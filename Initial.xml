@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>const int NSB = 4;
+chan resSeg[NSB]; //reserve
+int segToSBs[NSB][2] = {{0,1},{1,2},{1,2},{2,3}}; //SegmentID -&gt; SBIds
+int reserve[NSB]; //SBID -&gt; Seg
+chan switchh[NSB];
+chan reqLock[NSB];
+chan ready;</declaration><template><name x="5" y="5">TCC</name><parameter>int id</parameter><declaration>int route[3] = {1,2,4};
+int cur = 1;
+int i = 1;
+int next = 2;
+int[0,2] switches[NSB] = {0, 1, 1, 0};</declaration><location id="id0" x="736" y="-40"></location><location id="id1" x="512" y="-40"></location><location id="id2" x="288" y="-40"></location><location id="id3" x="80" y="-40"></location><location id="id4" x="-160" y="-40"></location><init ref="id4"/><transition><source ref="id0"/><target ref="id4"/><label kind="synchronisation" x="248" y="-200">ready?</label><nail x="736" y="-176"/><nail x="-160" y="-176"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="synchronisation" x="536" y="-64">reqLock[segToSBs[next][1]]!</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="synchronisation" x="312" y="-64">reqLock[segToSBs[next][0]]!</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="synchronisation" x="104" y="-64">resSeg[segToSBs[next][1]]!</label><label kind="assignment" x="88" y="-24">reserve[segToSBs[next][1]]:=next</label><nail x="184" y="-40"/></transition><transition><source ref="id4"/><target ref="id3"/><label kind="synchronisation" x="-128" y="-64">resSeg[segToSBs[next][0]]!</label><label kind="assignment" x="-152" y="-32">reserve[segToSBs[next][0]]:=next</label></transition></template><template><name>SB</name><parameter>int id</parameter><location id="id5" x="-152" y="-80"></location><location id="id6" x="-328" y="-80"></location><location id="id7" x="-528" y="-80"></location><location id="id8" x="-704" y="-80"></location><location id="id9" x="-880" y="-80"></location><init ref="id9"/><transition><source ref="id6"/><target ref="id5"/><label kind="synchronisation" x="-272" y="-104">ready!</label></transition><transition><source ref="id7"/><target ref="id6"/><label kind="synchronisation" x="-464" y="-104">switchh[id]!</label></transition><transition><source ref="id8"/><target ref="id7"/><label kind="synchronisation" x="-648" y="-104">reqLock[id]?</label></transition><transition><source ref="id9"/><target ref="id8"/><label kind="synchronisation" x="-832" y="-104">resSeg[id]?</label></transition></template><template><name>Switch</name><parameter>int id</parameter><location id="id10" x="208" y="0"><name x="198" y="-30">Minus</name></location><location id="id11" x="0" y="0"><name x="-10" y="-30">Plus</name></location><init ref="id11"/><transition><source ref="id10"/><target ref="id10"/><label kind="guard" x="280" y="-32">reserve[id]!=1</label><label kind="synchronisation" x="280" y="-16">switchh[id]?</label><nail x="272" y="-40"/><nail x="272" y="40"/></transition><transition><source ref="id11"/><target ref="id11"/><label kind="guard" x="-176" y="-32">reserve[id]!=2</label><label kind="synchronisation" x="-120" y="-16">switchh[id]?</label><nail x="-56" y="32"/><nail x="-56" y="-48"/></transition><transition><source ref="id10"/><target ref="id11"/><label kind="guard" x="48" y="64">reserve[id]==1</label><label kind="synchronisation" x="88" y="48">switchh[id]?</label><nail x="112" y="48"/></transition><transition><source ref="id11"/><target ref="id10"/><label kind="guard" x="56" y="-88">reserve[id]==2</label><label kind="synchronisation" x="80" y="-72">switchh[id]?</label><nail x="104" y="-48"/></transition></template><system>// Place template instantiations here.
+TCC1 = TCC(1);
+SB1 = SB(1);
+SB2 = SB(2);
+SB3 = SB(3);
+SB4 = SB(4);
+S0 = Switch(0);
+S1 = Switch(1);
+S2 = Switch(2);
+S3 = Switch(3);
+// List one or more processes to be composed into a system.
+system TCC, SB1, SB2, SB3, SB4, S0, S1, S2, S3;</system></nta>
