@@ -1,87 +1,120 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>const int TRAINS = 2;
-typedef int[0, TRAINS-1] t_id;
-int routes[TRAINS][3] = {{0,1,3}, {3,2,1}};
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>//const int TRAINS = 2;
+//typedef int[0, TRAINS-1] t_id;
+//int routes[TRAINS][3] = {{0,1,3}, {3,2,1}};
 
+//TYPES
 typedef struct 
 { 
   int id;
-  int SBid1;
-  int SBid2;
+  int sb1;
+  int sb2;
 } Seg;
 
-const int NSB = 4;
-const int NSeg = 4;
-const int Nt = 2;
-chan resSeg[NSB]; //reserve
-int[0,NSB-1] segToSBs[NSB][2] = {{0,1},{1,2},{1,2},{2,3}}; //SegmentID -&gt; SBIds
-int switchPos[NSB]; //SBID -&gt; Seg
-chan switchh[NSB];
-chan reqLock[NSB];
-chan move[Nt];
-int msg[NSB];
-int reservations[NSB][3] = {{-1,-1,-1},{0,-1,-1},{1,-1,-1},{-1,-1,-1}}; //SBid -&gt; (Tid, Tid, Tid)
-int segments[NSB][3] = {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,-1,-1}};
-int locks[NSB] = {-1,-1,-1,-1};
-
-bool reserve(int tid, int SBid, int s)
-{
-  for (i : int[0,2]) 
-  {
-    if(segments[SBid][i] == s) {
-	if (reservations[SBid][i] == -1){
-		reservations[SBid][i] = tid;
-		switchPos[SBid] = i;
-		return true;
-	}
-	return false;
-    }
-  }
-    return false;
-}
-
-bool lock(int tid, int SBid)
-{
-  if (locks[SBid] == -1){
-		locks[SBid] = tid;
-		return true;
-	}
-	return false;
-}
-void pass(int SBid, Seg s)
-{
-  locks[SBid] = -1;
-
-  for (i : int[0,2]) 
-  {
-    if(segments[s.SBid1][i] == s.id) {
-	reservations[s.SBid1][i] = -1;
-    }
-    if(segments[s.SBid2][i] == s.id) {
-	reservations[s.SBid2][i] = -1;
-    }    
-  }
-}
-</declaration><template><name x="5" y="5">TCC</name><parameter>int id, const Seg &amp;route[NSeg], Seg curSeg</parameter><declaration>const int length = 3;
-const int NSEG = 4;
-int cur = 1;
-int i = 1;
-Seg next;
-bool msg; //result
-</declaration><location id="id0" x="-312" y="-120"></location><location id="id1" x="-456" y="-40"><name x="-568" y="-64">SingleSegment</name></location><location id="id2" x="-456" y="56"><name x="-568" y="24">DoubleSegment</name></location><location id="id3" x="-160" y="56"></location><location id="id4" x="512" y="-40"><name x="448" y="-80">Reserved2</name></location><location id="id5" x="200" y="-40"><name x="144" y="-80">Reserved1</name></location><location id="id6" x="-160" y="-40"></location><init ref="id0"/><transition><source ref="id0"/><target ref="id6"/><label kind="assignment" x="-264" y="-112">next := route[i]</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="assignment" x="-584" y="-8">curSeg := next, i++</label></transition><transition><source ref="id1"/><target ref="id0"/><label kind="assignment" x="-560" y="-144">pass(segToSBs[next.id][0], curSeg)</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="guard" x="-400" y="64">i&lt;length-1</label><label kind="synchronisation" x="-400" y="80">move[id]?</label></transition><transition><source ref="id4"/><target ref="id3"/><label kind="guard" x="120" y="48">msg</label><label kind="synchronisation" x="120" y="64">reqLock[segToSBs[next.id][0]]!</label><label kind="assignment" x="120" y="80">lock(id, segToSBs[next.id][0]), msg:=false</label><nail x="216" y="56"/></transition><transition><source ref="id5"/><target ref="id4"/><label kind="guard" x="240" y="-80">msg</label><label kind="synchronisation" x="224" y="-64">resSeg[segToSBs[next.id][1]]!</label><label kind="assignment" x="232" y="-40">msg:=reserve(id, segToSBs[next.id][1] ,next.id)</label><nail x="304" y="-40"/></transition><transition><source ref="id6"/><target ref="id5"/><label kind="guard" x="-128" y="-80">next.id&lt;NSB</label><label kind="synchronisation" x="-128" y="-64">resSeg[segToSBs[next.id][0]]!</label><label kind="assignment" x="-128" y="-40">msg:=reserve(id, segToSBs[next.id][0] ,next.id)</label></transition></template><template><name>SB</name><parameter>int id</parameter><location id="id7" x="-152" y="-80"><name x="-162" y="-110">Locked</name></location><location id="id8" x="-328" y="-80"><name x="-360" y="-112">Switched</name></location><location id="id9" x="-528" y="-80"><name x="-576" y="-112">LockRequested</name></location><location id="id10" x="-880" y="-80"><name x="-890" y="-110">Idle</name></location><init ref="id10"/><transition><source ref="id7"/><target ref="id7"/><label kind="synchronisation" x="-184" y="-240">resSeg[id]?</label><nail x="-232" y="-216"/><nail x="-72" y="-216"/></transition><transition><source ref="id10"/><target ref="id9"/><label kind="synchronisation" x="-768" y="-104">reqLock[id]?</label></transition><transition><source ref="id10"/><target ref="id10"/><label kind="synchronisation" x="-928" y="-216">resSeg[id]?</label><nail x="-968" y="-192"/><nail x="-824" y="-192"/></transition><transition><source ref="id8"/><target ref="id7"/><label kind="synchronisation" x="-272" y="-104">move[locks[id]]!</label></transition><transition><source ref="id9"/><target ref="id8"/><label kind="synchronisation" x="-464" y="-104">switchh[id]!</label></transition></template><template><name>Switch</name><parameter>int id</parameter><location id="id11" x="208" y="0"><name x="198" y="-30">Minus</name></location><location id="id12" x="0" y="0"><name x="-10" y="-30">Plus</name></location><init ref="id12"/><transition><source ref="id11"/><target ref="id11"/><label kind="guard" x="280" y="-32">switchPos[id]!=1</label><label kind="synchronisation" x="280" y="-16">switchh[id]?</label><nail x="272" y="-40"/><nail x="272" y="40"/></transition><transition><source ref="id12"/><target ref="id12"/><label kind="guard" x="-160" y="-24">switchPos[id]!=2</label><label kind="synchronisation" x="-152" y="-8">switchh[id]?</label><nail x="-68" y="38"/><nail x="-68" y="-42"/></transition><transition><source ref="id11"/><target ref="id12"/><label kind="guard" x="48" y="64">switchPos[id]==1</label><label kind="synchronisation" x="88" y="48">switchh[id]?</label><nail x="112" y="48"/></transition><transition><source ref="id12"/><target ref="id11"/><label kind="guard" x="56" y="-88">switchPos[id]==2</label><label kind="synchronisation" x="80" y="-72">switchh[id]?</label><nail x="104" y="-48"/></transition></template><template><name>ControlSystem</name><declaration>void initialize(int&amp; msg[NSB])
-{
-  for (i : int[0,NSB-1]) 
-  {
-    msg[i] = -1;
-  }
-}</declaration><location id="id13" x="136" y="0"></location><location id="id14" x="0" y="0"></location><init ref="id14"/><transition><source ref="id14"/><target ref="id13"/><label kind="assignment" x="24" y="0">initialize(msg)</label></transition></template><template><name>Train</name><location id="id15" x="-312" y="-152"><name x="-344" y="-184">DoubleSegment</name></location><location id="id16" x="-512" y="-152"><name x="-568" y="-184">SingleSegment</name></location><init ref="id16"/><transition><source ref="id15"/><target ref="id16"/><nail x="-408" y="-104"/></transition><transition><source ref="id16"/><target ref="id15"/></transition></template><system>// Place template instantiations here.
+//CONSTANTS
+const int NSB = 4; //Number of switch boxes
+const int Nseg = 4; //Number of segments
+const int Nt = 2; //Number of trains
 const Seg none = {-1, -1, -1};
 const Seg s0 = {0, 0, 1};
 const Seg s1 = {1, 1, 2};
 const Seg s2 = {2, 1, 2};
 const Seg s3 = {3, 2, 3};
+const Seg r1[Nseg] = {s0,s1,s3, none};
+const Seg r2[Nseg] = {s3,s2,s1, none};
+const Seg segments[Nseg] = {s0, s1, s2, s3};
 
-const Seg r1[NSeg] = {s0,s1,s3, none};
-const Seg r2[NSeg] = {s3,s2,s1, none};
+
+//VARIABLES
+chan resSeg[NSB][Nt][Nseg]; //[switch box][train id][segment id]
+int[0,NSB-1] segToSBs[NSB][2] = {{0,1},{1,2},{1,2},{2,3}}; //SegmentID -&gt; SBIds
+int switchPos[NSB]; //SBID -&gt; Seg
+chan switchh[NSB];
+chan reqLock[NSB][Nt]; //lock sb for t
+chan move[Nt];
+chan OK[Nt];
+chan notOK[Nt];
+chan pass[NSB][Nt];
+
+//BACKUP
+//int msg[NSB];
+//int reservations[NSB][3] = {{-1,-1,-1},{0,-1,-1},{1,-1,-1},{-1,-1,-1}}; //SBid -&gt; (Tid, Tid, Tid)
+//int segments[NSB][3] = {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,-1,-1}};
+//int locks[NSB] = {-1,-1,-1,-1};
+
+</declaration><template><name x="5" y="5">TCC</name><parameter>int id, const Seg &amp;route[Nseg], Seg curSeg</parameter><declaration>const int length = 3;
+const int NSEG = 4;
+int cur = 1;
+int i = 1;
+Seg next;
+bool msg; //result
+</declaration><location id="id0" x="144" y="-152"><name x="134" y="-182">Reserving2</name></location><location id="id1" x="-304" y="-152"><name x="-314" y="-182">Reserving1</name></location><location id="id2" x="-776" y="-160"></location><location id="id3" x="-776" y="-40"><name x="-888" y="-64">SingleSegment</name></location><location id="id4" x="-776" y="56"><name x="-888" y="24">DoubleSegment</name></location><location id="id5" x="-480" y="56"><name x="-496" y="24">Locking</name></location><location id="id6" x="320" y="-152"><name x="280" y="-184">Reserved2</name></location><location id="id7" x="-112" y="-152"><name x="-144" y="-184">Reserved1</name></location><location id="id8" x="-576" y="-160"></location><init ref="id2"/><transition><source ref="id0"/><target ref="id7"/><label kind="synchronisation" x="-8" y="-96">notOK[id]?</label><nail x="24" y="-96"/></transition><transition><source ref="id0"/><target ref="id6"/><label kind="synchronisation" x="216" y="-176">OK[id]?</label></transition><transition><source ref="id7"/><target ref="id0"/><label kind="synchronisation" x="-56" y="-248">resSeg[next.sb2][id][next.id]!</label><nail x="16" y="-224"/></transition><transition><source ref="id1"/><target ref="id8"/><label kind="synchronisation" x="-464" y="-88">notOK[id]?</label><nail x="-432" y="-96"/></transition><transition><source ref="id1"/><target ref="id7"/><label kind="synchronisation" x="-224" y="-176">OK[id]?</label></transition><transition><source ref="id2"/><target ref="id8"/><label kind="assignment" x="-712" y="-184">next := route[i]</label></transition><transition><source ref="id4"/><target ref="id3"/><label kind="assignment" x="-904" y="-8">curSeg := next, i++</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="synchronisation" x="-944" y="-120">pass[next.sb1][curSeg.id]!</label></transition><transition><source ref="id5"/><target ref="id4"/><label kind="guard" x="-720" y="56">i&lt;length-1</label><label kind="synchronisation" x="-720" y="72">move[id]?</label></transition><transition><source ref="id6"/><target ref="id5"/><label kind="synchronisation" x="-16" y="64">reqLock[next.sb1][id]!</label><nail x="320" y="56"/></transition><transition><source ref="id8"/><target ref="id1"/><label kind="guard" x="-504" y="-248">next.id&lt;NSB</label><label kind="synchronisation" x="-512" y="-232">resSeg[next.sb1][id][next.id]!</label><nail x="-432" y="-216"/></transition></template><template><name>SB</name><parameter>int id, int stem, int plus, int minus</parameter><declaration>int res[3] = {-1, -1, -1};
+bool result;
+int tid = -1;
+int lockedBy = -1;
+
+bool reserve(int tid, int sid){
+  Seg s = segments[sid];
+  if (stem == s.id){
+	if (res[0] == -1){
+		res[0] = tid;
+		return true;
+	}
+	return false;
+  } else if (plus == s.id){
+	if(res[1] == -1){
+		res[1] = tid;
+		return true;
+	}
+	return false;
+  } else if (minus == s.id){
+	if(res[2] == -1){
+		res[2] = tid;
+		return true;
+	}
+	return false;
+  }
+  return false;
+}
+
+bool lock(int tid){
+  if(lockedBy == -1){
+	lockedBy = tid;
+  	return true;
+  }
+  return false;
+}
+
+
+void clear(int tid, int sid){
+  Seg s = segments[sid];
+
+  if (lockedBy == tid){
+ 	lockedBy = -1;
+  }
+
+  if (stem == s.id){
+	res[0] = -1;
+  } else if (plus == s.id){
+	res[1] = -1;
+  } else if (minus == s.id){
+	res[2] = -1;
+  }
+}</declaration><location id="id9" x="-368" y="-80"></location><location id="id10" x="-880" y="-328"><name x="-936" y="-360">ReserveAttempted</name></location><location id="id11" x="-56" y="-80"><name x="-40" y="-88">Locked</name></location><location id="id12" x="-232" y="-80"><name x="-264" y="-112">Switched</name></location><location id="id13" x="-528" y="-80"><name x="-576" y="-112">LockAttempted</name></location><location id="id14" x="-880" y="-80"><name x="-920" y="-104">Idle</name></location><init ref="id14"/><transition><source ref="id11"/><target ref="id14"/><label kind="select" x="-560" y="-8">i : int[0,Nt-1],
+j : int[0,Nseg-1]</label><label kind="synchronisation" x="-560" y="24">pass[id][i]?</label><label kind="assignment" x="-560" y="40">clear(i, j)</label><nail x="-48" y="64"/><nail x="-880" y="64"/></transition><transition><source ref="id9"/><target ref="id12"/><label kind="synchronisation" x="-336" y="-80">switchh[id]!</label></transition><transition><source ref="id13"/><target ref="id14"/><label kind="guard" x="-728" y="-32">!result</label><label kind="synchronisation" x="-728" y="-16">notOK[tid]!</label><label kind="assignment" x="-728" y="0">tid:=-1</label><nail x="-712" y="-32"/></transition><transition><source ref="id10"/><target ref="id14"/><label kind="guard" x="-800" y="-240">!result</label><label kind="synchronisation" x="-800" y="-224">notOK[tid]!</label><label kind="assignment" x="-800" y="-208">tid := -1</label><nail x="-808" y="-280"/><nail x="-808" y="-152"/></transition><transition><source ref="id10"/><target ref="id14"/><label kind="guard" x="-920" y="-240">result</label><label kind="synchronisation" x="-920" y="-224">OK[tid]!</label><label kind="assignment" x="-928" y="-208">tid := -1</label></transition><transition><source ref="id11"/><target ref="id11"/><label kind="select" x="-128" y="-312">i : int[0,Nt-1],
+j : int[0,Nseg-1]</label><label kind="synchronisation" x="-128" y="-280">resSeg[id][i][j]?</label><label kind="assignment" x="-128" y="-264">result:=reserve(i,j),
+tid:=i</label><nail x="-136" y="-216"/><nail x="24" y="-216"/></transition><transition><source ref="id14"/><target ref="id13"/><label kind="select" x="-712" y="-200">i : int[0,Nt-1]</label><label kind="synchronisation" x="-712" y="-184">reqLock[id][i]?</label><label kind="assignment" x="-712" y="-168">result:=lock(i),
+tid:=i</label><nail x="-712" y="-128"/></transition><transition><source ref="id14"/><target ref="id10"/><label kind="select" x="-1072" y="-256">i : int[0,Nt-1],
+j : int[0,Nseg-1]</label><label kind="synchronisation" x="-1072" y="-224">resSeg[id][i][j]?</label><label kind="assignment" x="-1080" y="-208">result:=reserve(i,j),
+tid:=i</label><nail x="-968" y="-152"/><nail x="-968" y="-272"/></transition><transition><source ref="id12"/><target ref="id11"/><label kind="synchronisation" x="-192" y="-80">move[lockedBy]!</label></transition><transition><source ref="id13"/><target ref="id9"/><label kind="guard" x="-464" y="-104">result</label><label kind="assignment" x="-464" y="-80">tid:=-1</label></transition></template><template><name>Switch</name><parameter>int id</parameter><location id="id15" x="208" y="0"><name x="198" y="-30">Minus</name></location><location id="id16" x="0" y="0"><name x="-10" y="-30">Plus</name></location><init ref="id16"/><transition><source ref="id15"/><target ref="id15"/><label kind="guard" x="280" y="-32">switchPos[id]!=1</label><label kind="synchronisation" x="280" y="-16">switchh[id]?</label><nail x="272" y="-40"/><nail x="272" y="40"/></transition><transition><source ref="id16"/><target ref="id16"/><label kind="guard" x="-160" y="-24">switchPos[id]!=2</label><label kind="synchronisation" x="-152" y="-8">switchh[id]?</label><nail x="-68" y="38"/><nail x="-68" y="-42"/></transition><transition><source ref="id15"/><target ref="id16"/><label kind="guard" x="48" y="64">switchPos[id]==1</label><label kind="synchronisation" x="88" y="48">switchh[id]?</label><nail x="112" y="48"/></transition><transition><source ref="id16"/><target ref="id15"/><label kind="guard" x="56" y="-88">switchPos[id]==2</label><label kind="synchronisation" x="80" y="-72">switchh[id]?</label><nail x="104" y="-48"/></transition></template><template><name>ControlSystem</name><declaration>void initialize(int&amp; msg[NSB])
+{
+  for (i : int[0,NSB-1]) 
+  {
+    msg[i] = -1;
+  }
+}</declaration><location id="id17" x="136" y="0"></location><location id="id18" x="-144" y="0"></location><init ref="id18"/><transition><source ref="id18"/><target ref="id17"/></transition></template><template><name>Train</name><location id="id19" x="-312" y="-152"><name x="-344" y="-184">DoubleSegment</name></location><location id="id20" x="-512" y="-152"><name x="-568" y="-184">SingleSegment</name></location><init ref="id20"/><transition><source ref="id19"/><target ref="id20"/><nail x="-408" y="-104"/></transition><transition><source ref="id20"/><target ref="id19"/></transition></template><system>// Place template instantiations here.
+
+
+
 
 TCC0 = TCC(0, r1, s0);
 TCC1 = TCC(1, r2, s3);
@@ -89,10 +122,10 @@ S0 = Switch(0);
 S1 = Switch(1);
 S2 = Switch(2);
 S3 = Switch(3);
-SB0 = SB(0);
-SB1 = SB(1);
-SB2 = SB(2);
-SB3 = SB(3);
+SB0 = SB(0, 0, -1, -1);
+SB1 = SB(1, 0, 1, 2);
+SB2 = SB(2, 3, 1, 2);
+SB3 = SB(3, 3, -1, -1);
 
 // List one or more processes to be composed into a system.
 system TCC0, TCC1, SB0, SB1, SB2, SB3, S0, S1, S2, S3;</system></nta>
