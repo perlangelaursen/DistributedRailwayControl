@@ -3,6 +3,11 @@
 /*
 
 */
+A[] not deadlock
+
+/*
+
+*/
 E<> (TCC0.Arrived)
 
 /*
