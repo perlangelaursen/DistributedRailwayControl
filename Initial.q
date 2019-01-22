@@ -3,7 +3,12 @@
 /*
 
 */
-//NO_QUERY
+E<> (TCC0.Arrived)
+
+/*
+
+*/
+E<> (TCC1.Arrived)
 
 /*
 
