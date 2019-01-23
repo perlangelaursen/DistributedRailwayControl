@@ -99,15 +99,19 @@ void updateSBinfo(){
 			<committed/>
 		</location>
 		<location id="id1" x="-952" y="-352">
+			<name x="-943" y="-391">Initial3</name>
 			<committed/>
 		</location>
 		<location id="id2" x="-952" y="-208">
+			<name x="-962" y="-242">Initial5</name>
 			<committed/>
 		</location>
 		<location id="id3" x="-952" y="-456">
+			<name x="-962" y="-490">Initial2</name>
 			<committed/>
 		</location>
 		<location id="id4" x="-952" y="-280">
+			<name x="-962" y="-314">Initial4</name>
 			<committed/>
 		</location>
 		<location id="id5" x="-776" y="-56">
@@ -481,6 +485,12 @@ tid:=i</label>
 	<system>system TCC, SB, Switch;</system>
 	<queries>
 		<query>
+			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) &amp;&amp; TCC(i).next.sb1 != TCC(i).next.sb2) imply ( TCC(i).curSeg.sb2 == TCC(i).next.sb1 || TCC(i).curSeg.sb1 == TCC(i).next.sb2 || TCC(i).curSeg == TCC(i).next)
+			</formula>
+			<comment>No derailment; A train's current segment is either the same as its next segment or connected to it.
+			</comment>
+		</query>
+		<query>
 			<formula>A[] not deadlock
 			</formula>
 			<comment>
@@ -489,7 +499,7 @@ tid:=i</label>
 		<query>
 			<formula>E&lt;&gt; forall(i:t_id) TCC(i).Arrived
 			</formula>
-			<comment>All trains will eventually arrive
+			<comment>All trains will eventually arrive at their destinations.
 			</comment>
 		</query>
 		<query>
