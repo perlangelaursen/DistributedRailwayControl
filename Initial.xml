@@ -149,7 +149,7 @@ void updateSBinfo(){
 			<name x="-296" y="72">Locking</name>
 		</location>
 		<location id="id11" x="0" y="-161">
-			<name x="-40" y="-193">Reserved2</name>
+			<name x="-40" y="-193">Reserved</name>
 		</location>
 		<location id="id12" x="-576" y="-160">
 		</location>
@@ -227,7 +227,7 @@ void updateSBinfo(){
 			<label kind="guard" x="-739" y="-229">i&lt;length &amp;&amp; routes[id][i] != none</label>
 			<label kind="assignment" x="-739" y="-212">next := routes[id][i],
 updateSBinfo(),
-sb = 0</label>
+sb := 0</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
