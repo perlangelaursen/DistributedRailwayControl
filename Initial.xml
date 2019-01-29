@@ -7,14 +7,16 @@
 
 const int SEGSIZE = 2;
 const int reservations = 2;
+const int SWITCH = 2;
+
+
 
 //TYPES
 typedef struct 
 { 
   int id;
   int sbs[SEGSIZE];
-  //int sb1;
-  //int sb2;
+  int[0,2] dir; //0 = left to right, 1 = right to left, 2 = both directions
 } Seg;
 
 
@@ -69,26 +71,27 @@ const int Nseg = 5; //Number of segments
 const int Nt = 2; //Number of trains
 const int[1,NCB] lockLimit = 2;
 const int[1,Nseg] resLimit = 2;
-const Seg none = {-1, {-1, -1}};
-const Seg s0 = {0, {0, 1}}; 
-const Seg s1 = {1, {1, 2}};
-const Seg s2 = {2, {2, 3}};
-const Seg s3 = {3, {2, 3}};
-const Seg s4 = {4, {3, 4}};
+const Seg none = {-1, {-1, -1}, 0};
+const Seg s0 = {0, {0, 1}, 2}; 
+const Seg s1 = {1, {1, 2}, 2};
+const Seg s2 = {2, {2, 3}, 2};
+const Seg s3 = {3, {2, 3}, 1};
+const Seg s4 = {4, {3, 4}, 2};
 
 const Seg segments[Nseg] = {s0, s1, s2, s3, s4};
 
 typedef int[0, Nt-1] t_id;
 typedef int[0, NCB-1] SB_id;
+typedef int[0, SWITCH-1] SW_id;
 const Seg routes[Nt][Nseg]= {{s0,s1,s2,s4,none}, {s4,s3,s1,s0, none}};
 const int length = 4; //route length
 const int[0,1] directions[Nt]= {0,1}; //0 = left to right, 1 = right to left
 const int SBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
+const int[0,1] tDir[Nt] = {0,1}; //0 = left to right, 1 = right to left
+const int boxes[NCB] = { -1, -1, 0, 1, -1};
 
-
-//VARIABLES
 chan resSeg[NCB][Nt][Nseg]; //[switch box][train id][segment id]
-chan switchh[NCB];
+broadcast chan switchh[NCB];
 chan reqLock[NCB][Nt][Nseg][Nseg]; //lock sb for t between two segments
 chan OK[Nt];
 chan notOK[Nt];
@@ -132,6 +135,7 @@ int nextLockSeg(){
     return routes[id][li].id;
 }</declaration>
 		<location id="id0" x="-773" y="161">
+			<name x="-884" y="144">CrossingPoint</name>
 		</location>
 		<location id="id1" x="-952" y="-348">
 			<name x="-962" y="-382">Initial</name>
@@ -161,7 +165,7 @@ int nextLockSeg(){
 		<transition>
 			<source ref="id0"/>
 			<target ref="id6"/>
-			<label kind="synchronisation" x="-875" y="42">notOK[id]?</label>
+			<label kind="synchronisation" x="-884" y="51">notOK[id]?</label>
 			<nail x="-824" y="17"/>
 		</transition>
 		<transition>
@@ -371,7 +375,7 @@ bool swDir(int s1, int s2){ //+ = true, - = false
 		<transition>
 			<source ref="id9"/>
 			<target ref="id12"/>
-			<label kind="synchronisation" x="-221" y="-136">OKsb[id]?</label>
+			<label kind="synchronisation" x="-212" y="-136">OKsb[boxes[id]]?</label>
 		</transition>
 		<transition>
 			<source ref="id10"/>
@@ -393,7 +397,7 @@ tid:=i</label>
 			<source ref="id10"/>
 			<target ref="id9"/>
 			<label kind="guard" x="-357" y="-144">sw</label>
-			<label kind="synchronisation" x="-374" y="-127">switchh[id]!</label>
+			<label kind="synchronisation" x="-433" y="-127">switchh[boxes[id]]!</label>
 			<nail x="-306" y="-110"/>
 		</transition>
 		<transition>
@@ -460,7 +464,7 @@ tid:=i</label>
 	</template>
 	<template>
 		<name>Point</name>
-		<parameter>SB_id id</parameter>
+		<parameter>SW_id id</parameter>
 		<declaration>bool reply;</declaration>
 		<location id="id15" x="144" y="68">
 		</location>
@@ -537,9 +541,15 @@ tid:=i</label>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
+			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply boxes[TCC(i).nextSB] == -1 || Point(boxes[TCC(i).nextSB]).Plus || Point(boxes[TCC(i).nextSB]).Minus)
+			</formula>
+			<comment>No derailment.
+			</comment>
+		</query>
+		<query>
 			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) &amp;&amp; TCC(i).next.sbs[0] != TCC(i).next.sbs[1]) imply ( TCC(i).curSeg.sbs[1] == TCC(i).next.sbs[0] || TCC(i).curSeg.sbs[0] == TCC(i).next.sbs[1] || TCC(i).curSeg == TCC(i).next)
 			</formula>
-			<comment>No derailment; A train's current segment is either the same as its next segment or connected to it.
+			<comment>A train's current segment is either the same as its next segment or connected to it.
 			</comment>
 		</query>
 		<query>
