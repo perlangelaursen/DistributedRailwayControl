@@ -67,6 +67,8 @@ const int SBs[NSB][3]= {{0,-1,-1}, {0,1,2}, {1,-1,-1}, {3,4,2}, {3,-1,-1}, {5,6,
 const int NCB = 5; //Number of switch boxes
 const int Nseg = 5; //Number of segments
 const int Nt = 2; //Number of trains
+const int[1,NCB] lockLimit = 2;
+const int[1,Nseg] resLimit = 2;
 const Seg none = {-1, {-1, -1}};
 const Seg s0 = {0, {0, 1}}; 
 const Seg s1 = {1, {1, 2}};
@@ -237,14 +239,14 @@ next := routes[id][i]</label>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id7"/>
-			<label kind="guard" x="-1300" y="-127">li&lt;length &amp;&amp; routes[id][li] != none</label>
+			<label kind="guard" x="-1300" y="-127">li-i &lt; lockLimit &amp;&amp; li&lt;length &amp;&amp; routes[id][li] != none</label>
 			<label kind="synchronisation" x="-1300" y="-110">reqLock[reachedSBReservation()][id][prevLockSeg()][nextLockSeg()]!</label>
 			<nail x="-935" y="-85"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id5"/>
-			<label kind="guard" x="-671" y="-221">ri &lt; length &amp;&amp; routes[id][ri] != none</label>
+			<label kind="guard" x="-671" y="-221">ri-i &lt; resLimit &amp;&amp; ri &lt; length &amp;&amp; routes[id][ri] != none</label>
 			<label kind="synchronisation" x="-671" y="-204">resSeg[routes[id][ri].sbs[directions[id]^sb]][id][routes[id][ri].id]!</label>
 			<nail x="-314" y="-161"/>
 		</transition>
@@ -369,7 +371,7 @@ bool swDir(int s1, int s2){ //+ = true, - = false
 		<transition>
 			<source ref="id9"/>
 			<target ref="id12"/>
-			<label kind="synchronisation" x="-237" y="-127">OKsb[id]?</label>
+			<label kind="synchronisation" x="-221" y="-136">OKsb[id]?</label>
 		</transition>
 		<transition>
 			<source ref="id10"/>
