@@ -13,7 +13,7 @@ const int NSWITCH = 2; //Number of switchable points
 
 //TYPES
 typedef int[0, NT-1] t_id;
-typedef int[0, NCB-1] SB_id;
+typedef int[0, NCB-1]  CB_id;
 typedef int[0, NSWITCH-1] SW_id;
 typedef struct 
 { 
@@ -176,7 +176,7 @@ ri:=(cb==0) ? ri+1 : ri</label>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-1368" y="-348">curSeg := routes[id][0],
+			<label kind="assignment" x="-1402" y="-348">curSeg := routes[id][0],
 nextSeg := routes[id][1],
 nextSB:=curSeg.cbs[1^directions[id]]</label>
 		</transition>
@@ -189,7 +189,7 @@ nextSB:=curSeg.cbs[1^directions[id]]</label>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="synchronisation" x="-1326" y="-255">resSeg[nextSB][id][curSeg.id]!</label>
+			<label kind="synchronisation" x="-1343" y="-255">resSeg[nextSB][id][curSeg.id]!</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -200,14 +200,14 @@ nextSB:=curSeg.cbs[1^directions[id]]</label>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-705" y="-76">ri &gt; i &amp;&amp; li &gt; i</label>
-			<label kind="synchronisation" x="-705" y="-59">pass[nextSB][id]!</label>
+			<label kind="guard" x="-722" y="-76">ri &gt; i &amp;&amp; li &gt; i</label>
+			<label kind="synchronisation" x="-722" y="-59">pass[nextSB][id]!</label>
 			<nail x="-569" y="-42"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-986" y="-331">i&gt;=length || routes[id][i] == none</label>
+			<label kind="guard" x="-1028" y="-331">i&gt;=length || routes[id][i] == none</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
@@ -249,7 +249,7 @@ routes[id][li] != none</label>
 	</template>
 	<template>
 		<name>CB</name>
-		<parameter>SB_id id</parameter>
+		<parameter>CB_id id</parameter>
 		<declaration>int res[3] = {-1, -1, -1};
 bool result;
 int tid = -1;
@@ -260,24 +260,12 @@ int connected;
 
 bool reserve(int tid, int sid){
   Seg s = segments[sid];
-  if (CBs[id][0] == s.id){
-	if (res[0] == -1){
-		res[0] = tid;
-		return true;
-	}
-	return false;
-  } else if (CBs[id][1] == s.id){
-	if(res[1] == -1){
-		res[1] = tid;
-		return true;
-	}
-	return false;
-  } else if (CBs[id][2] == s.id){
-	if(res[2] == -1){
-		res[2] = tid;
-		return true;
-	}
-	return false;
+  
+  for(i : int[0,2]) {
+    if (CBs[id][i] == s.id &amp;&amp; res[i] == -1) {
+      res[i] = tid;
+      return true;
+    }
   }
   return false;
 }
@@ -532,7 +520,7 @@ tid:=i</label>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A[] forall(i:SB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; boxes[i] != -1) imply (Point(boxes[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(boxes[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
+			<formula>A[] forall(i:CB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; boxes[i] != -1) imply (Point(boxes[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(boxes[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
