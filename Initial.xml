@@ -79,7 +79,7 @@ const Seg segments[NSEG] = {s0, s1, s2, s3, s4};
 const Seg routes[NT][NSEG]= {{s0,s1,s2,s4,none}, {s4,s3,s1,s0, none}};
 const int length = 4; //route length
 const int[0,1] directions[NT]= {0,1}; //0 = left to right, 1 = right to left
-const int SBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
+const int CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const int boxes[NCB] = { -1, -1, 0, 1, -1};
 
 chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]
@@ -98,11 +98,11 @@ Seg curSeg;
 Seg nextSeg;
 int nextSB;
 
-int sb = 0;
+int cb = 0;
 int li = 1;
 int ri = 1;
 
-int reachedSBReservation(){
+int reachedCBReservation(){
    if (!directions[id]){
       return routes[id][li].cbs[0];
     } else {
@@ -168,8 +168,8 @@ int nextLockSeg(){
 			<source ref="id5"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-493" y="-221">OK[id]?</label>
-			<label kind="assignment" x="-493" y="-204">sb:=sb^1,
-ri:=(sb==0) ? ri+1 : ri</label>
+			<label kind="assignment" x="-493" y="-204">cb:=cb^1,
+ri:=(cb==0) ? ri+1 : ri</label>
 			<nail x="-442" y="-238"/>
 			<nail x="-612" y="-204"/>
 		</transition>
@@ -232,7 +232,7 @@ nextSeg := routes[id][i]</label>
 			<label kind="guard" x="-1283" y="-119">li-i &lt; lockLimit &amp;&amp; 
 li&lt;length &amp;&amp; 
 routes[id][li] != none</label>
-			<label kind="synchronisation" x="-1394" y="-51">reqLock[reachedSBReservation()][id]
+			<label kind="synchronisation" x="-1394" y="-51">reqLock[reachedCBReservation()][id]
 [prevLockSeg()][nextLockSeg()]!</label>
 			<nail x="-1122" y="-102"/>
 		</transition>
@@ -240,7 +240,7 @@ routes[id][li] != none</label>
 			<source ref="id6"/>
 			<target ref="id5"/>
 			<label kind="guard" x="-697" y="-433">ri-i &lt; resLimit &amp;&amp; ri &lt; length &amp;&amp; routes[id][ri] != none</label>
-			<label kind="synchronisation" x="-697" y="-416">resSeg[routes[id][ri].cbs[sb^directions[id]]]
+			<label kind="synchronisation" x="-697" y="-416">resSeg[routes[id][ri].cbs[cb^directions[id]]]
 	[id][routes[id][ri].id]!</label>
 			<nail x="-714" y="-374"/>
 			<nail x="-612" y="-374"/>
@@ -254,26 +254,25 @@ routes[id][li] != none</label>
 bool result;
 int tid = -1;
 int lockedBy = -1;
-//bool dir = true; //plus = true, minus = false
 bool sw = false;
 int stem;
 int connected;
 
 bool reserve(int tid, int sid){
   Seg s = segments[sid];
-  if (SBs[id][0] == s.id){
+  if (CBs[id][0] == s.id){
 	if (res[0] == -1){
 		res[0] = tid;
 		return true;
 	}
 	return false;
-  } else if (SBs[id][1] == s.id){
+  } else if (CBs[id][1] == s.id){
 	if(res[1] == -1){
 		res[1] = tid;
 		return true;
 	}
 	return false;
-  } else if (SBs[id][2] == s.id){
+  } else if (CBs[id][2] == s.id){
 	if(res[2] == -1){
 		res[2] = tid;
 		return true;
@@ -284,15 +283,15 @@ bool reserve(int tid, int sid){
 }
 
 bool lock(int tid, int s1, int s2){
-  if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == SBs[id][0] || s2 == SBs[id][0])){
+  if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == CBs[id][0] || s2 == CBs[id][0])){
       int s = 0;
       for (i:int[0,2]){
-        if(SBs[id][i] == s1){
+        if(CBs[id][i] == s1){
            if(res[i] == tid) {
                s++;
            }
         }
-        if(SBs[id][i] == s2 ){
+        if(CBs[id][i] == s2 ){
             if(res[i] == tid){
                s++;
             }
@@ -327,21 +326,13 @@ bool swDir(int s1, int s2){ //+ = true, - = false
         return true;
     }
     return false;
-  /*if (!dir &amp;&amp; (SBs[id][1] == s1 || SBs[id][1] == s2)){
-	dir = true;
-	return true;
-  } else if (dir &amp;&amp; (SBs[id][2] == s1 || SBs[id][2] == s2)) {
-	dir = false;
-	return true;
-  }
-  return false;*/
 }
 
 void updateConnected(){
-    if(connected == SBs[id][1]){
-        connected := SBs[id][2];
+    if(connected == CBs[id][1]){
+        connected := CBs[id][2];
     } else {
-        connected := SBs[id][1];
+        connected := CBs[id][1];
     }
 }</declaration>
 		<location id="id8" x="-994" y="68">
@@ -371,8 +362,8 @@ void updateConnected(){
 		<transition>
 			<source ref="id8"/>
 			<target ref="id15"/>
-			<label kind="assignment" x="-977" y="51">stem = SBs[id][0],
-connected = SBs[id][1]</label>
+			<label kind="assignment" x="-977" y="51">stem = CBs[id][0],
+connected = CBs[id][1]</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
@@ -541,7 +532,7 @@ tid:=i</label>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A[] forall(i:SB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; boxes[i] != -1) imply (Point(boxes[i]).Plus &amp;&amp; CB(i).connected == SBs[i][1]) || (Point(boxes[i]).Minus &amp;&amp; CB(i).connected == SBs[i][2])
+			<formula>A[] forall(i:SB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; boxes[i] != -1) imply (Point(boxes[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(boxes[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
