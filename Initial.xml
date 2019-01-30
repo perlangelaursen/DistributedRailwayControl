@@ -83,7 +83,7 @@ const int CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(st
 const int boxes[NCB] = { -1, -1, 0, 1, -1};
 
 chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]
-broadcast chan switchh[NCB];
+chan switchh[NCB];
 chan reqLock[NCB][NT][NSEG][NSEG]; //lock sb for t between two segments
 chan OK[NT];
 chan notOK[NT];
@@ -457,7 +457,6 @@ tid:=-1</label>
 	<template>
 		<name>Point</name>
 		<parameter>SW_id id</parameter>
-		<declaration>bool reply;</declaration>
 		<location id="id16" x="136" y="68">
 		</location>
 		<location id="id17" x="136" y="-68">
@@ -470,44 +469,24 @@ tid:=-1</label>
 		</location>
 		<init ref="id19"/>
 		<transition>
-			<source ref="id18"/>
-			<target ref="id18"/>
-			<label kind="guard" x="348" y="-34">reply</label>
-			<label kind="synchronisation" x="348" y="-17">OKsb[id]!</label>
-			<label kind="assignment" x="348" y="0">reply:=false</label>
-			<nail x="340" y="-34"/>
-			<nail x="340" y="34"/>
-		</transition>
-		<transition>
-			<source ref="id19"/>
-			<target ref="id19"/>
-			<label kind="guard" x="-136" y="-34">reply</label>
-			<label kind="synchronisation" x="-136" y="-17">OKsb[id]!</label>
-			<label kind="assignment" x="-161" y="0">reply:=false</label>
-			<nail x="-68" y="-34"/>
-			<nail x="-68" y="34"/>
-		</transition>
-		<transition>
 			<source ref="id19"/>
 			<target ref="id17"/>
-			<label kind="guard" x="0" y="-93">!reply</label>
-			<label kind="synchronisation" x="0" y="-76">switchh[id]?</label>
-			<label kind="assignment" x="0" y="-59">reply:=true</label>
+			<label kind="synchronisation" x="0" y="-59">switchh[id]?</label>
 		</transition>
 		<transition>
 			<source ref="id18"/>
 			<target ref="id16"/>
-			<label kind="guard" x="229" y="25">!reply</label>
-			<label kind="synchronisation" x="229" y="42">switchh[id]?</label>
-			<label kind="assignment" x="229" y="59">reply:=true</label>
+			<label kind="synchronisation" x="204" y="42">switchh[id]?</label>
 		</transition>
 		<transition>
 			<source ref="id17"/>
 			<target ref="id18"/>
+			<label kind="synchronisation" x="204" y="-59">OKsb[id]!</label>
 		</transition>
 		<transition>
 			<source ref="id16"/>
 			<target ref="id19"/>
+			<label kind="synchronisation" x="0" y="42">OKsb[id]!</label>
 		</transition>
 	</template>
 	<system>system TCC, CB, Point;</system>
