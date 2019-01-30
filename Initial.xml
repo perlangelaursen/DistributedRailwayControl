@@ -251,10 +251,9 @@ routes[id][li] != none</label>
 		<name>CB</name>
 		<parameter>CB_id id</parameter>
 		<declaration>int res[3] = {-1, -1, -1};
-bool result;
+int[0,2] result;
 int tid = -1;
 int lockedBy = -1;
-bool sw = false;
 int stem;
 int connected;
 
@@ -270,7 +269,7 @@ bool reserve(int tid, int sid){
   return false;
 }
 
-bool lock(int tid, int s1, int s2){
+int[0,2] lock(int tid, int s1, int s2){
   if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == CBs[id][0] || s2 == CBs[id][0])){
       int s = 0;
       for (i:int[0,2]){
@@ -285,12 +284,13 @@ bool lock(int tid, int s1, int s2){
             }
         }
       }
-      if (s==2){
-        lockedBy = tid;
-        return true;
+      if (s==2  &amp;&amp; connected != s1 &amp;&amp;  connected != s2){
+        return 2;
+      } else if (s==2) {
+        return 1;
       }
     }
-    return false;
+    return 0;
 }
 
 
@@ -305,13 +305,6 @@ bool clear(int tid){
         }
       }
       return true;
-    }
-    return false;
-}
-
-bool swDir(int s1, int s2){ //+ = true, - = false
-    if(connected != s1 &amp;&amp; connected != s2){
-        return true;
     }
     return false;
 }
@@ -377,7 +370,7 @@ connected = CBs[id][1]</label>
 		<transition>
 			<source ref="id11"/>
 			<target ref="id13"/>
-			<label kind="guard" x="-314" y="-153">!sw</label>
+			<label kind="guard" x="-314" y="-153">result == 1</label>
 			<nail x="-510" y="-136"/>
 			<nail x="-280" y="-136"/>
 			<nail x="-136" y="-136"/>
@@ -395,14 +388,14 @@ tid:=i</label>
 		<transition>
 			<source ref="id11"/>
 			<target ref="id10"/>
-			<label kind="guard" x="-476" y="-68">sw</label>
+			<label kind="guard" x="-476" y="-68">result == 2</label>
 			<label kind="synchronisation" x="-476" y="-51">switchh[boxes[id]]!</label>
 			<nail x="-331" y="-34"/>
 		</transition>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id15"/>
-			<label kind="guard" x="-782" y="-34">!result</label>
+			<label kind="guard" x="-782" y="-34">result==0</label>
 			<label kind="synchronisation" x="-782" y="-17">notOK[tid]!</label>
 			<label kind="assignment" x="-782" y="0">tid:=-1</label>
 			<nail x="-816" y="-34"/>
@@ -429,11 +422,10 @@ tid:=i</label>
 			<label kind="select" x="-773" y="-221">i : int[0,NT-1],
 j : int[0,NSEG-1],
 k : int[0,NSEG-1]</label>
-			<label kind="guard" x="-773" y="-161">lockedBy == -1</label>
-			<label kind="synchronisation" x="-773" y="-144">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-773" y="-127">result:=lock(i,j,k),
-tid:=i,
-sw:=swDir(j,k)</label>
+			<label kind="guard" x="-773" y="-144">lockedBy == -1</label>
+			<label kind="synchronisation" x="-773" y="-127">reqLock[id][i][j][k]?</label>
+			<label kind="assignment" x="-773" y="-110">result:=lock(i,j,k),
+tid:=i</label>
 			<nail x="-748" y="-68"/>
 		</transition>
 		<transition>
@@ -450,15 +442,16 @@ tid:=i</label>
 		<transition>
 			<source ref="id13"/>
 			<target ref="id15"/>
-			<label kind="synchronisation" x="-680" y="34">OK[lockedBy]!</label>
+			<label kind="synchronisation" x="-680" y="34">OK[tid]!</label>
+			<label kind="assignment" x="-680" y="51">lockedBy:=tid,
+tid:=-1</label>
 			<nail x="-136" y="34"/>
 			<nail x="-884" y="34"/>
 		</transition>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id11"/>
-			<label kind="guard" x="-654" y="-34">result</label>
-			<label kind="assignment" x="-654" y="-17">tid:=-1</label>
+			<label kind="guard" x="-654" y="-34">result &gt; 0</label>
 		</transition>
 	</template>
 	<template>
