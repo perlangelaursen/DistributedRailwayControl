@@ -14,6 +14,7 @@ import network.SegmentOneWay;
 import network.SegmentTwoWay;
 import network.SwitchBox;
 
+import network.Train;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -84,6 +85,13 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	private EClass regularBoxEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass trainEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,6 +189,16 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	@Override
 	public EReference getNetwork_Segments() {
 		return (EReference)networkEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNetwork_Train() {
+		return (EReference)networkEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -359,6 +377,26 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getTrain() {
+		return trainEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTrain_Route() {
+		return (EReference)trainEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getPointSetting() {
 		return pointSettingEEnum;
 	}
@@ -395,6 +433,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		networkEClass = createEClass(NETWORK);
 		createEReference(networkEClass, NETWORK__CONTROL_BOXES);
 		createEReference(networkEClass, NETWORK__SEGMENTS);
+		createEReference(networkEClass, NETWORK__TRAIN);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__ID);
@@ -419,6 +458,9 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(switchBoxEClass, SWITCH_BOX__MINUS);
 
 		regularBoxEClass = createEClass(REGULAR_BOX);
+
+		trainEClass = createEClass(TRAIN);
+		createEReference(trainEClass, TRAIN__ROUTE);
 
 		// Create enums
 		pointSettingEEnum = createEEnum(POINT_SETTING);
@@ -458,11 +500,13 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		segmentTwoWayEClass.getESuperTypes().add(this.getSegment());
 		switchBoxEClass.getESuperTypes().add(this.getControlBox());
 		regularBoxEClass.getESuperTypes().add(this.getControlBox());
+		trainEClass.getESuperTypes().add(this.getElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(networkEClass, Network.class, "Network", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNetwork_ControlBoxes(), this.getControlBox(), null, "controlBoxes", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNetwork_Segments(), this.getSegment(), null, "segments", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNetwork_Train(), this.getTrain(), null, "train", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -487,6 +531,9 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getSwitchBox_Minus(), this.getSegment(), null, "minus", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(regularBoxEClass, RegularBox.class, "RegularBox", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(trainEClass, Train.class, "Train", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTrain_Route(), this.getSegment(), null, "route", null, 1, -1, Train.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(pointSettingEEnum, PointSetting.class, "PointSetting");

@@ -59,8 +59,7 @@
           xsi:type="gmfgen:GenExternalNodeLabel"
           visualID="5001"
           editPartClassName="SwitchBoxIdEditPart"
-          itemSemanticEditPolicyClassName="SwitchBoxIdItemSemanticEditPolicy"
-          elementIcon="true">
+          itemSemanticEditPolicyClassName="SwitchBoxIdItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -113,14 +112,65 @@
           xsi:type="gmfgen:GenExternalNodeLabel"
           visualID="5002"
           editPartClassName="RegularBoxIdEditPart"
-          itemSemanticEditPolicyClassName="RegularBoxIdItemSemanticEditPolicy"
-          elementIcon="true">
+          itemSemanticEditPolicyClassName="RegularBoxIdItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:InnerClassViewmap"
             className="ControlBoxId"
             classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ControlBoxId extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ControlBoxId() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;&lt;...>&quot;);&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="network.genmodel#//network/Element/id"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="2003"
+        editPartClassName="TrainEditPart"
+        itemSemanticEditPolicyClassName="TrainItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="TrainCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="TrainGraphicalNodeEditPolicy"
+        createCommandClassName="TrainCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="TrainEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="TrainFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class TrainFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public TrainFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(15)&#xA;));&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 0, 0, 0);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <attributes
+            xsi:type="gmfgen:ResizeConstraints"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="20"
+            height="15"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="network.genmodel#//network/Train"/>
+        <containmentMetaFeature
+            href="network.genmodel#//network/Network/train"/>
+        <childMetaFeature
+            href="network.genmodel#//network/Network/train"/>
+      </modelFacet>
+      <labels
+          xsi:type="gmfgen:GenExternalNodeLabel"
+          visualID="5003"
+          editPartClassName="TrainIdEditPart"
+          itemSemanticEditPolicyClassName="TrainIdItemSemanticEditPolicy">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:FigureViewmap"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
@@ -160,8 +210,7 @@
       <labels
           visualID="6001"
           editPartClassName="SegmentOneWayIdEditPart"
-          itemSemanticEditPolicyClassName="SegmentOneWayIdItemSemanticEditPolicy"
-          elementIcon="true">
+          itemSemanticEditPolicyClassName="SegmentOneWayIdItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -211,8 +260,7 @@
       <labels
           visualID="6002"
           editPartClassName="SegmentTwoWayIdEditPart"
-          itemSemanticEditPolicyClassName="SegmentTwoWayIdItemSemanticEditPolicy"
-          elementIcon="true">
+          itemSemanticEditPolicyClassName="SegmentTwoWayIdItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -254,6 +302,10 @@
             title="RegularBox"
             description="Create new RegularBox"
             genNodes="//@diagram/@topLevelNodes.1"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Train"
+            genNodes="//@diagram/@topLevelNodes.2"/>
       </groups>
     </palette>
     <preferencePages
@@ -297,6 +349,9 @@
     <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.1"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@topLevelNodes.2"/>
     <childReferences
         parent="//@diagram"
         child="//@diagram/@links.0"
@@ -430,7 +485,7 @@
       extensibleViaService="true">
     <implementations
         xsi:type="gmfgen:PredefinedParser"
-        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet"/>
+        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet"/>
   </labelParsers>
   <contextMenus
       context="//@diagram">

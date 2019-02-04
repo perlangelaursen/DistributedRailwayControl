@@ -67,6 +67,20 @@
       </actualFigure>
     </descriptors>
     <descriptors
+        name="TrainFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="TrainFigure">
+        <layout
+            xsi:type="gmfgraph:BorderLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"/>
+        <preferredSize
+            dx="20"
+            dy="15"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
         name="ControlBoxId">
       <actualFigure
           xsi:type="gmfgraph:Label"
@@ -80,6 +94,12 @@
           name="SegmentIdFigure"
           text="&lt;...>"/>
     </descriptors>
+    <descriptors
+        name="TrainFigureId">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="TrainIdFigure"/>
+    </descriptors>
   </figures>
   <nodes
       name="SwitchBox"
@@ -89,6 +109,10 @@
       name="RegularBox"
       figure="RegularBoxFigure"
       resizeConstraint="NONE"/>
+  <nodes
+      name="Train"
+      figure="TrainFigure"
+      resizeConstraint="NONE"/>
   <connections
       name="SegmentOneWay"
       figure="SegmentOneWayFigure"/>
@@ -97,14 +121,22 @@
       figure="SegmentTwoWayFigure"/>
   <labels
       name="SegmentOneWayId"
-      figure="SegmentId"/>
+      figure="SegmentId"
+      elementIcon="false"/>
   <labels
       name="SegmentTwoWayId"
-      figure="SegmentId"/>
+      figure="SegmentId"
+      elementIcon="false"/>
   <labels
       name="SwitchBoxId"
-      figure="ControlBoxId"/>
+      figure="ControlBoxId"
+      elementIcon="false"/>
   <labels
       name="RegularBoxId"
-      figure="ControlBoxId"/>
+      figure="ControlBoxId"
+      elementIcon="false"/>
+  <labels
+      name="TrainId"
+      figure="TrainFigureId"
+      elementIcon="false"/>
 </gmfgraph:Canvas>

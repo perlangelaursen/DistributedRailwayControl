@@ -46,6 +46,26 @@
           href="network.gmfgraph#RegularBox"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="network.ecore#//Network/train"/>
+    <ownedChild>
+      <domainMetaElement
+          href="network.ecore#//Train"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="network.gmfgraph#TrainId"/>
+        <features
+            href="network.ecore#//Element/id"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="network.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="network.gmfgraph#Train"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="network.ecore#//SegmentOneWay"/>

@@ -12,9 +12,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import network.Network;
 
-public class Translator extends AbstractHandler implements IHandler{
-	
-
+public abstract class Translator extends AbstractHandler implements IHandler{
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
@@ -23,6 +21,7 @@ public class Translator extends AbstractHandler implements IHandler{
 			if (structuredSelection.size() == 1) {
 				Network n = getNetwork(structuredSelection.getFirstElement());
 				if (n != null) {
+					generateCode(n);
 					MessageDialog.openInformation(null, "Network statistics", "The network has "+n.getControlBoxes().size()+" control boxes and "+n.getSegments().size()+" segments.");
 				}
 			}
@@ -30,6 +29,8 @@ public class Translator extends AbstractHandler implements IHandler{
 		return null;
 	}
 
+	protected abstract void generateCode(Network n);
+	
 	private Network getNetwork(Object o) {
 		if (o instanceof Network) {
 			return (Network) o;

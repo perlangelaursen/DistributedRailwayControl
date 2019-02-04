@@ -86,13 +86,22 @@ public interface NetworkPackage extends EPackage {
 	int NETWORK__SEGMENTS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Train</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NETWORK__TRAIN = 2;
+
+	/**
 	 * The number of structural features of the '<em>Network</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NETWORK_FEATURE_COUNT = 2;
+	int NETWORK_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Network</em>' class.
@@ -534,6 +543,52 @@ public interface NetworkPackage extends EPackage {
 	int REGULAR_BOX_OPERATION_COUNT = CONTROL_BOX_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link network.impl.TrainImpl <em>Train</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see network.impl.TrainImpl
+	 * @see network.impl.NetworkPackageImpl#getTrain()
+	 * @generated
+	 */
+	int TRAIN = 8;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRAIN__ID = ELEMENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Route</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRAIN__ROUTE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Train</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRAIN_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Train</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRAIN_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link network.PointSetting <em>Point Setting</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -541,7 +596,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getPointSetting()
 	 * @generated
 	 */
-	int POINT_SETTING = 8;
+	int POINT_SETTING = 9;
 
 
 	/**
@@ -575,6 +630,17 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNetwork_Segments();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link network.Network#getTrain <em>Train</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Train</em>'.
+	 * @see network.Network#getTrain()
+	 * @see #getNetwork()
+	 * @generated
+	 */
+	EReference getNetwork_Train();
 
 	/**
 	 * Returns the meta object for class '{@link network.Element <em>Element</em>}'.
@@ -757,6 +823,27 @@ public interface NetworkPackage extends EPackage {
 	EClass getRegularBox();
 
 	/**
+	 * Returns the meta object for class '{@link network.Train <em>Train</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Train</em>'.
+	 * @see network.Train
+	 * @generated
+	 */
+	EClass getTrain();
+
+	/**
+	 * Returns the meta object for the reference list '{@link network.Train#getRoute <em>Route</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Route</em>'.
+	 * @see network.Train#getRoute()
+	 * @see #getTrain()
+	 * @generated
+	 */
+	EReference getTrain_Route();
+
+	/**
 	 * Returns the meta object for enum '{@link network.PointSetting <em>Point Setting</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -814,6 +901,14 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference NETWORK__SEGMENTS = eINSTANCE.getNetwork_Segments();
+
+		/**
+		 * The meta object literal for the '<em><b>Train</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NETWORK__TRAIN = eINSTANCE.getNetwork_Train();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.ElementImpl <em>Element</em>}' class.
@@ -964,6 +1059,24 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EClass REGULAR_BOX = eINSTANCE.getRegularBox();
+
+		/**
+		 * The meta object literal for the '{@link network.impl.TrainImpl <em>Train</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see network.impl.TrainImpl
+		 * @see network.impl.NetworkPackageImpl#getTrain()
+		 * @generated
+		 */
+		EClass TRAIN = eINSTANCE.getTrain();
+
+		/**
+		 * The meta object literal for the '<em><b>Route</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRAIN__ROUTE = eINSTANCE.getTrain_Route();
 
 		/**
 		 * The meta object literal for the '{@link network.PointSetting <em>Point Setting</em>}' enum.

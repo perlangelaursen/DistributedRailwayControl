@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -61,8 +62,31 @@ public class NetworkItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTrainPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Train feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTrainPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Network_train_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Network_train_feature", "_UI_Network_type"),
+				 NetworkPackage.Literals.NETWORK__TRAIN,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -79,6 +103,7 @@ public class NetworkItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(NetworkPackage.Literals.NETWORK__CONTROL_BOXES);
 			childrenFeatures.add(NetworkPackage.Literals.NETWORK__SEGMENTS);
+			childrenFeatures.add(NetworkPackage.Literals.NETWORK__TRAIN);
 		}
 		return childrenFeatures;
 	}
@@ -133,6 +158,7 @@ public class NetworkItemProvider
 		switch (notification.getFeatureID(Network.class)) {
 			case NetworkPackage.NETWORK__CONTROL_BOXES:
 			case NetworkPackage.NETWORK__SEGMENTS:
+			case NetworkPackage.NETWORK__TRAIN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -169,6 +195,11 @@ public class NetworkItemProvider
 			(createChildParameter
 				(NetworkPackage.Literals.NETWORK__SEGMENTS,
 				 NetworkFactory.eINSTANCE.createSegmentTwoWay()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(NetworkPackage.Literals.NETWORK__TRAIN,
+				 NetworkFactory.eINSTANCE.createTrain()));
 	}
 
 	/**

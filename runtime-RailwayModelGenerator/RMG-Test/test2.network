@@ -8,4 +8,6 @@
   <segments xsi:type="nw:SegmentTwoWay" id="s1" start="cb1" end="cb2"/>
   <segments xsi:type="nw:SegmentTwoWay" id="s3" start="cb3" end="cb2" train="true"/>
   <segments xsi:type="nw:SegmentOneWay" id="s2" start="cb2" end="cb1"/>
+  <train id="t1" route="s0 s1 s3"/>
+  <train id="t2" route="s3 s2 s0"/>
 </nw:Network>

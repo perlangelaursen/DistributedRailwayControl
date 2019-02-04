@@ -67,6 +67,15 @@ public interface NetworkFactory extends EFactory {
 	RegularBox createRegularBox();
 
 	/**
+	 * Returns a new object of class '<em>Train</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Train</em>'.
+	 * @generated
+	 */
+	Train createTrain();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

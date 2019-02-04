@@ -187,6 +187,29 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link network.Train} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TrainItemProvider trainItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link network.Train}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTrainAdapter() {
+		if (trainItemProvider == null) {
+			trainItemProvider = new TrainItemProvider(this);
+		}
+
+		return trainItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -296,6 +319,7 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 		if (segmentTwoWayItemProvider != null) segmentTwoWayItemProvider.dispose();
 		if (switchBoxItemProvider != null) switchBoxItemProvider.dispose();
 		if (regularBoxItemProvider != null) regularBoxItemProvider.dispose();
+		if (trainItemProvider != null) trainItemProvider.dispose();
 	}
 
 }

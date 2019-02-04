@@ -2,7 +2,7 @@
 <notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network" xmi:id="_AiEY0Ch8EemWPJas9unSIg" type="Network" name="test2.network_diagram" measurementUnit="Pixel">
   <children xmi:type="notation:Node" xmi:id="_1XDqMCiBEemwM8Hj1pgYmA" type="2002">
     <children xmi:type="notation:DecorationNode" xmi:id="_1XDqNSiBEemwM8Hj1pgYmA" type="5002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_1XDqNiiBEemwM8Hj1pgYmA" y="5"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1XDqNiiBEemwM8Hj1pgYmA" x="-20" y="40"/>
     </children>
     <styles xmi:type="notation:DescriptionStyle" xmi:id="_1XDqMSiBEemwM8Hj1pgYmA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_1XDqMiiBEemwM8Hj1pgYmA" fontName="Segoe UI"/>
@@ -39,6 +39,26 @@
     <styles xmi:type="notation:LineStyle" xmi:id="_3ox1MyiBEemwM8Hj1pgYmA"/>
     <element xmi:type="nw:RegularBox" href="test2.network#cb3"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3ox1NCiBEemwM8Hj1pgYmA" x="978" y="181"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_EKfIoCiKEemmWInz2Hpblw" type="2003">
+    <children xmi:type="notation:DecorationNode" xmi:id="_EKfvsCiKEemmWInz2Hpblw" type="5003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_EKfvsSiKEemmWInz2Hpblw" x="40" y="-20"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_EKfIoSiKEemmWInz2Hpblw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_EKfIoiiKEemmWInz2Hpblw" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_EKfIoyiKEemmWInz2Hpblw"/>
+    <element xmi:type="nw:Train" href="test2.network#t1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EKfIpCiKEemmWInz2Hpblw" x="330" y="165"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_fzTewCiKEemmWInz2Hpblw" type="2003">
+    <children xmi:type="notation:DecorationNode" xmi:id="_fzTexSiKEemmWInz2Hpblw" type="5003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fzTexiiKEemmWInz2Hpblw" x="7" y="-40"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_fzTewSiKEemmWInz2Hpblw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fzTewiiKEemmWInz2Hpblw" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_fzTewyiKEemmWInz2Hpblw"/>
+    <element xmi:type="nw:Train" href="test2.network#t2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fzTexCiKEemmWInz2Hpblw" x="870" y="150"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_AiE_4Ch8EemWPJas9unSIg"/>
   <element xmi:type="nw:Network" href="test2.network#/"/>
