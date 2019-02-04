@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: network.provider.NetworkEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: network.provider
 Require-Bundle: org.eclipse.core.runtime,
  s144449s144456.RailwayModelGenerator;visibility:=reexport,

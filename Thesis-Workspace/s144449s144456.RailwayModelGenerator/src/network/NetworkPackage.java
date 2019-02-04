@@ -478,6 +478,60 @@ public interface NetworkPackage extends EPackage {
 	 */
 	int SWITCH_BOX_OPERATION_COUNT = CONTROL_BOX_OPERATION_COUNT + 0;
 
+	/**
+	 * The meta object id for the '{@link network.impl.RegularBoxImpl <em>Regular Box</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see network.impl.RegularBoxImpl
+	 * @see network.impl.NetworkPackageImpl#getRegularBox()
+	 * @generated
+	 */
+	int REGULAR_BOX = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX__ID = CONTROL_BOX__ID;
+
+	/**
+	 * The feature id for the '<em><b>Ingoing</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX__INGOING = CONTROL_BOX__INGOING;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX__OUTGOING = CONTROL_BOX__OUTGOING;
+
+	/**
+	 * The number of structural features of the '<em>Regular Box</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX_FEATURE_COUNT = CONTROL_BOX_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Regular Box</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX_OPERATION_COUNT = CONTROL_BOX_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link network.PointSetting <em>Point Setting</em>}' enum.
@@ -487,7 +541,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getPointSetting()
 	 * @generated
 	 */
-	int POINT_SETTING = 7;
+	int POINT_SETTING = 8;
 
 
 	/**
@@ -693,6 +747,16 @@ public interface NetworkPackage extends EPackage {
 	EReference getSwitchBox_Minus();
 
 	/**
+	 * Returns the meta object for class '{@link network.RegularBox <em>Regular Box</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Regular Box</em>'.
+	 * @see network.RegularBox
+	 * @generated
+	 */
+	EClass getRegularBox();
+
+	/**
 	 * Returns the meta object for enum '{@link network.PointSetting <em>Point Setting</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -890,6 +954,16 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SWITCH_BOX__MINUS = eINSTANCE.getSwitchBox_Minus();
+
+		/**
+		 * The meta object literal for the '{@link network.impl.RegularBoxImpl <em>Regular Box</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see network.impl.RegularBoxImpl
+		 * @see network.impl.NetworkPackageImpl#getRegularBox()
+		 * @generated
+		 */
+		EClass REGULAR_BOX = eINSTANCE.getRegularBox();
 
 		/**
 		 * The meta object literal for the '{@link network.PointSetting <em>Point Setting</em>}' enum.

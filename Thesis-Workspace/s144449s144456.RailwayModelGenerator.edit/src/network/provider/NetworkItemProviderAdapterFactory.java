@@ -95,29 +95,6 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link network.ControlBox} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ControlBoxItemProvider controlBoxItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link network.ControlBox}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createControlBoxAdapter() {
-		if (controlBoxItemProvider == null) {
-			controlBoxItemProvider = new ControlBoxItemProvider(this);
-		}
-
-		return controlBoxItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link network.SegmentOneWay} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -184,6 +161,29 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 		}
 
 		return switchBoxItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link network.RegularBox} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RegularBoxItemProvider regularBoxItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link network.RegularBox}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRegularBoxAdapter() {
+		if (regularBoxItemProvider == null) {
+			regularBoxItemProvider = new RegularBoxItemProvider(this);
+		}
+
+		return regularBoxItemProvider;
 	}
 
 	/**
@@ -292,10 +292,10 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 	@Override
 	public void dispose() {
 		if (networkItemProvider != null) networkItemProvider.dispose();
-		if (controlBoxItemProvider != null) controlBoxItemProvider.dispose();
 		if (segmentOneWayItemProvider != null) segmentOneWayItemProvider.dispose();
 		if (segmentTwoWayItemProvider != null) segmentTwoWayItemProvider.dispose();
 		if (switchBoxItemProvider != null) switchBoxItemProvider.dispose();
+		if (regularBoxItemProvider != null) regularBoxItemProvider.dispose();
 	}
 
 }

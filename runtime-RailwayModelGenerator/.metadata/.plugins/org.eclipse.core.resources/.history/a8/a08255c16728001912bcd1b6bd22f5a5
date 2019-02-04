@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nw:Network xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network">
+  <controlBoxes id="cb0"/>
+  <controlBoxes xsi:type="nw:SwitchBox" id="cb1"/>
+  <controlBoxes xsi:type="nw:SwitchBox" id="cb2"/>
+  <controlBoxes id="cb2"/>
+  <segments xsi:type="nw:SegmentTwoWay" id="s0" start="cb0" end="cb1" train="true"/>
+  <segments xsi:type="nw:SegmentTwoWay" id="s1" start="cb1" end="cb2"/>
+  <segments xsi:type="nw:SegmentOneWay" id="s3" start="cb1" end="cb2"/>
+  <segments xsi:type="nw:SegmentTwoWay" id="s3" start="cb2" end="cb2" train="true"/>
+</nw:Network>

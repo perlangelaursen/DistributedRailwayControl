@@ -153,12 +153,12 @@ public class NetworkItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(NetworkPackage.Literals.NETWORK__CONTROL_BOXES,
-				 NetworkFactory.eINSTANCE.createControlBox()));
+				 NetworkFactory.eINSTANCE.createSwitchBox()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(NetworkPackage.Literals.NETWORK__CONTROL_BOXES,
-				 NetworkFactory.eINSTANCE.createSwitchBox()));
+				 NetworkFactory.eINSTANCE.createRegularBox()));
 
 		newChildDescriptors.add
 			(createChildParameter

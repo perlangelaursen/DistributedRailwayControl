@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network" xmi:id="_AiEY0Ch8EemWPJas9unSIg" type="Network" name="test2.network_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_cOxMkCiAEemtZLLLIc0F1w" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_cOzBwCiAEemtZLLLIc0F1w" type="5001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_cOzBwSiAEemtZLLLIc0F1w" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_cOxMkSiAEemtZLLLIc0F1w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_cOxMkiiAEemtZLLLIc0F1w" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_cOxMkyiAEemtZLLLIc0F1w"/>
+    <element xmi:type="nw:SwitchBox" href="test2.network#//@controlBoxes.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cOxMlCiAEemtZLLLIc0F1w" x="272" y="213"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_cxhUUCiAEemtZLLLIc0F1w" type="2002">
+    <children xmi:type="notation:DecorationNode" xmi:id="_cxh7YCiAEemtZLLLIc0F1w" type="5002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_cxh7YSiAEemtZLLLIc0F1w" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_cxhUUSiAEemtZLLLIc0F1w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_cxhUUiiAEemtZLLLIc0F1w" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_cxhUUyiAEemtZLLLIc0F1w"/>
+    <element xmi:type="nw:RegularBox" href="test2.network#//@controlBoxes.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cxhUVCiAEemtZLLLIc0F1w" x="570" y="195"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_kYP1ICiAEemtZLLLIc0F1w" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_kYQcMCiAEemtZLLLIc0F1w" type="5001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_kYQcMSiAEemtZLLLIc0F1w" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_kYP1ISiAEemtZLLLIc0F1w"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_kYP1IiiAEemtZLLLIc0F1w" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_kYP1IyiAEemtZLLLIc0F1w"/>
+    <element xmi:type="nw:SwitchBox" href="test2.network#//@controlBoxes.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kYP1JCiAEemtZLLLIc0F1w" x="824" y="196"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_AiE_4Ch8EemWPJas9unSIg"/>
+  <element xmi:type="nw:Network" href="test2.network#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_f9xN4CiAEemtZLLLIc0F1w" type="4002" source="_cOxMkCiAEemtZLLLIc0F1w" target="_cxhUUCiAEemtZLLLIc0F1w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_f9xN4yiAEemtZLLLIc0F1w" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_f9xN5CiAEemtZLLLIc0F1w" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_f9xN4SiAEemtZLLLIc0F1w" fontName="Segoe UI"/>
+    <element xmi:type="nw:SegmentOneWay" href="test2.network#s"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_f9xN4iiAEemtZLLLIc0F1w" points="[8, -1, -156, 17]$[162, -20, -2, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_f9zDECiAEemtZLLLIc0F1w" id="(0.2,0.1)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_f9zDESiAEemtZLLLIc0F1w" id="(0.2,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_lHBmsCiAEemtZLLLIc0F1w" type="4002" source="_cxhUUCiAEemtZLLLIc0F1w" target="_kYP1ICiAEemtZLLLIc0F1w">
+    <children xmi:type="notation:DecorationNode" xmi:id="_lHBmsyiAEemtZLLLIc0F1w" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_lHCNwCiAEemtZLLLIc0F1w" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_lHBmsSiAEemtZLLLIc0F1w" fontName="Segoe UI"/>
+    <element xmi:type="nw:SegmentOneWay" href="test2.network#//@segments.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_lHBmsiiAEemtZLLLIc0F1w" points="[2, -1, -253, -6]$[131, -46, -124, -51]$[250, 2, -5, -3]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lHDb4CiAEemtZLLLIc0F1w" id="(0.4,0.1)"/>
+  </edges>
+</notation:Diagram>

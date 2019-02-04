@@ -4,7 +4,6 @@ package network;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Control Box</b></em>'.
@@ -19,11 +18,10 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see network.NetworkPackage#getControlBox()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ControlBox extends Element {
-
 	/**
 	 * Returns the value of the '<em><b>Ingoing</b></em>' reference list.
 	 * The list contents are of type {@link network.Segment}.
@@ -59,4 +57,5 @@ public interface ControlBox extends Element {
 	 * @generated
 	 */
 	EList<Segment> getOutgoing();
+
 } // ControlBox

@@ -11,8 +11,8 @@
         title="network">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ControlBox"
-          description="Create new ControlBox">
+          title="SegmentOneWay"
+          description="Create new SegmentOneWay">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon
@@ -20,8 +20,26 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SegmentOneWay"
-          description="Create new SegmentOneWay">
+          title="SegmentTwoWay"
+          description="Create new SegmentTwoWay">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SwitchBox"
+          description="Create new SwitchBox">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="RegularBox"
+          description="Create new RegularBox">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon

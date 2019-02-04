@@ -8,8 +8,10 @@ import network.Segment;
 import network.SwitchBox;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -38,6 +40,7 @@ public class SwitchBoxImpl extends ControlBoxImpl implements SwitchBox {
 	 * @ordered
 	 */
 	protected static final PointSetting CONNECTED_EDEFAULT = PointSetting.PLUS;
+
 	/**
 	 * The cached value of the '{@link #getConnected() <em>Connected</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -57,6 +60,7 @@ public class SwitchBoxImpl extends ControlBoxImpl implements SwitchBox {
 	 * @ordered
 	 */
 	protected Segment stem;
+
 	/**
 	 * The cached value of the '{@link #getPlus() <em>Plus</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -66,6 +70,7 @@ public class SwitchBoxImpl extends ControlBoxImpl implements SwitchBox {
 	 * @ordered
 	 */
 	protected Segment plus;
+
 	/**
 	 * The cached value of the '{@link #getMinus() <em>Minus</em>}' reference.
 	 * <!-- begin-user-doc -->

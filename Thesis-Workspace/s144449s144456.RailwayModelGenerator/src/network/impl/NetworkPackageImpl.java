@@ -8,6 +8,7 @@ import network.Network;
 import network.NetworkFactory;
 import network.NetworkPackage;
 import network.PointSetting;
+import network.RegularBox;
 import network.Segment;
 import network.SegmentOneWay;
 import network.SegmentTwoWay;
@@ -76,6 +77,13 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	private EClass switchBoxEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass regularBoxEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -341,6 +349,16 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getRegularBox() {
+		return regularBoxEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getPointSetting() {
 		return pointSettingEEnum;
 	}
@@ -400,6 +418,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(switchBoxEClass, SWITCH_BOX__PLUS);
 		createEReference(switchBoxEClass, SWITCH_BOX__MINUS);
 
+		regularBoxEClass = createEClass(REGULAR_BOX);
+
 		// Create enums
 		pointSettingEEnum = createEEnum(POINT_SETTING);
 	}
@@ -437,6 +457,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		segmentOneWayEClass.getESuperTypes().add(this.getSegment());
 		segmentTwoWayEClass.getESuperTypes().add(this.getSegment());
 		switchBoxEClass.getESuperTypes().add(this.getControlBox());
+		regularBoxEClass.getESuperTypes().add(this.getControlBox());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(networkEClass, Network.class, "Network", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -446,7 +467,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(controlBoxEClass, ControlBox.class, "ControlBox", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(controlBoxEClass, ControlBox.class, "ControlBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getControlBox_Ingoing(), this.getSegment(), this.getSegment_End(), "ingoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlBox_Outgoing(), this.getSegment(), this.getSegment_Start(), "outgoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -464,6 +485,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getSwitchBox_Stem(), this.getSegment(), null, "stem", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchBox_Plus(), this.getSegment(), null, "plus", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchBox_Minus(), this.getSegment(), null, "minus", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(regularBoxEClass, RegularBox.class, "RegularBox", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(pointSettingEEnum, PointSetting.class, "PointSetting");

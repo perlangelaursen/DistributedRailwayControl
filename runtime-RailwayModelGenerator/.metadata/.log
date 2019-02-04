@@ -1,0 +1,282 @@
+!SESSION 2019-02-04 10:51:11.774 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 10:51:53.570
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 10:55:50.793 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 10:56:00.735
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 10:59:43.773 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 10:59:53.680
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 11:23:45.117 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 11:23:55.786
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 11:30:36.656 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 11:30:47.472
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.ui.sdk 2 0 2019-02-04 11:32:32.466
+!MESSAGE Could not locate the running profile instance. The eclipse.p2.data.area and eclipse.p2.profile properties may not be set correctly in this application's config.ini file.
+!SESSION 2019-02-04 11:58:02.078 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 11:58:13.043
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 12:27:58.398 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 12:28:07.699
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 13:27:20.929 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:27:30.943
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 13:29:39.285 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:29:56.224
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.emf.ecp.cdo.core 1 0 2019-02-04 13:30:54.157
+!MESSAGE Could not open socket on port 7778
+!SESSION 2019-02-04 13:39:13.513 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:39:24.539
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.emf.ecp.cdo.core 1 0 2019-02-04 13:39:28.106
+!MESSAGE Could not open socket on port 7778
+
+!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-04 13:41:38.028
+!MESSAGE [org.eclipse.emf.ecp.core.ecpProviderRegistry(27)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPProviderRegistryImpl
+
+!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-04 13:41:38.029
+!MESSAGE [org.eclipse.emf.ecp.core.ecpRepositoryManager(28)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPRepositoryManagerImpl
+
+!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-04 13:41:38.030
+!MESSAGE [org.eclipse.emf.ecp.core.ecpProjectManager(29)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPProjectManagerImpl
+!SESSION 2019-02-04 13:46:47.392 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:46:58.366
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.emf.ecp.cdo.core 1 0 2019-02-04 13:47:04.038
+!MESSAGE Could not open socket on port 7778
+
+!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-04 13:47:48.251
+!MESSAGE [org.eclipse.emf.ecp.core.ecpProviderRegistry(27)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPProviderRegistryImpl
+
+!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-04 13:47:48.252
+!MESSAGE [org.eclipse.emf.ecp.core.ecpRepositoryManager(28)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPRepositoryManagerImpl
+
+!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-04 13:47:48.254
+!MESSAGE [org.eclipse.emf.ecp.core.ecpProjectManager(29)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPProjectManagerImpl
+!SESSION 2019-02-04 13:49:29.249 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:49:42.119
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 13:53:09.737 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:53:22.722
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 13:53:54.834 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 13:54:04.072
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 14:00:26.210 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 14:00:41.050
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 14:24:14.633 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 14:24:27.442
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 14:25:57.206 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 14:26:09.899
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2019-02-04 14:34:57.570 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace/../runtime-RailwayModelGenerator -dev file:C:/Users/Anh Van/OneDrive/2019 Formal Verification of Distributed Railway Control Systems/DistributedRailwayControl/Thesis-Workspace/.metadata/.plugins/org.eclipse.pde.core/RailwayModelGenerator/dev.properties -os win32 -ws win32 -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-04 14:35:10.628
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

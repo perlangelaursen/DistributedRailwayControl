@@ -23,7 +23,6 @@ package network;
  * @generated
  */
 public interface SwitchBox extends ControlBox {
-
 	/**
 	 * Returns the value of the '<em><b>Connected</b></em>' attribute.
 	 * The literals are from the enumeration {@link network.PointSetting}.
@@ -130,4 +129,5 @@ public interface SwitchBox extends ControlBox {
 	 * @generated
 	 */
 	void setMinus(Segment value);
+
 } // SwitchBox

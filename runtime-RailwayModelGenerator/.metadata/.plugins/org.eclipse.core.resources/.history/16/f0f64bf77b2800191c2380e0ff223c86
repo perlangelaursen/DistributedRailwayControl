@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network" xmi:id="_90wI4Ch5EemCB4j36COs4A" type="Network" name="test2.network_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_Ariv0Ch6EemCB4j36COs4A" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_ArlMECh6EemCB4j36COs4A" type="5001"/>
+    <element xmi:type="nw:SwitchBox" href="test2.network#//@controlBoxes.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ariv0Sh6EemCB4j36COs4A" x="353" y="179"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_D-wNACh6EemCB4j36COs4A" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_D-wNAih6EemCB4j36COs4A" type="5001"/>
+    <element xmi:type="nw:SwitchBox" href="test2.network#//@controlBoxes.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_D-wNASh6EemCB4j36COs4A" x="577" y="181"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_90wI4Sh5EemCB4j36COs4A"/>
+  <element xmi:type="nw:Network" href="test2.network#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_D-26sCh6EemCB4j36COs4A" type="4002" source="_Ariv0Ch6EemCB4j36COs4A" target="_D-wNACh6EemCB4j36COs4A">
+    <styles xmi:type="notation:FontStyle" xmi:id="_D-26sSh6EemCB4j36COs4A" fontName="Segoe UI"/>
+    <element xmi:type="nw:SegmentOneWay" href="test2.network#//@segments.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_D-26sih6EemCB4j36COs4A" points="[-24, -13, 353, 186]$[-377, -199, 0, 0]"/>
+  </edges>
+</notation:Diagram>

@@ -15,20 +15,47 @@
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="network.gmfgraph#ControlBoxId"/>
+            href="network.gmfgraph#SwitchBoxId"/>
         <features
             href="network.ecore#//Element/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="network.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="network.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
-          href="network.gmfgraph#ControlBox"/>
+          href="network.gmfgraph#SwitchBox"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="network.ecore#//Network/controlBoxes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="network.ecore#//RegularBox"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="network.gmfgraph#RegularBoxId"/>
+        <features
+            href="network.ecore#//Element/id"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="network.gmftool#//@palette/@tools.0/@tools.3"/>
+      <diagramNode
+          href="network.gmfgraph#RegularBox"/>
     </ownedChild>
   </nodes>
   <links>
     <domainMetaElement
         href="network.ecore#//SegmentOneWay"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="network.gmfgraph#SegmentOneWayId"/>
+      <features
+          href="network.ecore#//Element/id"/>
+    </labelMappings>
     <containmentFeature
         href="network.ecore#//Network/segments"/>
     <tool
@@ -36,6 +63,30 @@
         href="network.gmftool#//@palette/@tools.0/@tools.0"/>
     <diagramLink
         href="network.gmfgraph#SegmentOneWay"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="network.ecore#//Segment/start"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="network.ecore#//Segment/end"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="network.ecore#//SegmentTwoWay"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="network.gmfgraph#SegmentTwoWayId"/>
+      <features
+          href="network.ecore#//Element/id"/>
+    </labelMappings>
+    <containmentFeature
+        href="network.ecore#//Network/segments"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="network.gmftool#//@palette/@tools.0/@tools.1"/>
+    <diagramLink
+        href="network.gmfgraph#SegmentTwoWay"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="network.ecore#//Segment/start"/>

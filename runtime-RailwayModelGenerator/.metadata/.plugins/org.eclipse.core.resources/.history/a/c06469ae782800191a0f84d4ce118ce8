@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network" xmi:id="_ogxqYCh4Eemy1NDxBysXwQ" type="Network" name="test2.network_diagram" measurementUnit="Pixel">
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_ogxqYSh4Eemy1NDxBysXwQ"/>
+  <element xmi:type="nw:Network" href="default.network#/"/>
+</notation:Diagram>

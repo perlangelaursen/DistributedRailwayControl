@@ -3,14 +3,18 @@
 package network.impl;
 
 import java.util.Collection;
+
 import network.ControlBox;
 import network.NetworkPackage;
-
 import network.Segment;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -28,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ControlBoxImpl extends ElementImpl implements ControlBox {
+public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	/**
 	 * The cached value of the '{@link #getIngoing() <em>Ingoing</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -38,6 +42,7 @@ public class ControlBoxImpl extends ElementImpl implements ControlBox {
 	 * @ordered
 	 */
 	protected EList<Segment> ingoing;
+
 	/**
 	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
 	 * <!-- begin-user-doc -->
