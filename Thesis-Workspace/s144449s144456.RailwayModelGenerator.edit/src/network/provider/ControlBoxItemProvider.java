@@ -7,12 +7,8 @@ import java.util.Collection;
 import java.util.List;
 
 import network.ControlBox;
-import network.NetworkPackage;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
@@ -43,54 +39,8 @@ public class ControlBoxItemProvider extends ElementItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIngoingPropertyDescriptor(object);
-			addOutgoingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Ingoing feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIngoingPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ControlBox_ingoing_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ControlBox_ingoing_feature", "_UI_ControlBox_type"),
-				 NetworkPackage.Literals.CONTROL_BOX__INGOING,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Outgoing feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOutgoingPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ControlBox_outgoing_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ControlBox_outgoing_feature", "_UI_ControlBox_type"),
-				 NetworkPackage.Literals.CONTROL_BOX__OUTGOING,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
