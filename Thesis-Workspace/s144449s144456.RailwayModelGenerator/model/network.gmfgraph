@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmfgraph:Canvas xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="network">
+  <figures name="Default">
+    <descriptors name="ControlBoxFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="ControlBoxFigure">
+        <layout xsi:type="gmfgraph:FlowLayout"/>
+        <children xsi:type="gmfgraph:Label" name="ControlBoxIdFigure" text="&lt;...>"/>
+      </actualFigure>
+      <accessors figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="SegmentOneWayFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="SegmentOneWayFigure">
+        <children xsi:type="gmfgraph:Label" name="SegmentOneWayIdFigure" text="&lt;...>"/>
+      </actualFigure>
+      <accessors figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+    </descriptors>
+  </figures>
+  <nodes name="ControlBox" figure="ControlBoxFigure"/>
+  <connections name="SegmentOneWay" figure="SegmentOneWayFigure"/>
+  <labels name="ControlBoxId" figure="ControlBoxFigure" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels name="SegmentOneWayId" figure="SegmentOneWayFigure" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+</gmfgraph:Canvas>

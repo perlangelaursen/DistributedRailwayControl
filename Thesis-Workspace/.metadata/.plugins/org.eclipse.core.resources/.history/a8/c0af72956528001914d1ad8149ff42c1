@@ -1,0 +1,10 @@
+package s144449s144456.RailwayModelGenerator.commands;
+
+import org.eclipse.core.commands.IHandler;
+
+public class Translator  extends AbstractHandler implements IHandler{
+	
+	public Translator() {
+		
+	}
+}

@@ -1,0 +1,162 @@
+/**
+ */
+package network.impl;
+
+import network.ConnectionConfiguration;
+import network.NetworkPackage;
+import network.SwitchBox;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Switch Box</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link network.impl.SwitchBoxImpl#getConnected <em>Connected</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class SwitchBoxImpl extends ControlBoxImpl implements SwitchBox {
+	/**
+	 * The default value of the '{@link #getConnected() <em>Connected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnected()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ConnectionConfiguration CONNECTED_EDEFAULT = ConnectionConfiguration.STEM;
+	/**
+	 * The cached value of the '{@link #getConnected() <em>Connected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnected()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConnectionConfiguration connected = CONNECTED_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SwitchBoxImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return NetworkPackage.Literals.SWITCH_BOX;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConnectionConfiguration getConnected() {
+		return connected;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setConnected(ConnectionConfiguration newConnected) {
+		ConnectionConfiguration oldConnected = connected;
+		connected = newConnected == null ? CONNECTED_EDEFAULT : newConnected;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.SWITCH_BOX__CONNECTED, oldConnected, connected));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case NetworkPackage.SWITCH_BOX__CONNECTED:
+				return getConnected();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case NetworkPackage.SWITCH_BOX__CONNECTED:
+				setConnected((ConnectionConfiguration)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case NetworkPackage.SWITCH_BOX__CONNECTED:
+				setConnected(CONNECTED_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case NetworkPackage.SWITCH_BOX__CONNECTED:
+				return connected != CONNECTED_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (connected: ");
+		result.append(connected);
+		result.append(')');
+		return result.toString();
+	}
+
+} //SwitchBoxImpl

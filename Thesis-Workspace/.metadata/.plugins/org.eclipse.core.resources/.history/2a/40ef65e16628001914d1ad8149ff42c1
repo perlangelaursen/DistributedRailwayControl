@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension 
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="dk.dtu.compute.se2.tutorial"
+               label="SE2 Tutorial">
+         </menu>
+      </menuContribution>
+   </extension>
+
+   <extension 
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:dk.dtu.compute.se2.tutorial?after=additions">
+         <command
+               commandId="dk.dtu.compute.se2.tutorial.count">
+            <visibleWhen>
+               <with
+                     variable="selection">
+                  <count value="1"/>
+                  <iterate>
+                     <adapt
+                           type="geometry.Geometry">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="dk.dtu.compute.se2.tutorial.count"
+            description="Count geo objects in geometry"
+            defaultHandler="dk.dtu.compute.se2.tutorial.commands.CountHandler"
+            name="Count">
+      </command>
+   </extension>
+</plugin>

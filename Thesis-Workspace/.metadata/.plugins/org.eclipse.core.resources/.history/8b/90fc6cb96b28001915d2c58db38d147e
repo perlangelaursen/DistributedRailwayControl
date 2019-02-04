@@ -1,0 +1,52 @@
+/**
+ */
+package network;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Switch Box</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link network.SwitchBox#getConnected <em>Connected</em>}</li>
+ * </ul>
+ *
+ * @see network.NetworkPackage#getSwitchBox()
+ * @model
+ * @generated
+ */
+public interface SwitchBox extends ControlBox {
+
+	/**
+	 * Returns the value of the '<em><b>Connected</b></em>' attribute.
+	 * The literals are from the enumeration {@link network.PointSetting}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Connected</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Connected</em>' attribute.
+	 * @see network.PointSetting
+	 * @see #setConnected(PointSetting)
+	 * @see network.NetworkPackage#getSwitchBox_Connected()
+	 * @model required="true"
+	 * @generated
+	 */
+	PointSetting getConnected();
+
+	/**
+	 * Sets the value of the '{@link network.SwitchBox#getConnected <em>Connected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Connected</em>' attribute.
+	 * @see network.PointSetting
+	 * @see #getConnected()
+	 * @generated
+	 */
+	void setConnected(PointSetting value);
+} // SwitchBox

@@ -1,0 +1,46 @@
+package s144449s144456.RailwayModelGenerator.commands;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.handlers.HandlerUtil;
+
+import network.Network;
+
+public class Translator  extends AbstractHandler implements IHandler{
+	
+	public Translator() {
+		
+	}
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
+		if (selection != null & selection instanceof IStructuredSelection) {
+			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			if (structuredSelection.size() == 1) {
+				Network geometry = getNetwork(structuredSelection.getFirstElement());
+				if (geometry != null) {
+					String message = "XXX";
+					// TODO imlement counting of points, lines and intermediate poins and
+					//      generate a String message from it.
+					MessageDialog.openInformation(null, "Geometry statistics", message);
+				}
+			}
+		}
+		return null;
+	}
+
+	private Network getNetwork(Object o) {
+		if (o instanceof Network) {
+			return (Network) o;
+		} else if (o instanceof IAdaptable) {
+			return ((IAdaptable) o).getAdapter(Network.class);
+		}
+		return null;
+	}
+}

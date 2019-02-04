@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/s144449s144456.RailwayModelGenerator/src" modelPluginID="s144449s144456.RailwayModelGenerator"
+    modelName="Network" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>network.ecore</foreignModel>
+  <genPackages prefix="Network" disposableProviderFactory="true" ecorePackage="network.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="network.ecore#//ConnectionConfiguration">
+      <genEnumLiterals ecoreEnumLiteral="network.ecore#//ConnectionConfiguration/STEM"/>
+      <genEnumLiterals ecoreEnumLiteral="network.ecore#//ConnectionConfiguration/PLUS"/>
+      <genEnumLiterals ecoreEnumLiteral="network.ecore#//ConnectionConfiguration/MINUS"/>
+    </genEnums>
+    <genClasses ecoreClass="network.ecore#//Network">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference network.ecore#//Network/controlBoxes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference network.ecore#//Network/segments"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="network.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//Element/id"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="network.ecore#//ControlBox"/>
+    <genClasses image="false" ecoreClass="network.ecore#//Segment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//Segment/start"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//Segment/end"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//Segment/train"/>
+    </genClasses>
+    <genClasses ecoreClass="network.ecore#//SegmentOneWay"/>
+    <genClasses ecoreClass="network.ecore#//SegmentTwoWay"/>
+    <genClasses ecoreClass="network.ecore#//SwitchBox"/>
+  </genPackages>
+</genmodel:GenModel>

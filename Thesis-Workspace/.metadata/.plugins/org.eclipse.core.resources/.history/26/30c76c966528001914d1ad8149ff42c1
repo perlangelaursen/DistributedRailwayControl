@@ -1,0 +1,7 @@
+package s144449s144456.RailwayModelGenerator.commands;
+
+public class Translator  extends AbstractHandler implements IHandler{
+	public Translator() {
+		
+	}
+}
