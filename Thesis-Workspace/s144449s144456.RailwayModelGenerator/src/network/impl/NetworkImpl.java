@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link network.impl.NetworkImpl#getControlBoxes <em>Control Boxes</em>}</li>
  *   <li>{@link network.impl.NetworkImpl#getSegments <em>Segments</em>}</li>
- *   <li>{@link network.impl.NetworkImpl#getTrain <em>Train</em>}</li>
+ *   <li>{@link network.impl.NetworkImpl#getTrains <em>Trains</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,14 +59,14 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	protected EList<Segment> segments;
 
 	/**
-	 * The cached value of the '{@link #getTrain() <em>Train</em>}' containment reference list.
+	 * The cached value of the '{@link #getTrains() <em>Trains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTrain()
+	 * @see #getTrains()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Train> train;
+	protected EList<Train> trains;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,11 +119,11 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	 * @generated
 	 */
 	@Override
-	public EList<Train> getTrain() {
-		if (train == null) {
-			train = new EObjectContainmentEList<Train>(Train.class, this, NetworkPackage.NETWORK__TRAIN);
+	public EList<Train> getTrains() {
+		if (trains == null) {
+			trains = new EObjectContainmentEList<Train>(Train.class, this, NetworkPackage.NETWORK__TRAINS);
 		}
-		return train;
+		return trains;
 	}
 
 	/**
@@ -138,8 +138,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return ((InternalEList<?>)getControlBoxes()).basicRemove(otherEnd, msgs);
 			case NetworkPackage.NETWORK__SEGMENTS:
 				return ((InternalEList<?>)getSegments()).basicRemove(otherEnd, msgs);
-			case NetworkPackage.NETWORK__TRAIN:
-				return ((InternalEList<?>)getTrain()).basicRemove(otherEnd, msgs);
+			case NetworkPackage.NETWORK__TRAINS:
+				return ((InternalEList<?>)getTrains()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -156,8 +156,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return getControlBoxes();
 			case NetworkPackage.NETWORK__SEGMENTS:
 				return getSegments();
-			case NetworkPackage.NETWORK__TRAIN:
-				return getTrain();
+			case NetworkPackage.NETWORK__TRAINS:
+				return getTrains();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,9 +179,9 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				getSegments().clear();
 				getSegments().addAll((Collection<? extends Segment>)newValue);
 				return;
-			case NetworkPackage.NETWORK__TRAIN:
-				getTrain().clear();
-				getTrain().addAll((Collection<? extends Train>)newValue);
+			case NetworkPackage.NETWORK__TRAINS:
+				getTrains().clear();
+				getTrains().addAll((Collection<? extends Train>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -201,8 +201,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 			case NetworkPackage.NETWORK__SEGMENTS:
 				getSegments().clear();
 				return;
-			case NetworkPackage.NETWORK__TRAIN:
-				getTrain().clear();
+			case NetworkPackage.NETWORK__TRAINS:
+				getTrains().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -220,8 +220,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return controlBoxes != null && !controlBoxes.isEmpty();
 			case NetworkPackage.NETWORK__SEGMENTS:
 				return segments != null && !segments.isEmpty();
-			case NetworkPackage.NETWORK__TRAIN:
-				return train != null && !train.isEmpty();
+			case NetworkPackage.NETWORK__TRAINS:
+				return trains != null && !trains.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

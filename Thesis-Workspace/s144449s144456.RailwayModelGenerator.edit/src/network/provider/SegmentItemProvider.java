@@ -14,8 +14,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link network.Segment} object.
@@ -47,7 +45,6 @@ public class SegmentItemProvider extends ElementItemProvider {
 
 			addStartPropertyDescriptor(object);
 			addEndPropertyDescriptor(object);
-			addTrainPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -97,28 +94,6 @@ public class SegmentItemProvider extends ElementItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Train feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTrainPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Segment_train_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Segment_train_feature", "_UI_Segment_type"),
-				 NetworkPackage.Literals.SEGMENT__TRAIN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,12 +118,6 @@ public class SegmentItemProvider extends ElementItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(Segment.class)) {
-			case NetworkPackage.SEGMENT__TRAIN:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

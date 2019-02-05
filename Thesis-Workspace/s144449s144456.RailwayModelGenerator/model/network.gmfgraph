@@ -58,9 +58,9 @@
             xsi:type="gmfgraph:BorderLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="200"
-            green="170"
-            blue="124"/>
+            red="94"
+            green="156"
+            blue="234"/>
         <preferredSize
             dx="20"
             dy="20"/>
@@ -70,7 +70,8 @@
         name="TrainFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="TrainFigure">
+          name="TrainFigure"
+          outline="false">
         <layout
             xsi:type="gmfgraph:BorderLayout"/>
         <backgroundColor

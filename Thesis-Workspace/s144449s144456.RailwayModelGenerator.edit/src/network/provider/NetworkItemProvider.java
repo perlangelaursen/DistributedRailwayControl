@@ -62,25 +62,25 @@ public class NetworkItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTrainPropertyDescriptor(object);
+			addTrainsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Train feature.
+	 * This adds a property descriptor for the Trains feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTrainPropertyDescriptor(Object object) {
+	protected void addTrainsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Network_train_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Network_train_feature", "_UI_Network_type"),
-				 NetworkPackage.Literals.NETWORK__TRAIN,
+				 getString("_UI_Network_trains_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Network_trains_feature", "_UI_Network_type"),
+				 NetworkPackage.Literals.NETWORK__TRAINS,
 				 true,
 				 false,
 				 true,
@@ -103,7 +103,7 @@ public class NetworkItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(NetworkPackage.Literals.NETWORK__CONTROL_BOXES);
 			childrenFeatures.add(NetworkPackage.Literals.NETWORK__SEGMENTS);
-			childrenFeatures.add(NetworkPackage.Literals.NETWORK__TRAIN);
+			childrenFeatures.add(NetworkPackage.Literals.NETWORK__TRAINS);
 		}
 		return childrenFeatures;
 	}
@@ -158,7 +158,7 @@ public class NetworkItemProvider
 		switch (notification.getFeatureID(Network.class)) {
 			case NetworkPackage.NETWORK__CONTROL_BOXES:
 			case NetworkPackage.NETWORK__SEGMENTS:
-			case NetworkPackage.NETWORK__TRAIN:
+			case NetworkPackage.NETWORK__TRAINS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -198,7 +198,7 @@ public class NetworkItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(NetworkPackage.Literals.NETWORK__TRAIN,
+				(NetworkPackage.Literals.NETWORK__TRAINS,
 				 NetworkFactory.eINSTANCE.createTrain()));
 	}
 

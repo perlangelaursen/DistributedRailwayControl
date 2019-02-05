@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link network.impl.SegmentImpl#getStart <em>Start</em>}</li>
  *   <li>{@link network.impl.SegmentImpl#getEnd <em>End</em>}</li>
- *   <li>{@link network.impl.SegmentImpl#isTrain <em>Train</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,26 +48,6 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	 * @ordered
 	 */
 	protected ControlBox end;
-
-	/**
-	 * The default value of the '{@link #isTrain() <em>Train</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTrain()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean TRAIN_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isTrain() <em>Train</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTrain()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean train = TRAIN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,29 +198,6 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	 * @generated
 	 */
 	@Override
-	public boolean isTrain() {
-		return train;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTrain(boolean newTrain) {
-		boolean oldTrain = train;
-		train = newTrain;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.SEGMENT__TRAIN, oldTrain, train));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case NetworkPackage.SEGMENT__START:
@@ -286,8 +242,6 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 			case NetworkPackage.SEGMENT__END:
 				if (resolve) return getEnd();
 				return basicGetEnd();
-			case NetworkPackage.SEGMENT__TRAIN:
-				return isTrain();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -305,9 +259,6 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 				return;
 			case NetworkPackage.SEGMENT__END:
 				setEnd((ControlBox)newValue);
-				return;
-			case NetworkPackage.SEGMENT__TRAIN:
-				setTrain((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -327,9 +278,6 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 			case NetworkPackage.SEGMENT__END:
 				setEnd((ControlBox)null);
 				return;
-			case NetworkPackage.SEGMENT__TRAIN:
-				setTrain(TRAIN_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -346,26 +294,8 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 				return start != null;
 			case NetworkPackage.SEGMENT__END:
 				return end != null;
-			case NetworkPackage.SEGMENT__TRAIN:
-				return train != TRAIN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (train: ");
-		result.append(train);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SegmentImpl

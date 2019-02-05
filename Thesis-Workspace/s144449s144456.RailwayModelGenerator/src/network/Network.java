@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link network.Network#getControlBoxes <em>Control Boxes</em>}</li>
  *   <li>{@link network.Network#getSegments <em>Segments</em>}</li>
- *   <li>{@link network.Network#getTrain <em>Train</em>}</li>
+ *   <li>{@link network.Network#getTrains <em>Trains</em>}</li>
  * </ul>
  *
  * @see network.NetworkPackage#getNetwork()
@@ -58,19 +58,19 @@ public interface Network extends EObject {
 	EList<Segment> getSegments();
 
 	/**
-	 * Returns the value of the '<em><b>Train</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Trains</b></em>' containment reference list.
 	 * The list contents are of type {@link network.Train}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Train</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Trains</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Train</em>' containment reference list.
-	 * @see network.NetworkPackage#getNetwork_Train()
+	 * @return the value of the '<em>Trains</em>' containment reference list.
+	 * @see network.NetworkPackage#getNetwork_Trains()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Train> getTrain();
+	EList<Train> getTrains();
 
 } // Network

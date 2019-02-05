@@ -86,13 +86,13 @@ public interface NetworkPackage extends EPackage {
 	int NETWORK__SEGMENTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Train</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Trains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NETWORK__TRAIN = 2;
+	int NETWORK__TRAINS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Network</em>' class.
@@ -242,22 +242,13 @@ public interface NetworkPackage extends EPackage {
 	int SEGMENT__END = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Train</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT__TRAIN = ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Segment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
+	int SEGMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Segment</em>' class.
@@ -304,15 +295,6 @@ public interface NetworkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEGMENT_ONE_WAY__END = SEGMENT__END;
-
-	/**
-	 * The feature id for the '<em><b>Train</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_ONE_WAY__TRAIN = SEGMENT__TRAIN;
 
 	/**
 	 * The number of structural features of the '<em>Segment One Way</em>' class.
@@ -368,15 +350,6 @@ public interface NetworkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEGMENT_TWO_WAY__END = SEGMENT__END;
-
-	/**
-	 * The feature id for the '<em><b>Train</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_TWO_WAY__TRAIN = SEGMENT__TRAIN;
 
 	/**
 	 * The number of structural features of the '<em>Segment Two Way</em>' class.
@@ -632,15 +605,15 @@ public interface NetworkPackage extends EPackage {
 	EReference getNetwork_Segments();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link network.Network#getTrain <em>Train</em>}'.
+	 * Returns the meta object for the containment reference list '{@link network.Network#getTrains <em>Trains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Train</em>'.
-	 * @see network.Network#getTrain()
+	 * @return the meta object for the containment reference list '<em>Trains</em>'.
+	 * @see network.Network#getTrains()
 	 * @see #getNetwork()
 	 * @generated
 	 */
-	EReference getNetwork_Train();
+	EReference getNetwork_Trains();
 
 	/**
 	 * Returns the meta object for class '{@link network.Element <em>Element</em>}'.
@@ -726,17 +699,6 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSegment_End();
-
-	/**
-	 * Returns the meta object for the attribute '{@link network.Segment#isTrain <em>Train</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Train</em>'.
-	 * @see network.Segment#isTrain()
-	 * @see #getSegment()
-	 * @generated
-	 */
-	EAttribute getSegment_Train();
 
 	/**
 	 * Returns the meta object for class '{@link network.SegmentOneWay <em>Segment One Way</em>}'.
@@ -903,12 +865,12 @@ public interface NetworkPackage extends EPackage {
 		EReference NETWORK__SEGMENTS = eINSTANCE.getNetwork_Segments();
 
 		/**
-		 * The meta object literal for the '<em><b>Train</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Trains</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NETWORK__TRAIN = eINSTANCE.getNetwork_Train();
+		EReference NETWORK__TRAINS = eINSTANCE.getNetwork_Trains();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.ElementImpl <em>Element</em>}' class.
@@ -979,14 +941,6 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SEGMENT__END = eINSTANCE.getSegment_End();
-
-		/**
-		 * The meta object literal for the '<em><b>Train</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SEGMENT__TRAIN = eINSTANCE.getSegment_Train();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.SegmentOneWayImpl <em>Segment One Way</em>}' class.

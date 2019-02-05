@@ -38,7 +38,7 @@
       <command
             id="s144449s144456.RailwayModelGenerator.test"
             description="Test command"
-            defaultHandler="s144449s144456.RailwayModelGenerator.commands.Translator"
+            defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalTranslator"
             name="Test">
       </command>
    </extension>

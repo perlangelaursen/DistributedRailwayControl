@@ -48,7 +48,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="network.ecore#//Network/train"/>
+        href="network.ecore#//Network/trains"/>
     <ownedChild>
       <domainMetaElement
           href="network.ecore#//Train"/>

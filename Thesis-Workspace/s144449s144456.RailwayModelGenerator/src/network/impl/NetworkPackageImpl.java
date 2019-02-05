@@ -197,7 +197,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getNetwork_Train() {
+	public EReference getNetwork_Trains() {
 		return (EReference)networkEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -279,16 +279,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	@Override
 	public EReference getSegment_End() {
 		return (EReference)segmentEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getSegment_Train() {
-		return (EAttribute)segmentEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -433,7 +423,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		networkEClass = createEClass(NETWORK);
 		createEReference(networkEClass, NETWORK__CONTROL_BOXES);
 		createEReference(networkEClass, NETWORK__SEGMENTS);
-		createEReference(networkEClass, NETWORK__TRAIN);
+		createEReference(networkEClass, NETWORK__TRAINS);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__ID);
@@ -445,7 +435,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		segmentEClass = createEClass(SEGMENT);
 		createEReference(segmentEClass, SEGMENT__START);
 		createEReference(segmentEClass, SEGMENT__END);
-		createEAttribute(segmentEClass, SEGMENT__TRAIN);
 
 		segmentOneWayEClass = createEClass(SEGMENT_ONE_WAY);
 
@@ -506,7 +495,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEClass(networkEClass, Network.class, "Network", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNetwork_ControlBoxes(), this.getControlBox(), null, "controlBoxes", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNetwork_Segments(), this.getSegment(), null, "segments", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNetwork_Train(), this.getTrain(), null, "train", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNetwork_Trains(), this.getTrain(), null, "trains", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -518,7 +507,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEClass(segmentEClass, Segment.class, "Segment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSegment_Start(), this.getControlBox(), this.getControlBox_Outgoing(), "start", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSegment_End(), this.getControlBox(), this.getControlBox_Ingoing(), "end", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSegment_Train(), ecorePackage.getEBoolean(), "train", null, 0, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(segmentOneWayEClass, SegmentOneWay.class, "SegmentOneWay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

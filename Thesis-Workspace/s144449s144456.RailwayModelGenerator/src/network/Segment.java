@@ -14,7 +14,6 @@ package network;
  * <ul>
  *   <li>{@link network.Segment#getStart <em>Start</em>}</li>
  *   <li>{@link network.Segment#getEnd <em>End</em>}</li>
- *   <li>{@link network.Segment#isTrain <em>Train</em>}</li>
  * </ul>
  *
  * @see network.NetworkPackage#getSegment()
@@ -77,31 +76,5 @@ public interface Segment extends Element {
 	 * @generated
 	 */
 	void setEnd(ControlBox value);
-
-	/**
-	 * Returns the value of the '<em><b>Train</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Train</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Train</em>' attribute.
-	 * @see #setTrain(boolean)
-	 * @see network.NetworkPackage#getSegment_Train()
-	 * @model
-	 * @generated
-	 */
-	boolean isTrain();
-
-	/**
-	 * Sets the value of the '{@link network.Segment#isTrain <em>Train</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Train</em>' attribute.
-	 * @see #isTrain()
-	 * @generated
-	 */
-	void setTrain(boolean value);
 
 } // Segment
