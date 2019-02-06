@@ -10,10 +10,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import network.Network;
-import network.Segment;
-import network.SegmentOneWay;
-import network.Train;
+import network.*;
 
 public abstract class Translator extends AbstractHandler implements IHandler{
 	@Override
@@ -52,17 +49,23 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		boolean b3 = s1.getStart().getOutgoing().contains(s2); // <-- [] -->
 		boolean b4 = s1.getStart().getIngoing().contains(s2); // <-- [] <--
 		
+		ControlBox mid = getMidBox(s1, s2);
+		boolean sw = true;
+		if(mid instanceof SwitchBox) {
+			Segment stem = ((SwitchBox) mid).getStem();
+			sw = stem == s1 || stem == s2;
+		}
 		if(s1 instanceof SegmentOneWay) {
 			if(s2 instanceof SegmentOneWay) { // --> [] -->
-				return b1;	
+				return sw && b1;	
 			} else { // --> [] <-->
-				return b1 || b2;
+				return sw && (b1 || b2);
 			}
 		} else {
 			if(s2 instanceof SegmentOneWay) { // <--> [] -->
-				return b1 || b3;
+				return sw && (b1 || b3);
 			} else { // <--> [] <-->
-				return b1 || b2 || b3 || b4;	
+				return sw && (b1 || b2 || b3 || b4);	
 			}
 		}
 	}
@@ -76,5 +79,13 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			return ((IAdaptable) o).getAdapter(Network.class);
 		}
 		return null;
+	}
+	
+	private ControlBox getMidBox(Segment s, Segment s2) {
+		if(s.getStart() == s2.getStart() || s.getStart() == s2.getEnd()) {
+			return s.getStart();
+		} else {
+			return s.getEnd();
+		}
 	}
 }

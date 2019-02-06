@@ -11,5 +11,5 @@
   <segments xsi:type="nw:SegmentOneWay" id="s2" start="cb2" end="cb1"/>
   <segments xsi:type="nw:SegmentTwoWay" id="s4" start="cb4" end="cb0"/>
   <trains id="t0" route="s4 s0 s1 s3"/>
-  <trains id="t1" route="s3 s2 s0 s4"/>
+  <trains id="t1" route="s3 s2 s4"/>
 </nw:Network>
