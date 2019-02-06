@@ -207,6 +207,26 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getNetwork_LockLimit() {
+		return (EAttribute)networkEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getNetwork_ReserveLimit() {
+		return (EAttribute)networkEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getElement() {
 		return elementEClass;
 	}
@@ -424,6 +444,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(networkEClass, NETWORK__CONTROL_BOXES);
 		createEReference(networkEClass, NETWORK__SEGMENTS);
 		createEReference(networkEClass, NETWORK__TRAINS);
+		createEAttribute(networkEClass, NETWORK__LOCK_LIMIT);
+		createEAttribute(networkEClass, NETWORK__RESERVE_LIMIT);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__ID);
@@ -496,6 +518,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getNetwork_ControlBoxes(), this.getControlBox(), null, "controlBoxes", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNetwork_Segments(), this.getSegment(), null, "segments", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNetwork_Trains(), this.getTrain(), null, "trains", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNetwork_LockLimit(), ecorePackage.getEInt(), "lockLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNetwork_ReserveLimit(), ecorePackage.getEInt(), "reserveLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

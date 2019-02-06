@@ -14,6 +14,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference network.ecore#//Network/controlBoxes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference network.ecore#//Network/segments"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//Network/trains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//Network/lockLimit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//Network/reserveLimit"/>
     </genClasses>
     <genClasses image="false" ecoreClass="network.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//Element/id"/>

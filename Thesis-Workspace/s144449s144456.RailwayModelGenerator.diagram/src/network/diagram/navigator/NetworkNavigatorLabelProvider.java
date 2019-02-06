@@ -16,6 +16,7 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 import org.eclipse.ui.navigator.ICommonLabelProvider;
 
+import network.Network;
 import network.diagram.edit.parts.NetworkEditPart;
 import network.diagram.edit.parts.RegularBoxEditPart;
 import network.diagram.edit.parts.RegularBoxIdEditPart;
@@ -173,7 +174,13 @@ public class NetworkNavigatorLabelProvider extends LabelProvider
 	* @generated
 	*/
 	private String getNetwork_1000Text(View view) {
-		return ""; //$NON-NLS-1$
+		Network domainModelElement = (Network) view.getElement();
+		if (domainModelElement != null) {
+			return String.valueOf(domainModelElement.getLockLimit());
+		} else {
+			NetworkDiagramEditorPlugin.getInstance().logError("No domain element for view with visualID = " + 1000); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
+		}
 	}
 
 	/**

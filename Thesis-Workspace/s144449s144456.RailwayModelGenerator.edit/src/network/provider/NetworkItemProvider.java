@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -63,6 +64,8 @@ public class NetworkItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTrainsPropertyDescriptor(object);
+			addLockLimitPropertyDescriptor(object);
+			addReserveLimitPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -85,6 +88,50 @@ public class NetworkItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Lock Limit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLockLimitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Network_lockLimit_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Network_lockLimit_feature", "_UI_Network_type"),
+				 NetworkPackage.Literals.NETWORK__LOCK_LIMIT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Reserve Limit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReserveLimitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Network_reserveLimit_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Network_reserveLimit_feature", "_UI_Network_type"),
+				 NetworkPackage.Literals.NETWORK__RESERVE_LIMIT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -140,7 +187,8 @@ public class NetworkItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Network_type");
+		Network network = (Network)object;
+		return getString("_UI_Network_type") + " " + network.getLockLimit();
 	}
 
 
@@ -156,6 +204,10 @@ public class NetworkItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Network.class)) {
+			case NetworkPackage.NETWORK__LOCK_LIMIT:
+			case NetworkPackage.NETWORK__RESERVE_LIMIT:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case NetworkPackage.NETWORK__CONTROL_BOXES:
 			case NetworkPackage.NETWORK__SEGMENTS:
 			case NetworkPackage.NETWORK__TRAINS:

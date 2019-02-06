@@ -26,7 +26,7 @@ const int routes[NT][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
 //const int length = 4; //route length
 //const int[0,1] directions[NT]= {0,1}; //0 = left to right, 1 = right to left
 const int CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
-const int boxes[NCB] = { -1, -1, 0, 1, -1};
+const int switches[NCB] = { -1, -1, 0, 1, -1};
 
 chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]
 chan switchh[NCB];
@@ -294,7 +294,7 @@ connected = CBs[id][1]</label>
 		<transition>
 			<source ref="id10"/>
 			<target ref="id13"/>
-			<label kind="synchronisation" x="-289" y="-34">OKsb[boxes[id]]?</label>
+			<label kind="synchronisation" x="-289" y="-34">OKsb[switches[id]]?</label>
 			<label kind="assignment" x="-289" y="-17">updateConnected()</label>
 		</transition>
 		<transition>
@@ -319,7 +319,7 @@ tid:=i</label>
 			<source ref="id11"/>
 			<target ref="id10"/>
 			<label kind="guard" x="-476" y="-68">result == 2</label>
-			<label kind="synchronisation" x="-476" y="-51">switchh[boxes[id]]!</label>
+			<label kind="synchronisation" x="-476" y="-51">switchh[switches[id]]!</label>
 			<nail x="-331" y="-34"/>
 		</transition>
 		<transition>
@@ -422,7 +422,7 @@ tid:=-1</label>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A[] forall(i:CB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; boxes[i] != -1) imply (Point(boxes[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(boxes[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
+			<formula>A[] forall(i:CB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; switches[i] != -1) imply (Point(switches[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(switches[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
@@ -434,7 +434,7 @@ tid:=-1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply boxes[TCC(i).nextSB] == -1 || Point(boxes[TCC(i).nextSB]).Plus || Point(boxes[TCC(i).nextSB]).Minus)
+			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply switches[TCC(i).nextSB] == -1 || Point(switches[TCC(i).nextSB]).Plus || Point(switches[TCC(i).nextSB]).Minus)
 			</formula>
 			<comment>No derailment.
 			</comment>

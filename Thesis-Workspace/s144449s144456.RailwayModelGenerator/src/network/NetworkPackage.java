@@ -95,13 +95,31 @@ public interface NetworkPackage extends EPackage {
 	int NETWORK__TRAINS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Lock Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NETWORK__LOCK_LIMIT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Reserve Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NETWORK__RESERVE_LIMIT = 4;
+
+	/**
 	 * The number of structural features of the '<em>Network</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NETWORK_FEATURE_COUNT = 3;
+	int NETWORK_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Network</em>' class.
@@ -616,6 +634,28 @@ public interface NetworkPackage extends EPackage {
 	EReference getNetwork_Trains();
 
 	/**
+	 * Returns the meta object for the attribute '{@link network.Network#getLockLimit <em>Lock Limit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lock Limit</em>'.
+	 * @see network.Network#getLockLimit()
+	 * @see #getNetwork()
+	 * @generated
+	 */
+	EAttribute getNetwork_LockLimit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link network.Network#getReserveLimit <em>Reserve Limit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reserve Limit</em>'.
+	 * @see network.Network#getReserveLimit()
+	 * @see #getNetwork()
+	 * @generated
+	 */
+	EAttribute getNetwork_ReserveLimit();
+
+	/**
 	 * Returns the meta object for class '{@link network.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -871,6 +911,22 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference NETWORK__TRAINS = eINSTANCE.getNetwork_Trains();
+
+		/**
+		 * The meta object literal for the '<em><b>Lock Limit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NETWORK__LOCK_LIMIT = eINSTANCE.getNetwork_LockLimit();
+
+		/**
+		 * The meta object literal for the '<em><b>Reserve Limit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NETWORK__RESERVE_LIMIT = eINSTANCE.getNetwork_ReserveLimit();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.ElementImpl <em>Element</em>}' class.
