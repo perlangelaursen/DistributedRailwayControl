@@ -15,68 +15,14 @@ const int NSWITCH = 2; //Number of switchable points
 typedef int[0, NT-1] t_id;
 typedef int[0, NCB-1]  CB_id;
 typedef int[0, NSWITCH-1] SW_id;
-typedef struct 
-{ 
-  int id;
-  int cbs[2];
-  int[0,2] dir; //0 = left to right, 1 = right to left, 2 = both directions
-} Seg;
-
 
 //CONSTANTS
-//EXAMPLE 1
-/*const int NCB = 4; //Number of switch boxes
-const int Nseg = 4; //Number of segments
-const int Nt = 2; //Number of trains
-const Seg none = {-1, {-1, -1}};
-const Seg s0 = {0, {0, 1}}; 
-const Seg s1 = {1, {1, 2}};
-const Seg s2 = {2, {1, 2}};
-const Seg s3 = {3, {2, 3}};
-const Seg segments[Nseg] = {s0, s1, s2, s3};
-
-typedef int[0, Nt-1] t_id;
-typedef int[0, NCB-1] SB_id;
-const Seg routes[Nt][Nseg]= {{s0,s1,s3,none}, {s3, s2,s0, none}};
-const int[0,1] directions[Nt]= {0,1}; //0 = left to right, 1 = right to left
-const int SBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,-1,-1}}; //(stem, plus, minus)
-*/
-
-
-//EXAMPLE 2
-/*const int NCB = 10; //Number of switch boxes
-const int Nseg = 9; //Number of segments
-const int Nt = 2; //Number of trains
-const Seg none = {-1, {-1, -1}};
-const Seg s0 = {0, {0, 1}};  //Left to right
-const Seg s1 = {1, {1, 2}};
-const Seg s2 = {2, {1, 3}};
-const Seg s3 = {3, {3, 4}};
-const Seg s4 = {4, {5, 3}};
-const Seg s5 = {5, {6, 5}};
-const Seg s6 = {6, {5, 7}};
-const Seg s7 = {7, {7, 8}};
-const Seg s8 = {8, {7, 9}};
-const Seg segments[Nseg] = {s0, s1, s2, s3, s4, s5, s6, s7, s8};
-
-const Seg routes[Nt][4]= {{s0,s2,s3,none}, {s3, s4,s5, none}};
-const int[0,1] directions[Nt]= {0,1}; //0 = left to right, 1 = right to left
-const int SBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {1,-1,-1}, {3,4,2}, {3,-1,-1}, {5,6,4}, {5,-1,-1}, {6,7,8}, {7,-1,-1}, {8,-1,-1}}; //(stem, plus, minus)
-*/
-
 //EXAMPLE 3
 const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
-const Seg none = {-1, {-1, -1}, 0}; 
-const Seg s0 = {0, {0, 1}, 2}; 
-const Seg s1 = {1, {1, 2}, 2};
-const Seg s2 = {2, {2, 3}, 2};
-const Seg s3 = {3, {2, 3}, 1};
-const Seg s4 = {4, {3, 4}, 2};
-const Seg segments[NSEG] = {s0, s1, s2, s3, s4};
 
-
-const Seg routes[NT][NSEG]= {{s0,s1,s2,s4,none}, {s4,s3,s1,s0, none}};
+const int controlBoxes[NT][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
+const int routes[NT][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
 const int length = 4; //route length
 const int[0,1] directions[NT]= {0,1}; //0 = left to right, 1 = right to left
 const int CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
@@ -94,29 +40,15 @@ chan OKsb[NCB];
 		<name x="5" y="5">TCC</name>
 		<parameter>t_id id</parameter>
 		<declaration>int i = 1;
-Seg curSeg;
-Seg nextSeg;
+int curSeg;
+int nextSeg;
 int nextSB;
 
 int cb = 0;
-int li = 1;
+int ci = 1;
 int ri = 1;
-
-int reachedCBReservation(){
-   if (!directions[id]){
-      return routes[id][li].cbs[0];
-    } else {
-      return routes[id][li].cbs[1];
-    }
-}
-
-int prevLockSeg(){
-    return routes[id][li-1].id;
-}
-
-int nextLockSeg(){
-    return routes[id][li].id;
-}</declaration>
+int cl = 1;
+</declaration>
 		<location id="id0" x="-442" y="34">
 			<name x="-425" y="17">CrossingPoint</name>
 		</location>
@@ -161,7 +93,7 @@ int nextLockSeg(){
 			<source ref="id7"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-943" y="-76">OK[id]?</label>
-			<label kind="assignment" x="-952" y="-59">li++</label>
+			<label kind="assignment" x="-952" y="-59">cl++</label>
 			<nail x="-952" y="-68"/>
 		</transition>
 		<transition>
@@ -169,16 +101,17 @@ int nextLockSeg(){
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-493" y="-221">OK[id]?</label>
 			<label kind="assignment" x="-493" y="-204">cb:=cb^1,
-ri:=(cb==0) ? ri+1 : ri</label>
+ri:=(cb==0) ? ri+1 : ri,
+ci:=(cb==1) ? ci+1 : ci</label>
 			<nail x="-442" y="-238"/>
 			<nail x="-612" y="-204"/>
 		</transition>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-1402" y="-348">curSeg := routes[id][0],
+			<label kind="assignment" x="-1292" y="-357">curSeg := routes[id][0],
 nextSeg := routes[id][1],
-nextSB:=curSeg.cbs[1^directions[id]]</label>
+nextSB:=controlBoxes[id][ri]</label>
 		</transition>
 		<transition>
 			<source ref="id4"/>
@@ -189,7 +122,7 @@ nextSB:=curSeg.cbs[1^directions[id]]</label>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="synchronisation" x="-1343" y="-255">resSeg[nextSB][id][curSeg.id]!</label>
+			<label kind="synchronisation" x="-1343" y="-255">resSeg[nextSB][id][curSeg]!</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -200,14 +133,14 @@ nextSB:=curSeg.cbs[1^directions[id]]</label>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-722" y="-76">ri &gt; i &amp;&amp; li &gt; i</label>
+			<label kind="guard" x="-722" y="-76">ri &gt; i &amp;&amp; cl &gt; i</label>
 			<label kind="synchronisation" x="-722" y="-59">pass[nextSB][id]!</label>
 			<nail x="-569" y="-42"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-1028" y="-331">i&gt;=length || routes[id][i] == none</label>
+			<label kind="guard" x="-1028" y="-331">i&gt;=length || routes[id][i] == -1</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
@@ -221,7 +154,7 @@ nextSB:=curSeg.cbs[1^directions[id]]</label>
 			<label kind="synchronisation" x="-433" y="-110">OK[id]?</label>
 			<label kind="assignment" x="-433" y="-93">curSeg := nextSeg,
 i++,
-nextSB:=curSeg.cbs[1^directions[id]],
+nextSB:=controlBoxes[id][i],
 nextSeg := routes[id][i]</label>
 			<nail x="-442" y="-102"/>
 			<nail x="-476" y="-110"/>
@@ -229,19 +162,17 @@ nextSeg := routes[id][i]</label>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id7"/>
-			<label kind="guard" x="-1283" y="-119">li-i &lt; lockLimit &amp;&amp; 
-li&lt;length &amp;&amp; 
-routes[id][li] != none</label>
-			<label kind="synchronisation" x="-1394" y="-51">reqLock[reachedCBReservation()][id]
-[prevLockSeg()][nextLockSeg()]!</label>
+			<label kind="guard" x="-1300" y="-119">cl&lt;length &amp;&amp;
+cl-i &lt; lockLimit</label>
+			<label kind="synchronisation" x="-1394" y="-51">reqLock[controlBoxes[id][cl]][id]
+[routes[id][cl-1]][routes[id][cl]]!</label>
 			<nail x="-1122" y="-102"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id5"/>
-			<label kind="guard" x="-697" y="-433">ri-i &lt; resLimit &amp;&amp; ri &lt; length &amp;&amp; routes[id][ri] != none</label>
-			<label kind="synchronisation" x="-697" y="-416">resSeg[routes[id][ri].cbs[cb^directions[id]]]
-	[id][routes[id][ri].id]!</label>
+			<label kind="guard" x="-697" y="-433">ri-i &lt; resLimit &amp;&amp; ri &lt; length &amp;&amp; routes[id][ri] != -1</label>
+			<label kind="synchronisation" x="-697" y="-416">resSeg[controlBoxes[id][ci]][id][routes[id][ri]]!</label>
 			<nail x="-714" y="-374"/>
 			<nail x="-612" y="-374"/>
 			<nail x="-578" y="-374"/>
@@ -258,10 +189,8 @@ int stem;
 int connected;
 
 bool reserve(int tid, int sid){
-  Seg s = segments[sid];
-  
   for(i : int[0,2]) {
-    if (CBs[id][i] == s.id &amp;&amp; res[i] == -1) {
+    if (CBs[id][i] == sid &amp;&amp; res[i] == -1) {
       res[i] = tid;
       return true;
     }
@@ -498,7 +427,7 @@ tid:=-1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply (CB(TCC(i).nextSB).connected == TCC(i).curSeg.id &amp;&amp; CB(TCC(i).nextSB).stem == TCC(i).nextSeg.id) || (CB(TCC(i).nextSB).stem == TCC(i).curSeg.id &amp;&amp; CB(TCC(i).nextSB).connected == TCC(i).nextSeg.id))
+			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply (CB(TCC(i).nextSB).connected == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextSB).stem == TCC(i).nextSeg) || (CB(TCC(i).nextSB).stem == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextSB).connected == TCC(i).nextSeg))
 			</formula>
 			<comment>A train can only cross a point if the point's position is consistent with the segment that the trains is entering.
 			</comment>
@@ -510,7 +439,7 @@ tid:=-1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) &amp;&amp; TCC(i).nextSeg.cbs[0] != TCC(i).nextSeg.cbs[1]) imply ( TCC(i).curSeg.cbs[1] == TCC(i).nextSeg.cbs[0] || TCC(i).curSeg.cbs[0] == TCC(i).nextSeg.cbs[1] || TCC(i).curSeg == TCC(i).nextSeg)
+			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) imply (CBs[TCC(i).nextSB][0] == TCC(i).curSeg imply (CBs[TCC(i).nextSB][1] == TCC(i).nextSeg || CBs[TCC(i).nextSB][2] == TCC(i).nextSeg)) &amp;&amp; (CBs[TCC(i).nextSB][0] == TCC(i).nextSeg imply (CBs[TCC(i).nextSB][1] == TCC(i).curSeg || CBs[TCC(i).nextSB][2] == TCC(i).curSeg)))
 			</formula>
 			<comment>A train's current segment is either the same as its next segment or connected to it.
 			</comment>
