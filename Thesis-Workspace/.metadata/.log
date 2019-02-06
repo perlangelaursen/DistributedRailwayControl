@@ -1,844 +1,99 @@
-!SESSION 2019-02-04 15:10:53.466 -----------------------------------------------
-eclipse.buildId=4.10.0.I20181206-0815
-java.version=1.8.0_201
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -product org.eclipse.epp.package.modeling.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.modeling.product
 
-This is a continuation of log file C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace\.metadata\.bak_0.log
-Created Time: 2019-02-04 15:29:18.823
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:29:18.824
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:29:19.321
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:29:19.730
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:29:19.857
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:29:19.859
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$5.widgetDefaultSelected(PropertySheetViewer.java:806)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:123)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:51.498
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:52.080
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:52.840
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:52.905
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:52.906
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$5.widgetDefaultSelected(PropertySheetViewer.java:806)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:123)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:57.323
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:57.436
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$6.mouseDown(PropertySheetViewer.java:817)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-
-!ENTRY org.eclipse.ui 4 0 2019-02-04 15:31:57.439
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.ClassCastException: org.eclipse.gmf.gmfgraph.impl.FigureDescriptorImpl cannot be cast to org.eclipse.gmf.gmfgraph.DiagramLabel
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.getDiagramLabel(LabelMappingImpl.java:93)
-	at org.eclipse.gmf.mappings.impl.LabelMappingImpl.eGet(LabelMappingImpl.java:207)
-	at org.eclipse.gmf.mappings.impl.FeatureLabelMappingImpl.eGet(FeatureLabelMappingImpl.java:337)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1011)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:1003)
-	at org.eclipse.emf.ecore.impl.BasicEObjectImpl.eGet(BasicEObjectImpl.java:998)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.collectReachableObjectsOfType(ItemPropertyDescriptor.java:1131)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getReachableObjectsOfType(ItemPropertyDescriptor.java:1065)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getComboBoxObjects(ItemPropertyDescriptor.java:834)
-	at org.eclipse.gmf.mappings.provider.NodeMappingItemProvider$2.getComboBoxObjects(NodeMappingItemProvider.java:162)
-	at org.eclipse.emf.edit.provider.ItemPropertyDescriptor.getChoiceOfValues(ItemPropertyDescriptor.java:1690)
-	at org.eclipse.emf.edit.ui.provider.PropertyDescriptor.createPropertyEditor(PropertyDescriptor.java:1049)
-	at org.eclipse.ui.views.properties.PropertySheetEntry.getEditor(PropertySheetEntry.java:371)
-	at org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage$ExtendedPropertySheetEntry.getEditor(ExtendedPropertySheetPage.java:931)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.activateCellEditor(PropertySheetViewer.java:169)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.handleSelect(PropertySheetViewer.java:731)
-	at org.eclipse.ui.views.properties.PropertySheetViewer.access$8(PropertySheetViewer.java:711)
-	at org.eclipse.ui.views.properties.PropertySheetViewer$5.widgetDefaultSelected(PropertySheetViewer.java:806)
-	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:123)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-!SESSION 2019-02-05 19:59:55.869 -----------------------------------------------
-eclipse.buildId=4.10.0.I20181206-0815
-java.version=1.8.0_201
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -product org.eclipse.epp.package.modeling.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.modeling.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-02-05 20:00:10.117
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY org.eclipse.equinox.p2.updatechecker 4 0 2019-02-05 20:00:18.609
-!MESSAGE Exception in update check thread
-!STACK 0
-java.lang.NullPointerException
-	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.findMatchingRepositoryExtensions(AbstractRepositoryManager.java:407)
-	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:765)
-	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:671)
-	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
-	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.getAvailableRepositories(UpdateChecker.java:152)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.checkForUpdates(UpdateChecker.java:130)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker$UpdateCheckThread.run(UpdateChecker.java:78)
-!SESSION 2019-02-05 20:00:18.834 -----------------------------------------------
-eclipse.buildId=4.10.0.I20181206-0815
-java.version=1.8.0_201
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -product org.eclipse.epp.package.modeling.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.modeling.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-02-05 20:00:33.029
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-05 20:00:43.667
-!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
-
-!ENTRY org.eclipse.equinox.p2.updatechecker 4 0 2019-02-05 20:01:27.873
-!MESSAGE Exception in update check thread
-!STACK 0
-org.eclipse.core.runtime.OperationCanceledException
-	at org.eclipse.equinox.internal.p2.repository.CacheManager.updateCache(CacheManager.java:430)
-	at org.eclipse.equinox.internal.p2.repository.CacheManager.createCache(CacheManager.java:262)
-	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:69)
-	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:89)
-	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:63)
-	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:770)
-	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:671)
-	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
-	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.getAvailableRepositories(UpdateChecker.java:152)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker.checkForUpdates(UpdateChecker.java:130)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker$UpdateCheckThread.run(UpdateChecker.java:78)
-!SESSION 2019-02-05 20:01:28.218 -----------------------------------------------
-eclipse.buildId=4.10.0.I20181206-0815
-java.version=1.8.0_201
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -product org.eclipse.epp.package.modeling.product -product org.eclipse.epp.package.modeling.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.modeling.product -data C:\Users\Anh Van\OneDrive\2019 Formal Verification of Distributed Railway Control Systems\DistributedRailwayControl\Thesis-Workspace -product org.eclipse.epp.package.modeling.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-02-05 20:01:36.944
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-05 20:01:47.435
-!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
-
-!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-05 20:02:45.098
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 18:47:19.423
 !MESSAGE No repository found at https://www.eclipse.org/downloads/.
 
-!ENTRY org.eclipse.ui 4 0 2019-02-05 20:09:51.483
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.NullPointerException
-	at org.eclipse.ui.internal.PartSite.getShell(PartSite.java:477)
-	at org.eclipse.ui.forms.editor.FormEditor.close(FormEditor.java:651)
-	at org.eclipse.sirius.ui.editor.SessionEditor.close(SessionEditor.java:453)
-	at org.eclipse.sirius.ui.editor.SessionEditor.notify(SessionEditor.java:508)
-	at org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionImpl.notifyListeners(DAnalysisSessionImpl.java:1048)
-	at org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionImpl.close(DAnalysisSessionImpl.java:1281)
-	at org.eclipse.sirius.ui.tools.internal.actions.session.CloseSessionsAction.internalClose(CloseSessionsAction.java:116)
-	at org.eclipse.sirius.ui.tools.internal.actions.session.CloseSessionsAction.run(CloseSessionsAction.java:100)
-	at org.eclipse.ui.actions.BaseSelectionListenerAction.runWithEvent(BaseSelectionListenerAction.java:170)
-	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:568)
-	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:400)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+!ENTRY org.eclipse.equinox.p2.core 4 0 2019-02-06 19:00:22.498
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:398)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
 	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:121)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:106)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$1.runModal(PreloadingRepositoryHandler.java:84)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:00:22.498
+!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
 
-!ENTRY org.eclipse.gmf.bridge.ui.dashboard 4 0 2019-02-05 22:46:46.389
-!MESSAGE FrameworkEvent ERROR
-!STACK 0
-org.osgi.framework.BundleException: Exception in org.eclipse.gmf.internal.bridge.ui.dashboard.Plugin.stop() of bundle org.eclipse.gmf.bridge.ui.dashboard.
-	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:858)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1019)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:362)
-	at org.eclipse.osgi.container.Module.doStop(Module.java:643)
-	at org.eclipse.osgi.container.Module.stop(Module.java:505)
-	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1824)
-	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1743)
-	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:195)
-	at org.eclipse.osgi.container.Module.doStop(Module.java:643)
-	at org.eclipse.osgi.container.Module.stop(Module.java:505)
-	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:213)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.NullPointerException
-	at org.eclipse.gmf.internal.bridge.ui.dashboard.DashboardActionRegistry.dispose(DashboardActionRegistry.java:57)
-	at org.eclipse.gmf.internal.bridge.ui.dashboard.Plugin.stop(Plugin.java:56)
-	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:838)
-	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:831)
-	... 13 more
-Root exception:
-java.lang.NullPointerException
-	at org.eclipse.gmf.internal.bridge.ui.dashboard.DashboardActionRegistry.dispose(DashboardActionRegistry.java:57)
-	at org.eclipse.gmf.internal.bridge.ui.dashboard.Plugin.stop(Plugin.java:56)
-	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:838)
-	at org.eclipse.osgi.internal.framework.BundleContextImpl$4.run(BundleContextImpl.java:1)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at org.eclipse.osgi.internal.framework.BundleContextImpl.stop(BundleContextImpl.java:831)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle.stopWorker0(EquinoxBundle.java:1019)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.stopWorker(EquinoxBundle.java:362)
-	at org.eclipse.osgi.container.Module.doStop(Module.java:643)
-	at org.eclipse.osgi.container.Module.stop(Module.java:505)
-	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.decStartLevel(ModuleContainer.java:1824)
-	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1743)
-	at org.eclipse.osgi.container.SystemModule.stopWorker(SystemModule.java:275)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule.stopWorker(EquinoxBundle.java:195)
-	at org.eclipse.osgi.container.Module.doStop(Module.java:643)
-	at org.eclipse.osgi.container.Module.stop(Module.java:505)
-	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:207)
-	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:213)
-	at java.lang.Thread.run(Unknown Source)
+!ENTRY org.eclipse.equinox.p2.core 4 0 2019-02-06 19:00:27.765
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://www.eclipse.org/downloads/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:398)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:121)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:106)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$1.runModal(PreloadingRepositoryHandler.java:84)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:00:27.765
+!MESSAGE No repository found at https://www.eclipse.org/downloads/.
 
-!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-05 22:46:49.662
-!MESSAGE [org.eclipse.emf.ecp.core.ecpProviderRegistry(28)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPProviderRegistryImpl
+!ENTRY org.eclipse.equinox.p2.core 4 0 2019-02-06 19:01:04.238
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:398)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:121)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:106)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$1.runModal(PreloadingRepositoryHandler.java:84)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:01:04.238
+!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
 
-!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-05 22:46:49.663
-!MESSAGE [org.eclipse.emf.ecp.core.ecpRepositoryManager(29)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPRepositoryManagerImpl
-
-!ENTRY org.eclipse.emf.ecp.core 4 0 2019-02-05 22:46:49.663
-!MESSAGE [org.eclipse.emf.ecp.core.ecpProjectManager(30)] findMethod: Suitable but non-accessible method deactivate found in class org.eclipse.net4j.util.lifecycle.Lifecycle, subclass of org.eclipse.emf.ecp.internal.core.ECPProjectManagerImpl
-!SESSION 2019-02-06 11:09:14.099 -----------------------------------------------
+!ENTRY org.eclipse.equinox.p2.core 4 0 2019-02-06 19:01:09.586
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://www.eclipse.org/downloads/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:398)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:121)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:106)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$1.runModal(PreloadingRepositoryHandler.java:84)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:01:09.586
+!MESSAGE No repository found at https://www.eclipse.org/downloads/.
+!SESSION 2019-02-06 19:01:34.624 -----------------------------------------------
 eclipse.buildId=4.10.0.I20181206-0815
 java.version=1.8.0_201
 java.vendor=Oracle Corporation
@@ -846,307 +101,84 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -product org.eclipse.epp.package.modeling.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.modeling.product
 
-!ENTRY org.eclipse.ui 4 4 2019-02-06 11:10:14.433
-!MESSAGE Unable to create part
-!SUBENTRY 1 org.eclipse.core.filebuffers 4 0 2019-02-06 11:10:14.433
-!MESSAGE Cannot determine URI for '/s144449s144456.RailwayModelGenerator.commands/src/s144449s144456/RailwayModelGenerator/commands/UppaalTranslator.java'.
-!STACK 1
-org.eclipse.core.runtime.CoreException: Cannot determine URI for '/s144449s144456.RailwayModelGenerator.commands/src/s144449s144456/RailwayModelGenerator/commands/UppaalTranslator.java'.
-	at org.eclipse.core.internal.filebuffers.ResourceFileBuffer.create(ResourceFileBuffer.java:239)
-	at org.eclipse.core.internal.filebuffers.TextFileBufferManager.connect(TextFileBufferManager.java:115)
-	at org.eclipse.ui.editors.text.TextFileDocumentProvider.createFileInfo(TextFileDocumentProvider.java:563)
-	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitDocumentProvider.createFileInfo(CompilationUnitDocumentProvider.java:1013)
-	at org.eclipse.ui.editors.text.TextFileDocumentProvider.connect(TextFileDocumentProvider.java:481)
-	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitDocumentProvider.connect(CompilationUnitDocumentProvider.java:1277)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.doSetInput(AbstractTextEditor.java:4167)
-	at org.eclipse.ui.texteditor.StatusTextEditor.doSetInput(StatusTextEditor.java:260)
-	at org.eclipse.ui.texteditor.AbstractDecoratedTextEditor.doSetInput(AbstractDecoratedTextEditor.java:1476)
-	at org.eclipse.jdt.internal.ui.javaeditor.JavaEditor.internalDoSetInput(JavaEditor.java:2573)
-	at org.eclipse.jdt.internal.ui.javaeditor.JavaEditor.doSetInput(JavaEditor.java:2546)
-	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor.doSetInput(CompilationUnitEditor.java:1423)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.lambda$1(AbstractTextEditor.java:3135)
-	at org.eclipse.ui.internal.WorkbenchWindow.run(WorkbenchWindow.java:2193)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.internalInit(AbstractTextEditor.java:3152)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.init(AbstractTextEditor.java:3177)
-	at org.eclipse.ui.internal.EditorReference.initialize(EditorReference.java:365)
-	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:345)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:1001)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:966)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.internalInject(InjectorImpl.java:139)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:411)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:333)
-	at org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:193)
-	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:108)
-	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:77)
-	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:59)
-	at org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.createWidget(ContributedPartRenderer.java:132)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:1015)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:675)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.showTab(StackRenderer.java:1295)
-	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:105)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:693)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$1.run(PartRenderingEngine.java:560)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:544)
-	at org.eclipse.e4.ui.workbench.renderers.swt.ElementReferenceRenderer.createWidget(ElementReferenceRenderer.java:73)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:1015)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:675)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SashRenderer.processContents(SashRenderer.java:140)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SashRenderer.processContents(SashRenderer.java:140)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SashRenderer.processContents(SashRenderer.java:140)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveRenderer.processContents(PerspectiveRenderer.java:51)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.showTab(PerspectiveStackRenderer.java:82)
-	at org.eclipse.e4.ui.workbench.renderers.swt.LazyStackRenderer.postProcess(LazyStackRenderer.java:105)
-	at org.eclipse.e4.ui.workbench.renderers.swt.PerspectiveStackRenderer.postProcess(PerspectiveStackRenderer.java:64)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:693)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SashRenderer.processContents(SashRenderer.java:140)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.processContents(SWTPartRenderer.java:72)
-	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.processContents(WBWRenderer.java:665)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:689)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1099)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-!SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2019-02-06 11:10:14.444
-!MESSAGE Cannot determine URI for '/s144449s144456.RailwayModelGenerator.commands/src/s144449s144456/RailwayModelGenerator/commands/UppaalTranslator.java'.
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-02-06 11:10:19.738
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-06 19:03:08.003
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
-!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-02-06 11:10:19.738
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-02-06 19:03:08.785
 !MESSAGE Removing part descriptor with the 'org.eclipse.ocl.examples.emf.validation.validity.ui.validity' id and the 'ValidityView' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
 
-!ENTRY org.eclipse.ui 4 4 2019-02-06 11:10:28.278
-!MESSAGE Unable to create part
-!SUBENTRY 1 org.eclipse.core.filebuffers 4 0 2019-02-06 11:10:28.279
-!MESSAGE Cannot determine URI for '/s144449s144456.RailwayModelGenerator.commands/src/s144449s144456/RailwayModelGenerator/commands/Translator.java'.
-!STACK 1
-org.eclipse.core.runtime.CoreException: Cannot determine URI for '/s144449s144456.RailwayModelGenerator.commands/src/s144449s144456/RailwayModelGenerator/commands/Translator.java'.
-	at org.eclipse.core.internal.filebuffers.ResourceFileBuffer.create(ResourceFileBuffer.java:239)
-	at org.eclipse.core.internal.filebuffers.TextFileBufferManager.connect(TextFileBufferManager.java:115)
-	at org.eclipse.ui.editors.text.TextFileDocumentProvider.createFileInfo(TextFileDocumentProvider.java:563)
-	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitDocumentProvider.createFileInfo(CompilationUnitDocumentProvider.java:1013)
-	at org.eclipse.ui.editors.text.TextFileDocumentProvider.connect(TextFileDocumentProvider.java:481)
-	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitDocumentProvider.connect(CompilationUnitDocumentProvider.java:1277)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.doSetInput(AbstractTextEditor.java:4167)
-	at org.eclipse.ui.texteditor.StatusTextEditor.doSetInput(StatusTextEditor.java:260)
-	at org.eclipse.ui.texteditor.AbstractDecoratedTextEditor.doSetInput(AbstractDecoratedTextEditor.java:1476)
-	at org.eclipse.jdt.internal.ui.javaeditor.JavaEditor.internalDoSetInput(JavaEditor.java:2573)
-	at org.eclipse.jdt.internal.ui.javaeditor.JavaEditor.doSetInput(JavaEditor.java:2546)
-	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor.doSetInput(CompilationUnitEditor.java:1423)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.lambda$1(AbstractTextEditor.java:3135)
-	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:440)
-	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:356)
-	at org.eclipse.ui.internal.WorkbenchWindow.lambda$4(WorkbenchWindow.java:2249)
-	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:72)
-	at org.eclipse.ui.internal.WorkbenchWindow.run(WorkbenchWindow.java:2247)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.internalInit(AbstractTextEditor.java:3152)
-	at org.eclipse.ui.texteditor.AbstractTextEditor.init(AbstractTextEditor.java:3177)
-	at org.eclipse.ui.internal.EditorReference.initialize(EditorReference.java:365)
-	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.create(CompatibilityPart.java:345)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:1001)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:966)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.internalInject(InjectorImpl.java:139)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:411)
-	at org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:333)
-	at org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:193)
-	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:108)
-	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:77)
-	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:59)
-	at org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.createWidget(ContributedPartRenderer.java:132)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createWidget(PartRenderingEngine.java:1015)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:675)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:781)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$0(PartRenderingEngine.java:752)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$2.run(PartRenderingEngine.java:746)
-	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:730)
-	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl$1.handleEvent(PartServiceImpl.java:107)
-	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.lambda$0(UIEventHandler.java:38)
-	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:236)
-	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:147)
-	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4580)
-	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:219)
-	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:38)
-	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:205)
-	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:203)
-	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
-	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:233)
-	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:151)
-	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:132)
-	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:75)
-	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:44)
-	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:55)
-	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:63)
-	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:424)
-	at org.eclipse.e4.ui.model.application.ui.impl.ElementContainerImpl.setSelectedElement(ElementContainerImpl.java:177)
-	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.hidePart(PartServiceImpl.java:1360)
-	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.hidePart(PartServiceImpl.java:1310)
-	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.closePart(StackRenderer.java:1268)
-	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.access$0(StackRenderer.java:1254)
-	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer$3.close(StackRenderer.java:1122)
-	at org.eclipse.swt.custom.CTabFolder.onMouse(CTabFolder.java:1957)
-	at org.eclipse.swt.custom.CTabFolder.lambda$0(CTabFolder.java:336)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
-!SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2019-02-06 11:10:28.280
-!MESSAGE Cannot determine URI for '/s144449s144456.RailwayModelGenerator.commands/src/s144449s144456/RailwayModelGenerator/commands/Translator.java'.
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:03:14.260
+!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
 
-!ENTRY org.eclipse.ui 4 0 2019-02-06 13:39:53.990
-!MESSAGE Unhandled event loop exception
-!STACK 0
-java.lang.NullPointerException
-	at org.eclipse.ui.internal.PartSite.getShell(PartSite.java:477)
-	at org.eclipse.ui.forms.editor.FormEditor.close(FormEditor.java:651)
-	at org.eclipse.sirius.ui.editor.SessionEditor.close(SessionEditor.java:453)
-	at org.eclipse.sirius.ui.editor.SessionEditor.notify(SessionEditor.java:508)
-	at org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionImpl.notifyListeners(DAnalysisSessionImpl.java:1048)
-	at org.eclipse.sirius.business.internal.session.danalysis.DAnalysisSessionImpl.close(DAnalysisSessionImpl.java:1281)
-	at org.eclipse.sirius.ui.tools.internal.actions.session.CloseSessionsAction.internalClose(CloseSessionsAction.java:116)
-	at org.eclipse.sirius.ui.tools.internal.actions.session.CloseSessionsAction.run(CloseSessionsAction.java:100)
-	at org.eclipse.ui.actions.BaseSelectionListenerAction.runWithEvent(BaseSelectionListenerAction.java:170)
-	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:568)
-	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:400)
-	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
-	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
-	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
-	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
-	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
-	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
-	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
-	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
-	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
-	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
-	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
-	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
-	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
-	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:04:09.798
+!MESSAGE No repository found at https://www.eclipse.org/downloads/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2019-02-06 19:10:11.992
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:398)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
 	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
-	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
-	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:121)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:106)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$1.runModal(PreloadingRepositoryHandler.java:84)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:10:11.993
+!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2019-02-06 19:10:17.592
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at https://www.eclipse.org/downloads/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:398)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:110)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:105)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:121)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:106)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$1.runModal(PreloadingRepositoryHandler.java:84)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:10:17.592
+!MESSAGE No repository found at https://www.eclipse.org/downloads/.
+!SESSION 2019-02-06 19:10:36.278 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_201
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.modeling.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.modeling.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-02-06 19:10:58.898
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Anh Van'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:11:05.365
+!MESSAGE No repository found at https://www.eclipse.org/modeling/gmp/downloads/index.php?showAll=1&hlbuild=R201409281400&project=gmf-tooling.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-02-06 19:12:00.384
+!MESSAGE No repository found at https://www.eclipse.org/downloads/.

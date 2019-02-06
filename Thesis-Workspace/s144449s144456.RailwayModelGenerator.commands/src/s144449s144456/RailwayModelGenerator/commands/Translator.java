@@ -24,6 +24,9 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 				if (n != null) {
 					//Check routes
 					for(Train t : n.getTrains()) {
+						if(t.getId() == null || t.getId().equals("")) {
+							msg += "Error in train: Missing ID.\n";
+						}
 						for(int i = 0; i < t.getRoute().size()-1; i++) {
 							if(!isConnected(t.getRoute().get(i), t.getRoute().get(i+1))) {
 								msg += "Error in train "+t.getId()+"'s route: Movement from segment "+t.getRoute().get(i).getId()+" to segment "+t.getRoute().get(i+1).getId()+" is not possible.\n";
@@ -31,10 +34,56 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 						}
 					}
 					
+					//Check control boxes
+					for(ControlBox cb : n.getControlBoxes()) {
+						if(cb.getId() == null || cb.getId().equals("")) {
+							msg += "Error in control box: Missing ID.\n";
+						}
+						if(cb instanceof SwitchBox) {
+							SwitchBox sb = (SwitchBox) cb;
+							if(!sb.getIngoing().contains(sb.getStem()) && ! sb.getOutgoing().contains(sb.getStem())) {
+								msg += "Error in switch box "+sb.getId()+": Stem segment is not connected to switch box.\n";	
+							}
+							if(!sb.getIngoing().contains(sb.getPlus()) && ! sb.getOutgoing().contains(sb.getPlus())) {
+								msg += "Error in switch box "+sb.getId()+": Plus segment is not connected to switch box.\n";	
+							}
+							if(!sb.getIngoing().contains(sb.getMinus()) && ! sb.getOutgoing().contains(sb.getMinus())) {
+								msg += "Error in switch box "+sb.getId()+": Minus segment is not connected to switch box.\n";	
+							}
+							if(sb.getStem() == sb.getPlus()) {
+								msg += "Error in switch box "+sb.getId()+": Stem segment and plus segment must be different.\n";
+							}
+							if(sb.getStem() == sb.getMinus()) {
+								msg += "Error in switch box "+sb.getId()+": Stem segment and minus segment must be different.\n";
+							}
+							if(sb.getMinus() == sb.getPlus()) {
+								msg += "Error in switch box "+sb.getId()+": Plus segment and minus segment must be different.\n";
+							}
+							if(sb.getIngoing().size() + sb.getOutgoing().size() > 3) {
+								msg += "Error in control box "+sb.getId()+": Control box has too many connected segments.\n";
+							}
+							
+						} else {
+							//TODO: Check ingoing/outgoing
+							if(cb.getIngoing().size() + cb.getOutgoing().size() > 2) {
+								msg += "Error in control box "+cb.getId()+": Control box has too many connected segments.\n";
+							}
+						}
+					}
+					//Check segments
+					for(Segment s : n.getSegments()) {
+						if(s.getId() == null || s.getId().equals("")) {
+							msg += "Error in segment: Missing ID.\n";
+						}
+					}
+					
+					//Generate code
 					if(msg.equals("")) {
 						generateCode(n);
 						msg = "Model file successfully generated.";
 					}
+					
+					//Display dialog
 					MessageDialog.openInformation(null, "Generate File", msg);
 					
 				}

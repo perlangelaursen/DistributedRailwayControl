@@ -17,7 +17,7 @@
       <menuContribution
             locationURI="popup:s144449s144456.RailwayModelGenerator?after=additions">
          <command
-               commandId="s144449s144456.RailwayModelGenerator.test">
+               commandId="s144449s144456.RailwayModelGenerator.generateUppaal">
             <visibleWhen>
                <with
                      variable="selection">
@@ -36,10 +36,10 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="s144449s144456.RailwayModelGenerator.test"
-            description="Test command"
+            id="s144449s144456.RailwayModelGenerator.generateUppaal"
+            description="Generate Uppaal code of model"
             defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalTranslator"
-            name="Test">
+            name="Generate Uppaal Code">
       </command>
    </extension>
 </plugin>
