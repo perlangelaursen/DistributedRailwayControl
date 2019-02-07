@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>//const int TRAINS = 2;
-//typedef int[0, TRAINS-1] t_id;
-//int routes[TRAINS][3] = {{0,1,3}, {3,2,1}};
-//const int reservations = 2;
-
-const int NCB = 5; //Number of control boxes
+	<declaration>const int NCB = 5; //Number of control boxes
 const int NSEG = 5; //Number of segments
 const int NT = 2; //Number of trains
 const int NSWITCH = 2; //Number of switchable points
@@ -16,18 +11,16 @@ typedef int[0, NT-1] t_id;
 typedef int[0, NCB-1]  CB_id;
 typedef int[0, NSWITCH-1] SW_id;
 
-//CONSTANTS
-//EXAMPLE 3
+//EXAMPLE
 const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
 const int controlBoxes[NT][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const int routes[NT][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-//const int length = 4; //route length
-//const int[0,1] directions[NT]= {0,1}; //0 = left to right, 1 = right to left
 const int CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const int switches[NCB] = { -1, -1, 0, 1, -1};
 
+//Channels
 chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]
 chan switchh[NCB];
 chan reqLock[NCB][NT][NSEG][NSEG]; //lock sb for t between two segments
@@ -78,12 +71,6 @@ int cl = 1;
 		</location>
 		<init ref="id1"/>
 		<transition>
-			<source ref="id0"/>
-			<target ref="id6"/>
-			<label kind="synchronisation" x="-705" y="8">notOK[id]?</label>
-			<nail x="-714" y="34"/>
-		</transition>
-		<transition>
 			<source ref="id7"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-935" y="8">notOK[id]?</label>
@@ -100,18 +87,18 @@ int cl = 1;
 			<source ref="id5"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-493" y="-221">OK[id]?</label>
-			<label kind="assignment" x="-493" y="-204">cb:=cb^1,
-ri:=(cb==0) ? ri+1 : ri,
-ci:=(cb==1) ? ci+1 : ci</label>
+			<label kind="assignment" x="-493" y="-204">cb = cb^1,
+ri = (cb==0) ? ri+1 : ri,
+ci = (cb==1) ? ci+1 : ci</label>
 			<nail x="-442" y="-238"/>
 			<nail x="-612" y="-204"/>
 		</transition>
 		<transition>
 			<source ref="id1"/>
 			<target ref="id3"/>
-			<label kind="assignment" x="-1292" y="-357">curSeg := routes[id][0],
-nextSeg := routes[id][1],
-nextSB:=controlBoxes[id][ri]</label>
+			<label kind="assignment" x="-1292" y="-357">curSeg = routes[id][0],
+nextSeg = routes[id][1],
+nextSB = controlBoxes[id][ri]</label>
 		</transition>
 		<transition>
 			<source ref="id4"/>
@@ -133,9 +120,9 @@ nextSB:=controlBoxes[id][ri]</label>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-722" y="-76">ri &gt; i &amp;&amp; cl &gt; i</label>
-			<label kind="synchronisation" x="-722" y="-59">pass[nextSB][id]!</label>
-			<nail x="-569" y="-42"/>
+			<label kind="guard" x="-705" y="-8">ri &gt; i &amp;&amp; cl &gt; i</label>
+			<label kind="synchronisation" x="-705" y="8">pass[nextSB][id]!</label>
+			<nail x="-722" y="34"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
@@ -152,20 +139,20 @@ nextSB:=controlBoxes[id][ri]</label>
 			<source ref="id0"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-433" y="-110">OK[id]?</label>
-			<label kind="assignment" x="-433" y="-93">curSeg := nextSeg,
+			<label kind="assignment" x="-433" y="-93">curSeg = nextSeg,
 i++,
-nextSB:=controlBoxes[id][i],
-nextSeg := routes[id][i]</label>
+nextSB = controlBoxes[id][i],
+nextSeg = routes[id][i]</label>
 			<nail x="-442" y="-102"/>
 			<nail x="-476" y="-110"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id7"/>
-			<label kind="guard" x="-1300" y="-119">cl&lt;NSEG &amp;&amp;
+			<label kind="guard" x="-1241" y="-119">cl&lt;NSEG &amp;&amp;
 cl-i &lt; lockLimit &amp;&amp;
 routes[id][cl] != -1</label>
-			<label kind="synchronisation" x="-1394" y="-51">reqLock[controlBoxes[id][cl]][id]
+			<label kind="synchronisation" x="-1334" y="-51">reqLock[controlBoxes[id][cl]][id]
 [routes[id][cl-1]][routes[id][cl]]!</label>
 			<nail x="-1122" y="-102"/>
 		</transition>
@@ -224,19 +211,15 @@ int[0,2] lock(int tid, int s1, int s2){
 }
 
 
-bool clear(int tid){
-  if (lockedBy == tid){
-      lockedBy = -1;
+void clear(int tid){
+     lockedBy = -1;
 
-      for (i : int[0,2]) 
-      {
-        if(res[i] == tid){
-            res[i] = -1;
-        }
-      }
-      return true;
-    }
-    return false;
+     for (i : int[0,2]) 
+     {
+       if(res[i] == tid){
+           res[i] = -1;
+       }
+     }
 }
 
 void updateConnected(){
@@ -255,167 +238,153 @@ void updateConnected(){
 		<location id="id10" x="-314" y="-34">
 			<name x="-324" y="-68">Switching</name>
 		</location>
-		<location id="id11" x="-510" y="-34">
-		</location>
-		<location id="id12" x="-884" y="-306">
+		<location id="id11" x="-884" y="-306">
 			<name x="-940" y="-338">ReserveAttempted</name>
 		</location>
-		<location id="id13" x="-136" y="-34">
+		<location id="id12" x="-136" y="-34">
 			<name x="-120" y="-42">Switched</name>
 		</location>
-		<location id="id14" x="-680" y="-34">
-			<name x="-671" y="-59">LockAttempted</name>
+		<location id="id13" x="-620" y="-34">
+			<name x="-654" y="-17">LockAttempted</name>
 		</location>
-		<location id="id15" x="-884" y="-68">
+		<location id="id14" x="-884" y="-68">
 			<name x="-858" y="-93">Idle</name>
 		</location>
 		<init ref="id8"/>
 		<transition>
 			<source ref="id8"/>
-			<target ref="id15"/>
+			<target ref="id14"/>
 			<label kind="assignment" x="-977" y="51">stem = CBs[id][0],
 connected = CBs[id][1]</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
-			<target ref="id15"/>
-			<label kind="guard" x="-1037" y="-119">result</label>
-			<label kind="synchronisation" x="-1037" y="-102">OK[tid]!</label>
-			<label kind="assignment" x="-1037" y="-85">tid:=-1</label>
-		</transition>
-		<transition>
-			<source ref="id9"/>
-			<target ref="id15"/>
-			<label kind="guard" x="-1122" y="-153">!result</label>
-			<label kind="synchronisation" x="-1122" y="-136">notOK[tid]!</label>
-			<label kind="assignment" x="-1122" y="-119">tid:=-1</label>
-			<nail x="-1011" y="-136"/>
+			<target ref="id14"/>
+			<label kind="guard" x="-1045" y="-119">tid == lockedBy</label>
+			<label kind="synchronisation" x="-1045" y="-102">OK[tid]!</label>
+			<label kind="assignment" x="-1045" y="-85">clear(tid),
+tid = -1</label>
+			<nail x="-1011" y="-144"/>
 		</transition>
 		<transition>
 			<source ref="id10"/>
-			<target ref="id13"/>
+			<target ref="id12"/>
 			<label kind="synchronisation" x="-289" y="-34">OKsb[switches[id]]?</label>
 			<label kind="assignment" x="-289" y="-17">updateConnected()</label>
 		</transition>
 		<transition>
-			<source ref="id11"/>
-			<target ref="id13"/>
-			<label kind="guard" x="-314" y="-153">result == 1</label>
-			<nail x="-510" y="-136"/>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-416" y="-153">result == 1</label>
+			<nail x="-620" y="-136"/>
 			<nail x="-280" y="-136"/>
 			<nail x="-136" y="-136"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
+			<source ref="id14"/>
 			<target ref="id9"/>
 			<label kind="select" x="-1130" y="-17">i : int[0,NT-1]</label>
 			<label kind="synchronisation" x="-1130" y="0">pass[id][i]?</label>
-			<label kind="assignment" x="-1130" y="17">result:=clear(i),
-tid:=i</label>
+			<label kind="assignment" x="-1130" y="17">tid = i</label>
 			<nail x="-918" y="-51"/>
 			<nail x="-1011" y="0"/>
 		</transition>
 		<transition>
-			<source ref="id11"/>
+			<source ref="id13"/>
 			<target ref="id10"/>
-			<label kind="guard" x="-476" y="-68">result == 2</label>
-			<label kind="synchronisation" x="-476" y="-51">switchh[switches[id]]!</label>
+			<label kind="guard" x="-535" y="-68">result == 2</label>
+			<label kind="synchronisation" x="-535" y="-51">switchh[switches[id]]!</label>
 			<nail x="-331" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id14"/>
-			<target ref="id15"/>
+			<source ref="id13"/>
+			<target ref="id14"/>
 			<label kind="guard" x="-782" y="-34">result==0</label>
 			<label kind="synchronisation" x="-782" y="-17">notOK[tid]!</label>
-			<label kind="assignment" x="-782" y="0">tid:=-1</label>
+			<label kind="assignment" x="-782" y="0">tid = -1</label>
 			<nail x="-816" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id12"/>
-			<target ref="id15"/>
+			<source ref="id11"/>
+			<target ref="id14"/>
 			<label kind="guard" x="-807" y="-289">!result</label>
 			<label kind="synchronisation" x="-807" y="-272">notOK[tid]!</label>
-			<label kind="assignment" x="-807" y="-255">tid := -1</label>
+			<label kind="assignment" x="-807" y="-255">tid = -1</label>
 			<nail x="-816" y="-272"/>
 			<nail x="-816" y="-136"/>
 		</transition>
 		<transition>
-			<source ref="id12"/>
-			<target ref="id15"/>
+			<source ref="id11"/>
+			<target ref="id14"/>
 			<label kind="guard" x="-926" y="-238">result</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
-			<label kind="assignment" x="-943" y="-204">tid := -1</label>
+			<label kind="assignment" x="-943" y="-204">tid = -1</label>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id14"/>
+			<source ref="id14"/>
+			<target ref="id13"/>
 			<label kind="select" x="-773" y="-221">i : int[0,NT-1],
 j : int[0,NSEG-1],
 k : int[0,NSEG-1]</label>
 			<label kind="guard" x="-773" y="-144">lockedBy == -1</label>
 			<label kind="synchronisation" x="-773" y="-127">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-773" y="-110">result:=lock(i,j,k),
-tid:=i</label>
+			<label kind="assignment" x="-773" y="-110">result = lock(i,j,k),
+tid = i</label>
 			<nail x="-748" y="-68"/>
-		</transition>
-		<transition>
-			<source ref="id15"/>
-			<target ref="id12"/>
-			<label kind="select" x="-1088" y="-263">i : int[0,NT-1],
-j : int[0,NSEG-1]</label>
-			<label kind="synchronisation" x="-1088" y="-229">resSeg[id][i][j]?</label>
-			<label kind="assignment" x="-1088" y="-212">result:=reserve(i,j),
-tid:=i</label>
-			<nail x="-952" y="-136"/>
-			<nail x="-952" y="-272"/>
-		</transition>
-		<transition>
-			<source ref="id13"/>
-			<target ref="id15"/>
-			<label kind="synchronisation" x="-680" y="34">OK[tid]!</label>
-			<label kind="assignment" x="-680" y="51">lockedBy:=tid,
-tid:=-1</label>
-			<nail x="-136" y="34"/>
-			<nail x="-884" y="34"/>
 		</transition>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id11"/>
-			<label kind="guard" x="-654" y="-34">result &gt; 0</label>
+			<label kind="select" x="-1088" y="-263">i : int[0,NT-1],
+j : int[0,NSEG-1]</label>
+			<label kind="synchronisation" x="-1088" y="-229">resSeg[id][i][j]?</label>
+			<label kind="assignment" x="-1088" y="-212">result = reserve(i,j),
+tid = i</label>
+			<nail x="-952" y="-136"/>
+			<nail x="-952" y="-272"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="-680" y="34">OK[tid]!</label>
+			<label kind="assignment" x="-680" y="51">lockedBy = tid,
+tid = -1</label>
+			<nail x="-136" y="34"/>
+			<nail x="-884" y="34"/>
 		</transition>
 	</template>
 	<template>
 		<name>Point</name>
 		<parameter>SW_id id</parameter>
-		<location id="id16" x="136" y="68">
+		<location id="id15" x="136" y="68">
 		</location>
-		<location id="id17" x="136" y="-68">
+		<location id="id16" x="136" y="-68">
 		</location>
-		<location id="id18" x="280" y="0">
+		<location id="id17" x="280" y="0">
 			<name x="270" y="-30">Minus</name>
 		</location>
-		<location id="id19" x="0" y="0">
+		<location id="id18" x="0" y="0">
 			<name x="-10" y="-30">Plus</name>
 		</location>
-		<init ref="id19"/>
-		<transition>
-			<source ref="id19"/>
-			<target ref="id17"/>
-			<label kind="synchronisation" x="0" y="-59">switchh[id]?</label>
-		</transition>
+		<init ref="id18"/>
 		<transition>
 			<source ref="id18"/>
 			<target ref="id16"/>
-			<label kind="synchronisation" x="204" y="42">switchh[id]?</label>
+			<label kind="synchronisation" x="0" y="-59">switchh[id]?</label>
 		</transition>
 		<transition>
 			<source ref="id17"/>
-			<target ref="id18"/>
-			<label kind="synchronisation" x="204" y="-59">OKsb[id]!</label>
+			<target ref="id15"/>
+			<label kind="synchronisation" x="204" y="42">switchh[id]?</label>
 		</transition>
 		<transition>
 			<source ref="id16"/>
-			<target ref="id19"/>
+			<target ref="id17"/>
+			<label kind="synchronisation" x="204" y="-59">OKsb[id]!</label>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id18"/>
 			<label kind="synchronisation" x="0" y="42">OKsb[id]!</label>
 		</transition>
 	</template>
