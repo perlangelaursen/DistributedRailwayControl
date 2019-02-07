@@ -10,6 +10,7 @@ const int NSWITCH = 2; //Number of switchable points
 typedef int[0, NT-1] t_id;
 typedef int[0, NCB-1]  CB_id;
 typedef int[0, NSWITCH-1] SW_id;
+typedef int[0, NSEG-1] Seg_id;
 
 //EXAMPLE
 const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
@@ -165,7 +166,7 @@ copyControlBoxInfo()</label>
 			<source ref="id5"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-603" y="-85">notOK[id]?</label>
-			<nail x="-663" y="-93"/>
+			<nail x="-654" y="-93"/>
 		</transition>
 		<transition>
 			<source ref="id0"/>
@@ -468,6 +469,18 @@ tid = -1</label>
 			<formula>A[] forall(i:t_id) forall(j:t_id) i != j and not(TCC(i).Initial) and not(TCC(j).Initial) imply TCC(i).curSeg != TCC(j).curSeg
 			</formula>
 			<comment>Two trains are never on the same segment after the initialization step.
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(id:t_id) forall(i:Seg_id) TCC(id).Initial or (TCC(id).boxes[i] == controlBoxes[id][i] and not(TCC(id).Initial))
+			</formula>
+			<comment>A trains internal notion of the control boxes will always be the same as its global counterpart after it has left the initial state
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(id:t_id) forall(i:Seg_id) TCC(id).Initial or (TCC(id).route[i] == routes[id][i] and not(TCC(id).Initial))
+			</formula>
+			<comment>A trains internal notion of its route will always be the same as its global counterpart after it has left the initial state
 			</comment>
 		</query>
 	</queries>
