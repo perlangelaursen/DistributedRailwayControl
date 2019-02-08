@@ -99,7 +99,7 @@
                 </children>
                 <children xsi:type="advanced:Placeholder" xmi:id="_ORBhoio8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.editorss" containerData="8400" ref="_ORBiqio8EemYzJ1tAUEzAQ"/>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_ORBhoyo8EemYzJ1tAUEzAQ" elementId="bottomRight" containerData="3400" selectedElement="_ORBhpio8EemYzJ1tAUEzAQ">
+              <children xsi:type="basic:PartStack" xmi:id="_ORBhoyo8EemYzJ1tAUEzAQ" elementId="bottomRight" containerData="3400" selectedElement="_ORBhpSo8EemYzJ1tAUEzAQ">
                 <tags>org.eclipse.e4.secondaryDataStack</tags>
                 <tags>General</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_ORBhpCo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.views.TaskList" ref="_ORCJGCo8EemYzJ1tAUEzAQ" closeable="true">
@@ -337,7 +337,7 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
-      <toolbar xmi:id="_ORCJNio8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.views.PropertySheet" visible="false"/>
+      <toolbar xmi:id="_ORCJNio8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.views.PropertySheet"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_ORCJOyo8EemYzJ1tAUEzAQ" elementId="org.eclipse.mylyn.tasks.ui.views.tasks" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Task List" iconURI="platform:/plugin/org.eclipse.mylyn.tasks.ui/icons/eview16/task-list.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.mylyn.internal.tasks.ui.views.TaskListView"/>
@@ -361,7 +361,7 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
-      <toolbar xmi:id="_ORCJPyo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.console.ConsoleView"/>
+      <toolbar xmi:id="_ORCJPyo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.console.ConsoleView" visible="false"/>
     </sharedElements>
     <trimBars xmi:id="_ORCJTCo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.main.toolbar">
       <children xsi:type="menu:ToolBar" xmi:id="_ORCJTSo8EemYzJ1tAUEzAQ" elementId="group.file" toBeRendered="false">
@@ -370,7 +370,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ORCJTyo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Q_lZkCo8Eemcrskp7mZ9TA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_ORFNlSo8EemYzJ1tAUEzAQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_jrh7ECrbEem5gZ9MKzzDTA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_ORFNlSo8EemYzJ1tAUEzAQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ORCJXCo8EemYzJ1tAUEzAQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -395,7 +395,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ORCJjyo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Q_n10So8Eemcrskp7mZ9TA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_ORFNQSo8EemYzJ1tAUEzAQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_jrkXUCrbEem5gZ9MKzzDTA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_ORFNQSo8EemYzJ1tAUEzAQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ORCJ2So8EemYzJ1tAUEzAQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1541,12 +1541,6 @@
     <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.gmf.bridge.ui.dashboard"/>
     <tags>View</tags>
     <tags>categoryTag:General</tags>
-  </descriptors>
-  <descriptors xmi:id="_ORCxYCo8EemYzJ1tAUEzAQ" elementId="org.eclipse.ocl.examples.emf.validation.validity.ui.validity" label="ValidityView" iconURI="platform:/plugin/org.eclipse.ocl.examples.emf.validation.validity.ui/icons/validation.gif" tooltip="" category="OCL" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
-    <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView"/>
-    <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.ocl.examples.emf.validation.validity.ui"/>
-    <tags>View</tags>
-    <tags>categoryTag:OCL</tags>
   </descriptors>
   <trimContributions xmi:id="_2r10UF9tEeO-yojH_y4TJA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.main.toolbar" positionInParent="last">
     <children xsi:type="menu:ToolControl" xmi:id="_76uUAF9tEeO-yojH_y4TJA" elementId="Spacer Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">

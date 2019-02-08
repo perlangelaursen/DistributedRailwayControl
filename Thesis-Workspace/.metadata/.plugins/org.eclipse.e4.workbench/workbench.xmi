@@ -122,7 +122,7 @@
           <tags>persp.viewSC:org.eclipse.jdt.ui.PackageExplorer</tags>
           <tags>persp.viewSC:org.eclipse.pde.ui.TargetPlatformState</tags>
           <tags>persp.newWizSC:org.eclipse.pde.ds.ui.wizard</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_6JXB4yoREemUJoiXXeuyCw" selectedElement="_6JXB5CoREemUJoiXXeuyCw" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_6JXB4yoREemUJoiXXeuyCw" selectedElement="_6JXB7CoREemUJoiXXeuyCw" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_6JXB5CoREemUJoiXXeuyCw" containerData="3577" selectedElement="_6JXB5SoREemUJoiXXeuyCw">
               <children xsi:type="basic:PartStack" xmi:id="_6JXB5SoREemUJoiXXeuyCw" elementId="topLeft" containerData="6729" selectedElement="_6JXB5ioREemUJoiXXeuyCw">
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
@@ -151,7 +151,7 @@
                 </children>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_6JXB7CoREemUJoiXXeuyCw" containerData="6423" selectedElement="_6JXB7SoREemUJoiXXeuyCw">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_6JXB7CoREemUJoiXXeuyCw" containerData="6423" selectedElement="_6JXB8ioREemUJoiXXeuyCw">
               <children xsi:type="basic:PartSashContainer" xmi:id="_6JXB7SoREemUJoiXXeuyCw" containerData="6647" selectedElement="_6JXB7ioREemUJoiXXeuyCw" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_6JXB7ioREemUJoiXXeuyCw" elementId="org.eclipse.ui.editorss" containerData="9000" ref="_6JXC_ioREemUJoiXXeuyCw"/>
                 <children xsi:type="basic:PartStack" xmi:id="_6JXB7yoREemUJoiXXeuyCw" elementId="org.eclipse.ui.views.ContentOutlineMStack" containerData="1000" selectedElement="_6JXB8SoREemUJoiXXeuyCw">
@@ -453,7 +453,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6JXD4yoREemUJoiXXeuyCw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_iz5aoCo6EemJPLjYsukYrQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_6JZfBSoREemUJoiXXeuyCw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Z9P34CrbEemnc_SUi_lY1w" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_6JZfBSoREemUJoiXXeuyCw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6JXD8CoREemUJoiXXeuyCw" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -492,7 +492,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6JXEMyoREemUJoiXXeuyCw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_iz9FACo6EemJPLjYsukYrQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_6JZesSoREemUJoiXXeuyCw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Z9P37SrbEemnc_SUi_lY1w" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_6JZesSoREemUJoiXXeuyCw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6JXEPioREemUJoiXXeuyCw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1651,12 +1651,6 @@
     <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.gmf.bridge.ui.dashboard"/>
     <tags>View</tags>
     <tags>categoryTag:General</tags>
-  </descriptors>
-  <descriptors xmi:id="_ilo8MSo6EemJPLjYsukYrQ" elementId="org.eclipse.ocl.examples.emf.validation.validity.ui.validity" label="ValidityView" iconURI="platform:/plugin/org.eclipse.ocl.examples.emf.validation.validity.ui/icons/validation.gif" tooltip="" category="OCL" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
-    <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ocl.examples.emf.validation.validity.ui.view.ValidityView"/>
-    <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.ocl.examples.emf.validation.validity.ui"/>
-    <tags>View</tags>
-    <tags>categoryTag:OCL</tags>
   </descriptors>
   <trimContributions xmi:id="_2r10UF9tEeO-yojH_y4TJA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.main.toolbar" positionInParent="last">
     <children xsi:type="menu:ToolControl" xmi:id="_76uUAF9tEeO-yojH_y4TJA" elementId="Spacer Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">

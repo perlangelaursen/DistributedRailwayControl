@@ -7,19 +7,24 @@ const int NT = 2; //Number of trains
 const int NSWITCH = 2; //Number of switchable points
 
 //TYPES
-typedef int[0, NT-1] t_id;
-typedef int[0, NCB-1]  CB_id;
-typedef int[0, NSWITCH-1] SW_id;
-typedef int[0, NSEG-1] Seg_id;
+typedef int[0, NT-1] t_id; //Train IDs
+typedef int[0, NCB-1]  CB_id; //Control box IDs
+typedef int[0, NSWITCH-1] SW_id; //Switch IDs
+typedef int[0, NSEG-1] Seg_id; //Segment IDs
+typedef int[-1, NSEG-1] SegV_id; //Segment IDs with -1
+typedef int[-1, NSWITCH-1] SWV_id; //Switch IDs with -1
+typedef int[-1, NCB-1] CBV_id; //Control Box IDs with -1
+typedef int[-1, NT-1] tV_id; //Train IDs with -1
 
 //EXAMPLE
 const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
-const int controlBoxes[NT][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
-const int routes[NT][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-const int CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
-const int switches[NCB] = { -1, -1, 0, 1, -1};
+const CB_id controlBoxes[NT][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
+const SegV_id routes[NT][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
+const SegV_id CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
+const SWV_id switches[NCB] = { -1, -1, 0, 1, -1};
+const bool initialConnections[NSWITCH] = {true, true};
 
 //Channels
 chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]
@@ -33,18 +38,18 @@ chan OKsb[NCB];
 	<template>
 		<name x="5" y="5">TCC</name>
 		<parameter>t_id id</parameter>
-		<declaration>int i = 1;
-int curSeg;
-int nextSeg;
-int nextSB;
+		<declaration>Seg_id nextSegIndex = 1;
+SegV_id curSeg;
+SegV_id nextSeg;
+CBV_id nextCB;
 
-int cb = 0;
-int ci = 1;
-int ri = 1;
-int cl = 1;
+int[0,1] resBit = 0;
+CB_id resCBIndex = 1;
+Seg_id resSegIndex = 1;
+CB_id lockIndex = 1;
 
-int route[NSEG];
-int boxes[NCB];
+SegV_id route[NSEG];
+CBV_id boxes[NCB];
 
 void copyRouteFromServer() {
     for(i : int[0, NSEG-1]) {
@@ -58,23 +63,23 @@ void copyControlBoxInfo() {
     for(i : int[0, NCB-1]) {
         boxes[i] = controlBoxes[id][i];
     }
-    nextSB = boxes[ri];
+    nextCB = boxes[resSegIndex];
 }
 
 bool possibleToLockSegment() {
-    return cl&lt;NSEG &amp;&amp; cl-i &lt; lockLimit &amp;&amp; route[cl] != -1;
+    return lockIndex&lt;NSEG &amp;&amp; lockIndex-nextSegIndex &lt; lockLimit &amp;&amp; route[lockIndex] != -1;
 }
 
 bool possibleToReserveSegment() {
-    return ri-i &lt; resLimit &amp;&amp; ri &lt; NSEG &amp;&amp; route[ri] != -1;
+    return resSegIndex-nextSegIndex &lt; resLimit &amp;&amp; resSegIndex &lt; NSEG &amp;&amp; route[resSegIndex] != -1;
 }
 
 bool possibleToCrossBox() {
-    return ri &gt; i &amp;&amp; cl &gt; i;
+    return resSegIndex &gt; nextSegIndex &amp;&amp; lockIndex &gt; nextSegIndex;
 }
 
 bool hasTrainArrived() {
-    return i&gt;=NSEG || route[i] == -1;
+    return nextSegIndex&gt;=NSEG || route[nextSegIndex] == -1;
 }</declaration>
 		<location id="id0" x="-442" y="-374">
 			<name x="-425" y="-391">CrossingPoint</name>
@@ -114,16 +119,16 @@ bool hasTrainArrived() {
 			<source ref="id7"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-943" y="-76">OK[id]?</label>
-			<label kind="assignment" x="-952" y="-59">cl++</label>
+			<label kind="assignment" x="-952" y="-59">lockIndex++</label>
 			<nail x="-952" y="-68"/>
 		</transition>
 		<transition>
 			<source ref="id5"/>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-425" y="-93">OK[id]?</label>
-			<label kind="assignment" x="-425" y="-76">cb = cb^1,
-ri = (cb==0) ? ri+1 : ri,
-ci = (cb==1) ? ci+1 : ci</label>
+			<label kind="assignment" x="-425" y="-76">resBit = resBit^1,
+resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex,
+resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex</label>
 			<nail x="-442" y="-102"/>
 			<nail x="-612" y="-136"/>
 		</transition>
@@ -142,7 +147,7 @@ copyControlBoxInfo()</label>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="synchronisation" x="-1343" y="-255">resSeg[nextSB][id][curSeg]!</label>
+			<label kind="synchronisation" x="-1317" y="-255">resSeg[nextCB][id][curSeg]!</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -154,7 +159,7 @@ copyControlBoxInfo()</label>
 			<source ref="id6"/>
 			<target ref="id0"/>
 			<label kind="guard" x="-646" y="-365">possibleToCrossBox()</label>
-			<label kind="synchronisation" x="-646" y="-348">pass[nextSB][id]!</label>
+			<label kind="synchronisation" x="-646" y="-348">pass[nextCB][id]!</label>
 			<nail x="-680" y="-374"/>
 		</transition>
 		<transition>
@@ -173,25 +178,25 @@ copyControlBoxInfo()</label>
 			<target ref="id6"/>
 			<label kind="synchronisation" x="-425" y="-348">OK[id]?</label>
 			<label kind="assignment" x="-425" y="-331">curSeg = nextSeg,
-i++,
-nextSB = boxes[i],
-nextSeg = route[i]</label>
+nextSegIndex++,
+nextCB = boxes[nextSegIndex],
+nextSeg = route[nextSegIndex]</label>
 			<nail x="-442" y="-238"/>
 			<nail x="-697" y="-187"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id7"/>
-			<label kind="guard" x="-1309" y="-93">possibleToLockSegment()</label>
-			<label kind="synchronisation" x="-1292" y="-42">reqLock[boxes[cl]][id]
-[route[cl-1]][route[cl]]!</label>
+			<label kind="guard" x="-1317" y="-59">possibleToLockSegment()</label>
+			<label kind="synchronisation" x="-1326" y="-42">reqLock[boxes[lockIndex]][id]
+[route[lockIndex-1]][route[lockIndex]]!</label>
 			<nail x="-1122" y="-102"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id5"/>
 			<label kind="guard" x="-714" y="42">possibleToReserveSegment()</label>
-			<label kind="synchronisation" x="-714" y="59">resSeg[boxes[ci]][id][route[ri]]!</label>
+			<label kind="synchronisation" x="-714" y="59">resSeg[boxes[resCBIndex]][id][route[resSegIndex]]!</label>
 			<nail x="-731" y="-8"/>
 			<nail x="-714" y="34"/>
 			<nail x="-629" y="34"/>
@@ -200,12 +205,14 @@ nextSeg = route[i]</label>
 	<template>
 		<name>CB</name>
 		<parameter>CB_id id</parameter>
-		<declaration>int res[3] = {-1, -1, -1};
+		<declaration>tV_id res[3] = {-1, -1, -1};
 int[0,2] result;
-int tid = -1;
-int lockedBy = -1;
-int stem;
-int connected;
+tV_id tid = -1;
+tV_id lockedBy = -1;
+SegV_id stem;
+SegV_id plus;
+SegV_id minus;
+SegV_id connected;
 
 bool reserve(int tid, int sid){
   for(i : int[0,2]) {
@@ -217,22 +224,18 @@ bool reserve(int tid, int sid){
   return false;
 }
 
-int[0,2] lock(int tid, int s1, int s2){
-  if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == CBs[id][0] || s2 == CBs[id][0])){
+int[0,2] lock(int tid, int s1, int s2){ //0 = not allowed, 1 = continue without switching, 2 = switch and continue
+  if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == stem || s2 == stem)){
       int s = 0;
-      for (i:int[0,2]){
-        if(CBs[id][i] == s1){
-           if(res[i] == tid) {
-               s++;
-           }
-        }
-        if(CBs[id][i] == s2 ){
-            if(res[i] == tid){
-               s++;
-            }
-        }
+
+      if(s1 == stem || s1 == plus || s1 == minus){
+          s++;
       }
-      if (s==2  &amp;&amp; connected != s1 &amp;&amp;  connected != s2){
+      if(s2 == stem || s2 == plus || s2 == minus){
+          s++;
+      }
+
+      if (s==2 &amp;&amp; connected != s1 &amp;&amp; connected != s2){
         return 2;
       } else if (s==2) {
         return 1;
@@ -255,9 +258,9 @@ void clear(int tid){
 
 void updateConnected(){
     if(connected == CBs[id][1]){
-        connected := CBs[id][2];
+        connected = CBs[id][2];
     } else {
-        connected := CBs[id][1];
+        connected = CBs[id][1];
     }
 }</declaration>
 		<location id="id8" x="-994" y="68">
@@ -286,6 +289,8 @@ void updateConnected(){
 			<source ref="id8"/>
 			<target ref="id14"/>
 			<label kind="assignment" x="-977" y="51">stem = CBs[id][0],
+plus = CBs[id][1],
+minus = CBs[id][2],
 connected = CBs[id][1]</label>
 		</transition>
 		<transition>
@@ -388,40 +393,56 @@ tid = -1</label>
 		<name>Point</name>
 		<parameter>SW_id id</parameter>
 		<declaration>bool goToMinus = false;</declaration>
-		<location id="id15" x="136" y="0">
+		<location id="id15" x="136" y="144">
+			<name x="126" y="110">Initial</name>
+			<committed/>
+		</location>
+		<location id="id16" x="136" y="0">
 			<name x="102" y="-42">Switching</name>
 		</location>
-		<location id="id16" x="340" y="0">
+		<location id="id17" x="340" y="0">
 			<name x="330" y="-30">Minus</name>
 		</location>
-		<location id="id17" x="-68" y="0">
+		<location id="id18" x="-68" y="0">
 			<name x="-78" y="-30">Plus</name>
 		</location>
-		<init ref="id17"/>
+		<init ref="id15"/>
 		<transition>
-			<source ref="id17"/>
-			<target ref="id15"/>
+			<source ref="id15"/>
+			<target ref="id17"/>
+			<label kind="guard" x="170" y="119">!initialConnections[id]</label>
+			<nail x="340" y="144"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-42" y="119">initialConnections[id]</label>
+			<nail x="-68" y="144"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id16"/>
 			<label kind="synchronisation" x="-8" y="-68">switchh[id]?</label>
 			<label kind="assignment" x="-34" y="-51">goToMinus = true</label>
 			<nail x="34" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id16"/>
-			<target ref="id15"/>
+			<source ref="id17"/>
+			<target ref="id16"/>
 			<label kind="synchronisation" x="204" y="34">switchh[id]?</label>
 			<label kind="assignment" x="204" y="51">goToMinus = false</label>
 			<nail x="238" y="34"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id16"/>
+			<source ref="id16"/>
+			<target ref="id17"/>
 			<label kind="guard" x="204" y="-68">goToMinus</label>
 			<label kind="synchronisation" x="204" y="-51">OKsb[id]!</label>
 			<nail x="238" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id17"/>
+			<source ref="id16"/>
+			<target ref="id18"/>
 			<label kind="guard" x="0" y="34">!(goToMinus)</label>
 			<label kind="synchronisation" x="0" y="51">OKsb[id]!</label>
 			<nail x="34" y="34"/>
@@ -430,25 +451,25 @@ tid = -1</label>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A[] forall(i:CB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; switches[i] != -1) imply (Point(switches[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(switches[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
+			<formula>A[] forall(i:CB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; switches[i] != -1 &amp;&amp; not(Point(switches[i]).Initial)) imply (Point(switches[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(switches[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply (CB(TCC(i).nextSB).connected == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextSB).stem == TCC(i).nextSeg) || (CB(TCC(i).nextSB).stem == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextSB).connected == TCC(i).nextSeg))
+			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply (CB(TCC(i).nextCB).connected == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).stem == TCC(i).nextSeg) || (CB(TCC(i).nextCB).stem == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).connected == TCC(i).nextSeg))
 			</formula>
 			<comment>A train can only cross a point if the point's position is consistent with the segment that the trains is entering.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply switches[TCC(i).nextSB] == -1 || Point(switches[TCC(i).nextSB]).Plus || Point(switches[TCC(i).nextSB]).Minus)
+			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply switches[TCC(i).nextCB] == -1 || Point(switches[TCC(i).nextCB]).Plus || Point(switches[TCC(i).nextCB]).Minus)
 			</formula>
 			<comment>No derailment.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) imply (CBs[TCC(i).nextSB][0] == TCC(i).curSeg imply (CBs[TCC(i).nextSB][1] == TCC(i).nextSeg || CBs[TCC(i).nextSB][2] == TCC(i).nextSeg)) &amp;&amp; (CBs[TCC(i).nextSB][0] == TCC(i).nextSeg imply (CBs[TCC(i).nextSB][1] == TCC(i).curSeg || CBs[TCC(i).nextSB][2] == TCC(i).curSeg)))
+			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) imply (CBs[TCC(i).nextCB][0] == TCC(i).curSeg imply (CBs[TCC(i).nextCB][1] == TCC(i).nextSeg || CBs[TCC(i).nextCB][2] == TCC(i).nextSeg)) &amp;&amp; (CBs[TCC(i).nextCB][0] == TCC(i).nextSeg imply (CBs[TCC(i).nextCB][1] == TCC(i).curSeg || CBs[TCC(i).nextCB][2] == TCC(i).curSeg)))
 			</formula>
 			<comment>A train's current segment is either the same as its next segment or connected to it.
 			</comment>
