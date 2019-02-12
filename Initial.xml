@@ -24,7 +24,6 @@ const cBV_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const segV_id routes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const pV_id points[NCB] = { -1, -1, 0, 1, -1};
-const bool initialConnections[NPOINT] = {true, true};
 
 //Channels
 chan resSeg[NCB][NTRAIN][NSEG]; //[switch box][train id][segment id]
@@ -34,6 +33,12 @@ chan OK[NTRAIN];
 chan notOK[NTRAIN];
 chan pass[NCB][NTRAIN]; //t passing s connected to sb
 chan OKp[NCB];
+
+
+
+
+
+
 
 </declaration>
 	<template>
@@ -200,8 +205,8 @@ nextSeg = route[nextSegIndex]</label>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id7"/>
-			<label kind="guard" x="-1215" y="-832">possibleToLockSegment()</label>
-			<label kind="synchronisation" x="-1224" y="-815">reqLock[boxes[lockIndex]][id]
+			<label kind="guard" x="-1292" y="-824">possibleToLockSegment()</label>
+			<label kind="synchronisation" x="-1292" y="-807">reqLock[boxes[lockIndex]][id]
 [route[lockIndex-1]][route[lockIndex]]!</label>
 			<nail x="-1020" y="-875"/>
 		</transition>
