@@ -17,7 +17,7 @@ typedef int[-1, NCB-1] cBV_id; //Control Box IDs with -1
 typedef int[-1, NTRAIN-1] tV_id; //Train IDs with -1
 
 //EXAMPLE
-const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
+const int[1,NCB] lockLimit = 2; //Max number of reservations (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
 const cB_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
@@ -230,6 +230,17 @@ const int error = 0;
 const int noSwitch = 1;
 const int doSwitch = 2;
 
+void initialize(){
+    stem = cBs[id][0];
+    plus = cBs[id][1];
+    minus = cBs[id][2];
+    
+    connected = plus;
+    if(points[id] != -1 &amp;&amp; !initialConnections[points[id]]){
+        connected = minus;
+    }
+}
+
 bool reserve(t_id tid, seg_id sid){
   for(i : int[0,2]) {
     if (cBs[id][i] == sid &amp;&amp; res[i] == -1) {
@@ -273,10 +284,10 @@ void clear(t_id tid){
 }
 
 void updateConnected(){
-    if(connected == cBs[id][1]){
-        connected = cBs[id][2];
+    if(connected == plus){
+        connected = minus;
     } else {
-        connected = cBs[id][1];
+        connected = plus;
     }
 }</declaration>
 		<location id="id8" x="-994" y="68">
@@ -304,10 +315,7 @@ void updateConnected(){
 		<transition>
 			<source ref="id8"/>
 			<target ref="id14"/>
-			<label kind="assignment" x="-977" y="51">stem = cBs[id][0],
-plus = cBs[id][1],
-minus = cBs[id][2],
-connected = cBs[id][1]</label>
+			<label kind="assignment" x="-977" y="51">initialize()</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
