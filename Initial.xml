@@ -3,54 +3,54 @@
 <nta>
 	<declaration>const int NCB = 5; //Number of control boxes
 const int NSEG = 5; //Number of segments
-const int NT = 2; //Number of trains
-const int NSWITCH = 2; //Number of switchable points
+const int NTRAIN = 2; //Number of trains
+const int NPOINT = 2; //Number of switchable points
 
 //TYPES
-typedef int[0, NT-1] t_id; //Train IDs
-typedef int[0, NCB-1]  CB_id; //Control box IDs
-typedef int[0, NSWITCH-1] SW_id; //Switch IDs
-typedef int[0, NSEG-1] Seg_id; //Segment IDs
-typedef int[-1, NSEG-1] SegV_id; //Segment IDs with -1
-typedef int[-1, NSWITCH-1] SWV_id; //Switch IDs with -1
-typedef int[-1, NCB-1] CBV_id; //Control Box IDs with -1
-typedef int[-1, NT-1] tV_id; //Train IDs with -1
+typedef int[0, NTRAIN-1] t_id; //Train IDs
+typedef int[0, NCB-1]  cB_id; //Control box IDs
+typedef int[0, NPOINT-1] p_id; //Switch IDs
+typedef int[0, NSEG-1] seg_id; //Segment IDs
+typedef int[-1, NSEG-1] segV_id; //Segment IDs with -1
+typedef int[-1, NPOINT-1] pV_id; //Switch IDs with -1
+typedef int[-1, NCB-1] cBV_id; //Control Box IDs with -1
+typedef int[-1, NTRAIN-1] tV_id; //Train IDs with -1
 
 //EXAMPLE
 const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
-const CB_id controlBoxes[NT][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
-const SegV_id routes[NT][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-const SegV_id CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
-const SWV_id switches[NCB] = { -1, -1, 0, 1, -1};
-const bool initialConnections[NSWITCH] = {true, true};
+const cB_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
+const segV_id routes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
+const segV_id CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
+const pV_id switches[NCB] = { -1, -1, 0, 1, -1};
+const bool initialConnections[NPOINT] = {true, true};
 
 //Channels
-chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]
+chan resSeg[NCB][NTRAIN][NSEG]; //[switch box][train id][segment id]
 chan switchh[NCB];
-chan reqLock[NCB][NT][NSEG][NSEG]; //lock sb for t between two segments
-chan OK[NT];
-chan notOK[NT];
-chan pass[NCB][NT]; //t passing s connected to sb
+chan reqLock[NCB][NTRAIN][NSEG][NSEG]; //lock sb for t between two segments
+chan OK[NTRAIN];
+chan notOK[NTRAIN];
+chan pass[NCB][NTRAIN]; //t passing s connected to sb
 chan OKsb[NCB];
 </declaration>
 	<template>
 		<name x="5" y="5">TCC</name>
 		<parameter>t_id id</parameter>
-		<declaration>Seg_id nextSegIndex = 1;
-SegV_id curSeg;
-SegV_id nextSeg;
-CBV_id nextCB;
-Seg_id routeLength;
+		<declaration>seg_id nextSegIndex = 1;
+segV_id curSeg;
+segV_id nextSeg;
+cBV_id nextCB;
+seg_id routeLength;
 
 int[0,1] resBit = 0;
-CB_id resCBIndex = 1;
-Seg_id resSegIndex = 1;
-CB_id lockIndex = 1;
+cB_id resCBIndex = 1;
+seg_id resSegIndex = 1;
+cB_id lockIndex = 1;
 
-SegV_id route[NSEG];
-CBV_id boxes[NCB];
+segV_id route[NSEG];
+cBV_id boxes[NCB];
 
 void copyRouteFromServer() {
     for(i : int[0, NSEG-1]) {
@@ -216,21 +216,21 @@ nextSeg = route[nextSegIndex]</label>
 	</template>
 	<template>
 		<name>CB</name>
-		<parameter>CB_id id</parameter>
+		<parameter>cB_id id</parameter>
 		<declaration>tV_id res[3] = {-1, -1, -1};
 int[0,2] result;
 tV_id tid = -1;
 tV_id lockedBy = -1;
-SegV_id stem;
-SegV_id plus;
-SegV_id minus;
-SegV_id connected;
+segV_id stem;
+segV_id plus;
+segV_id minus;
+segV_id connected;
 
 const int error = 0;
 const int noSwitch = 1;
 const int doSwitch = 2;
 
-bool reserve(int tid, int sid){
+bool reserve(t_id tid, seg_id sid){
   for(i : int[0,2]) {
     if (CBs[id][i] == sid &amp;&amp; res[i] == -1) {
       res[i] = tid;
@@ -240,7 +240,7 @@ bool reserve(int tid, int sid){
   return false;
 }
 
-int[0,2] lock(int tid, int s1, int s2){
+int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
   if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == stem || s2 == stem)){
       int s = 0;
 
@@ -261,7 +261,7 @@ int[0,2] lock(int tid, int s1, int s2){
 }
 
 
-void clear(int tid){
+void clear(t_id tid){
      lockedBy = -1;
 
      for (i : int[0,2]) 
@@ -335,7 +335,7 @@ tid = -1</label>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id9"/>
-			<label kind="select" x="-1130" y="-17">i : int[0,NT-1]</label>
+			<label kind="select" x="-1130" y="-17">i : t_id</label>
 			<label kind="synchronisation" x="-1130" y="0">pass[id][i]?</label>
 			<label kind="assignment" x="-1130" y="17">tid = i</label>
 			<nail x="-918" y="-51"/>
@@ -375,9 +375,9 @@ tid = -1</label>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id13"/>
-			<label kind="select" x="-773" y="-221">i : int[0,NT-1],
-j : int[0,NSEG-1],
-k : int[0,NSEG-1]</label>
+			<label kind="select" x="-773" y="-221">i : t_id,
+j : seg_id,
+k : seg_id</label>
 			<label kind="guard" x="-773" y="-144">lockedBy == -1</label>
 			<label kind="synchronisation" x="-773" y="-127">reqLock[id][i][j][k]?</label>
 			<label kind="assignment" x="-773" y="-110">result = lock(i,j,k),
@@ -387,8 +387,8 @@ tid = i</label>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id11"/>
-			<label kind="select" x="-1088" y="-263">i : int[0,NT-1],
-j : int[0,NSEG-1]</label>
+			<label kind="select" x="-1088" y="-263">i : t_id,
+j : seg_id</label>
 			<label kind="synchronisation" x="-1088" y="-229">resSeg[id][i][j]?</label>
 			<label kind="assignment" x="-1088" y="-212">result = reserve(i,j),
 tid = i</label>
@@ -407,7 +407,7 @@ tid = -1</label>
 	</template>
 	<template>
 		<name>Point</name>
-		<parameter>SW_id id</parameter>
+		<parameter>p_id id</parameter>
 		<declaration>bool goToMinus = false;</declaration>
 		<location id="id15" x="136" y="144">
 			<name x="126" y="110">Initial</name>
@@ -467,7 +467,7 @@ tid = -1</label>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A[] forall(i:CB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; switches[i] != -1 &amp;&amp; not(Point(switches[i]).Initial)) imply (Point(switches[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(switches[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
+			<formula>A[] forall(i:cB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; switches[i] != -1 &amp;&amp; not(Point(switches[i]).Initial)) imply (Point(switches[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(switches[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
@@ -515,13 +515,13 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:Seg_id) TCC(id).Initial or (TCC(id).boxes[i] == controlBoxes[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).boxes[i] == controlBoxes[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of the control boxes will always be the same as its global counterpart after it has left the initial state
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:Seg_id) TCC(id).Initial or (TCC(id).route[i] == routes[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).route[i] == routes[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of its route will always be the same as its global counterpart after it has left the initial state
 			</comment>
