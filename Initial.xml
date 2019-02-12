@@ -17,7 +17,7 @@ typedef int[-1, NCB-1] cBV_id; //Control Box IDs with -1
 typedef int[-1, NTRAIN-1] tV_id; //Train IDs with -1
 
 //EXAMPLE
-const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
+const int[1,NCB] lockLimit = 2; //Max number of reservations (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
 const cBV_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
@@ -288,10 +288,10 @@ void clear(t_id tid){
 }
 
 void updateConnected(){
-    if(connected == cBs[id][1]){
-        connected = cBs[id][2];
+    if(connected == plus){
+        connected = minus;
     } else {
-        connected = cBs[id][1];
+        connected = plus;
     }
 }</declaration>
 		<location id="id8" x="-1139" y="-68">
