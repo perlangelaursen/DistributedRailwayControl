@@ -226,6 +226,10 @@ SegV_id plus;
 SegV_id minus;
 SegV_id connected;
 
+const int error = 0;
+const int noSwitch = 1;
+const int doSwitch = 2;
+
 bool reserve(int tid, int sid){
   for(i : int[0,2]) {
     if (CBs[id][i] == sid &amp;&amp; res[i] == -1) {
@@ -236,7 +240,7 @@ bool reserve(int tid, int sid){
   return false;
 }
 
-int[0,2] lock(int tid, int s1, int s2){ //0 = not allowed, 1 = continue without switching, 2 = switch and continue
+int[0,2] lock(int tid, int s1, int s2){
   if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == stem || s2 == stem)){
       int s = 0;
 
@@ -248,12 +252,12 @@ int[0,2] lock(int tid, int s1, int s2){ //0 = not allowed, 1 = continue without 
       }
 
       if (s==2 &amp;&amp; connected != s1 &amp;&amp; connected != s2){
-        return 2;
+        return doSwitch;
       } else if (s==2) {
-        return 1;
+        return noSwitch;
       }
     }
-    return 0;
+    return error;
 }
 
 
@@ -323,7 +327,7 @@ tid = -1</label>
 		<transition>
 			<source ref="id13"/>
 			<target ref="id12"/>
-			<label kind="guard" x="-458" y="-153">result == 1</label>
+			<label kind="guard" x="-458" y="-153">result == noSwitch</label>
 			<nail x="-620" y="-136"/>
 			<nail x="-322" y="-136"/>
 			<nail x="-170" y="-136"/>
@@ -340,14 +344,14 @@ tid = -1</label>
 		<transition>
 			<source ref="id13"/>
 			<target ref="id10"/>
-			<label kind="guard" x="-569" y="-68">result == 2</label>
+			<label kind="guard" x="-569" y="-68">result == doSwitch</label>
 			<label kind="synchronisation" x="-569" y="-51">switchh[switches[id]]!</label>
 			<nail x="-373" y="-34"/>
 		</transition>
 		<transition>
 			<source ref="id13"/>
 			<target ref="id14"/>
-			<label kind="guard" x="-782" y="-34">result==0</label>
+			<label kind="guard" x="-782" y="-34">result==error</label>
 			<label kind="synchronisation" x="-782" y="-17">notOK[tid]!</label>
 			<label kind="assignment" x="-782" y="0">tid = -1</label>
 			<nail x="-816" y="-34"/>
