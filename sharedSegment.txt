@@ -26,9 +26,9 @@ const bool initialConnections[NPOINT] = {true, true};
 
 //Channels
 chan resSeg[NCB][NTRAIN][NSEG]; //[switch box][train id][segment id]
-chan switchh[NCB];
+chan switchPoint[NPOINT];
 chan reqLock[NCB][NTRAIN][NSEG][NSEG]; //lock sb for t between two segments
 chan OK[NTRAIN];
 chan notOK[NTRAIN];
 chan pass[NCB][NTRAIN]; //t passing s connected to sb
-chan OKsb[NCB];
+chan OKp[NCB];
