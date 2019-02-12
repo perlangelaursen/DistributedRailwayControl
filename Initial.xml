@@ -22,18 +22,18 @@ const int[1,NSEG] resLimit = 2; //Max number of locks
 
 const cB_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const segV_id routes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-const segV_id CBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const pV_id points[NCB] = { -1, -1, 0, 1, -1};
 const bool initialConnections[NPOINT] = {true, true};
 
 //Channels
 chan resSeg[NCB][NTRAIN][NSEG]; //[switch box][train id][segment id]
-chan switchh[NCB];
+chan switchPoint[NPOINT];
 chan reqLock[NCB][NTRAIN][NSEG][NSEG]; //lock sb for t between two segments
 chan OK[NTRAIN];
 chan notOK[NTRAIN];
 chan pass[NCB][NTRAIN]; //t passing s connected to sb
-chan OKsb[NCB];
+chan OKp[NCB];
 </declaration>
 	<template>
 		<name x="5" y="5">TCC</name>
@@ -232,7 +232,7 @@ const int doSwitch = 2;
 
 bool reserve(t_id tid, seg_id sid){
   for(i : int[0,2]) {
-    if (CBs[id][i] == sid &amp;&amp; res[i] == -1) {
+    if (cBs[id][i] == sid &amp;&amp; res[i] == -1) {
       res[i] = tid;
       return true;
     }
@@ -273,10 +273,10 @@ void clear(t_id tid){
 }
 
 void updateConnected(){
-    if(connected == CBs[id][1]){
-        connected = CBs[id][2];
+    if(connected == cBs[id][1]){
+        connected = cBs[id][2];
     } else {
-        connected = CBs[id][1];
+        connected = cBs[id][1];
     }
 }</declaration>
 		<location id="id8" x="-994" y="68">
@@ -304,10 +304,10 @@ void updateConnected(){
 		<transition>
 			<source ref="id8"/>
 			<target ref="id14"/>
-			<label kind="assignment" x="-977" y="51">stem = CBs[id][0],
-plus = CBs[id][1],
-minus = CBs[id][2],
-connected = CBs[id][1]</label>
+			<label kind="assignment" x="-977" y="51">stem = cBs[id][0],
+plus = cBs[id][1],
+minus = cBs[id][2],
+connected = cBs[id][1]</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
@@ -321,7 +321,7 @@ tid = -1</label>
 		<transition>
 			<source ref="id10"/>
 			<target ref="id12"/>
-			<label kind="synchronisation" x="-331" y="-34">OKsb[points[id]]?</label>
+			<label kind="synchronisation" x="-331" y="-34">OKp[points[id]]?</label>
 			<label kind="assignment" x="-331" y="-17">updateConnected()</label>
 		</transition>
 		<transition>
@@ -345,7 +345,7 @@ tid = -1</label>
 			<source ref="id13"/>
 			<target ref="id10"/>
 			<label kind="guard" x="-569" y="-68">result == doSwitch</label>
-			<label kind="synchronisation" x="-569" y="-51">switchh[points[id]]!</label>
+			<label kind="synchronisation" x="-569" y="-51">switchPoint[points[id]]!</label>
 			<nail x="-373" y="-34"/>
 		</transition>
 		<transition>
@@ -438,14 +438,14 @@ tid = -1</label>
 		<transition>
 			<source ref="id18"/>
 			<target ref="id16"/>
-			<label kind="synchronisation" x="-8" y="-68">switchh[id]?</label>
+			<label kind="synchronisation" x="-8" y="-68">switchPoint[id]?</label>
 			<label kind="assignment" x="-34" y="-51">goToMinus = true</label>
 			<nail x="34" y="-34"/>
 		</transition>
 		<transition>
 			<source ref="id17"/>
 			<target ref="id16"/>
-			<label kind="synchronisation" x="204" y="34">switchh[id]?</label>
+			<label kind="synchronisation" x="204" y="34">switchPoint[id]?</label>
 			<label kind="assignment" x="204" y="51">goToMinus = false</label>
 			<nail x="238" y="34"/>
 		</transition>
@@ -453,21 +453,21 @@ tid = -1</label>
 			<source ref="id16"/>
 			<target ref="id17"/>
 			<label kind="guard" x="204" y="-68">goToMinus</label>
-			<label kind="synchronisation" x="204" y="-51">OKsb[id]!</label>
+			<label kind="synchronisation" x="204" y="-51">OKp[id]!</label>
 			<nail x="238" y="-34"/>
 		</transition>
 		<transition>
 			<source ref="id16"/>
 			<target ref="id18"/>
 			<label kind="guard" x="0" y="34">!(goToMinus)</label>
-			<label kind="synchronisation" x="0" y="51">OKsb[id]!</label>
+			<label kind="synchronisation" x="0" y="51">OKp[id]!</label>
 			<nail x="34" y="34"/>
 		</transition>
 	</template>
 	<system>system TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A[] forall(i:cB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; points[i] != -1 &amp;&amp; not(Point(points[i]).Initial)) imply (Point(points[i]).Plus &amp;&amp; CB(i).connected == CBs[i][1]) || (Point(points[i]).Minus &amp;&amp; CB(i).connected == CBs[i][2])
+			<formula>A[] forall(i:cB_id) (not(CB(i).Initial) &amp;&amp; not(CB(i).Switching) &amp;&amp; points[i] != -1 &amp;&amp; not(Point(points[i]).Initial)) imply (Point(points[i]).Plus &amp;&amp; CB(i).connected == cBs[i][1]) || (Point(points[i]).Minus &amp;&amp; CB(i).connected == cBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
@@ -485,7 +485,7 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) imply (CBs[TCC(i).nextCB][0] == TCC(i).curSeg imply (CBs[TCC(i).nextCB][1] == TCC(i).nextSeg || CBs[TCC(i).nextCB][2] == TCC(i).nextSeg)) &amp;&amp; (CBs[TCC(i).nextCB][0] == TCC(i).nextSeg imply (CBs[TCC(i).nextCB][1] == TCC(i).curSeg || CBs[TCC(i).nextCB][2] == TCC(i).curSeg)))
+			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) imply (cBs[TCC(i).nextCB][0] == TCC(i).curSeg imply (cBs[TCC(i).nextCB][1] == TCC(i).nextSeg || cBs[TCC(i).nextCB][2] == TCC(i).nextSeg)) &amp;&amp; (cBs[TCC(i).nextCB][0] == TCC(i).nextSeg imply (cBs[TCC(i).nextCB][1] == TCC(i).curSeg || cBs[TCC(i).nextCB][2] == TCC(i).curSeg)))
 			</formula>
 			<comment>A train's current segment is either the same as its next segment or connected to it.
 			</comment>
