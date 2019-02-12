@@ -42,6 +42,7 @@ chan OKsb[NCB];
 SegV_id curSeg;
 SegV_id nextSeg;
 CBV_id nextCB;
+Seg_id routeLength;
 
 int[0,1] resBit = 0;
 CB_id resCBIndex = 1;
@@ -54,6 +55,9 @@ CBV_id boxes[NCB];
 void copyRouteFromServer() {
     for(i : int[0, NSEG-1]) {
         route[i] = routes[id][i];
+        if(route[i]&gt;-1) {
+            routeLength++;
+        }
     }
     curSeg = route[0];
     nextSeg = route[1];
@@ -67,11 +71,11 @@ void copyControlBoxInfo() {
 }
 
 bool possibleToLockSegment() {
-    return lockIndex&lt;NSEG &amp;&amp; lockIndex-nextSegIndex &lt; lockLimit &amp;&amp; route[lockIndex] != -1;
+    return lockIndex &lt;  routeLength &amp;&amp; lockIndex - nextSegIndex &lt; lockLimit;
 }
 
 bool possibleToReserveSegment() {
-    return resSegIndex-nextSegIndex &lt; resLimit &amp;&amp; resSegIndex &lt; NSEG &amp;&amp; route[resSegIndex] != -1;
+    return resSegIndex &lt; routeLength &amp;&amp;  resSegIndex - nextSegIndex &lt; resLimit;
 }
 
 bool possibleToCrossBox() {
@@ -79,7 +83,15 @@ bool possibleToCrossBox() {
 }
 
 bool hasTrainArrived() {
-    return nextSegIndex&gt;=NSEG || route[nextSegIndex] == -1;
+    return nextSegIndex == routeLength;
+}
+
+bool validRoute() {
+    bool result = true;
+    for(j : int [0, NSEG-2]){
+        result = result &amp;&amp; !(route[j] == -1 &amp;&amp; route[j+1] &gt; -1);
+    }
+    return result;
 }</declaration>
 		<location id="id0" x="-442" y="-374">
 			<name x="-425" y="-391">CrossingPoint</name>
@@ -147,7 +159,7 @@ copyControlBoxInfo()</label>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id2"/>
-			<label kind="synchronisation" x="-1317" y="-255">resSeg[nextCB][id][curSeg]!</label>
+			<label kind="synchronisation" x="-1326" y="-255">resSeg[nextCB][id][curSeg]!</label>
 		</transition>
 		<transition>
 			<source ref="id2"/>
@@ -490,6 +502,12 @@ tid = -1</label>
 			<formula>A[] forall(i:t_id) forall(j:t_id) i != j and not(TCC(i).Initial) and not(TCC(j).Initial) imply TCC(i).curSeg != TCC(j).curSeg
 			</formula>
 			<comment>Two trains are never on the same segment after the initialization step.
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) TCC(i).validRoute()
+			</formula>
+			<comment>All trains must have a valid route composition. This means that the actual route must be greater than -1 and the padding must be -1.
 			</comment>
 		</query>
 		<query>
