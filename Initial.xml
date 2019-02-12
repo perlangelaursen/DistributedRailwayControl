@@ -20,7 +20,7 @@ typedef int[-1, NTRAIN-1] tV_id; //Train IDs with -1
 const int[1,NCB] lockLimit = 2; //Max number of reservations (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
-const cB_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
+const cBV_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const segV_id routes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const pV_id points[NCB] = { -1, -1, 0, 1, -1};
@@ -34,6 +34,7 @@ chan OK[NTRAIN];
 chan notOK[NTRAIN];
 chan pass[NCB][NTRAIN]; //t passing s connected to sb
 chan OKp[NCB];
+
 </declaration>
 	<template>
 		<name x="5" y="5">TCC</name>
@@ -523,7 +524,7 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).boxes[i] == controlBoxes[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:cB_id) TCC(id).Initial or (TCC(id).boxes[i] == controlBoxes[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of the control boxes will always be the same as its global counterpart after it has left the initial state
 			</comment>
