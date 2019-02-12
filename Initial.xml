@@ -89,7 +89,7 @@ bool hasTrainArrived() {
 
 bool validRoute() {
     bool result = true;
-    for(j : int [0, NCB-2]){
+    for(j : int [0, NSEG-2]){
         result = result &amp;&amp; !(route[j] == -1 &amp;&amp; route[j+1] &gt; -1);
     }
     return result;
