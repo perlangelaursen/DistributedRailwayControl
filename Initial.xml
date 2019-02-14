@@ -31,12 +31,13 @@ const pV_id points[NCB] = { -1, -1, 0, 1, -1};
 const InitialReserves reserves[NTRAIN] = {{1, {0,-1,-1}}, {3, {1,-1,-1}}};
 
 //Channels
-chan resSeg[NCB][NTRAIN][NSEG]; //[switch box][train id][segment id]
+chan resSeg[NCB][NTRAIN][NSEG];
 chan switchPoint[NPOINT];
-chan reqLock[NCB][NTRAIN][NSEG][NSEG]; //lock sb for t between two segments
+chan reqLock[NCB][NTRAIN][NSEG][NSEG];
 chan OK[NTRAIN];
 chan notOK[NTRAIN];
-chan pass[NCB][NTRAIN]; //t passing s connected to sb
+chan pass[NCB];
+chan passed[NCB];
 chan OKp[NCB];
 urgent broadcast chan start;</declaration>
 	<template>
@@ -156,7 +157,7 @@ resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex</label>
 			<source ref="id4"/>
 			<target ref="id0"/>
 			<label kind="guard" x="-544" y="-1147">possibleToCrossBox()</label>
-			<label kind="synchronisation" x="-544" y="-1130">pass[nextCB][id]!</label>
+			<label kind="synchronisation" x="-544" y="-1130">pass[nextCB]!</label>
 			<nail x="-578" y="-1156"/>
 		</transition>
 		<transition>
@@ -173,7 +174,7 @@ resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex</label>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id4"/>
-			<label kind="synchronisation" x="-323" y="-1130">OK[id]?</label>
+			<label kind="synchronisation" x="-323" y="-1130">passed[nextCB]!</label>
 			<label kind="assignment" x="-323" y="-1113">curSeg = nextSeg,
 nextSegIndex++,
 nextCB = boxes[nextSegIndex],
@@ -274,14 +275,14 @@ int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
 }
 
 
-void clear(t_id tid){
+void clear(){
      lockedBy = -1;
 
-     for (i : int[0,2]) 
-     {
-       if(res[i] == tid){
-           res[i] = -1;
-       }
+     res[0] = -1;
+     if(connected == plus) {
+        res[1] = -1;
+     } else {
+        res[2] = -1;
      }
 }
 
@@ -322,10 +323,8 @@ void updateConnected(){
 		<transition>
 			<source ref="id9"/>
 			<target ref="id14"/>
-			<label kind="guard" x="-1156" y="-153">tid == lockedBy</label>
-			<label kind="synchronisation" x="-1156" y="-136">OK[tid]!</label>
-			<label kind="assignment" x="-1156" y="-119">clear(tid),
-tid = -1</label>
+			<label kind="synchronisation" x="-1139" y="-127">passed[id]?</label>
+			<label kind="assignment" x="-1139" y="-110">clear()</label>
 			<nail x="-1020" y="-102"/>
 		</transition>
 		<transition>
@@ -345,9 +344,7 @@ tid = -1</label>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id9"/>
-			<label kind="select" x="-1113" y="-42">i : t_id</label>
-			<label kind="synchronisation" x="-1113" y="-25">pass[id][i]?</label>
-			<label kind="assignment" x="-1113" y="-8">tid = i</label>
+			<label kind="synchronisation" x="-1122" y="-42">pass[id]?</label>
 			<nail x="-952" y="-51"/>
 			<nail x="-1020" y="-34"/>
 		</transition>
