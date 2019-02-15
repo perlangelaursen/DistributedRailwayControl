@@ -1,4 +1,3 @@
-
 // Station 8
 const int NCB = 18; //Number of control boxes
 const int NSEG = 25; //Number of segments
