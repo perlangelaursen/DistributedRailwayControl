@@ -23,7 +23,7 @@ typedef struct {
 } InitialReserves;
 
 //EXAMPLE
-const int[1,NCB] lockLimit = 2; //Max number of reservations (pairs)
+const int[1,NCB] lockLimit = 1; //Max number of reservations (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
 const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
@@ -42,7 +42,6 @@ chan pass[NCB];
 chan passed[NCB];
 chan switchPoint[NPOINT];
 chan OKp[NCB];
-
 urgent broadcast chan start;</declaration>
 	<template>
 		<name x="5" y="5">TCC</name>
@@ -62,7 +61,7 @@ segV_id segments[NSEG];
 cBV_id boxes[NCB];
 
 void copySegments() {
-    for(i : int[0, NSEG-1]) {
+    for(i : seg_id) {
         segments[i] = segRoutes[id][i];
         if(segments[i]&gt;-1) {
             routeLength++;
@@ -73,10 +72,10 @@ void copySegments() {
 }
 
 void copyControlBoxes() {
-    for(i : int[0, NCB-1]) {
+    for(i : cB_id) {
         boxes[i] = boxRoutes[id][i];
     }
-    nextCB = boxes[resSegIndex];
+    nextCB = boxes[1];
 }
 
 bool possibleToLockSegment() {
@@ -87,7 +86,7 @@ bool possibleToReserveSegment() {
     return resSegIndex &lt; routeLength &amp;&amp;  resSegIndex - nextSegIndex &lt; resLimit;
 }
 
-bool possibleToCrossBox() {
+bool possibleToPassBox() {
     return resSegIndex &gt; nextSegIndex &amp;&amp; lockIndex &gt; nextSegIndex;
 }
 
@@ -103,7 +102,7 @@ bool validRoute() {
     return result;
 }</declaration>
 		<location id="id0" x="-340" y="-1156">
-			<name x="-323" y="-1173">CrossingPoint</name>
+			<name x="-323" y="-1173">DoubleSegment</name>
 		</location>
 		<location id="id1" x="-1020" y="-1156">
 			<name x="-1030" y="-1190">Initial</name>
@@ -160,7 +159,7 @@ resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex</label>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-544" y="-1147">possibleToCrossBox()</label>
+			<label kind="guard" x="-544" y="-1147">possibleToPassBox()</label>
 			<label kind="synchronisation" x="-544" y="-1130">pass[nextCB]!</label>
 			<nail x="-578" y="-1156"/>
 		</transition>
@@ -189,8 +188,8 @@ nextSeg = segments[nextSegIndex]</label>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id5"/>
-			<label kind="guard" x="-1292" y="-833">possibleToLockSegment()</label>
-			<label kind="synchronisation" x="-1292" y="-816">reqLock[boxes[lockIndex]][id]
+			<label kind="guard" x="-1309" y="-833">possibleToLockSegment()</label>
+			<label kind="synchronisation" x="-1309" y="-816">reqLock[boxes[lockIndex]][id]
 [segments[lockIndex-1]][segments[lockIndex]]!</label>
 			<nail x="-1020" y="-884"/>
 		</transition>
@@ -483,13 +482,13 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply (CB(TCC(i).nextCB).connected == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).stem == TCC(i).nextSeg) || (CB(TCC(i).nextCB).stem == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).connected == TCC(i).nextSeg))
+			<formula>A[] forall(i:t_id) (TCC(i).DoubleSegment imply (CB(TCC(i).nextCB).connected == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).stem == TCC(i).nextSeg) || (CB(TCC(i).nextCB).stem == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).connected == TCC(i).nextSeg))
 			</formula>
 			<comment>A train can only cross a point if the point's position is consistent with the segment that the trains is entering.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).CrossingPoint imply points[TCC(i).nextCB] == -1 || Point(points[TCC(i).nextCB]).Plus || Point(points[TCC(i).nextCB]).Minus)
+			<formula>A[] forall(i:t_id) (TCC(i).DoubleSegment imply points[TCC(i).nextCB] == -1 || Point(points[TCC(i).nextCB]).Plus || Point(points[TCC(i).nextCB]).Minus)
 			</formula>
 			<comment>No derailment.
 			</comment>
