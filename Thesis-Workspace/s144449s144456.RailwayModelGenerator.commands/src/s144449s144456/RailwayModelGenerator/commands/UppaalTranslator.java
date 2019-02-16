@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import network.*;
@@ -11,6 +12,7 @@ import network.*;
 public class UppaalTranslator extends Translator{
 	private Map<ControlBox, Integer> cbIDs;
 	private Map<Segment, Integer> segIDs;
+	private LinkedList<SwitchBox> points;
 	private int id;
 	private String start, end;
 	
@@ -19,54 +21,71 @@ public class UppaalTranslator extends Translator{
 		if(n != null) {
 			initialize(n);
 			
-			int nSwitch = 0;
+			int nPoint = 0;
 			for(ControlBox s : n.getControlBoxes()) {
 				if(s instanceof SwitchBox) {
-					nSwitch++;
+					nPoint++;
 				}
 			}
-			String sizesString = "const int NCB = "+n.getControlBoxes().size()+";\n"+
-						  			"const int NSEG = "+n.getSegments().size()+";\n"+
-						  			"const int NT = "+n.getTrains().size()+";\n"+
-						  			"const int NSWITCH = "+nSwitch+";\n";
-			String typesString = "typedef int[0, NT-1] t_id;\r\n" + 
-								"typedef int[0, NCB-1]  CB_id;\r\n" + 
-								"typedef int[0, NSWITCH-1] SW_id;\r\n";
+			String sizesString = "const int NTRAIN = "+n.getTrains().size()+";\n"+
+								 "const int NCB = "+n.getControlBoxes().size()+";\n"+
+								 "const int NPOINT = "+nPoint+";\n"+
+						  		 "const int NSEG = "+n.getSegments().size()+";\n";
+			
+			String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
+								"typedef int[0, NCB-1]  cB_id;\n" + 
+								"typedef int[0, NPOINT-1] p_id;\n" + 
+								"typedef int[0, NSEG-1] seg_id;\n" + 
+								"typedef int[-1, NTRAIN-1] tV_id;\n" + 
+								"typedef int[-1, NCB-1] cBV_id;\n" + 
+								"typedef int[-1, NPOINT-1] pV_id;\n" + 
+								"typedef int[-1, NSEG-1] segV_id;\n"+
+								"typedef struct {\r\n" + 
+								"    cB_id cb;\r\n" + 
+								"    tV_id res[3];\r\n" + 
+								"} InitialReserves;";
 			
 			//Limits
 			String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
-								"const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
+								  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
 			
-			//Control Boxes
-			String cbsString= "const int controlBoxes[NT][NCB] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				cbsString += trainCBs(n, n.getTrains().get(i)) + ", ";
-			}
-			cbsString += trainCBs(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
-			
-
-			
-			String routesString = "const int routes[NT][NSEG] = {";
+			//Route segments
+			String routesString = "const segV_id segRoutes[NTRAIN][NSEG] = {";
 			for(int i = 0; i < n.getTrains().size()-1; i++) {
 				routesString += trainRoute(n, n.getTrains().get(i))+", ";
 			}
 			routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
+
+			//Route control boxes
+			String cbsString= "const cBV_id boxRoutes[NTRAIN][NCB] = {";
+			for(int i = 0; i < n.getTrains().size()-1; i++) {
+				cbsString += trainCBs(n, n.getTrains().get(i)) + ", ";
+			}
+			cbsString += trainCBs(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
+						
 			
-			
-			String cbDetailsString = "const int CBs[NCB][3] = {";
+			String cbDetailsString = "const segV_id cBs[NCB][3] = {";
 			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
 				cbDetailsString += cbsDetails(n.getControlBoxes().get(i))+", ";
 			}
 			cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
 			
-			String switchesString = "const int switches[NCB] = {";
+			//Points
+			String pointsString = "const pV_id points[NCB] = {";
 			id = 0;
 			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
 				ControlBox cb = n.getControlBoxes().get(i);
-				switchesString += switchID(cb)+", ";
+				pointsString += pointID(cb)+", ";
 			} 
-			switchesString += switchID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+			pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
 			
+			String pointSettingsString = "const bool pointInPlus[NPOINT] = {";
+			for(int i = 0; i < points.size()-1; i++) {
+				pointSettingsString += (points.get(i).getConnected() == PointSetting.PLUS)+", ";
+			}
+			pointSettingsString += (points.get(points.size()-1).getConnected() == PointSetting.PLUS)+"};\n";
+			
+			//Channels
 			String channelsString = "chan resSeg[NCB][NT][NSEG]; //[switch box][train id][segment id]\r\n" + 
 									"chan switchh[NCB];\r\n" + 
 									"chan reqLock[NCB][NT][NSEG][NSEG]; //lock sb for t between two segments\r\n" + 
@@ -80,7 +99,7 @@ public class UppaalTranslator extends Translator{
 			try {
 				writer = new PrintWriter("test.xml", "UTF-8");
 				writer.println(start);
-				writer.println(sizesString + typesString + limitsString + cbsString + routesString + cbDetailsString + switchesString + channelsString);
+				writer.println(sizesString + typesString + limitsString + routesString + cbsString + cbDetailsString + pointsString + pointSettingsString + channelsString);
 				writer.println(end);
 				writer.close();
 			} catch (FileNotFoundException | UnsupportedEncodingException e) {
@@ -90,7 +109,7 @@ public class UppaalTranslator extends Translator{
 		}
 	}
 
-	private String switchID(ControlBox cb) {
+	private String pointID(ControlBox cb) {
 		String switchesString = "";
 		if(cb instanceof SwitchBox) {
 			switchesString += id;
@@ -101,6 +120,7 @@ public class UppaalTranslator extends Translator{
 		return switchesString;
 	}
 
+	
 	private String cbsDetails(ControlBox cb) {
 		String cbsDetails = "{";
 		if (cb instanceof SwitchBox) {
@@ -157,11 +177,15 @@ public class UppaalTranslator extends Translator{
 
 	private void initialize(Network n) {
 		int i = 0;
-
+		
 		cbIDs = new HashMap<>();
+		points = new LinkedList<>();
 		for(ControlBox cb : n.getControlBoxes()) {
 			cbIDs.put(cb, i);
 			i++;
+			if(cb instanceof SwitchBox) {
+				points.add((SwitchBox) cb);
+			}
 		}
 		
 		segIDs = new HashMap<>();
