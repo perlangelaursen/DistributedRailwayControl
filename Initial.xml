@@ -30,6 +30,7 @@ const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
 const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const pV_id points[NCB] = { -1, -1, 0, 1, -1};
+const bool pointInPlus[NPOINT] = {true, true};
 const InitialReserves reserves[NTRAIN] = {{1, {0,-1,-1}}, {3, {1,-1,-1}}};
 
 //Channels
@@ -239,8 +240,12 @@ void setInfo() {
     stem = cBs[id][0];
     plus = cBs[id][1];
     minus = cBs[id][2];
-    connected = cBs[id][1];
     point = points[id];
+    connected = plus;
+
+    if(point != -1 &amp;&amp; !pointInPlus[point]){
+        connected = minus;
+    }
 
     for(i : t_id) {
         if (reserves[i].cb == id) {
@@ -263,20 +268,13 @@ int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
   if(lockedBy == -1 &amp;&amp; (s1 != s2) &amp;&amp; (s1 == stem || s2 == stem)){
       int s = 0;
 
-      if(s1 == stem || s1 == plus || s1 == minus){
-          s++;
-      }
-      if(s2 == stem || s2 == plus || s2 == minus){
-          s++;
-      }
-
-      if (s==2 &amp;&amp; connected != s1 &amp;&amp; connected != s2){
+      if((s1 == stem &amp;&amp; s2 != connected) || (s2 == stem &amp;&amp; s1 != connected)){
         return doSwitch;
-      } else if (s==2) {
+      } else if ((s1 == stem &amp;&amp; s2 == connected) || (s2 == stem &amp;&amp; s1 == connected)){
         return noSwitch;
       }
-    }
-    return error;
+   }
+   return error;
 }
 
 
@@ -421,40 +419,56 @@ tid = -1</label>
 		<name>Point</name>
 		<parameter>p_id id</parameter>
 		<declaration>bool goToMinus = false;</declaration>
-		<location id="id15" x="136" y="0">
+		<location id="id15" x="136" y="153">
+		</location>
+		<location id="id16" x="136" y="0">
 			<name x="102" y="-42">Switching</name>
 		</location>
-		<location id="id16" x="340" y="0">
+		<location id="id17" x="340" y="0">
 			<name x="330" y="-30">Minus</name>
 		</location>
-		<location id="id17" x="-68" y="0">
+		<location id="id18" x="-68" y="0">
 			<name x="-78" y="-30">Plus</name>
 		</location>
-		<init ref="id17"/>
+		<init ref="id15"/>
 		<transition>
-			<source ref="id17"/>
-			<target ref="id15"/>
+			<source ref="id15"/>
+			<target ref="id17"/>
+			<label kind="guard" x="238" y="119">!pointInPlus[id]</label>
+			<label kind="synchronisation" x="289" y="136">start?</label>
+			<nail x="340" y="153"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-51" y="119">pointInPlus[id]</label>
+			<label kind="synchronisation" x="-50" y="136">start?</label>
+			<nail x="-68" y="153"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id16"/>
 			<label kind="synchronisation" x="-34" y="-68">switchPoint[id]?</label>
 			<label kind="assignment" x="-34" y="-51">goToMinus = true</label>
 			<nail x="34" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id16"/>
-			<target ref="id15"/>
+			<source ref="id17"/>
+			<target ref="id16"/>
 			<label kind="synchronisation" x="204" y="34">switchPoint[id]?</label>
 			<label kind="assignment" x="204" y="51">goToMinus = false</label>
 			<nail x="238" y="34"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id16"/>
+			<source ref="id16"/>
+			<target ref="id17"/>
 			<label kind="guard" x="204" y="-68">goToMinus</label>
 			<label kind="synchronisation" x="204" y="-51">OKp[id]!</label>
 			<nail x="238" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id17"/>
+			<source ref="id16"/>
+			<target ref="id18"/>
 			<label kind="guard" x="0" y="34">!(goToMinus)</label>
 			<label kind="synchronisation" x="0" y="51">OKp[id]!</label>
 			<nail x="34" y="34"/>
