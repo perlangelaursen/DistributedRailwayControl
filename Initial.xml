@@ -61,7 +61,7 @@ cB_id lockIndex = 1;
 segV_id segments[NSEG];
 cBV_id boxes[NCB];
 
-void copySegmentsFromServer() {
+void copySegments() {
     for(i : int[0, NSEG-1]) {
         segments[i] = segRoutes[id][i];
         if(segments[i]&gt;-1) {
@@ -72,7 +72,7 @@ void copySegmentsFromServer() {
     nextSeg = segments[1];
 }
 
-void copyControlBoxInfo() {
+void copyControlBoxes() {
     for(i : int[0, NCB-1]) {
         boxes[i] = boxRoutes[id][i];
     }
@@ -125,8 +125,8 @@ bool validRoute() {
 			<source ref="id1"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-977" y="-1037">start?</label>
-			<label kind="assignment" x="-977" y="-1020">copySegmentsFromServer(),
-copyControlBoxInfo()</label>
+			<label kind="assignment" x="-977" y="-1020">copySegments(),
+copyControlBoxes()</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
