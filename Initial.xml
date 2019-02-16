@@ -26,8 +26,8 @@ typedef struct {
 const int[1,NCB] lockLimit = 2; //Max number of reservations (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
-const segV_id routeSegments[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-const cBV_id routeBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
+const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
+const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const pV_id points[NCB] = { -1, -1, 0, 1, -1};
 const InitialReserves reserves[NTRAIN] = {{1, {0,-1,-1}}, {3, {1,-1,-1}}};
@@ -62,7 +62,7 @@ cBV_id boxes[NCB];
 
 void copySegmentsFromServer() {
     for(i : int[0, NSEG-1]) {
-        segments[i] = routeSegments[id][i];
+        segments[i] = segRoutes[id][i];
         if(segments[i]&gt;-1) {
             routeLength++;
         }
@@ -73,7 +73,7 @@ void copySegmentsFromServer() {
 
 void copyControlBoxInfo() {
     for(i : int[0, NCB-1]) {
-        boxes[i] = routeBoxes[id][i];
+        boxes[i] = boxRoutes[id][i];
     }
     nextCB = boxes[resSegIndex];
 }
@@ -511,13 +511,13 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:cB_id) TCC(id).Initial or (TCC(id).boxes[i] == routeBoxes[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:cB_id) TCC(id).Initial or (TCC(id).boxes[i] == boxRoutes[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of the control boxes will always be the same as its global counterpart after it has left the initial state
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).segments[i] == routeSegments[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).segments[i] == segRoutes[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of its route will always be the same as its global counterpart after it has left the initial state
 			</comment>
