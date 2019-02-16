@@ -123,8 +123,8 @@ bool validRoute() {
 		<transition>
 			<source ref="id1"/>
 			<target ref="id4"/>
-			<label kind="synchronisation" x="-977" y="-1037">start?</label>
-			<label kind="assignment" x="-977" y="-1020">copySegments(),
+			<label kind="synchronisation" x="-986" y="-1096">start?</label>
+			<label kind="assignment" x="-986" y="-1079">copySegments(),
 copyControlBoxes()</label>
 		</transition>
 		<transition>
@@ -221,15 +221,16 @@ nextSeg = segments[nextSegIndex]</label>
 	<template>
 		<name>CB</name>
 		<parameter>cB_id id</parameter>
-		<declaration>tV_id res[3] = {-1, -1, -1};
-int[0,2] result;
-tV_id tid = -1;
-tV_id lockedBy = -1;
-segV_id stem = -1;
+		<declaration>segV_id stem = -1;
 segV_id plus = -1;
 segV_id minus = -1;
 segV_id connected =-1;
 pV_id point = -1;
+
+tV_id res[3] = {-1, -1, -1};
+int[0,2] result;
+tV_id tid = -1;
+tV_id lockedBy = -1;
 
 const int error = 0;
 const int noSwitch = 1;
@@ -239,8 +240,8 @@ void setInfo() {
     stem = cBs[id][0];
     plus = cBs[id][1];
     minus = cBs[id][2];
-    point = points[id];
     connected = plus;
+    point = points[id];
 
     if(point != -1 &amp;&amp; !pointInPlus[point]){
         connected = minus;
@@ -254,13 +255,18 @@ void setInfo() {
 }
 
 bool reserve(t_id tid, seg_id sid){
-  for(i : int[0,2]) {
-    if (cBs[id][i] == sid &amp;&amp; res[i] == -1) {
-      res[i] = tid;
+  if(stem == sid &amp;&amp; res[0] == -1){
+      res[0] = tid;
       return true;
-    }
+  } else if (plus == sid &amp;&amp; res[1] == -1){
+      res[1] = tid;
+      return true;
+  } else if (minus == sid &amp;&amp; res[2] == -1){
+      res[2] = tid;
+      return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
