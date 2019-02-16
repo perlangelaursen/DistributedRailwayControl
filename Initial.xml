@@ -26,21 +26,22 @@ typedef struct {
 const int[1,NCB] lockLimit = 2; //Max number of reservations (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
-const segV_id routes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-const cBV_id controlBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
+const segV_id routeSegments[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
+const cBV_id routeBoxes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
 const pV_id points[NCB] = { -1, -1, 0, 1, -1};
 const InitialReserves reserves[NTRAIN] = {{1, {0,-1,-1}}, {3, {1,-1,-1}}};
 
 //Channels
 chan resSeg[NCB][NTRAIN][NSEG];
-chan switchPoint[NPOINT];
 chan reqLock[NCB][NTRAIN][NSEG][NSEG];
 chan OK[NTRAIN];
 chan notOK[NTRAIN];
 chan pass[NCB];
 chan passed[NCB];
+chan switchPoint[NPOINT];
 chan OKp[NCB];
+
 urgent broadcast chan start;</declaration>
 	<template>
 		<name x="5" y="5">TCC</name>
@@ -56,23 +57,23 @@ cB_id resCBIndex = 1;
 seg_id resSegIndex = 1;
 cB_id lockIndex = 1;
 
-segV_id route[NSEG];
+segV_id segments[NSEG];
 cBV_id boxes[NCB];
 
-void copyRouteFromServer() {
+void copySegmentsFromServer() {
     for(i : int[0, NSEG-1]) {
-        route[i] = routes[id][i];
-        if(route[i]&gt;-1) {
+        segments[i] = routeSegments[id][i];
+        if(segments[i]&gt;-1) {
             routeLength++;
         }
     }
-    curSeg = route[0];
-    nextSeg = route[1];
+    curSeg = segments[0];
+    nextSeg = segments[1];
 }
 
 void copyControlBoxInfo() {
     for(i : int[0, NCB-1]) {
-        boxes[i] = controlBoxes[id][i];
+        boxes[i] = routeBoxes[id][i];
     }
     nextCB = boxes[resSegIndex];
 }
@@ -96,7 +97,7 @@ bool hasTrainArrived() {
 bool validRoute() {
     bool result = true;
     for(j : int [0, NSEG-2]){
-        result = result &amp;&amp; !(route[j] == -1 &amp;&amp; route[j+1] &gt; -1);
+        result = result &amp;&amp; !(segments[j] == -1 &amp;&amp; segments[j+1] &gt; -1);
     }
     return result;
 }</declaration>
@@ -123,7 +124,7 @@ bool validRoute() {
 			<source ref="id1"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-977" y="-1037">start?</label>
-			<label kind="assignment" x="-977" y="-1020">copyRouteFromServer(),
+			<label kind="assignment" x="-977" y="-1020">copySegmentsFromServer(),
 copyControlBoxInfo()</label>
 		</transition>
 		<transition>
@@ -180,7 +181,7 @@ resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex</label>
 			<label kind="assignment" x="-323" y="-1113">curSeg = nextSeg,
 nextSegIndex++,
 nextCB = boxes[nextSegIndex],
-nextSeg = route[nextSegIndex]</label>
+nextSeg = segments[nextSegIndex]</label>
 			<nail x="-340" y="-1020"/>
 			<nail x="-595" y="-969"/>
 		</transition>
@@ -189,14 +190,14 @@ nextSeg = route[nextSegIndex]</label>
 			<target ref="id5"/>
 			<label kind="guard" x="-1292" y="-833">possibleToLockSegment()</label>
 			<label kind="synchronisation" x="-1292" y="-816">reqLock[boxes[lockIndex]][id]
-[route[lockIndex-1]][route[lockIndex]]!</label>
+[segments[lockIndex-1]][segments[lockIndex]]!</label>
 			<nail x="-1020" y="-884"/>
 		</transition>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
 			<label kind="guard" x="-612" y="-740">possibleToReserveSegment()</label>
-			<label kind="synchronisation" x="-612" y="-723">resSeg[boxes[resCBIndex]][id][route[resSegIndex]]!</label>
+			<label kind="synchronisation" x="-612" y="-722">resSeg[boxes[resCBIndex]][id][segments[resSegIndex]]!</label>
 			<nail x="-629" y="-790"/>
 			<nail x="-612" y="-748"/>
 			<nail x="-527" y="-748"/>
@@ -510,13 +511,13 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:cB_id) TCC(id).Initial or (TCC(id).boxes[i] == controlBoxes[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:cB_id) TCC(id).Initial or (TCC(id).boxes[i] == routeBoxes[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of the control boxes will always be the same as its global counterpart after it has left the initial state
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).route[i] == routes[id][i] and not(TCC(id).Initial))
+			<formula>A[] forall(id:t_id) forall(i:seg_id) TCC(id).Initial or (TCC(id).segments[i] == routeSegments[id][i] and not(TCC(id).Initial))
 			</formula>
 			<comment>A trains internal notion of its route will always be the same as its global counterpart after it has left the initial state
 			</comment>
