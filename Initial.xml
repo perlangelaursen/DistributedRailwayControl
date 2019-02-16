@@ -90,7 +90,7 @@ bool possibleToPassBox() {
     return resSegIndex &gt; nextSegIndex &amp;&amp; lockIndex &gt; nextSegIndex;
 }
 
-bool hasTrainArrived() {
+bool hasArrived() {
     return nextSegIndex == routeLength;
 }
 
@@ -166,7 +166,7 @@ resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex</label>
 		<transition>
 			<source ref="id4"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-807" y="-1113">hasTrainArrived()</label>
+			<label kind="guard" x="-765" y="-1113">hasArrived()</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
