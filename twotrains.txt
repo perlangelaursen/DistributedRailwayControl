@@ -1,0 +1,29 @@
+// Two trains same direction
+const int NCB = 6; //Number of control boxes
+const int NSEG = 5; //Number of segments
+const int NTRAIN = 2; //Number of trains
+const int NPOINT = 2; //Number of switchable points
+
+//TYPES
+typedef int[0, NTRAIN-1] t_id; //Train IDs
+typedef int[0, NCB-1]  cB_id; //Control box IDs
+typedef int[0, NPOINT-1] p_id; //Switch IDs
+typedef int[0, NSEG-1] seg_id; //Segment IDs
+typedef int[-1, NSEG-1] segV_id; //Segment IDs with -1
+typedef int[-1, NPOINT-1] pV_id; //Switch IDs with -1
+typedef int[-1, NCB-1] cBV_id; //Control Box IDs with -1
+typedef int[-1, NTRAIN-1] tV_id; //Train IDs with -1
+typedef struct {
+    cB_id cb;
+    tV_id res[3];
+} InitialReserves;
+
+//EXAMPLE
+const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
+const int[1,NSEG] resLimit = 2; //Max number of locks
+
+const cBV_id controlBoxes[NTRAIN][NCB] = {{0,2,3,5,-1,-1}, {1,2,3,4,-1,-1}};
+const segV_id routes[NTRAIN][NSEG]= {{0,2,4,-1, -1}, {1,2,3,-1,-1}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {1,-1,-1}, {2,1,0}, {2, 4, 3}, {3,-1,-1}, {4,-1,-1}}; //(stem, plus, minus)
+const pV_id points[NCB] = { -1, -1, 0, 1, -1, -1};
+const InitialReserves reserves[NTRAIN] = {{2, {-1,1,0}}, {0, {-1,-1,-1}}};
