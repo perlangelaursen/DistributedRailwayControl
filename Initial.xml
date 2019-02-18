@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>const int NTRAIN = 2; //Number of trains
-const int NCB = 5; //Number of control boxes
-const int NPOINT = 2; //Number of points
-const int NSEG = 5; //Number of segments
-
+	<declaration>//Configuration Data - Part 1
+const int NTRAIN = 1;
+const int NCB = 4;
+const int NPOINT = 1;
+const int NSEG = 3;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id; //Train IDs
@@ -22,16 +22,16 @@ typedef struct {
     seg_id seg;
 } reservations;
 
-//EXAMPLE
-const int[1,NCB] lockLimit = 1; //Max number of reservations (pairs)
-const int[1,NSEG] resLimit = 2; //Max number of locks
+//Configuration Data - Part 2
+const int[1,NCB] lockLimit = 1;
+const int[1,NSEG] resLimit = 1;
 
-const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0, -1}};
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4},{4,3,2,1,0}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
-const reservations initialRes[NTRAIN] = {{1, 0}, {3, 4}};
-const pV_id points[NCB] = { -1, -1, 0, 1, -1};
-const bool pointInPlus[NPOINT] = {true, true};
+const segV_id segRoutes[NTRAIN][NSEG]= {{2,0,-1}};
+const cBV_id boxRoutes[NTRAIN][NCB] = {{3,1,0,-1}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {1,-1,-1}, {2,-1,-1}};
+const reservations initialRes[NTRAIN] = {{1, 2}};
+const pV_id points[NCB] = {-1,0,-1,-1};
+const bool pointInPlus[NPOINT] = {true};
 
 //Channels
 chan resSeg[NCB][NTRAIN][NSEG];
@@ -50,7 +50,7 @@ urgent broadcast chan start;</declaration>
 segV_id curSeg;
 segV_id nextSeg;
 cBV_id nextCB;
-seg_id routeLength;
+int[0,NSEG] routeLength;
 
 int[0,1] resBit = 0;
 cB_id resCBIndex = 1;
