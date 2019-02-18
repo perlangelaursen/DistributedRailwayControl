@@ -103,15 +103,14 @@ bool validRoute() {
     return result;
 }</declaration>
 		<location id="id0" x="-680" y="-748">
-			<name x="-816" y="-756">ContinueLocking</name>
 		</location>
-		<location id="id1" x="-374" y="-544">
+		<location id="id1" x="-374" y="-340">
 		</location>
 		<location id="id2" x="-68" y="-748">
 			<name x="-51" y="-765">Reserved</name>
 		</location>
-		<location id="id3" x="-680" y="-544">
-			<name x="-807" y="-552">DoubleSegment</name>
+		<location id="id3" x="-680" y="-340">
+			<name x="-807" y="-348">DoubleSegment</name>
 		</location>
 		<location id="id4" x="-1020" y="-1156">
 			<name x="-1030" y="-1190">Initial</name>
@@ -131,65 +130,83 @@ bool validRoute() {
 		<init ref="id4"/>
 		<transition>
 			<source ref="id0"/>
-			<target ref="id7"/>
-			<label kind="guard" x="-850" y="-867">noOfLocks == lockLimit</label>
-			<label kind="assignment" x="-782" y="-850">noOfLocks = 0</label>
+			<target ref="id1"/>
+			<label kind="guard" x="-501" y="-535">lockIndex - nextSegIndex &gt; 0</label>
 		</transition>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-578" y="-765">noOfLocks &lt; lockLimit &amp;&amp; resSegIndex - nextSegIndex &gt; 0</label>
-			<label kind="assignment" x="-578" y="-748">noOfLocks++</label>
+			<label kind="guard" x="-535" y="-782">lockIndex - nextSegIndex == 0 &amp;&amp;
+resSegIndex &gt; lockIndex</label>
 		</transition>
 		<transition>
-			<source ref="id1"/>
-			<target ref="id3"/>
-			<label kind="synchronisation" x="-578" y="-561">pass[nextCB]!</label>
-			<nail x="-433" y="-544"/>
-			<nail x="-569" y="-544"/>
+			<source ref="id0"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-918" y="-824">lockIndex - nextSegIndex == 0 &amp;&amp;
+resSegIndex == lockIndex</label>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id0"/>
-			<label kind="synchronisation" x="-952" y="-671">passed[nextCB]!</label>
-			<label kind="assignment" x="-952" y="-646">curSeg = nextSeg,
+			<label kind="synchronisation" x="-935" y="-561">passed[nextCB]!</label>
+			<label kind="assignment" x="-935" y="-544">curSeg = nextSeg,
 nextSegIndex++,
 nextCB = boxes[nextSegIndex],
 nextSeg = segments[nextSegIndex]</label>
 		</transition>
 		<transition>
 			<source ref="id8"/>
+			<target ref="id2"/>
+			<label kind="guard" x="42" y="-697">lockIndex - nextSegIndex &lt; lockLimit &amp;&amp; 
+segments[lockIndex] != -1</label>
+			<label kind="synchronisation" x="42" y="-663">OK[id]?</label>
+			<nail x="34" y="-612"/>
+			<nail x="34" y="-680"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="-586" y="-357">pass[nextCB]!</label>
+			<nail x="-450" y="-340"/>
+			<nail x="-578" y="-340"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
 			<target ref="id1"/>
-			<label kind="synchronisation" x="-229" y="-561">OK[id]?</label>
-			<nail x="-238" y="-544"/>
+			<label kind="guard" x="-187" y="-459">lockIndex - nextSegIndex == lockLimit || 
+segments[lockIndex] == -1</label>
+			<label kind="synchronisation" x="-187" y="-425">OK[id]?</label>
+			<nail x="-119" y="-510"/>
 		</transition>
 		<transition>
 			<source ref="id8"/>
 			<target ref="id2"/>
-			<label kind="synchronisation" x="8" y="-671">notOK[id]?</label>
-			<label kind="assignment" x="8" y="-654">lockIndex--</label>
-			<nail x="0" y="-612"/>
-			<nail x="0" y="-680"/>
+			<label kind="synchronisation" x="-68" y="-680">notOK[id]?</label>
+			<label kind="assignment" x="-68" y="-663">lockIndex--</label>
+			<nail x="-68" y="-612"/>
+			<nail x="-68" y="-680"/>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id8"/>
-			<label kind="synchronisation" x="-476" y="-688">reqLock[boxes[lockIndex]][id]
+			<label kind="synchronisation" x="-501" y="-629">reqLock[boxes[lockIndex]][id]
 [segments[lockIndex-1]][segments[lockIndex]]!</label>
-			<label kind="assignment" x="-238" y="-654">lockIndex++</label>
-			<nail x="-136" y="-680"/>
-			<nail x="-136" y="-612"/>
+			<label kind="assignment" x="-255" y="-586">lockIndex++</label>
+			<nail x="-170" y="-680"/>
+			<nail x="-170" y="-612"/>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-59" y="-884">resSegIndex - nextSegIndex == resLimit</label>
+			<label kind="guard" x="-59" y="-901">resSegIndex - nextSegIndex == resLimit ||
+segments[resSegIndex] == -1</label>
 			<label kind="synchronisation" x="-59" y="-867">OK[id]?</label>
 		</transition>
 		<transition>
 			<source ref="id6"/>
 			<target ref="id7"/>
-			<label kind="guard" x="-578" y="-850">resSegIndex - nextSegIndex &lt; resLimit</label>
+			<label kind="guard" x="-578" y="-867">resSegIndex - nextSegIndex &lt; resLimit &amp;&amp;
+segments[resSegIndex] != -1</label>
 			<label kind="synchronisation" x="-578" y="-833">OK[id]?</label>
 			<nail x="-170" y="-816"/>
 			<nail x="-578" y="-816"/>
