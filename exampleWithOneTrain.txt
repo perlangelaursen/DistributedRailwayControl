@@ -19,12 +19,12 @@ typedef struct {
 } reservation;
 
 //EXAMPLE
-const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
-const int[1,NSEG] resLimit = 2; //Max number of locks
+const int[1,NCB] lockLimit = 2;
+const int[1,NSEG] resLimit = 2;
 
 const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3}};
 const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,3,-1}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,-1,-1}}; //(stem, plus, minus)
+const segV_id cBs[NCB][3]= {{-1,0,-1}, {0,1,2}, {3,1,2}, {3,-1,-1}};
 const pV_id points[NCB] = { -1, 0, 1, -1 };
 const reservation initialRes[NTRAIN] = {{1, 0}};
 const bool pointInPlus[NPOINT] = {true, true};

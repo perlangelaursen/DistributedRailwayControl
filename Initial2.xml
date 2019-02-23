@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>// Station 1
+	<declaration>// Station 1 with regular control box
 const int NCB = 5; //Number of control boxes
 const int NSEG = 5; //Number of segments
 const int NTRAIN = 2; //Number of trains
@@ -22,8 +22,8 @@ typedef struct {
 } reservation;
 
 //EXAMPLE
-const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
-const int[1,NSEG] resLimit = 2; //Max number of locks
+const int[1,NCB] lockLimit = 2;
+const int[1,NSEG] resLimit = 2;
 
 const segV_id cBs[NCB][3]= {{-1,0,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
 const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0,-1}};
@@ -79,6 +79,9 @@ bool routesAreConsistent(t_id id){
     segV_id sRoute[NSEG] = segRoutes[id];
 
     for(i:int[0,NCB-2]){
+        if(bRoute[i+1] != -1 &amp;&amp; sRoute[i] == -1){
+            return false;
+        }
         if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){
             return false;
         }
@@ -116,7 +119,7 @@ bool canConnect(seg_id s1, seg_id s2){
 }
 
 bool segRouteIsWellFormed(segV_id route[NSEG]){
-    for(i:int[0,NCB-2]){
+    for(i:int[0,NSEG-2]){
         if(route[i] == -1 &amp;&amp; route[i+1] != -1){
             return false;
         }
@@ -187,8 +190,8 @@ bool cBIsWellFormed(segV_id cB[3]){
 
     //Case: Point
     for(i:cB_id){
-        //No switch boxes can share stem segment, no switch boxes can share minus segment without also sharing plus segment
-        if(cBs[i] != cB &amp;&amp; ((cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] != -1 &amp;&amp; cBs[i][1] != cB[1])))){ 
+        //No switch boxes can share stem segment with same plus or minus segment, no switch boxes can share minus segment without also sharing plus segment
+        if(cBs[i] != cB &amp;&amp; (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) &amp;&amp; (cBs[i][1] != -1 &amp;&amp; cBs[i][1] != cB[1])){ 
             return false;
         }
     }
@@ -299,9 +302,9 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id1"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-1011" y="-1113">isWellFormed()</label>
-			<label kind="synchronisation" x="-1011" y="-1096">start?</label>
-			<label kind="assignment" x="-1011" y="-1079">copySegments(),
+			<label kind="guard" x="-1011" y="-1096">isWellFormed()</label>
+			<label kind="synchronisation" x="-1011" y="-1079">start?</label>
+			<label kind="assignment" x="-1011" y="-1062">copySegments(),
 copyControlBoxes(),
 updateLockIndex()</label>
 		</transition>
@@ -671,7 +674,9 @@ tid = -1</label>
 		<query>
 			<formula>A[] forall(i:cB_id) (Initializer.Initialized imply not(CB(i).Initial))
 			</formula>
-			<comment>
+			<comment>All CB are well-formed
+
+(Initializer.Initialized --&gt; forall(i:cB_id) not(CB(i).Initial))
 			</comment>
 		</query>
 		<query>
@@ -687,7 +692,7 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).DoubleSegment imply (CB(TCC(i).nextCB).connected == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).stem == TCC(i).nextSeg) || (CB(TCC(i).nextCB).stem == TCC(i).curSeg &amp;&amp; CB(TCC(i).nextCB).connected == TCC(i).nextSeg))
+			<formula>
 			</formula>
 			<comment>A train can only cross a point if the point's position is consistent with the segment that the trains is entering.
 			</comment>
@@ -699,7 +704,7 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (not(TCC(i).Initial) imply (cBs[TCC(i).nextCB][0] == TCC(i).curSeg imply (cBs[TCC(i).nextCB][1] == TCC(i).nextSeg || cBs[TCC(i).nextCB][2] == TCC(i).nextSeg)) &amp;&amp; (cBs[TCC(i).nextCB][0] == TCC(i).nextSeg imply (cBs[TCC(i).nextCB][1] == TCC(i).curSeg || cBs[TCC(i).nextCB][2] == TCC(i).curSeg)))
+			<formula>
 			</formula>
 			<comment>A train's current segment is either the same as its next segment or connected to it.
 			</comment>
