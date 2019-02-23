@@ -25,9 +25,9 @@ typedef struct {
 const int[1,NCB] lockLimit = 2; //Max number of reservation (pairs)
 const int[1,NSEG] resLimit = 2; //Max number of locks
 
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4}, {4,3,2,1,0}};
+const segV_id cBs[NCB][3]= {{-1,0,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
 const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0,-1}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}}; //(stem, plus, minus)
+const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4}, {4,3,2,1,0}};
 const pV_id points[NCB] = {-1, -1, 0, 1, -1};
 const reservation initialRes[NTRAIN] = {{1, 0}, {3,4}};
 const bool pointInPlus[NPOINT] = {true, true};
@@ -41,7 +41,160 @@ chan pass[NCB];
 chan passed[NCB];
 chan switchPoint[NPOINT];
 chan OKp[NCB];
-urgent broadcast chan start;</declaration>
+urgent broadcast chan start;
+
+////////////////////////////////////
+//Well-formedness Functions
+bool initialResIsConsistent(t_id id){
+    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];
+}
+
+bool reservationIsWellFormed(reservation res){
+    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;
+}
+
+bool pointIsWellFormed(cBV_id id){
+    if(points[id] != -1){
+        return cBs[id][2] != -1;
+    } else {
+        return cBs[id][2] == -1;
+    }
+}
+bool sharesSegment(cB_id i, cB_id j){
+    return (i != j) &amp;&amp;
+            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||
+            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||
+            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));
+}
+
+bool sharesSegmentS(cB_id i, cB_id j, seg_id s){
+    return (i != j) &amp;&amp;
+            ((cBs[i][0] == s &amp;&amp; (s == cBs[j][0] || s == cBs[j][1] || s == cBs[j][2])) ||
+            (cBs[i][1] == s &amp;&amp; (s == cBs[j][0] || s == cBs[j][1] || s == cBs[j][2])) ||
+            (cBs[i][2] == s &amp;&amp; (s == cBs[j][0] || s == cBs[j][1] || s == cBs[j][2])));
+}
+
+bool routesAreConsistent(t_id id){
+    cBV_id bRoute[NCB] = boxRoutes[id];
+    segV_id sRoute[NSEG] = segRoutes[id];
+
+    for(i:int[0,NCB-2]){
+        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){
+            return false;
+        }
+        if(bRoute[i] == -1 &amp;&amp; sRoute[i] != -1){
+            return false;
+        }
+    }
+    return true; 
+}
+
+bool boxRouteIsWellFormed(cBV_id route[NCB]){
+    for(i:int[0,NCB-2]){
+        if(route[i] == -1 &amp;&amp; route[i+1] != -1){
+            return false;
+        }
+        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){
+            return false;
+        }
+
+    }
+    return true; 
+}
+
+bool canConnect(seg_id s1, seg_id s2){
+    for(i:cB_id){
+        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){
+            return true;
+        } else if (cBs[i][1] == s1 &amp;&amp; (cBs[i][0] == s2 || cBs[i][2] == s2)){
+            return true;
+        } else if (cBs[i][2] == s1 &amp;&amp; (cBs[i][0] == s2 || cBs[i][1] == s2)){
+            return true;
+        }
+    }
+    return false;   
+}
+
+bool segRouteIsWellFormed(segV_id route[NSEG]){
+    for(i:int[0,NCB-2]){
+        if(route[i] == -1 &amp;&amp; route[i+1] != -1){
+            return false;
+        }
+        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){
+            return false;
+        }
+
+    }
+    return true; 
+}
+
+int otherBox(segV_id cB[3], segV_id s){
+    int found = 0;
+    for(i:cB_id){
+        if(cBs[i] != cB &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){
+            found++;
+        }
+    }
+    return found;
+}
+
+bool cBIsWellFormed(segV_id cB[3]){
+    //Invalid forms
+    if((cB[0] == -1 &amp;&amp; cB[1] == -1) || (cB[0] == -1 &amp;&amp; cB[2] != -1) || (cB[1] == -1 &amp;&amp; cB[2] != -1)){
+        return false;
+    }
+    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||
+        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||
+        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){
+        return false;
+    }
+
+    //Case: [cb]--x--[i] 
+    if(cB[0] == -1 &amp;&amp; cB[2] == -1){
+        //Only one control box may be at the segment's down end
+        for(i:cB_id){
+            if(cBs[i] != cB &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
+                return false;
+            }
+        }
+        return otherBox(cB, cB[1]) == 1;
+    }
+
+    //Case: [j]--y--[cb]
+    if(cB[1] == -1 &amp;&amp; cB[2] == -1){
+        //Only one control box may be at the segment's up end
+        for(i:cB_id){
+            if(cBs[i] != cB &amp;&amp; cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
+                return false;
+            }
+        }
+        return otherBox(cB, cB[0]) == 1;
+    }
+
+    //Case: [j]--y--[cb]--x--[i]
+    if(cB[2] == -1){
+        for(i:cB_id){
+            if(cBs[i] != cB &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
+                return false;
+            }
+            if(cBs[i] != cB &amp;&amp; cBs[i][0] == cB[1] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
+                return false;
+            }
+        }
+        return otherBox(cB, cB[0]) == 1 &amp;&amp; otherBox(cB, cB[1]) == 1;
+    }
+
+
+    //Case: Point
+    for(i:cB_id){
+        //No switch boxes can share stem segment, no switch boxes can share minus segment without also sharing plus segment
+        if(cBs[i] != cB &amp;&amp; ((cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] != -1 &amp;&amp; cBs[i][1] != cB[1])))){ 
+            return false;
+        }
+    }
+    return otherBox(cB, cB[0]) == 1 &amp;&amp; otherBox(cB, cB[1]) == 1 &amp;&amp; otherBox(cB, cB[2]) == 1;
+}
+</declaration>
 	<template>
 		<name x="5" y="5">TCC</name>
 		<parameter>t_id id</parameter>
@@ -103,12 +256,26 @@ bool hasArrived() {
     return nextSegIndex == routeLength;
 }
 
+void updateResData(){
+    resBit = resBit^1;
+    resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;
+    resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;
+}
+
 bool validRoute() {
     bool result = true;
     for(j : int [0, NSEG-2]){
         result = result &amp;&amp; !(segments[j] == -1 &amp;&amp; segments[j+1] &gt; -1);
     }
     return result;
+}
+
+bool isWellFormed(){
+	return boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; 
+           segRouteIsWellFormed(segRoutes[id]) &amp;&amp; 
+           routesAreConsistent(id) &amp;&amp; 
+           reservationIsWellFormed(initialRes[id]) &amp;&amp; 
+           initialResIsConsistent(id);
 }</declaration>
 		<location id="id0" x="-340" y="-1156">
 			<name x="-323" y="-1173">DoubleSegment</name>
@@ -132,8 +299,9 @@ bool validRoute() {
 		<transition>
 			<source ref="id1"/>
 			<target ref="id4"/>
-			<label kind="synchronisation" x="-986" y="-1096">start?</label>
-			<label kind="assignment" x="-986" y="-1079">copySegments(),
+			<label kind="guard" x="-1011" y="-1113">isWellFormed()</label>
+			<label kind="synchronisation" x="-1011" y="-1096">start?</label>
+			<label kind="assignment" x="-1011" y="-1079">copySegments(),
 copyControlBoxes(),
 updateLockIndex()</label>
 		</transition>
@@ -315,6 +483,10 @@ void updateConnected(){
     } else {
         connected = plus;
     }
+}
+
+bool isWellFormed(){
+    return cBIsWellFormed(cBs[id]) &amp;&amp; pointIsWellFormed(id);
 }</declaration>
 		<location id="id8" x="-986" y="34">
 			<name x="-1020" y="8">Initial</name>
@@ -341,8 +513,9 @@ void updateConnected(){
 		<transition>
 			<source ref="id8"/>
 			<target ref="id14"/>
+			<label kind="guard" x="-969" y="34">isWellFormed()</label>
 			<label kind="synchronisation" x="-943" y="-8">start?</label>
-			<label kind="assignment" x="-960" y="8">setInfo()</label>
+			<label kind="assignment" x="-969" y="51">setInfo()</label>
 		</transition>
 		<transition>
 			<source ref="id9"/>
@@ -495,6 +668,18 @@ tid = -1</label>
 	</template>
 	<system>system Initializer, TCC, CB, Point;</system>
 	<queries>
+		<query>
+			<formula>A[] forall(i:cB_id) (Initializer.Initialized imply not(CB(i).Initial))
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) (Initializer.Initialized imply not(TCC(i).Initial))
+			</formula>
+			<comment>All TCC are well-formed
+			</comment>
+		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) not(CB(i).Switching) &amp;&amp; CB(i).stem != -1 &amp;&amp; CB(i).plus != -1 &amp;&amp; CB(i).minus != -1 &amp;&amp; CB(i).connected != -1 &amp;&amp; points[i] != -1 imply (Point(points[i]).Plus &amp;&amp; CB(i).connected == cBs[i][1]) || (Point(points[i]).Minus &amp;&amp; CB(i).connected == cBs[i][2])
 			</formula>
