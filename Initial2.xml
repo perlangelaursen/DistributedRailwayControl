@@ -434,18 +434,13 @@ void setInfo() {
 }
 
 bool reserve(t_id tid, seg_id sid){
-  if(segments[0] == sid &amp;&amp; res[0] == -1){
-      res[0] = tid;
-      return true;
-  } else if (segments[1] == sid &amp;&amp; res[1] == -1){
-      res[1] = tid;
-      return true;
-  } else if (segments[2] == sid &amp;&amp; res[2] == -1){
-      res[2] = tid;
-      return true;
-  } else {
+    for(i:int[0,2]){
+        if(segments[i] == sid &amp;&amp; res[i] == -1){
+            res[i] = tid;
+            return true;
+        }
+    }
     return false;
-  }
 }
 
 int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
@@ -483,7 +478,7 @@ bool isWellFormed(){
     return cBIsWellFormed(cBs[id]) &amp;&amp; pointIsWellFormed(id);
 }</declaration>
 		<location id="id8" x="-986" y="34">
-			<name x="-1020" y="8">Initial</name>
+			<name x="-1037" y="25">Initial</name>
 		</location>
 		<location id="id9" x="-1139" y="-68">
 			<name x="-1164" y="-102">Passing</name>
@@ -610,6 +605,7 @@ tid = -1</label>
 			<name x="102" y="-119">SwitchingPM</name>
 		</location>
 		<location id="id16" x="136" y="153">
+			<name x="119" y="170">Initial</name>
 		</location>
 		<location id="id17" x="136" y="68">
 			<name x="102" y="34">SwitchingMP</name>
@@ -677,7 +673,7 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) not(CB(i).Switching) &amp;&amp; CB(i).stem != -1 &amp;&amp; CB(i).plus != -1 &amp;&amp; CB(i).minus != -1 &amp;&amp; CB(i).connected != -1 &amp;&amp; points[i] != -1 imply (Point(points[i]).Plus &amp;&amp; CB(i).connected == cBs[i][1]) || (Point(points[i]).Minus &amp;&amp; CB(i).connected == cBs[i][2])
+			<formula>A[] forall(i:cB_id) not(CB(i).Switching) &amp;&amp; CB(i).segments[0] != -1 &amp;&amp; CB(i).segments[1] != -1 &amp;&amp; CB(i).segments[2] != -1 &amp;&amp; CB(i).connected != -1 &amp;&amp; points[i] != -1 imply (Point(points[i]).Plus &amp;&amp; CB(i).connected == cBs[i][1]) || (Point(points[i]).Minus &amp;&amp; CB(i).connected == cBs[i][2])
 			</formula>
 			<comment>The local state information about connected segments of a switch box is consistent with the actual state of the switch.
 			</comment>
@@ -722,12 +718,6 @@ tid = -1</label>
 			<formula>A[] forall(i:t_id) forall(j:t_id) i != j and not(TCC(i).Initial) and not(TCC(j).Initial) imply TCC(i).curSeg != TCC(j).curSeg
 			</formula>
 			<comment>Two trains are never on the same segment after the initialization step.
-			</comment>
-		</query>
-		<query>
-			<formula>A[] forall(i:t_id) TCC(i).validRoute()
-			</formula>
-			<comment>All trains must have a valid route composition. This means that the actual route must be greater than -1 and the padding must be -1.
 			</comment>
 		</query>
 		<query>
