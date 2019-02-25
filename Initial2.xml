@@ -212,8 +212,10 @@ cBV_id nextCB;
 int[0,1] resBit = 0;
 cB_id resCBIndex = 1;
 seg_id resSegIndex = 1;
+seg_id prevResIndex = 0;
 
 cB_id lockIndex = 1;
+cB_id origLockIndex = 0;
 
 seg_id nextSegIndex = 1;
 
@@ -239,6 +241,8 @@ void copyControlBoxes() {
 }
 
 void updateLockIndex(){
+    origLockIndex = lockIndex;
+    lockIndex++;
     while(lockIndex &lt; NCB-1 &amp;&amp; !requiresLock[lockIndex]){
         lockIndex++;
     }
@@ -261,6 +265,7 @@ bool hasArrived() {
 
 void updateResData(){
     resBit = resBit^1;
+    prevResIndex = (resBit==0) ? resSegIndex : prevResIndex;
     resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;
     resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;
 }
@@ -316,8 +321,7 @@ updateLockIndex()</label>
 			<source ref="id5"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-841" y="-858">OK[id]?</label>
-			<label kind="assignment" x="-850" y="-841">lockIndex++,
-updateLockIndex()</label>
+			<label kind="assignment" x="-850" y="-841">updateLockIndex()</label>
 			<nail x="-850" y="-850"/>
 		</transition>
 		<transition>
@@ -399,6 +403,7 @@ updateLockIndex()</label>
 		<declaration>segV_id segments[3];
 segV_id connected =-1;
 pV_id point = -1;
+bool valid = false;
 
 tV_id res[3] = {-1, -1, -1};
 int[0,2] result;
@@ -434,8 +439,9 @@ void setInfo() {
     }
 }
 
-bool reserve(t_id tid, seg_id sid){
+int[0, 2] reserve(t_id tid, seg_id sid){
     for(i:int[0,2]){
+        valid =  valid || (segments[i] == sid);
         if(segments[i] == sid &amp;&amp; res[i] == -1){
             res[i] = tid;
             return true;
@@ -555,7 +561,8 @@ bool isWellFormed(){
 			<target ref="id14"/>
 			<label kind="guard" x="-807" y="-289">!result</label>
 			<label kind="synchronisation" x="-807" y="-272">notOK[tid]!</label>
-			<label kind="assignment" x="-807" y="-255">tid = -1</label>
+			<label kind="assignment" x="-807" y="-255">tid = -1,
+valid=false</label>
 			<nail x="-816" y="-272"/>
 			<nail x="-816" y="-136"/>
 		</transition>
@@ -564,7 +571,8 @@ bool isWellFormed(){
 			<target ref="id14"/>
 			<label kind="guard" x="-926" y="-238">result</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
-			<label kind="assignment" x="-943" y="-204">tid = -1</label>
+			<label kind="assignment" x="-943" y="-204">tid = -1,
+valid=false</label>
 		</transition>
 		<transition>
 			<source ref="id14"/>
@@ -698,9 +706,27 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>
+			<formula>A[] forall(i:t_id) (TCC(i).resSegIndex - TCC(i).nextSegIndex) &lt;= resLimit
 			</formula>
-			<comment>A train's current segment is either the same as its next segment or connected to it.
+			<comment>A TCC will never reserve more than what is specified
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) (TCC(i).resSegIndex - TCC(i).prevResIndex) == 1
+			</formula>
+			<comment>The resSegIndex will always be one higher than the previous index
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) (TCC(i).lockIndex - TCC(i).origLockIndex) &gt; 0
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).lockedBy != -1 imply CB(i).lockedBy == CB(i).res[0] and (CB(i).lockedBy == CB(i).res[1] or CB(i).lockedBy == CB(i).res[2])	
+			</formula>
+			<comment>When a CB is locked then the same train must have reserve the stem and another connected segment
 			</comment>
 		</query>
 		<query>
