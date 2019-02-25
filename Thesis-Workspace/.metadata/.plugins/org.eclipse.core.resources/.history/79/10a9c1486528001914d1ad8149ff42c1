@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Commands
-Bundle-SymbolicName: s144449s144456.RailwayModelGenerator.commands
-Bundle-Version: 1.0.0.qualifier
-Automatic-Module-Name: s144449s144456.RailwayModelGenerator.commands
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8

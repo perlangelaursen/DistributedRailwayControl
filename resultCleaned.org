@@ -20,7 +20,7 @@
 
 * No derailment
 ** Elapsed time
-#+PLOT: title:"Elapsed time (No derailment)" ind:1 deps:(5) type:2d with:histograms set:"yrange [0:]"
+#+PLOT: title:"Elapsed time (No derailment)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+-------------|
 | Configuration              |    First |   Second |    Third |     Average |
 |----------------------------+----------+----------+----------+-------------|
@@ -41,8 +41,12 @@
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+<<<<<<< HEAD
+#+PLOT: title:"Memory Usage Peak (No derailment)" deps:(5) set:"xrange[0:]"
+=======
 Unit KB
 #+PLOT: title:"Memory Usage (No derailment)" ind:1 deps:(5) type:2d with:histograms set:"yrange [0:]"
+>>>>>>> cdb0e7ff24df020bec4320d030ccb01fba6f51cd
 |----------------------------+----------+----------+----------+-----------|
 | Configuration              |    First |   Second |    Third |   Average |
 |----------------------------+----------+----------+----------+-----------|
@@ -64,7 +68,11 @@ Unit KB
 
 * No collision
 ** Elapsed time
+<<<<<<< HEAD
+#+PLOT: title:"Elapsed time (No collision)" deps:(5) set:"xrange[0:]"
+=======
 #+PLOT: title:"Elapsed time (No collision)" ind:1 deps:(5) type:2d with:histograms set:"yrange [0:]"
+>>>>>>> cdb0e7ff24df020bec4320d030ccb01fba6f51cd
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -85,7 +93,11 @@ Unit KB
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+<<<<<<< HEAD
+#+PLOT: title:"Memory Usage Peak (No collision)" deps:(5) set:"xrange[0:]"
+=======
 #+PLOT: title:"Elapsed time (No derailment)" ind:1 deps:(5) type:2d with:histograms set:"yrange [0:]"
+>>>>>>> cdb0e7ff24df020bec4320d030ccb01fba6f51cd
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -107,7 +119,11 @@ Unit KB
 
 * Will arrive
 ** Elapsed time
+<<<<<<< HEAD
+#+PLOT: title:"Elapsed time (Will arrive)" deps:(5) set:"xrange[0:]"
+=======
 #+PLOT: title:"Elapsed time (No derailment)" ind:1 deps:(5) type:2d with:histograms set:"yrange [0:]"
+>>>>>>> cdb0e7ff24df020bec4320d030ccb01fba6f51cd
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -128,7 +144,11 @@ Unit KB
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+<<<<<<< HEAD
+#+PLOT: title:"Memory Usage Peak (Will arrive)" deps:(5) set:"xrange[0:]"
+=======
 #+PLOT: title:"Elapsed time (No derailment)" ind:1 deps:(5) type:2d with:histograms set:"yrange [0:]"
+>>>>>>> cdb0e7ff24df020bec4320d030ccb01fba6f51cd
 |----------------------------+----------+---------+---------+-----------|
 | Configuration              |    First |  Second |   Third |   Average |
 |----------------------------+----------+---------+---------+-----------|
