@@ -207,6 +207,7 @@ segV_id curSeg;
 
 cBV_id boxes[NCB];
 bool requiresLock[NCB];
+int[0,NCB] boxesLength;
 cBV_id nextCB;
 
 int[0,1] resBit = 0;
@@ -234,6 +235,7 @@ void copyControlBoxes() {
     for(i : cB_id) {
         boxes[i] = boxRoutes[id][i];
         if(boxes[i] &gt; -1){
+            boxesLength++;
             requiresLock[i] = points[boxes[i]] &gt; -1;
         }
     }
@@ -241,8 +243,6 @@ void copyControlBoxes() {
 }
 
 void updateLockIndex(){
-    origLockIndex = lockIndex;
-    lockIndex++;
     while(lockIndex &lt; NCB-1 &amp;&amp; !requiresLock[lockIndex]){
         lockIndex++;
     }
@@ -321,7 +321,9 @@ updateLockIndex()</label>
 			<source ref="id5"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-841" y="-858">OK[id]?</label>
-			<label kind="assignment" x="-850" y="-841">updateLockIndex()</label>
+			<label kind="assignment" x="-850" y="-841">origLockIndex = lockIndex,
+lockIndex++,
+updateLockIndex()</label>
 			<nail x="-850" y="-850"/>
 		</transition>
 		<transition>
@@ -483,6 +485,16 @@ void updateConnected(){
 
 bool isWellFormed(){
     return cBIsWellFormed(cBs[id]) &amp;&amp; pointIsWellFormed(id);
+}
+
+int countTCCReservations(t_id id) {
+    int result = 0;
+    for(i : int[0,2]) {
+        if (res[i] == id) {
+            result++;
+        }
+    }
+    return result;
 }</declaration>
 		<location id="id8" x="-1045" y="51">
 			<name x="-1096" y="42">Initial</name>
@@ -553,7 +565,8 @@ bool isWellFormed(){
 			<target ref="id14"/>
 			<label kind="guard" x="-782" y="-34">result == ERROR</label>
 			<label kind="synchronisation" x="-782" y="-17">notOK[tid]!</label>
-			<label kind="assignment" x="-782" y="0">tid = -1</label>
+			<label kind="assignment" x="-782" y="0">tid = -1,
+result=0</label>
 			<nail x="-816" y="-34"/>
 		</transition>
 		<transition>
@@ -562,7 +575,8 @@ bool isWellFormed(){
 			<label kind="guard" x="-807" y="-289">!result</label>
 			<label kind="synchronisation" x="-807" y="-272">notOK[tid]!</label>
 			<label kind="assignment" x="-807" y="-255">tid = -1,
-valid=false</label>
+valid=false,
+result=0</label>
 			<nail x="-816" y="-272"/>
 			<nail x="-816" y="-136"/>
 		</transition>
@@ -572,7 +586,8 @@ valid=false</label>
 			<label kind="guard" x="-926" y="-238">result</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
 			<label kind="assignment" x="-943" y="-204">tid = -1,
-valid=false</label>
+valid=false,
+result=0</label>
 		</transition>
 		<transition>
 			<source ref="id14"/>
@@ -602,7 +617,8 @@ tid = i</label>
 			<target ref="id14"/>
 			<label kind="synchronisation" x="-722" y="34">OK[tid]!</label>
 			<label kind="assignment" x="-722" y="51">lockedBy = tid,
-tid = -1</label>
+tid = -1,
+result=0</label>
 			<nail x="-170" y="34"/>
 			<nail x="-884" y="34"/>
 		</transition>
@@ -724,9 +740,63 @@ tid = -1</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) CB(i).lockedBy != -1 imply CB(i).lockedBy == CB(i).res[0] and (CB(i).lockedBy == CB(i).res[1] or CB(i).lockedBy == CB(i).res[2])	
+			<formula>A[] forall(i:cB_id) CB(i).lockedBy != -1 imply CB(i).lockedBy == CB(i).res[0] and (CB(i).lockedBy == CB(i).res[1] or CB(i).lockedBy == CB(i).res[2])
 			</formula>
 			<comment>When a CB is locked then the same train must have reserve the stem and another connected segment
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) TCC(i).Locking imply (TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[0] or TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[1] or TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[2]) and (TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[0] or TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[1] or TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[2]) and TCC(i).segments[TCC(i).lockIndex] != TCC(i).segments[TCC(i).lockIndex - 1]
+			</formula>
+			<comment>A TCC will only lock control box with two adjacent segments
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).Switched imply CB(i).result == CB(i).DOSWITCH or CB(i).result == CB(i).NOSWITCH
+			</formula>
+			<comment>CB will only send and OK to a TCC if it is in the Switched location and the result is either DOSWITCH or NOSWITCH
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).Passing imply CB(i).LockAttempted + CB(i).Switching + CB(i).Switched == 0
+			</formula>
+			<comment>A CB cannot be lock and switch a point when a train is in its critical section (Correct by construction)
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).Switched imply CB(i).lockedBy == -1
+			</formula>
+			<comment>A control box only returns an acknowledgement for a lock request if its point was unlocked prior to the request
+			</comment>
+		</query>
+		<query>
+			<formula> A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).lockedBy == i
+			</formula>
+			<comment>A train only passes a switch box if it has been locked for the train
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment and TCC(i).nextSegIndex == TCC(i).routeLength imply !(CB(TCC(i).boxesLength - 1).Passing) and CB(TCC(i).boxesLength - 1).lockedBy != i
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).countTCCReservations(i) == 2 and CB(TCC(i).boxes[TCC(i).nextSegIndex+1]).countTCCReservations(i) &lt;= 2
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply points[TCC(i).nextCB] == -1 or Point(points[TCC(i).nextCB]).SwitchingPM + Point(points[TCC(i).nextCB]).SwitchingMP == 0
+			</formula>
+			<comment>No derailment alternative
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply (TCC(i).segments[TCC(i).nextSegIndex] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex] == CB(TCC(i).nextCB).connected) and (TCC(i).segments[TCC(i).nextSegIndex-1] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex-1] == CB(TCC(i).nextCB).connected)
+			</formula>
+			<comment>
 			</comment>
 		</query>
 		<query>
