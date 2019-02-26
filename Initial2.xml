@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>//Smallest network
-const int NCB = 2;
-const int NSEG = 1;
-const int NTRAIN = 1;
-const int NPOINT = 1;
+	<declaration>// Station 4
+const int NCB = 10;
+const int NSEG = 13;
+const int NTRAIN = 2;
+const int NPOINT = 8;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id;
@@ -21,18 +21,16 @@ typedef struct {
     seg_id seg;
 } reservation;
 
+//EXAMPLE
+const int[1,NCB] lockLimit = 2;
+const int[1,NSEG] resLimit = 2;
 
-//Configuration Data - Part 2
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
-
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1}};
-const segV_id segRoutes[NTRAIN][NSEG]= {{0}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,-1,-1}};
-const pV_id points[NCB] = {-1,-1};
-const reservation initialRes[NTRAIN] = {{1,0}};
-const bool pointInPlus[NPOINT] = {true};
-
+const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4,5,6,7,8,9}, {9,8,7,6,5,4,3,2,1,-1}};
+const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,3,4,6,7,9,10,12,-1,-1,-1,-1}, {12,11,9,8,6,5,3,2,-1,-1,-1,-1,-1}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,4,5}, {6,4,5}, {6,7,8}, {9,7,8}, {9,10,11}, {12,10,11}, {12,-1,-1}};
+const pV_id points[NCB] = { -1, 0, 1, 2, 3,4,5,6,7,-1};
+const reservation initialRes[NTRAIN] = {{1, 0}, {8, 12}};
+const bool pointInPlus[NPOINT] = {true, true, true, true, true, true, true, true};
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -152,7 +150,7 @@ bool cBIsWellFormed(cB_id id){
     segV_id cB[3] = cBs[id];
 
     //Invalid definitions
-    if((cB[0] == -1 &amp;&amp; cB[2] != -1) || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){
+    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){
         return false;
     }
     if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||
@@ -675,17 +673,21 @@ result=0</label>
 	<system>system Initializer, TCC, CB, Point;</system>
 	<queries>
 		<query>
-			<formula>A&lt;&gt; forall(i:cB_id) (Initializer.Initialized imply not(CB(i).Initial))
+			<formula>E&lt;&gt; forall(i:t_id) (Initializer.Initialized &amp;&amp; not(TCC(i).Initial))
 			</formula>
-			<comment>All CB are well-formed
-
-(Initializer.Initialized --&gt; forall(i:cB_id) not(CB(i).Initial))
+			<comment>All TCC are well-formed
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (Initializer.Initialized imply not(TCC(i).Initial))
+			<formula>E&lt;&gt; forall(i:cB_id) (Initializer.Initialized &amp;&amp; not(CB(i).Initial))
 			</formula>
-			<comment>All TCC are well-formed
+			<comment>All CB are well-formed
+			</comment>
+		</query>
+		<query>
+			<formula>
+			</formula>
+			<comment>Split
 			</comment>
 		</query>
 		<query>
@@ -701,7 +703,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).curSeg == CB(TCC(i).boxes[TCC(i).nextSegIndex-1]).connected) || (TCC(i).curSeg == CB(TCC(i).boxes[TCC(i).nextSegIndex-1]).segments[0])
+			<formula>
 			</formula>
 			<comment>No derailment.
 			</comment>
@@ -719,7 +721,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).resSegIndex - TCC(i).prevResIndex) == 1
+			<formula>A[] forall(i:t_id) not(TCC(i).Initial) imply (TCC(i).resSegIndex - TCC(i).prevResIndex) == 1
 			</formula>
 			<comment>The resSegIndex will always be one higher than the previous index
 			</comment>
@@ -761,7 +763,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).lockedBy == i
+			<formula>A[] forall(i:t_id) (TCC(i).DoubleSegment &amp;&amp; points[TCC(i).nextCB] != -1) imply CB(TCC(i).nextCB).lockedBy == i
 			</formula>
 			<comment>A train only passes a switch box if it has been locked for the train
 			</comment>
