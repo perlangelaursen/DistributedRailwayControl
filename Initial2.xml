@@ -276,6 +276,15 @@ void updateLocationInfo(){
     nextCB = boxes[nextSegIndex];
 }
 
+int cbInBoxes(cB_id cb) {
+    for(i : int[0,NCB-1]) {
+        if (cb == boxes[i]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 bool isWellFormed(){
 	return boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; 
            segRouteIsWellFormed(segRoutes[id]) &amp;&amp; 
@@ -408,7 +417,7 @@ pV_id point = -1;
 bool valid = false;
 
 tV_id res[3] = {-1, -1, -1};
-int[0,2] result;
+int[-1,2] result;
 tV_id tid = -1;
 tV_id lockedBy = -1;
 
@@ -439,6 +448,17 @@ void setInfo() {
             }
         }
     }
+}
+
+int[-1,2] possibleToReserve(t_id tid, seg_id sid) {
+    valid = false;    
+    for(i:int[0,2]) {
+        valid =  valid || (segments[i] == sid);
+        if(segments[i] == sid &amp;&amp; res[i] == -1) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 int[0, 2] reserve(t_id tid, seg_id sid){
@@ -572,7 +592,7 @@ result=0</label>
 		<transition>
 			<source ref="id11"/>
 			<target ref="id14"/>
-			<label kind="guard" x="-807" y="-289">!result</label>
+			<label kind="guard" x="-807" y="-289">result == -1 and valid</label>
 			<label kind="synchronisation" x="-807" y="-272">notOK[tid]!</label>
 			<label kind="assignment" x="-807" y="-255">tid = -1,
 valid=false,
@@ -583,9 +603,10 @@ result=0</label>
 		<transition>
 			<source ref="id11"/>
 			<target ref="id14"/>
-			<label kind="guard" x="-926" y="-238">result</label>
+			<label kind="guard" x="-943" y="-238">result&gt;=0 and valid</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
-			<label kind="assignment" x="-943" y="-204">tid = -1,
+			<label kind="assignment" x="-943" y="-204">res[result]=tid,
+tid = -1,
 valid=false,
 result=0</label>
 		</transition>
@@ -604,10 +625,10 @@ tid = i</label>
 		<transition>
 			<source ref="id14"/>
 			<target ref="id11"/>
-			<label kind="select" x="-1088" y="-263">i : t_id,
+			<label kind="select" x="-1173" y="-263">i : t_id,
 j : seg_id</label>
-			<label kind="synchronisation" x="-1088" y="-229">reqSeg[id][i][j]?</label>
-			<label kind="assignment" x="-1088" y="-212">result = reserve(i,j),
+			<label kind="synchronisation" x="-1173" y="-229">reqSeg[id][i][j]?</label>
+			<label kind="assignment" x="-1173" y="-212">result = possibleToReserve(i,j),
 tid = i</label>
 			<nail x="-952" y="-136"/>
 			<nail x="-952" y="-272"/>
@@ -746,7 +767,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) TCC(i).Locking imply (TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[0] or TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[1] or TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[2]) and (TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[0] or TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[1] or TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[2]) and TCC(i).segments[TCC(i).lockIndex] != TCC(i).segments[TCC(i).lockIndex - 1]
+			<formula>A[] forall(i:t_id) exists(j:int[0,2]) exists(k:int[0,2]) TCC(i).Locking and j != k imply (TCC(i).segments[TCC(i).lockIndex] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[j] and TCC(i).segments[TCC(i).lockIndex - 1] == CB(TCC(i).boxes[TCC(i).lockIndex]).segments[k])
 			</formula>
 			<comment>A TCC will only lock control box with two adjacent segments
 			</comment>
@@ -770,7 +791,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula> A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).lockedBy == i
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).lockedBy == i
 			</formula>
 			<comment>A train only passes a switch box if it has been locked for the train
 			</comment>
@@ -797,6 +818,30 @@ result=0</label>
 			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply (TCC(i).segments[TCC(i).nextSegIndex] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex] == CB(TCC(i).nextCB).connected) and (TCC(i).segments[TCC(i).nextSegIndex-1] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex-1] == CB(TCC(i).nextCB).connected)
 			</formula>
 			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) exists(j:int[0,2]) CB(i).res[j] != -1 imply TCC(CB(i).res[j]).cbInBoxes(i) &lt;= TCC(CB(i).res[j]).resSegIndex
+			</formula>
+			<comment>The reservation data of a control box is consistent with the reservation data of TCCs.
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).lockedBy != -1 imply TCC(CB(i).lockedBy).cbInBoxes(i) &lt;= TCC(CB(i).lockedBy).lockIndex
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).ReserveAttempted imply CB(i).valid
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).ReserveAttempted and CB(i).result &gt;= 0 imply CB(i).res[CB(i).result] == -1
+			</formula>
+			<comment>A control box only returns an acknowledgement for reservations involving segments that are not already reserved
 			</comment>
 		</query>
 		<query>
