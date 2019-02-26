@@ -838,6 +838,24 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
+			<formula>A[] forall(i:t_id) forall(j:cB_id) TCC(i).cbInBoxes(j) == -1 imply not(CB(j).LockAttempted and CB(j).tid == i)
+			</formula>
+			<comment> A TCC only obtains locks at switch boxes on its route
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) exists(j:cB_id) exists(k:int[0,2]) TCC(i).Reserving + CB(j).ReserveAttempted == 2 and CB(j).tid == i imply TCC(i).segments[TCC(i).resSegIndex] == CB(j).segments[k]
+			</formula>
+			<comment>A TCC only reserves segments on its route
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:t_id) exists(j:cB_id) TCC(i).Reserving + CB(j).ReserveAttempted == 2 and CB(j).tid == i imply TCC(i).cbInBoxes(j) &gt;= 0
+			</formula>
+			<comment>A TCC only reserves segments at control boxes on its route
+			</comment>
+		</query>
+		<query>
 			<formula>A[] not deadlock
 			</formula>
 			<comment>
