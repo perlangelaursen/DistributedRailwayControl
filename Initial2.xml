@@ -754,9 +754,9 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) CB(i).lockedBy != -1 imply CB(i).lockedBy == CB(i).res[0] and (CB(i).lockedBy == CB(i).res[1] or CB(i).lockedBy == CB(i).res[2])
+			<formula>A[] forall(i:t_id) forall(j:cB_id) exists(k:int[1,2]) CB(j).lockedBy == i imply CB(j).res[0] == i and CB(j).res[k] == i
 			</formula>
-			<comment>When a CB is locked then the same train must have reserve the stem and another connected segment
+			<comment>For every lock that a TCC has obtained at a switch box, it has the reservation for the stem segment at the switch box and one of the segments that the switch box can connect the stem to
 			</comment>
 		</query>
 		<query>
@@ -784,7 +784,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (TCC(i).DoubleSegment &amp;&amp; points[TCC(i).nextCB] != -1) imply CB(TCC(i).nextCB).lockedBy == i
+			<formula>A[] forall(i:t_id) (TCC(i).DoubleSegment and points[TCC(i).nextCB] != -1) imply CB(TCC(i).nextCB).lockedBy == i
 			</formula>
 			<comment>A train only passes a switch box if it has been locked for the train
 			</comment>
@@ -796,9 +796,9 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).countTCCReservations(i) == 2 and CB(TCC(i).boxes[TCC(i).nextSegIndex+1]).countTCCReservations(i) &lt;= 2
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).countTCCReservations(i) == 2 and CB(TCC(i).boxes[TCC(i).nextSegIndex+1]).countTCCReservations(i) &lt;= 2 and CB(TCC(i).boxes[TCC(i).nextSegIndex+1]).countTCCReservations(i) &gt;= 1
 			</formula>
-			<comment>
+			<comment>A train only enters a segment that is has the full reservation of.
 			</comment>
 		</query>
 		<query>
@@ -808,9 +808,9 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply (TCC(i).segments[TCC(i).nextSegIndex] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex] == CB(TCC(i).nextCB).connected) and (TCC(i).segments[TCC(i).nextSegIndex-1] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex-1] == CB(TCC(i).nextCB).connected)
+			<formula>A[] forall(i:t_id) forall(j:int[0,1]) TCC(i).DoubleSegment imply (TCC(i).segments[TCC(i).nextSegIndex-j] == CB(TCC(i).nextCB).segments[0] or TCC(i).segments[TCC(i).nextSegIndex-j] == CB(TCC(i).nextCB).connected)
 			</formula>
-			<comment>
+			<comment>If a train is in a critical point section, then the segments that it is moving on are connected
 			</comment>
 		</query>
 		<query>
@@ -840,7 +840,7 @@ result=0</label>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:cB_id) TCC(i).cbInBoxes(j) == -1 imply not(CB(j).LockAttempted and CB(j).tid == i)
 			</formula>
-			<comment> A TCC only obtains locks at switch boxes on its route
+			<comment>A TCC only obtains locks at switch boxes on its route
 			</comment>
 		</query>
 		<query>
