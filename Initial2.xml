@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>// Station 6
-const int NCB = 14; //Number of control boxes
-const int NSEG = 19; //Number of segments
-const int NTRAIN = 2; //Number of trains
-const int NPOINT = 12; //Number of switchable points
+	<declaration>//Smallest network
+const int NCB = 2;
+const int NSEG = 1;
+const int NTRAIN = 1;
+const int NPOINT = 1;
 
 //TYPES
-typedef int[0, NTRAIN-1] t_id; //Train IDs
-typedef int[0, NCB-1]  cB_id; //Control box IDs
-typedef int[0, NPOINT-1] p_id; //Switch IDs
-typedef int[0, NSEG-1] seg_id; //Segment IDs
-typedef int[-1, NSEG-1] segV_id; //Segment IDs with -1
-typedef int[-1, NPOINT-1] pV_id; //Switch IDs with -1
-typedef int[-1, NCB-1] cBV_id; //Control Box IDs with -1
-typedef int[-1, NTRAIN-1] tV_id; //Train IDs with -1
+typedef int[0, NTRAIN-1] t_id;
+typedef int[0, NCB-1]  cB_id;
+typedef int[0, NPOINT-1] p_id;
+typedef int[0, NSEG-1] seg_id;
+typedef int[-1, NSEG-1] segV_id;
+typedef int[-1, NPOINT-1] pV_id;
+typedef int[-1, NCB-1] cBV_id;
+typedef int[-1, NTRAIN-1] tV_id;
 typedef struct {
     cB_id cb;
     seg_id seg;
 } reservation;
 
-//EXAMPLE
-const int[1,NCB] lockLimit = 2;
-const int[1,NSEG] resLimit = 2;
 
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13}, {13,12,11,10,9,8,7,6,5,4,3,2,1,-1}};
-const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,3,4,6,7,9,10,12,13,15,16,18,-1,-1,-1,-1,-1,-1}, {18, 17, 15, 14, 12, 11, 9, 8, 6, 5, 3, 2,-1,-1,-1,-1,-1,-1,-1}};
-const segV_id cBs[NCB][3]= {{-1,0,-1}, {0,1,2}, {3,1,2}, {3,4,5}, {6,4,5}, {6,7,8}, {9,7,8}, {9,10,11}, {12,10,11}, {12,13,14}, {15,13,14}, {15,16,17}, {18,16,17}, {18,-1,-1}};
-const pV_id points[NCB] = { -1, 0, 1, 2, 3,4,5,6,7,8,9,10,11,-1};
-const reservation initialRes[NTRAIN] = {{1,0}, {12, 18}};
-const bool pointInPlus[NPOINT] = {true, true, true, true, true, true, true, true, true, true, true, true};
+//Configuration Data - Part 2
+const int[1,NCB] lockLimit = 1;
+const int[1,NSEG] resLimit = 1;
+
+const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1}};
+const segV_id segRoutes[NTRAIN][NSEG]= {{0}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,-1,-1}};
+const pV_id points[NCB] = {-1,-1};
+const reservation initialRes[NTRAIN] = {{1,0}};
+const bool pointInPlus[NPOINT] = {true};
+
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -53,13 +55,6 @@ bool reservationIsWellFormed(reservation res){
     return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;
 }
 
-bool pointIsWellFormed(cBV_id id){
-    if(points[id] != -1){
-        return cBs[id][2] != -1;
-    } else {
-        return cBs[id][2] == -1;
-    }
-}
 bool sharesSegment(cB_id i, cB_id j){
     return (i != j) &amp;&amp;
             ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||
@@ -85,7 +80,7 @@ bool routesAreConsistent(t_id id){
         if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){
             return false;
         }
-        if(bRoute[i] == -1 &amp;&amp; sRoute[i] != -1){
+        if((bRoute[i] == -1 || bRoute[i+1] == -1) &amp;&amp; sRoute[i] != -1){
             return false;
         }
     }
@@ -104,7 +99,6 @@ bool boxRouteIsWellFormed(cBV_id route[NCB]){
     }
     return true; 
 }
-
 bool canConnect(seg_id s1, seg_id s2){
     for(i:cB_id){
         if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){
@@ -119,31 +113,46 @@ bool canConnect(seg_id s1, seg_id s2){
 }
 
 bool segRouteIsWellFormed(segV_id route[NSEG]){
-    for(i:int[0,NSEG-2]){
+    int i = 0;
+    while(i &lt;= NSEG -2){
         if(route[i] == -1 &amp;&amp; route[i+1] != -1){
             return false;
         }
         if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){
             return false;
         }
-
+        i++;
     }
     return true; 
 }
 
-int otherBox(segV_id cB[3], segV_id s){
+int pointIsWellFormed(cBV_id id){
+    if(points[id] != -1){
+        for(i : cB_id){
+            if(i != id &amp;&amp; points[i] == points[id]){
+                return false;
+            }
+        }
+    }
+    return (points[id] == -1) == (cBs[id][2] == -1);
+}
+
+int otherBoxes(cB_id id, segV_id s){
+    segV_id cB[3] = cBs[id];
     int found = 0;
     for(i:cB_id){
-        if(cBs[i] != cB &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){
+        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){
             found++;
         }
     }
     return found;
 }
 
-bool cBIsWellFormed(segV_id cB[3]){
-    //Invalid forms
-    if((cB[0] == -1 &amp;&amp; cB[1] == -1) || (cB[0] == -1 &amp;&amp; cB[2] != -1) || (cB[1] == -1 &amp;&amp; cB[2] != -1)){
+bool cBIsWellFormed(cB_id id){
+    segV_id cB[3] = cBs[id];
+
+    //Invalid definitions
+    if((cB[0] == -1 &amp;&amp; cB[2] != -1) || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){
         return false;
     }
     if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||
@@ -152,50 +161,26 @@ bool cBIsWellFormed(segV_id cB[3]){
         return false;
     }
 
-    //Case: [cb]--x--[i] 
-    if(cB[0] == -1 &amp;&amp; cB[2] == -1){
-        //Only one control box may be at the segment's down end
-        for(i:cB_id){
-            if(cBs[i] != cB &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
-                return false;
-            }
-        }
-        return otherBox(cB, cB[1]) == 1;
+    //Case: []--x--
+    if(cB[1] == -1){
+        return otherBoxes(id, cB[0]) == 1;
     }
 
-    //Case: [j]--y--[cb]
-    if(cB[1] == -1 &amp;&amp; cB[2] == -1){
-        //Only one control box may be at the segment's up end
-        for(i:cB_id){
-            if(cBs[i] != cB &amp;&amp; cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
-                return false;
-            }
-        }
-        return otherBox(cB, cB[0]) == 1;
-    }
-
-    //Case: [j]--y--[cb]--x--[i]
+    //Case: --x--[]--y--
     if(cB[2] == -1){
-        for(i:cB_id){
-            if(cBs[i] != cB &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
-                return false;
-            }
-            if(cBs[i] != cB &amp;&amp; cBs[i][0] == cB[1] &amp;&amp; (cBs[i][1] == -1 || cBs[i][2] == -1)){ 
-                return false;
-            }
-        }
-        return otherBox(cB, cB[0]) == 1 &amp;&amp; otherBox(cB, cB[1]) == 1;
+        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;
     }
 
-
-    //Case: Point
+    //Case: Switch box
     for(i:cB_id){
-        //No switch boxes can share stem segment with same plus or minus segment, no switch boxes can share minus segment without also sharing plus segment
-        if(cBs[i] != cB &amp;&amp; (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) &amp;&amp; (cBs[i][1] != -1 &amp;&amp; cBs[i][1] != cB[1])){ 
-            return false;
+        if(i != id &amp;&amp; 
+            (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) ||
+            (cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] != cB[2]) ||
+            (cBs[i][2] == cB[2] &amp;&amp; cBs[i][1] != cB[1])){
+                return false;
         }
     }
-    return otherBox(cB, cB[0]) == 1 &amp;&amp; otherBox(cB, cB[1]) == 1 &amp;&amp; otherBox(cB, cB[2]) == 1;
+    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;
 }
 </declaration>
 	<template>
@@ -212,14 +197,13 @@ cBV_id nextCB;
 
 int[0,1] resBit = 0;
 cB_id resCBIndex = 1;
-seg_id resSegIndex = 1;
-seg_id prevResIndex = 0;
+seg_id resSegIndex = 0;
 
 cB_id lockIndex = 1;
+seg_id nextSegIndex = 0;
+
 cB_id origLockIndex = 0;
-
-seg_id nextSegIndex = 1;
-
+seg_id prevResIndex = 0;
 
 void copySegments() {
     for(i : seg_id) {
@@ -229,6 +213,13 @@ void copySegments() {
         }
     }
     curSeg = segments[0];
+
+    if(routeLength &gt; 1){
+        resSegIndex = 1;
+    }
+    if(NSEG &gt; 1){
+        nextSegIndex = 1;
+    }
 }
 
 void copyControlBoxes() {
@@ -251,16 +242,16 @@ bool possibleToLock() {
     return lockIndex &lt; routeLength &amp;&amp; lockIndex - nextSegIndex &lt; lockLimit &amp;&amp; resSegIndex &gt; lockIndex;
 }
 
+bool hasArrived() {
+    return curSeg == segments[routeLength-1];
+}
+
 bool possibleToReserve() {
-    return resSegIndex &lt; routeLength &amp;&amp; resCBIndex &lt;= routeLength &amp;&amp; resSegIndex - nextSegIndex &lt; resLimit;
+    return resSegIndex &lt; routeLength &amp;&amp; resCBIndex &lt;= routeLength &amp;&amp; resSegIndex - nextSegIndex &lt; resLimit &amp;&amp; !hasArrived();
 }
 
 bool possibleToPass() {
     return resSegIndex &gt; nextSegIndex &amp;&amp; lockIndex &gt; nextSegIndex &amp;&amp; nextCB != boxes[routeLength];
-}
-
-bool hasArrived() {
-    return nextSegIndex == routeLength;
 }
 
 void updateResData(){
@@ -484,7 +475,7 @@ void updateConnected(){
 }
 
 bool isWellFormed(){
-    return cBIsWellFormed(cBs[id]) &amp;&amp; pointIsWellFormed(id);
+    return cBIsWellFormed(id) &amp;&amp; pointIsWellFormed(id);
 }
 
 int countTCCReservations(t_id id) {
@@ -770,7 +761,7 @@ result=0</label>
 			</comment>
 		</query>
 		<query>
-			<formula> A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).lockedBy == i
+			<formula>A[] forall(i:t_id) TCC(i).DoubleSegment imply CB(TCC(i).nextCB).lockedBy == i
 			</formula>
 			<comment>A train only passes a switch box if it has been locked for the train
 			</comment>
