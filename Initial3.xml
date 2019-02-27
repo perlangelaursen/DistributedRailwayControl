@@ -198,9 +198,6 @@ seg_id resSegIndex = 0;
 cB_id lockIndex = 1;
 seg_id nextSegIndex = 0;
 
-//cB_id origLockIndex = 0;
-//seg_id prevResIndex = 0;
-
 cBV_id reservations[NSEG][2];
 bool locks[NCB];
 
@@ -262,7 +259,6 @@ bool possibleToPass() {
 void updateResData(){
     reservations[resSegIndex][resBit] = boxes[resCBIndex];
     resBit = resBit^1;
-   // prevResIndex = (resBit==0) ? resSegIndex : prevResIndex;
     resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;
     resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;
 }
@@ -278,7 +274,6 @@ void updateLocationInfo(){
 }
 
 void updateLockInfo(){
-    //origLockIndex = lockIndex;
     locks[lockIndex] = true;
     lockIndex++;
     updateLockIndex();
@@ -857,7 +852,7 @@ All reservations at a CB are also saved in the state space of the relevant TCCs
 		<query>
 			<formula>A[] forall(i:t_id) TCC(i).Reserving imply TCC(i).reservations[TCC(i).resSegIndex][TCC(i).resBit] == -1
 			</formula>
-			<comment>A[] forall(i:t_id) TCC(i).Reserving imply TCC(i).reservations[TCC(i).resSegIndex][TCC(i).resBit] == -1
+			<comment>A TCC only reserves segments that it does not already have a reservation for
 			</comment>
 		</query>
 		<query>
