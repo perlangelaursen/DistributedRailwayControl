@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>//Smallest network
-const int NCB = 2;
-const int NSEG = 1;
-const int NTRAIN = 1;
-const int NPOINT = 1;
+	<declaration>// Station 6
+const int NCB = 14;
+const int NSEG = 19;
+const int NTRAIN = 2;
+const int NPOINT = 12;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id;
@@ -21,15 +21,15 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
+const int[1,NCB] lockLimit = 2;
+const int[1,NSEG] resLimit = 2;
 
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,0}};
-const segV_id segRoutes[NTRAIN][NSEG]= {{0}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,-1,-1}};
-const pV_id points[NCB] = { -1,-1};
-const reservation initialRes[NTRAIN] = {{1,0}};
-const bool pointInPlus[NPOINT] = {true};
+const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13}, {13,12,11,10,9,8,7,6,5,4,3,2,1,-1}};
+const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,3,4,6,7,9,10,12,13,15,16,18,-1,-1,-1,-1,-1,-1}, {18, 17, 15, 14, 12, 11, 9, 8, 6, 5, 3, 2,-1,-1,-1,-1,-1,-1,-1}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,4,5}, {6,4,5}, {6,7,8}, {9,7,8}, {9,10,11}, {12,10,11}, {12,13,14}, {15,13,14}, {15,16,17}, {18,16,17}, {18,-1,-1}};
+const pV_id points[NCB] = { -1, 0, 1, 2, 3,4,5,6,7,8,9,10,11,-1};
+const reservation initialRes[NTRAIN] = {{1,0}, {12, 18}};
+const bool pointInPlus[NPOINT] = {true, true, true, true, true, true, true, true, true, true, true, true};
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -55,9 +55,8 @@ bool reservationIsWellFormed(reservation res){
 
 bool sharesSegmentS(cB_id i, cB_id j, seg_id s){
     return  (i != j) &amp;&amp;
-            ((cBs[i][0] == s &amp;&amp; (s == cBs[j][0] || s == cBs[j][1] || s == cBs[j][2])) ||
-            (cBs[i][1] == s &amp;&amp; (s == cBs[j][0] || s == cBs[j][1] || s == cBs[j][2])) ||
-            (cBs[i][2] == s &amp;&amp; (s == cBs[j][0] || s == cBs[j][1] || s == cBs[j][2])));
+            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; 
+            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);
 }
 
 bool routesAreConsistent(t_id id){
@@ -68,7 +67,7 @@ bool routesAreConsistent(t_id id){
         if((bRoute[i+1] != -1) == (sRoute[i] == -1)){
             return false;
         }
-        if(!sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){
+        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){
             return false;
         }
     }
@@ -94,6 +93,7 @@ bool boxRouteIsWellFormed(cBV_id route[NCB]){
     }
     return true; 
 }
+
 bool canConnect(seg_id s1, seg_id s2){
     for(i:cB_id){
         if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){
@@ -274,11 +274,11 @@ int cbInBoxes(cB_id cb) {
 }
 
 bool isWellFormed(){
-	return /*segRouteIsWellFormed(segRoutes[id]) &amp;&amp;
-           boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; */
-           routesAreConsistent(id) /*&amp;&amp; 
+	return segRouteIsWellFormed(segRoutes[id]) &amp;&amp;
+           boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; 
+           routesAreConsistent(id) &amp;&amp; 
            reservationIsWellFormed(initialRes[id]) &amp;&amp; 
-           initialResIsConsistent(id)*/;
+           initialResIsConsistent(id);
 }</declaration>
 		<location id="id0" x="-340" y="-1156">
 			<name x="-323" y="-1173">DoubleSegment</name>

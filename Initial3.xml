@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>// Station 1 with regular control box
-const int NCB = 5;
-const int NSEG = 5;
+	<declaration>// Station 6
+const int NCB = 14;
+const int NSEG = 19;
 const int NTRAIN = 2;
-const int NPOINT = 2;
+const int NPOINT = 12;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id;
@@ -21,16 +21,15 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-//EXAMPLE
 const int[1,NCB] lockLimit = 2;
 const int[1,NSEG] resLimit = 2;
 
-const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,2,4,-1}, {4,3,1,0,-1}};
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4}, {4,3,2,1,0}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
-const pV_id points[NCB] = {-1, -1, 0, 1, -1};
-const reservation initialRes[NTRAIN] = {{1, 0}, {3,4}};
-const bool pointInPlus[NPOINT] = {true, true};
+const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3,4,5,6,7,8,9,10,11,12,13}, {13,12,11,10,9,8,7,6,5,4,3,2,1,-1}};
+const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,3,4,6,7,9,10,12,13,15,16,18,-1,-1,-1,-1,-1,-1}, {18, 17, 15, 14, 12, 11, 9, 8, 6, 5, 3, 2,-1,-1,-1,-1,-1,-1,-1}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,4,5}, {6,4,5}, {6,7,8}, {9,7,8}, {9,10,11}, {12,10,11}, {12,13,14}, {15,13,14}, {15,16,17}, {18,16,17}, {18,-1,-1}};
+const pV_id points[NCB] = { -1, 0, 1, 2, 3,4,5,6,7,8,9,10,11,-1};
+const reservation initialRes[NTRAIN] = {{1,0}, {12, 18}};
+const bool pointInPlus[NPOINT] = {true, true, true, true, true, true, true, true, true, true, true, true};
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -234,7 +233,7 @@ void initialize() {
     nextCB = boxes[1];
 
     //Reservations
-    for(i : seg_id){
+   for(i : seg_id){
         reservations[i][0] = -1;
         reservations[i][1] = -1;
     }
@@ -244,25 +243,28 @@ void initialize() {
     updateLockIndex();
 }
 
-bool possibleToLock(cB_id c) {
-    return (reservations[c-1][1] == boxes[c]) &amp;&amp; (reservations[c][0] == boxes[c]) &amp;&amp;
-        requiresLock[c] &amp;&amp; !locks[c] &amp;&amp; (sum(i:cB_id) locks[i]) &lt;= lockLimit;
+bool possibleToLock() {
+    return lockIndex &lt; routeLength &amp;&amp; lockIndex - nextSegIndex &lt; lockLimit &amp;&amp; resSegIndex &gt; lockIndex;
+    //return (reservations[lockIndex-1][1] == boxes[lockIndex]) &amp;&amp; (reservations[lockIndex][0] == boxes[lockIndex]) &amp;&amp;
+        //requiresLock[lockIndex] &amp;&amp; !locks[lockIndex] &amp;&amp; (sum(i:cB_id) locks[i]) &lt;= lockLimit;
 }
 
 bool hasArrived() {
     return curSeg == segments[routeLength-1];
 }
 
-bool possibleToReserve(seg_id s, cB_id c) {
-    return segments[s] != -1 &amp;&amp; (sum(i:seg_id) (reservations[i][0] &gt; -1)) + (sum(i:seg_id) (reservations[i][1] &gt; -1)) &lt;= resLimit * 2;
+bool possibleToReserve() {
+    return segments[resSegIndex] != -1 &amp;&amp; resSegIndex - nextSegIndex &lt; resLimit;
+//    return segments[resSegIndex] != -1 &amp;&amp; (sum(i:seg_id) (reservations[i][0] &gt; -1)) + (sum(i:seg_id) (reservations[i][1] &gt; -1)) &lt;= resLimit * 2;
 }
-
+/*
 bool segmentFullyReserved(seg_id s){
     return (reservations[s][0] &gt; -1) &amp;&amp; (reservations[s][1] &gt; -1);
-}
+}*/
 
-bool possibleToPass(cB_id c) {
-    return !hasArrived() &amp;&amp; (!requiresLock[c] || locks[c]) &amp;&amp; segmentFullyReserved(c);
+bool possibleToPass() {
+    return resSegIndex &gt; nextSegIndex &amp;&amp; lockIndex &gt; nextSegIndex &amp;&amp; nextCB != boxes[routeLength];
+    //return !hasArrived() &amp;&amp; (!requiresLock[nextSegIndex] || locks[nextSegIndex]) &amp;&amp; segmentFullyReserved(nextSegIndex);
 }
 
 void updateResData(){
@@ -351,7 +353,7 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id4"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-544" y="-1207">possibleToPass(nextSegIndex)</label>
+			<label kind="guard" x="-544" y="-1207">possibleToPass()</label>
 			<label kind="synchronisation" x="-544" y="-1190">pass[nextCB]!</label>
 			<nail x="-578" y="-1156"/>
 		</transition>
@@ -377,7 +379,7 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id4"/>
 			<target ref="id5"/>
-			<label kind="guard" x="-1317" y="-833">possibleToLock(lockIndex)</label>
+			<label kind="guard" x="-1317" y="-833">possibleToLock()</label>
 			<label kind="synchronisation" x="-1317" y="-816">reqLock[boxes[lockIndex]][id]
 [segments[lockIndex-1]][segments[lockIndex]]!</label>
 			<nail x="-1020" y="-884"/>
@@ -385,7 +387,7 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id4"/>
 			<target ref="id3"/>
-			<label kind="guard" x="-612" y="-740">possibleToReserve(resSegIndex, resCBIndex)</label>
+			<label kind="guard" x="-612" y="-740">possibleToReserve()</label>
 			<label kind="synchronisation" x="-612" y="-722">reqSeg[boxes[resCBIndex]][id][segments[resSegIndex]]!</label>
 			<nail x="-612" y="-748"/>
 			<nail x="-527" y="-748"/>
@@ -676,6 +678,12 @@ result=0</label>
 	<system>system Initializer, TCC, CB, Point;</system>
 	<queries>
 		<query>
+			<formula>A[] not deadlock
+			</formula>
+			<comment>
+			</comment>
+		</query>
+		<query>
 			<formula>E&lt;&gt; forall(i:t_id) TCC(i).Arrived
 			</formula>
 			<comment>Liveness
@@ -789,7 +797,6 @@ All reservations at a CB are also saved in the state space of the relevant TCCs
 	(CB(j).segments[0] == TCC(i).segments[k+1] &amp;&amp; CB(j).connected == TCC(i).segments[k]))
 			</formula>
 			<comment>A TCC only requests the switching (locking) for segments adjacent in its route
-
 			</comment>
 		</query>
 		<query>
