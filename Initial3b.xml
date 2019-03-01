@@ -179,10 +179,7 @@ bool cBIsWellFormed(cB_id id){
 
     //Case: Switch box
     for(i:cB_id){
-        if(i != id &amp;&amp; 
-            (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) ||
-            (cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] != cB[2]) ||
-            (cBs[i][2] == cB[2] &amp;&amp; cBs[i][1] != cB[1])){
+        if(i != id &amp;&amp; cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])){
                 return false;
         }
     }
@@ -206,6 +203,8 @@ seg_id resSegIndex = 0;
 
 cB_id lockIndex = 1;
 seg_id nextIndex = 0;
+
+segV_id headSeg = -1;
 
 int p;
 
@@ -267,9 +266,13 @@ void updateResData(){
     resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;
 }
 
+void updateHeadInfo(bool p){
+        headSeg = nextSegment(nextCB,curSeg, p); 
+}
+
 void updateLocationInfo(){
-    curSeg = nextSegment(nextCB,curSeg, p);
-    p = 0;
+    curSeg = headSeg;
+    headSeg = -1;
     nextIndex++;
     nextCB = boxes[nextIndex];
 }
@@ -313,7 +316,7 @@ bool isWellFormed(){
 			<target ref="id1"/>
 			<label kind="select" x="-476" y="-1224">i : int[0,1]</label>
 			<label kind="synchronisation" x="-476" y="-1207">passp[points[nextCB]][i]!</label>
-			<label kind="assignment" x="-476" y="-1190">p = i</label>
+			<label kind="assignment" x="-476" y="-1190">updateHeadInfo(i)</label>
 			<nail x="-451" y="-1156"/>
 		</transition>
 		<transition>
@@ -705,9 +708,9 @@ result=0</label>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:t_id) Initializer.Initialized &amp;&amp; i != j imply
 	(TCC(i).curSeg != TCC(j).curSeg) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).curSeg != TCC(j).segments[TCC(j).nextIndex]) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).segments[TCC(i).nextIndex] != TCC(j).segments[TCC(j).nextIndex]) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; !TCC(j).DoubleSegment imply TCC(i).segments[TCC(i).nextIndex] != TCC(j).curSeg)
+	(TCC(i).DoubleSegment imply TCC(i).headSeg != TCC(j).curSeg) &amp;&amp;
+	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).curSeg != TCC(j).headSeg) &amp;&amp;
+	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).headSeg != TCC(j).headSeg)
 			</formula>
 			<comment>No collision
 			</comment>
@@ -861,7 +864,7 @@ A reservation is only ever given if it was available
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:cB_id) 
-	(TCC(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i) imply 
+	(TCC(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).segments[CB(j).result &gt; -1) imply 
 	(exists(k:cB_id) TCC(i).boxes[k] == j)
 			</formula>
 			<comment>A TCC only reserves at control boxes on its route
@@ -869,7 +872,7 @@ A reservation is only ever given if it was available
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:cB_id) 
-	(TCC(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply 
+	(TCC(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).segments[CB(j).result &gt; -1) imply 
 	(exists(k:seg_id) CB(j).segments[CB(j).result] == TCC(i).segments[k])
 			</formula>
 			<comment>A TCC only reserves segments on its route
