@@ -688,7 +688,19 @@ tid = i</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] not deadlock
+			<formula>E&lt;&gt; forall(i:t_id) not(TCC(i).Initial)
+			</formula>
+			<comment>Well-formedness of TCC
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; forall(i:cB_id) not(CB(i).Initial)
+			</formula>
+			<comment>Well-formedness of CB
+			</comment>
+		</query>
+		<query>
+			<formula>A[] !deadlock
 			</formula>
 			<comment>
 			</comment>
@@ -708,17 +720,16 @@ tid = i</label>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:t_id) Initializer.Initialized &amp;&amp; i != j imply
 	(TCC(i).curSeg != TCC(j).curSeg) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).curSeg != TCC(j).segments[TCC(j).index+1]) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).segments[TCC(i).index+1] != TCC(j).segments[TCC(j).index+1]) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; !TCC(j).DoubleSegment imply TCC(i).segments[TCC(i).index+1] != TCC(j).curSeg)
+	(TCC(i).DoubleSegment imply TCC(i).headSeg != TCC(j).curSeg) &amp;&amp;
+	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).headSeg!= TCC(j).headSeg)
 			</formula>
 			<comment>No collision
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:int[0,1]) TCC(i).DoubleSegment imply
-	(TCC(i).segments[TCC(i).index+1-j] == CB(TCC(i).boxes[TCC(i).index+1]).segments[0]) ||
-	(TCC(i).segments[TCC(i).index+1-j] == CB(TCC(i).boxes[TCC(i).index+1]).connected)
+	(TCC(i).headSeg == CB(TCC(i).boxes[TCC(i).index+1]).segments[0] &amp;&amp; TCC(i).headSeg == CB(TCC(i).boxes[TCC(i).index+1]).connected) ||
+	(TCC(i).curSeg == CB(TCC(i).boxes[TCC(i).index+1]).segments[0] ||  TCC(i).curSeg == CB(TCC(i).boxes[TCC(i).index+1]).connected)
 			</formula>
 			<comment>No derailment:
 A train passing a point always moves between the connected segments
@@ -739,40 +750,52 @@ A train is never in a critical section while the point there is switching
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) CB(i).lockedBy &gt; -1 imply
-	(exists(k:cB_id) TCC(CB(i).lockedBy).boxes[k] == i &amp;&amp; k &gt;= TCC(CB(i).lockedBy).index+1 &amp;&amp; k &lt; TCC(CB(i).lockedBy).lockIndex)
+			<formula>A[] forall(i:p_id) (Point(i).Plus imply pointInPlus[i]) &amp;&amp; (Point(i).Minus imply !pointInPlus[i])
 			</formula>
-			<comment>Lock concistency:
+			<comment>Network array consistency:
+The pointInPlus array reflects the true state of all Points
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) points[i] &gt; -1 imply
+	(Point(points[i]).Plus imply CB(i).connected == cBs[i][1]) &amp;&amp; (Point(points[i]).Minus imply CB(i).connected == cBs[i][2])
+			</formula>
+			<comment>Point consistency:
+A CB's connected information is consistent with its Point's position
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).lockedBy &gt; -1 imply
+	(exists(k:cB_id) TCC(CB(i).lockedBy).boxes[k] == i &amp;&amp; k &gt; TCC(CB(i).lockedBy).index &amp;&amp; k &lt; TCC(CB(i).lockedBy).lockIndex)
+			</formula>
+			<comment>Lock consistency:
 A CB's lock information is also reflected in the state space of the relevant TCC
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) Initializer.Initialized imply
-	 forall(j:cB_id) (j &gt;= TCC(i).index+1 &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; TCC(i).requiresLock[j] imply 
+			<formula>A[] forall(i:t_id) forall(j:cB_id) (j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; TCC(i).requiresLock[j] imply 
 	CB(TCC(i).boxes[j]).lockedBy == i)
 			</formula>
-			<comment>Lock concistency:
+			<comment>Lock consistency:
 A TCC's obtained locks are reflected in the relevant CBs
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) Initializer.Initialized imply
-	 forall(j:seg_id) j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply
-		exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i &amp;&amp; 
-		TCC(i).resCBIndex &gt; TCC(i).resSegIndex imply
-		exists(l:int[0,2]) CB(TCC(i).boxes[j+2]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+2]).res[l] == i
+			<formula>A[]  forall(i:t_id) forall(j:seg_id) (j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i) &amp;&amp;
+		(j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).resCBIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j]).res[l] == i)
+	
 			</formula>
-			<comment>Reservation concistency:
+			<comment>Reservation consistency:
 All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) CB(i).res[j] &gt; -1 imply
-	exists(k:seg_id) TCC(CB(i).res[j]).boxes[k] == CB(i).segments[j] &amp;&amp; k &gt;= TCC(CB(i).res[j]).index &amp;&amp; 
-		((TCC(CB(i).res[j]).resCBIndex == TCC(CB(i).res[j]).resSegIndex &amp;&amp; k &lt;= TCC(CB(i).res[j]).resSegIndex) ||
-		(TCC(CB(i).res[j]).resCBIndex &gt; TCC(CB(i).res[j]).resSegIndex &amp;&amp; k &lt;= TCC(CB(i).res[j]).resCBIndex))
+	exists(k:seg_id) TCC(CB(i).res[j]).segments[k] == CB(i).segments[j] &amp;&amp; k &gt;= TCC(CB(i).res[j]).index &amp;&amp;
+		(TCC(CB(i).res[j]).resCBIndex == TCC(CB(i).res[j]).resSegIndex imply (k &lt; TCC(CB(i).res[j]).resSegIndex)) &amp;&amp;
+		(TCC(CB(i).res[j]).resCBIndex != TCC(CB(i).res[j]).resSegIndex imply (k &lt; TCC(CB(i).res[j]).resCBIndex))
 			</formula>
-			<comment>Reservation concistency: 
+			<comment>Reservation consistency: 
 All reservations at a CB are also saved in the state space of the relevant TCCs
 			</comment>
 		</query>
@@ -841,7 +864,7 @@ A lock is only ever given if it was available
 			</comment>
 		</query>
 		<query>
-			<formula>A[]  forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) TCC(CB(i).lockedBy).boxes[j] == j)
+			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) TCC(CB(i).lockedBy).boxes[j] == j)
 			</formula>
 			<comment>A TCC only requests locks at switch boxes on its route
 			</comment>
