@@ -198,20 +198,22 @@ bool cBIsWellFormed(cB_id id){
 		<name x="5" y="5">TCC</name>
 		<parameter>t_id id</parameter>
 		<declaration>segV_id segments[NSEG];
+cBV_id boxes[NCB];
+
 int[0,NSEG] routeLength;
 segV_id curSeg;
 
-cBV_id boxes[NCB];
 bool requiresLock[NCB];
-
-int[0,1] resBit = 0;
-cB_id resCBIndex = 1;
-seg_id resSegIndex = 0;
 
 cB_id lockIndex = 1;
 seg_id index = 0;
 
+int[0,1] resBit = 0;
+cB_id resCBIndex = 1;
+int[0,NSEG] resSegIndex = 0;
+
 segV_id headSeg = -1;
+cB_id locks = 0;
 
 void updateLockIndex(){
     while(lockIndex &lt; NCB-1 &amp;&amp; !requiresLock[lockIndex]){
@@ -229,10 +231,6 @@ void initialize() {
     }
     curSeg = segments[0];
 
-    if(routeLength &gt; 1){
-        resSegIndex = 1;
-    }
-
     //Control boxes
     for(i : cB_id) {
         boxes[i] = boxRoutes[id][i];
@@ -241,12 +239,13 @@ void initialize() {
         }
     }
 
-    //Locks
+    //Locks and reservations
+    resSegIndex = 1;
     updateLockIndex();
 }
 
 bool possibleToLock() {
-    return lockIndex &lt; routeLength &amp;&amp; (lockIndex - 2 - index &lt; lockLimit) &amp;&amp; resSegIndex &gt; lockIndex;
+    return lockIndex &lt; routeLength &amp;&amp; locks &lt; lockLimit &amp;&amp; resSegIndex &gt; lockIndex;
 }
 
 bool hasArrived() {
@@ -254,11 +253,11 @@ bool hasArrived() {
 }
 
 bool possibleToReserve() {
-    return segments[resSegIndex] != -1 &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
+    return !hasArrived() &amp;&amp; resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
 }
 
 bool possibleToPass() {
-    return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; boxes[index+1] != boxes[routeLength];
+    return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; index + 1 &lt; routeLength;
 }
 
 void updateResData(){
@@ -270,6 +269,9 @@ void updateResData(){
 void updateLocationInfo(){
     curSeg = headSeg;
     headSeg = -1;
+    if(requiresLock[index + 1]){
+        locks--;
+    }
     index++;
 }
 
@@ -278,6 +280,7 @@ void updateHeadInfo(){
 }
 
 void updateLockInfo(){
+    locks++;
     lockIndex++;
     updateLockIndex();
 }
@@ -409,7 +412,7 @@ segV_id connected =-1;
 pV_id point = -1;
 
 tV_id res[3] = {-1, -1, -1};
-int[-1,2] result;
+int[-1,2] result = -1;
 tV_id tid = -1;
 tV_id lockedBy = -1;
 
@@ -483,7 +486,7 @@ void updateConnected(){
 
 void resetVariables(){
     tid = -1;
-    result = 0;
+    result = -1;
 }
 
 void updateLockInfo(){
@@ -750,6 +753,12 @@ A train is never in a critical section while the point there is switching
 			</comment>
 		</query>
 		<query>
+			<formula>A[] forall(i:t_id) TCC(i).locks == (sum(j:cB_id) (j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; points[TCC(i).boxes[j]] &gt; -1))
+			</formula>
+			<comment>A TCC's locks variable is always the true number of locks
+			</comment>
+		</query>
+		<query>
 			<formula>A[] forall(i:p_id) (Point(i).Plus imply pointInPlus[i]) &amp;&amp; (Point(i).Minus imply !pointInPlus[i])
 			</formula>
 			<comment>Network array consistency:
@@ -781,7 +790,7 @@ A TCC's obtained locks are reflected in the relevant CBs
 			</comment>
 		</query>
 		<query>
-			<formula>A[]  forall(i:t_id) forall(j:seg_id) (j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i) &amp;&amp;
+			<formula>A[] forall(i:t_id) forall(j:seg_id) (j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i) &amp;&amp;
 		(j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).resCBIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j]).res[l] == i)
 	
 			</formula>
@@ -864,13 +873,13 @@ A lock is only ever given if it was available
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) TCC(CB(i).lockedBy).boxes[j] == j)
+			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) TCC(CB(i).lockedBy).boxes[j] == i)
 			</formula>
 			<comment>A TCC only requests locks at switch boxes on its route
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (sum(j:cB_id) (j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; points[TCC(i).boxes[j]] &gt; -1)) &lt;= lockLimit
+			<formula>A[] forall(i:t_id) TCC(i).locks &lt;= lockLimit
 			</formula>
 			<comment>A TCC never has more locks than allowed
 			</comment>
