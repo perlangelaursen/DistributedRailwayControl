@@ -198,20 +198,22 @@ bool cBIsWellFormed(cB_id id){
 		<name x="5" y="5">TCC</name>
 		<parameter>t_id id</parameter>
 		<declaration>segV_id segments[NSEG];
+cBV_id boxes[NCB];
+
 int[0,NSEG] routeLength;
 segV_id curSeg;
 
-cBV_id boxes[NCB];
 bool requiresLock[NCB];
-
-int[0,1] resBit = 0;
-cB_id resCBIndex = 1;
-seg_id resSegIndex = 0;
 
 cB_id lockIndex = 1;
 seg_id index = 0;
 
+int[0,1] resBit = 0;
+cB_id resCBIndex = 1;
+int[0,NSEG] resSegIndex = 0;
+
 segV_id headSeg = -1;
+cB_id locks = 0;
 
 void updateLockIndex(){
     while(lockIndex &lt; NCB-1 &amp;&amp; !requiresLock[lockIndex]){
@@ -229,10 +231,6 @@ void initialize() {
     }
     curSeg = segments[0];
 
-    if(routeLength &gt; 1){
-        resSegIndex = 1;
-    }
-
     //Control boxes
     for(i : cB_id) {
         boxes[i] = boxRoutes[id][i];
@@ -241,12 +239,13 @@ void initialize() {
         }
     }
 
-    //Locks
+    //Locks and reservations
+    resSegIndex = 1;
     updateLockIndex();
 }
 
 bool possibleToLock() {
-    return lockIndex &lt; routeLength &amp;&amp; (lockIndex - 2 - index &lt; lockLimit) &amp;&amp; resSegIndex &gt; lockIndex;
+    return lockIndex &lt; routeLength &amp;&amp; locks &lt; lockLimit &amp;&amp; resSegIndex &gt; lockIndex;
 }
 
 bool hasArrived() {
@@ -254,14 +253,14 @@ bool hasArrived() {
 }
 
 bool possibleToReserve() {
-    return segments[resSegIndex] != -1 &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
+    return !hasArrived() &amp;&amp; resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
 }
 
 bool possibleToPass() {
-    return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; boxes[index+1] != boxes[routeLength];
+    return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; index + 1 &lt; routeLength;
 }
 
-void updateResData(){
+void updateResInfo(){
     resBit = resBit^1;
     resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;
     resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;
@@ -270,6 +269,9 @@ void updateResData(){
 void updateLocationInfo(){
     curSeg = headSeg;
     headSeg = -1;
+    if(requiresLock[index + 1]){
+        locks--;
+    }
     index++;
 }
 
@@ -278,6 +280,7 @@ void updateHeadInfo(){
 }
 
 void updateLockInfo(){
+    locks++;
     lockIndex++;
     updateLockIndex();
 }
@@ -332,7 +335,7 @@ bool isWellFormed(){
 			<source ref="id3"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-323" y="-875">OK[id]?</label>
-			<label kind="assignment" x="-323" y="-858">updateResData()</label>
+			<label kind="assignment" x="-323" y="-858">updateResInfo()</label>
 			<nail x="-340" y="-884"/>
 			<nail x="-510" y="-918"/>
 		</transition>
@@ -409,7 +412,7 @@ segV_id connected =-1;
 pV_id point = -1;
 
 tV_id res[3] = {-1, -1, -1};
-int[-1,2] result;
+int[-1,2] result = -1;
 tV_id tid = -1;
 tV_id lockedBy = -1;
 
@@ -418,9 +421,7 @@ const int NOSWITCH = 1;
 const int DOSWITCH = 2;
 
 void initialize() {
-    segments[0] = cBs[id][0];
-    segments[1] = cBs[id][1];
-    segments[2] = cBs[id][2];
+    segments = cBs[id];
     point = points[id];
     connected = segments[1];
 
@@ -451,7 +452,7 @@ int[-1,2] checkSegment(t_id tid, seg_id sid) {
     return -1;
 }
 
-int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
+int[0,2] checkLock(t_id tid, seg_id s1, seg_id s2){
   if(lockedBy == -1 &amp;&amp; (segments[0] == s1 &amp;&amp; exists(i:int[1,2]) segments[i] == s2) || (segments[0] == s2 &amp;&amp; exists(i:int[1,2]) segments[i] == s1)){
     if ((s1 == segments[0] &amp;&amp; s2 == connected) || (s2 == segments[0] &amp;&amp; s1 == connected)){
         return NOSWITCH;
@@ -483,7 +484,7 @@ void updateConnected(){
 
 void resetVariables(){
     tid = -1;
-    result = 0;
+    result = -1;
 }
 
 void updateLockInfo(){
@@ -491,7 +492,7 @@ void updateLockInfo(){
     resetVariables();
 }
 
-void updateReservations(){
+void updateResInfo(){
     res[result]=tid;
     resetVariables();
 }
@@ -583,9 +584,9 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id11"/>
 			<target ref="id14"/>
-			<label kind="guard" x="-943" y="-238">result &gt;= 0</label>
+			<label kind="guard" x="-943" y="-238">result &gt; -1</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
-			<label kind="assignment" x="-943" y="-204">updateReservations()</label>
+			<label kind="assignment" x="-943" y="-204">updateResInfo()</label>
 		</transition>
 		<transition>
 			<source ref="id14"/>
@@ -595,7 +596,7 @@ j : seg_id,
 k : seg_id</label>
 			<label kind="guard" x="-790" y="-136">lockedBy == -1</label>
 			<label kind="synchronisation" x="-790" y="-119">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-790" y="-102">result = lock(i,j,k),
+			<label kind="assignment" x="-790" y="-102">result = checkLock(i,j,k),
 tid = i</label>
 			<nail x="-714" y="-68"/>
 		</transition>
@@ -688,7 +689,19 @@ tid = i</label>
 			</comment>
 		</query>
 		<query>
-			<formula>A[] not deadlock
+			<formula>E&lt;&gt; forall(i:t_id) not(TCC(i).Initial)
+			</formula>
+			<comment>Well-formedness of TCC
+			</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; forall(i:cB_id) not(CB(i).Initial)
+			</formula>
+			<comment>Well-formedness of CB
+			</comment>
+		</query>
+		<query>
+			<formula>A[] !deadlock
 			</formula>
 			<comment>
 			</comment>
@@ -708,17 +721,16 @@ tid = i</label>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:t_id) Initializer.Initialized &amp;&amp; i != j imply
 	(TCC(i).curSeg != TCC(j).curSeg) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).curSeg != TCC(j).segments[TCC(j).index+1]) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).segments[TCC(i).index+1] != TCC(j).segments[TCC(j).index+1]) &amp;&amp;
-	(TCC(i).DoubleSegment &amp;&amp; !TCC(j).DoubleSegment imply TCC(i).segments[TCC(i).index+1] != TCC(j).curSeg)
+	(TCC(i).DoubleSegment imply TCC(i).headSeg != TCC(j).curSeg) &amp;&amp;
+	(TCC(i).DoubleSegment &amp;&amp; TCC(j).DoubleSegment imply TCC(i).headSeg!= TCC(j).headSeg)
 			</formula>
 			<comment>No collision
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:int[0,1]) TCC(i).DoubleSegment imply
-	(TCC(i).segments[TCC(i).index+1-j] == CB(TCC(i).boxes[TCC(i).index+1]).segments[0]) ||
-	(TCC(i).segments[TCC(i).index+1-j] == CB(TCC(i).boxes[TCC(i).index+1]).connected)
+	(TCC(i).headSeg == CB(TCC(i).boxes[TCC(i).index+1]).segments[0] &amp;&amp; TCC(i).headSeg == CB(TCC(i).boxes[TCC(i).index+1]).connected) ||
+	(TCC(i).curSeg == CB(TCC(i).boxes[TCC(i).index+1]).segments[0] ||  TCC(i).curSeg == CB(TCC(i).boxes[TCC(i).index+1]).connected)
 			</formula>
 			<comment>No derailment:
 A train passing a point always moves between the connected segments
@@ -739,40 +751,57 @@ A train is never in a critical section while the point there is switching
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) CB(i).lockedBy &gt; -1 imply
-	(exists(k:cB_id) TCC(CB(i).lockedBy).boxes[k] == i &amp;&amp; k &gt;= TCC(CB(i).lockedBy).index+1 &amp;&amp; k &lt; TCC(CB(i).lockedBy).lockIndex)
+			<formula>A[] forall(i:t_id) TCC(i).locks == (sum(j:cB_id) (j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; points[TCC(i).boxes[j]] &gt; -1))
 			</formula>
-			<comment>Lock concistency:
+			<comment>A TCC's locks variable is always the true number of locks
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:p_id) (Point(i).Plus imply pointInPlus[i]) &amp;&amp; (Point(i).Minus imply !pointInPlus[i])
+			</formula>
+			<comment>Network array consistency:
+The pointInPlus array reflects the true state of all Points
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) points[i] &gt; -1 imply
+	(Point(points[i]).Plus imply CB(i).connected == cBs[i][1]) &amp;&amp; (Point(points[i]).Minus imply CB(i).connected == cBs[i][2])
+			</formula>
+			<comment>Point consistency:
+A CB's connected information is consistent with its Point's position
+			</comment>
+		</query>
+		<query>
+			<formula>A[] forall(i:cB_id) CB(i).lockedBy &gt; -1 imply
+	(exists(k:cB_id) TCC(CB(i).lockedBy).boxes[k] == i &amp;&amp; k &gt; TCC(CB(i).lockedBy).index &amp;&amp; k &lt; TCC(CB(i).lockedBy).lockIndex)
+			</formula>
+			<comment>Lock consistency:
 A CB's lock information is also reflected in the state space of the relevant TCC
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) Initializer.Initialized imply
-	 forall(j:cB_id) (j &gt;= TCC(i).index+1 &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; TCC(i).requiresLock[j] imply 
+			<formula>A[] forall(i:t_id) forall(j:cB_id) (j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; TCC(i).requiresLock[j] imply 
 	CB(TCC(i).boxes[j]).lockedBy == i)
 			</formula>
-			<comment>Lock concistency:
+			<comment>Lock consistency:
 A TCC's obtained locks are reflected in the relevant CBs
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) Initializer.Initialized imply
-	 forall(j:seg_id) j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply
-		exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i &amp;&amp; 
-		TCC(i).resCBIndex &gt; TCC(i).resSegIndex imply
-		exists(l:int[0,2]) CB(TCC(i).boxes[j+2]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+2]).res[l] == i
+			<formula>A[] forall(i:t_id) forall(j:seg_id) (j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i) &amp;&amp;
+		(j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).resCBIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j]).res[l] == i)
 			</formula>
-			<comment>Reservation concistency:
+			<comment>Reservation consistency:
 All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) CB(i).res[j] &gt; -1 imply
-	exists(k:seg_id) TCC(CB(i).res[j]).boxes[k] == CB(i).segments[j] &amp;&amp; k &gt;= TCC(CB(i).res[j]).index &amp;&amp; 
-		((TCC(CB(i).res[j]).resCBIndex == TCC(CB(i).res[j]).resSegIndex &amp;&amp; k &lt;= TCC(CB(i).res[j]).resSegIndex) ||
-		(TCC(CB(i).res[j]).resCBIndex &gt; TCC(CB(i).res[j]).resSegIndex &amp;&amp; k &lt;= TCC(CB(i).res[j]).resCBIndex))
+	exists(k:seg_id) TCC(CB(i).res[j]).segments[k] == CB(i).segments[j] &amp;&amp; k &gt;= TCC(CB(i).res[j]).index &amp;&amp;
+		(TCC(CB(i).res[j]).resCBIndex == TCC(CB(i).res[j]).resSegIndex imply (k &lt; TCC(CB(i).res[j]).resSegIndex)) &amp;&amp;
+		(TCC(CB(i).res[j]).resCBIndex != TCC(CB(i).res[j]).resSegIndex imply (k &lt; TCC(CB(i).res[j]).resCBIndex))
 			</formula>
-			<comment>Reservation concistency: 
+			<comment>Reservation consistency: 
 All reservations at a CB are also saved in the state space of the relevant TCCs
 			</comment>
 		</query>
@@ -841,13 +870,13 @@ A lock is only ever given if it was available
 			</comment>
 		</query>
 		<query>
-			<formula>A[]  forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) TCC(CB(i).lockedBy).boxes[j] == j)
+			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) TCC(CB(i).lockedBy).boxes[j] == i)
 			</formula>
 			<comment>A TCC only requests locks at switch boxes on its route
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) (sum(j:cB_id) (j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).lockIndex &amp;&amp; points[TCC(i).boxes[j]] &gt; -1)) &lt;= lockLimit
+			<formula>A[] forall(i:t_id) TCC(i).locks &lt;= lockLimit
 			</formula>
 			<comment>A TCC never has more locks than allowed
 			</comment>
