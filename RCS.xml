@@ -260,7 +260,7 @@ bool possibleToPass() {
     return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; index + 1 &lt; routeLength;
 }
 
-void updateResData(){
+void updateResInfo(){
     resBit = resBit^1;
     resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;
     resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;
@@ -335,7 +335,7 @@ bool isWellFormed(){
 			<source ref="id3"/>
 			<target ref="id4"/>
 			<label kind="synchronisation" x="-323" y="-875">OK[id]?</label>
-			<label kind="assignment" x="-323" y="-858">updateResData()</label>
+			<label kind="assignment" x="-323" y="-858">updateResInfo()</label>
 			<nail x="-340" y="-884"/>
 			<nail x="-510" y="-918"/>
 		</transition>
@@ -421,9 +421,7 @@ const int NOSWITCH = 1;
 const int DOSWITCH = 2;
 
 void initialize() {
-    segments[0] = cBs[id][0];
-    segments[1] = cBs[id][1];
-    segments[2] = cBs[id][2];
+    segments = cBs[id];
     point = points[id];
     connected = segments[1];
 
@@ -454,7 +452,7 @@ int[-1,2] checkSegment(t_id tid, seg_id sid) {
     return -1;
 }
 
-int[0,2] lock(t_id tid, seg_id s1, seg_id s2){
+int[0,2] checkLock(t_id tid, seg_id s1, seg_id s2){
   if(lockedBy == -1 &amp;&amp; (segments[0] == s1 &amp;&amp; exists(i:int[1,2]) segments[i] == s2) || (segments[0] == s2 &amp;&amp; exists(i:int[1,2]) segments[i] == s1)){
     if ((s1 == segments[0] &amp;&amp; s2 == connected) || (s2 == segments[0] &amp;&amp; s1 == connected)){
         return NOSWITCH;
@@ -494,7 +492,7 @@ void updateLockInfo(){
     resetVariables();
 }
 
-void updateReservations(){
+void updateResInfo(){
     res[result]=tid;
     resetVariables();
 }
@@ -586,9 +584,9 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id11"/>
 			<target ref="id14"/>
-			<label kind="guard" x="-943" y="-238">result &gt;= 0</label>
+			<label kind="guard" x="-943" y="-238">result &gt; -1</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
-			<label kind="assignment" x="-943" y="-204">updateReservations()</label>
+			<label kind="assignment" x="-943" y="-204">updateResInfo()</label>
 		</transition>
 		<transition>
 			<source ref="id14"/>
@@ -598,7 +596,7 @@ j : seg_id,
 k : seg_id</label>
 			<label kind="guard" x="-790" y="-136">lockedBy == -1</label>
 			<label kind="synchronisation" x="-790" y="-119">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-790" y="-102">result = lock(i,j,k),
+			<label kind="assignment" x="-790" y="-102">result = checkLock(i,j,k),
 tid = i</label>
 			<nail x="-714" y="-68"/>
 		</transition>
@@ -792,7 +790,6 @@ A TCC's obtained locks are reflected in the relevant CBs
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:seg_id) (j &gt;= TCC(i).index &amp;&amp; j &lt; TCC(i).resSegIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j+1]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j+1]).res[l] == i) &amp;&amp;
 		(j &gt; TCC(i).index &amp;&amp; j &lt; TCC(i).resCBIndex imply exists(l:int[0,2]) CB(TCC(i).boxes[j]).segments[l] == TCC(i).segments[j] &amp;&amp; CB(TCC(i).boxes[j]).res[l] == i)
-	
 			</formula>
 			<comment>Reservation consistency:
 All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
