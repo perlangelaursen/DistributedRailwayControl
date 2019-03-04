@@ -310,8 +310,8 @@ bool isWellFormed(){
            reservationIsWellFormed(initialRes[id]) &amp;&amp; 
            initialResIsConsistent(id);
 }</declaration>
-		<location id="id0" x="-578" y="-748">
-			<name x="-561" y="-756">DoubleSegment</name>
+		<location id="id0" x="-578" y="-714">
+			<name x="-561" y="-722">DoubleSegment</name>
 		</location>
 		<location id="id1" x="-272" y="-1020">
 			<name x="-255" y="-1037">Locking</name>
@@ -332,6 +332,21 @@ bool isWellFormed(){
 		</location>
 		<init ref="id4"/>
 		<transition>
+			<source ref="id6"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-1105" y="-952">possibleToReserve()</label>
+			<label kind="synchronisation" x="-1105" y="-935">reqSeg[boxes[resCBIndex]]
+[id][segments[resSegIndex]]!</label>
+			<nail x="-1088" y="-952"/>
+			<nail x="-986" y="-952"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-1105" y="-1037">!hasReservations()</label>
+			<label kind="synchronisation" x="-1105" y="-1020">notOK[id]?</label>
+		</transition>
+		<transition>
 			<source ref="id1"/>
 			<target ref="id2"/>
 			<label kind="synchronisation" x="-408" y="-1037">notOK[id]?</label>
@@ -342,25 +357,17 @@ bool isWellFormed(){
 			<label kind="guard" x="-467" y="-1147">possibleToLock() &amp;&amp; !possibleToPass()</label>
 			<label kind="synchronisation" x="-467" y="-1130">reqLock[boxes[lockIndex]][id]
 [segments[lockIndex-1]][segments[lockIndex]]!</label>
-			<nail x="-442" y="-1088"/>
-			<nail x="-272" y="-1088"/>
+			<nail x="-476" y="-1088"/>
+			<nail x="-374" y="-1088"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
 			<target ref="id6"/>
-			<label kind="guard" x="-1071" y="-1147">stillPossibleToReserve()</label>
-			<label kind="synchronisation" x="-1071" y="-1130">OK[id]?</label>
-			<label kind="assignment" x="-1071" y="-1113">updateResInfo()</label>
-			<nail x="-884" y="-1088"/>
+			<label kind="guard" x="-1096" y="-1147">stillPossibleToReserve()</label>
+			<label kind="synchronisation" x="-1096" y="-1130">OK[id]?</label>
+			<label kind="assignment" x="-1096" y="-1113">updateResInfo()</label>
+			<nail x="-986" y="-1088"/>
 			<nail x="-1088" y="-1088"/>
-		</transition>
-		<transition>
-			<source ref="id3"/>
-			<target ref="id6"/>
-			<label kind="guard" x="-1071" y="-952">!hasReservations()</label>
-			<label kind="synchronisation" x="-1071" y="-935">notOK[id]?</label>
-			<nail x="-884" y="-952"/>
-			<nail x="-1088" y="-952"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
@@ -384,41 +391,34 @@ bool isWellFormed(){
 			<target ref="id2"/>
 			<label kind="synchronisation" x="-425" y="-952">OK[id]?</label>
 			<label kind="assignment" x="-425" y="-935">updateLockInfo()</label>
-			<nail x="-272" y="-952"/>
-			<nail x="-442" y="-952"/>
+			<nail x="-374" y="-952"/>
+			<nail x="-476" y="-952"/>
 		</transition>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id6"/>
-			<label kind="guard" x="-943" y="-748">!stillAbleToPass() &amp;&amp; !moreReservations()</label>
-			<label kind="synchronisation" x="-943" y="-731">passed[boxes[index+1]]!</label>
-			<label kind="assignment" x="-943" y="-714">updateLocationInfo()</label>
-			<nail x="-1190" y="-748"/>
+			<label kind="guard" x="-943" y="-705">!stillAbleToPass() &amp;&amp; !moreReservations()</label>
+			<label kind="synchronisation" x="-943" y="-688">passed[boxes[index+1]]!</label>
+			<label kind="assignment" x="-943" y="-671">updateLocationInfo()</label>
+			<nail x="-1190" y="-714"/>
 		</transition>
 		<transition>
 			<source ref="id0"/>
 			<target ref="id2"/>
-			<label kind="guard" x="-926" y="-901">stillAbleToPass() || moreReservations()</label>
-			<label kind="synchronisation" x="-833" y="-884">passed[boxes[index+1]]!</label>
-			<label kind="assignment" x="-799" y="-867">updateLocationInfo()</label>
-			<nail x="-646" y="-850"/>
+			<label kind="guard" x="-926" y="-858">stillAbleToPass() || moreReservations()</label>
+			<label kind="synchronisation" x="-833" y="-841">passed[boxes[index+1]]!</label>
+			<label kind="assignment" x="-799" y="-824">updateLocationInfo()</label>
+			<nail x="-646" y="-816"/>
 			<nail x="-646" y="-918"/>
 		</transition>
 		<transition>
 			<source ref="id2"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-501" y="-901">possibleToPass()</label>
-			<label kind="synchronisation" x="-501" y="-884">pass[boxes[index+1]]!</label>
-			<label kind="assignment" x="-501" y="-867">updateHeadInfo()</label>
+			<label kind="guard" x="-501" y="-858">possibleToPass()</label>
+			<label kind="synchronisation" x="-501" y="-841">pass[boxes[index+1]]!</label>
+			<label kind="assignment" x="-501" y="-824">updateHeadInfo()</label>
 			<nail x="-510" y="-918"/>
-			<nail x="-510" y="-850"/>
-		</transition>
-		<transition>
-			<source ref="id6"/>
-			<target ref="id3"/>
-			<label kind="guard" x="-1113" y="-1037">possibleToReserve()</label>
-			<label kind="synchronisation" x="-1113" y="-1020">reqSeg[boxes[resCBIndex]]
-[id][segments[resSegIndex]]!</label>
+			<nail x="-510" y="-816"/>
 		</transition>
 		<transition>
 			<source ref="id4"/>
