@@ -22,6 +22,7 @@
 
 * No derailment (Move between connected segments)
 ** Elapsed time
+#+PLOT: title:"Elapsed time (No derailment: Move between connected segments)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -37,12 +38,13 @@
 | Station Ten                |  601.131 |  602.165 |  600.341 |    601.21233 |
 | Station Twelfth            | 1749.956 | 1751.553 | 1724.338 |     1741.949 |
 | Two trains same direction  |    0.014 |    0.019 |    0.016 |  0.016333333 |
-| Four trains same direction |      DNF |      DNF |      DNF |          DNF |
+| Four trains same direction | 1146.256 | 1130.966 | 1133.690 |    1136.9707 |
 | Nærumbanen (2T)            |   24.112 |   24.158 |   24.186 |       24.152 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (No derailment: Move between connected segments)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -58,13 +60,14 @@
 | Station Ten                | 313.016 | 313.220 | 313.748 |   313.328 |
 | Station Twelfth            | 560.580 | 724.492 | 723.488 |    669.52 |
 | Two trains same direction  |   7.488 |   7.496 |   7.540 |     7.508 |
-| Four trains same direction |     DNF |     DNF |     DNF |       DNF |
+| Four trains same direction | 726.732 | 749.296 | 749.460 | 741.82933 |
 | Nærumbanen (2T)            |  78.428 |  78.824 |  78.828 | 78.693333 |
 |----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 * No derailment (Critical section)
 ** Elapsed time
+#+PLOT: title:"Elapsed time (No derailment: No trains in the critical section)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -80,12 +83,13 @@
 | Station Ten                |  599.734 |  601.485 |  600.747 |    600.65533 |
 | Station Twelfth            | 1744.904 | 1745.973 | 1739.476 |     1743.451 |
 | Two trains same direction  |    0.022 |    0.015 |    0.019 |  0.018666667 |
-| Four trains same direction |      DNF |      DNF |      DNF |          DNF |
+| Four trains same direction | 1121.890 | 1139.341 | 1130.754 |    1130.6617 |
 | Nærumbanen (2T)            |   24.004 |   24.091 |   24.111 |    24.068667 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (No derailment: No trains in the critical section)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -101,13 +105,14 @@
 | Station Ten                | 312.992 | 313.008 | 313.132 |   313.044 |
 | Station Twelfth            | 559.520 | 559.532 | 559.600 | 559.55067 |
 | Two trains same direction  |   7.484 |   7.488 |   7.492 |     7.488 |
-| Four trains same direction |     DNF |     DNF |     DNF |       DNF |
+| Four trains same direction | 726.708 | 726.852 | 726.864 |   726.808 |
 | Nærumbanen (2T)            |  78.428 |  78.800 |  78.808 | 78.678667 |
 |----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 * No collision
 ** Elapsed time
+#+PLOT: title:"Elapsed time (No collision)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -123,12 +128,13 @@
 | Station Ten                |  599.563 |  599.868 |  597.934 |    599.12167 |
 | Station Twelfth            | 1741.865 | 1741.334 | 1747.987 |    1743.7287 |
 | Two trains same direction  |    0.016 |    0.019 |    0.019 |        0.018 |
-| Four trains same direction |      DNF |      DNF |      DNF |          DNF |
+| Four trains same direction | 1142.559 | 1141.663 | 1139.661 |    1141.2943 |
 | Nærumbanen (2T)            |   24.081 |   24.345 |   24.339 |       24.255 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (No collision)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+----------+---------+-----------|
 | Configuration              |   First |   Second |   Third |   Average |
 |----------------------------+---------+----------+---------+-----------|
@@ -144,13 +150,14 @@
 | Station Ten                | 312.972 |  312.984 | 313.116 |   313.024 |
 | Station Twelfth            | 723.464 | 1051.300 | 887.412 |   887.392 |
 | Two trains same direction  |   7.496 |    7.548 |   7.560 | 7.5346667 |
-| Four trains same direction |     DNF |      DNF |     DNF |       DNF |
+| Four trains same direction | 726.716 |  726.880 | 726.904 | 726.83333 |
 | Nærumbanen (2T)            |  78.436 |   78.828 |  78.888 | 78.717333 |
 |----------------------------+---------+----------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 * Will arrive
 ** Elapsed time
+#+PLOT: title:"Elapsed time (Will arrive)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -166,12 +173,13 @@
 | Station Ten                |  590.130 |  587.481 |  588.739 |    588.78333 |
 | Station Twelfth            | 1731.068 | 1730.117 | 1726.287 |    1729.1573 |
 | Two trains same direction  |    0.018 |    0.017 |    0.018 |  0.017666667 |
-| Four trains same direction |      DNF |      DNF |      DNF |          DNF |
+| Four trains same direction | 1082.917 | 1090.144 | 1096.833 |    1089.9647 |
 | Nærumbanen (2T)            |   23.900 |   23.947 |   23.908 |    23.918333 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (Will arrive)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -187,7 +195,7 @@
 | Station Ten                | 312.360 | 312.528 | 312.528 |   312.472 |
 | Station Twelfth            | 557.696 | 557.984 | 557.984 |   557.888 |
 | Two trains same direction  |   7.460 |   7.460 |   7.460 |      7.46 |
-| Four trains same direction |     DNF |     DNF |     DNF |       DNF |
+| Four trains same direction | 726.668 | 726.800 | 726.808 | 726.75867 |
 | Nærumbanen (2T)            |  78.392 |  78.704 |  78.704 |      78.6 |
 |----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
