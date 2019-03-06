@@ -19,7 +19,6 @@
 |----------------------------+-------+--------+-------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
-
 * No derailment (Move between connected segments)
 ** Elapsed time
 #+PLOT: title:"Elapsed time (No derailment: Move between connected segments)" deps:(5) set:"xrange[0:]"
