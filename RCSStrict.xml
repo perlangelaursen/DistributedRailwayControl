@@ -354,7 +354,7 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="guard" x="-467" y="-1147">possibleToLock() &amp;&amp; !possibleToPass()</label>
+			<label kind="guard" x="-467" y="-1147">possibleToLock()</label>
 			<label kind="synchronisation" x="-467" y="-1130">reqLock[boxes[lockIndex]][id]
 [segments[lockIndex-1]][segments[lockIndex]]!</label>
 			<nail x="-476" y="-1088"/>
@@ -414,7 +414,7 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id2"/>
 			<target ref="id0"/>
-			<label kind="guard" x="-501" y="-858">possibleToPass()</label>
+			<label kind="guard" x="-501" y="-858">possibleToPass() &amp;&amp; !(possibleToLock())</label>
 			<label kind="synchronisation" x="-501" y="-841">pass[boxes[index+1]]!</label>
 			<label kind="assignment" x="-501" y="-824">updateHeadInfo()</label>
 			<nail x="-510" y="-918"/>
