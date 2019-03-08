@@ -2,6 +2,7 @@
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
 	<declaration>// Station 1 with regular control box
+//Configuration Data - Part 1
 const int NCB = 5;
 const int NSEG = 5;
 const int NTRAIN = 2;
@@ -22,9 +23,10 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-//EXAMPLE
-const int[1,NCB] lockLimit = 2;
-const int[1,NSEG] resLimit = 2;
+//Configuration Data - Part 2
+const int[1,NROUTELENGTH] resLimit = 2;
+const int[0,NROUTELENGTH-1] lockLimit = 2;
+
 
 const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,2,4}, {4,3,1,0}};
 const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
@@ -645,9 +647,8 @@ bool isWellFormed(){
 			<label kind="select" x="-790" y="-187">i : t_id,
 j : seg_id,
 k : seg_id</label>
-			<label kind="guard" x="-790" y="-136">lockedBy == -1</label>
-			<label kind="synchronisation" x="-790" y="-119">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-790" y="-102">result = checkLock(i,j,k),
+			<label kind="synchronisation" x="-790" y="-127">reqLock[id][i][j][k]?</label>
+			<label kind="assignment" x="-790" y="-110">result = checkLock(i,j,k),
 tid = i</label>
 			<nail x="-714" y="-68"/>
 		</transition>

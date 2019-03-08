@@ -2,6 +2,7 @@
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
 	<declaration>// Station 1 with regular control box
+//Configuration Data - Part 1
 const int NCB = 5;
 const int NSEG = 5;
 const int NTRAIN = 2;
@@ -22,11 +23,11 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-//EXAMPLE
-const int[1,NCB] lockLimit = 2;
-const int[1,NSEG] resLimit = 2;
+//Configuration Data - Part 2
+const int[1,NROUTELENGTH] resLimit = 2;
+const int[0,NROUTELENGTH-1] lockLimit = 2;
 
-const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,2,4}, {4,3,1,0}};
+const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,1,2,4}, {4,3,1,0}};
 const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
 const pV_id points[NCB] = {-1, -1, 0, 1, -1};
