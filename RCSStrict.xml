@@ -252,7 +252,7 @@ bool possibleToLock() {
 }
 
 bool hasArrived() {
-    return curSeg == segments[routeLength-1];
+    return index == routeLength-1;
 }
 
 bool possibleToReserve() {
