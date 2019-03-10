@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>// Station 1 with regular control box
-//Configuration Data - Part 1
-const int NCB = 5;
-const int NSEG = 5;
-const int NTRAIN = 2;
-const int NPOINT = 2;
-const int NROUTELENGTH = 4;
+	<declaration>//Smallest network
+const int NCB = 2;
+const int NSEG = 1;
+const int NTRAIN = 1;
+const int NPOINT = 1;
+const int NROUTELENGTH = 1;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id;
@@ -24,15 +23,15 @@ typedef struct {
 } reservation;
 
 //Configuration Data - Part 2
-const int[1,NROUTELENGTH] resLimit = 2;
-const int[0,NROUTELENGTH-1] lockLimit = 2;
+const int[1,NROUTELENGTH] resLimit = 1;
+const int[0,NROUTELENGTH-1] lockLimit = 0;
 
-const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,1,2,4}, {4,3,1,0}};
-const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
-const pV_id points[NCB] = {-1, -1, 0, 1, -1};
-const reservation initialRes[NTRAIN] = {{1, 0}, {3,4}};
-bool pointInPlus[NPOINT] = {true, true};
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1}};
+const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,-1,-1}};
+const pV_id points[NCB] = { -1,-1};
+const reservation initialRes[NTRAIN] = {{1,0}};
+bool pointInPlus[NPOINT] = {true};
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -251,7 +250,7 @@ bool possibleToLock() {
 }
 
 bool hasArrived() {
-    return curSeg == segments[routeLength-1];
+    return index == routeLength-1;
 }
 
 bool possibleToReserve() {
