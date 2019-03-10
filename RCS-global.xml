@@ -245,7 +245,7 @@ void initialize() {
 }
 
 bool possibleToLock() {
-    return lockIndex &lt; routeLength &amp;&amp; locks &lt; lockLimit &amp;&amp; resSegIndex &gt; lockIndex;
+    return lockIndex &lt; routeLength &amp;&amp; locks &lt; lockLimit &amp;&amp; ((resBit == 0 &amp;&amp; resSegIndex &gt; lockIndex) || (resBit == 1 &amp;&amp; resSegIndex &gt;= lockIndex));
 }
 
 bool hasArrived() {
