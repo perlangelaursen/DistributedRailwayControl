@@ -320,6 +320,7 @@ bool isWellFormed(){
 			<name x="-255" y="-1037">Locking</name>
 		</location>
 		<location id="id2" x="-578" y="-1020">
+			<name x="-680" y="-1028">PassOrLock</name>
 		</location>
 		<location id="id3" x="-884" y="-1020">
 			<name x="-867" y="-1028">Reserving</name>

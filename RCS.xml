@@ -315,9 +315,9 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id1"/>
 			<target ref="id4"/>
-			<label kind="guard" x="-1011" y="-1096">isWellFormed()</label>
-			<label kind="synchronisation" x="-1011" y="-1079">start?</label>
-			<label kind="assignment" x="-1011" y="-1062">initialize()</label>
+			<label kind="guard" x="-1028" y="-1096">isWellFormed()</label>
+			<label kind="synchronisation" x="-1028" y="-1079">start?</label>
+			<label kind="assignment" x="-1028" y="-1062">initialize()</label>
 		</transition>
 		<transition>
 			<source ref="id5"/>
@@ -376,9 +376,10 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id4"/>
 			<target ref="id5"/>
-			<label kind="guard" x="-1317" y="-833">possibleToLock()</label>
-			<label kind="synchronisation" x="-1317" y="-816">reqLock[boxes[lockIndex]][id]
-[segments[lockIndex-1]][segments[lockIndex]]!</label>
+			<label kind="guard" x="-1241" y="-841">possibleToLock()</label>
+			<label kind="synchronisation" x="-1241" y="-824">reqLock[boxes[lockIndex]][id]
+[segments[lockIndex-1]]
+[segments[lockIndex]]!</label>
 			<nail x="-1020" y="-884"/>
 		</transition>
 		<transition>
@@ -547,9 +548,9 @@ bool isWellFormed(){
 			<source ref="id13"/>
 			<target ref="id12"/>
 			<label kind="guard" x="-458" y="-153">result == NOSWITCH</label>
-			<nail x="-646" y="-136"/>
+			<nail x="-544" y="-136"/>
 			<nail x="-322" y="-136"/>
-			<nail x="-170" y="-136"/>
+			<nail x="-272" y="-136"/>
 		</transition>
 		<transition>
 			<source ref="id14"/>
@@ -675,8 +676,8 @@ tid = i</label>
 		<transition>
 			<source ref="id17"/>
 			<target ref="id19"/>
-			<label kind="synchronisation" x="-25" y="42">OKp[id]!</label>
-			<label kind="assignment" x="-25" y="59">pointInPlus[id] = true</label>
+			<label kind="synchronisation" x="-42" y="42">OKp[id]!</label>
+			<label kind="assignment" x="-42" y="59">pointInPlus[id] = true</label>
 			<nail x="34" y="34"/>
 		</transition>
 	</template>
