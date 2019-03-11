@@ -254,7 +254,7 @@ bool hasArrived() {
 }
 
 bool possibleToReserve() {
-    return !hasArrived() &amp;&amp; resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
+    return resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
 }
 
 bool possibleToPass() {
