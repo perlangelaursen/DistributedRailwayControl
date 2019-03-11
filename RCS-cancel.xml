@@ -290,7 +290,7 @@ void updateLockInfo(){
 }
 
 bool possibleToCancel(){
-    return (resSegIndex &gt; index + 1) || (resCBIndex &gt; index + 1);
+    return resCBIndex &gt; index + 1;
 }
 
 void updateCancel(){
@@ -543,10 +543,6 @@ void updateCancel(seg_id s){
             res[i] = -1;
         }
     }
-}
-
-void cancLock(){
-    lockedBy = -1;
 }
 
 bool isWellFormed(){
