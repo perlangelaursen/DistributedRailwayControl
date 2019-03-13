@@ -206,7 +206,7 @@ cBV_id boxes[NROUTELENGTH+1];
 int[0,NSEG] routeLength;
 segV_id curSeg;
 
-bool requiresLock[NCB];
+bool requiresLock[NROUTELENGTH+1];
 
 cB_id lockIndex = 1;
 seg_id index = 0;
@@ -219,7 +219,7 @@ segV_id headSeg = -1;
 cB_id locks = 0;
 
 void updateLockIndex(){
-    while(lockIndex &lt; NCB-1 &amp;&amp; !requiresLock[lockIndex]){
+    while(lockIndex &lt; NROUTELENGTH &amp;&amp; !requiresLock[lockIndex]){
         lockIndex++;
     }
 }
