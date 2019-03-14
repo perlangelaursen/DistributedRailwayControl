@@ -3,6 +3,7 @@ const int NCB = 4;
 const int NSEG = 4; 
 const int NTRAIN = 2; 
 const int NPOINT = 2;
+const int NROUTELENGTH = 3;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id;
@@ -21,8 +22,8 @@ typedef struct {
 const int[1,NCB] lockLimit = 2;
 const int[1,NSEG] resLimit = 2;
 
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,1,2,3}, {3,2,1,-1}};
-const segV_id segRoutes[NTRAIN][NSEG]= {{0,1,3,-1}, {3,2,-1,-1}};
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3}, {3,2,1,-1}};
+const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,3}, {3,2,-1}};
 const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,2}, {3,1,2}, {3,-1,-1}};
 const pV_id points[NCB] = { -1, 0, 1,-1};
 const reservation initialRes[NTRAIN] = {{1, 0}, {2,3}};
