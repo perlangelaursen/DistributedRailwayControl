@@ -24,7 +24,7 @@ typedef struct {
 } reservation;
 
 //Configuration Data - Part 2
-const int[1,NROUTELENGTH] resLimit = 2;
+const int[0,NROUTELENGTH] resLimit = 2;
 const int[0,NROUTELENGTH-1] lockLimit = 2;
 
 const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,2,4}, {4,3,1,0}};
@@ -206,7 +206,7 @@ cBV_id boxes[NROUTELENGTH+1];
 int[0,NROUTELENGTH] routeLength;
 segV_id curSeg;
 
-bool requiresLock[NCB];
+bool requiresLock[NROUTELENGTH+1];
 
 cB_id lockIndex = 1;
 seg_id index = 0;
@@ -220,7 +220,7 @@ cB_id locks = 0;
 
 
 void updateLockIndex(){
-    while(lockIndex &lt; NCB-1 &amp;&amp; !requiresLock[lockIndex]){
+    while(lockIndex &lt; NROUTELENGTH &amp;&amp; !requiresLock[lockIndex]){
         lockIndex++;
     }
 }
@@ -257,7 +257,7 @@ bool hasArrived() {
 }
 
 bool possibleToReserve() {
-    return !hasArrived() &amp;&amp; resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
+    return resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
 }
 
 bool possibleToPass() {
