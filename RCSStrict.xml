@@ -497,7 +497,7 @@ void initialize() {
     }
 }
 
-int[-1,2] checkSegment(t_id tid, seg_id sid) {
+int[-1,2] checkSegment(seg_id sid) {
     for(i:int[0,2]) {
         if(segments[i] == sid &amp;&amp; res[i] == -1) {
             return i;
@@ -659,7 +659,7 @@ tid = i</label>
 			<label kind="select" x="-1173" y="-263">i : t_id,
 j : seg_id</label>
 			<label kind="synchronisation" x="-1173" y="-229">reqSeg[id][i][j]?</label>
-			<label kind="assignment" x="-1173" y="-212">result = checkSegment(i,j),
+			<label kind="assignment" x="-1173" y="-212">result = checkSegment(j),
 tid = i</label>
 			<nail x="-952" y="-136"/>
 			<nail x="-952" y="-272"/>
