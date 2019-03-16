@@ -454,7 +454,7 @@ int[-1,2] checkSegment(seg_id sid) {
     return -1;
 }
 
-int[0,2] checkLock(t_id tid, seg_id s1, seg_id s2){
+int[0,2] checkLock(seg_id s1, seg_id s2){
   if(lockedBy == -1 &amp;&amp; (segments[0] == s1 &amp;&amp; exists(i:int[1,2]) segments[i] == s2) || (segments[0] == s2 &amp;&amp; exists(i:int[1,2]) segments[i] == s1)){
     if ((s1 == segments[0] &amp;&amp; s2 == connected) || (s2 == segments[0] &amp;&amp; s1 == connected)){
         return NOSWITCH;
@@ -597,7 +597,7 @@ bool isWellFormed(){
 j : seg_id,
 k : seg_id</label>
 			<label kind="synchronisation" x="-790" y="-136">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-790" y="-119">result = checkLock(i,j,k),
+			<label kind="assignment" x="-790" y="-119">result = checkLock(j,k),
 tid = i</label>
 			<nail x="-714" y="-68"/>
 		</transition>
