@@ -3,6 +3,7 @@ const int NCB = 6; //Number of control boxes
 const int NSEG = 5; //Number of segments
 const int NTRAIN = 2; //Number of trains
 const int NPOINT = 2; //Number of switchable points
+const int NROUTELENGTH = 3;
 
 //TYPES
 typedef int[0, NTRAIN-1] t_id; //Train IDs
@@ -22,8 +23,8 @@ typedef struct {
 const int[1,NCB] lockLimit = 2;
 const int[1,NSEG] resLimit = 2;
 
-const cBV_id boxRoutes[NTRAIN][NCB] = {{0,2,3,5,-1,-1}, {1,2,3,4,-1,-1}};
-const segV_id segRoutes[NTRAIN][NSEG]= {{0,2,4,-1, -1}, {1,2,3,-1,-1}};
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,2,3,5}, {1,2,3,4}};
+const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,2,4}, {1,2,3}};
 const segV_id cBs[NCB][3]= {{-1,0,-1}, {1,-1,-1}, {2,1,0}, {2, 4, 3}, {3,-1,-1}, {4,-1,-1}};
 const pV_id points[NCB] = { -1, -1, 0, 1, -1, -1};
 const reservation initialRes[NTRAIN] = {{2, 0}, {2, 1}};
