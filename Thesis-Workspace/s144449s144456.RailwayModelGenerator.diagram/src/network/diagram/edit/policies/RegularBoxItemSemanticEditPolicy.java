@@ -13,12 +13,9 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipReques
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 
-import network.diagram.edit.commands.SegmentOneWayCreateCommand;
-import network.diagram.edit.commands.SegmentOneWayReorientCommand;
-import network.diagram.edit.commands.SegmentTwoWayCreateCommand;
-import network.diagram.edit.commands.SegmentTwoWayReorientCommand;
-import network.diagram.edit.parts.SegmentOneWayEditPart;
-import network.diagram.edit.parts.SegmentTwoWayEditPart;
+import network.diagram.edit.commands.SegmentCreateCommand;
+import network.diagram.edit.commands.SegmentReorientCommand;
+import network.diagram.edit.parts.SegmentEditPart;
 import network.diagram.part.NetworkVisualIDRegistry;
 import network.diagram.providers.NetworkElementTypes;
 
@@ -43,13 +40,7 @@ public class RegularBoxItemSemanticEditPolicy extends NetworkBaseItemSemanticEdi
 		cmd.setTransactionNestingEnabled(false);
 		for (Iterator<?> it = view.getTargetEdges().iterator(); it.hasNext();) {
 			Edge incomingLink = (Edge) it.next();
-			if (NetworkVisualIDRegistry.getVisualID(incomingLink) == SegmentOneWayEditPart.VISUAL_ID) {
-				DestroyElementRequest r = new DestroyElementRequest(incomingLink.getElement(), false);
-				cmd.add(new DestroyElementCommand(r));
-				cmd.add(new DeleteCommand(getEditingDomain(), incomingLink));
-				continue;
-			}
-			if (NetworkVisualIDRegistry.getVisualID(incomingLink) == SegmentTwoWayEditPart.VISUAL_ID) {
+			if (NetworkVisualIDRegistry.getVisualID(incomingLink) == SegmentEditPart.VISUAL_ID) {
 				DestroyElementRequest r = new DestroyElementRequest(incomingLink.getElement(), false);
 				cmd.add(new DestroyElementCommand(r));
 				cmd.add(new DeleteCommand(getEditingDomain(), incomingLink));
@@ -58,13 +49,7 @@ public class RegularBoxItemSemanticEditPolicy extends NetworkBaseItemSemanticEdi
 		}
 		for (Iterator<?> it = view.getSourceEdges().iterator(); it.hasNext();) {
 			Edge outgoingLink = (Edge) it.next();
-			if (NetworkVisualIDRegistry.getVisualID(outgoingLink) == SegmentOneWayEditPart.VISUAL_ID) {
-				DestroyElementRequest r = new DestroyElementRequest(outgoingLink.getElement(), false);
-				cmd.add(new DestroyElementCommand(r));
-				cmd.add(new DeleteCommand(getEditingDomain(), outgoingLink));
-				continue;
-			}
-			if (NetworkVisualIDRegistry.getVisualID(outgoingLink) == SegmentTwoWayEditPart.VISUAL_ID) {
+			if (NetworkVisualIDRegistry.getVisualID(outgoingLink) == SegmentEditPart.VISUAL_ID) {
 				DestroyElementRequest r = new DestroyElementRequest(outgoingLink.getElement(), false);
 				cmd.add(new DestroyElementCommand(r));
 				cmd.add(new DeleteCommand(getEditingDomain(), outgoingLink));
@@ -96,11 +81,8 @@ public class RegularBoxItemSemanticEditPolicy extends NetworkBaseItemSemanticEdi
 	 * @generated
 	 */
 	protected Command getStartCreateRelationshipCommand(CreateRelationshipRequest req) {
-		if (NetworkElementTypes.SegmentOneWay_4002 == req.getElementType()) {
-			return getGEFWrapper(new SegmentOneWayCreateCommand(req, req.getSource(), req.getTarget()));
-		}
-		if (NetworkElementTypes.SegmentTwoWay_4003 == req.getElementType()) {
-			return getGEFWrapper(new SegmentTwoWayCreateCommand(req, req.getSource(), req.getTarget()));
+		if (NetworkElementTypes.Segment_4004 == req.getElementType()) {
+			return getGEFWrapper(new SegmentCreateCommand(req, req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -109,11 +91,8 @@ public class RegularBoxItemSemanticEditPolicy extends NetworkBaseItemSemanticEdi
 	 * @generated
 	 */
 	protected Command getCompleteCreateRelationshipCommand(CreateRelationshipRequest req) {
-		if (NetworkElementTypes.SegmentOneWay_4002 == req.getElementType()) {
-			return getGEFWrapper(new SegmentOneWayCreateCommand(req, req.getSource(), req.getTarget()));
-		}
-		if (NetworkElementTypes.SegmentTwoWay_4003 == req.getElementType()) {
-			return getGEFWrapper(new SegmentTwoWayCreateCommand(req, req.getSource(), req.getTarget()));
+		if (NetworkElementTypes.Segment_4004 == req.getElementType()) {
+			return getGEFWrapper(new SegmentCreateCommand(req, req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -126,10 +105,8 @@ public class RegularBoxItemSemanticEditPolicy extends NetworkBaseItemSemanticEdi
 	 */
 	protected Command getReorientRelationshipCommand(ReorientRelationshipRequest req) {
 		switch (getVisualID(req)) {
-		case SegmentOneWayEditPart.VISUAL_ID:
-			return getGEFWrapper(new SegmentOneWayReorientCommand(req));
-		case SegmentTwoWayEditPart.VISUAL_ID:
-			return getGEFWrapper(new SegmentTwoWayReorientCommand(req));
+		case SegmentEditPart.VISUAL_ID:
+			return getGEFWrapper(new SegmentReorientCommand(req));
 		}
 		return super.getReorientRelationshipCommand(req);
 	}

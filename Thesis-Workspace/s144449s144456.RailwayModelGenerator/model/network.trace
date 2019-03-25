@@ -25,17 +25,10 @@
         queryText="true"/>
   </nodeTraces>
   <linkTraces
-      visualID="4002"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://s144449s144456.railwaymodelgenerator/network' and _eClass_.name = 'SegmentOneWay')">
+      visualID="4004"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://s144449s144456.railwaymodelgenerator/network' and _eClass_.name = 'Segment')">
     <linkLabelTraces
-        visualID="6001"
-        queryText="true"/>
-  </linkTraces>
-  <linkTraces
-      visualID="4003"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://s144449s144456.railwaymodelgenerator/network' and _eClass_.name = 'SegmentTwoWay')">
-    <linkLabelTraces
-        visualID="6002"
+        visualID="6003"
         queryText="true"/>
   </linkTraces>
 </trace:TraceModel>

@@ -43,17 +43,11 @@ public class NetworkEditPartFactory implements EditPartFactory {
 			case TrainIdEditPart.VISUAL_ID:
 				return new TrainIdEditPart(view);
 
-			case SegmentOneWayEditPart.VISUAL_ID:
-				return new SegmentOneWayEditPart(view);
+			case SegmentEditPart.VISUAL_ID:
+				return new SegmentEditPart(view);
 
-			case SegmentOneWayIdEditPart.VISUAL_ID:
-				return new SegmentOneWayIdEditPart(view);
-
-			case SegmentTwoWayEditPart.VISUAL_ID:
-				return new SegmentTwoWayEditPart(view);
-
-			case SegmentTwoWayIdEditPart.VISUAL_ID:
-				return new SegmentTwoWayIdEditPart(view);
+			case SegmentIdEditPart.VISUAL_ID:
+				return new SegmentIdEditPart(view);
 
 			}
 		}

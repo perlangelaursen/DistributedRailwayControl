@@ -32,9 +32,8 @@ public class NetworkModelingAssistantProviderOfRegularBoxEditPart extends Networ
 	* @generated
 	*/
 	public List<IElementType> doGetRelTypesOnSource(RegularBoxEditPart source) {
-		List<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(NetworkElementTypes.SegmentOneWay_4002);
-		types.add(NetworkElementTypes.SegmentTwoWay_4003);
+		List<IElementType> types = new ArrayList<IElementType>(1);
+		types.add(NetworkElementTypes.Segment_4004);
 		return types;
 	}
 
@@ -56,16 +55,10 @@ public class NetworkModelingAssistantProviderOfRegularBoxEditPart extends Networ
 			IGraphicalEditPart targetEditPart) {
 		List<IElementType> types = new LinkedList<IElementType>();
 		if (targetEditPart instanceof SwitchBoxEditPart) {
-			types.add(NetworkElementTypes.SegmentOneWay_4002);
+			types.add(NetworkElementTypes.Segment_4004);
 		}
 		if (targetEditPart instanceof RegularBoxEditPart) {
-			types.add(NetworkElementTypes.SegmentOneWay_4002);
-		}
-		if (targetEditPart instanceof SwitchBoxEditPart) {
-			types.add(NetworkElementTypes.SegmentTwoWay_4003);
-		}
-		if (targetEditPart instanceof RegularBoxEditPart) {
-			types.add(NetworkElementTypes.SegmentTwoWay_4003);
+			types.add(NetworkElementTypes.Segment_4004);
 		}
 		return types;
 	}
@@ -85,10 +78,7 @@ public class NetworkModelingAssistantProviderOfRegularBoxEditPart extends Networ
 	*/
 	public List<IElementType> doGetTypesForTarget(RegularBoxEditPart source, IElementType relationshipType) {
 		List<IElementType> types = new ArrayList<IElementType>();
-		if (relationshipType == NetworkElementTypes.SegmentOneWay_4002) {
-			types.add(NetworkElementTypes.SwitchBox_2001);
-			types.add(NetworkElementTypes.RegularBox_2002);
-		} else if (relationshipType == NetworkElementTypes.SegmentTwoWay_4003) {
+		if (relationshipType == NetworkElementTypes.Segment_4004) {
 			types.add(NetworkElementTypes.SwitchBox_2001);
 			types.add(NetworkElementTypes.RegularBox_2002);
 		}
@@ -109,9 +99,8 @@ public class NetworkModelingAssistantProviderOfRegularBoxEditPart extends Networ
 	* @generated
 	*/
 	public List<IElementType> doGetRelTypesOnTarget(RegularBoxEditPart target) {
-		List<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(NetworkElementTypes.SegmentOneWay_4002);
-		types.add(NetworkElementTypes.SegmentTwoWay_4003);
+		List<IElementType> types = new ArrayList<IElementType>(1);
+		types.add(NetworkElementTypes.Segment_4004);
 		return types;
 	}
 
@@ -130,10 +119,7 @@ public class NetworkModelingAssistantProviderOfRegularBoxEditPart extends Networ
 	*/
 	public List<IElementType> doGetTypesForSource(RegularBoxEditPart target, IElementType relationshipType) {
 		List<IElementType> types = new ArrayList<IElementType>();
-		if (relationshipType == NetworkElementTypes.SegmentOneWay_4002) {
-			types.add(NetworkElementTypes.SwitchBox_2001);
-			types.add(NetworkElementTypes.RegularBox_2002);
-		} else if (relationshipType == NetworkElementTypes.SegmentTwoWay_4003) {
+		if (relationshipType == NetworkElementTypes.Segment_4004) {
 			types.add(NetworkElementTypes.SwitchBox_2001);
 			types.add(NetworkElementTypes.RegularBox_2002);
 		}

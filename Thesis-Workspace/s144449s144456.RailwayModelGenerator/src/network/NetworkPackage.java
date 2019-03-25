@@ -278,116 +278,6 @@ public interface NetworkPackage extends EPackage {
 	int SEGMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link network.impl.SegmentOneWayImpl <em>Segment One Way</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see network.impl.SegmentOneWayImpl
-	 * @see network.impl.NetworkPackageImpl#getSegmentOneWay()
-	 * @generated
-	 */
-	int SEGMENT_ONE_WAY = 4;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_ONE_WAY__ID = SEGMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Start</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_ONE_WAY__START = SEGMENT__START;
-
-	/**
-	 * The feature id for the '<em><b>End</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_ONE_WAY__END = SEGMENT__END;
-
-	/**
-	 * The number of structural features of the '<em>Segment One Way</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_ONE_WAY_FEATURE_COUNT = SEGMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Segment One Way</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_ONE_WAY_OPERATION_COUNT = SEGMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link network.impl.SegmentTwoWayImpl <em>Segment Two Way</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see network.impl.SegmentTwoWayImpl
-	 * @see network.impl.NetworkPackageImpl#getSegmentTwoWay()
-	 * @generated
-	 */
-	int SEGMENT_TWO_WAY = 5;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_TWO_WAY__ID = SEGMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Start</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_TWO_WAY__START = SEGMENT__START;
-
-	/**
-	 * The feature id for the '<em><b>End</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_TWO_WAY__END = SEGMENT__END;
-
-	/**
-	 * The number of structural features of the '<em>Segment Two Way</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_TWO_WAY_FEATURE_COUNT = SEGMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Segment Two Way</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEGMENT_TWO_WAY_OPERATION_COUNT = SEGMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link network.impl.SwitchBoxImpl <em>Switch Box</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -395,7 +285,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getSwitchBox()
 	 * @generated
 	 */
-	int SWITCH_BOX = 6;
+	int SWITCH_BOX = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -486,7 +376,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getRegularBox()
 	 * @generated
 	 */
-	int REGULAR_BOX = 7;
+	int REGULAR_BOX = 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -541,7 +431,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getTrain()
 	 * @generated
 	 */
-	int TRAIN = 8;
+	int TRAIN = 6;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -587,7 +477,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getPointSetting()
 	 * @generated
 	 */
-	int POINT_SETTING = 9;
+	int POINT_SETTING = 7;
 
 
 	/**
@@ -739,26 +629,6 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSegment_End();
-
-	/**
-	 * Returns the meta object for class '{@link network.SegmentOneWay <em>Segment One Way</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Segment One Way</em>'.
-	 * @see network.SegmentOneWay
-	 * @generated
-	 */
-	EClass getSegmentOneWay();
-
-	/**
-	 * Returns the meta object for class '{@link network.SegmentTwoWay <em>Segment Two Way</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Segment Two Way</em>'.
-	 * @see network.SegmentTwoWay
-	 * @generated
-	 */
-	EClass getSegmentTwoWay();
 
 	/**
 	 * Returns the meta object for class '{@link network.SwitchBox <em>Switch Box</em>}'.
@@ -997,26 +867,6 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SEGMENT__END = eINSTANCE.getSegment_End();
-
-		/**
-		 * The meta object literal for the '{@link network.impl.SegmentOneWayImpl <em>Segment One Way</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see network.impl.SegmentOneWayImpl
-		 * @see network.impl.NetworkPackageImpl#getSegmentOneWay()
-		 * @generated
-		 */
-		EClass SEGMENT_ONE_WAY = eINSTANCE.getSegmentOneWay();
-
-		/**
-		 * The meta object literal for the '{@link network.impl.SegmentTwoWayImpl <em>Segment Two Way</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see network.impl.SegmentTwoWayImpl
-		 * @see network.impl.NetworkPackageImpl#getSegmentTwoWay()
-		 * @generated
-		 */
-		EClass SEGMENT_TWO_WAY = eINSTANCE.getSegmentTwoWay();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.SwitchBoxImpl <em>Switch Box</em>}' class.

@@ -24,14 +24,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="3"
         eType="#//Segment" eOpposite="#//Segment/start"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Segment" abstract="true" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="start" lowerBound="1" eType="#//ControlBox"
         eOpposite="#//ControlBox/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="1" eType="#//ControlBox"
         eOpposite="#//ControlBox/ingoing"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SegmentOneWay" eSuperTypes="#//Segment"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SegmentTwoWay" eSuperTypes="#//Segment"/>
   <eClassifiers xsi:type="ecore:EClass" name="SwitchBox" eSuperTypes="#//ControlBox">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="connected" lowerBound="1"
         eType="#//PointSetting"/>

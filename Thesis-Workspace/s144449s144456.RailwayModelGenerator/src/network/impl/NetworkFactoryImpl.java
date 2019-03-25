@@ -58,8 +58,7 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case NetworkPackage.NETWORK: return createNetwork();
-			case NetworkPackage.SEGMENT_ONE_WAY: return createSegmentOneWay();
-			case NetworkPackage.SEGMENT_TWO_WAY: return createSegmentTwoWay();
+			case NetworkPackage.SEGMENT: return createSegment();
 			case NetworkPackage.SWITCH_BOX: return createSwitchBox();
 			case NetworkPackage.REGULAR_BOX: return createRegularBox();
 			case NetworkPackage.TRAIN: return createTrain();
@@ -115,20 +114,9 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 	 * @generated
 	 */
 	@Override
-	public SegmentOneWay createSegmentOneWay() {
-		SegmentOneWayImpl segmentOneWay = new SegmentOneWayImpl();
-		return segmentOneWay;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public SegmentTwoWay createSegmentTwoWay() {
-		SegmentTwoWayImpl segmentTwoWay = new SegmentTwoWayImpl();
-		return segmentTwoWay;
+	public Segment createSegment() {
+		SegmentImpl segment = new SegmentImpl();
+		return segment;
 	}
 
 	/**

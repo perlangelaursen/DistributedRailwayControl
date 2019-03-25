@@ -31,22 +31,13 @@ public interface NetworkFactory extends EFactory {
 	Network createNetwork();
 
 	/**
-	 * Returns a new object of class '<em>Segment One Way</em>'.
+	 * Returns a new object of class '<em>Segment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Segment One Way</em>'.
+	 * @return a new object of class '<em>Segment</em>'.
 	 * @generated
 	 */
-	SegmentOneWay createSegmentOneWay();
-
-	/**
-	 * Returns a new object of class '<em>Segment Two Way</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Segment Two Way</em>'.
-	 * @generated
-	 */
-	SegmentTwoWay createSegmentTwoWay();
+	Segment createSegment();
 
 	/**
 	 * Returns a new object of class '<em>Switch Box</em>'.

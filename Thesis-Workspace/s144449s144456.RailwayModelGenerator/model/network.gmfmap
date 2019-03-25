@@ -21,7 +21,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="network.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="network.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="network.gmfgraph#SwitchBox"/>
     </ownedChild>
@@ -41,7 +41,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="network.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="network.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="network.gmfgraph#RegularBox"/>
     </ownedChild>
@@ -61,18 +61,18 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="network.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="network.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="network.gmfgraph#Train"/>
     </ownedChild>
   </nodes>
   <links>
     <domainMetaElement
-        href="network.ecore#//SegmentOneWay"/>
+        href="network.ecore#//Segment"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="network.gmfgraph#SegmentOneWayId"/>
+          href="network.gmfgraph#SegmentId"/>
       <features
           href="network.ecore#//Element/id"/>
     </labelMappings>
@@ -82,31 +82,7 @@
         xsi:type="gmftool:CreationTool"
         href="network.gmftool#//@palette/@tools.0/@tools.0"/>
     <diagramLink
-        href="network.gmfgraph#SegmentOneWay"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="network.ecore#//Segment/start"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="network.ecore#//Segment/end"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="network.ecore#//SegmentTwoWay"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="network.gmfgraph#SegmentTwoWayId"/>
-      <features
-          href="network.ecore#//Element/id"/>
-    </labelMappings>
-    <containmentFeature
-        href="network.ecore#//Network/segments"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="network.gmftool#//@palette/@tools.0/@tools.1"/>
-    <diagramLink
-        href="network.gmfgraph#SegmentTwoWay"/>
+        href="network.gmfgraph#Segment"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="network.ecore#//Segment/start"/>

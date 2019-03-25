@@ -34,8 +34,7 @@ import org.eclipse.gmf.tooling.runtime.edit.helpers.GeneratedEditHelperBase;
 
 import network.ControlBox;
 import network.Network;
-import network.SegmentOneWay;
-import network.SegmentTwoWay;
+import network.Segment;
 import network.diagram.part.NetworkDiagramEditorPlugin;
 import network.diagram.part.NetworkVisualIDRegistry;
 import network.diagram.providers.NetworkElementTypes;
@@ -310,29 +309,14 @@ public class NetworkBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public boolean canCreateSegmentOneWay_4002(Network container, ControlBox source, ControlBox target) {
-			return canExistSegmentOneWay_4002(container, null, source, target);
-		}
-
-		/**
-		 * @generated
-		 */
-		public boolean canCreateSegmentTwoWay_4003(Network container, ControlBox source, ControlBox target) {
-			return canExistSegmentTwoWay_4003(container, null, source, target);
+		public boolean canCreateSegment_4004(Network container, ControlBox source, ControlBox target) {
+			return canExistSegment_4004(container, null, source, target);
 		}
 
 		/**
 		* @generated
 		*/
-		public boolean canExistSegmentOneWay_4002(Network container, SegmentOneWay linkInstance, ControlBox source,
-				ControlBox target) {
-			return true;
-		}
-
-		/**
-		* @generated
-		*/
-		public boolean canExistSegmentTwoWay_4003(Network container, SegmentTwoWay linkInstance, ControlBox source,
+		public boolean canExistSegment_4004(Network container, Segment linkInstance, ControlBox source,
 				ControlBox target) {
 			return true;
 		}

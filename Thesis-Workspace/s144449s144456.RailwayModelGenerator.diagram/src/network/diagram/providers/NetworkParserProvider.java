@@ -15,8 +15,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import network.NetworkPackage;
 import network.diagram.edit.parts.RegularBoxIdEditPart;
-import network.diagram.edit.parts.SegmentOneWayIdEditPart;
-import network.diagram.edit.parts.SegmentTwoWayIdEditPart;
+import network.diagram.edit.parts.SegmentIdEditPart;
 import network.diagram.edit.parts.SwitchBoxIdEditPart;
 import network.diagram.edit.parts.TrainIdEditPart;
 import network.diagram.parsers.MessageFormatParser;
@@ -81,35 +80,18 @@ public class NetworkParserProvider extends AbstractProvider implements IParserPr
 	/**
 	* @generated
 	*/
-	private IParser segmentOneWayId_6001Parser;
+	private IParser segmentId_6003Parser;
 
 	/**
 	* @generated
 	*/
-	private IParser getSegmentOneWayId_6001Parser() {
-		if (segmentOneWayId_6001Parser == null) {
+	private IParser getSegmentId_6003Parser() {
+		if (segmentId_6003Parser == null) {
 			EAttribute[] features = new EAttribute[] { NetworkPackage.eINSTANCE.getElement_Id() };
 			MessageFormatParser parser = new MessageFormatParser(features);
-			segmentOneWayId_6001Parser = parser;
+			segmentId_6003Parser = parser;
 		}
-		return segmentOneWayId_6001Parser;
-	}
-
-	/**
-	* @generated
-	*/
-	private IParser segmentTwoWayId_6002Parser;
-
-	/**
-	* @generated
-	*/
-	private IParser getSegmentTwoWayId_6002Parser() {
-		if (segmentTwoWayId_6002Parser == null) {
-			EAttribute[] features = new EAttribute[] { NetworkPackage.eINSTANCE.getElement_Id() };
-			MessageFormatParser parser = new MessageFormatParser(features);
-			segmentTwoWayId_6002Parser = parser;
-		}
-		return segmentTwoWayId_6002Parser;
+		return segmentId_6003Parser;
 	}
 
 	/**
@@ -123,10 +105,8 @@ public class NetworkParserProvider extends AbstractProvider implements IParserPr
 			return getRegularBoxId_5002Parser();
 		case TrainIdEditPart.VISUAL_ID:
 			return getTrainId_5004Parser();
-		case SegmentOneWayIdEditPart.VISUAL_ID:
-			return getSegmentOneWayId_6001Parser();
-		case SegmentTwoWayIdEditPart.VISUAL_ID:
-			return getSegmentTwoWayId_6002Parser();
+		case SegmentIdEditPart.VISUAL_ID:
+			return getSegmentId_6003Parser();
 		}
 		return null;
 	}

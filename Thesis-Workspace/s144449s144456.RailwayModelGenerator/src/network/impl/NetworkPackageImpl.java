@@ -10,8 +10,6 @@ import network.NetworkPackage;
 import network.PointSetting;
 import network.RegularBox;
 import network.Segment;
-import network.SegmentOneWay;
-import network.SegmentTwoWay;
 import network.SwitchBox;
 
 import network.Train;
@@ -57,20 +55,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	private EClass segmentEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass segmentOneWayEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass segmentTwoWayEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -307,26 +291,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getSegmentOneWay() {
-		return segmentOneWayEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getSegmentTwoWay() {
-		return segmentTwoWayEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getSwitchBox() {
 		return switchBoxEClass;
 	}
@@ -458,10 +422,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(segmentEClass, SEGMENT__START);
 		createEReference(segmentEClass, SEGMENT__END);
 
-		segmentOneWayEClass = createEClass(SEGMENT_ONE_WAY);
-
-		segmentTwoWayEClass = createEClass(SEGMENT_TWO_WAY);
-
 		switchBoxEClass = createEClass(SWITCH_BOX);
 		createEAttribute(switchBoxEClass, SWITCH_BOX__CONNECTED);
 		createEReference(switchBoxEClass, SWITCH_BOX__STEM);
@@ -507,8 +467,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		// Add supertypes to classes
 		controlBoxEClass.getESuperTypes().add(this.getElement());
 		segmentEClass.getESuperTypes().add(this.getElement());
-		segmentOneWayEClass.getESuperTypes().add(this.getSegment());
-		segmentTwoWayEClass.getESuperTypes().add(this.getSegment());
 		switchBoxEClass.getESuperTypes().add(this.getControlBox());
 		regularBoxEClass.getESuperTypes().add(this.getControlBox());
 		trainEClass.getESuperTypes().add(this.getElement());
@@ -528,13 +486,9 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getControlBox_Ingoing(), this.getSegment(), this.getSegment_End(), "ingoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlBox_Outgoing(), this.getSegment(), this.getSegment_Start(), "outgoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(segmentEClass, Segment.class, "Segment", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSegment_Start(), this.getControlBox(), this.getControlBox_Outgoing(), "start", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSegment_End(), this.getControlBox(), this.getControlBox_Ingoing(), "end", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(segmentOneWayEClass, SegmentOneWay.class, "SegmentOneWay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(segmentTwoWayEClass, SegmentTwoWay.class, "SegmentTwoWay", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(switchBoxEClass, SwitchBox.class, "SwitchBox", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwitchBox_Connected(), this.getPointSetting(), "connected", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

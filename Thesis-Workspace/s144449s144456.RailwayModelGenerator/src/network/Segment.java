@@ -17,7 +17,7 @@ package network;
  * </ul>
  *
  * @see network.NetworkPackage#getSegment()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface Segment extends Element {

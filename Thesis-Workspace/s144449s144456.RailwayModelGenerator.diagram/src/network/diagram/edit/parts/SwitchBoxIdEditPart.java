@@ -604,18 +604,18 @@ public class SwitchBoxIdEditPart extends LabelEditPart implements ITextAwareEdit
 	* @generated
 	*/
 	protected IFigure createFigurePrim() {
-		return new ControlBoxId();
+		return new ControlBoxIdFigure();
 	}
 
 	/**
 	 * @generated
 	 */
-	public class ControlBoxId extends WrappingLabel {
+	public class ControlBoxIdFigure extends WrappingLabel {
 
 		/**
 		 * @generated
 		 */
-		public ControlBoxId() {
+		public ControlBoxIdFigure() {
 			this.setText("<...>");
 		}
 

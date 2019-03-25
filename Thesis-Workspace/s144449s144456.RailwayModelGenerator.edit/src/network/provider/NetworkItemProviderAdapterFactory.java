@@ -95,49 +95,26 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link network.SegmentOneWay} instances.
+	 * This keeps track of the one adapter used for all {@link network.Segment} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SegmentOneWayItemProvider segmentOneWayItemProvider;
+	protected SegmentItemProvider segmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link network.SegmentOneWay}.
+	 * This creates an adapter for a {@link network.Segment}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSegmentOneWayAdapter() {
-		if (segmentOneWayItemProvider == null) {
-			segmentOneWayItemProvider = new SegmentOneWayItemProvider(this);
+	public Adapter createSegmentAdapter() {
+		if (segmentItemProvider == null) {
+			segmentItemProvider = new SegmentItemProvider(this);
 		}
 
-		return segmentOneWayItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link network.SegmentTwoWay} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SegmentTwoWayItemProvider segmentTwoWayItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link network.SegmentTwoWay}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSegmentTwoWayAdapter() {
-		if (segmentTwoWayItemProvider == null) {
-			segmentTwoWayItemProvider = new SegmentTwoWayItemProvider(this);
-		}
-
-		return segmentTwoWayItemProvider;
+		return segmentItemProvider;
 	}
 
 	/**
@@ -315,8 +292,7 @@ public class NetworkItemProviderAdapterFactory extends NetworkAdapterFactory imp
 	@Override
 	public void dispose() {
 		if (networkItemProvider != null) networkItemProvider.dispose();
-		if (segmentOneWayItemProvider != null) segmentOneWayItemProvider.dispose();
-		if (segmentTwoWayItemProvider != null) segmentTwoWayItemProvider.dispose();
+		if (segmentItemProvider != null) segmentItemProvider.dispose();
 		if (switchBoxItemProvider != null) switchBoxItemProvider.dispose();
 		if (regularBoxItemProvider != null) regularBoxItemProvider.dispose();
 		if (trainItemProvider != null) trainItemProvider.dispose();

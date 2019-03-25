@@ -104,7 +104,8 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			Segment stem = ((SwitchBox) mid).getStem();
 			sw = stem == s1 || stem == s2;
 		}
-		if(s1 instanceof SegmentOneWay) {
+		return false;
+		/*if(s1 instanceof SegmentOneWay) {
 			if(s2 instanceof SegmentOneWay) { // --> [] -->
 				return sw && b1;	
 			} else { // --> [] <-->
@@ -116,7 +117,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			} else { // <--> [] <-->
 				return sw && (b1 || b2 || b3 || b4);	
 			}
-		}
+		}*/
 	}
 
 	protected abstract void generateCode(Network n);

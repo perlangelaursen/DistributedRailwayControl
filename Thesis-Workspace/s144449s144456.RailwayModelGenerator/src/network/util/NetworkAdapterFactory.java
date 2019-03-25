@@ -84,14 +84,6 @@ public class NetworkAdapterFactory extends AdapterFactoryImpl {
 				return createSegmentAdapter();
 			}
 			@Override
-			public Adapter caseSegmentOneWay(SegmentOneWay object) {
-				return createSegmentOneWayAdapter();
-			}
-			@Override
-			public Adapter caseSegmentTwoWay(SegmentTwoWay object) {
-				return createSegmentTwoWayAdapter();
-			}
-			@Override
 			public Adapter caseSwitchBox(SwitchBox object) {
 				return createSwitchBoxAdapter();
 			}
@@ -176,34 +168,6 @@ public class NetworkAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSegmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link network.SegmentOneWay <em>Segment One Way</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see network.SegmentOneWay
-	 * @generated
-	 */
-	public Adapter createSegmentOneWayAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link network.SegmentTwoWay <em>Segment Two Way</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see network.SegmentTwoWay
-	 * @generated
-	 */
-	public Adapter createSegmentTwoWayAdapter() {
 		return null;
 	}
 

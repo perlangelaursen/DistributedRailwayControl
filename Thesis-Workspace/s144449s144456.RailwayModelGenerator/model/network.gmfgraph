@@ -7,28 +7,11 @@
     name="network">
   <figures
       name="Default">
-    <figures
-        xsi:type="gmfgraph:PolylineDecoration"
-        name="ArrowHead"/>
     <descriptors
-        name="SegmentOneWayFigure">
+        name="SegmentFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="SegmentOneWayFigure"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="SegmentOneWayIdFigure"
-            text="&lt;...>"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="SegmentTwoWayFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="SegmentTwoWayFigure"
-          sourceDecoration="//@figures.0/@figures.0"
-          targetDecoration="//@figures.0/@figures.0"/>
+          name="SegmentFigure"/>
     </descriptors>
     <descriptors
         name="RegularBoxFigure">
@@ -82,21 +65,21 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="ControlBoxId">
+        name="ControlBoxIdFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
           name="ControlBoxIdFigure"
           text="&lt;...>"/>
     </descriptors>
     <descriptors
-        name="SegmentId">
+        name="SegmentIdFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
           name="SegmentIdFigure"
           text="&lt;...>"/>
     </descriptors>
     <descriptors
-        name="TrainFigureId">
+        name="TrainIdFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
           name="TrainIdFigure"/>
@@ -115,29 +98,22 @@
       figure="TrainFigure"
       resizeConstraint="NONE"/>
   <connections
-      name="SegmentOneWay"
-      figure="SegmentOneWayFigure"/>
-  <connections
-      name="SegmentTwoWay"
-      figure="SegmentTwoWayFigure"/>
+      name="Segment"
+      figure="SegmentFigure"/>
   <labels
-      name="SegmentOneWayId"
-      figure="SegmentId"
-      elementIcon="false"/>
-  <labels
-      name="SegmentTwoWayId"
-      figure="SegmentId"
+      name="SegmentId"
+      figure="SegmentIdFigure"
       elementIcon="false"/>
   <labels
       name="SwitchBoxId"
-      figure="ControlBoxId"
+      figure="ControlBoxIdFigure"
       elementIcon="false"/>
   <labels
       name="RegularBoxId"
-      figure="ControlBoxId"
+      figure="ControlBoxIdFigure"
       elementIcon="false"/>
   <labels
       name="TrainId"
-      figure="TrainFigureId"
+      figure="TrainIdFigure"
       elementIcon="false"/>
 </gmfgraph:Canvas>

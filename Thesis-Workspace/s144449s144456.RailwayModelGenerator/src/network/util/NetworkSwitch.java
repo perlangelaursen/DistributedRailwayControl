@@ -92,22 +92,6 @@ public class NetworkSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case NetworkPackage.SEGMENT_ONE_WAY: {
-				SegmentOneWay segmentOneWay = (SegmentOneWay)theEObject;
-				T result = caseSegmentOneWay(segmentOneWay);
-				if (result == null) result = caseSegment(segmentOneWay);
-				if (result == null) result = caseElement(segmentOneWay);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case NetworkPackage.SEGMENT_TWO_WAY: {
-				SegmentTwoWay segmentTwoWay = (SegmentTwoWay)theEObject;
-				T result = caseSegmentTwoWay(segmentTwoWay);
-				if (result == null) result = caseSegment(segmentTwoWay);
-				if (result == null) result = caseElement(segmentTwoWay);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case NetworkPackage.SWITCH_BOX: {
 				SwitchBox switchBox = (SwitchBox)theEObject;
 				T result = caseSwitchBox(switchBox);
@@ -192,36 +176,6 @@ public class NetworkSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSegment(Segment object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Segment One Way</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Segment One Way</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSegmentOneWay(SegmentOneWay object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Segment Two Way</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Segment Two Way</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSegmentTwoWay(SegmentTwoWay object) {
 		return null;
 	}
 

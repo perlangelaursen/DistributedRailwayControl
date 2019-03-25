@@ -34,8 +34,7 @@ import org.eclipse.gmf.tooling.runtime.update.UpdaterLinkDescriptor;
 import network.NetworkPackage;
 import network.diagram.edit.parts.NetworkEditPart;
 import network.diagram.edit.parts.RegularBoxEditPart;
-import network.diagram.edit.parts.SegmentOneWayEditPart;
-import network.diagram.edit.parts.SegmentTwoWayEditPart;
+import network.diagram.edit.parts.SegmentEditPart;
 import network.diagram.edit.parts.SwitchBoxEditPart;
 import network.diagram.edit.parts.TrainEditPart;
 import network.diagram.part.NetworkDiagramUpdater;
@@ -271,16 +270,9 @@ public class NetworkCanonicalEditPolicy extends CanonicalEditPolicy {
 			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
-		case SegmentOneWayEditPart.VISUAL_ID: {
+		case SegmentEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(NetworkDiagramUpdater.getSegmentOneWay_4002ContainedLinks(view));
-			}
-			domain2NotationMap.putView(view.getElement(), view);
-			break;
-		}
-		case SegmentTwoWayEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(NetworkDiagramUpdater.getSegmentTwoWay_4003ContainedLinks(view));
+				result.addAll(NetworkDiagramUpdater.getSegment_4004ContainedLinks(view));
 			}
 			domain2NotationMap.putView(view.getElement(), view);
 			break;

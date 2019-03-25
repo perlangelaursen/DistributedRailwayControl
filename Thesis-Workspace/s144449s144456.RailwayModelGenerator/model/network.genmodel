@@ -30,8 +30,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//Segment/start"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//Segment/end"/>
     </genClasses>
-    <genClasses ecoreClass="network.ecore#//SegmentOneWay"/>
-    <genClasses ecoreClass="network.ecore#//SegmentTwoWay"/>
     <genClasses ecoreClass="network.ecore#//SwitchBox">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//SwitchBox/connected"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//SwitchBox/stem"/>
