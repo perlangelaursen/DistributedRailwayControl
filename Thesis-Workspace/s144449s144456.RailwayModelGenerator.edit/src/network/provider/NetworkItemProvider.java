@@ -241,12 +241,7 @@ public class NetworkItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(NetworkPackage.Literals.NETWORK__SEGMENTS,
-				 NetworkFactory.eINSTANCE.createSegmentOneWay()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(NetworkPackage.Literals.NETWORK__SEGMENTS,
-				 NetworkFactory.eINSTANCE.createSegmentTwoWay()));
+				 NetworkFactory.eINSTANCE.createSegment()));
 
 		newChildDescriptors.add
 			(createChildParameter

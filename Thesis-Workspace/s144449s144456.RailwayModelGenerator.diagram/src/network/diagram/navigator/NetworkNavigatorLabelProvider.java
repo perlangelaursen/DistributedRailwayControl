@@ -20,10 +20,8 @@ import network.Network;
 import network.diagram.edit.parts.NetworkEditPart;
 import network.diagram.edit.parts.RegularBoxEditPart;
 import network.diagram.edit.parts.RegularBoxIdEditPart;
-import network.diagram.edit.parts.SegmentOneWayEditPart;
-import network.diagram.edit.parts.SegmentOneWayIdEditPart;
-import network.diagram.edit.parts.SegmentTwoWayEditPart;
-import network.diagram.edit.parts.SegmentTwoWayIdEditPart;
+import network.diagram.edit.parts.SegmentEditPart;
+import network.diagram.edit.parts.SegmentIdEditPart;
 import network.diagram.edit.parts.SwitchBoxEditPart;
 import network.diagram.edit.parts.SwitchBoxIdEditPart;
 import network.diagram.edit.parts.TrainEditPart;
@@ -98,12 +96,9 @@ public class NetworkNavigatorLabelProvider extends LabelProvider
 		case TrainEditPart.VISUAL_ID:
 			return getImage("Navigator?TopLevelNode?http://s144449s144456.railwaymodelgenerator/network?Train", //$NON-NLS-1$
 					NetworkElementTypes.Train_2004);
-		case SegmentOneWayEditPart.VISUAL_ID:
-			return getImage("Navigator?Link?http://s144449s144456.railwaymodelgenerator/network?SegmentOneWay", //$NON-NLS-1$
-					NetworkElementTypes.SegmentOneWay_4002);
-		case SegmentTwoWayEditPart.VISUAL_ID:
-			return getImage("Navigator?Link?http://s144449s144456.railwaymodelgenerator/network?SegmentTwoWay", //$NON-NLS-1$
-					NetworkElementTypes.SegmentTwoWay_4003);
+		case SegmentEditPart.VISUAL_ID:
+			return getImage("Navigator?Link?http://s144449s144456.railwaymodelgenerator/network?Segment", //$NON-NLS-1$
+					NetworkElementTypes.Segment_4004);
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -162,10 +157,8 @@ public class NetworkNavigatorLabelProvider extends LabelProvider
 			return getRegularBox_2002Text(view);
 		case TrainEditPart.VISUAL_ID:
 			return getTrain_2004Text(view);
-		case SegmentOneWayEditPart.VISUAL_ID:
-			return getSegmentOneWay_4002Text(view);
-		case SegmentTwoWayEditPart.VISUAL_ID:
-			return getSegmentTwoWay_4003Text(view);
+		case SegmentEditPart.VISUAL_ID:
+			return getSegment_4004Text(view);
 		}
 		return getUnknownElementText(view);
 	}
@@ -234,31 +227,15 @@ public class NetworkNavigatorLabelProvider extends LabelProvider
 	/**
 	* @generated
 	*/
-	private String getSegmentOneWay_4002Text(View view) {
-		IParser parser = NetworkParserProvider.getParser(NetworkElementTypes.SegmentOneWay_4002,
+	private String getSegment_4004Text(View view) {
+		IParser parser = NetworkParserProvider.getParser(NetworkElementTypes.Segment_4004,
 				view.getElement() != null ? view.getElement() : view,
-				NetworkVisualIDRegistry.getType(SegmentOneWayIdEditPart.VISUAL_ID));
+				NetworkVisualIDRegistry.getType(SegmentIdEditPart.VISUAL_ID));
 		if (parser != null) {
 			return parser.getPrintString(new EObjectAdapter(view.getElement() != null ? view.getElement() : view),
 					ParserOptions.NONE.intValue());
 		} else {
-			NetworkDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 6001); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
-	}
-
-	/**
-	* @generated
-	*/
-	private String getSegmentTwoWay_4003Text(View view) {
-		IParser parser = NetworkParserProvider.getParser(NetworkElementTypes.SegmentTwoWay_4003,
-				view.getElement() != null ? view.getElement() : view,
-				NetworkVisualIDRegistry.getType(SegmentTwoWayIdEditPart.VISUAL_ID));
-		if (parser != null) {
-			return parser.getPrintString(new EObjectAdapter(view.getElement() != null ? view.getElement() : view),
-					ParserOptions.NONE.intValue());
-		} else {
-			NetworkDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 6002); //$NON-NLS-1$
+			NetworkDiagramEditorPlugin.getInstance().logError("Parser was not found for label " + 6003); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}

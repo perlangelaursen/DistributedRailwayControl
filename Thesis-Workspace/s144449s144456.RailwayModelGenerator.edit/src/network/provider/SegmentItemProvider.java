@@ -43,48 +43,25 @@ public class SegmentItemProvider extends ElementItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addStartPropertyDescriptor(object);
-			addEndPropertyDescriptor(object);
+			addControlBoxesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Start feature.
+	 * This adds a property descriptor for the Control Boxes feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addStartPropertyDescriptor(Object object) {
+	protected void addControlBoxesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Segment_start_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Segment_start_feature", "_UI_Segment_type"),
-				 NetworkPackage.Literals.SEGMENT__START,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the End feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEndPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Segment_end_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Segment_end_feature", "_UI_Segment_type"),
-				 NetworkPackage.Literals.SEGMENT__END,
+				 getString("_UI_Segment_controlBoxes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Segment_controlBoxes_feature", "_UI_Segment_type"),
+				 NetworkPackage.Literals.SEGMENT__CONTROL_BOXES,
 				 true,
 				 false,
 				 true,

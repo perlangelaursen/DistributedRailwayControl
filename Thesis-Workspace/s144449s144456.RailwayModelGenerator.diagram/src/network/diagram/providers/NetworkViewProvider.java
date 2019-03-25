@@ -44,10 +44,8 @@ import org.eclipse.swt.graphics.FontData;
 import network.diagram.edit.parts.NetworkEditPart;
 import network.diagram.edit.parts.RegularBoxEditPart;
 import network.diagram.edit.parts.RegularBoxIdEditPart;
-import network.diagram.edit.parts.SegmentOneWayEditPart;
-import network.diagram.edit.parts.SegmentOneWayIdEditPart;
-import network.diagram.edit.parts.SegmentTwoWayEditPart;
-import network.diagram.edit.parts.SegmentTwoWayIdEditPart;
+import network.diagram.edit.parts.SegmentEditPart;
+import network.diagram.edit.parts.SegmentIdEditPart;
 import network.diagram.edit.parts.SwitchBoxEditPart;
 import network.diagram.edit.parts.SwitchBoxIdEditPart;
 import network.diagram.edit.parts.TrainEditPart;
@@ -217,11 +215,8 @@ public class NetworkViewProvider extends AbstractProvider implements IViewProvid
 		IElementType elementType = getSemanticElementType(semanticAdapter);
 		String elementTypeHint = ((IHintedType) elementType).getSemanticHint();
 		switch (NetworkVisualIDRegistry.getVisualID(elementTypeHint)) {
-		case SegmentOneWayEditPart.VISUAL_ID:
-			return createSegmentOneWay_4002(getSemanticElement(semanticAdapter), containerView, index, persisted,
-					preferencesHint);
-		case SegmentTwoWayEditPart.VISUAL_ID:
-			return createSegmentTwoWay_4003(getSemanticElement(semanticAdapter), containerView, index, persisted,
+		case SegmentEditPart.VISUAL_ID:
+			return createSegment_4004(getSemanticElement(semanticAdapter), containerView, index, persisted,
 					preferencesHint);
 		}
 		// can never happen, provided #provides(CreateEdgeViewOperation) is correct
@@ -351,7 +346,7 @@ public class NetworkViewProvider extends AbstractProvider implements IViewProvid
 	/**
 	* @generated
 	*/
-	public Edge createSegmentOneWay_4002(EObject domainElement, View containerView, int index, boolean persisted,
+	public Edge createSegment_4004(EObject domainElement, View containerView, int index, boolean persisted,
 			PreferencesHint preferencesHint) {
 		Connector edge = NotationFactory.eINSTANCE.createConnector();
 		edge.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
@@ -362,7 +357,7 @@ public class NetworkViewProvider extends AbstractProvider implements IViewProvid
 		bendpoints.setPoints(points);
 		edge.setBendpoints(bendpoints);
 		ViewUtil.insertChildView(containerView, edge, index, persisted);
-		edge.setType(NetworkVisualIDRegistry.getType(SegmentOneWayEditPart.VISUAL_ID));
+		edge.setType(NetworkVisualIDRegistry.getType(SegmentEditPart.VISUAL_ID));
 		edge.setElement(domainElement);
 		// initializePreferences
 		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint.getPreferenceStore();
@@ -386,57 +381,11 @@ public class NetworkViewProvider extends AbstractProvider implements IViewProvid
 		if (routing != null) {
 			ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE.getRoutingStyle_Routing(), routing);
 		}
-		Node label6001 = createLabel(edge, NetworkVisualIDRegistry.getType(SegmentOneWayIdEditPart.VISUAL_ID));
-		label6001.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
-		Location location6001 = (Location) label6001.getLayoutConstraint();
-		location6001.setX(0);
-		location6001.setY(40);
-		return edge;
-	}
-
-	/**
-	* @generated
-	*/
-	public Edge createSegmentTwoWay_4003(EObject domainElement, View containerView, int index, boolean persisted,
-			PreferencesHint preferencesHint) {
-		Connector edge = NotationFactory.eINSTANCE.createConnector();
-		edge.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
-		RelativeBendpoints bendpoints = NotationFactory.eINSTANCE.createRelativeBendpoints();
-		ArrayList<RelativeBendpoint> points = new ArrayList<RelativeBendpoint>(2);
-		points.add(new RelativeBendpoint());
-		points.add(new RelativeBendpoint());
-		bendpoints.setPoints(points);
-		edge.setBendpoints(bendpoints);
-		ViewUtil.insertChildView(containerView, edge, index, persisted);
-		edge.setType(NetworkVisualIDRegistry.getType(SegmentTwoWayEditPart.VISUAL_ID));
-		edge.setElement(domainElement);
-		// initializePreferences
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint.getPreferenceStore();
-
-		org.eclipse.swt.graphics.RGB lineRGB = PreferenceConverter.getColor(prefStore,
-				IPreferenceConstants.PREF_LINE_COLOR);
-		ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE.getLineStyle_LineColor(),
-				FigureUtilities.RGBToInteger(lineRGB));
-		FontStyle edgeFontStyle = (FontStyle) edge.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (edgeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore, IPreferenceConstants.PREF_DEFAULT_FONT);
-			edgeFontStyle.setFontName(fontData.getName());
-			edgeFontStyle.setFontHeight(fontData.getHeight());
-			edgeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			edgeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter.getColor(prefStore,
-					IPreferenceConstants.PREF_FONT_COLOR);
-			edgeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB).intValue());
-		}
-		Routing routing = Routing.get(prefStore.getInt(IPreferenceConstants.PREF_LINE_STYLE));
-		if (routing != null) {
-			ViewUtil.setStructuralFeatureValue(edge, NotationPackage.eINSTANCE.getRoutingStyle_Routing(), routing);
-		}
-		Node label6002 = createLabel(edge, NetworkVisualIDRegistry.getType(SegmentTwoWayIdEditPart.VISUAL_ID));
-		label6002.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
-		Location location6002 = (Location) label6002.getLayoutConstraint();
-		location6002.setX(0);
-		location6002.setY(40);
+		Node label6003 = createLabel(edge, NetworkVisualIDRegistry.getType(SegmentIdEditPart.VISUAL_ID));
+		label6003.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		Location location6003 = (Location) label6003.getLayoutConstraint();
+		location6003.setX(0);
+		location6003.setY(40);
 		return edge;
 	}
 

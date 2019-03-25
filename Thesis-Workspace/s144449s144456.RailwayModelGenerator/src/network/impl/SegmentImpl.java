@@ -2,17 +2,17 @@
  */
 package network.impl;
 
+import java.util.Collection;
 import network.ControlBox;
 import network.NetworkPackage;
 import network.Segment;
-
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,32 +22,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link network.impl.SegmentImpl#getStart <em>Start</em>}</li>
- *   <li>{@link network.impl.SegmentImpl#getEnd <em>End</em>}</li>
+ *   <li>{@link network.impl.SegmentImpl#getControlBoxes <em>Control Boxes</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class SegmentImpl extends ElementImpl implements Segment {
+public class SegmentImpl extends ElementImpl implements Segment {
 	/**
-	 * The cached value of the '{@link #getStart() <em>Start</em>}' reference.
+	 * The cached value of the '{@link #getControlBoxes() <em>Control Boxes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStart()
+	 * @see #getControlBoxes()
 	 * @generated
 	 * @ordered
 	 */
-	protected ControlBox start;
-
-	/**
-	 * The cached value of the '{@link #getEnd() <em>End</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEnd()
-	 * @generated
-	 * @ordered
-	 */
-	protected ControlBox end;
+	protected EList<ControlBox> controlBoxes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,16 +63,11 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	 * @generated
 	 */
 	@Override
-	public ControlBox getStart() {
-		if (start != null && start.eIsProxy()) {
-			InternalEObject oldStart = (InternalEObject)start;
-			start = (ControlBox)eResolveProxy(oldStart);
-			if (start != oldStart) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NetworkPackage.SEGMENT__START, oldStart, start));
-			}
+	public EList<ControlBox> getControlBoxes() {
+		if (controlBoxes == null) {
+			controlBoxes = new EObjectWithInverseResolvingEList.ManyInverse<ControlBox>(ControlBox.class, this, NetworkPackage.SEGMENT__CONTROL_BOXES, NetworkPackage.CONTROL_BOX__SEGMENTS);
 		}
-		return start;
+		return controlBoxes;
 	}
 
 	/**
@@ -91,123 +75,12 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ControlBox basicGetStart() {
-		return start;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetStart(ControlBox newStart, NotificationChain msgs) {
-		ControlBox oldStart = start;
-		start = newStart;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NetworkPackage.SEGMENT__START, oldStart, newStart);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setStart(ControlBox newStart) {
-		if (newStart != start) {
-			NotificationChain msgs = null;
-			if (start != null)
-				msgs = ((InternalEObject)start).eInverseRemove(this, NetworkPackage.CONTROL_BOX__OUTGOING, ControlBox.class, msgs);
-			if (newStart != null)
-				msgs = ((InternalEObject)newStart).eInverseAdd(this, NetworkPackage.CONTROL_BOX__OUTGOING, ControlBox.class, msgs);
-			msgs = basicSetStart(newStart, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.SEGMENT__START, newStart, newStart));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ControlBox getEnd() {
-		if (end != null && end.eIsProxy()) {
-			InternalEObject oldEnd = (InternalEObject)end;
-			end = (ControlBox)eResolveProxy(oldEnd);
-			if (end != oldEnd) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NetworkPackage.SEGMENT__END, oldEnd, end));
-			}
-		}
-		return end;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ControlBox basicGetEnd() {
-		return end;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEnd(ControlBox newEnd, NotificationChain msgs) {
-		ControlBox oldEnd = end;
-		end = newEnd;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NetworkPackage.SEGMENT__END, oldEnd, newEnd);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEnd(ControlBox newEnd) {
-		if (newEnd != end) {
-			NotificationChain msgs = null;
-			if (end != null)
-				msgs = ((InternalEObject)end).eInverseRemove(this, NetworkPackage.CONTROL_BOX__INGOING, ControlBox.class, msgs);
-			if (newEnd != null)
-				msgs = ((InternalEObject)newEnd).eInverseAdd(this, NetworkPackage.CONTROL_BOX__INGOING, ControlBox.class, msgs);
-			msgs = basicSetEnd(newEnd, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.SEGMENT__END, newEnd, newEnd));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case NetworkPackage.SEGMENT__START:
-				if (start != null)
-					msgs = ((InternalEObject)start).eInverseRemove(this, NetworkPackage.CONTROL_BOX__OUTGOING, ControlBox.class, msgs);
-				return basicSetStart((ControlBox)otherEnd, msgs);
-			case NetworkPackage.SEGMENT__END:
-				if (end != null)
-					msgs = ((InternalEObject)end).eInverseRemove(this, NetworkPackage.CONTROL_BOX__INGOING, ControlBox.class, msgs);
-				return basicSetEnd((ControlBox)otherEnd, msgs);
+			case NetworkPackage.SEGMENT__CONTROL_BOXES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getControlBoxes()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -220,10 +93,8 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case NetworkPackage.SEGMENT__START:
-				return basicSetStart(null, msgs);
-			case NetworkPackage.SEGMENT__END:
-				return basicSetEnd(null, msgs);
+			case NetworkPackage.SEGMENT__CONTROL_BOXES:
+				return ((InternalEList<?>)getControlBoxes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -236,12 +107,8 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NetworkPackage.SEGMENT__START:
-				if (resolve) return getStart();
-				return basicGetStart();
-			case NetworkPackage.SEGMENT__END:
-				if (resolve) return getEnd();
-				return basicGetEnd();
+			case NetworkPackage.SEGMENT__CONTROL_BOXES:
+				return getControlBoxes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,14 +118,13 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NetworkPackage.SEGMENT__START:
-				setStart((ControlBox)newValue);
-				return;
-			case NetworkPackage.SEGMENT__END:
-				setEnd((ControlBox)newValue);
+			case NetworkPackage.SEGMENT__CONTROL_BOXES:
+				getControlBoxes().clear();
+				getControlBoxes().addAll((Collection<? extends ControlBox>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -272,11 +138,8 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NetworkPackage.SEGMENT__START:
-				setStart((ControlBox)null);
-				return;
-			case NetworkPackage.SEGMENT__END:
-				setEnd((ControlBox)null);
+			case NetworkPackage.SEGMENT__CONTROL_BOXES:
+				getControlBoxes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -290,10 +153,8 @@ public abstract class SegmentImpl extends ElementImpl implements Segment {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NetworkPackage.SEGMENT__START:
-				return start != null;
-			case NetworkPackage.SEGMENT__END:
-				return end != null;
+			case NetworkPackage.SEGMENT__CONTROL_BOXES:
+				return controlBoxes != null && !controlBoxes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

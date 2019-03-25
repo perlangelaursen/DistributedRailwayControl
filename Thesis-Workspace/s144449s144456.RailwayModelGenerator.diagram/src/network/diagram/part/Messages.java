@@ -248,47 +248,37 @@ public class Messages extends NLS {
 	/**
 	* @generated
 	*/
-	public static String SegmentOneWay1CreationTool_title;
+	public static String Segment1CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String SegmentOneWay1CreationTool_desc;
+	public static String Segment1CreationTool_desc;
 
 	/**
 	* @generated
 	*/
-	public static String SegmentTwoWay2CreationTool_title;
+	public static String SwitchBox2CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String SegmentTwoWay2CreationTool_desc;
+	public static String SwitchBox2CreationTool_desc;
 
 	/**
 	* @generated
 	*/
-	public static String SwitchBox3CreationTool_title;
+	public static String RegularBox3CreationTool_title;
 
 	/**
 	* @generated
 	*/
-	public static String SwitchBox3CreationTool_desc;
+	public static String RegularBox3CreationTool_desc;
 
 	/**
 	* @generated
 	*/
-	public static String RegularBox4CreationTool_title;
-
-	/**
-	* @generated
-	*/
-	public static String RegularBox4CreationTool_desc;
-
-	/**
-	* @generated
-	*/
-	public static String Train5CreationTool_title;
+	public static String Train4CreationTool_title;
 
 	/**
 	* @generated
@@ -323,22 +313,12 @@ public class Messages extends NLS {
 	/**
 	* @generated
 	*/
-	public static String NavigatorGroupName_SegmentOneWay_4002_target;
+	public static String NavigatorGroupName_Segment_4004_target;
 
 	/**
 	* @generated
 	*/
-	public static String NavigatorGroupName_SegmentOneWay_4002_source;
-
-	/**
-	* @generated
-	*/
-	public static String NavigatorGroupName_SegmentTwoWay_4003_target;
-
-	/**
-	* @generated
-	*/
-	public static String NavigatorGroupName_SegmentTwoWay_4003_source;
+	public static String NavigatorGroupName_Segment_4004_source;
 
 	/**
 	* @generated

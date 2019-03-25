@@ -15,7 +15,7 @@ import network.*;
 public abstract class Translator extends AbstractHandler implements IHandler{
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
+		/*ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null & selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 			if (structuredSelection.size() == 1) {
@@ -88,10 +88,10 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 					
 				}
 			}
-		}
+		}*/
 		return null;
 	}
-
+/*
 	private boolean isConnected(Segment s1, Segment s2) {
 		boolean b1 = s1.getEnd().getOutgoing().contains(s2); // --> [] -->
 		boolean b2 = s1.getEnd().getIngoing().contains(s2); // --> [] <--
@@ -136,5 +136,5 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		} else {
 			return s.getEnd();
 		}
-	}
+	}*/
 }

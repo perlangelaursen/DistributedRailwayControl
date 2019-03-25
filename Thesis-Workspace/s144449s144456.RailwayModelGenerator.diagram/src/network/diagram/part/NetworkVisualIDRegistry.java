@@ -12,10 +12,8 @@ import network.NetworkPackage;
 import network.diagram.edit.parts.NetworkEditPart;
 import network.diagram.edit.parts.RegularBoxEditPart;
 import network.diagram.edit.parts.RegularBoxIdEditPart;
-import network.diagram.edit.parts.SegmentOneWayEditPart;
-import network.diagram.edit.parts.SegmentOneWayIdEditPart;
-import network.diagram.edit.parts.SegmentTwoWayEditPart;
-import network.diagram.edit.parts.SegmentTwoWayIdEditPart;
+import network.diagram.edit.parts.SegmentEditPart;
+import network.diagram.edit.parts.SegmentIdEditPart;
 import network.diagram.edit.parts.SwitchBoxEditPart;
 import network.diagram.edit.parts.SwitchBoxIdEditPart;
 import network.diagram.edit.parts.TrainEditPart;
@@ -182,13 +180,8 @@ public class NetworkVisualIDRegistry {
 				return true;
 			}
 			break;
-		case SegmentOneWayEditPart.VISUAL_ID:
-			if (SegmentOneWayIdEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case SegmentTwoWayEditPart.VISUAL_ID:
-			if (SegmentTwoWayIdEditPart.VISUAL_ID == nodeVisualID) {
+		case SegmentEditPart.VISUAL_ID:
+			if (SegmentIdEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -203,11 +196,8 @@ public class NetworkVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (NetworkPackage.eINSTANCE.getSegmentOneWay().isSuperTypeOf(domainElement.eClass())) {
-			return SegmentOneWayEditPart.VISUAL_ID;
-		}
-		if (NetworkPackage.eINSTANCE.getSegmentTwoWay().isSuperTypeOf(domainElement.eClass())) {
-			return SegmentTwoWayEditPart.VISUAL_ID;
+		if (NetworkPackage.eINSTANCE.getSegment().isSuperTypeOf(domainElement.eClass())) {
+			return SegmentEditPart.VISUAL_ID;
 		}
 		return -1;
 	}

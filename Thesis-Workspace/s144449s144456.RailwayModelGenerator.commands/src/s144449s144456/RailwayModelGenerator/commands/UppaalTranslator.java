@@ -17,7 +17,7 @@ public class UppaalTranslator extends Translator{
 
 	private int id;
 	private String start, end;
-	
+	/*
 	@Override
 	protected void generateCode(Network n) {
 		if(n != null) {
@@ -750,5 +750,5 @@ public class UppaalTranslator extends Translator{
 			cbs[2] = s2.getStart();
 		}
 		return cbs;
-	}
+	}*/
 }

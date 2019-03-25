@@ -7,28 +7,16 @@
     name="network">
   <figures
       name="Default">
-    <figures
-        xsi:type="gmfgraph:PolylineDecoration"
-        name="ArrowHead"/>
     <descriptors
-        name="SegmentOneWayFigure">
+        name="SegmentFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="SegmentOneWayFigure"
-          targetDecoration="//@figures.0/@figures.0">
+          name="SegmentOneWayFigure">
         <children
             xsi:type="gmfgraph:Label"
             name="SegmentOneWayIdFigure"
             text="&lt;...>"/>
       </actualFigure>
-    </descriptors>
-    <descriptors
-        name="SegmentTwoWayFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="SegmentTwoWayFigure"
-          sourceDecoration="//@figures.0/@figures.0"
-          targetDecoration="//@figures.0/@figures.0"/>
     </descriptors>
     <descriptors
         name="RegularBoxFigure">
@@ -89,7 +77,7 @@
           text="&lt;...>"/>
     </descriptors>
     <descriptors
-        name="SegmentId">
+        name="SegmentFigureId">
       <actualFigure
           xsi:type="gmfgraph:Label"
           name="SegmentIdFigure"
@@ -115,18 +103,11 @@
       figure="TrainFigure"
       resizeConstraint="NONE"/>
   <connections
-      name="SegmentOneWay"
-      figure="SegmentOneWayFigure"/>
-  <connections
-      name="SegmentTwoWay"
-      figure="SegmentTwoWayFigure"/>
+      name="Segment"
+      figure="SegmentFigure"/>
   <labels
-      name="SegmentOneWayId"
-      figure="SegmentId"
-      elementIcon="false"/>
-  <labels
-      name="SegmentTwoWayId"
-      figure="SegmentId"
+      name="SegmentId"
+      figure="SegmentFigureId"
       elementIcon="false"/>
   <labels
       name="SwitchBoxId"

@@ -2,6 +2,8 @@
  */
 package network;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -12,69 +14,30 @@ package network;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link network.Segment#getStart <em>Start</em>}</li>
- *   <li>{@link network.Segment#getEnd <em>End</em>}</li>
+ *   <li>{@link network.Segment#getControlBoxes <em>Control Boxes</em>}</li>
  * </ul>
  *
  * @see network.NetworkPackage#getSegment()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface Segment extends Element {
 	/**
-	 * Returns the value of the '<em><b>Start</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link network.ControlBox#getOutgoing <em>Outgoing</em>}'.
+	 * Returns the value of the '<em><b>Control Boxes</b></em>' reference list.
+	 * The list contents are of type {@link network.ControlBox}.
+	 * It is bidirectional and its opposite is '{@link network.ControlBox#getSegments <em>Segments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Start</em>' reference isn't clear,
+	 * If the meaning of the '<em>Control Boxes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start</em>' reference.
-	 * @see #setStart(ControlBox)
-	 * @see network.NetworkPackage#getSegment_Start()
-	 * @see network.ControlBox#getOutgoing
-	 * @model opposite="outgoing" required="true"
+	 * @return the value of the '<em>Control Boxes</em>' reference list.
+	 * @see network.NetworkPackage#getSegment_ControlBoxes()
+	 * @see network.ControlBox#getSegments
+	 * @model opposite="segments" lower="2" upper="2"
 	 * @generated
 	 */
-	ControlBox getStart();
-
-	/**
-	 * Sets the value of the '{@link network.Segment#getStart <em>Start</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start</em>' reference.
-	 * @see #getStart()
-	 * @generated
-	 */
-	void setStart(ControlBox value);
-
-	/**
-	 * Returns the value of the '<em><b>End</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link network.ControlBox#getIngoing <em>Ingoing</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>End</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>End</em>' reference.
-	 * @see #setEnd(ControlBox)
-	 * @see network.NetworkPackage#getSegment_End()
-	 * @see network.ControlBox#getIngoing
-	 * @model opposite="ingoing" required="true"
-	 * @generated
-	 */
-	ControlBox getEnd();
-
-	/**
-	 * Sets the value of the '{@link network.Segment#getEnd <em>End</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>End</em>' reference.
-	 * @see #getEnd()
-	 * @generated
-	 */
-	void setEnd(ControlBox value);
+	EList<ControlBox> getControlBoxes();
 
 } // Segment

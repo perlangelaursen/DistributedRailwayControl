@@ -17,8 +17,7 @@ import org.eclipse.swt.graphics.Image;
 import network.NetworkPackage;
 import network.diagram.edit.parts.NetworkEditPart;
 import network.diagram.edit.parts.RegularBoxEditPart;
-import network.diagram.edit.parts.SegmentOneWayEditPart;
-import network.diagram.edit.parts.SegmentTwoWayEditPart;
+import network.diagram.edit.parts.SegmentEditPart;
 import network.diagram.edit.parts.SwitchBoxEditPart;
 import network.diagram.edit.parts.TrainEditPart;
 import network.diagram.part.NetworkDiagramEditorPlugin;
@@ -73,13 +72,8 @@ public class NetworkElementTypes {
 	/**
 	* @generated
 	*/
-	public static final IElementType SegmentOneWay_4002 = getElementType(
-			"s144449s144456.RailwayModelGenerator.diagram.SegmentOneWay_4002"); //$NON-NLS-1$
-	/**
-	* @generated
-	*/
-	public static final IElementType SegmentTwoWay_4003 = getElementType(
-			"s144449s144456.RailwayModelGenerator.diagram.SegmentTwoWay_4003"); //$NON-NLS-1$
+	public static final IElementType Segment_4004 = getElementType(
+			"s144449s144456.RailwayModelGenerator.diagram.Segment_4004"); //$NON-NLS-1$
 
 	/**
 	* @generated
@@ -127,9 +121,7 @@ public class NetworkElementTypes {
 
 			elements.put(Train_2004, NetworkPackage.eINSTANCE.getTrain());
 
-			elements.put(SegmentOneWay_4002, NetworkPackage.eINSTANCE.getSegmentOneWay());
-
-			elements.put(SegmentTwoWay_4003, NetworkPackage.eINSTANCE.getSegmentTwoWay());
+			elements.put(Segment_4004, NetworkPackage.eINSTANCE.getSegment());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -151,8 +143,7 @@ public class NetworkElementTypes {
 			KNOWN_ELEMENT_TYPES.add(SwitchBox_2001);
 			KNOWN_ELEMENT_TYPES.add(RegularBox_2002);
 			KNOWN_ELEMENT_TYPES.add(Train_2004);
-			KNOWN_ELEMENT_TYPES.add(SegmentOneWay_4002);
-			KNOWN_ELEMENT_TYPES.add(SegmentTwoWay_4003);
+			KNOWN_ELEMENT_TYPES.add(Segment_4004);
 		}
 		return KNOWN_ELEMENT_TYPES.contains(elementType);
 	}
@@ -170,10 +161,8 @@ public class NetworkElementTypes {
 			return RegularBox_2002;
 		case TrainEditPart.VISUAL_ID:
 			return Train_2004;
-		case SegmentOneWayEditPart.VISUAL_ID:
-			return SegmentOneWay_4002;
-		case SegmentTwoWayEditPart.VISUAL_ID:
-			return SegmentTwoWay_4003;
+		case SegmentEditPart.VISUAL_ID:
+			return Segment_4004;
 		}
 		return null;
 	}

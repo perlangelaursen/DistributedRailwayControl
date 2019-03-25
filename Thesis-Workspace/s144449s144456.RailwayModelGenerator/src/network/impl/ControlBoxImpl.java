@@ -26,32 +26,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link network.impl.ControlBoxImpl#getIngoing <em>Ingoing</em>}</li>
- *   <li>{@link network.impl.ControlBoxImpl#getOutgoing <em>Outgoing</em>}</li>
+ *   <li>{@link network.impl.ControlBoxImpl#getSegments <em>Segments</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	/**
-	 * The cached value of the '{@link #getIngoing() <em>Ingoing</em>}' reference list.
+	 * The cached value of the '{@link #getSegments() <em>Segments</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIngoing()
+	 * @see #getSegments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Segment> ingoing;
-
-	/**
-	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOutgoing()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Segment> outgoing;
+	protected EList<Segment> segments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,24 +67,11 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	 * @generated
 	 */
 	@Override
-	public EList<Segment> getIngoing() {
-		if (ingoing == null) {
-			ingoing = new EObjectWithInverseResolvingEList<Segment>(Segment.class, this, NetworkPackage.CONTROL_BOX__INGOING, NetworkPackage.SEGMENT__END);
+	public EList<Segment> getSegments() {
+		if (segments == null) {
+			segments = new EObjectWithInverseResolvingEList.ManyInverse<Segment>(Segment.class, this, NetworkPackage.CONTROL_BOX__SEGMENTS, NetworkPackage.SEGMENT__CONTROL_BOXES);
 		}
-		return ingoing;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Segment> getOutgoing() {
-		if (outgoing == null) {
-			outgoing = new EObjectWithInverseResolvingEList<Segment>(Segment.class, this, NetworkPackage.CONTROL_BOX__OUTGOING, NetworkPackage.SEGMENT__START);
-		}
-		return outgoing;
+		return segments;
 	}
 
 	/**
@@ -107,10 +83,8 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case NetworkPackage.CONTROL_BOX__INGOING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIngoing()).basicAdd(otherEnd, msgs);
-			case NetworkPackage.CONTROL_BOX__OUTGOING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
+			case NetworkPackage.CONTROL_BOX__SEGMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSegments()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -123,10 +97,8 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case NetworkPackage.CONTROL_BOX__INGOING:
-				return ((InternalEList<?>)getIngoing()).basicRemove(otherEnd, msgs);
-			case NetworkPackage.CONTROL_BOX__OUTGOING:
-				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
+			case NetworkPackage.CONTROL_BOX__SEGMENTS:
+				return ((InternalEList<?>)getSegments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -139,10 +111,8 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NetworkPackage.CONTROL_BOX__INGOING:
-				return getIngoing();
-			case NetworkPackage.CONTROL_BOX__OUTGOING:
-				return getOutgoing();
+			case NetworkPackage.CONTROL_BOX__SEGMENTS:
+				return getSegments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,13 +126,9 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NetworkPackage.CONTROL_BOX__INGOING:
-				getIngoing().clear();
-				getIngoing().addAll((Collection<? extends Segment>)newValue);
-				return;
-			case NetworkPackage.CONTROL_BOX__OUTGOING:
-				getOutgoing().clear();
-				getOutgoing().addAll((Collection<? extends Segment>)newValue);
+			case NetworkPackage.CONTROL_BOX__SEGMENTS:
+				getSegments().clear();
+				getSegments().addAll((Collection<? extends Segment>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,11 +142,8 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NetworkPackage.CONTROL_BOX__INGOING:
-				getIngoing().clear();
-				return;
-			case NetworkPackage.CONTROL_BOX__OUTGOING:
-				getOutgoing().clear();
+			case NetworkPackage.CONTROL_BOX__SEGMENTS:
+				getSegments().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -194,10 +157,8 @@ public abstract class ControlBoxImpl extends ElementImpl implements ControlBox {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NetworkPackage.CONTROL_BOX__INGOING:
-				return ingoing != null && !ingoing.isEmpty();
-			case NetworkPackage.CONTROL_BOX__OUTGOING:
-				return outgoing != null && !outgoing.isEmpty();
+			case NetworkPackage.CONTROL_BOX__SEGMENTS:
+				return segments != null && !segments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

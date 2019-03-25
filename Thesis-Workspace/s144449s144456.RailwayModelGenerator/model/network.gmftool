@@ -11,17 +11,8 @@
         title="network">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SegmentOneWay"
-          description="Create new SegmentOneWay">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="SegmentTwoWay"
-          description="Create new SegmentTwoWay">
+          title="Segment"
+          description="Create new Segment">
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
         <largeIcon
