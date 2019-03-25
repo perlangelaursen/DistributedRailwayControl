@@ -1,0 +1,7 @@
+# Tracing options for the s144449s144456.RailwayNetworkConfigurationGenerator.diagram plug-in
+
+# Common issues
+s144449s144456.RailwayNetworkConfigurationGenerator.diagram/debug=false
+
+# Visual IDs
+s144449s144456.RailwayNetworkConfigurationGenerator.diagram/debug/visualID=false
