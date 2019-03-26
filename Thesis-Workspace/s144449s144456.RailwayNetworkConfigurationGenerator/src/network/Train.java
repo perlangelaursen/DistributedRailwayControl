@@ -2,6 +2,8 @@
  */
 package network;
 
+import java.util.LinkedList;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -37,4 +39,8 @@ public interface Train extends Element {
 	 */
 	EList<Segment> getRoute();
 
+	/**
+	 * @generated NOT
+	 */
+	LinkedList<ControlBox> getBoxRoute();
 } // Train

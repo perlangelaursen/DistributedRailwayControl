@@ -10,91 +10,86 @@ import java.util.Map;
 import network.*;
 
 public class UppaalTranslator extends Translator{
-	private Map<ControlBox, Integer> cbIDs;
-	private Map<Segment, Integer> segIDs;
-	private LinkedList<SwitchBox> points;
-	
-
 	private int id;
 	private String start, end;
 	
 	@Override
 	protected String generateCode(Network n) {
 		if(n != null) {
-			initialize(n);
-			
-			int nPoint = 0;
-			for(ControlBox s : n.getControlBoxes()) {
-				if(s instanceof SwitchBox) {
-					nPoint++;
-				}
-			}
-			String sizesString = "const int NTRAIN = "+n.getTrains().size()+";\n"+
-								 "const int NCB = "+n.getControlBoxes().size()+";\n"+
-								 "const int NPOINT = "+nPoint+";\n"+
-						  		 "const int NSEG = "+n.getSegments().size()+";\n\n";
-			
-			String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
-								"typedef int[0, NCB-1]  cB_id;\n" + 
-								"typedef int[0, NPOINT-1] p_id;\n" + 
-								"typedef int[0, NSEG-1] seg_id;\n" + 
-								"typedef int[-1, NTRAIN-1] tV_id;\n" + 
-								"typedef int[-1, NCB-1] cBV_id;\n" + 
-								"typedef int[-1, NPOINT-1] pV_id;\n" + 
-								"typedef int[-1, NSEG-1] segV_id;\n"+
-								"typedef struct {\r\n" + 
-								"    cB_id cb;\r\n" + 
-								"    seg_id seg;\r\n" + 
-								"} reservations;\n\n";
-			
-			//Limits
-			String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
-								  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
-			
-			//Route segments
-			String routesString = "const segV_id segRoutes[NTRAIN][NSEG] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				routesString += trainRoute(n, n.getTrains().get(i))+", ";
-			}
-			routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
-
-			//Route control boxes
-			String cbsString= "const cBV_id boxRoutes[NTRAIN][NCB] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				cbsString += trainCBs(n, n.getTrains().get(i)) + ", ";
-			}
-			cbsString += trainCBs(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
-						
-			
-			String cbDetailsString = "const segV_id cBs[NCB][3] = {";
-			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
-				cbDetailsString += cbsDetails(n.getControlBoxes().get(i))+", ";
-			}
-			cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
-			
-			//Initial reservations
-			String initRes = "const reservations initialRes[NTRAIN] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				int[] res = getRes(n.getTrains().get(i));
-				initRes += "{"+res[0]+", "+res[1]+"},";
-			}
-			int[] res = getRes(n.getTrains().get(n.getTrains().size()-1));
-			initRes += "{"+res[0]+", "+res[1]+"}};\n";
-			
-			//Points
-			String pointsString = "const pV_id points[NCB] = {";
-			id = 0;
-			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
-				ControlBox cb = n.getControlBoxes().get(i);
-				pointsString += pointID(cb)+", ";
-			} 
-			pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
-			
-			String pointSettingsString = "const bool pointInPlus[NPOINT] = {";
-			for(int i = 0; i < points.size()-1; i++) {
-				pointSettingsString += (points.get(i).getConnected() == PointSetting.PLUS)+", ";
-			}
-			pointSettingsString += (points.get(points.size()-1).getConnected() == PointSetting.PLUS)+"};\n\n";
+//			setStartEndStrings(n);
+//			
+//			int nPoint = 0;
+//			for(ControlBox s : n.getControlBoxes()) {
+//				if(s instanceof SwitchBox) {
+//					nPoint++;
+//				}
+//			}
+//			String sizesString = "const int NTRAIN = "+n.getTrains().size()+";\n"+
+//								 "const int NCB = "+n.getControlBoxes().size()+";\n"+
+//								 "const int NPOINT = "+nPoint+";\n"+
+//						  		 "const int NSEG = "+n.getSegments().size()+";\n\n";
+//			
+//			String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
+//								"typedef int[0, NCB-1]  cB_id;\n" + 
+//								"typedef int[0, NPOINT-1] p_id;\n" + 
+//								"typedef int[0, NSEG-1] seg_id;\n" + 
+//								"typedef int[-1, NTRAIN-1] tV_id;\n" + 
+//								"typedef int[-1, NCB-1] cBV_id;\n" + 
+//								"typedef int[-1, NPOINT-1] pV_id;\n" + 
+//								"typedef int[-1, NSEG-1] segV_id;\n"+
+//								"typedef struct {\r\n" + 
+//								"    cB_id cb;\r\n" + 
+//								"    seg_id seg;\r\n" + 
+//								"} reservations;\n\n";
+//			
+//			//Limits
+//			String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
+//								  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
+//			
+//			//Route segments
+//			String routesString = "const segV_id segRoutes[NTRAIN][NSEG] = {";
+//			for(int i = 0; i < n.getTrains().size()-1; i++) {
+//				routesString += trainRoute(n, n.getTrains().get(i))+", ";
+//			}
+//			routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
+//
+//			//Route control boxes
+//			String cbsString= "const cBV_id boxRoutes[NTRAIN][NCB] = {";
+//			for(int i = 0; i < n.getTrains().size()-1; i++) {
+//				cbsString += trainCBs(n, n.getTrains().get(i)) + ", ";
+//			}
+//			cbsString += trainCBs(n, n.getTrains().get(n.getTrains().size()-1))+"};\n";
+//						
+//			
+//			String cbDetailsString = "const segV_id cBs[NCB][3] = {";
+//			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
+//				cbDetailsString += cbsDetails(n.getControlBoxes().get(i))+", ";
+//			}
+//			cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+//			
+//			//Initial reservations
+//			String initRes = "const reservations initialRes[NTRAIN] = {";
+//			for(int i = 0; i < n.getTrains().size()-1; i++) {
+//				int[] res = getRes(n.getTrains().get(i));
+//				initRes += "{"+res[0]+", "+res[1]+"},";
+//			}
+//			int[] res = getRes(n.getTrains().get(n.getTrains().size()-1));
+//			initRes += "{"+res[0]+", "+res[1]+"}};\n";
+//			
+//			//Points
+//			String pointsString = "const pV_id points[NCB] = {";
+//			id = 0;
+//			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
+//				ControlBox cb = n.getControlBoxes().get(i);
+//				pointsString += pointID(cb)+", ";
+//			} 
+//			pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+//			
+//			String pointSettingsString = "const bool pointInPlus[NPOINT] = {";
+//			for(int i = 0; i < switchBoxes.size()-1; i++) {
+//				pointSettingsString += (switchBoxes.get(i).getConnected() == PointSetting.PLUS)+", ";
+//			}
+//			pointSettingsString += (switchBoxes.get(switchBoxes.size()-1).getConnected() == PointSetting.PLUS)+"};\n\n";
 			
 			//Channels
 			String channelsString = "chan resSeg[NCB][NTRAIN][NSEG];\r\n" + 
@@ -112,7 +107,7 @@ public class UppaalTranslator extends Translator{
 			try {
 				writer = new PrintWriter("test.xml", "UTF-8");
 				writer.println(start);
-				writer.println(sizesString + typesString + limitsString + routesString + cbsString + cbDetailsString + initRes + pointsString + pointSettingsString + channelsString);
+//				writer.println(sizesString + typesString + limitsString + routesString + cbsString + cbDetailsString + initRes + pointsString + pointSettingsString + channelsString);
 				writer.println(end);
 				writer.close();
 				return "Model file successfully generated.";
@@ -123,15 +118,15 @@ public class UppaalTranslator extends Translator{
 		return "An error occurred";
 	}
 
-	private int[] getRes(Train t) {
-		Segment s1 = t.getRoute().get(0);
-		Segment s2 = t.getRoute().get(1);
-		ControlBox[] cbs = getSegmentBoxes(s1, s2);
-		int[] res = new int[2];
-		res[0] = cbIDs.get(cbs[1]);
-		res[1] = segIDs.get(s1);
-		return res;
-	}
+//	private int[] getRes(Train t) {
+//		Segment s1 = t.getRoute().get(0);
+//		Segment s2 = t.getRoute().get(1);
+//		ControlBox[] cbs = getSegmentBoxes(s1, s2);
+//		int[] res = new int[2];
+//		res[0] = cbIDs.get(cbs[1]);
+//		res[1] = segIDs.get(s1);
+//		return res;
+//	}
 
 	private String pointID(ControlBox cb) {
 		String switchesString = "";
@@ -184,41 +179,22 @@ public class UppaalTranslator extends Translator{
 	}
 	
 
-	private String trainCBs(Network n, Train t) {
-		String cbsString = "{";
-		for(int j = 0; j < t.getRoute().size()-1; j+=2) {
-			ControlBox[] cbs = getSegmentBoxes(t.getRoute().get(j), t.getRoute().get(j+1));
-			cbsString += cbIDs.get(cbs[0])+", "+cbIDs.get(cbs[1])+", ";
-		}
-		ControlBox[] cbs = getSegmentBoxes(t.getRoute().get(t.getRoute().size()-2), t.getRoute().get(t.getRoute().size()-1));
-		cbsString += cbIDs.get(cbs[2]);
-		for(int j = t.getRoute().size(); j < n.getControlBoxes().size()-1; j++) {
-			cbsString += ", -1";	
-		}
-		cbsString += "}";
-		return cbsString;
-	}
+//	private String trainCBs(Network n, Train t) {
+//		String cbsString = "{";
+//		for(int j = 0; j < t.getRoute().size()-1; j+=2) {
+//			ControlBox[] cbs = getSegmentBoxes(t.getRoute().get(j), t.getRoute().get(j+1));
+//			cbsString += cbIDs.get(cbs[0])+", "+cbIDs.get(cbs[1])+", ";
+//		}
+//		ControlBox[] cbs = getSegmentBoxes(t.getRoute().get(t.getRoute().size()-2), t.getRoute().get(t.getRoute().size()-1));
+//		cbsString += cbIDs.get(cbs[2]);
+//		for(int j = t.getRoute().size(); j < n.getControlBoxes().size()-1; j++) {
+//			cbsString += ", -1";	
+//		}
+//		cbsString += "}";
+//		return cbsString;
+//	}
 
-	private void initialize(Network n) {
-		int i = 0;
-		
-		cbIDs = new HashMap<>();
-		points = new LinkedList<>();
-		for(ControlBox cb : n.getControlBoxes()) {
-			cbIDs.put(cb, i);
-			i++;
-			if(cb instanceof SwitchBox) {
-				points.add((SwitchBox) cb);
-			}
-		}
-		
-		segIDs = new HashMap<>();
-		i = 0;
-		for(Segment s : n.getSegments()) {
-			segIDs.put(s, i);
-			i++;
-		}
-		
+	private void setStartEndStrings(Network n) {		
 		start = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" + 
 				"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\r\n" + 
 				"<nta>\r\n" + 
@@ -730,26 +706,4 @@ public class UppaalTranslator extends Translator{
 				"</nta>\r\n";
 	}
 
-
-	private ControlBox[] getSegmentBoxes(Segment s, Segment s2) { 
-		ControlBox[] cbs = new ControlBox[3];
-		if(s.getStart() == s2.getStart()) {
-			cbs[0] = s.getEnd();
-			cbs[1] = s.getStart();
-			cbs[2] = s2.getEnd();
-		} else if (s.getStart() == s2.getEnd()) {
-			cbs[0] = s.getEnd();
-			cbs[1] = s.getStart();
-			cbs[2] = s2.getStart();
-		} else if (s.getEnd() == s2.getStart()) {
-			cbs[0] = s.getStart();
-			cbs[1] = s.getEnd();
-			cbs[2] = s2.getEnd();
-		} else {
-			cbs[0] = s.getStart();
-			cbs[1] = s.getEnd();
-			cbs[2] = s2.getStart();
-		}
-		return cbs;
-	}
 }

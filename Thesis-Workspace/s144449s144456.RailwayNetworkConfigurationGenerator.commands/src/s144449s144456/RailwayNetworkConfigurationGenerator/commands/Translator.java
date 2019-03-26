@@ -1,5 +1,9 @@
 package s144449s144456.RailwayNetworkConfigurationGenerator.commands;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -13,6 +17,12 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import network.*;
 
 public abstract class Translator extends AbstractHandler implements IHandler{
+	protected Map<ControlBox, Integer> cbIDs;
+	protected Map<Segment, Integer> segIDs;
+	protected Map<Train, Integer> trainIDs;
+	protected Map<SwitchBox, Integer> pointIDs;
+	protected Map<ControlBox, Segment[]> controlBoxSegments;
+	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
@@ -29,7 +39,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 							//msg += "Error in train: Missing ID.\n";
 						}
 						for(int i = 0; i < t.getRoute().size()-1; i++) {
-							if(!isConnected(t.getRoute().get(i), t.getRoute().get(i+1))) {
+							if(!areConnected(t.getRoute().get(i), t.getRoute().get(i+1))) {
 								msg += "Error in train "+t.getId()+"'s route: Movement from segment "+t.getRoute().get(i).getId()+" to segment "+t.getRoute().get(i+1).getId()+" is not possible.\n";
 							}
 						}
@@ -81,6 +91,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 					
 					//Generate code
 					if(msg.equals("")) {
+						initialize(n);
 						msg = generateCode(n);
 					}
 					
@@ -93,7 +104,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		return null;
 	}
 
-	private boolean isConnected(Segment s1, Segment s2) {
+	private boolean areConnected(Segment s1, Segment s2) {
 		return s1.getStart().getSegments().contains(s2) || s1.getEnd().getSegments().contains(s2);
 	}
 
@@ -106,5 +117,66 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			return ((IAdaptable) o).getAdapter(Network.class);
 		}
 		return null;
+	}
+	
+	
+	
+	private void initialize(Network n) {
+		int i = 0;
+		
+		//Segments
+		segIDs = new HashMap<>();
+		i = 0;
+		for(Segment s : n.getSegments()) {
+			segIDs.put(s, i);
+			i++;
+		}
+		
+		//Control Boxes
+		cbIDs = new HashMap<>();
+		controlBoxSegments = new HashMap<>();
+		i = 0;
+		for(ControlBox cb : n.getControlBoxes()) {
+			cbIDs.put(cb, i);
+
+			Segment[] segments = new Segment[3];
+			if(cb instanceof SwitchBox) {
+				SwitchBox sb = (SwitchBox) cb;
+				segments[0] = sb.getStem();
+				segments[1] = sb.getPlus();
+				segments[2] = sb.getMinus();
+			} else {
+				segments[0] = cb.getSegments().get(0);
+				if (cb.getSegments().size() > 1) {
+					segments[1] = cb.getSegments().get(1);
+					
+					if (cb.getSegments().size() > 2) {
+						segments[2] = cb.getSegments().get(2);
+					}
+				}
+			}
+			controlBoxSegments.put(cb, segments);
+			i++;
+		}
+		
+		pointIDs = new HashMap<>();
+		i = 0;
+		for(ControlBox cb : n.getControlBoxes()) {
+			if(cb instanceof SwitchBox) {
+				SwitchBox sb = (SwitchBox) cb;
+				pointIDs.put(sb, i);
+				i++;
+			}
+		}
+		
+
+		
+		//Trains
+		i = 0;
+		trainIDs = new HashMap<>();
+		for(Train t : n.getTrains()) {
+			trainIDs.put(t,i);
+			i++;
+		}
 	}
 }

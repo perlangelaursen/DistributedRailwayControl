@@ -3,10 +3,12 @@
 package network.impl;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 import network.NetworkPackage;
 import network.Segment;
 import network.Train;
+import network.ControlBox;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -37,6 +39,11 @@ public class TrainImpl extends ElementImpl implements Train {
 	 * @ordered
 	 */
 	protected EList<Segment> route;
+	
+	/**
+	 * @generated NOT
+	 */
+	private LinkedList<ControlBox> boxRoute;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,5 +136,50 @@ public class TrainImpl extends ElementImpl implements Train {
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
+	/**
+	 * @generated NOT
+	 */
+	private ControlBox[] getSegmentBoxes(Segment s, Segment s2) { //0 = first, 1 = shared, 2 = last
+		ControlBox[] cbs = new ControlBox[3];
+		if(s.getStart() == s2.getStart()) {
+			cbs[0] = s.getEnd();
+			cbs[1] = s.getStart();
+			cbs[2] = s2.getEnd();
+		} else if (s.getStart() == s2.getEnd()) {
+			cbs[0] = s.getEnd();
+			cbs[1] = s.getStart();
+			cbs[2] = s2.getStart();
+		} else if (s.getEnd() == s2.getStart()) {
+			cbs[0] = s.getStart();
+			cbs[1] = s.getEnd();
+			cbs[2] = s2.getEnd();
+		} else {
+			cbs[0] = s.getStart();
+			cbs[1] = s.getEnd();
+			cbs[2] = s2.getStart();
+		}
+		return cbs;
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public LinkedList<ControlBox> getBoxRoute() {
+		if(boxRoute == null) {
+			LinkedList<ControlBox> l = new LinkedList<>();
+			ControlBox[] cbs;
+			for(int j = 0; j < getRoute().size()-1; j++) {
+				cbs = getSegmentBoxes(getRoute().get(j), getRoute().get(j+1));
+				l.add(cbs[0]);
+				if(j == getRoute().size()-2) {
+					l.add(cbs[1]);
+					l.add(cbs[2]);
+				}
+			}
+			return l;
+		}
+		return boxRoute;
+	}
 } //TrainImpl
