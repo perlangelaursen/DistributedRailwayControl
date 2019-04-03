@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension 
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="s144449s144456.RailwayNetworkConfigurationGenerator"
+               label="Railway Configuration Generator">
+         </menu>
+      </menuContribution>
+   </extension>
+
+   <extension 
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:s144449s144456.RailwayNetworkConfigurationGenerator?after=additions">
+         <command
+               commandId="s144449s144456.RailwayNetworkConfigurationGenerator.generateUppaal">
+            <visibleWhen>
+               <with
+                     variable="selection">
+                  <count value="1"/>
+                  <iterate>
+                     <adapt
+                           type="network.Network">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="s144449s144456.RailwayNetworkConfigurationGenerator.generateUppaal"
+            description="Generate Uppaal code of model"
+            defaultHandler="s144449s144456.RailwayNetworkConfigurationGenerator.commands.UppaalTranslator"
+            name="Generate Uppaal Code">
+      </command>
+   </extension>
+</plugin>

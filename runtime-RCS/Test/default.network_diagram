@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network" xmi:id="_hYOBAE9AEemJxKPdGBwHlA" type="Network" name="default.network_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_wtIxAE9KEemlZalT0UnerA" type="2002">
+    <children xmi:type="notation:DecorationNode" xmi:id="_wtKmME9KEemlZalT0UnerA" type="5002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_wtKmMU9KEemlZalT0UnerA" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_wtIxAU9KEemlZalT0UnerA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_wtJYEE9KEemlZalT0UnerA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_wtJYEU9KEemlZalT0UnerA"/>
+    <element xmi:type="nw:RegularBox" href="default.network#//@controlBoxes.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wtJYEk9KEemlZalT0UnerA" x="199" y="130"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_w-PvIE9KEemlZalT0UnerA" type="2002">
+    <children xmi:type="notation:DecorationNode" xmi:id="_w-QWME9KEemlZalT0UnerA" type="5002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_w-QWMU9KEemlZalT0UnerA" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_w-PvIU9KEemlZalT0UnerA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_w-PvIk9KEemlZalT0UnerA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_w-PvI09KEemlZalT0UnerA"/>
+    <element xmi:type="nw:RegularBox" href="default.network#//@controlBoxes.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_w-PvJE9KEemlZalT0UnerA" x="407" y="120"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_xgp4oE9KEemlZalT0UnerA" type="2002">
+    <children xmi:type="notation:DecorationNode" xmi:id="_xgqfsE9KEemlZalT0UnerA" type="5002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_xgqfsU9KEemlZalT0UnerA" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_xgp4oU9KEemlZalT0UnerA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_xgp4ok9KEemlZalT0UnerA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_xgp4o09KEemlZalT0UnerA"/>
+    <element xmi:type="nw:RegularBox" href="default.network#//@controlBoxes.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xgp4pE9KEemlZalT0UnerA" x="526" y="87"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_hYOoEE9AEemJxKPdGBwHlA"/>
+  <element xmi:type="nw:Network" href="default.network#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_xT2ywE9KEemlZalT0UnerA" type="4004" source="_wtIxAE9KEemlZalT0UnerA" target="_w-PvIE9KEemlZalT0UnerA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_xT2yw09KEemlZalT0UnerA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_xT2yxE9KEemlZalT0UnerA" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_xT2ywU9KEemlZalT0UnerA" fontName="Segoe UI"/>
+    <element xmi:type="nw:Segment" href="default.network#//@segments.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_xT2ywk9KEemlZalT0UnerA" points="[8, 6, -198, 9]$[210, -13, 4, -10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xUV68E9KEemlZalT0UnerA" id="(0.6,0.15)"/>
+  </edges>
+</notation:Diagram>

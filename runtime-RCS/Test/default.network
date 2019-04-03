@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nw:Network xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nw="http://s144449s144456.railwaymodelgenerator/network">
+  <controlBoxes xsi:type="nw:RegularBox" outgoing="//@segments.0"/>
+  <controlBoxes xsi:type="nw:RegularBox" ingoing="//@segments.0"/>
+  <controlBoxes xsi:type="nw:RegularBox"/>
+  <segments start="//@controlBoxes.0" end="//@controlBoxes.1"/>
+</nw:Network>
