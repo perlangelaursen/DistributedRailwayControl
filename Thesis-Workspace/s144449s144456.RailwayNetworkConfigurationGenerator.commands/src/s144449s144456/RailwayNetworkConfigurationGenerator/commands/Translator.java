@@ -20,7 +20,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 	protected Map<ControlBox, Integer> cbIDs;
 	protected Map<Segment, Integer> segIDs;
 	protected Map<Train, Integer> trainIDs;
-	protected Map<SwitchBox, Integer> pointIDs;
+	protected Map<ControlBox, Integer> pointIDs;
 	protected Map<ControlBox, Segment[]> controlBoxSegments;
 	
 	@Override
