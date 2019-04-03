@@ -1,7 +1,0 @@
-# Tracing options for the s144449s144456.RailwayModelGenerator.diagram plug-in
-
-# Common issues
-s144449s144456.RailwayModelGenerator.diagram/debug=false
-
-# Visual IDs
-s144449s144456.RailwayModelGenerator.diagram/debug/visualID=false

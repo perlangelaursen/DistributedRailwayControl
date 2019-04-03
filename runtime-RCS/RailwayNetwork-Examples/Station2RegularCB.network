@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nw:Network xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nw="http://s144449s144456.RailwayNetworkConfigurationGenerator/network">
+  <controlBoxes xsi:type="nw:RegularBox" id="cb0" outgoing="s0"/>
+  <controlBoxes xsi:type="nw:RegularBox" id="cb1" ingoing="s0" outgoing="s1"/>
+  <controlBoxes xsi:type="nw:SwitchBox" id="cb2" ingoing="s1" outgoing="s2 s3" stem="s1" plus="s2" minus="s3"/>
+  <controlBoxes xsi:type="nw:SwitchBox" id="cb3" ingoing="s2 s3" outgoing="s4" stem="s4" plus="s2" minus="s3"/>
+  <controlBoxes xsi:type="nw:RegularBox" id="cb4" ingoing="s4"/>
+  <segments id="s0" start="cb0" end="cb1"/>
+  <segments id="s1" start="cb1" end="cb2"/>
+  <segments id="s2" start="cb2" end="cb3"/>
+  <segments id="s4" start="cb3" end="cb4"/>
+  <segments id="s3" start="cb2" end="cb3"/>
+  <trains id="t0" route="s0 s1 s2 s4"/>
+  <trains id="t1" route="s4 s3 s1 s0"/>
+</nw:Network>

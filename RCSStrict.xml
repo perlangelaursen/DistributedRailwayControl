@@ -782,8 +782,8 @@ tid = i</label>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) forall(j:int[0,1]) Train(i).DoubleSegment imply
-	(Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected) ||
-	(Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] ||  Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).connected)
+	(Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).connected) ||
+	(Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected)
 			</formula>
 			<comment>No derailment:
 A train passing a point always moves between the connected segments
