@@ -14,7 +14,7 @@ public class UMCTranslator extends Translator {
 			String classes = createTrainClass(n.getReserveLimit(), n.getLockLimit())+createCBClass()+createPointClass();
 			
 			String objectString = "\r\n"+"Objects";
-					
+			
 			//Create trains
 			String trainsString = getTrainObjectsString(n);
 			
@@ -30,7 +30,7 @@ public class UMCTranslator extends Translator {
 			//Generate file
 			PrintWriter writer;
 			try {
-				writer = new PrintWriter("test.xml", "UTF-8");
+				writer = new PrintWriter("RCS_UMC.txt", "UTF-8");
 				writer.println(classes);
 				writer.println(objectString + "\r\n" + trainsString + "\r\n" + cbsString + "\r\n" + pointsString + "\r\n" + abstractionsString);
 //				System.out.println(trainsString + cbsString + pointsString + abstractionsString);
@@ -65,21 +65,27 @@ public class UMCTranslator extends Translator {
 		String prop13 = "AG(";
 		String prop14 = "AG(";
 		String prop15 = "~EF{";
-		String prop16 = "AG(";
+		String prop16 = "~EF(";
 		String prop17 = "AG(";
 		String prop18 = "~EF{";
 		String prop19 = "~EF{";
+		String prop20 = "~EF{";
+		String prop21 = "AG(";
 
-		abs += "  Action: $t:$cb.pass -> passing($t,$cb)";
+		abs += "  Action: $t:$cb.pass -> passing($t,$cb)\r\n";
 		abs += "  Action: $t:$cb.reqLock($t,$s1,$s2) -> reqLocking($t,$cb,$s1,$s2)\r\n";
-		abs += "  Action: $t:$cb.reqSeg($t,$s) -> reqSegAt($t,$cb)\r\n" +
-				"  Action: $t:$cb.reqSeg($t,$s) -> reqSegS($t,$s)\r\n";
+		abs += "  Action: $t:*.reqLock($t,$s1,$s2) -> reqLockingS($t,$s1,$s2)\r\n";
+		abs += "  Action: $t:$cb.reqSeg($t,*) -> reqSegAt($t,$cb)\r\n";
+		abs += "  Action: $t:*.reqSeg($t,$s) -> reqSegS($t,$s)\r\n";
+		abs += "  Action: $cb:*.switchPoint -> switching($cb)\r\n";
 		
 		for(Train t : n.getTrains()) {
 			String tid = "t"+trainIDs.get(t);
 			abs += "  State: inState("+tid+".DoubleSegment)\r\n" + 
 					"    and "+tid+".curSeg = $s1\r\n" + 
 					"    and "+tid+".headSeg = $s2 -> doublePos("+tid+",$s1,$s2)\r\n";
+			abs += "  State: "+tid+".locks > "+tid+".lockLimit -> lockLimitExceeded("+tid+")\r\n";
+			
 			for(Train t2: n.getTrains()) {
 				if(t != t2) {
 					String tid2 = "t"+trainIDs.get(t2);
@@ -101,13 +107,19 @@ public class UMCTranslator extends Translator {
 					
 					//If a train is passing a CB, the segments it moves on are connected
 					//Note: Train only moves on reserved segments + Train only reserves segments on its route
-					prop3 += "([passing("+tid+", "+cbid+")] (doublePos("+tid+","+s1+","+s2+") & (connects("+cbid+","+s1+","+s2+") | connects("+cbid+","+s2+","+s1+")))) & ";
+					prop3 += "([passing("+tid+", "+cbid+")] (doublePos("+tid+","+s1+","+s2+") & connects("+cbid+","+s1+","+s2+"))) & ";
 					
 					//A CB only returns acknowledgement for a switch/lock request if the requested segments are its stem and one of its other segments
 					//Note: Weaker - canConnect regardless of whether OK is returned or not (possible in UMC)
 					//Note: Train only requests switching/locking of CBs in route
-					prop13 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] (canConnect("+cbid+","+s1+","+s2+") | canConnect("+cbid+","+s2+","+s1+"))) & ";				
+					prop13 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] canConnect("+cbid+","+s1+","+s2+")) & ";				
 					
+					
+					//A TCC only requests locks for connections that it has reserved
+					//Note: Train only requests switching/locking for segments in route
+					//Note: Train only requests switching/locking of CBs in route
+//					prop14 += "(locked("+tid+","+cbid+") -> (reserved("+tid+","+stem+","+cbid+") & (reserved("+tid+","+plus+","+cbid+") | reserved("+tid+","+minus+","+cbid+")))) & ";
+					prop14 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] -> (reserved("+tid+","+s1+","+cbid+") & reserved("+tid+","+s2+","+cbid+"))) & ";
 
 					String cbid2 = "cb"+cbIDs.get(t.getBoxRoute().get(i+1));
 					//Reservation consistency: All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
@@ -118,7 +130,7 @@ public class UMCTranslator extends Translator {
 				if(cb instanceof SwitchBox) {
 					String pid = "p"+pointIDs.get(cb);
 					//If a train is passing a CB, the associated point is not in the middle of switching 
-					prop4 += "([passing("+tid+", "+cbid+")] ~switching("+pid+")) & ";
+					prop4 += "([passing("+tid+", "+cbid+")] ~inSwitching("+pid+")) & ";
 					
 					int stem = segIDs.get(((SwitchBox) cb).getStem());
 					int plus = segIDs.get(((SwitchBox) cb).getPlus());
@@ -127,10 +139,6 @@ public class UMCTranslator extends Translator {
 					abs += "  State: "+tid+".curSeg = "+plus+" and "+tid+".headSeg = "+stem+" -> inCrit("+cbid+","+tid+")\r\n";
 					abs += "  State: "+tid+".curSeg = "+stem+" and "+tid+".headSeg = "+minus+" -> inCrit("+cbid+","+tid+")\r\n";
 					abs += "  State: "+tid+".curSeg = "+minus+" and "+tid+".headSeg = "+stem+" -> inCrit("+cbid+","+tid+")\r\n";
-					
-					//A TCC only has locks for CBs that it has the stem reservation at and one other segment reservation
-					//Note: Train only locks CBs in route
-					prop14 += "(locked("+tid+","+cbid+") -> (reserved("+tid+","+stem+","+cbid+") & (reserved("+tid+","+plus+","+cbid+") | reserved("+tid+","+minus+","+cbid+")))) & ";
 				}
 				
 				abs += "  State: "+tid+".index < "+i+"\r\n" + 
@@ -161,6 +169,8 @@ public class UMCTranslator extends Translator {
 					//Note: Train only moves on reserved segments + Train only reserves segments on its route
 					prop8 += "(doublePos("+tid+","+s1+","+s2+") -> (reserved("+tid+","+s2+","+cbid2+") & reserved("+tid+","+s2+","+cbid3+"))) & ";
 					
+					prop21 += "(doublePos("+tid+","+s1+","+s2+") -> connects("+cbid2+","+s1+","+s2+")) & ";
+					
 					//A train only passes a switch box if it has been locked for the train
 					prop10 += "((doublePos("+tid+","+s1+","+s2+") & isSwitchBox("+cbid2+")) -> locked("+tid+","+cbid2+")) & ";
 				}
@@ -179,16 +189,34 @@ public class UMCTranslator extends Translator {
 					//A TCC only reserves at control boxes on its route
 					prop18 += "reqSegAt("+tid+","+cbid+") | ";
 				}
+				if(cb instanceof SwitchBox) {
+					String pid = "p"+pointIDs.get(cb);
+					abs += "  State: inState("+pid+".Switching) -> inSwitching("+pid+")\r\n";
+				}
 			}
 			
 			//A TCC never has more locks than allowed
-			prop16 += "~locksExceeded("+tid+") & ";
+			prop16 += "lockLimitExceeded("+tid+") | ";
 			
 			for(Segment s : n.getSegments()) {
 				String sid = ""+segIDs.get(s);
 				if(!t.getRoute().contains(s)) {
 					//A TCC only reserves segments on its route
 					prop19 += "reqSegS("+tid+","+sid+") | ";
+					
+					for(Segment s2 : n.getSegments()) {
+						String sid2 = ""+segIDs.get(s2);
+						//A TCC only requests switch/lock for connections of segments that are adjacent in its route
+						prop20 += "reqLockingS("+tid+","+sid+","+sid2+") | ";
+					}
+				} else {
+					int i = t.getRoute().indexOf(s);
+					for(Segment s2 : n.getSegments()) {
+						if(i < t.getRoute().size()-1 && t.getRoute().get(i+1) != s2) {
+							String sid2 = ""+segIDs.get(s2);
+							prop20 += "reqLockingS("+tid+","+sid+","+sid2+") | ";
+						}
+					}
 				}
 			}
 		}
@@ -197,6 +225,7 @@ public class UMCTranslator extends Translator {
 		for(ControlBox cb : n.getControlBoxes()) {
 			String cbid = "cb"+cbIDs.get(cb);
 			abs += "  State: "+cbid+".segments[0] = $s1 and "+cbid+".connected = $s2 -> connects("+cbid+",$s1,$s2)\r\n";
+			abs += "  State: "+cbid+".segments[0] = $s1 and "+cbid+".connected = $s2 -> connects("+cbid+",$s2,$s1)\r\n";
 			abs += "  State: "+cbid+".point /= null -> isSwitchBox("+cbid+")\r\n";
 			if(cb instanceof SwitchBox) {
 				SwitchBox sb = (SwitchBox) cb;
@@ -211,10 +240,14 @@ public class UMCTranslator extends Translator {
 			abs += "  State: "+cbid+".lockedBy = $t -> lockedBy("+cbid+",$t)\r\n";
 			abs += "  State: inState("+cbid+".Switching) -> inSwitching("+cbid+")\r\n";
 			abs += "  State: "+cbid+".segments[0] = $s1\r\n" + 
-					"    and cb2.segments[1] = $s2 -> canConnect("+cbid+",$s1,$s2)\r\n";
+					"    and "+cbid+".segments[1] = $s2 -> canConnect("+cbid+",$s1,$s2)\r\n";
+			abs += "  State: "+cbid+".segments[0] = $s1\r\n" + 
+					"    and "+cbid+".segments[1] = $s2 -> canConnect("+cbid+",$s2,$s1)\r\n";
 			if(cb instanceof SwitchBox) {
 				abs += "  State: "+cbid+".segments[0] = $s1\r\n" + 
-						"    and cb2.segments[2] = $s2 -> canConnect("+cbid+",$s1,$s2)\r\n";
+						"    and "+cbid+".segments[2] = $s2 -> canConnect("+cbid+",$s1,$s2)\r\n";
+				abs += "  State: "+cbid+".segments[0] = $s1\r\n" + 
+						"    and "+cbid+".segments[2] = $s2 -> canConnect("+cbid+",$s2,$s1)\r\n";
 			}
 			
 			for(int i = 0; i <= 2; i++) {
@@ -229,7 +262,8 @@ public class UMCTranslator extends Translator {
 			prop11 += "(inSwitched("+cbid+") -> lockedBy("+cbid+",null)) & ";
 			
 			//A control box only switches and locks its point if no train is in its critical section
-			prop12 += "((inSwitched("+cbid+") | inSwitching("+cbid+")) -> (";
+//			prop12 += "((inSwitched("+cbid+") | inSwitching("+cbid+")) -> (";
+			prop12 += "([switching("+cbid+")] (";
 			for(Train t : n.getTrains()) {
 				String tid = "t"+trainIDs.get(t);
 				prop12 += "~inCrit("+cbid+","+tid+") & ";
@@ -273,36 +307,49 @@ public class UMCTranslator extends Translator {
 			prop18 = prop18.substring(0, prop18.length() - 3)+"}\r\n";
 		}
 		prop19 = prop19.substring(0, prop19.length() - 3)+"}\r\n";
+		prop20 = prop20.substring(0, prop20.length() - 3)+"}\r\n";
+		prop21 = prop21.substring(0, prop21.length() - 3)+")\r\n";
 		
-		String props = "//LIVENESS\r\n";
-		props += prop1;
+		String props = "";
 		props += "\r\n//NO COLLISION\r\n";
 		props += prop2;
+		
 		props += "\r\n//NO DERAILMENT\r\n";
-		props += "//If a train is passing a CB, the segments it moves on are connected\r\n"+prop3;
-		props += "//If a train is passing a CB, the associated point is not in the middle of switching\r\n"+prop4;
-		props += "\r\n//CONSISTENCY\r\n";
-//		props += "Lock consistency: A TCC's locks variable is always the true number of locks\r\n";
-//		props += "Network array consistency: The pointInPlus array reflects the true state of all Points\r\n";
-		props += "//Point consistency: A CB's connected information is consistent with its Point's position\r\n"+prop5;
-		props += "//Lock consistency: A TCC's obtained locks are reflected in the relevant CBs\r\n"+prop6;
-		props += "//Reservation consistency: All segment reservations obtained by a TCC are also saved in the state space of the relevant CB\r\n"+prop7;
-		props += "\r\n//OPERATION REQUIREMENTS: PASS\r\n";
-		props += "//A train only enters a segment that is has the full reservation of\r\n"+prop8;
-		props += "//A train never passes the last control box in its route\r\n"+prop9;
-		props += "//A train only passes a switch box if it has been locked for the train\r\n"+prop10;
-		props += "\r\n//OPERATION REQUIREMENTS: LOCK\r\n";
-		props += "//A lock is only ever given if it is available\r\n"+prop11;
-		props += "//A control box only switches and locks its point if no train is in its critical section\r\n"+prop12;
-		props += "//A CB only returns acknowledgement for a switch/lock request if the requested segments are its stem and one of its other segments\r\n"+prop13;
-		props += "//A TCC only has locks for CB's that it has the stem reservation at and one other segment reservation\r\n"+prop14;
-		props += "//A TCC only requests locks at switch boxes on its route\r\n"+prop15;
-		props += "//A TCC never has more locks than allowed\r\n"+prop16;
+		props += "//If a train is in a critical section, the point in that section is not in the middle of switching\r\n"+prop4;
+		props += "//If a train is in a critical section, then the segments that it is moving on are connected\r\n"+prop3;
+
 		props += "\r\n//OPERATION REQUIREMENTS: RESERVE\r\n";
-		props += "//A reservation is only ever given if it is available\r\n"+prop17;
-		props += "//A TCC only reserves at control boxes on its route\r\n"+prop18;
-		props += "//A TCC only reserves segments on its route\r\n"+prop19;
-//		props += "//A TCC never has more reservations than allowed\r\n";
+//		props += "//A train never has more reservations than the reservation limit\r\n";
+		props += "//A reservation is only requested if the requested segment is a part of the requesting train's route\r\n"+prop19;
+		props += "//A reservation is only requested if the control box that a train contacts is a part of the train's route\r\n"+prop18;
+		props += "//A reservation is only successful if the requested segment is associated with the control box that receives the request and if it is not already reserved\r\n"+prop17;
+		
+		props += "\r\n//OPERATION REQUIREMENTS: LOCK\r\n";
+		props += "//A train never has more locks than the lock limit\r\n"+prop16;
+		props += "//A lock is only requested if the involved switch box is in the route of the requesting train\r\n"+prop15;
+		props += "//A lock is only requested if the requesting train has the reservation for the two segments at the switch box\r\n"+prop14;
+		props += "//A lock is only successful if the point involved in the request was unlocked prior to the request\r\n"+prop11;
+		props += "//A switch is only requested if the requested connection is of segments that are adjacent in the train's route\r\n"+prop20;
+		props += "//A switch is only successful if the requested conenction is of the stem segment and plus or minus segment of the switch box\r\n"+prop13;
+		props += "//A control box only switches and locks its point if no train is in its critical section\r\n"+prop12;
+
+		props += "\r\n//OPERATION REQUIREMENTS: PASS\r\n";
+		props += "//A train only passes a switch box if it has been locked for the train\r\n"+prop10;
+		props += "//A train never passes the last control box on its route\r\n"+prop9;
+		props += "//A train only enters a segment that it has the full reservation of\r\n"+prop8;
+
+		props += "\r\n//CONSISTENCY\r\n";
+		props += "//Reservation consistency: The reservations saved in the state space of a Train are also saved in the state spaces of the involved CBs\r\n"+prop7;
+		props += "//Lock consistency: The locks saved in the state space of a Train are also saved in the state spaces of the involved CBs\r\n"+prop6;		
+//		props += "Lock consistency: The number of saved locks in the state space of a Train is the same number of locks that it believes that is has \r\n";
+//		props += "Network array consistency: The position of a point in the network data is consistent with the actual position of the point\r\n";
+//		props += "//Point consistency: A CB's connected information is consistent with its Point's position\r\n"+prop5;
+		props += "//Position consistency: The train position saved in a TCC is consistent with the train's actual position\r\n"+prop21;
+
+		props += "//LIVENESS\r\n";
+		props += prop1;
+		
+
 		System.out.println(props);
 		abs += "}";
 		return abs;
