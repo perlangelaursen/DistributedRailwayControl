@@ -3,10 +3,6 @@ package s144449s144456.RailwayNetworkConfigurationGenerator.commands;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EList;
 
 import network.*;
@@ -19,11 +15,12 @@ public class UppaalTranslator extends Translator{
 	protected String generateCode(Network n) {
 		if(n != null) {
 			setStartEndStrings(n);
-			
+			int routeLength = computeLongestRouteLength(n.getTrains());
 			String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
 								 "const int NCB = "+cbIDs.size()+";\n"+
 								 "const int NPOINT = "+pointIDs.size()+";\n"+
-						  		 "const int NSEG = "+segIDs.size()+";\n\n";
+						  		 "const int NSEG = "+segIDs.size()+";\n"+ 
+								 "const int NROUTELENGTH ="+ routeLength +";\n\n";
 			
 			String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
 								"typedef int[0, NCB-1]  cB_id;\n" + 
@@ -36,22 +33,22 @@ public class UppaalTranslator extends Translator{
 								"typedef struct {\r\n" + 
 								"    cB_id cb;\r\n" + 
 								"    seg_id seg;\r\n" + 
-								"} reservations;\n\n";
+								"} reservation;\n\n";
 			
 			//Limits
 			String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
 								  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
 			
 			//Route segments
-			int routeLength = computeLongestRouteLength(n.getTrains());
-			String routesString = "const segV_id segRoutes[NTRAIN][NSEG] = {";
+			
+			String routesString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
 			for(int i = 0; i < n.getTrains().size()-1; i++) {
 				routesString += trainRoute(n, n.getTrains().get(i), routeLength)+", ";
 			}
 			routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1), routeLength)+"};\n";
 
 			//Route control boxes
-			String cbsString= "const cBV_id boxRoutes[NTRAIN][NCB] = {";
+			String cbsString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
 			for(int i = 0; i < n.getTrains().size()-1; i++) {
 				cbsString += trainBoxes(n.getTrains().get(i), routeLength + 1) + ", ";
 			}
@@ -65,7 +62,7 @@ public class UppaalTranslator extends Translator{
 			cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
 			
 			//Initial reservations
-			String initRes = "const reservations initialRes[NTRAIN] = {";
+			String initRes = "const reservation initialRes[NTRAIN] = {";
 			for(int i = 0; i < n.getTrains().size()-1; i++) {
 				int[] res = getRes(n.getTrains().get(i));
 				initRes += "{"+res[0]+", "+res[1]+"},";
@@ -82,9 +79,9 @@ public class UppaalTranslator extends Translator{
 			} 
 			pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
 			
-			String pointSettingsString = "const bool pointInPlus[NPOINT] = {";
-			pointSettingsString += "true";
-			for(int i = 1; i < n.getControlBoxes().size(); i++) {
+			String pointSettingsString = "bool pointInPlus[NPOINT] = {";
+			pointSettingsString += (pointIDs.size() >= 1) ? "true" : "";
+			for(int i = 1; i < pointIDs.size(); i++) {
 				pointSettingsString += ", true";
 			}
 			pointSettingsString += "};\n\n";
@@ -154,7 +151,7 @@ public class UppaalTranslator extends Translator{
 		}
 		res += ", " + cbIDs.get(findEdgeControlBox(t.getRoute().get(t.getRoute().size()-1), 
 				t.getRoute().get(t.getRoute().size()-2)));
-		i++;
+		i+=2;
 		for(; i < routeLength; i++) {
 			res += ", -1";
 		}
@@ -164,7 +161,7 @@ public class UppaalTranslator extends Translator{
 	private int[] getRes(Train t) {
 		Segment s1 = t.getRoute().get(0);
 		Segment s2 = t.getRoute().get(1);
-		ControlBox box = findEdgeControlBox(s1, s2);
+		ControlBox box = findConnectingBox(s1, s2);
 		int[] res = {cbIDs.get(box), segIDs.get(s1)};
 		return res;
 	}
@@ -176,9 +173,9 @@ public class UppaalTranslator extends Translator{
 	
 	private String cbsDetails(ControlBox cb) {
 		String cbsDetails = "{";
-		cbsDetails += controlBoxSegments.get(cb)[0];
+		cbsDetails += segIDs.get(controlBoxSegments.get(cb)[0]);
 		for(int i = 1; i < controlBoxSegments.get(cb).length; i++) {
-			cbsDetails += ", " + controlBoxSegments.get(cb)[i];
+			cbsDetails += ", " + segIDs.getOrDefault(controlBoxSegments.get(cb)[i], -1) ;
 		}
 		return cbsDetails+"}";
 	}
