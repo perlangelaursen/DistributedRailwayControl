@@ -1,0 +1,32 @@
+//Smallest network
+//Configuration Data - Part 1
+const int NCB = 2;
+const int NSEG = 1;
+const int NTRAIN = 1;
+const int NPOINT = 1;
+const int NROUTELENGTH = 1;
+
+//TYPES
+typedef int[0, NTRAIN-1] t_id;
+typedef int[0, NCB-1]  cB_id;
+typedef int[0, NPOINT-1] p_id;
+typedef int[0, NSEG-1] seg_id;
+typedef int[-1, NSEG-1] segV_id;
+typedef int[-1, NPOINT-1] pV_id;
+typedef int[-1, NCB-1] cBV_id;
+typedef int[-1, NTRAIN-1] tV_id;
+typedef struct {
+    cB_id cb;
+    seg_id seg;
+} reservation;
+
+//Configuration Data - Part 2
+const int[1,NROUTELENGTH] resLimit = 1;
+const int[0,NROUTELENGTH-1] lockLimit = 0;
+
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1}};
+const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,-1,-1}};
+const pV_id points[NCB] = { -1,-1};
+const reservation initialRes[NTRAIN] = {{1,0}};
+bool pointInPlus[NPOINT] = {true};
