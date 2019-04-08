@@ -384,17 +384,7 @@ public abstract class UppaalTranslator extends Translator {
 				typesString + limitsString + routesString + 
 				cbsString + cbDetailsString + initRes + 
 				pointsString + pointSettingsString + 
-				"//Channels\n" + 
-				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
-				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
-				"chan OK[NTRAIN];\n" + 
-				"chan notOK[NTRAIN];\n" + 
-				"chan pass[NCB];\n" + 
-				"chan passed[NCB];\n" + 
-				"chan switchPoint[NPOINT];\n" + 
-				"chan OKp[NPOINT];\n" + 
-				"urgent broadcast chan start;\n" + 
-				"\n" + 
+				generateChannels() + 
 				"int nextSegment(cB_id cb, seg_id s){\n" + 
 				"    int s1 = cBs[cb][0];\n" + 
 				"    int s2 = cBs[cb][1];\n" + 
@@ -548,6 +538,19 @@ public abstract class UppaalTranslator extends Translator {
 				"</declaration>\n";
 	}
 	
+	protected String generateChannels() {
+		return "//Channels\n" + 
+				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
+				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
+				"chan OK[NTRAIN];\n" + 
+				"chan notOK[NTRAIN];\n" + 
+				"chan pass[NCB];\n" + 
+				"chan passed[NCB];\n" + 
+				"chan switchPoint[NPOINT];\n" + 
+				"chan OKp[NPOINT];\n" + 
+				"urgent broadcast chan start;\n\n";
+	}
+
 	protected String computeQueries() {
 		return "<queries>\n" + 
 				"		<query>\n" + 

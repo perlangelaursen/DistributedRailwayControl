@@ -1,5 +1,7 @@
 package s144449s144456.RailwayNetworkConfigurationGenerator.commands;
 
+import network.Network;
+
 public class UppaalCancelTranslator extends UppaalTranslator {
 
 	@Override
@@ -473,7 +475,21 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 				"		</transition>\n" + 
 				"	</template>\n";
 	}
-	
-	
 
+	@Override
+	protected String generateChannels() {
+		return "//Channels\n" + 
+				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
+				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
+				"chan OK[NTRAIN];\n" + 
+				"chan notOK[NTRAIN];\n" + 
+				"chan pass[NCB];\n" + 
+				"chan passed[NCB];\n" + 
+				"chan switchPoint[NPOINT];\n" + 
+				"chan OKp[NCB];\n" + 
+				"urgent broadcast chan start;\n" + 
+				"chan cancel[NCB][NSEG];\n\n";
+	}
+
+	
 }
