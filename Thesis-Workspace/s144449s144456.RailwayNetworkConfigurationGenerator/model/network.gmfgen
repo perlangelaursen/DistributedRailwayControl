@@ -25,6 +25,7 @@
         visualID="2001"
         editPartClassName="SwitchBoxEditPart"
         itemSemanticEditPolicyClassName="SwitchBoxItemSemanticEditPolicy"
+        notationViewFactoryClassName="SwitchBoxViewFactory"
         canonicalEditPolicyClassName="SwitchBoxCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="SwitchBoxGraphicalNodeEditPolicy"
         createCommandClassName="SwitchBoxCreateCommand">
@@ -59,7 +60,8 @@
           xsi:type="gmfgen:GenExternalNodeLabel"
           visualID="5001"
           editPartClassName="SwitchBoxIdEditPart"
-          itemSemanticEditPolicyClassName="SwitchBoxIdItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="SwitchBoxIdItemSemanticEditPolicy"
+          notationViewFactoryClassName="SwitchBoxIdViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -78,6 +80,7 @@
         visualID="2002"
         editPartClassName="RegularBoxEditPart"
         itemSemanticEditPolicyClassName="RegularBoxItemSemanticEditPolicy"
+        notationViewFactoryClassName="RegularBoxViewFactory"
         canonicalEditPolicyClassName="RegularBoxCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="RegularBoxGraphicalNodeEditPolicy"
         createCommandClassName="RegularBoxCreateCommand">
@@ -112,7 +115,8 @@
           xsi:type="gmfgen:GenExternalNodeLabel"
           visualID="5002"
           editPartClassName="RegularBoxIdEditPart"
-          itemSemanticEditPolicyClassName="RegularBoxIdItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="RegularBoxIdItemSemanticEditPolicy"
+          notationViewFactoryClassName="RegularBoxIdViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -131,6 +135,7 @@
         visualID="2004"
         editPartClassName="TrainEditPart"
         itemSemanticEditPolicyClassName="TrainItemSemanticEditPolicy"
+        notationViewFactoryClassName="TrainViewFactory"
         canonicalEditPolicyClassName="TrainCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="TrainGraphicalNodeEditPolicy"
         createCommandClassName="TrainCreateCommand">
@@ -165,7 +170,8 @@
           xsi:type="gmfgen:GenExternalNodeLabel"
           visualID="5004"
           editPartClassName="TrainIdEditPart"
-          itemSemanticEditPolicyClassName="TrainIdItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="TrainIdItemSemanticEditPolicy"
+          notationViewFactoryClassName="TrainIdViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -183,6 +189,7 @@
         visualID="4004"
         editPartClassName="SegmentEditPart"
         itemSemanticEditPolicyClassName="SegmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="SegmentViewFactory"
         createCommandClassName="SegmentCreateCommand"
         reorientCommandClassName="SegmentReorientCommand">
       <diagramRunTimeClass
@@ -209,7 +216,8 @@
       <labels
           visualID="6003"
           editPartClassName="SegmentIdEditPart"
-          itemSemanticEditPolicyClassName="SegmentIdItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="SegmentIdItemSemanticEditPolicy"
+          notationViewFactoryClassName="SegmentIdViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
