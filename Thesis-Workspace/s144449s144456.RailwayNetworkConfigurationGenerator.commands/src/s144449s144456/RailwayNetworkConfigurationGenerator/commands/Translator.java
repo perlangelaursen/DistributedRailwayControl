@@ -1,7 +1,6 @@
 package s144449s144456.RailwayNetworkConfigurationGenerator.commands;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import org.eclipse.core.commands.AbstractHandler;

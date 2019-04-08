@@ -7,578 +7,11 @@ import org.eclipse.emf.common.util.EList;
 
 import network.*;
 
-public class UppaalTranslator extends Translator{
-	private int id;
-	private String start, end;
+public abstract class UppaalTranslator extends Translator {
+	protected abstract String computeTrainModel();
 	
-	@Override
-	protected String generateCode(Network n) {
-		if(n != null) {
-			setStartEndStrings(n);
-			int routeLength = computeLongestRouteLength(n.getTrains());
-			String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
-								 "const int NCB = "+cbIDs.size()+";\n"+
-								 "const int NPOINT = "+pointIDs.size()+";\n"+
-						  		 "const int NSEG = "+segIDs.size()+";\n"+ 
-								 "const int NROUTELENGTH ="+ routeLength +";\n\n";
-			
-			String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
-								"typedef int[0, NCB-1]  cB_id;\n" + 
-								"typedef int[0, NPOINT-1] p_id;\n" + 
-								"typedef int[0, NSEG-1] seg_id;\n" + 
-								"typedef int[-1, NTRAIN-1] tV_id;\n" + 
-								"typedef int[-1, NCB-1] cBV_id;\n" + 
-								"typedef int[-1, NPOINT-1] pV_id;\n" + 
-								"typedef int[-1, NSEG-1] segV_id;\n"+
-								"typedef struct {\r\n" + 
-								"    cB_id cb;\r\n" + 
-								"    seg_id seg;\r\n" + 
-								"} reservation;\n\n";
-			
-			//Limits
-			String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
-								  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
-			
-			//Route segments
-			
-			String routesString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				routesString += trainRoute(n, n.getTrains().get(i), routeLength)+", ";
-			}
-			routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1), routeLength)+"};\n";
-
-			//Route control boxes
-			String cbsString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				cbsString += trainBoxes(n.getTrains().get(i), routeLength + 1) + ", ";
-			}
-			cbsString += trainBoxes(n.getTrains().get(n.getTrains().size()-1), routeLength + 1)+"};\n";
-						
-			
-			String cbDetailsString = "const segV_id cBs[NCB][3] = {";
-			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
-				cbDetailsString += cbsDetails(n.getControlBoxes().get(i))+", ";
-			}
-			cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
-			
-			//Initial reservations
-			String initRes = "const reservation initialRes[NTRAIN] = {";
-			for(int i = 0; i < n.getTrains().size()-1; i++) {
-				int[] res = getRes(n.getTrains().get(i));
-				initRes += "{"+res[0]+", "+res[1]+"},";
-			}
-			int[] res = getRes(n.getTrains().get(n.getTrains().size()-1));
-			initRes += "{"+res[0]+", "+res[1]+"}};\n";
-			
-			//Points
-			String pointsString = "const pV_id points[NCB] = {";
-			id = 0;
-			for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
-				ControlBox cb = n.getControlBoxes().get(i);
-				pointsString += pointID(cb)+", ";
-			} 
-			pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
-			
-			String pointSettingsString = "bool pointInPlus[NPOINT] = {";
-			pointSettingsString += (pointIDs.size() >= 1) ? "true" : "";
-			for(int i = 1; i < pointIDs.size(); i++) {
-				pointSettingsString += ", true";
-			}
-			pointSettingsString += "};\n\n";
-			
-
-			
-			//Generate file
-			PrintWriter writer;
-			try {
-				writer = new PrintWriter("test.xml", "UTF-8");
-				writer.println(start);
-				writer.println(sizesString + typesString + limitsString + routesString + cbsString + cbDetailsString + initRes + pointsString + pointSettingsString + computeGlobalFunctionsAndChannels());
-				writer.println(end);
-				writer.close();
-				return "Model file successfully generated.";
-			} catch (FileNotFoundException | UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		return "An error occurred";
-	}
-
-	private int computeLongestRouteLength(EList<Train> trains) {
-		int routeLength = 0;
-		for(Train train : trains) {
-			if (train.getRoute().size() > routeLength) {
-				routeLength = train.getRoute().size();
-			}
-		}
-		return routeLength;
-	}
-	
-	private boolean isSegmentConnectedToControlBox(ControlBox box, Segment seg) {
-		boolean found = false;
-		for(int i = 0; i < controlBoxSegments.get(box).length; i++) {
-			found = found || controlBoxSegments.get(box)[i] == seg;
-		}
-		return found;
-	}
-	
-	private ControlBox findConnectingBox(Segment s1, Segment s2) {
-		ControlBox box = null;
-		for(ControlBox b : controlBoxSegments.keySet()) {
-			if (isSegmentConnectedToControlBox(b, s1) && isSegmentConnectedToControlBox(b, s2)) {
-				box = b;
-			}
-		}
-		return box;
-	}
-	
-	private ControlBox findEdgeControlBox(Segment edge, Segment neighbour) {
-		ControlBox box = null;
-		for(ControlBox b : controlBoxSegments.keySet()) {
-			if (isSegmentConnectedToControlBox(b, edge) && !(isSegmentConnectedToControlBox(b, neighbour))) {
-				box = b;
-			}
-		}
-		return box;
-	}
-	
-	private String trainBoxes(Train t, int routeLength) {
-		String res = "{";
-		res += cbIDs.get(findEdgeControlBox(t.getRoute().get(0), t.getRoute().get(1)));
-		int i = 0;
-		for(; i < t.getRoute().size()-1; i++) {
-			res += ", " + cbIDs.get(findConnectingBox(t.getRoute().get(i), t.getRoute().get(i+1)));
-		}
-		res += ", " + cbIDs.get(findEdgeControlBox(t.getRoute().get(t.getRoute().size()-1), 
-				t.getRoute().get(t.getRoute().size()-2)));
-		i+=2;
-		for(; i < routeLength; i++) {
-			res += ", -1";
-		}
-		return res + "}";
-	}
-
-	private int[] getRes(Train t) {
-		Segment s1 = t.getRoute().get(0);
-		Segment s2 = t.getRoute().get(1);
-		ControlBox box = findConnectingBox(s1, s2);
-		int[] res = {cbIDs.get(box), segIDs.get(s1)};
-		return res;
-	}
-
-	private String pointID(ControlBox cb) {
-		return Integer.toString(pointIDs.getOrDefault(cb, -1));
-	}
-
-	
-	private String cbsDetails(ControlBox cb) {
-		String cbsDetails = "{";
-		cbsDetails += segIDs.get(controlBoxSegments.get(cb)[0]);
-		for(int i = 1; i < controlBoxSegments.get(cb).length; i++) {
-			cbsDetails += ", " + segIDs.getOrDefault(controlBoxSegments.get(cb)[i], -1) ;
-		}
-		return cbsDetails+"}";
-	}
-
-	private String trainRoute(Network n, Train t, int routeLength) {
-		String routesString = "{";
-		for(int j = 0; j < routeLength-1; j++) {
-			if (j < t.getRoute().size()) {
-				routesString += segIDs.get(t.getRoute().get(j))+",";
-			} else {
-				routesString += "-1,";
-			}
-		}
-		if(t.getRoute().size() < routeLength) {
-			routesString += "-1}";
-		} else {
-			routesString += segIDs.get(t.getRoute().get(t.getRoute().size()-1))+"}";
-		}
-		return routesString;
-	}
-
-	private String computeGlobalFunctionsAndChannels() {
-		return "//Channels\n" + 
-				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
-				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
-				"chan OK[NTRAIN];\n" + 
-				"chan notOK[NTRAIN];\n" + 
-				"chan pass[NCB];\n" + 
-				"chan passed[NCB];\n" + 
-				"chan switchPoint[NPOINT];\n" + 
-				"chan OKp[NPOINT];\n" + 
-				"urgent broadcast chan start;\n" + 
-				"\n" + 
-				"int nextSegment(cB_id cb, seg_id s){\n" + 
-				"    int s1 = cBs[cb][0];\n" + 
-				"    int s2 = cBs[cb][1];\n" + 
-				"    if(points[cb] &gt; -1 &amp;&amp; !pointInPlus[points[cb]]){\n" + 
-				"        s2 = cBs[cb][2];\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    if(s == s1){\n" + 
-				"        return s2;\n" + 
-				"    } else {\n" + 
-				"        return s1;\n" + 
-				"    }    \n" + 
-				"}\n" + 
-				"\n" + 
-				"////////////////////////////////////\n" + 
-				"//Well-formedness Functions\n" + 
-				"bool initialResIsConsistent(t_id id){\n" + 
-				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool reservationIsWellFormed(reservation res){\n" + 
-				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\n" + 
-				"}\n" + 
-				"\n" + 
-				"\n" + 
-				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\n" + 
-				"    return  (i != j) &amp;&amp;\n" + 
-				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \n" + 
-				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool routesAreConsistent(t_id id){\n" + 
-				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\n" + 
-				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\n" + 
-				"\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
-				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"\n" + 
-				"bool sharesSegment(cB_id i, cB_id j){\n" + 
-				"    return (i != j) &amp;&amp;\n" + 
-				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\n" + 
-				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\n" + 
-				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"bool canConnect(seg_id s1, seg_id s2){\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\n" + 
-				"            return true;\n" + 
-				"        }\n" + 
-				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\n" + 
-				"            return true;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return false;   \n" + 
-				"}\n" + 
-				"\n" + 
-				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\n" + 
-				"    int i = 0;\n" + 
-				"    if(route[0] == -1){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"    while(i &lt;= NROUTELENGTH - 2){\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        i++;\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"\n" + 
-				"int pointIsWellFormed(cBV_id id){\n" + 
-				"    if(points[id] != -1){\n" + 
-				"        for(i : cB_id){\n" + 
-				"            if(i != id &amp;&amp; points[i] == points[id]){\n" + 
-				"                return false;\n" + 
-				"            }\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return (points[id] == -1) == (cBs[id][2] == -1);\n" + 
-				"}\n" + 
-				"\n" + 
-				"int otherBoxes(cB_id id, segV_id s){\n" + 
-				"    segV_id cB[3] = cBs[id];\n" + 
-				"    int found = 0;\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\n" + 
-				"            found++;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return found;\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool cBIsWellFormed(cB_id id){\n" + 
-				"    segV_id cB[3] = cBs[id];\n" + 
-				"\n" + 
-				"    //Invalid definitions\n" + 
-				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\n" + 
-				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\n" + 
-				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: []--x--\n" + 
-				"    if(cB[1] == -1){\n" + 
-				"        return otherBoxes(id, cB[0]) == 1;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: --x--[]--y--\n" + 
-				"    if(cB[2] == -1){\n" + 
-				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: Switch box\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(i != id &amp;&amp; \n" + 
-				"            (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) ||\n" + 
-				"            (cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] != cB[2]) ||\n" + 
-				"            (cBs[i][2] == cB[2] &amp;&amp; cBs[i][1] != cB[1])){\n" + 
-				"                return false;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\n" + 
-				"}\n";
-	}
-	
-	private void setStartEndStrings(Network n) {		
-		start = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-				+ "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>"
-				+ "<nta>"
-				+ "<declaration>";
-		end = "</declaration>\n" + 
-				"	<template>\n" + 
-				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
-				"		<parameter>t_id id</parameter>\n" + 
-				"		<declaration>segV_id segments[NROUTELENGTH];\n" + 
-				"cBV_id boxes[NROUTELENGTH+1];\n" + 
-				"\n" + 
-				"int[0,NROUTELENGTH] routeLength;\n" + 
-				"segV_id curSeg;\n" + 
-				"\n" + 
-				"bool requiresLock[NROUTELENGTH+1];\n" + 
-				"\n" + 
-				"cB_id lockIndex = 1;\n" + 
-				"seg_id index = 0;\n" + 
-				"\n" + 
-				"int[0,1] resBit = 0;\n" + 
-				"cB_id resCBIndex = 1;\n" + 
-				"int[0,NSEG] resSegIndex = 0;\n" + 
-				"\n" + 
-				"segV_id headSeg = -1;\n" + 
-				"cB_id locks = 0;\n" + 
-				"\n" + 
-				"void updateLockIndex(){\n" + 
-				"    while(lockIndex &lt; NROUTELENGTH &amp;&amp; !requiresLock[lockIndex]){\n" + 
-				"        lockIndex++;\n" + 
-				"    }\n" + 
-				"}\n" + 
-				"\n" + 
-				"void initialize() {\n" + 
-				"    //Segments\n" + 
-				"    for(i : int[0,NROUTELENGTH-1]) {\n" + 
-				"        segments[i] = segRoutes[id][i];\n" + 
-				"        if(segments[i]&gt;-1) {\n" + 
-				"            routeLength++;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    curSeg = segments[0];\n" + 
-				"\n" + 
-				"    //Control boxes\n" + 
-				"    for(i : int[0,NROUTELENGTH]) {\n" + 
-				"        boxes[i] = boxRoutes[id][i];\n" + 
-				"        if(boxes[i] &gt; -1){\n" + 
-				"            requiresLock[i] = points[boxes[i]] &gt; -1;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Locks and reservations\n" + 
-				"    resSegIndex = 1;\n" + 
-				"    updateLockIndex();\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool possibleToLock() {\n" + 
-				"    return lockIndex &lt; routeLength &amp;&amp; locks &lt; lockLimit &amp;&amp; ((resBit == 0 &amp;&amp; resSegIndex &gt; lockIndex) || (resBit == 1 &amp;&amp; resSegIndex &gt;= lockIndex));\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool hasArrived() {\n" + 
-				"    return index == routeLength-1;\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool possibleToReserve() {\n" + 
-				"    return resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool possibleToPass() {\n" + 
-				"    return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; index + 1 &lt; routeLength;\n" + 
-				"}\n" + 
-				"\n" + 
-				"void updateResInfo(){\n" + 
-				"    resBit = resBit^1;\n" + 
-				"    resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;\n" + 
-				"    resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;\n" + 
-				"}\n" + 
-				"\n" + 
-				"void updateLocationInfo(){\n" + 
-				"    curSeg = headSeg;\n" + 
-				"    headSeg = -1;\n" + 
-				"    if(requiresLock[index + 1]){\n" + 
-				"        locks--;\n" + 
-				"    }\n" + 
-				"    index++;\n" + 
-				"}\n" + 
-				"\n" + 
-				"void updateHeadInfo(){\n" + 
-				"    headSeg = nextSegment(boxes[index+1], curSeg);\n" + 
-				"}\n" + 
-				"\n" + 
-				"void updateLockInfo(){\n" + 
-				"    locks++;\n" + 
-				"    lockIndex++;\n" + 
-				"    updateLockIndex();\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool isWellFormed(){\n" + 
-				"	return segRouteIsWellFormed(segRoutes[id]) &amp;&amp;\n" + 
-				"           boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; \n" + 
-				"           routesAreConsistent(id) &amp;&amp; \n" + 
-				"           reservationIsWellFormed(initialRes[id]) &amp;&amp; \n" + 
-				"           initialResIsConsistent(id);\n" + 
-				"}</declaration>\n" + 
-				"		<location id=\"id0\" x=\"-340\" y=\"-1156\">\n" + 
-				"			<name x=\"-323\" y=\"-1173\">DoubleSegment</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id1\" x=\"-1020\" y=\"-1156\">\n" + 
-				"			<name x=\"-1030\" y=\"-1190\">Initial</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id2\" x=\"-680\" y=\"-1156\">\n" + 
-				"			<name x=\"-748\" y=\"-1181\">Arrived</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id3\" x=\"-340\" y=\"-748\">\n" + 
-				"			<name x=\"-323\" y=\"-765\">Reserving</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id4\" x=\"-680\" y=\"-952\">\n" + 
-				"			<name x=\"-807\" y=\"-969\">SingleSegment</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id5\" x=\"-1020\" y=\"-748\">\n" + 
-				"			<name x=\"-1044\" y=\"-732\">Locking</name>\n" + 
-				"		</location>\n" + 
-				"		<init ref=\"id1\"/>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id1\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-1028\" y=\"-1096\">isWellFormed()</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-1028\" y=\"-1079\">start?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-1028\" y=\"-1062\">initialize()</label>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id5\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-833\" y=\"-739\">notOK[id]?</label>\n" + 
-				"			<nail x=\"-748\" y=\"-748\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id5\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-841\" y=\"-858\">OK[id]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-841\" y=\"-841\">updateLockInfo()</label>\n" + 
-				"			<nail x=\"-850\" y=\"-850\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id3\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-323\" y=\"-875\">OK[id]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-323\" y=\"-858\">updateResInfo()</label>\n" + 
-				"			<nail x=\"-340\" y=\"-884\"/>\n" + 
-				"			<nail x=\"-510\" y=\"-918\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id2\"/>\n" + 
-				"			<target ref=\"id2\"/>\n" + 
-				"			<nail x=\"-714\" y=\"-1224\"/>\n" + 
-				"			<nail x=\"-646\" y=\"-1224\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id0\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-544\" y=\"-1207\">possibleToPass()</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-544\" y=\"-1190\">pass[boxes[index+1]]!</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-544\" y=\"-1173\">updateHeadInfo()</label>\n" + 
-				"			<nail x=\"-578\" y=\"-1156\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id2\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-765\" y=\"-1113\">hasArrived()</label>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id3\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-501\" y=\"-867\">notOK[id]?</label>\n" + 
-				"			<nail x=\"-552\" y=\"-875\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id0\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-450\" y=\"-994\">passed[boxes[index+1]]!</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-450\" y=\"-977\">updateLocationInfo()</label>\n" + 
-				"			<nail x=\"-340\" y=\"-1020\"/>\n" + 
-				"			<nail x=\"-595\" y=\"-969\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id5\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-1241\" y=\"-841\">possibleToLock()</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-1241\" y=\"-824\">reqLock[boxes[lockIndex]][id]\n" + 
-				"[segments[lockIndex-1]]\n" + 
-				"[segments[lockIndex]]!</label>\n" + 
-				"			<nail x=\"-1020\" y=\"-884\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id3\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-612\" y=\"-740\">possibleToReserve()</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-612\" y=\"-722\">reqSeg[boxes[resCBIndex]][id][segments[resSegIndex]]!</label>\n" + 
-				"			<nail x=\"-612\" y=\"-748\"/>\n" + 
-				"			<nail x=\"-527\" y=\"-748\"/>\n" + 
-				"		</transition>\n" + 
-				"	</template>\n" + 
-				"	<template>\n" + 
-				"		<name>Initializer</name>\n" + 
-				"		<location id=\"id6\" x=\"0\" y=\"136\">\n" + 
-				"			<name x=\"8\" y=\"110\">Initialized</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id7\" x=\"0\" y=\"0\">\n" + 
-				"			<name x=\"-10\" y=\"-34\">Uninitialized</name>\n" + 
-				"		</location>\n" + 
-				"		<init ref=\"id7\"/>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id7\"/>\n" + 
-				"			<target ref=\"id6\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"8\" y=\"51\">start!</label>\n" + 
-				"		</transition>\n" + 
-				"	</template>\n" + 
-				"	<template>\n" + 
+	protected String computeCBModel() {
+		return "<template>\n" + 
 				"		<name>CB</name>\n" + 
 				"		<parameter>cB_id id</parameter>\n" + 
 				"		<declaration>segV_id segments[3];\n" + 
@@ -792,8 +225,11 @@ public class UppaalTranslator extends Translator{
 				"			<nail x=\"-170\" y=\"34\"/>\n" + 
 				"			<nail x=\"-884\" y=\"34\"/>\n" + 
 				"		</transition>\n" + 
-				"	</template>\n" + 
-				"	<template>\n" + 
+				"	</template>\n";
+	}
+	
+	protected String computePointModel() {
+		return "<template>\n" + 
 				"		<name>Point</name>\n" + 
 				"		<parameter>p_id id</parameter>\n" + 
 				"		<location id=\"id15\" x=\"136\" y=\"-85\">\n" + 
@@ -852,9 +288,271 @@ public class UppaalTranslator extends Translator{
 				"			<label kind=\"assignment\" x=\"-42\" y=\"59\">pointInPlus[id] = true</label>\n" + 
 				"			<nail x=\"34\" y=\"34\"/>\n" + 
 				"		</transition>\n" + 
-				"	</template>\n" + 
-				"	<system>system Initializer, Train, CB, Point;</system>\n" + 
-				"	<queries>\n" + 
+				"	</template>\n";
+	}
+	
+	private String computeInitializerModel() {
+		return "<template>\n" + 
+				"		<name>Initializer</name>\n" + 
+				"		<location id=\"id6\" x=\"0\" y=\"136\">\n" + 
+				"			<name x=\"8\" y=\"110\">Initialized</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id7\" x=\"0\" y=\"0\">\n" + 
+				"			<name x=\"-10\" y=\"-34\">Uninitialized</name>\n" + 
+				"		</location>\n" + 
+				"		<init ref=\"id7\"/>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id7\"/>\n" + 
+				"			<target ref=\"id6\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"8\" y=\"51\">start!</label>\n" + 
+				"		</transition>\n" + 
+				"	</template>\n";
+	}
+	
+	protected String computeDeclarations(Network n) {
+		int routeLength = computeLongestRouteLength(n.getTrains());
+		String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
+							 "const int NCB = "+cbIDs.size()+";\n"+
+							 "const int NPOINT = "+pointIDs.size()+";\n"+
+					  		 "const int NSEG = "+segIDs.size()+";\n"+ 
+							 "const int NROUTELENGTH ="+ routeLength +";\n\n";
+		
+		String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
+							"typedef int[0, NCB-1]  cB_id;\n" + 
+							"typedef int[0, NPOINT-1] p_id;\n" + 
+							"typedef int[0, NSEG-1] seg_id;\n" + 
+							"typedef int[-1, NTRAIN-1] tV_id;\n" + 
+							"typedef int[-1, NCB-1] cBV_id;\n" + 
+							"typedef int[-1, NPOINT-1] pV_id;\n" + 
+							"typedef int[-1, NSEG-1] segV_id;\n"+
+							"typedef struct {\r\n" + 
+							"    cB_id cb;\r\n" + 
+							"    seg_id seg;\r\n" + 
+							"} reservation;\n\n";
+		
+		//Limits
+		String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
+							  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
+		
+		//Route segments
+		
+		String routesString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
+		for(int i = 0; i < n.getTrains().size()-1; i++) {
+			routesString += trainRoute(n, n.getTrains().get(i), routeLength)+", ";
+		}
+		routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1), routeLength)+"};\n";
+
+		//Route control boxes
+		String cbsString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
+		for(int i = 0; i < n.getTrains().size()-1; i++) {
+			cbsString += trainBoxes(n.getTrains().get(i), routeLength + 1) + ", ";
+		}
+		cbsString += trainBoxes(n.getTrains().get(n.getTrains().size()-1), routeLength + 1)+"};\n";
+					
+		
+		String cbDetailsString = "const segV_id cBs[NCB][3] = {";
+		for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
+			cbDetailsString += cbsDetails(n.getControlBoxes().get(i))+", ";
+		}
+		cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+		
+		//Initial reservations
+		String initRes = "const reservation initialRes[NTRAIN] = {";
+		for(int i = 0; i < n.getTrains().size()-1; i++) {
+			int[] res = getRes(n.getTrains().get(i));
+			initRes += "{"+res[0]+", "+res[1]+"},";
+		}
+		int[] res = getRes(n.getTrains().get(n.getTrains().size()-1));
+		initRes += "{"+res[0]+", "+res[1]+"}};\n";
+		
+		//Points
+		String pointsString = "const pV_id points[NCB] = {";
+		for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
+			ControlBox cb = n.getControlBoxes().get(i);
+			pointsString += pointID(cb)+", ";
+		} 
+		pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+		
+		String pointSettingsString = "bool pointInPlus[NPOINT] = {";
+		pointSettingsString += (pointIDs.size() >= 1) ? "true" : "";
+		for(int i = 1; i < pointIDs.size(); i++) {
+			pointSettingsString += ", true";
+		}
+		pointSettingsString += "};\n\n";
+		
+		return "<declaration>\n" + sizesString + 
+				typesString + limitsString + routesString + 
+				cbsString + cbDetailsString + initRes + 
+				pointsString + pointSettingsString + 
+				generateChannels() + 
+				"int nextSegment(cB_id cb, seg_id s){\n" + 
+				"    int s1 = cBs[cb][0];\n" + 
+				"    int s2 = cBs[cb][1];\n" + 
+				"    if(points[cb] &gt; -1 &amp;&amp; !pointInPlus[points[cb]]){\n" + 
+				"        s2 = cBs[cb][2];\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    if(s == s1){\n" + 
+				"        return s2;\n" + 
+				"    } else {\n" + 
+				"        return s1;\n" + 
+				"    }    \n" + 
+				"}\n" + 
+				"\n" + 
+				"////////////////////////////////////\n" + 
+				"//Well-formedness Functions\n" + 
+				"bool initialResIsConsistent(t_id id){\n" + 
+				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool reservationIsWellFormed(reservation res){\n" + 
+				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\n" + 
+				"}\n" + 
+				"\n" + 
+				"\n" + 
+				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\n" + 
+				"    return  (i != j) &amp;&amp;\n" + 
+				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \n" + 
+				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool routesAreConsistent(t_id id){\n" + 
+				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\n" + 
+				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\n" + 
+				"\n" + 
+				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
+				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return true; \n" + 
+				"}\n" + 
+				"\n" + 
+				"bool sharesSegment(cB_id i, cB_id j){\n" + 
+				"    return (i != j) &amp;&amp;\n" + 
+				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\n" + 
+				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\n" + 
+				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\n" + 
+				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
+				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"\n" + 
+				"    }\n" + 
+				"    return true; \n" + 
+				"}\n" + 
+				"bool canConnect(seg_id s1, seg_id s2){\n" + 
+				"    for(i:cB_id){\n" + 
+				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\n" + 
+				"            return true;\n" + 
+				"        }\n" + 
+				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\n" + 
+				"            return true;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return false;   \n" + 
+				"}\n" + 
+				"\n" + 
+				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\n" + 
+				"    int i = 0;\n" + 
+				"    if(route[0] == -1){\n" + 
+				"        return false;\n" + 
+				"    }\n" + 
+				"    while(i &lt;= NROUTELENGTH - 2){\n" + 
+				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        i++;\n" + 
+				"    }\n" + 
+				"    return true; \n" + 
+				"}\n" + 
+				"\n" + 
+				"int pointIsWellFormed(cBV_id id){\n" + 
+				"    if(points[id] != -1){\n" + 
+				"        for(i : cB_id){\n" + 
+				"            if(i != id &amp;&amp; points[i] == points[id]){\n" + 
+				"                return false;\n" + 
+				"            }\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return (points[id] == -1) == (cBs[id][2] == -1);\n" + 
+				"}\n" + 
+				"\n" + 
+				"int otherBoxes(cB_id id, segV_id s){\n" + 
+				"    segV_id cB[3] = cBs[id];\n" + 
+				"    int found = 0;\n" + 
+				"    for(i:cB_id){\n" + 
+				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\n" + 
+				"            found++;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return found;\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool cBIsWellFormed(cB_id id){\n" + 
+				"    segV_id cB[3] = cBs[id];\n" + 
+				"\n" + 
+				"    //Invalid definitions\n" + 
+				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\n" + 
+				"        return false;\n" + 
+				"    }\n" + 
+				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\n" + 
+				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\n" + 
+				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\n" + 
+				"        return false;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Case: []--x--\n" + 
+				"    if(cB[1] == -1){\n" + 
+				"        return otherBoxes(id, cB[0]) == 1;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Case: --x--[]--y--\n" + 
+				"    if(cB[2] == -1){\n" + 
+				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Case: Switch box\n" + 
+				"    for(i:cB_id){\n" + 
+				"        if(i != id &amp;&amp; \n" + 
+				"            (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) ||\n" + 
+				"            (cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] != cB[2]) ||\n" + 
+				"            (cBs[i][2] == cB[2] &amp;&amp; cBs[i][1] != cB[1])){\n" + 
+				"                return false;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\n" + 
+				"}\n" + 
+				"</declaration>\n";
+	}
+	
+	protected String generateChannels() {
+		return "//Channels\n" + 
+				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
+				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
+				"chan OK[NTRAIN];\n" + 
+				"chan notOK[NTRAIN];\n" + 
+				"chan pass[NCB];\n" + 
+				"chan passed[NCB];\n" + 
+				"chan switchPoint[NPOINT];\n" + 
+				"chan OKp[NPOINT];\n" + 
+				"urgent broadcast chan start;\n\n";
+	}
+
+	protected String computeQueries() {
+		return "<queries>\n" + 
 				"		<query>\n" + 
 				"			<formula>\n" + 
 				"			</formula>\n" + 
@@ -1101,8 +799,124 @@ public class UppaalTranslator extends Translator{
 				"			<comment>A TCC never has more reservations than allowed\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
-				"	</queries>\n" + 
-				"</nta>\n";
+				"	</queries>\n";
+	}
+	
+	@Override
+	protected String generateCode(Network n) {
+		if(n != null) {
+			String result =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
+					"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n" + 
+					"<nta>\n" + computeDeclarations(n) + computeTrainModel() +  
+					computeInitializerModel() + computeCBModel() + computePointModel() +
+					"<system>system Initializer, Train, CB, Point;</system>\n" + 
+					computeQueries() + 
+					"</nta>\n";
+
+			//Generate file
+			PrintWriter writer;
+			try {
+				writer = new PrintWriter("test.xml", "UTF-8");
+				writer.println(result);
+				writer.close();
+				return "Model file successfully generated.";
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		return "An error occurred";
 	}
 
+	private int computeLongestRouteLength(EList<Train> trains) {
+		int routeLength = 0;
+		for(Train train : trains) {
+			if (train.getRoute().size() > routeLength) {
+				routeLength = train.getRoute().size();
+			}
+		}
+		return routeLength;
+	}
+	
+	private boolean isSegmentConnectedToControlBox(ControlBox box, Segment seg) {
+		boolean found = false;
+		for(int i = 0; i < controlBoxSegments.get(box).length; i++) {
+			found = found || controlBoxSegments.get(box)[i] == seg;
+		}
+		return found;
+	}
+	
+	private ControlBox findConnectingBox(Segment s1, Segment s2) {
+		ControlBox box = null;
+		for(ControlBox b : controlBoxSegments.keySet()) {
+			if (isSegmentConnectedToControlBox(b, s1) && isSegmentConnectedToControlBox(b, s2)) {
+				box = b;
+			}
+		}
+		return box;
+	}
+	
+	private ControlBox findEdgeControlBox(Segment edge, Segment neighbour) {
+		ControlBox box = null;
+		for(ControlBox b : controlBoxSegments.keySet()) {
+			if (isSegmentConnectedToControlBox(b, edge) && !(isSegmentConnectedToControlBox(b, neighbour))) {
+				box = b;
+			}
+		}
+		return box;
+	}
+	
+	private String trainBoxes(Train t, int routeLength) {
+		String res = "{";
+		res += cbIDs.get(findEdgeControlBox(t.getRoute().get(0), t.getRoute().get(1)));
+		int i = 0;
+		for(; i < t.getRoute().size()-1; i++) {
+			res += ", " + cbIDs.get(findConnectingBox(t.getRoute().get(i), t.getRoute().get(i+1)));
+		}
+		res += ", " + cbIDs.get(findEdgeControlBox(t.getRoute().get(t.getRoute().size()-1), 
+				t.getRoute().get(t.getRoute().size()-2)));
+		i+=2;
+		for(; i < routeLength; i++) {
+			res += ", -1";
+		}
+		return res + "}";
+	}
+
+	private int[] getRes(Train t) {
+		Segment s1 = t.getRoute().get(0);
+		Segment s2 = t.getRoute().get(1);
+		ControlBox box = findConnectingBox(s1, s2);
+		int[] res = {cbIDs.get(box), segIDs.get(s1)};
+		return res;
+	}
+
+	private String pointID(ControlBox cb) {
+		return Integer.toString(pointIDs.getOrDefault(cb, -1));
+	}
+
+	
+	private String cbsDetails(ControlBox cb) {
+		String cbsDetails = "{";
+		cbsDetails += segIDs.get(controlBoxSegments.get(cb)[0]);
+		for(int i = 1; i < controlBoxSegments.get(cb).length; i++) {
+			cbsDetails += ", " + segIDs.getOrDefault(controlBoxSegments.get(cb)[i], -1) ;
+		}
+		return cbsDetails+"}";
+	}
+
+	private String trainRoute(Network n, Train t, int routeLength) {
+		String routesString = "{";
+		for(int j = 0; j < routeLength-1; j++) {
+			if (j < t.getRoute().size()) {
+				routesString += segIDs.get(t.getRoute().get(j))+",";
+			} else {
+				routesString += "-1,";
+			}
+		}
+		if(t.getRoute().size() < routeLength) {
+			routesString += "-1}";
+		} else {
+			routesString += segIDs.get(t.getRoute().get(t.getRoute().size()-1))+"}";
+		}
+		return routesString;
+	}
 }
