@@ -1,6 +1,7 @@
 package s144449s144456.RailwayNetworkConfigurationGenerator.commands;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -24,7 +25,6 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		System.out.println("NEW SELECTION");
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null & selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
