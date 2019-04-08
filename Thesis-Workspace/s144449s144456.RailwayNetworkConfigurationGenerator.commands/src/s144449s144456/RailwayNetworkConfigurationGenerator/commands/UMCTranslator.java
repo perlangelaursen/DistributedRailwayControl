@@ -414,7 +414,7 @@ public class UMCTranslator extends Translator {
 	private String getTrainObjectsString(Network n) {
 		String ts = "";
 		for(Train t : n.getTrains()) {
-			//segments
+			//Segments
 			ts += "t"+trainIDs.get(t)+":Train(segments=>[";
 			for(int j = 0; j < t.getRoute().size()-1; j++) {
 				ts += segIDs.get(t.getRoute().get(j))+",";
@@ -422,31 +422,35 @@ public class UMCTranslator extends Translator {
 			ts += segIDs.get(t.getRoute().get(t.getRoute().size()-1))+"], ";
 			ts += "curSeg => "+segIDs.get(t.getRoute().get(0))+", ";
 			
-			//control boxes
+			//Control boxes
 			String boxIDs = "boxIDs => [";
 			String requiresLock = "requiresLock => [";
 			ts += "boxes => [";
-			for(int j = 0; j < t.getBoxRoute().size()-1; j++) {
+			for(int j = 0; j < t.getBoxRoute().size(); j++) {
 				ControlBox cb = t.getBoxRoute().get(j);
 				int cbID = cbIDs.get(cb);
 				ts += "cb"+cbID+",";
 				boxIDs += cbID+",";
 				requiresLock += (cb instanceof SwitchBox)? "true," : "false,";
 			}
-			ControlBox cb = t.getBoxRoute().get(t.getBoxRoute().size()-1);
-			int cbID = cbIDs.get(cb);
-			boxIDs += cbID+"]";
-			requiresLock += (cb instanceof SwitchBox)? "true]" : "false]";
+
+			requiresLock = requiresLock.substring(0, requiresLock.length() - 1)+"]";
+			boxIDs = boxIDs.substring(0,boxIDs.length()-1)+"]";
+			ts = ts.substring(0, ts.length() - 1)+"], "+boxIDs+", "+requiresLock;
 			
-			ts += "cb"+cbID+"], "+boxIDs+", "+requiresLock+", "+"lockIndex => ";
-			int lockIndex = 0;
-			for(int j = 1; j < t.getBoxRoute().size(); j++) {
-				if(t.getBoxRoute().get(j) instanceof SwitchBox) {
-					lockIndex = j;
-					break;
+			if(t.getRoute().size() > 1) {
+				ts += ", "+"lockIndex => ";
+				int lockIndex = 0;
+				for(int j = 1; j < t.getBoxRoute().size(); j++) {
+					if(t.getBoxRoute().get(j) instanceof SwitchBox) {
+						lockIndex = j;
+						break;
+					}
 				}
+				ts += lockIndex;
 			}
-			ts += lockIndex+");\r\n";
+			
+			ts += ");\r\n";
 		}
 		return ts;
 	}

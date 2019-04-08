@@ -170,15 +170,20 @@ public class TrainImpl extends ElementImpl implements Train {
 		if(boxRoute == null) {
 			LinkedList<ControlBox> l = new LinkedList<>();
 			ControlBox[] cbs;
-			for(int j = 0; j < getRoute().size()-1; j++) {
-				cbs = getSegmentBoxes(getRoute().get(j), getRoute().get(j+1));
-				l.add(cbs[0]);
-				if(j == getRoute().size()-2) {
-					l.add(cbs[1]);
-					l.add(cbs[2]);
+			if(getRoute().size() > 1) {
+				for(int j = 0; j < getRoute().size()-1; j++) {
+					cbs = getSegmentBoxes(getRoute().get(j), getRoute().get(j+1));
+					l.add(cbs[0]);
+					if(j == getRoute().size()-2) {
+						l.add(cbs[1]);
+						l.add(cbs[2]);
+					}
 				}
+			} else {
+				l.add(getRoute().get(0).getStart());
+				l.add(getRoute().get(0).getEnd());
 			}
-			return l;
+			boxRoute = l;
 		}
 		return boxRoute;
 	}
