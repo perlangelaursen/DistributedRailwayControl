@@ -29,78 +29,89 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 			if (structuredSelection.size() == 1) {
 				Network n = getNetwork(structuredSelection.getFirstElement());
-				String msg = "";
-				if (n != null) {
-					//Check routes
-					for(Train t : n.getTrains()) {
-						if(t.getId() == null || t.getId().equals("")) {
-							t.setId("");
-							//msg += "Error in train: Missing ID.\n";
-						}
-						for(int i = 0; i < t.getRoute().size()-1; i++) {
-							if(!areConnected(t.getRoute().get(i), t.getRoute().get(i+1))) {
-								msg += "Error in train "+t.getId()+"'s route: Movement from segment "+t.getRoute().get(i).getId()+" to segment "+t.getRoute().get(i+1).getId()+" is not possible.\n";
-							}
-						}
-					}
-					
-					//Check control boxes
-					for(ControlBox cb : n.getControlBoxes()) {
-						if(cb.getId() == null || cb.getId().equals("")) {
-							cb.setId("");
-							//msg += "Error in control box: Missing ID.\n";
-						}
-						if(cb instanceof SwitchBox) {
-							SwitchBox sb = (SwitchBox) cb;
-							if(!sb.getSegments().contains(sb.getStem())) {
-								msg += "Error in switch box "+sb.getId()+": Stem segment is not connected to switch box.\n";	
-							}
-							if(!sb.getSegments().contains(sb.getPlus())) {
-								msg += "Error in switch box "+sb.getId()+": Plus segment is not connected to switch box.\n";	
-							}
-							if(!sb.getSegments().contains(sb.getMinus())) {
-								msg += "Error in switch box "+sb.getId()+": Minus segment is not connected to switch box.\n";	
-							}
-							if(sb.getStem() == sb.getPlus()) {
-								msg += "Error in switch box "+sb.getId()+": Stem segment and plus segment must be different.\n";
-							}
-							if(sb.getStem() == sb.getMinus()) {
-								msg += "Error in switch box "+sb.getId()+": Stem segment and minus segment must be different.\n";
-							}
-							if(sb.getMinus() == sb.getPlus()) {
-								msg += "Error in switch box "+sb.getId()+": Plus segment and minus segment must be different.\n";
-							}
-							if(sb.getSegments().size() > 3) {
-								msg += "Error in control box "+sb.getId()+": Switch box has too many connected segments.\n";
-							}
-							
-						} else {
-							if(cb.getSegments().size() > 2) {
-								msg += "Error in control box "+cb.getId()+": Regular control box has too many connected segments.\n";
-							}
-						}
-					}
-					//Check segments
-					for(Segment s : n.getSegments()) {
-						if(s.getId() == null || s.getId().equals("")) {
-							s.setId("");
-							//msg += "Error in segment: Missing ID.\n";
-						}
-					}
-					
+				if (n != null && isWellFormed(n)) {
 					//Generate code
-					if(msg.equals("")) {
-						initialize(n);
-						msg = generateCode(n);
-					}
+					initialize(n);
+					String msg = generateCode(n);
 					
 					//Display dialog
 					MessageDialog.openInformation(null, "Generate File", msg);
-					
 				}
 			}
 		}
 		return null;
+	}
+
+	private boolean isWellFormed(Network n) {
+		String msg = "";
+		
+		//SIZE 
+		if(n.getSegments().size() < 1) {
+			msg += "Network must contain at least one segment.\n";
+		}
+		if(n.getControlBoxes().size() < 2) {
+			msg += "Network must contain at least two control boxes.\n";
+		}
+		if(n.getTrains().size() < 1) {
+			msg += "Network must contain at least one train.\n";
+		}
+		
+		//CONTROL BOXES
+		for(ControlBox cb : n.getControlBoxes()) {
+			String id = ((cb.getId() != null) ? cb.getId() : "[no id]");
+			if(cb instanceof SwitchBox ) {
+				SwitchBox sb = (SwitchBox) cb;
+				if(sb.getSegments().size() != 3) {
+					msg += "Error in switch box "+id+": Switch box must be associated with exactly three segments.\n";
+					for(Segment s : sb.getSegments()) {
+						System.out.print(id+" has: ");
+						System.out.println(s.toString());
+					}
+				}
+				if(sb.getStem() == null) {
+					msg += "Error in switch box "+id+": Stem segment has not been set.\n";
+				} else if(!sb.getSegments().contains(sb.getStem())) {
+					msg += "Error in switch box "+id+": Stem segment is not associated with switch box.\n";	
+				}
+				if(sb.getPlus() == null) {
+					msg += "Error in switch box "+id+": Plus segment has not been set.\n";
+				} else if(!sb.getSegments().contains(sb.getPlus())) {
+					msg += "Error in switch box "+id+": Plus segment is not associated with switch box.\n";	
+				}
+				if(sb.getMinus() == null) {
+					msg += "Error in switch box "+id+": Minus segment has not been set.\n";
+				} else if(!sb.getSegments().contains(sb.getMinus())) {
+					msg += "Error in switch box "+id+": Minus segment is not associated with switch box.\n";	
+				}
+				if(sb.getStem() != null && sb.getStem() == sb.getPlus()) {
+					msg += "Error in switch box "+id+": Stem segment and plus segment must be different.\n";
+				}
+				if(sb.getStem() != null && sb.getStem() == sb.getMinus()) {
+					msg += "Error in switch box "+id+": Stem segment and minus segment must be different.\n";
+				}
+				if(sb.getPlus() != null && sb.getMinus() == sb.getPlus()) {
+					msg += "Error in switch box "+id+": Plus segment and minus segment must be different.\n";
+				}
+			} else if(cb.getSegments().size() < 1) {
+				msg += "Error in regular control box "+id+": Control box must be associated with at least one segment.\n";
+			}
+		}
+		//TRAINS
+		for(Train t : n.getTrains()) {
+			String id = ((t.getId() != null) ? t.getId() : "[no id]");
+			if(t.getRoute().size() < 1) {
+				msg += "Train " + id + " must have at least one segment in its route.\n";
+			} else {
+				for(int i = 0; i < t.getRoute().size()-1; i++) {
+					if(!areConnected(t.getRoute().get(i), t.getRoute().get(i+1))) {
+						msg += "Error in train "+t.getId()+"'s route: Movement from segment "+t.getRoute().get(i).getId()+" to segment "+t.getRoute().get(i+1).getId()+" is not possible.\n";
+					}
+				}
+			}
+		}
+	
+		MessageDialog.openInformation(null, "Generate File", msg);
+		return msg.equals("");
 	}
 
 	private boolean areConnected(Segment s1, Segment s2) {
