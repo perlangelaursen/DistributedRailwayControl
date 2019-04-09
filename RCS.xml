@@ -199,7 +199,7 @@ bool cBIsWellFormed(cB_id id){
 
     //Case: Switch box
     for(i:cB_id){
-        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][1] == cBs[id][1] &amp;&amp; cBs[i][2] == cBs[id][2] &amp;&amp; cBs[i][3] != cBs[id][3])){                
+        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][0] != cB[0] &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] == cB[2])){                
             return false;
         } 
     }
