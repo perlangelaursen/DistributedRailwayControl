@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>// Station 1
+	<declaration>// Station 1 with regular control box
+//Configuration Data - Part 1
 const int NCB = 5;
-const int NSEG = 5; 
-const int NTRAIN = 2; 
+const int NSEG = 5;
+const int NTRAIN = 2;
 const int NPOINT = 2;
 const int NROUTELENGTH = 4;
 
@@ -22,16 +23,17 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 2;
-const int[1,NSEG] resLimit = 2;
+//Configuration Data - Part 2
+const int[0,NROUTELENGTH] resLimit = 2;
+const int[0,NROUTELENGTH-1] lockLimit = 2;
 
-const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
+
 const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,2,4}, {4,3,1,0}};
-const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,3,2}, {4,-1,-1}};
-const pV_id points[NCB] = { -1, -1, 0, 1,-1};
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
+const pV_id points[NCB] = {-1, -1, 0, 1, -1};
 const reservation initialRes[NTRAIN] = {{1, 0}, {3,4}};
 bool pointInPlus[NPOINT] = {true, true};
-
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -41,7 +43,7 @@ chan notOK[NTRAIN];
 chan pass[NCB];
 chan passed[NCB];
 chan switchPoint[NPOINT];
-chan OKp[NPOINT];
+chan OKp[NCB];
 urgent broadcast chan start;
 
 int nextSegment(cB_id cb, seg_id s){
@@ -771,15 +773,15 @@ The number of saved locks in the state space of a Train is the same number of lo
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:p_id) (Point(i).Plus imply pointInPlus[i]) &amp;&amp; (Point(i).Minus imply !pointInPlus[i])
+			<formula>A[] forall(i:p_id) Initializer.Initialized &amp;&amp; !Point(i).SwitchingPM &amp;&amp; !Point(i).SwitchingMP imply (pointInPlus[i] imply Point(i).Plus) &amp;&amp; (!pointInPlus[i] imply Point(i).Minus)
 			</formula>
 			<comment>Network array consistency:
 The position of a point in the network data is consistent with the actual position of the point.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) points[i] &gt; -1 imply
-	(Point(points[i]).Plus imply CB(i).connected == cBs[i][1]) &amp;&amp; (Point(points[i]).Minus imply CB(i).connected == cBs[i][2])
+			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching imply 
+	((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).Plus &amp;&amp; (CB(i).connected == CB(i).segments[2]) imply Point(points[i]).Minus)
 			</formula>
 			<comment>Point consistency:
 A CB's information about its associated Point's position is consistent with the Point's actual position.
