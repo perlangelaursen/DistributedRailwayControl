@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+gmf_dashboard/domainGenerationModel=platform\:/resource/s144449s144456.RailwayModelGenerator/model/network.genmodel
+gmf_dashboard/domainModel=platform\:/resource/s144449s144456.RailwayModelGenerator/model/network.ecore
+gmf_dashboard/generationModel=platform\:/resource/s144449s144456.RailwayModelGenerator/model/network.gmfgen
+gmf_dashboard/graphicalDefinitionModel=platform\:/resource/s144449s144456.RailwayModelGenerator/model/network.gmfgraph
+gmf_dashboard/mappingModel=platform\:/resource/s144449s144456.RailwayModelGenerator/model/network.gmfmap
+gmf_dashboard/toolingDefinitionModel=platform\:/resource/s144449s144456.RailwayModelGenerator/model/network.gmftool
