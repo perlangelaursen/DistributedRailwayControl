@@ -30,7 +30,7 @@ public class UMCTranslator extends Translator {
 			//Generate file
 			PrintWriter writer;
 			try {
-				writer = new PrintWriter("RCS_UMC.txt", "UTF-8");
+				writer = new PrintWriter(n.getName()+"_UMC.txt", "UTF-8");
 				writer.println(classes);
 				writer.println(objectString + "\r\n" + trainsString + "\r\n" + cbsString + "\r\n" + pointsString + "\r\n" + abstractionsString);
 //				System.out.println(trainsString + cbsString + pointsString + abstractionsString);

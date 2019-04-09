@@ -13,18 +13,20 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reserveLimit" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="untitled"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="Component" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ControlBox" abstract="true" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="ControlBox" abstract="true" eSuperTypes="#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ingoing" upperBound="3"
         eType="#//Segment" eOpposite="#//Segment/end"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="3"
         eType="#//Segment" eOpposite="#//Segment/start"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="start" lowerBound="1" eType="#//ControlBox"
         eOpposite="#//ControlBox/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="1" eType="#//ControlBox"
@@ -42,7 +44,7 @@
     <eLiterals name="MINUS" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RegularBox" eSuperTypes="#//ControlBox"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Train" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Train" eSuperTypes="#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" upperBound="-1"
         eType="#//Segment"/>
   </eClassifiers>

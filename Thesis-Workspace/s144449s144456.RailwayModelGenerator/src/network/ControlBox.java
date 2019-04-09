@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface ControlBox extends Element {
+public interface ControlBox extends Component {
 	/**
 	 * Returns the value of the '<em><b>Ingoing</b></em>' reference list.
 	 * The list contents are of type {@link network.Segment}.

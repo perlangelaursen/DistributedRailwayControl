@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *
  * @generated
  */
-public class TrainImpl extends ElementImpl implements Train {
+public class TrainImpl extends ComponentImpl implements Train {
 	/**
 	 * The cached value of the '{@link #getRoute() <em>Route</em>}' reference list.
 	 * <!-- begin-user-doc -->

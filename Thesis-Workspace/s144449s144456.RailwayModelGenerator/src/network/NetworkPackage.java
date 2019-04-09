@@ -113,13 +113,22 @@ public interface NetworkPackage extends EPackage {
 	int NETWORK__RESERVE_LIMIT = 4;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NETWORK__NAME = 5;
+
+	/**
 	 * The number of structural features of the '<em>Network</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NETWORK_FEATURE_COUNT = 5;
+	int NETWORK_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Network</em>' class.
@@ -131,14 +140,14 @@ public interface NetworkPackage extends EPackage {
 	int NETWORK_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link network.impl.ElementImpl <em>Element</em>}' class.
+	 * The meta object id for the '{@link network.impl.ComponentImpl <em>Component</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see network.impl.ElementImpl
-	 * @see network.impl.NetworkPackageImpl#getElement()
+	 * @see network.impl.ComponentImpl
+	 * @see network.impl.NetworkPackageImpl#getComponent()
 	 * @generated
 	 */
-	int ELEMENT = 1;
+	int COMPONENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -147,25 +156,25 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT__ID = 0;
+	int COMPONENT__ID = 0;
 
 	/**
-	 * The number of structural features of the '<em>Element</em>' class.
+	 * The number of structural features of the '<em>Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = 1;
+	int COMPONENT_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>Element</em>' class.
+	 * The number of operations of the '<em>Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_OPERATION_COUNT = 0;
+	int COMPONENT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link network.impl.ControlBoxImpl <em>Control Box</em>}' class.
@@ -184,7 +193,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX__ID = ELEMENT__ID;
+	int CONTROL_BOX__ID = COMPONENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Ingoing</b></em>' reference list.
@@ -193,7 +202,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX__INGOING = ELEMENT_FEATURE_COUNT + 0;
+	int CONTROL_BOX__INGOING = COMPONENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -202,7 +211,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX__OUTGOING = ELEMENT_FEATURE_COUNT + 1;
+	int CONTROL_BOX__OUTGOING = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Control Box</em>' class.
@@ -211,7 +220,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+	int CONTROL_BOX_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Control Box</em>' class.
@@ -220,7 +229,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int CONTROL_BOX_OPERATION_COUNT = COMPONENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link network.impl.SegmentImpl <em>Segment</em>}' class.
@@ -239,7 +248,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT__ID = ELEMENT__ID;
+	int SEGMENT__ID = COMPONENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' reference.
@@ -248,7 +257,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT__START = ELEMENT_FEATURE_COUNT + 0;
+	int SEGMENT__START = COMPONENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>End</b></em>' reference.
@@ -257,7 +266,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT__END = ELEMENT_FEATURE_COUNT + 1;
+	int SEGMENT__END = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Segment</em>' class.
@@ -266,7 +275,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+	int SEGMENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Segment</em>' class.
@@ -275,7 +284,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SEGMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int SEGMENT_OPERATION_COUNT = COMPONENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link network.impl.SwitchBoxImpl <em>Switch Box</em>}' class.
@@ -440,7 +449,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAIN__ID = ELEMENT__ID;
+	int TRAIN__ID = COMPONENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Route</b></em>' reference list.
@@ -449,7 +458,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAIN__ROUTE = ELEMENT_FEATURE_COUNT + 0;
+	int TRAIN__ROUTE = COMPONENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Train</em>' class.
@@ -458,7 +467,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAIN_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+	int TRAIN_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Train</em>' class.
@@ -467,7 +476,7 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAIN_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int TRAIN_OPERATION_COUNT = COMPONENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link network.PointSetting <em>Point Setting</em>}' enum.
@@ -546,25 +555,36 @@ public interface NetworkPackage extends EPackage {
 	EAttribute getNetwork_ReserveLimit();
 
 	/**
-	 * Returns the meta object for class '{@link network.Element <em>Element</em>}'.
+	 * Returns the meta object for the attribute '{@link network.Network#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Element</em>'.
-	 * @see network.Element
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see network.Network#getName()
+	 * @see #getNetwork()
 	 * @generated
 	 */
-	EClass getElement();
+	EAttribute getNetwork_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link network.Element#getId <em>Id</em>}'.
+	 * Returns the meta object for class '{@link network.Component <em>Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Component</em>'.
+	 * @see network.Component
+	 * @generated
+	 */
+	EClass getComponent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link network.Component#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see network.Element#getId()
-	 * @see #getElement()
+	 * @see network.Component#getId()
+	 * @see #getComponent()
 	 * @generated
 	 */
-	EAttribute getElement_Id();
+	EAttribute getComponent_Id();
 
 	/**
 	 * Returns the meta object for class '{@link network.ControlBox <em>Control Box</em>}'.
@@ -799,14 +819,22 @@ public interface NetworkPackage extends EPackage {
 		EAttribute NETWORK__RESERVE_LIMIT = eINSTANCE.getNetwork_ReserveLimit();
 
 		/**
-		 * The meta object literal for the '{@link network.impl.ElementImpl <em>Element</em>}' class.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see network.impl.ElementImpl
-		 * @see network.impl.NetworkPackageImpl#getElement()
 		 * @generated
 		 */
-		EClass ELEMENT = eINSTANCE.getElement();
+		EAttribute NETWORK__NAME = eINSTANCE.getNetwork_Name();
+
+		/**
+		 * The meta object literal for the '{@link network.impl.ComponentImpl <em>Component</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see network.impl.ComponentImpl
+		 * @see network.impl.NetworkPackageImpl#getComponent()
+		 * @generated
+		 */
+		EClass COMPONENT = eINSTANCE.getComponent();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -814,7 +842,7 @@ public interface NetworkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ELEMENT__ID = eINSTANCE.getElement_Id();
+		EAttribute COMPONENT__ID = eINSTANCE.getComponent_Id();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.ControlBoxImpl <em>Control Box</em>}' class.

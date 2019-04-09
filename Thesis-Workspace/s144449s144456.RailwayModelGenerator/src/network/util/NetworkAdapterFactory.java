@@ -72,8 +72,8 @@ public class NetworkAdapterFactory extends AdapterFactoryImpl {
 				return createNetworkAdapter();
 			}
 			@Override
-			public Adapter caseElement(Element object) {
-				return createElementAdapter();
+			public Adapter caseComponent(Component object) {
+				return createComponentAdapter();
 			}
 			@Override
 			public Adapter caseControlBox(ControlBox object) {
@@ -130,16 +130,16 @@ public class NetworkAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link network.Element <em>Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link network.Component <em>Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see network.Element
+	 * @see network.Component
 	 * @generated
 	 */
-	public Adapter createElementAdapter() {
+	public Adapter createComponentAdapter() {
 		return null;
 	}
 

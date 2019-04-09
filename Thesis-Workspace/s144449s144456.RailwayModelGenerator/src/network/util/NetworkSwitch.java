@@ -72,23 +72,23 @@ public class NetworkSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case NetworkPackage.ELEMENT: {
-				Element element = (Element)theEObject;
-				T result = caseElement(element);
+			case NetworkPackage.COMPONENT: {
+				Component component = (Component)theEObject;
+				T result = caseComponent(component);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case NetworkPackage.CONTROL_BOX: {
 				ControlBox controlBox = (ControlBox)theEObject;
 				T result = caseControlBox(controlBox);
-				if (result == null) result = caseElement(controlBox);
+				if (result == null) result = caseComponent(controlBox);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case NetworkPackage.SEGMENT: {
 				Segment segment = (Segment)theEObject;
 				T result = caseSegment(segment);
-				if (result == null) result = caseElement(segment);
+				if (result == null) result = caseComponent(segment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -96,7 +96,7 @@ public class NetworkSwitch<T> extends Switch<T> {
 				SwitchBox switchBox = (SwitchBox)theEObject;
 				T result = caseSwitchBox(switchBox);
 				if (result == null) result = caseControlBox(switchBox);
-				if (result == null) result = caseElement(switchBox);
+				if (result == null) result = caseComponent(switchBox);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -104,14 +104,14 @@ public class NetworkSwitch<T> extends Switch<T> {
 				RegularBox regularBox = (RegularBox)theEObject;
 				T result = caseRegularBox(regularBox);
 				if (result == null) result = caseControlBox(regularBox);
-				if (result == null) result = caseElement(regularBox);
+				if (result == null) result = caseComponent(regularBox);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case NetworkPackage.TRAIN: {
 				Train train = (Train)theEObject;
 				T result = caseTrain(train);
-				if (result == null) result = caseElement(train);
+				if (result == null) result = caseComponent(train);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -135,17 +135,17 @@ public class NetworkSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Component</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseElement(Element object) {
+	public T caseComponent(Component object) {
 		return null;
 	}
 

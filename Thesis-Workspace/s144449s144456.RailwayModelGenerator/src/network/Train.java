@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Train extends Element {
+public interface Train extends Component {
 	/**
 	 * Returns the value of the '<em><b>Route</b></em>' reference list.
 	 * The list contents are of type {@link network.Segment}.

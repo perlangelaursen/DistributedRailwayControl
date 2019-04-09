@@ -804,6 +804,7 @@ public abstract class UppaalTranslator extends Translator {
 	
 	@Override
 	protected String generateCode(Network n) {
+
 		if(n != null) {
 			String result =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
 					"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n" + 
@@ -816,7 +817,7 @@ public abstract class UppaalTranslator extends Translator {
 			//Generate file
 			PrintWriter writer;
 			try {
-				writer = new PrintWriter("test.xml", "UTF-8");
+				writer = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
 				writer.println(result);
 				writer.close();
 				return "Model file successfully generated.";
@@ -826,6 +827,8 @@ public abstract class UppaalTranslator extends Translator {
 		}
 		return "An error occurred";
 	}
+
+	protected abstract String getFileNameDetails();
 
 	private int computeLongestRouteLength(EList<Train> trains) {
 		int routeLength = 0;

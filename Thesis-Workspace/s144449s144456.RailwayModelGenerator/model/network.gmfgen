@@ -70,7 +70,7 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="network.genmodel#//network/Element/id"/>
+              href="network.genmodel#//network/Component/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -123,7 +123,7 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="network.genmodel#//network/Element/id"/>
+              href="network.genmodel#//network/Component/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -175,7 +175,7 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="network.genmodel#//network/Element/id"/>
+              href="network.genmodel#//network/Component/id"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -224,7 +224,7 @@
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0">
           <metaFeatures
-              href="network.genmodel#//network/Element/id"/>
+              href="network.genmodel#//network/Component/id"/>
         </modelFacet>
       </labels>
     </links>

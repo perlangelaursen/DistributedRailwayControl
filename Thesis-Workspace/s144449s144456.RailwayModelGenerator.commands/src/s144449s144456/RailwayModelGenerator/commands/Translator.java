@@ -156,7 +156,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		return count;
 	}
 
-	private String getIDString(Element c) {
+	private String getIDString(Component c) {
 		return ((c.getId() != null) ? c.getId() : "<id>");
 	}
 
@@ -174,8 +174,6 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		}
 		return null;
 	}
-	
-	
 	
 	private void initialize(Network n) {
 		int i = 0;
