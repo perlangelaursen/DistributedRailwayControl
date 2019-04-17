@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>const int NTRAIN = 2;
+	<declaration>// Station 1 with regular control box
+//Configuration Data - Part 1
 const int NCB = 5;
-const int NPOINT = 2;
 const int NSEG = 5;
-const int NROUTELENGTH =4;
+const int NTRAIN = 2;
+const int NPOINT = 2;
+const int NROUTELENGTH = 4;
 
+//TYPES
 typedef int[0, NTRAIN-1] t_id;
 typedef int[0, NCB-1]  cB_id;
 typedef int[0, NPOINT-1] p_id;
 typedef int[0, NSEG-1] seg_id;
-typedef int[-1, NTRAIN-1] tV_id;
-typedef int[-1, NCB-1] cBV_id;
-typedef int[-1, NPOINT-1] pV_id;
 typedef int[-1, NSEG-1] segV_id;
+typedef int[-1, NPOINT-1] pV_id;
+typedef int[-1, NCB-1] cBV_id;
+typedef int[-1, NTRAIN-1] tV_id;
 typedef struct {
     cB_id cb;
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
-const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,1,4,3}, {3,2,1,0}};
-const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0, 1, 3, 4, 2}, {2, 4, 3, 1, 0}};
-const segV_id cBs[NCB][3] = {{0, -1, -1}, {0, 1, -1}, {3, -1, -1}, {1, 4, 2}, {3, 4, 2}};
-const reservation initialRes[NTRAIN] = {{1, 0},{4, 3}};
-const pV_id points[NCB] = {-1, -1, -1, 0, 1};
-const bool pointInPlus[NPOINT] = {true, true};
+//Configuration Data - Part 2
+const int[0,NROUTELENGTH] resLimit = 2;
+const int[0,NROUTELENGTH-1] lockLimit = 2;
+
+
+const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,2,4}, {4,3,1,0}};
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
+const pV_id points[NCB] = {-1, -1, 0, 1, -1};
+const reservation initialRes[NTRAIN] = {{1, 0}, {3,4}};
+bool pointInPlus[NPOINT] = {true, true};
 
 //Channels
 chan reqSeg[NCB][NTRAIN][NSEG];
@@ -37,8 +43,22 @@ chan notOK[NTRAIN];
 chan pass[NCB];
 chan passed[NCB];
 chan switchPoint[NPOINT];
-chan OKp[NPOINT];
+chan OKp[NCB];
 urgent broadcast chan start;
+
+int nextSegment(cB_id cb, seg_id s){
+    int s1 = cBs[cb][0];
+    int s2 = cBs[cb][1];
+    if(points[cb] &gt; -1 &amp;&amp; !pointInPlus[points[cb]]){
+        s2 = cBs[cb][2];
+    }
+
+    if(s == s1){
+        return s2;
+    } else {
+        return s1;
+    }    
+}
 
 ////////////////////////////////////
 //Well-formedness Functions
@@ -193,7 +213,7 @@ bool cBIsWellFormed(cB_id id){
 		<declaration>segV_id segments[NROUTELENGTH];
 cBV_id boxes[NROUTELENGTH+1];
 
-int[0,NROUTELENGTH] routeLength;
+int[0,NSEG] routeLength;
 segV_id curSeg;
 
 bool requiresLock[NROUTELENGTH+1];
@@ -249,6 +269,12 @@ bool possibleToReserve() {
     return resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;
 }
 
+bool stillPossibleToReserve() {
+    int[0,1] tempBit = resBit^1;
+    int[0,NSEG]  tempSegIndex = (tempBit == 0) ? resSegIndex + 1 : resSegIndex;
+    return tempSegIndex &lt; routeLength &amp;&amp; tempSegIndex - 1 -index &lt; resLimit;
+}
+
 bool possibleToPass() {
     return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; index + 1 &lt; routeLength;
 }
@@ -269,13 +295,25 @@ void updateLocationInfo(){
 }
 
 void updateHeadInfo(){
-    headSeg = segments[index+1];
+    headSeg = nextSegment(boxes[index+1], curSeg);
 }
 
 void updateLockInfo(){
     locks++;
     lockIndex++;
     updateLockIndex();
+}
+
+bool hasReservations() {
+    return resSegIndex &gt; index + 1;
+}
+
+bool moreReservations() {
+    return resSegIndex &gt; index + 2;
+}
+
+bool stillAbleToPass() {
+    return resSegIndex &gt; index + 2 &amp;&amp; lockIndex &gt; index + 2 &amp;&amp; index + 2 &lt; routeLength;
 }
 
 bool isWellFormed(){
@@ -285,136 +323,148 @@ bool isWellFormed(){
            reservationIsWellFormed(initialRes[id]) &amp;&amp; 
            initialResIsConsistent(id);
 }</declaration>
-		<location id="id0" x="-858" y="-850">
+		<location id="id0" x="-578" y="-714">
+			<name x="-561" y="-722">DoubleSegment</name>
 		</location>
-		<location id="id1" x="-535" y="-875">
+		<location id="id1" x="-272" y="-1020">
+			<name x="-255" y="-1037">Locking</name>
 		</location>
-		<location id="id2" x="-748" y="-748">
+		<location id="id2" x="-578" y="-1020">
+			<name x="-680" y="-1028">PassOrLock</name>
 		</location>
-		<location id="id3" x="-493" y="-918">
+		<location id="id3" x="-884" y="-1020">
+			<name x="-867" y="-1028">Reserving</name>
 		</location>
-		<location id="id4" x="-340" y="-1156">
-			<name x="-323" y="-1173">DoubleSegment</name>
+		<location id="id4" x="-1394" y="-1020">
+			<name x="-1404" y="-1054">Initial</name>
 		</location>
-		<location id="id5" x="-1020" y="-1156">
-			<name x="-1030" y="-1190">Initial</name>
+		<location id="id5" x="-1190" y="-1224">
+			<name x="-1258" y="-1249">Arrived</name>
 		</location>
-		<location id="id6" x="-680" y="-1156">
-			<name x="-748" y="-1181">Arrived</name>
+		<location id="id6" x="-1190" y="-1020">
+			<name x="-1309" y="-1054">SingleSegment</name>
 		</location>
-		<location id="id7" x="-340" y="-748">
-			<name x="-323" y="-765">Reserving</name>
-		</location>
-		<location id="id8" x="-680" y="-952">
-			<name x="-807" y="-969">SingleSegment</name>
-		</location>
-		<location id="id9" x="-1020" y="-748">
-			<name x="-1044" y="-732">Locking</name>
-		</location>
-		<init ref="id5"/>
+		<init ref="id4"/>
 		<transition>
-			<source ref="id1"/>
-			<target ref="id8"/>
-		</transition>
-		<transition>
-			<source ref="id0"/>
-			<target ref="id8"/>
-			<label kind="assignment" x="-840" y="-901">updateLockInfo()</label>
-		</transition>
-		<transition>
-			<source ref="id2"/>
-			<target ref="id8"/>
+			<source ref="id6"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-1105" y="-952">possibleToReserve()</label>
+			<label kind="synchronisation" x="-1105" y="-935">reqSeg[boxes[resCBIndex]]
+[id][segments[resSegIndex]]!</label>
+			<nail x="-1088" y="-952"/>
+			<nail x="-986" y="-952"/>
 		</transition>
 		<transition>
 			<source ref="id3"/>
-			<target ref="id8"/>
-			<label kind="assignment" x="-595" y="-960">updateResInfo()</label>
+			<target ref="id6"/>
+			<label kind="guard" x="-1105" y="-1037">!hasReservations()</label>
+			<label kind="synchronisation" x="-1105" y="-1020">notOK[id]?</label>
 		</transition>
 		<transition>
-			<source ref="id5"/>
-			<target ref="id8"/>
-			<label kind="guard" x="-1028" y="-1096">isWellFormed()</label>
-			<label kind="synchronisation" x="-1028" y="-1079">start?</label>
-			<label kind="assignment" x="-1028" y="-1062">initialize()</label>
-		</transition>
-		<transition>
-			<source ref="id9"/>
+			<source ref="id1"/>
 			<target ref="id2"/>
-			<label kind="synchronisation" x="-918" y="-739">notOK[id]?</label>
+			<label kind="synchronisation" x="-408" y="-1037">notOK[id]?</label>
 		</transition>
 		<transition>
-			<source ref="id9"/>
-			<target ref="id0"/>
-			<label kind="synchronisation" x="-943" y="-807">OK[id]?</label>
-		</transition>
-		<transition>
-			<source ref="id7"/>
-			<target ref="id3"/>
-			<label kind="synchronisation" x="-323" y="-875">OK[id]?</label>
-			<nail x="-340" y="-884"/>
-		</transition>
-		<transition>
-			<source ref="id6"/>
-			<target ref="id6"/>
-			<nail x="-714" y="-1224"/>
-			<nail x="-646" y="-1224"/>
-		</transition>
-		<transition>
-			<source ref="id8"/>
-			<target ref="id4"/>
-			<label kind="guard" x="-544" y="-1207">possibleToPass()</label>
-			<label kind="synchronisation" x="-544" y="-1190">pass[boxes[index+1]]!</label>
-			<label kind="assignment" x="-544" y="-1173">updateHeadInfo()</label>
-			<nail x="-578" y="-1156"/>
-		</transition>
-		<transition>
-			<source ref="id8"/>
-			<target ref="id6"/>
-			<label kind="guard" x="-765" y="-1113">hasArrived()</label>
-		</transition>
-		<transition>
-			<source ref="id7"/>
+			<source ref="id2"/>
 			<target ref="id1"/>
-			<label kind="synchronisation" x="-493" y="-841">notOK[id]?</label>
+			<label kind="guard" x="-467" y="-1147">possibleToLock()</label>
+			<label kind="synchronisation" x="-467" y="-1130">reqLock[boxes[lockIndex]][id]
+[segments[lockIndex-1]][segments[lockIndex]]!</label>
+			<nail x="-476" y="-1088"/>
+			<nail x="-374" y="-1088"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-1096" y="-1147">stillPossibleToReserve()</label>
+			<label kind="synchronisation" x="-1096" y="-1130">OK[id]?</label>
+			<label kind="assignment" x="-1096" y="-1113">updateResInfo()</label>
+			<nail x="-986" y="-1088"/>
+			<nail x="-1088" y="-1088"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-782" y="-986">hasReservations()</label>
+			<label kind="synchronisation" x="-782" y="-969">notOK[id]?</label>
+			<nail x="-782" y="-952"/>
+			<nail x="-680" y="-952"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-782" y="-1147">!stillPossibleToReserve()</label>
+			<label kind="synchronisation" x="-782" y="-1130">OK[id]?</label>
+			<label kind="assignment" x="-782" y="-1113">updateResInfo()</label>
+			<nail x="-790" y="-1088"/>
+			<nail x="-680" y="-1088"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="synchronisation" x="-425" y="-952">OK[id]?</label>
+			<label kind="assignment" x="-425" y="-935">updateLockInfo()</label>
+			<nail x="-374" y="-952"/>
+			<nail x="-476" y="-952"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-943" y="-705">!stillAbleToPass() &amp;&amp; !moreReservations()</label>
+			<label kind="synchronisation" x="-943" y="-688">passed[boxes[index+1]]!</label>
+			<label kind="assignment" x="-943" y="-671">updateLocationInfo()</label>
+			<nail x="-1190" y="-714"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-926" y="-858">stillAbleToPass() || moreReservations()</label>
+			<label kind="synchronisation" x="-833" y="-841">passed[boxes[index+1]]!</label>
+			<label kind="assignment" x="-799" y="-824">updateLocationInfo()</label>
+			<nail x="-646" y="-816"/>
+			<nail x="-646" y="-918"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-501" y="-858">possibleToPass() &amp;&amp; !(possibleToLock())</label>
+			<label kind="synchronisation" x="-501" y="-841">pass[boxes[index+1]]!</label>
+			<label kind="assignment" x="-501" y="-824">updateHeadInfo()</label>
+			<nail x="-510" y="-918"/>
+			<nail x="-510" y="-816"/>
 		</transition>
 		<transition>
 			<source ref="id4"/>
-			<target ref="id8"/>
-			<label kind="synchronisation" x="-450" y="-994">passed[boxes[index+1]]!</label>
-			<label kind="assignment" x="-450" y="-977">updateLocationInfo()</label>
-			<nail x="-340" y="-1020"/>
-			<nail x="-595" y="-969"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-1351" y="-1003">isWellFormed()</label>
+			<label kind="synchronisation" x="-1351" y="-986">start?</label>
+			<label kind="assignment" x="-1351" y="-969">initialize()</label>
 		</transition>
 		<transition>
-			<source ref="id8"/>
-			<target ref="id9"/>
-			<label kind="guard" x="-1241" y="-841">possibleToLock()</label>
-			<label kind="synchronisation" x="-1241" y="-824">reqLock[boxes[lockIndex]][id]
-[segments[lockIndex-1]]
-[segments[lockIndex]]!</label>
-			<nail x="-1020" y="-884"/>
+			<source ref="id5"/>
+			<target ref="id5"/>
+			<nail x="-1224" y="-1292"/>
+			<nail x="-1156" y="-1292"/>
 		</transition>
 		<transition>
-			<source ref="id8"/>
-			<target ref="id7"/>
-			<label kind="guard" x="-612" y="-740">possibleToReserve()</label>
-			<label kind="synchronisation" x="-612" y="-722">reqSeg[boxes[resCBIndex]][id][segments[resSegIndex]]!</label>
-			<nail x="-612" y="-748"/>
-			<nail x="-527" y="-748"/>
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-1275" y="-1181">hasArrived()</label>
 		</transition>
 	</template>
 	<template>
 		<name>Initializer</name>
-		<location id="id10" x="0" y="136">
+		<location id="id7" x="0" y="136">
 			<name x="8" y="110">Initialized</name>
 		</location>
-		<location id="id11" x="0" y="0">
+		<location id="id8" x="0" y="0">
 			<name x="-10" y="-34">Uninitialized</name>
 		</location>
-		<init ref="id11"/>
+		<init ref="id8"/>
 		<transition>
-			<source ref="id11"/>
-			<target ref="id10"/>
+			<source ref="id8"/>
+			<target ref="id7"/>
 			<label kind="synchronisation" x="8" y="51">start!</label>
 		</transition>
 	</template>
@@ -514,108 +564,81 @@ void updateResInfo(){
 bool isWellFormed(){
     return cBIsWellFormed(id) &amp;&amp; pointIsWellFormed(id);
 }</declaration>
-		<location id="id12" x="-263" y="-34">
-		</location>
-		<location id="id13" x="-722" y="-68">
-		</location>
-		<location id="id14" x="-1020" y="-102">
-		</location>
-		<location id="id15" x="-1020" y="-42">
-		</location>
-		<location id="id16" x="-1020" y="-204">
-		</location>
-		<location id="id17" x="-1045" y="51">
+		<location id="id9" x="-1045" y="51">
 			<name x="-1096" y="42">Initial</name>
 		</location>
-		<location id="id18" x="-1139" y="-68">
+		<location id="id10" x="-1139" y="-68">
 			<name x="-1164" y="-102">Passing</name>
 		</location>
-		<location id="id19" x="-356" y="-34">
+		<location id="id11" x="-356" y="-34">
 			<name x="-366" y="-68">Switching</name>
 		</location>
-		<location id="id20" x="-884" y="-306">
+		<location id="id12" x="-884" y="-306">
 			<name x="-940" y="-338">SegmentChecked</name>
 		</location>
-		<location id="id21" x="-170" y="-34">
+		<location id="id13" x="-170" y="-34">
 			<name x="-154" y="-42">Switched</name>
 		</location>
-		<location id="id22" x="-646" y="-34">
+		<location id="id14" x="-646" y="-34">
 			<name x="-680" y="-17">LockChecked</name>
 		</location>
-		<location id="id23" x="-884" y="-68">
+		<location id="id15" x="-884" y="-68">
 			<name x="-858" y="-93">Idle</name>
 		</location>
-		<init ref="id17"/>
+		<init ref="id9"/>
 		<transition>
-			<source ref="id12"/>
-			<target ref="id21"/>
-			<label kind="assignment" x="-263" y="-25">updateConnected()</label>
-		</transition>
-		<transition>
-			<source ref="id13"/>
-			<target ref="id22"/>
-		</transition>
-		<transition>
-			<source ref="id14"/>
-			<target ref="id23"/>
-		</transition>
-		<transition>
-			<source ref="id15"/>
-			<target ref="id18"/>
-			<label kind="synchronisation" x="-1139" y="-51">passed[id]?</label>
-		</transition>
-		<transition>
-			<source ref="id16"/>
-			<target ref="id20"/>
-		</transition>
-		<transition>
-			<source ref="id17"/>
-			<target ref="id23"/>
+			<source ref="id9"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-1011" y="25">isWellFormed()</label>
 			<label kind="synchronisation" x="-1011" y="42">start?</label>
 			<label kind="assignment" x="-1011" y="59">initialize()</label>
 		</transition>
 		<transition>
-			<source ref="id18"/>
-			<target ref="id14"/>
-			<label kind="assignment" x="-1105" y="-119">clear()</label>
-		</transition>
-		<transition>
-			<source ref="id19"/>
-			<target ref="id12"/>
-			<label kind="synchronisation" x="-357" y="-25">OKp[point]?</label>
-		</transition>
-		<transition>
-			<source ref="id22"/>
-			<target ref="id21"/>
-			<label kind="guard" x="-458" y="-153">result == NOSWITCH</label>
-			<nail x="-544" y="-136"/>
-			<nail x="-322" y="-136"/>
-			<nail x="-272" y="-136"/>
-		</transition>
-		<transition>
-			<source ref="id23"/>
+			<source ref="id10"/>
 			<target ref="id15"/>
-			<label kind="synchronisation" x="-994" y="-42">pass[id]?</label>
+			<label kind="synchronisation" x="-1079" y="-136">passed[id]?</label>
+			<label kind="assignment" x="-1079" y="-119">clear()</label>
+			<nail x="-1020" y="-102"/>
 		</transition>
 		<transition>
-			<source ref="id22"/>
-			<target ref="id19"/>
+			<source ref="id11"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="-331" y="-34">OKp[point]?</label>
+			<label kind="assignment" x="-331" y="-17">updateConnected()</label>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-458" y="-153">result == NOSWITCH</label>
+			<nail x="-646" y="-136"/>
+			<nail x="-322" y="-136"/>
+			<nail x="-170" y="-136"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id10"/>
+			<label kind="synchronisation" x="-1105" y="-34">pass[id]?</label>
+			<nail x="-952" y="-51"/>
+			<nail x="-1020" y="-34"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id11"/>
 			<label kind="guard" x="-569" y="-68">result == DOSWITCH</label>
 			<label kind="synchronisation" x="-569" y="-51">switchPoint[point]!</label>
 			<nail x="-373" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id22"/>
-			<target ref="id23"/>
+			<source ref="id14"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-782" y="-34">result == ERROR</label>
 			<label kind="synchronisation" x="-782" y="-17">notOK[tid]!</label>
 			<label kind="assignment" x="-782" y="0">resetVariables()</label>
 			<nail x="-816" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id20"/>
-			<target ref="id23"/>
+			<source ref="id12"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-807" y="-289">result == -1</label>
 			<label kind="synchronisation" x="-807" y="-272">notOK[tid]!</label>
 			<label kind="assignment" x="-807" y="-255">resetVariables()</label>
@@ -623,35 +646,37 @@ bool isWellFormed(){
 			<nail x="-816" y="-136"/>
 		</transition>
 		<transition>
-			<source ref="id20"/>
-			<target ref="id23"/>
+			<source ref="id12"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-943" y="-238">result &gt; -1</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
 			<label kind="assignment" x="-943" y="-204">updateResInfo()</label>
 		</transition>
 		<transition>
-			<source ref="id23"/>
-			<target ref="id13"/>
-			<label kind="select" x="-807" y="-187">i : t_id,
+			<source ref="id15"/>
+			<target ref="id14"/>
+			<label kind="select" x="-790" y="-187">i : t_id,
 j : seg_id,
 k : seg_id</label>
-			<label kind="synchronisation" x="-807" y="-136">reqLock[id][i][j][k]?</label>
-			<label kind="assignment" x="-807" y="-119">result = checkLock(j,k),
+			<label kind="synchronisation" x="-790" y="-127">reqLock[id][i][j][k]?</label>
+			<label kind="assignment" x="-790" y="-110">result = checkLock(j,k),
 tid = i</label>
+			<nail x="-714" y="-68"/>
 		</transition>
 		<transition>
-			<source ref="id23"/>
-			<target ref="id16"/>
-			<label kind="select" x="-1215" y="-255">i : t_id,
+			<source ref="id15"/>
+			<target ref="id12"/>
+			<label kind="select" x="-1173" y="-263">i : t_id,
 j : seg_id</label>
-			<label kind="synchronisation" x="-1215" y="-221">reqSeg[id][i][j]?</label>
-			<label kind="assignment" x="-1215" y="-204">result = checkSegment(j),
+			<label kind="synchronisation" x="-1173" y="-229">reqSeg[id][i][j]?</label>
+			<label kind="assignment" x="-1173" y="-212">result = checkSegment(j),
 tid = i</label>
 			<nail x="-952" y="-136"/>
+			<nail x="-952" y="-272"/>
 		</transition>
 		<transition>
-			<source ref="id21"/>
-			<target ref="id23"/>
+			<source ref="id13"/>
+			<target ref="id15"/>
 			<label kind="synchronisation" x="-722" y="34">OK[tid]!</label>
 			<label kind="assignment" x="-722" y="51">updateLockInfo()</label>
 			<nail x="-170" y="34"/>
@@ -661,40 +686,61 @@ tid = i</label>
 	<template>
 		<name>Point</name>
 		<parameter>p_id id</parameter>
-		<declaration>bool inPlus;</declaration>
-		<location id="id24" x="42" y="-42">
+		<location id="id16" x="136" y="-85">
+			<name x="102" y="-119">SwitchingPM</name>
 		</location>
-		<location id="id25" x="144" y="0">
-			<name x="110" y="-34">Switching</name>
+		<location id="id17" x="136" y="153">
+			<name x="127" y="170">Initial</name>
 		</location>
-		<location id="id26" x="-170" y="0">
-			<name x="-179" y="17">Initial</name>
+		<location id="id18" x="136" y="68">
+			<name x="102" y="34">SwitchingMP</name>
 		</location>
-		<location id="id27" x="-68" y="0">
+		<location id="id19" x="340" y="0">
+			<name x="330" y="-30">Minus</name>
+		</location>
+		<location id="id20" x="-68" y="0">
 			<name x="-78" y="-30">Plus</name>
 		</location>
-		<init ref="id26"/>
+		<init ref="id17"/>
 		<transition>
-			<source ref="id24"/>
-			<target ref="id25"/>
-			<label kind="assignment" x="60" y="-21">inPlus = !inPlus</label>
+			<source ref="id17"/>
+			<target ref="id19"/>
+			<label kind="guard" x="238" y="119">!pointInPlus[id]</label>
+			<label kind="synchronisation" x="289" y="136">start?</label>
+			<nail x="340" y="153"/>
 		</transition>
 		<transition>
-			<source ref="id25"/>
-			<target ref="id27"/>
-			<label kind="synchronisation" x="8" y="51">OKp[id]!</label>
-			<nail x="34" y="42"/>
+			<source ref="id17"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-51" y="119">pointInPlus[id]</label>
+			<label kind="synchronisation" x="-50" y="136">start?</label>
+			<nail x="-68" y="153"/>
 		</transition>
 		<transition>
-			<source ref="id26"/>
-			<target ref="id27"/>
-			<label kind="synchronisation" x="-127" y="17">start?</label>
-			<label kind="assignment" x="-153" y="34">inPlus = pointInPlus[id]</label>
+			<source ref="id20"/>
+			<target ref="id16"/>
+			<label kind="synchronisation" x="-42" y="-68">switchPoint[id]?</label>
+			<nail x="34" y="-42"/>
 		</transition>
 		<transition>
-			<source ref="id27"/>
-			<target ref="id24"/>
-			<label kind="synchronisation" x="-85" y="-93">switchPoint[id]?</label>
+			<source ref="id19"/>
+			<target ref="id18"/>
+			<label kind="synchronisation" x="212" y="42">switchPoint[id]?</label>
+			<nail x="238" y="34"/>
+		</transition>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id19"/>
+			<label kind="synchronisation" x="246" y="-76">OKp[id]!</label>
+			<label kind="assignment" x="246" y="-59">pointInPlus[id] = false</label>
+			<nail x="238" y="-42"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id20"/>
+			<label kind="synchronisation" x="-25" y="42">OKp[id]!</label>
+			<label kind="assignment" x="-25" y="59">pointInPlus[id] = true</label>
+			<nail x="34" y="34"/>
 		</transition>
 	</template>
 	<system>system Initializer, Train, CB, Point;</system>
@@ -706,21 +752,21 @@ tid = i</label>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; forall(i:t_id) not(Train(i).Initial)
+			<formula>A&lt;&gt; forall(i:t_id) not(Train(i).Initial)
 			</formula>
-			<comment>Well-formedness of Train
+			<comment>Well-formedness of Trains.
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; forall(i:cB_id) not(CB(i).Initial)
+			<formula>A&lt;&gt; forall(i:cB_id) not(CB(i).Initial)
 			</formula>
-			<comment>Well-formedness of CB
+			<comment>Well-formedness of CBs.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] !deadlock
 			</formula>
-			<comment>
+			<comment>No deadlock.
 			</comment>
 		</query>
 		<query>
@@ -732,7 +778,8 @@ tid = i</label>
 		<query>
 			<formula>E&lt;&gt; forall(i:t_id) Train(i).Arrived
 			</formula>
-			<comment>Liveness
+			<comment>Liveness:
+There exists a sequence of actions for which all Trains arrive at their destinations.
 			</comment>
 		</query>
 		<query>
@@ -741,7 +788,7 @@ tid = i</label>
 	(Train(i).DoubleSegment imply Train(i).headSeg != Train(j).curSeg) &amp;&amp;
 	(Train(i).DoubleSegment &amp;&amp; Train(j).DoubleSegment imply Train(i).headSeg!= Train(j).headSeg)
 			</formula>
-			<comment>No collision
+			<comment>No collision.
 			</comment>
 		</query>
 		<query>
@@ -750,7 +797,7 @@ tid = i</label>
 	(Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected)
 			</formula>
 			<comment>No derailment:
-A train passing a point always moves between the connected segments
+If a train is in a critical section, then the segments that it is moving on are connected.
 			</comment>
 		</query>
 		<query>
@@ -758,7 +805,7 @@ A train passing a point always moves between the connected segments
 	!Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingPM &amp;&amp; !Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingMP
 			</formula>
 			<comment>No derailment:
-A train is never in a critical section while the point there is switching
+If a train is in a critical section, the point in that section is not in themiddle of switching.
 			</comment>
 		</query>
 		<query>
@@ -770,30 +817,23 @@ A train is never in a critical section while the point there is switching
 		<query>
 			<formula>A[] forall(i:t_id) Train(i).locks == (sum(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; points[Train(i).boxes[j]] &gt; -1))
 			</formula>
-			<comment>A TCC's locks variable is always the true number of locks
+			<comment>Lock consistency:
+The number of saved locks in the state space of a Train is the same number of locks that it believes that it has.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:p_id) (Point(i).Plus imply pointInPlus[i]) &amp;&amp; (Point(i).Minus imply !pointInPlus[i])
+			<formula>A[] forall(i:p_id) Initializer.Initialized &amp;&amp; !Point(i).SwitchingPM &amp;&amp; !Point(i).SwitchingMP imply (pointInPlus[i] imply Point(i).Plus) &amp;&amp; (!pointInPlus[i] imply Point(i).Minus)
 			</formula>
 			<comment>Network array consistency:
-The pointInPlus array reflects the true state of all Points
+The position of a point in the network data is consistent with the actual position of the point.
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) points[i] &gt; -1 imply
-	(Point(points[i]).Plus imply CB(i).connected == cBs[i][1]) &amp;&amp; (Point(points[i]).Minus imply CB(i).connected == cBs[i][2])
+			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching imply 
+	((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).Plus &amp;&amp; (CB(i).connected == CB(i).segments[2]) imply Point(points[i]).Minus)
 			</formula>
 			<comment>Point consistency:
-A CB's connected information is consistent with its Point's position
-			</comment>
-		</query>
-		<query>
-			<formula>A[] forall(i:cB_id) CB(i).lockedBy &gt; -1 imply
-	(exists(k:cB_id) Train(CB(i).lockedBy).boxes[k] == i &amp;&amp; k &gt; Train(CB(i).lockedBy).index &amp;&amp; k &lt; Train(CB(i).lockedBy).lockIndex)
-			</formula>
-			<comment>Lock consistency:
-A CB's lock information is also reflected in the state space of the relevant TCC
+A CB's information about its associated Point's position is consistent with the Point's actual position.
 			</comment>
 		</query>
 		<query>
@@ -801,7 +841,7 @@ A CB's lock information is also reflected in the state space of the relevant TCC
 	CB(Train(i).boxes[j]).lockedBy == i)
 			</formula>
 			<comment>Lock consistency:
-A TCC's obtained locks are reflected in the relevant CBs
+The locks saved in the state space of a Train are also saved in the state spaces of the involved CBs.
 			</comment>
 		</query>
 		<query>
@@ -809,17 +849,7 @@ A TCC's obtained locks are reflected in the relevant CBs
 		(j &gt; Train(i).index &amp;&amp; j &lt; Train(i).resCBIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j]).segments[l] == Train(i).segments[j] &amp;&amp; CB(Train(i).boxes[j]).res[l] == i)
 			</formula>
 			<comment>Reservation consistency:
-All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
-			</comment>
-		</query>
-		<query>
-			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) CB(i).res[j] &gt; -1 imply
-	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j] &amp;&amp; k &gt;= Train(CB(i).res[j]).index &amp;&amp;
-		(Train(CB(i).res[j]).resCBIndex == Train(CB(i).res[j]).resSegIndex imply (k &lt; Train(CB(i).res[j]).resSegIndex)) &amp;&amp;
-		(Train(CB(i).res[j]).resCBIndex != Train(CB(i).res[j]).resSegIndex imply (k &lt; Train(CB(i).res[j]).resCBIndex))
-			</formula>
-			<comment>Reservation consistency: 
-All reservations at a CB are also saved in the state space of the relevant TCCs
+The reservations saved in the state space of a Train are also saved in the state spaces of the involved CBs.
 			</comment>
 		</query>
 		<query>
@@ -832,20 +862,20 @@ All reservations at a CB are also saved in the state space of the relevant TCCs
 			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply 
 	Train(i).index+1 &lt; Train(i).resSegIndex
 			</formula>
-			<comment>A train only enters a segment that is has the full reservation of
+			<comment>A train only enters a segment that it has the full reservation of.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply Train(i).boxes[Train(i).index+1] != Train(i).boxes[Train(i).routeLength]
 			</formula>
-			<comment>A train never passes the last control box in its route
+			<comment>A train never passes the last control box on its route.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) Train(i).DoubleSegment &amp;&amp; points[Train(i).boxes[Train(i).index+1]] != -1 imply
 	CB(Train(i).boxes[Train(i).index+1]).lockedBy == i
 			</formula>
-			<comment>A train only passes a switch box if it has been locked for the train
+			<comment>A train only passes a switch box if it has been locked for the train.
 			</comment>
 		</query>
 		<query>
@@ -857,16 +887,13 @@ All reservations at a CB are also saved in the state space of the relevant TCCs
 		<query>
 			<formula>A[] forall(i:cB_id) CB(i).Switched imply CB(i).lockedBy == -1
 			</formula>
-			<comment>A CB only returns acknowledgement for a lock request if its point was unlocked prior to the request
-A TCC only requests locks for switch boxes that it has not already obtained the lock at
-
-A lock is only ever given if it was available
+			<comment>A lock is only successful if the point involved in the request was unlocked prior to the request.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) (CB(i).Switched || CB(i).Switching) imply !(exists(j:t_id) (Train(j).DoubleSegment &amp;&amp; Train(j).boxes[Train(j).index+1] == i))
 			</formula>
-			<comment>A control box only switches if no train is in its critical section
+			<comment>A control box only switches and locks its point if no train is in its critical section.
 			</comment>
 		</query>
 		<query>
@@ -875,7 +902,7 @@ A lock is only ever given if it was available
 	(CB(j).segments[0] == Train(i).segments[Train(i).lockIndex-1] &amp;&amp; CB(j).segments[k] == Train(i).segments[Train(i).lockIndex]) ||
 	(CB(j).segments[0] == Train(i).segments[Train(i).lockIndex] &amp;&amp; CB(j).segments[k] == Train(i).segments[Train(i).lockIndex-1]))
 			</formula>
-			<comment>A CB only returns acknowledgement for a switch/lock request if the requested segments are its stem and one of its other segments
+			<comment>A switch is only successful if the requested connection is of segments that are adjacent in the train’s route and the stem segment and plus or minus segment of the switch box.
 			</comment>
 		</query>
 		<query>
@@ -883,19 +910,19 @@ A lock is only ever given if it was available
 	CB(i).res[0] == CB(i).lockedBy &amp;&amp; 
 	exists(j:int[0,2]) CB(i).segments[j] == CB(i).connected &amp;&amp; CB(i).res[j] == CB(i).lockedBy
 			</formula>
-			<comment>A TCC only has locks for CB's that it has the stem reservation at and one other segment reservation
+			<comment>A lock is only successful if the requesting train has the reservation for the stem segment at the switch box and one other segment.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)
 			</formula>
-			<comment>A TCC only requests locks at switch boxes on its route
+			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) Train(i).locks &lt;= lockLimit
 			</formula>
-			<comment>A TCC never has more locks than allowed
+			<comment>A train never has more locks than the lock limit.
 			</comment>
 		</query>
 		<query>
@@ -909,10 +936,7 @@ A lock is only ever given if it was available
 	(Train(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply 
 	CB(j).res[CB(j).result] == -1
 			</formula>
-			<comment>A CB only returns acknowledgement for reservation requests of available segments
-A TCC only reserves segments that it does not already have a reservation for
-
-A reservation is only ever given if it was available
+			<comment>A reservation is only successful if the requested segment is not already reserved.
 			</comment>
 		</query>
 		<query>
@@ -920,7 +944,7 @@ A reservation is only ever given if it was available
 	(Train(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply 
 	(exists(k:int[0,2]) CB(j).segments[k] == Train(i).segments[Train(i).resSegIndex])
 			</formula>
-			<comment>A control box only returns acknowledgement for reservations involving segments that it is associated with
+			<comment>A reservation is only successful if the requested segment is associated with the control box that receives the request.
 			</comment>
 		</query>
 		<query>
@@ -928,7 +952,7 @@ A reservation is only ever given if it was available
 	CB(i).res[j] != -1 imply 
 	exists(k:cB_id) Train(CB(i).res[j]).boxes[k] == i
 			</formula>
-			<comment>A TCC only reserves at control boxes on its route
+			<comment>A reservation is only successful if the control box that a train contacts is a part of the train’s route.
 			</comment>
 		</query>
 		<query>
@@ -936,13 +960,13 @@ A reservation is only ever given if it was available
 	CB(i).res[j] != -1 imply 
 	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]
 			</formula>
-			<comment>A TCC only reserves segments on its route
+			<comment>A reservation is only successful if the requested segment is a part of the requesting train’s route.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:t_id) Train(i).resSegIndex - 1 - Train(i).index &lt;= resLimit
 			</formula>
-			<comment>A TCC never has more reservations than allowed
+			<comment>A train never has more reservations than the reservation limit.
 			</comment>
 		</query>
 	</queries>

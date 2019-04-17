@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link network.Network#getTrains <em>Trains</em>}</li>
  *   <li>{@link network.Network#getLockLimit <em>Lock Limit</em>}</li>
  *   <li>{@link network.Network#getReserveLimit <em>Reserve Limit</em>}</li>
+ *   <li>{@link network.Network#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see network.NetworkPackage#getNetwork()
@@ -128,5 +129,32 @@ public interface Network extends EObject {
 	 * @generated
 	 */
 	void setReserveLimit(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>"untitled"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see network.NetworkPackage#getNetwork_Name()
+	 * @model default="untitled" required="true"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link network.Network#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // Network

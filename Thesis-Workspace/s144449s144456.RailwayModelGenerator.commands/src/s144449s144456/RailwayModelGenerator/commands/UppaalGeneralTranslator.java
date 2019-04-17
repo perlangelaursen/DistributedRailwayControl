@@ -1,7 +1,7 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
 public class UppaalGeneralTranslator extends UppaalTranslator {
-
+	
 	@Override
 	protected String computeTrainModel() {
 		return "<template>\n" + 
@@ -202,4 +202,7 @@ public class UppaalGeneralTranslator extends UppaalTranslator {
 				"	</template>\n";
 	}
 
+	protected String getFileNameDetails() {
+		return "UPPAAL";
+	}
 }

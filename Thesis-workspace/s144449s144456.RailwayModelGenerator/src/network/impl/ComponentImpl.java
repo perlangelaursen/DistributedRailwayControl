@@ -2,7 +2,7 @@
  */
 package network.impl;
 
-import network.Element;
+import network.Component;
 import network.NetworkPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -14,18 +14,18 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Element</b></em>'.
+ * An implementation of the model object '<em><b>Component</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link network.impl.ElementImpl#getId <em>Id</em>}</li>
+ *   <li>{@link network.impl.ComponentImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class ElementImpl extends MinimalEObjectImpl.Container implements Element {
+public abstract class ComponentImpl extends MinimalEObjectImpl.Container implements Component {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -51,7 +51,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ElementImpl() {
+	protected ComponentImpl() {
 		super();
 	}
 
@@ -62,7 +62,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return NetworkPackage.Literals.ELEMENT;
+		return NetworkPackage.Literals.COMPONENT;
 	}
 
 	/**
@@ -85,7 +85,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.ELEMENT__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.COMPONENT__ID, oldId, id));
 	}
 
 	/**
@@ -96,7 +96,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NetworkPackage.ELEMENT__ID:
+			case NetworkPackage.COMPONENT__ID:
 				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -110,7 +110,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NetworkPackage.ELEMENT__ID:
+			case NetworkPackage.COMPONENT__ID:
 				setId((String)newValue);
 				return;
 		}
@@ -125,7 +125,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NetworkPackage.ELEMENT__ID:
+			case NetworkPackage.COMPONENT__ID:
 				setId(ID_EDEFAULT);
 				return;
 		}
@@ -140,7 +140,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NetworkPackage.ELEMENT__ID:
+			case NetworkPackage.COMPONENT__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
@@ -162,4 +162,4 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 		return result.toString();
 	}
 
-} //ElementImpl
+} //ComponentImpl

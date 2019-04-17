@@ -20,7 +20,7 @@ package network;
  * @model
  * @generated
  */
-public interface Segment extends Element {
+public interface Segment extends Component {
 	/**
 	 * Returns the value of the '<em><b>Start</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link network.ControlBox#getOutgoing <em>Outgoing</em>}'.

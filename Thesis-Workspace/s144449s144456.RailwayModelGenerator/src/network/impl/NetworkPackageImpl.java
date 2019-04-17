@@ -2,8 +2,8 @@
  */
 package network.impl;
 
+import network.Component;
 import network.ControlBox;
-import network.Element;
 import network.Network;
 import network.NetworkFactory;
 import network.NetworkPackage;
@@ -40,7 +40,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass elementEClass = null;
+	private EClass componentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -211,8 +211,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getElement() {
-		return elementEClass;
+	public EAttribute getNetwork_Name() {
+		return (EAttribute)networkEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -221,8 +221,18 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getElement_Id() {
-		return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
+	public EClass getComponent() {
+		return componentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getComponent_Id() {
+		return (EAttribute)componentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -410,9 +420,10 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(networkEClass, NETWORK__TRAINS);
 		createEAttribute(networkEClass, NETWORK__LOCK_LIMIT);
 		createEAttribute(networkEClass, NETWORK__RESERVE_LIMIT);
+		createEAttribute(networkEClass, NETWORK__NAME);
 
-		elementEClass = createEClass(ELEMENT);
-		createEAttribute(elementEClass, ELEMENT__ID);
+		componentEClass = createEClass(COMPONENT);
+		createEAttribute(componentEClass, COMPONENT__ID);
 
 		controlBoxEClass = createEClass(CONTROL_BOX);
 		createEReference(controlBoxEClass, CONTROL_BOX__INGOING);
@@ -465,11 +476,11 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		controlBoxEClass.getESuperTypes().add(this.getElement());
-		segmentEClass.getESuperTypes().add(this.getElement());
+		controlBoxEClass.getESuperTypes().add(this.getComponent());
+		segmentEClass.getESuperTypes().add(this.getComponent());
 		switchBoxEClass.getESuperTypes().add(this.getControlBox());
 		regularBoxEClass.getESuperTypes().add(this.getControlBox());
-		trainEClass.getESuperTypes().add(this.getElement());
+		trainEClass.getESuperTypes().add(this.getComponent());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(networkEClass, Network.class, "Network", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -478,9 +489,10 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getNetwork_Trains(), this.getTrain(), null, "trains", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_LockLimit(), ecorePackage.getEInt(), "lockLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_ReserveLimit(), ecorePackage.getEInt(), "reserveLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNetwork_Name(), ecorePackage.getEString(), "name", "untitled", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getElement_Id(), ecorePackage.getEString(), "id", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(componentEClass, Component.class, "Component", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getComponent_Id(), ecorePackage.getEString(), "id", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(controlBoxEClass, ControlBox.class, "ControlBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getControlBox_Ingoing(), this.getSegment(), this.getSegment_End(), "ingoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

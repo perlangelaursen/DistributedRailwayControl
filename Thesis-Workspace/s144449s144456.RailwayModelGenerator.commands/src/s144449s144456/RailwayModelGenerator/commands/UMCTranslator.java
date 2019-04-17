@@ -30,7 +30,7 @@ public class UMCTranslator extends Translator {
 			//Generate file
 			PrintWriter writer;
 			try {
-				writer = new PrintWriter("RCS_UMC.txt", "UTF-8");
+				writer = new PrintWriter(n.getName()+"_UMC.txt", "UTF-8");
 				writer.println(classes);
 				writer.println(objectString + "\r\n" + trainsString + "\r\n" + cbsString + "\r\n" + pointsString + "\r\n" + abstractionsString);
 //				System.out.println(trainsString + cbsString + pointsString + abstractionsString);
@@ -235,7 +235,7 @@ public class UMCTranslator extends Translator {
 				int s3 = segIDs.get(sb.getMinus());
 				abs += "  State: "+pid+".inPlus = true -> inPlus("+pid+")\r\n";
 				//Point consistency: A CB's connected information is consistent with its Point's position
-				prop5 += "((connects("+cbid+","+s1+","+s2+") & ~inSwitching("+cbid+")) -> inPlus("+pid+")) & ((connects("+cbid+","+s1+","+s3+") & ~inSwitching("+cbid+")) -> ~inPlus("+pid+")) & ";				
+				prop5 += "((connects("+cbid+","+s1+","+s2+") & ~inSwitching("+cbid+")) -> inPlus("+pid+")) & ((connects("+cbid+","+s1+","+s3+") & ~inSwitching("+cbid+")) -> ~inPlus("+pid+")) & ";
 			}
 			abs += "  State: "+cbid+".lockedBy = $t -> lockedBy("+cbid+",$t)\r\n";
 			abs += "  State: inState("+cbid+".Switching) -> inSwitching("+cbid+")\r\n";
@@ -343,7 +343,7 @@ public class UMCTranslator extends Translator {
 		props += "//Lock consistency: The locks saved in the state space of a Train are also saved in the state spaces of the involved CBs\r\n"+prop6;		
 //		props += "Lock consistency: The number of saved locks in the state space of a Train is the same number of locks that it believes that is has \r\n";
 //		props += "Network array consistency: The position of a point in the network data is consistent with the actual position of the point\r\n";
-//		props += "//Point consistency: A CB's connected information is consistent with its Point's position\r\n"+prop5;
+		props += "//Point consistency: A CB's connected information is consistent with its Point's position\r\n"+prop5;
 		props += "//Position consistency: The train position saved in a TCC is consistent with the train's actual position\r\n"+prop21;
 
 		props += "//LIVENESS\r\n";

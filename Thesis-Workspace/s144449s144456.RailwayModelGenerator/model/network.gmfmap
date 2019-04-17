@@ -17,7 +17,7 @@
         <diagramLabel
             href="network.gmfgraph#SwitchBoxId"/>
         <features
-            href="network.ecore#//Element/id"/>
+            href="network.ecore#//Component/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -37,7 +37,7 @@
         <diagramLabel
             href="network.gmfgraph#RegularBoxId"/>
         <features
-            href="network.ecore#//Element/id"/>
+            href="network.ecore#//Component/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -57,7 +57,7 @@
         <diagramLabel
             href="network.gmfgraph#TrainId"/>
         <features
-            href="network.ecore#//Element/id"/>
+            href="network.ecore#//Component/id"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -74,7 +74,7 @@
       <diagramLabel
           href="network.gmfgraph#SegmentId"/>
       <features
-          href="network.ecore#//Element/id"/>
+          href="network.ecore#//Component/id"/>
     </labelMappings>
     <containmentFeature
         href="network.ecore#//Network/segments"/>

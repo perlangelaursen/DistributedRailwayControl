@@ -95,7 +95,7 @@
         id="s144449s144456.RailwayModelGenerator.generateCancelUppaal"
         description="Generate Uppaal Code with Cancel operation"
         defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalCancelTranslator"
-        name="Generate Uppaal Code with Cancel operation">
+        name="Generate Uppaal Code (Extension with cancel operation)">
     </command>
   </extension>
 

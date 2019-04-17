@@ -1,7 +1,6 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
 public class UppaalStrictTranslator extends UppaalTranslator {
-
 	@Override
 	protected String computeTrainModel() {
 		return "<template>\n" + 
@@ -250,6 +249,11 @@ public class UppaalStrictTranslator extends UppaalTranslator {
 				"			<label kind=\"guard\" x=\"-1275\" y=\"-1181\">hasArrived()</label>\n" + 
 				"		</transition>\n" + 
 				"	</template>\n";
+	}
+
+	@Override
+	protected String getFileNameDetails() {
+		return "UPPAAL_Restricted";
 	}
 
 }

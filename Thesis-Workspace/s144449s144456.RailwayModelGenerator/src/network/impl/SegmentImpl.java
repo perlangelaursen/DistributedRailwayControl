@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class SegmentImpl extends ElementImpl implements Segment {
+public class SegmentImpl extends ComponentImpl implements Segment {
 	/**
 	 * The cached value of the '{@link #getStart() <em>Start</em>}' reference.
 	 * <!-- begin-user-doc -->

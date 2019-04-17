@@ -1,9 +1,6 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
-import network.Network;
-
-public class UppaalCancelTranslator extends UppaalTranslator {
-
+public class UppaalCancelTranslator extends UppaalTranslator {	
 	@Override
 	protected String computeTrainModel() {
 		return "<template>\n" + 
@@ -491,5 +488,8 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 				"chan cancel[NCB][NSEG];\n\n";
 	}
 
+	protected String getFileNameDetails() {
+		return "UPPAAL_Cancel";
+	}
 	
 }

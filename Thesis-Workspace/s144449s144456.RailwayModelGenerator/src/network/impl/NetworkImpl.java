@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link network.impl.NetworkImpl#getTrains <em>Trains</em>}</li>
  *   <li>{@link network.impl.NetworkImpl#getLockLimit <em>Lock Limit</em>}</li>
  *   <li>{@link network.impl.NetworkImpl#getReserveLimit <em>Reserve Limit</em>}</li>
+ *   <li>{@link network.impl.NetworkImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -111,6 +112,26 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	 * @ordered
 	 */
 	protected int reserveLimit = RESERVE_LIMIT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = "untitled";
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +243,29 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	 * @generated
 	 */
 	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.NETWORK__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case NetworkPackage.NETWORK__CONTROL_BOXES:
@@ -252,6 +296,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return getLockLimit();
 			case NetworkPackage.NETWORK__RESERVE_LIMIT:
 				return getReserveLimit();
+			case NetworkPackage.NETWORK__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,6 +329,9 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 			case NetworkPackage.NETWORK__RESERVE_LIMIT:
 				setReserveLimit((Integer)newValue);
 				return;
+			case NetworkPackage.NETWORK__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -310,6 +359,9 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 			case NetworkPackage.NETWORK__RESERVE_LIMIT:
 				setReserveLimit(RESERVE_LIMIT_EDEFAULT);
 				return;
+			case NetworkPackage.NETWORK__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -332,6 +384,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return lockLimit != LOCK_LIMIT_EDEFAULT;
 			case NetworkPackage.NETWORK__RESERVE_LIMIT:
 				return reserveLimit != RESERVE_LIMIT_EDEFAULT;
+			case NetworkPackage.NETWORK__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -350,6 +404,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 		result.append(lockLimit);
 		result.append(", reserveLimit: ");
 		result.append(reserveLimit);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

@@ -1,7 +1,7 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
 public class UppaalGlobalTranslator extends UppaalTranslator {
-
+	
 	@Override
 	protected String computeTrainModel() {
 		return "<template>\n" + 
@@ -415,6 +415,11 @@ public class UppaalGlobalTranslator extends UppaalTranslator {
 				"			<nail x=\"-884\" y=\"34\"/>\n" + 
 				"		</transition>\n" + 
 				"	</template>\n";
+	}
+
+	@Override
+	protected String getFileNameDetails() {
+		return "UPPAAL_Global";
 	}
 	
 	
