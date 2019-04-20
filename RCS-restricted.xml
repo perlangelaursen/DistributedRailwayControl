@@ -792,7 +792,7 @@ There exists a sequence of actions for which all Trains arrive at their destinat
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) forall(j:int[0,1]) Train(i).DoubleSegment imply
+			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply
 	(Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).connected) ||
 	(Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected)
 			</formula>

@@ -21,173 +21,173 @@
 
 * No derailment (Move between connected segments)
 ** Elapsed time
-|----------------------------+-------+--------+-------+-----------|
-| Configuration              | First | Second | Third | Average   |
-|----------------------------+-------+--------+-------+-----------|
-| Example with one train     | 0.004 |  0.004 | 0.004 | vmean([]) |
-| Example with two trains    | 0.033 |  0.032 | 0.037 | vmean([]) |
-| Shared Segment             | 0.015 |  0.015 | 0.015 | vmean([]) |
-| Large Network              | 0.015 |  0.017 | 0.014 | vmean([]) |
-| Station One                |       |        |       | vmean([]) |
-| Station Two                |       |        |       | vmean([]) |
-| Station Four               |       |        |       | vmean([]) |
-| Station Six                |       |        |       | vmean([]) |
-| Station Eight              |       |        |       | vmean([]) |
-| Station Ten                |       |        |       | vmean([]) |
-| Station Twelfth            |       |        |       | vmean([]) |
-| Two trains same direction  |       |        |       | vmean([]) |
-| Four trains same direction |       |        |       | vmean([]) |
-| Nærumbanen (2T)            |       |        |       | vmean([]) |
-|----------------------------+-------+--------+-------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   0.004 |   0.003 |   0.004 | vmean([]) |
+| Example with two trains    |   0.014 |   0.016 |   0.013 | vmean([]) |
+| Shared Segment             |   0.015 |   0.018 |   0.018 | vmean([]) |
+| Large Network              |   0.011 |   0.026 |   0.025 | vmean([]) |
+| Station One                |   0.010 |   0.010 |   0.021 | vmean([]) |
+| Station Two                |   0.075 |   0.097 |   0.079 | vmean([]) |
+| Station Four               |   1.494 |   1.396 |   1.355 | vmean([]) |
+| Station Six                |  22.872 |  23.017 |  22.706 | vmean([]) |
+| Station Eight              | 135.759 | 133.936 | 134.133 | vmean([]) |
+| Station Ten                | 475.160 | 477.251 | 474.018 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
-|----------------------------+--------+--------+--------+-----------|
-| Configuration              |  First | Second |  Third | Average   |
-|----------------------------+--------+--------+--------+-----------|
-| Example with one train     |  7.612 |  7.632 |  7.640 | vmean([]) |
-| Example with two trains    |  8.558 |  8.604 |  8.620 | vmean([]) |
-| Shared Segment             |  9.792 |  9.836 |  9.796 | vmean([]) |
-| Large Network              | 12.008 | 12.072 | 12.000 | vmean([]) |
-| Station One                |        |        |        | vmean([]) |
-| Station Two                |        |        |        | vmean([]) |
-| Station Four               |        |        |        | vmean([]) |
-| Station Six                |        |        |        | vmean([]) |
-| Station Eight              |        |        |        | vmean([]) |
-| Station Ten                |        |        |        | vmean([]) |
-| Station Twelfth            |        |        |        | vmean([]) |
-| Two trains same direction  |        |        |        | vmean([]) |
-| Four trains same direction |        |        |        | vmean([]) |
-| Nærumbanen (2T)            |        |        |        | vmean([]) |
-|----------------------------+--------+--------+--------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   7.640 |   7.652 |   7.656 | vmean([]) |
+| Example with two trains    |   8.576 |   8.584 |   8.588 | vmean([]) |
+| Shared Segment             |   9.816 |   9.848 |   9.852 | vmean([]) |
+| Large Network              |  12.024 |  12.072 |  12.084 | vmean([]) |
+| Station One                |   8.544 |   8.552 |   8.560 | vmean([]) |
+| Station Two                |  14.256 |  14.308 |  14.320 | vmean([]) |
+| Station Four               |  37.932 |  38.164 |  38.172 | vmean([]) |
+| Station Six                | 105.136 | 105.888 | 105.888 | vmean([]) |
+| Station Eight              | 221.068 | 222.868 | 222.868 | vmean([]) |
+| Station Ten                | 424.840 | 428.096 | 428.268 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 * No derailment (Critical section)
 ** Elapsed time
-|----------------------------+-------+--------+-------+-----------|
-| Configuration              | First | Second | Third | Average   |
-|----------------------------+-------+--------+-------+-----------|
-| Example with one train     | 0.002 |  0.002 | 0.003 | vmean([]) |
-| Example with two trains    | 0.031 |  0.037 | 0.049 | vmean([]) |
-| Shared Segment             | 0.015 |  0.014 | 0.016 | vmean([]) |
-| Large Network              | 0.012 |  0.020 | 0.020 | vmean([]) |
-| Station One                |       |        |       | vmean([]) |
-| Station Two                |       |        |       | vmean([]) |
-| Station Four               |       |        |       | vmean([]) |
-| Station Six                |       |        |       | vmean([]) |
-| Station Eight              |       |        |       | vmean([]) |
-| Station Ten                |       |        |       | vmean([]) |
-| Station Twelfth            |       |        |       | vmean([]) |
-| Two trains same direction  |       |        |       | vmean([]) |
-| Four trains same direction |       |        |       | vmean([]) |
-| Nærumbanen (2T)            |       |        |       | vmean([]) |
-|----------------------------+-------+--------+-------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   0.003 |   0.004 |   0.004 | vmean([]) |
+| Example with two trains    |   0.027 |   0.030 |   0.029 | vmean([]) |
+| Shared Segment             |   0.014 |   0.017 |   0.018 | vmean([]) |
+| Large Network              |   0.012 |   0.022 |   0.019 | vmean([]) |
+| Station One                |   0.019 |   0.022 |   0.011 | vmean([]) |
+| Station Two                |   0.067 |   0.077 |   0.078 | vmean([]) |
+| Station Four               |   1.264 |   1.385 |   1.299 | vmean([]) |
+| Station Six                |  21.984 |  22.251 |  22.444 | vmean([]) |
+| Station Eight              | 135.149 | 134.701 | 136.291 | vmean([]) |
+| Station Ten                | 471.003 | 472.720 | 472.425 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
-|----------------------------+--------+--------+--------+-----------|
-| Configuration              |  First | Second |  Third | Average   |
-|----------------------------+--------+--------+--------+-----------|
-| Example with one train     |  7.580 |  7.592 |  7.592 | vmean([]) |
-| Example with two trains    |  8.540 |  8.564 |  8.572 | vmean([]) |
-| Shared Segment             |  9.744 |  9.776 |  9.784 | vmean([]) |
-| Large Network              | 11.968 | 12.020 | 12.032 | vmean([]) |
-| Station One                |        |        |        | vmean([]) |
-| Station Two                |        |        |        | vmean([]) |
-| Station Four               |        |        |        | vmean([]) |
-| Station Six                |        |        |        | vmean([]) |
-| Station Eight              |        |        |        | vmean([]) |
-| Station Ten                |        |        |        | vmean([]) |
-| Station Twelfth            |        |        |        | vmean([]) |
-| Two trains same direction  |        |        |        | vmean([]) |
-| Four trains same direction |        |        |        | vmean([]) |
-| Nærumbanen (2T)            |        |        |        | vmean([]) |
-|----------------------------+--------+--------+--------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   7.608 |   7.616 |   7.628 | vmean([]) |
+| Example with two trains    |   8.560 |   8.568 |   8.572 | vmean([]) |
+| Shared Segment             |   9.792 |   9.820 |   9.832 | vmean([]) |
+| Large Network              |  12.004 |  12.052 |  12.064 | vmean([]) |
+| Station One                |   8.512 |   8.520 |   8.524 | vmean([]) |
+| Station Two                |  12.408 |  12.456 |  12.464 | vmean([]) |
+| Station Four               |  36.500 |  36.728 |  36.752 | vmean([]) |
+| Station Six                | 105.660 | 106.012 | 106.048 | vmean([]) |
+| Station Eight              | 219.100 | 220.624 | 220.980 | vmean([]) |
+| Station Ten                | 420.864 | 424.288 | 424.460 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 * No collision
 ** Elapsed time
-|----------------------------+-------+--------+-------+-----------|
-| Configuration              | First | Second | Third | Average   |
-|----------------------------+-------+--------+-------+-----------|
-| Example with one train     | 0.004 |  0.004 | 0.004 | vmean([]) |
-| Example with two trains    | 0.036 |  0.034 | 0.033 | vmean([]) |
-| Shared Segment             | 0.014 |  0.015 | 0.015 | vmean([]) |
-| Large Network              | 0.011 |  0.029 | 0.021 | vmean([]) |
-| Station One                |       |        |       | vmean([]) |
-| Station Two                |       |        |       | vmean([]) |
-| Station Four               |       |        |       | vmean([]) |
-| Station Six                |       |        |       | vmean([]) |
-| Station Eight              |       |        |       | vmean([]) |
-| Station Ten                |       |        |       | vmean([]) |
-| Station Twelfth            |       |        |       | vmean([]) |
-| Two trains same direction  |       |        |       | vmean([]) |
-| Four trains same direction |       |        |       | vmean([]) |
-| Nærumbanen (2T)            |       |        |       | vmean([]) |
-|----------------------------+-------+--------+-------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   0.003 |   0.004 |   0.003 | vmean([]) |
+| Example with two trains    |   0.026 |   0.017 |   0.030 | vmean([]) |
+| Shared Segment             |   0.014 |   0.016 |   0.017 | vmean([]) |
+| Large Network              |   0.012 |   0.019 |   0.019 | vmean([]) |
+| Station One                |   0.012 |   0.012 |   0.019 | vmean([]) |
+| Station Two                |   0.065 |   0.111 |   0.114 | vmean([]) |
+| Station Four               |   1.286 |   1.315 |   1.266 | vmean([]) |
+| Station Six                |  23.164 |  23.206 |  23.325 | vmean([]) |
+| Station Eight              | 127.860 | 124.623 | 124.672 | vmean([]) |
+| Station Ten                | 474.403 | 459.789 | 444.659 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
-|----------------------------+--------+--------+--------+-----------|
-| Configuration              |  First | Second |  Third | Average   |
-|----------------------------+--------+--------+--------+-----------|
-| Example with one train     |  7.560 |  7.576 |  7.576 | vmean([]) |
-| Example with two trains    |  8.548 |  8.560 |  8.568 | vmean([]) |
-| Shared Segment             |  9.744 |  9.776 |  9.784 | vmean([]) |
-| Large Network              | 11.944 | 11.996 | 12.016 | vmean([]) |
-| Station One                |        |        |        | vmean([]) |
-| Station Two                |        |        |        | vmean([]) |
-| Station Four               |        |        |        | vmean([]) |
-| Station Six                |        |        |        | vmean([]) |
-| Station Eight              |        |        |        | vmean([]) |
-| Station Ten                |        |        |        | vmean([]) |
-| Station Twelfth            |        |        |        | vmean([]) |
-| Two trains same direction  |        |        |        | vmean([]) |
-| Four trains same direction |        |        |        | vmean([]) |
-| Nærumbanen (2T)            |        |        |        | vmean([]) |
-|----------------------------+--------+--------+--------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   7.592 |   7.608 |   7.612 | vmean([]) |
+| Example with two trains    |   8.544 |   8.552 |   8.560 | vmean([]) |
+| Shared Segment             |   9.772 |   9.808 |   9.820 | vmean([]) |
+| Large Network              |  11.980 |  12.044 |  12.506 | vmean([]) |
+| Station One                |   8.516 |   8.524 |   8.532 | vmean([]) |
+| Station Two                |  12.384 |  12.436 |  12.444 | vmean([]) |
+| Station Four               |  37.948 |  38.172 |  38.184 | vmean([]) |
+| Station Six                | 101.400 | 102.152 | 102.160 | vmean([]) |
+| Station Eight              | 223.784 | 224.888 | 224.888 | vmean([]) |
+| Station Ten                | 421.316 | 426.156 | 426.156 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 * Will arrive
 ** Elapsed time
-|----------------------------+-------+--------+-------+-----------|
-| Configuration              | First | Second | Third | Average   |
-|----------------------------+-------+--------+-------+-----------|
-| Example with one train     | 0.003 |  0.004 | 0.002 | vmean([]) |
-| Example with two trains    | 0.031 |  0.035 | 0.034 | vmean([]) |
-| Shared Segment             | 0.010 |  0.016 | 0.016 | vmean([]) |
-| Large Network              | 0.014 |  0.019 | 0.021 | vmean([]) |
-| Station One                |       |        |       | vmean([]) |
-| Station Two                |       |        |       | vmean([]) |
-| Station Four               |       |        |       | vmean([]) |
-| Station Six                |       |        |       | vmean([]) |
-| Station Eight              |       |        |       | vmean([]) |
-| Station Ten                |       |        |       | vmean([]) |
-| Station Twelfth            |       |        |       | vmean([]) |
-| Two trains same direction  |       |        |       | vmean([]) |
-| Four trains same direction |       |        |       | vmean([]) |
-| Nærumbanen (2T)            |       |        |       | vmean([]) |
-|----------------------------+-------+--------+-------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   0.002 |   0.003 |   0.003 | vmean([]) |
+| Example with two trains    |   0.027 |   0.028 |   0.028 | vmean([]) |
+| Shared Segment             |   0.012 |   0.014 |   0.014 | vmean([]) |
+| Large Network              |   0.011 |   0.012 |   0.020 | vmean([]) |
+| Station One                |   0.019 |   0.018 |   0.021 | vmean([]) |
+| Station Two                |   0.077 |   0.064 |   0.076 | vmean([]) |
+| Station Four               |   1.253 |   1.375 |   1.291 | vmean([]) |
+| Station Six                |  21.982 |  22.389 |  22.220 | vmean([]) |
+| Station Eight              | 134.299 | 134.362 | 135.154 | vmean([]) |
+| Station Ten                | 470.486 | 452.370 | 444.189 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
-|----------------------------+--------+--------+-------+-----------|
-| Configuration              |  First | Second | Third | Average   |
-|----------------------------+--------+--------+-------+-----------|
-| Example with one train     |  7.500 |  7.500 | 7.500 | vmean([]) |
-| Example with two trains    |  8.472 |  8.472 | 8.476 | vmean([]) |
-| Shared Segment             |  9.668 |  9.688 | 9.692 | vmean([]) |
-| Large Network              | 11.900 | 11.924 | 11.924 | vmean([]) |
-| Station One                |        |        |       | vmean([]) |
-| Station Two                |        |        |       | vmean([]) |
-| Station Four               |        |        |       | vmean([]) |
-| Station Six                |        |        |       | vmean([]) |
-| Station Eight              |        |        |       | vmean([]) |
-| Station Ten                |        |        |       | vmean([]) |
-| Station Twelfth            |        |        |       | vmean([]) |
-| Two trains same direction  |        |        |       | vmean([]) |
-| Four trains same direction |        |        |       | vmean([]) |
-| Nærumbanen (2T)            |        |        |       | vmean([]) |
-|----------------------------+--------+--------+-------+-----------|
+|----------------------------+---------+---------+---------+-----------|
+| Configuration              |   First |  Second |   Third | Average   |
+|----------------------------+---------+---------+---------+-----------|
+| Example with one train     |   7.520 |   7.524 |   7.524 | vmean([]) |
+| Example with two trains    |   8.480 |   8.480 |   8.500 | vmean([]) |
+| Shared Segment             |   9.700 |   9.720 |   9.724 | vmean([]) |
+| Large Network              |  11.920 |  11.920 |  11.928 | vmean([]) |
+| Station One                |   8.440 |   8.440 |   8.460 | vmean([]) |
+| Station Two                |  12.312 |  12.356 |  12.364 | vmean([]) |
+| Station Four               |  37.080 |  37.260 |  37.284 | vmean([]) |
+| Station Six                | 100.220 | 100.576 | 100.608 | vmean([]) |
+| Station Eight              | 220.080 | 221.836 | 221.916 | vmean([]) |
+| Station Ten                | 422.496 | 427.152 | 427.152 | vmean([]) |
+| Station Twelfth            |         |         |         | vmean([]) |
+| Two trains same direction  |         |         |         | vmean([]) |
+| Four trains same direction |         |         |         | vmean([]) |
+| Nærumbanen (2T)            |         |         |         | vmean([]) |
+|----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
