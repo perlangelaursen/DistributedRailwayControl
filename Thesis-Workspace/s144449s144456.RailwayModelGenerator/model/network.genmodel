@@ -12,6 +12,7 @@
       <genEnumLiterals ecoreEnumLiteral="network.ecore#//PointSetting/PLUS"/>
       <genEnumLiterals ecoreEnumLiteral="network.ecore#//PointSetting/MINUS"/>
     </genEnums>
+    <genDataTypes ecoreDataType="network.ecore#//NewDataType2"/>
     <genClasses ecoreClass="network.ecore#//Network">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference network.ecore#//Network/controlBoxes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference network.ecore#//Network/segments"/>

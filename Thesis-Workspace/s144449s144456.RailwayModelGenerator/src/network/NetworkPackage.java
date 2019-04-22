@@ -4,6 +4,7 @@ package network;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -490,6 +491,17 @@ public interface NetworkPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>New Data Type2</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Object
+	 * @see network.impl.NetworkPackageImpl#getNewDataType2()
+	 * @generated
+	 */
+	int NEW_DATA_TYPE2 = 8;
+
+
+	/**
 	 * Returns the meta object for class '{@link network.Network <em>Network</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -746,6 +758,17 @@ public interface NetworkPackage extends EPackage {
 	EEnum getPointSetting();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.Object <em>New Data Type2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>New Data Type2</em>'.
+	 * @see java.lang.Object
+	 * @model instanceClass="java.lang.Object"
+	 * @generated
+	 */
+	EDataType getNewDataType2();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -975,6 +998,16 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum POINT_SETTING = eINSTANCE.getPointSetting();
+
+		/**
+		 * The meta object literal for the '<em>New Data Type2</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Object
+		 * @see network.impl.NetworkPackageImpl#getNewDataType2()
+		 * @generated
+		 */
+		EDataType NEW_DATA_TYPE2 = eINSTANCE.getNewDataType2();
 
 	}
 

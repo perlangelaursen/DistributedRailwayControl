@@ -15,6 +15,7 @@ import network.SwitchBox;
 import network.Train;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -83,6 +84,13 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	private EEnum pointSettingEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType newDataType2EDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -391,6 +399,16 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
+	public EDataType getNewDataType2() {
+		return newDataType2EDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NetworkFactory getNetworkFactory() {
 		return (NetworkFactory)getEFactoryInstance();
 	}
@@ -446,6 +464,9 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 
 		// Create enums
 		pointSettingEEnum = createEEnum(POINT_SETTING);
+
+		// Create data types
+		newDataType2EDataType = createEDataType(NEW_DATA_TYPE2);
 	}
 
 	/**
@@ -484,9 +505,9 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(networkEClass, Network.class, "Network", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNetwork_ControlBoxes(), this.getControlBox(), null, "controlBoxes", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNetwork_Segments(), this.getSegment(), null, "segments", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNetwork_Trains(), this.getTrain(), null, "trains", null, 0, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNetwork_ControlBoxes(), this.getControlBox(), null, "controlBoxes", null, 2, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNetwork_Segments(), this.getSegment(), null, "segments", null, 1, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNetwork_Trains(), this.getTrain(), null, "trains", null, 1, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_LockLimit(), ecorePackage.getEInt(), "lockLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_ReserveLimit(), ecorePackage.getEInt(), "reserveLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_Name(), ecorePackage.getEString(), "name", "untitled", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -517,6 +538,9 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEEnum(pointSettingEEnum, PointSetting.class, "PointSetting");
 		addEEnumLiteral(pointSettingEEnum, PointSetting.PLUS);
 		addEEnumLiteral(pointSettingEEnum, PointSetting.MINUS);
+
+		// Initialize data types
+		initEDataType(newDataType2EDataType, Object.class, "NewDataType2", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

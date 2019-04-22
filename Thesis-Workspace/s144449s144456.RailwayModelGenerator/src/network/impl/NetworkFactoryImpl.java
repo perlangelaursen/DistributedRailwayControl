@@ -77,6 +77,8 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 		switch (eDataType.getClassifierID()) {
 			case NetworkPackage.POINT_SETTING:
 				return createPointSettingFromString(eDataType, initialValue);
+			case NetworkPackage.NEW_DATA_TYPE2:
+				return createNewDataType2FromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +94,8 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 		switch (eDataType.getClassifierID()) {
 			case NetworkPackage.POINT_SETTING:
 				return convertPointSettingToString(eDataType, instanceValue);
+			case NetworkPackage.NEW_DATA_TYPE2:
+				return convertNewDataType2ToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -170,6 +174,24 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 	 */
 	public String convertPointSettingToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object createNewDataType2FromString(EDataType eDataType, String initialValue) {
+		return super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNewDataType2ToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

@@ -39,7 +39,7 @@ public interface Network extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Control Boxes</em>' containment reference list.
 	 * @see network.NetworkPackage#getNetwork_ControlBoxes()
-	 * @model containment="true"
+	 * @model containment="true" lower="2"
 	 * @generated
 	 */
 	EList<ControlBox> getControlBoxes();
@@ -55,7 +55,7 @@ public interface Network extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Segments</em>' containment reference list.
 	 * @see network.NetworkPackage#getNetwork_Segments()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<Segment> getSegments();
@@ -71,7 +71,7 @@ public interface Network extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Trains</em>' containment reference list.
 	 * @see network.NetworkPackage#getNetwork_Trains()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<Train> getTrains();

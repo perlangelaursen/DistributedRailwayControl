@@ -3,12 +3,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="network" nsURI="http://s144449s144456.RailwayModelGenerator/network"
     nsPrefix="nw">
   <eClassifiers xsi:type="ecore:EClass" name="Network">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="controlBoxes" upperBound="-1"
-        eType="#//ControlBox" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="segments" upperBound="-1"
-        eType="#//Segment" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trains" upperBound="-1"
-        eType="#//Train" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlBoxes" lowerBound="2"
+        upperBound="-1" eType="#//ControlBox" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="segments" lowerBound="1"
+        upperBound="-1" eType="#//Segment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trains" lowerBound="1"
+        upperBound="-1" eType="#//Train" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lockLimit" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reserveLimit" lowerBound="1"
@@ -48,4 +48,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" upperBound="-1"
         eType="#//Segment"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="NewDataType2" instanceTypeName="newDataType2"/>
 </ecore:EPackage>
