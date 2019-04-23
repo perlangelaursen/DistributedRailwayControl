@@ -9,6 +9,7 @@ import network.ControlBox;
 import network.NetworkPackage;
 import network.Segment;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -16,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -29,6 +31,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link network.impl.ControlBoxImpl#getIngoing <em>Ingoing</em>}</li>
  *   <li>{@link network.impl.ControlBoxImpl#getOutgoing <em>Outgoing</em>}</li>
+ *   <li>{@link network.impl.ControlBoxImpl#getX <em>X</em>}</li>
+ *   <li>{@link network.impl.ControlBoxImpl#getY <em>Y</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,6 +57,46 @@ public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox
 	 * @ordered
 	 */
 	protected EList<Segment> outgoing;
+
+	/**
+	 * The default value of the '{@link #getX() <em>X</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getX()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float X_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getX() <em>X</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getX()
+	 * @generated
+	 * @ordered
+	 */
+	protected float x = X_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getY() <em>Y</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getY()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final float Y_EDEFAULT = 0.0F;
+
+	/**
+	 * The cached value of the '{@link #getY() <em>Y</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getY()
+	 * @generated
+	 * @ordered
+	 */
+	protected float y = Y_EDEFAULT;
 
 	/**
 	 * @see #getSegments()
@@ -103,6 +147,52 @@ public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox
 			outgoing = new EObjectWithInverseResolvingEList<Segment>(Segment.class, this, NetworkPackage.CONTROL_BOX__OUTGOING, NetworkPackage.SEGMENT__START);
 		}
 		return outgoing;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public float getX() {
+		return x;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setX(float newX) {
+		float oldX = x;
+		x = newX;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.CONTROL_BOX__X, oldX, x));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public float getY() {
+		return y;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setY(float newY) {
+		float oldY = y;
+		y = newY;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.CONTROL_BOX__Y, oldY, y));
 	}
 
 	/**
@@ -170,6 +260,10 @@ public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox
 				return getIngoing();
 			case NetworkPackage.CONTROL_BOX__OUTGOING:
 				return getOutgoing();
+			case NetworkPackage.CONTROL_BOX__X:
+				return getX();
+			case NetworkPackage.CONTROL_BOX__Y:
+				return getY();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,6 +285,12 @@ public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox
 				getOutgoing().clear();
 				getOutgoing().addAll((Collection<? extends Segment>)newValue);
 				return;
+			case NetworkPackage.CONTROL_BOX__X:
+				setX((Float)newValue);
+				return;
+			case NetworkPackage.CONTROL_BOX__Y:
+				setY((Float)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -209,6 +309,12 @@ public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox
 			case NetworkPackage.CONTROL_BOX__OUTGOING:
 				getOutgoing().clear();
 				return;
+			case NetworkPackage.CONTROL_BOX__X:
+				setX(X_EDEFAULT);
+				return;
+			case NetworkPackage.CONTROL_BOX__Y:
+				setY(Y_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -225,8 +331,36 @@ public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox
 				return ingoing != null && !ingoing.isEmpty();
 			case NetworkPackage.CONTROL_BOX__OUTGOING:
 				return outgoing != null && !outgoing.isEmpty();
+			case NetworkPackage.CONTROL_BOX__X:
+				return x != X_EDEFAULT;
+			case NetworkPackage.CONTROL_BOX__Y:
+				return y != Y_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (x: ");
+		result.append(x);
+		result.append(", y: ");
+		result.append(y);
+		result.append(')');
+		return result.toString();
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void reload() {
+		segments = null;
+	}
 } //ControlBoxImpl

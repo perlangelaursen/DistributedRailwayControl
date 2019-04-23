@@ -1,6 +1,7 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
 import java.util.HashMap;
+
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -9,6 +10,10 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -28,9 +33,11 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null & selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			
 			if (structuredSelection.size() == 1) {
 				Network n = getNetwork(structuredSelection.getFirstElement());
-				if (n != null && isWellFormed(n)) {
+				n.reload();
+				if (n != null && isWellFormed(n)) {				
 					//Generate code
 					initialize(n);
 					String msg = generateCode(n);
@@ -61,15 +68,13 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		HashMap<SwitchBox, LinkedList<ControlBox>> conflicts = new HashMap<>();
 		for(ControlBox cb : n.getControlBoxes()) {
 			String id = getIDString(cb);
+			
 			if(cb instanceof SwitchBox ) {
+				//Segments
 				SwitchBox sb = (SwitchBox) cb;
 				if(sb.getSegments().size() != 3) {
 					msg += "Error in switch box "+id+": Switch box must be associated with exactly three segments.\n";
-					for(Segment s : sb.getSegments()) {
-						System.out.print(id+" has: ");
-						System.out.println(s.toString());
-					}
-				}
+				} 
 				if(sb.getStem() == null) {
 					msg += "Error in switch box "+id+": Stem segment has not been set.\n";
 				} else if(!sb.getSegments().contains(sb.getStem())) {
@@ -95,6 +100,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 					msg += "Error in switch box "+id+": Plus segment and minus segment must be different.\n";
 				}
 				
+				//Switch box connections
 				for(ControlBox cb2 : n.getControlBoxes()) {
 					if(cb2 instanceof SwitchBox && cb != cb2) {
 						SwitchBox sb2 = (SwitchBox) cb2;
@@ -123,10 +129,26 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 						}
 					}
 				}
-			} else if(cb.getSegments().size() < 1) {
-				msg += "Error in regular control box "+id+": Control box must be associated with at least one segment.\n";
+
+				//Direction
+				ControlBox cb1 = otherCB(sb, sb.getStem());
+				ControlBox cb2 = otherCB(sb, sb.getPlus());
+				if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
+						(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
+					msg += "Error in switch box "+id+": Plus segment and minus segment must be placed on different sides of the switch box.\n";
+				}
+			} else if(cb.getSegments().size() == 2) {
+				ControlBox cb1 = otherCB(cb, cb.getSegments().get(0));
+				ControlBox cb2 = otherCB(cb, cb.getSegments().get(1));
+				if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
+						(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
+					msg += "Error in control box "+id+": Associated segments must be placed on different sides of the control box.\n";
+				}
+			} else if(cb.getSegments().size() < 1 || cb.getSegments().size() > 2) {
+				msg += "Error in regular control box "+id+": Regular control box must be associated with exactly one or two segments.\n";
 			}
 		}
+		
 		//TRAINS
 		for(Train t : n.getTrains()) {
 			String id = getIDString(t);
@@ -134,8 +156,16 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 				msg += "Train " + id + " must have at least one segment in its route.\n";
 			} else {
 				for(int i = 0; i < t.getRoute().size()-1; i++) {
-					if(!areConnected(t.getRoute().get(i), t.getRoute().get(i+1))) {
-						msg += "Error in train "+t.getId()+"'s route: Movement from segment "+t.getRoute().get(i).getId()+" to segment "+t.getRoute().get(i+1).getId()+" is not possible.\n";
+					Segment s1 = t.getRoute().get(i);
+					Segment s2 = t.getRoute().get(i+1);
+					if(!canConnect(s1, s2)) {
+						msg += "Error in train "+id+"'s route: Movement from segment "+s1.getId()+" to segment "+s2.getId()+" is not possible.\n";
+					} else if (t.getBoxRoute().get(i+1) instanceof SwitchBox) {
+						SwitchBox sb = (SwitchBox) t.getBoxRoute().get(i+1);
+						System.out.println(sb.getId()+" is SB");
+						if((sb.getPlus() == s1 && sb.getMinus() == s2) || (sb.getPlus() == s2 && sb.getMinus() == s1)) {
+							msg += "Error in train "+id+"'s route: Movement from segment "+s1.getId()+" to segment "+s2.getId()+" is not possible.\n";
+						}
 					}
 				}
 			}
@@ -144,6 +174,11 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			MessageDialog.openInformation(null, "Generate File", msg);
 		}
 		return msg.equals("");
+	}
+
+
+	private ControlBox otherCB(ControlBox cb, Segment s) {
+		return (s.getStart() == cb) ? s.getEnd() : s.getStart();
 	}
 
 	private int sharedSegments(SwitchBox sb, SwitchBox sb2) {
@@ -160,7 +195,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		return ((c.getId() != null) ? c.getId() : "<id>");
 	}
 
-	private boolean areConnected(Segment s1, Segment s2) {
+	private boolean canConnect(Segment s1, Segment s2) {
 		return s1.getStart().getSegments().contains(s2) || s1.getEnd().getSegments().contains(s2);
 	}
 
@@ -223,8 +258,6 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			}
 		}
 		
-
-		
 		//Trains
 		i = 0;
 		trainIDs = new HashMap<>();
@@ -233,4 +266,5 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 			i++;
 		}
 	}
+
 }

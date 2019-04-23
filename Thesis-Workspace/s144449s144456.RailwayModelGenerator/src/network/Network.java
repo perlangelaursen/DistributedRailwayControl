@@ -157,4 +157,9 @@ public interface Network extends EObject {
 	 */
 	void setName(String value);
 
+	/**
+	 * @generated NOT
+	 */
+	void reload();
+
 } // Network

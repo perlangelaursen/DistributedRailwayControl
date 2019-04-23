@@ -187,4 +187,11 @@ public class TrainImpl extends ComponentImpl implements Train {
 		}
 		return boxRoute;
 	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public void reload() {
+		boxRoute = null;
+	}
 } //TrainImpl

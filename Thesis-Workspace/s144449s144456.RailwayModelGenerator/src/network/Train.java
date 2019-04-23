@@ -43,4 +43,9 @@ public interface Train extends Component {
 	 * @generated NOT
 	 */
 	LinkedList<ControlBox> getBoxRoute();
+
+	/**
+	 * @generated NOT
+	 */
+	void reload();
 } // Train

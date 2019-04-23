@@ -4,7 +4,6 @@ package network;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -215,13 +214,31 @@ public interface NetworkPackage extends EPackage {
 	int CONTROL_BOX__OUTGOING = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_BOX__X = COMPONENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_BOX__Y = COMPONENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Control Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 2;
+	int CONTROL_BOX_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Control Box</em>' class.
@@ -325,6 +342,24 @@ public interface NetworkPackage extends EPackage {
 	int SWITCH_BOX__OUTGOING = CONTROL_BOX__OUTGOING;
 
 	/**
+	 * The feature id for the '<em><b>X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_BOX__X = CONTROL_BOX__X;
+
+	/**
+	 * The feature id for the '<em><b>Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_BOX__Y = CONTROL_BOX__Y;
+
+	/**
 	 * The feature id for the '<em><b>Connected</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,6 +451,24 @@ public interface NetworkPackage extends EPackage {
 	int REGULAR_BOX__OUTGOING = CONTROL_BOX__OUTGOING;
 
 	/**
+	 * The feature id for the '<em><b>X</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX__X = CONTROL_BOX__X;
+
+	/**
+	 * The feature id for the '<em><b>Y</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGULAR_BOX__Y = CONTROL_BOX__Y;
+
+	/**
 	 * The number of structural features of the '<em>Regular Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -488,17 +541,6 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 */
 	int POINT_SETTING = 7;
-
-
-	/**
-	 * The meta object id for the '<em>New Data Type2</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.Object
-	 * @see network.impl.NetworkPackageImpl#getNewDataType2()
-	 * @generated
-	 */
-	int NEW_DATA_TYPE2 = 8;
 
 
 	/**
@@ -631,6 +673,28 @@ public interface NetworkPackage extends EPackage {
 	EReference getControlBox_Outgoing();
 
 	/**
+	 * Returns the meta object for the attribute '{@link network.ControlBox#getX <em>X</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>X</em>'.
+	 * @see network.ControlBox#getX()
+	 * @see #getControlBox()
+	 * @generated
+	 */
+	EAttribute getControlBox_X();
+
+	/**
+	 * Returns the meta object for the attribute '{@link network.ControlBox#getY <em>Y</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Y</em>'.
+	 * @see network.ControlBox#getY()
+	 * @see #getControlBox()
+	 * @generated
+	 */
+	EAttribute getControlBox_Y();
+
+	/**
 	 * Returns the meta object for class '{@link network.Segment <em>Segment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -758,17 +822,6 @@ public interface NetworkPackage extends EPackage {
 	EEnum getPointSetting();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.Object <em>New Data Type2</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>New Data Type2</em>'.
-	 * @see java.lang.Object
-	 * @model instanceClass="java.lang.Object"
-	 * @generated
-	 */
-	EDataType getNewDataType2();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -894,6 +947,22 @@ public interface NetworkPackage extends EPackage {
 		EReference CONTROL_BOX__OUTGOING = eINSTANCE.getControlBox_Outgoing();
 
 		/**
+		 * The meta object literal for the '<em><b>X</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROL_BOX__X = eINSTANCE.getControlBox_X();
+
+		/**
+		 * The meta object literal for the '<em><b>Y</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROL_BOX__Y = eINSTANCE.getControlBox_Y();
+
+		/**
 		 * The meta object literal for the '{@link network.impl.SegmentImpl <em>Segment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -998,16 +1067,6 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum POINT_SETTING = eINSTANCE.getPointSetting();
-
-		/**
-		 * The meta object literal for the '<em>New Data Type2</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.Object
-		 * @see network.impl.NetworkPackageImpl#getNewDataType2()
-		 * @generated
-		 */
-		EDataType NEW_DATA_TYPE2 = eINSTANCE.getNewDataType2();
 
 	}
 

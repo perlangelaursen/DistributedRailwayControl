@@ -15,7 +15,6 @@ import network.SwitchBox;
 import network.Train;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -84,13 +83,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	private EEnum pointSettingEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType newDataType2EDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -279,6 +271,26 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getControlBox_X() {
+		return (EAttribute)controlBoxEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getControlBox_Y() {
+		return (EAttribute)controlBoxEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getSegment() {
 		return segmentEClass;
 	}
@@ -399,16 +411,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EDataType getNewDataType2() {
-		return newDataType2EDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NetworkFactory getNetworkFactory() {
 		return (NetworkFactory)getEFactoryInstance();
 	}
@@ -446,6 +448,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		controlBoxEClass = createEClass(CONTROL_BOX);
 		createEReference(controlBoxEClass, CONTROL_BOX__INGOING);
 		createEReference(controlBoxEClass, CONTROL_BOX__OUTGOING);
+		createEAttribute(controlBoxEClass, CONTROL_BOX__X);
+		createEAttribute(controlBoxEClass, CONTROL_BOX__Y);
 
 		segmentEClass = createEClass(SEGMENT);
 		createEReference(segmentEClass, SEGMENT__START);
@@ -464,9 +468,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 
 		// Create enums
 		pointSettingEEnum = createEEnum(POINT_SETTING);
-
-		// Create data types
-		newDataType2EDataType = createEDataType(NEW_DATA_TYPE2);
 	}
 
 	/**
@@ -518,6 +519,8 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEClass(controlBoxEClass, ControlBox.class, "ControlBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getControlBox_Ingoing(), this.getSegment(), this.getSegment_End(), "ingoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlBox_Outgoing(), this.getSegment(), this.getSegment_Start(), "outgoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControlBox_X(), ecorePackage.getEFloat(), "x", null, 1, 1, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControlBox_Y(), ecorePackage.getEFloat(), "y", null, 1, 1, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSegment_Start(), this.getControlBox(), this.getControlBox_Outgoing(), "start", null, 1, 1, Segment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -538,9 +541,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEEnum(pointSettingEEnum, PointSetting.class, "PointSetting");
 		addEEnumLiteral(pointSettingEEnum, PointSetting.PLUS);
 		addEEnumLiteral(pointSettingEEnum, PointSetting.MINUS);
-
-		// Initialize data types
-		initEDataType(newDataType2EDataType, Object.class, "NewDataType2", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
