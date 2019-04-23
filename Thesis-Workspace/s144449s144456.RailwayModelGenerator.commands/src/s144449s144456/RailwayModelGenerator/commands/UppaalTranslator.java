@@ -501,6 +501,20 @@ public abstract class UppaalTranslator extends Translator {
 				"    return found;\n" + 
 				"}\n" + 
 				"\n" + 
+				"int sharedSegments(cB_id i, cB_id j){\r\n" + 
+				"    int count = 0;\r\n" + 
+				"    if (cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])){\r\n" + 
+				"        count++;\r\n" + 
+				"    }\r\n" + 
+				"    if (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])){\r\n" + 
+				"        count++;\r\n" + 
+				"    }\r\n" + 
+				"    if (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])){\r\n" + 
+				"         count++;\r\n" + 
+				"    }\r\n" + 
+				"    return count;\r\n" + 
+				"}\r\n" + 
+				"\r\n" +
 				"bool cBIsWellFormed(cB_id id){\n" + 
 				"    segV_id cB[3] = cBs[id];\n" + 
 				"\n" + 
@@ -523,16 +537,13 @@ public abstract class UppaalTranslator extends Translator {
 				"    if(cB[2] == -1){\n" + 
 				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\n" + 
 				"    }\n" + 
-				"\n" + 
-				"    //Case: Switch box\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(i != id &amp;&amp; \n" + 
-				"            (cBs[i][0] == cB[0] &amp;&amp; (cBs[i][1] == cB[1] || cBs[i][2] == cB[2])) ||\n" + 
-				"            (cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] != cB[2]) ||\n" + 
-				"            (cBs[i][2] == cB[2] &amp;&amp; cBs[i][1] != cB[1])){\n" + 
-				"                return false;\n" + 
-				"        }\n" + 
-				"    }\n" + 
+				"\n" +  
+				"    //Case: Switch box\r\n" + 
+				"    for(i:cB_id){\r\n" + 
+				"        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][0] != cB[0] &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] == cB[2])){                \r\n" + 
+				"            return false;\r\n" + 
+				"        } \r\n" + 
+				"    }\r\n" +  
 				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\n" + 
 				"}\n" + 
 				"</declaration>\n";

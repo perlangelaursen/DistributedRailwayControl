@@ -409,5 +409,18 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 		result.append(')');
 		return result.toString();
 	}
+	
+
+	/**
+	 * @generated NOT
+	 */
+	public void reload() {
+		for(ControlBox cb : controlBoxes) {
+			cb.reload();
+		}
+		for(Train t : trains) {
+			t.reload();
+		}
+	}
 
 } //NetworkImpl
