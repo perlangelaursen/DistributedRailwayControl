@@ -44,7 +44,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//SwitchBox/plus"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//SwitchBox/minus"/>
     </genClasses>
-    <genClasses ecoreClass="network.ecore#//RegularBox"/>
     <genClasses ecoreClass="network.ecore#//Train">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference network.ecore#//Train/route"/>
     </genClasses>

@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public abstract class ControlBoxImpl extends ComponentImpl implements ControlBox {
+public class ControlBoxImpl extends ComponentImpl implements ControlBox {
 	/**
 	 * The cached value of the '{@link #getIngoing() <em>Ingoing</em>}' reference list.
 	 * <!-- begin-user-doc -->

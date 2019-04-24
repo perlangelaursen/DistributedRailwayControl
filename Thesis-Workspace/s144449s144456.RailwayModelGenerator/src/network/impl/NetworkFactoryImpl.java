@@ -58,9 +58,9 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case NetworkPackage.NETWORK: return createNetwork();
+			case NetworkPackage.CONTROL_BOX: return createControlBox();
 			case NetworkPackage.SEGMENT: return createSegment();
 			case NetworkPackage.SWITCH_BOX: return createSwitchBox();
-			case NetworkPackage.REGULAR_BOX: return createRegularBox();
 			case NetworkPackage.TRAIN: return createTrain();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -114,6 +114,17 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 	 * @generated
 	 */
 	@Override
+	public ControlBox createControlBox() {
+		ControlBoxImpl controlBox = new ControlBoxImpl();
+		return controlBox;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Segment createSegment() {
 		SegmentImpl segment = new SegmentImpl();
 		return segment;
@@ -128,17 +139,6 @@ public class NetworkFactoryImpl extends EFactoryImpl implements NetworkFactory {
 	public SwitchBox createSwitchBox() {
 		SwitchBoxImpl switchBox = new SwitchBoxImpl();
 		return switchBox;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RegularBox createRegularBox() {
-		RegularBoxImpl regularBox = new RegularBoxImpl();
-		return regularBox;
 	}
 
 	/**

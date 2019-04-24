@@ -29,9 +29,11 @@
   <nodes>
     <containmentFeature
         href="network.ecore#//Network/controlBoxes"/>
+    <childrenFeature
+        href="network.ecore#//Network/controlBoxes"/>
     <ownedChild>
       <domainMetaElement
-          href="network.ecore#//RegularBox"/>
+          href="network.ecore#//ControlBox"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel

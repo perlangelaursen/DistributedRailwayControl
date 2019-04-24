@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see network.NetworkPackage#getControlBox()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface ControlBox extends Component {

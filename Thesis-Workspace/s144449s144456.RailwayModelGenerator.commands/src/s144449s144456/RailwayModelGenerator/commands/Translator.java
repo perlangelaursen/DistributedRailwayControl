@@ -66,6 +66,7 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		
 		//CONTROL BOXES
 		HashMap<SwitchBox, LinkedList<ControlBox>> conflicts = new HashMap<>();
+		String msgCB = "";
 		for(ControlBox cb : n.getControlBoxes()) {
 			String id = getIDString(cb);
 			
@@ -73,81 +74,92 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 				//Segments
 				SwitchBox sb = (SwitchBox) cb;
 				if(sb.getSegments().size() != 3) {
-					msg += "Error in switch box "+id+": Switch box must be associated with exactly three segments.\n";
+					msgCB += "Error in switch box "+id+": Switch box must be associated with exactly three segments.\n";
 				} 
 				if(sb.getStem() == null) {
-					msg += "Error in switch box "+id+": Stem segment has not been set.\n";
+					msgCB += "Error in switch box "+id+": Stem segment has not been set.\n";
 				} else if(!sb.getSegments().contains(sb.getStem())) {
-					msg += "Error in switch box "+id+": Stem segment is not associated with switch box.\n";	
+					msgCB += "Error in switch box "+id+": Stem segment is not associated with switch box.\n";	
 				}
 				if(sb.getPlus() == null) {
-					msg += "Error in switch box "+id+": Plus segment has not been set.\n";
+					msgCB += "Error in switch box "+id+": Plus segment has not been set.\n";
 				} else if(!sb.getSegments().contains(sb.getPlus())) {
-					msg += "Error in switch box "+id+": Plus segment is not associated with switch box.\n";	
+					msgCB += "Error in switch box "+id+": Plus segment is not associated with switch box.\n";	
 				}
 				if(sb.getMinus() == null) {
-					msg += "Error in switch box "+id+": Minus segment has not been set.\n";
+					msgCB += "Error in switch box "+id+": Minus segment has not been set.\n";
 				} else if(!sb.getSegments().contains(sb.getMinus())) {
-					msg += "Error in switch box "+id+": Minus segment is not associated with switch box.\n";	
+					msgCB += "Error in switch box "+id+": Minus segment is not associated with switch box.\n";	
 				}
 				if(sb.getStem() != null && sb.getStem() == sb.getPlus()) {
-					msg += "Error in switch box "+id+": Stem segment and plus segment must be different.\n";
+					msgCB += "Error in switch box "+id+": Stem segment and plus segment must be different.\n";
 				}
 				if(sb.getStem() != null && sb.getStem() == sb.getMinus()) {
-					msg += "Error in switch box "+id+": Stem segment and minus segment must be different.\n";
+					msgCB += "Error in switch box "+id+": Stem segment and minus segment must be different.\n";
 				}
 				if(sb.getPlus() != null && sb.getMinus() == sb.getPlus()) {
-					msg += "Error in switch box "+id+": Plus segment and minus segment must be different.\n";
+					msgCB += "Error in switch box "+id+": Plus segment and minus segment must be different.\n";
 				}
 				
 				//Switch box connections
-				for(ControlBox cb2 : n.getControlBoxes()) {
-					if(cb2 instanceof SwitchBox && cb != cb2) {
-						SwitchBox sb2 = (SwitchBox) cb2;
-						String id2 = getIDString(sb2);
-						LinkedList<ControlBox> cList2;
-
-						if(conflicts.containsKey(sb2)) {
-							cList2 = conflicts.get(sb2);
-						} else {
-							cList2 = new LinkedList<>();
-						}
-						
-						if(!cList2.contains(sb) && sharedSegments(sb, sb2) > 1 && !(sb.getPlus() == sb2.getPlus() && sb.getMinus() == sb2.getMinus() && sb.getStem() != sb2.getStem())) {
-							cList2.add(sb);
-							conflicts.put(sb2, cList2);
-
-							LinkedList<ControlBox> cList;
-							if(conflicts.containsKey(sb)) {
-								cList = conflicts.get(sb);
+				if(segmentsSet(sb)) {
+					for(ControlBox cb2 : n.getControlBoxes()) {
+						if(cb2 instanceof SwitchBox && cb != cb2 && segmentsSet((SwitchBox) cb2)) {
+							SwitchBox sb2 = (SwitchBox) cb2;
+							String id2 = getIDString(sb2);
+							LinkedList<ControlBox> cList2;
+	
+							if(conflicts.containsKey(sb2)) {
+								cList2 = conflicts.get(sb2);
 							} else {
-								cList = new LinkedList<>();
+								cList2 = new LinkedList<>();
 							}
-							cList.add(sb2);
-							conflicts.put(sb, cList);
-							msg += "Error in switch boxes "+id+" and "+id2+": Connections between the switch boxes are invalid.\n";							
+							
+							if(!cList2.contains(sb) && sharedSegments(sb, sb2) > 1 && !(sb.getPlus() == sb2.getPlus() && sb.getMinus() == sb2.getMinus() && sb.getStem() != sb2.getStem())) {
+								cList2.add(sb);
+								conflicts.put(sb2, cList2);
+	
+								LinkedList<ControlBox> cList;
+								if(conflicts.containsKey(sb)) {
+									cList = conflicts.get(sb);
+								} else {
+									cList = new LinkedList<>();
+								}
+								cList.add(sb2);
+								conflicts.put(sb, cList);
+								msgCB += "Error in switch boxes "+id+" and "+id2+": Connections between the switch boxes are invalid.\n";							
+							}
 						}
 					}
-				}
-
-				//Direction
-				ControlBox cb1 = otherCB(sb, sb.getStem());
-				ControlBox cb2 = otherCB(sb, sb.getPlus());
-				if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
-						(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
-					msg += "Error in switch box "+id+": Plus segment and minus segment must be placed on different sides of the switch box.\n";
-				}
-			} else if(cb.getSegments().size() == 2) {
-				ControlBox cb1 = otherCB(cb, cb.getSegments().get(0));
-				ControlBox cb2 = otherCB(cb, cb.getSegments().get(1));
-				if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
-						(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
-					msg += "Error in control box "+id+": Associated segments must be placed on different sides of the control box.\n";
 				}
 			} else if(cb.getSegments().size() < 1 || cb.getSegments().size() > 2) {
 				msg += "Error in regular control box "+id+": Regular control box must be associated with exactly one or two segments.\n";
 			}
+			
 		}
+		//Direction
+		if(msgCB.equals("")) {
+			for(ControlBox cb : n.getControlBoxes()) {
+				String id = getIDString(cb);
+				if(cb instanceof SwitchBox) {
+					SwitchBox sb = (SwitchBox) cb;
+					ControlBox cb1 = otherCB(sb, sb.getStem());
+					ControlBox cb2 = otherCB(sb, sb.getPlus());
+					if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
+							(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
+						msgCB += "Error in switch box "+id+": Plus segment and minus segment must be placed on different sides of the switch box.\n";
+					}
+				} else if(cb.getSegments().size() == 2) {
+					ControlBox cb1 = otherCB(cb, cb.getSegments().get(0));
+					ControlBox cb2 = otherCB(cb, cb.getSegments().get(1));
+					if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
+							(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
+						msgCB += "Error in control box "+id+": Associated segments must be placed on different sides of the control box.\n";
+					}
+				}
+			}
+		}
+		msg += msgCB;
 		
 		//TRAINS
 		for(Train t : n.getTrains()) {
@@ -176,6 +188,10 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		return msg.equals("");
 	}
 
+
+	private boolean segmentsSet(SwitchBox sb) {
+		return sb.getStem() != null && sb.getPlus() != null && sb.getMinus() != null;
+	}
 
 	private ControlBox otherCB(ControlBox cb, Segment s) {
 		return (s.getStart() == cb) ? s.getEnd() : s.getStart();

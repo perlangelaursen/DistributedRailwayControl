@@ -8,7 +8,6 @@ import network.Network;
 import network.NetworkFactory;
 import network.NetworkPackage;
 import network.PointSetting;
-import network.RegularBox;
 import network.Segment;
 import network.SwitchBox;
 
@@ -62,13 +61,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	private EClass switchBoxEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass regularBoxEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -371,16 +363,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getRegularBox() {
-		return regularBoxEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getTrain() {
 		return trainEClass;
 	}
@@ -461,8 +443,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(switchBoxEClass, SWITCH_BOX__PLUS);
 		createEReference(switchBoxEClass, SWITCH_BOX__MINUS);
 
-		regularBoxEClass = createEClass(REGULAR_BOX);
-
 		trainEClass = createEClass(TRAIN);
 		createEReference(trainEClass, TRAIN__ROUTE);
 
@@ -501,7 +481,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		controlBoxEClass.getESuperTypes().add(this.getComponent());
 		segmentEClass.getESuperTypes().add(this.getComponent());
 		switchBoxEClass.getESuperTypes().add(this.getControlBox());
-		regularBoxEClass.getESuperTypes().add(this.getControlBox());
 		trainEClass.getESuperTypes().add(this.getComponent());
 
 		// Initialize classes, features, and operations; add parameters
@@ -516,7 +495,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEClass(componentEClass, Component.class, "Component", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComponent_Id(), ecorePackage.getEString(), "id", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(controlBoxEClass, ControlBox.class, "ControlBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(controlBoxEClass, ControlBox.class, "ControlBox", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getControlBox_Ingoing(), this.getSegment(), this.getSegment_End(), "ingoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getControlBox_Outgoing(), this.getSegment(), this.getSegment_Start(), "outgoing", null, 0, 3, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControlBox_X(), ecorePackage.getEFloat(), "x", null, 1, 1, ControlBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -531,8 +510,6 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getSwitchBox_Stem(), this.getSegment(), null, "stem", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchBox_Plus(), this.getSegment(), null, "plus", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchBox_Minus(), this.getSegment(), null, "minus", null, 1, 1, SwitchBox.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(regularBoxEClass, RegularBox.class, "RegularBox", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(trainEClass, Train.class, "Train", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTrain_Route(), this.getSegment(), null, "route", null, 1, -1, Train.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
