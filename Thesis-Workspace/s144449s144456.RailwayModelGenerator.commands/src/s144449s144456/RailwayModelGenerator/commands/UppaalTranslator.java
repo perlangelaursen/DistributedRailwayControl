@@ -310,10 +310,11 @@ public abstract class UppaalTranslator extends Translator {
 	}
 	
 	protected String computeDeclarations(Network n) {
+		int NPOINT = (pointIDs.size() > 0) ? pointIDs.size() : 1;
 		int routeLength = computeLongestRouteLength(n.getTrains());
 		String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
 							 "const int NCB = "+cbIDs.size()+";\n"+
-							 "const int NPOINT = "+pointIDs.size()+";\n"+
+							 "const int NPOINT = "+NPOINT+";\n"+
 					  		 "const int NSEG = "+segIDs.size()+";\n"+ 
 							 "const int NROUTELENGTH ="+ routeLength +";\n\n";
 		
@@ -338,16 +339,17 @@ public abstract class UppaalTranslator extends Translator {
 		
 		String routesString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
 		for(int i = 0; i < n.getTrains().size()-1; i++) {
-			routesString += trainRoute(n, n.getTrains().get(i), routeLength)+", ";
+			routesString += trainRoute(n.getTrains().get(i), routeLength)+", ";
 		}
-		routesString += trainRoute(n, n.getTrains().get(n.getTrains().size()-1), routeLength)+"};\n";
+		routesString += trainRoute(n.getTrains().get(n.getTrains().size()-1), routeLength)+"};\n";
 
 		//Route control boxes
 		String cbsString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
-		for(int i = 0; i < n.getTrains().size()-1; i++) {
+		for(int i = 0; i < n.getTrains().size(); i++) {
 			cbsString += trainBoxes(n.getTrains().get(i), routeLength + 1) + ", ";
 		}
-		cbsString += trainBoxes(n.getTrains().get(n.getTrains().size()-1), routeLength + 1)+"};\n";
+		cbsString = cbsString.substring(0, cbsString.length() - 2)+"};\n";
+//		cbsString += trainBoxes(n.getTrains().get(n.getTrains().size()-1), routeLength + 1)+"};\n";
 					
 		
 		String cbDetailsString = "const segV_id cBs[NCB][3] = {";
@@ -374,9 +376,15 @@ public abstract class UppaalTranslator extends Translator {
 		pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
 		
 		String pointSettingsString = "bool pointInPlus[NPOINT] = {";
-		pointSettingsString += (pointIDs.size() >= 1) ? "true" : "";
-		for(int i = 1; i < pointIDs.size(); i++) {
-			pointSettingsString += ", true";
+		pointSettingsString += (pointIDs.size() > 0) ? "" : "true";
+		for(ControlBox cb : n.getControlBoxes()) {
+			if(cb instanceof SwitchBox) {
+				SwitchBox sb = (SwitchBox) cb;
+				pointSettingsString += (sb.getConnected() == PointSetting.PLUS)+", ";	
+			}
+		}
+		if(pointIDs.size() > 0) {
+			pointSettingsString = pointSettingsString.substring(0, pointSettingsString.length() - 2);
 		}
 		pointSettingsString += "};\n\n";
 		
@@ -851,54 +859,37 @@ public abstract class UppaalTranslator extends Translator {
 		return routeLength;
 	}
 	
-	private boolean isSegmentConnectedToControlBox(ControlBox box, Segment seg) {
-		boolean found = false;
-		for(int i = 0; i < controlBoxSegments.get(box).length; i++) {
-			found = found || controlBoxSegments.get(box)[i] == seg;
-		}
-		return found;
-	}
-	
-	private ControlBox findConnectingBox(Segment s1, Segment s2) {
-		ControlBox box = null;
-		for(ControlBox b : controlBoxSegments.keySet()) {
-			if (isSegmentConnectedToControlBox(b, s1) && isSegmentConnectedToControlBox(b, s2)) {
-				box = b;
-			}
-		}
-		return box;
-	}
-	
-	private ControlBox findEdgeControlBox(Segment edge, Segment neighbour) {
-		ControlBox box = null;
-		for(ControlBox b : controlBoxSegments.keySet()) {
-			if (isSegmentConnectedToControlBox(b, edge) && !(isSegmentConnectedToControlBox(b, neighbour))) {
-				box = b;
-			}
-		}
-		return box;
-	}
-	
-	private String trainBoxes(Train t, int routeLength) {
-		String res = "{";
-		res += cbIDs.get(findEdgeControlBox(t.getRoute().get(0), t.getRoute().get(1)));
-		int i = 0;
-		for(; i < t.getRoute().size()-1; i++) {
-			res += ", " + cbIDs.get(findConnectingBox(t.getRoute().get(i), t.getRoute().get(i+1)));
-		}
-		res += ", " + cbIDs.get(findEdgeControlBox(t.getRoute().get(t.getRoute().size()-1), 
-				t.getRoute().get(t.getRoute().size()-2)));
-		i+=2;
-		for(; i < routeLength; i++) {
-			res += ", -1";
-		}
-		return res + "}";
-	}
+//	private boolean isSegmentConnectedToControlBox(ControlBox box, Segment seg) {
+//		boolean found = false;
+//		for(int i = 0; i < controlBoxSegments.get(box).length; i++) {
+//			found = found || controlBoxSegments.get(box)[i] == seg;
+//		}
+//		return found;
+//	}
+//	
+//	private ControlBox findConnectingBox(Segment s1, Segment s2) {
+//		ControlBox box = null;
+//		for(ControlBox b : controlBoxSegments.keySet()) {
+//			if (isSegmentConnectedToControlBox(b, s1) && isSegmentConnectedToControlBox(b, s2)) {
+//				box = b;
+//			}
+//		}
+//		return box;
+//	}
+//	
+//	private ControlBox findEdgeControlBox(Segment edge, Segment neighbour) {
+//		ControlBox box = null;
+//		for(ControlBox b : controlBoxSegments.keySet()) {
+//			if (isSegmentConnectedToControlBox(b, edge) && !(isSegmentConnectedToControlBox(b, neighbour))) {
+//				box = b;
+//			}
+//		}
+//		return box;
+//	}
 
 	private int[] getRes(Train t) {
 		Segment s1 = t.getRoute().get(0);
-		Segment s2 = t.getRoute().get(1);
-		ControlBox box = findConnectingBox(s1, s2);
+		ControlBox box = t.getBoxRoute().get(1);
 		int[] res = {cbIDs.get(box), segIDs.get(s1)};
 		return res;
 	}
@@ -916,8 +907,20 @@ public abstract class UppaalTranslator extends Translator {
 		}
 		return cbsDetails+"}";
 	}
-
-	private String trainRoute(Network n, Train t, int routeLength) {
+	private String trainBoxes(Train t, int routeLength) { //3
+		String routeString = "{";
+		for(int i = 0; i < routeLength; i++) {
+			if (i < t.getBoxRoute().size()) {
+				routeString += cbIDs.get(t.getBoxRoute().get(i))+",";
+			} else {
+				routeString += "-1,";
+			}
+		}
+		routeString = routeString.substring(0, routeString.length() - 1)+"}";
+		return routeString;
+	}
+	
+	private String trainRoute(Train t, int routeLength) {
 		String routesString = "{";
 		for(int j = 0; j < routeLength-1; j++) {
 			if (j < t.getRoute().size()) {
