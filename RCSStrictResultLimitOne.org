@@ -21,6 +21,7 @@
 
 * No derailment (Move between connected segments)
 ** Elapsed time
+#+PLOT: title:"Elapsed time (No derailment: Move between connected segments)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -43,6 +44,7 @@
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (No derailment: Move between connected segments)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -66,6 +68,7 @@
 
 * No derailment (Critical section)
 ** Elapsed time
+#+PLOT: title:"Elapsed time (No derailment: No trains in the critical section)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -88,6 +91,7 @@
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (No derailment: No trains in the critical section)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -111,6 +115,7 @@
 
 * No collision
 ** Elapsed time
+#+PLOT: title:"Elapsed time (No collision)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -133,6 +138,7 @@
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (No collision)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
@@ -156,6 +162,7 @@
 
 * Will arrive
 ** Elapsed time
+#+PLOT: title:"Elapsed time (Will arrive)" deps:(5) set:"xrange[0:]"
 |----------------------------+----------+----------+----------+--------------|
 | Configuration              |    First |   Second |    Third |      Average |
 |----------------------------+----------+----------+----------+--------------|
@@ -178,6 +185,7 @@
 #+TBLFM: $5=vmean($2..$4)
 
 ** Memory Usage Peak
+#+PLOT: title:"Memory Usage Peak (Will arrive)" deps:(5) set:"xrange[0:]"
 |----------------------------+---------+---------+---------+-----------|
 | Configuration              |   First |  Second |   Third |   Average |
 |----------------------------+---------+---------+---------+-----------|
