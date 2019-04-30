@@ -150,7 +150,6 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 						msg += "Error in train "+id+"'s route: Movement from segment "+s1.getId()+" to segment "+s2.getId()+" is not possible.\n";
 					} else if (t.getBoxRoute().get(i+1) instanceof SwitchBox) {
 						SwitchBox sb = (SwitchBox) t.getBoxRoute().get(i+1);
-						System.out.println(sb.getId()+" is SB");
 						if((sb.getPlus() == s1 && sb.getMinus() == s2) || (sb.getPlus() == s2 && sb.getMinus() == s1)) {
 							msg += "Error in train "+id+"'s route: Movement from segment "+s1.getId()+" to segment "+s2.getId()+" is not possible.\n";
 						}

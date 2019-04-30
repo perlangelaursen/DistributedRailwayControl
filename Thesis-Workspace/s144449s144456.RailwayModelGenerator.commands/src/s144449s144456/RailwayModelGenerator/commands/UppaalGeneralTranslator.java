@@ -13,7 +13,7 @@ public class UppaalGeneralTranslator extends UppaalTranslator {
 				"int[0,NROUTELENGTH] routeLength;\n" + 
 				"segV_id curSeg;\n" + 
 				"\n" + 
-				"bool requiresLock[NROUTELENGTH];\n" + 
+				"bool requiresLock[NROUTELENGTH+1];\n" + 
 				"\n" + 
 				"cBRoute_i lockIndex = 1;\n" + 
 				"segRoute_i index = 0;\n" + 

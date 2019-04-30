@@ -1,6 +1,7 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
 public class UppaalCancelTranslator extends UppaalTranslator {	
+	
 	@Override
 	protected String computeTrainModel() {
 		return "<template>\n" + 
@@ -14,16 +15,15 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 				"\n" + 
 				"bool requiresLock[NROUTELENGTH+1];\n" + 
 				"\n" + 
-				"cB_id lockIndex = 1;\n" + 
-				"seg_id index = 0;\n" + 
+				"cBRoute_i lockIndex = 1;\n" + 
+				"segRoute_i index = 0;\n" + 
 				"\n" + 
 				"int[0,1] resBit = 0;\n" + 
-				"cB_id resCBIndex = 1;\n" + 
-				"int[0,NSEG] resSegIndex = 0;\n" + 
+				"cBRoute_i resCBIndex = 1;\n" + 
+				"cBRoute_i resSegIndex = 0;\n" + 
 				"\n" + 
 				"segV_id headSeg = -1;\n" + 
 				"cB_id locks = 0;\n" + 
-				"\n" + 
 				"\n" + 
 				"void updateLockIndex(){\n" + 
 				"    while(lockIndex &lt; NROUTELENGTH &amp;&amp; !requiresLock[lockIndex]){\n" + 
@@ -33,7 +33,7 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 				"\n" + 
 				"void initialize() {\n" + 
 				"    //Segments\n" + 
-				"    for(i : int[0,NROUTELENGTH-1]) {\n" + 
+				"    for(i : segRoute_i) {\n" + 
 				"        segments[i] = segRoutes[id][i];\n" + 
 				"        if(segments[i]&gt;-1) {\n" + 
 				"            routeLength++;\n" + 
@@ -42,7 +42,7 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 				"    curSeg = segments[0];\n" + 
 				"\n" + 
 				"    //Control boxes\n" + 
-				"    for(i : int[0,NROUTELENGTH]) {\n" + 
+				"    for(i : cBRoute_i) {\n" + 
 				"        boxes[i] = boxRoutes[id][i];\n" + 
 				"        if(boxes[i] &gt; -1){\n" + 
 				"            requiresLock[i] = points[boxes[i]] &gt; -1;\n" + 
