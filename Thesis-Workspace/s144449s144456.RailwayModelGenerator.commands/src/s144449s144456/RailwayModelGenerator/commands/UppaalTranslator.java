@@ -316,7 +316,7 @@ public abstract class UppaalTranslator extends Translator {
 							 "const int NCB = "+cbIDs.size()+";\n"+
 							 "const int NPOINT = "+NPOINT+";\n"+
 					  		 "const int NSEG = "+segIDs.size()+";\n"+ 
-							 "const int NROUTELENGTH ="+ routeLength +";\n\n";
+							 "const int NROUTELENGTH = "+ routeLength +";\n\n";
 		
 		String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
 							"typedef int[0, NCB-1]  cB_id;\n" + 
@@ -409,108 +409,117 @@ public abstract class UppaalTranslator extends Translator {
 				"    }    \n" + 
 				"}\n" + 
 				"\n" + 
-				"////////////////////////////////////\n" + 
-				"//Well-formedness Functions\n" + 
-				"bool initialResIsConsistent(t_id id){\n" + 
-				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool reservationIsWellFormed(reservation res){\n" + 
-				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\n" + 
-				"}\n" + 
-				"\n" + 
-				"\n" + 
-				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\n" + 
-				"    return  (i != j) &amp;&amp;\n" + 
-				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \n" + 
-				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool routesAreConsistent(t_id id){\n" + 
-				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\n" + 
-				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\n" + 
-				"\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
-				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"\n" + 
-				"bool sharesSegment(cB_id i, cB_id j){\n" + 
-				"    return (i != j) &amp;&amp;\n" + 
-				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\n" + 
-				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\n" + 
-				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"bool canConnect(seg_id s1, seg_id s2){\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\n" + 
-				"            return true;\n" + 
-				"        }\n" + 
-				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\n" + 
-				"            return true;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return false;   \n" + 
-				"}\n" + 
-				"\n" + 
-				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\n" + 
-				"    int i = 0;\n" + 
-				"    if(route[0] == -1){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"    while(i &lt;= NROUTELENGTH - 2){\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        i++;\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"\n" + 
-				"int pointIsWellFormed(cBV_id id){\n" + 
-				"    if(points[id] != -1){\n" + 
-				"        for(i : cB_id){\n" + 
-				"            if(i != id &amp;&amp; points[i] == points[id]){\n" + 
-				"                return false;\n" + 
-				"            }\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return (points[id] == -1) == (cBs[id][2] == -1);\n" + 
-				"}\n" + 
-				"\n" + 
-				"int otherBoxes(cB_id id, segV_id s){\n" + 
-				"    segV_id cB[3] = cBs[id];\n" + 
-				"    int found = 0;\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\n" + 
-				"            found++;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return found;\n" + 
-				"}\n" + 
-				"\n" + 
+				"////////////////////////////////////\r\n" + 
+				"//Well-formedness Functions\r\n" + 
+				"bool initialResIsConsistent(t_id id){\r\n" + 
+				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"bool reservationIsWellFormed(reservation res){\r\n" + 
+				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"\r\n" + 
+				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\r\n" + 
+				"    return  (i != j) &amp;&amp;\r\n" + 
+				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \r\n" + 
+				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"bool routesAreConsistent(t_id id){\r\n" + 
+				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\r\n" + 
+				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\r\n" + 
+				"\r\n" + 
+				"    for(i:int[0,NROUTELENGTH-1]){\r\n" + 
+				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\r\n" + 
+				"            return false;\r\n" + 
+				"        }\r\n" + 
+				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\r\n" + 
+				"            return false;\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"    return true; \r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"bool sharesSegment(cB_id i, cB_id j){\r\n" + 
+				"    return (i != j) &amp;&amp;\r\n" + 
+				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\r\n" + 
+				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\r\n" + 
+				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\r\n" + 
+				"    for(i:int[0,NROUTELENGTH-1]){\r\n" + 
+				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\r\n" + 
+				"            return false;\r\n" + 
+				"        }\r\n" + 
+				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\r\n" + 
+				"            return false;\r\n" + 
+				"        }\r\n" + 
+				"\r\n" + 
+				"    }\r\n" + 
+				"    return true; \r\n" + 
+				"}\r\n" + 
+				"bool canConnect(seg_id s1, seg_id s2){\r\n" + 
+				"    for(i:cB_id){\r\n" + 
+				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\r\n" + 
+				"            return true;\r\n" + 
+				"        }\r\n" + 
+				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\r\n" + 
+				"            return true;\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"    return false;   \r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\r\n" + 
+				"    int i = 0;\r\n" + 
+				"    if(route[0] == -1){\r\n" + 
+				"        return false;\r\n" + 
+				"    }\r\n" + 
+				"\r\n" + 
+				"    for(i:segRoute_i){\r\n" + 
+				"        for(j:segRoute_i){\r\n" + 
+				"            if(j != i &amp;&amp; route[i] == route[j]){\r\n" + 
+				"                return false;\r\n" + 
+				"            }\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"\r\n" + 
+				"    while(i &lt;= NROUTELENGTH - 2){\r\n" + 
+				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\r\n" + 
+				"            return false;\r\n" + 
+				"        }\r\n" + 
+				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\r\n" + 
+				"            return false;\r\n" + 
+				"        }\r\n" + 
+				"        i++;\r\n" + 
+				"    }\r\n" + 
+				"    return true; \r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"int pointIsWellFormed(cBV_id id){\r\n" + 
+				"    if(points[id] != -1){\r\n" + 
+				"        for(i : cB_id){\r\n" + 
+				"            if(i != id &amp;&amp; points[i] == points[id]){\r\n" + 
+				"                return false;\r\n" + 
+				"            }\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"    return (points[id] == -1) == (cBs[id][2] == -1);\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"int otherBoxes(cB_id id, segV_id s){\r\n" + 
+				"    segV_id cB[3] = cBs[id];\r\n" + 
+				"    int found = 0;\r\n" + 
+				"    for(i:cB_id){\r\n" + 
+				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\r\n" + 
+				"            found++;\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"    return found;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
 				"int sharedSegments(cB_id i, cB_id j){\r\n" + 
 				"    int count = 0;\r\n" + 
 				"    if (cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])){\r\n" + 
@@ -524,38 +533,38 @@ public abstract class UppaalTranslator extends Translator {
 				"    }\r\n" + 
 				"    return count;\r\n" + 
 				"}\r\n" + 
-				"\r\n" +
-				"bool cBIsWellFormed(cB_id id){\n" + 
-				"    segV_id cB[3] = cBs[id];\n" + 
-				"\n" + 
-				"    //Invalid definitions\n" + 
-				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\n" + 
-				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\n" + 
-				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: []--x--\n" + 
-				"    if(cB[1] == -1){\n" + 
-				"        return otherBoxes(id, cB[0]) == 1;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: --x--[]--y--\n" + 
-				"    if(cB[2] == -1){\n" + 
-				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\n" + 
-				"    }\n" + 
-				"\n" +  
+				"\r\n" + 
+				"bool cBIsWellFormed(cB_id id){\r\n" + 
+				"    segV_id cB[3] = cBs[id];\r\n" + 
+				"\r\n" + 
+				"    //Invalid definitions\r\n" + 
+				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\r\n" + 
+				"        return false;\r\n" + 
+				"    }\r\n" + 
+				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\r\n" + 
+				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\r\n" + 
+				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\r\n" + 
+				"        return false;\r\n" + 
+				"    }\r\n" + 
+				"\r\n" + 
+				"    //Case: []--x--\r\n" + 
+				"    if(cB[1] == -1){\r\n" + 
+				"        return otherBoxes(id, cB[0]) == 1;\r\n" + 
+				"    }\r\n" + 
+				"\r\n" + 
+				"    //Case: --x--[]--y--\r\n" + 
+				"    if(cB[2] == -1){\r\n" + 
+				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\r\n" + 
+				"    }\r\n" + 
+				"\r\n" + 
 				"    //Case: Switch box\r\n" + 
 				"    for(i:cB_id){\r\n" + 
 				"        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][0] != cB[0] &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] == cB[2])){                \r\n" + 
 				"            return false;\r\n" + 
 				"        } \r\n" + 
-				"    }\r\n" +  
-				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\n" + 
-				"}\n" + 
+				"    }\r\n" + 
+				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\r\n" + 
+				"}\r\n" +
 				"</declaration>\n";
 	}
 	
@@ -825,6 +834,7 @@ public abstract class UppaalTranslator extends Translator {
 	
 	@Override
 	protected String generateCode(Network n) {
+
 
 		if(n != null) {
 			String result =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 

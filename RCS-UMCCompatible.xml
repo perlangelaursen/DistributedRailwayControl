@@ -45,17 +45,6 @@ urgent broadcast chan start;
 
 ////////////////////////////////////
 //Well-formedness Functions
-bool routeSegsAreUnique(segV_id route[NROUTELENGTH]){
-    for(i:segRoute_i){
-        for(j:segRoute_i){
-            if(j &gt; i &amp;&amp; route[i] == route[j]){
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
 bool initialResIsConsistent(t_id id){
     return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];
 }
@@ -122,6 +111,15 @@ bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){
     if(route[0] == -1){
         return false;
     }
+
+    for(i:segRoute_i){
+        for(j:segRoute_i){
+            if(j != i &amp;&amp; route[i] == route[j]){
+                return false;
+            }
+        }
+    }
+
     while(i &lt;= NROUTELENGTH - 2){
         if(route[i] == -1 &amp;&amp; route[i+1] != -1){
             return false;
@@ -293,8 +291,7 @@ void updateLockInfo(){
 }
 
 bool isWellFormed(){
-	return routeSegsAreUnique(segRoutes[id]) &amp;&amp;
-           segRouteIsWellFormed(segRoutes[id]) &amp;&amp;
+	return segRouteIsWellFormed(segRoutes[id]) &amp;&amp;
            boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; 
            routesAreConsistent(id) &amp;&amp; 
            reservationIsWellFormed(initialRes[id]) &amp;&amp; 
@@ -348,7 +345,6 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id5"/>
 			<target ref="id8"/>
-			<label kind="guard" x="-1028" y="-1096">isWellFormed()</label>
 			<label kind="synchronisation" x="-1028" y="-1079">start?</label>
 			<label kind="assignment" x="-1028" y="-1062">initialize()</label>
 		</transition>
@@ -587,7 +583,6 @@ bool isWellFormed(){
 		<transition>
 			<source ref="id17"/>
 			<target ref="id23"/>
-			<label kind="guard" x="-1011" y="25">isWellFormed()</label>
 			<label kind="synchronisation" x="-1011" y="42">start?</label>
 			<label kind="assignment" x="-1011" y="59">initialize()</label>
 		</transition>
