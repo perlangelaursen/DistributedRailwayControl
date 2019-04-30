@@ -29,8 +29,6 @@
           ecoreFeature="ecore:EReference network.ecore#//ControlBox/ingoing"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference network.ecore#//ControlBox/outgoing"/>
-      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//ControlBox/x"/>
-      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EAttribute network.ecore#//ControlBox/y"/>
     </genClasses>
     <genClasses image="false" ecoreClass="network.ecore#//Segment">
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"

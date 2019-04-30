@@ -326,6 +326,8 @@ public abstract class UppaalTranslator extends Translator {
 							"typedef int[-1, NCB-1] cBV_id;\n" + 
 							"typedef int[-1, NPOINT-1] pV_id;\n" + 
 							"typedef int[-1, NSEG-1] segV_id;\n"+
+							"typedef int[0, NROUTELENGTH] cBRoute_i;\n" + 
+							"typedef int[0, NROUTELENGTH-1] segRoute_i;\r\n" +
 							"typedef struct {\r\n" + 
 							"    cB_id cb;\r\n" + 
 							"    seg_id seg;\r\n" + 
@@ -858,34 +860,6 @@ public abstract class UppaalTranslator extends Translator {
 		}
 		return routeLength;
 	}
-	
-//	private boolean isSegmentConnectedToControlBox(ControlBox box, Segment seg) {
-//		boolean found = false;
-//		for(int i = 0; i < controlBoxSegments.get(box).length; i++) {
-//			found = found || controlBoxSegments.get(box)[i] == seg;
-//		}
-//		return found;
-//	}
-//	
-//	private ControlBox findConnectingBox(Segment s1, Segment s2) {
-//		ControlBox box = null;
-//		for(ControlBox b : controlBoxSegments.keySet()) {
-//			if (isSegmentConnectedToControlBox(b, s1) && isSegmentConnectedToControlBox(b, s2)) {
-//				box = b;
-//			}
-//		}
-//		return box;
-//	}
-//	
-//	private ControlBox findEdgeControlBox(Segment edge, Segment neighbour) {
-//		ControlBox box = null;
-//		for(ControlBox b : controlBoxSegments.keySet()) {
-//			if (isSegmentConnectedToControlBox(b, edge) && !(isSegmentConnectedToControlBox(b, neighbour))) {
-//				box = b;
-//			}
-//		}
-//		return box;
-//	}
 
 	private int[] getRes(Train t) {
 		Segment s1 = t.getRoute().get(0);
