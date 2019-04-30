@@ -1,24 +1,3 @@
-* Template
-|----------------------------+-------+--------+-------+-----------|
-| Configuration              | First | Second | Third | Average   |
-|----------------------------+-------+--------+-------+-----------|
-| Example with one train     |       |        |       | vmean([]) |
-| Example with two trains    |       |        |       | vmean([]) |
-| Shared Segment             |       |        |       | vmean([]) |
-| Large Network              |       |        |       | vmean([]) |
-| Station One                |       |        |       | vmean([]) |
-| Station Two                |       |        |       | vmean([]) |
-| Station Four               |       |        |       | vmean([]) |
-| Station Six                |       |        |       | vmean([]) |
-| Station Eight              |       |        |       | vmean([]) |
-| Station Ten                |       |        |       | vmean([]) |
-| Station Twelfth            |       |        |       | vmean([]) |
-| Two trains same direction  |       |        |       | vmean([]) |
-| Four trains same direction |       |        |       | vmean([]) |
-| Nærumbanen (2T)            |       |        |       | vmean([]) |
-|----------------------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4)
-
 * No derailment (Move between connected segments)
 ** Elapsed time
 #+PLOT: title:"Elapsed time (No derailment: Move between connected segments)" deps:(5) set:"xrange[0:]"
@@ -39,6 +18,7 @@
 | Two trains same direction  |    0.014 |    0.019 |    0.016 |  0.016333333 |
 | Four trains same direction | 1146.256 | 1130.966 | 1133.690 |    1136.9707 |
 | Nærumbanen (2T)            |   24.112 |   24.158 |   24.186 |       24.152 |
+| Nærumbanen (3T)            |  648.154 |  655.805 |  660.029 |    654.66267 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -61,6 +41,7 @@
 | Two trains same direction  |   7.488 |   7.496 |   7.540 |     7.508 |
 | Four trains same direction | 726.732 | 749.296 | 749.460 | 741.82933 |
 | Nærumbanen (2T)            |  78.428 |  78.824 |  78.828 | 78.693333 |
+| Nærumbanen (3T)            | 384.220 | 385.180 | 385.192 |   384.864 |
 |----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -84,6 +65,7 @@
 | Two trains same direction  |    0.022 |    0.015 |    0.019 |  0.018666667 |
 | Four trains same direction | 1121.890 | 1139.341 | 1130.754 |    1130.6617 |
 | Nærumbanen (2T)            |   24.004 |   24.091 |   24.111 |    24.068667 |
+| Nærumbanen (3T)            |  664.594 |  660.006 |  657.312 |    660.63733 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -106,6 +88,7 @@
 | Two trains same direction  |   7.484 |   7.488 |   7.492 |     7.488 |
 | Four trains same direction | 726.708 | 726.852 | 726.864 |   726.808 |
 | Nærumbanen (2T)            |  78.428 |  78.800 |  78.808 | 78.678667 |
+| Nærumbanen (3T)            | 382.556 | 383.184 | 383.544 | 383.09467 |
 |----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -129,6 +112,7 @@
 | Two trains same direction  |    0.016 |    0.019 |    0.019 |        0.018 |
 | Four trains same direction | 1142.559 | 1141.663 | 1139.661 |    1141.2943 |
 | Nærumbanen (2T)            |   24.081 |   24.345 |   24.339 |       24.255 |
+| Nærumbanen (3T)            |  671.008 |  653.381 |  663.635 |    662.67467 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -151,6 +135,7 @@
 | Two trains same direction  |   7.496 |    7.548 |   7.560 | 7.5346667 |
 | Four trains same direction | 726.716 |  726.880 | 726.904 | 726.83333 |
 | Nærumbanen (2T)            |  78.436 |   78.828 |  78.888 | 78.717333 |
+| Nærumbanen (3T)            | 382.548 |  383.224 | 383.544 | 383.10533 |
 |----------------------------+---------+----------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -174,6 +159,7 @@
 | Two trains same direction  |    0.018 |    0.017 |    0.018 |  0.017666667 |
 | Four trains same direction | 1082.917 | 1090.144 | 1096.833 |    1089.9647 |
 | Nærumbanen (2T)            |   23.900 |   23.947 |   23.908 |    23.918333 |
+| Nærumbanen (3T)            |  662.400 |  662.405 |  669.196 |      664.667 |
 |----------------------------+----------+----------+----------+--------------|
 #+TBLFM: $5=vmean($2..$4)
 
@@ -196,5 +182,6 @@
 | Two trains same direction  |   7.460 |   7.460 |   7.460 |      7.46 |
 | Four trains same direction | 726.668 | 726.800 | 726.808 | 726.75867 |
 | Nærumbanen (2T)            |  78.392 |  78.704 |  78.704 |      78.6 |
+| Nærumbanen (3T)            | 382.464 | 383.120 | 383.192 | 382.92533 |
 |----------------------------+---------+---------+---------+-----------|
 #+TBLFM: $5=vmean($2..$4)
