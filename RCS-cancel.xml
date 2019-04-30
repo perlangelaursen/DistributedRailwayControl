@@ -65,6 +65,17 @@ int nextSegment(cB_id cb, seg_id s){
 
 ////////////////////////////////////
 //Well-formedness Functions
+bool routeSegsAreUnique(segV_id route[NROUTELENGTH]){
+    for(i:segRoute_i){
+        for(j:segRoute_i){
+            if(j &gt; i &amp;&amp; route[i] == route[j]){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 bool initialResIsConsistent(t_id id){
     return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];
 }
@@ -318,7 +329,8 @@ void updateCancel(){
 }
 
 bool isWellFormed(){
-	return segRouteIsWellFormed(segRoutes[id]) &amp;&amp;
+	return routeSegsAreUnique(segRoutes[id]) &amp;&amp;
+           segRouteIsWellFormed(segRoutes[id]) &amp;&amp;
            boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; 
            routesAreConsistent(id) &amp;&amp; 
            reservationIsWellFormed(initialRes[id]) &amp;&amp; 
