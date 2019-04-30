@@ -7,20 +7,18 @@ public class UppaalGlobalTranslator extends UppaalTranslator {
 		return "<template>\n" + 
 				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
 				"		<parameter>t_id id</parameter>\n" + 
-				"		<declaration>//segV_id segments[NROUTELENGTH];\n" + 
-				"//cBV_id boxes[NROUTELENGTH+1];\n" + 
-				"\n" + 
+				"		<declaration>\n" +  
 				"int[0,NROUTELENGTH] routeLength;\n" + 
 				"segV_id curSeg;\n" + 
 				"\n" + 
 				"bool requiresLock[NROUTELENGTH+1];\n" + 
 				"\n" + 
-				"cB_id lockIndex = 1;\n" + 
-				"seg_id index = 0;\n" + 
+				"cBRoute_i lockIndex = 1;\n" + 
+				"segRoute_i index = 0;\n" + 
 				"\n" + 
 				"int[0,1] resBit = 0;\n" + 
-				"cB_id resCBIndex = 1;\n" + 
-				"int[0,NSEG] resSegIndex = 0;\n" + 
+				"cBRoute_i resCBIndex = 1;\n" + 
+				"cBRoute_i resSegIndex = 0;\n" + 
 				"\n" + 
 				"segV_id headSeg = -1;\n" + 
 				"cB_id locks = 0;\n" + 
@@ -33,7 +31,7 @@ public class UppaalGlobalTranslator extends UppaalTranslator {
 				"\n" + 
 				"void initialize() {\n" + 
 				"    //Segments\n" + 
-				"    for(i : int[0,NROUTELENGTH-1]) {\n" + 
+				"    for(i : segRoute_i) {\n" + 
 				"        if(segRoutes[id][i]&gt;-1) {\n" + 
 				"            routeLength++;\n" + 
 				"        }\n" + 
@@ -41,7 +39,7 @@ public class UppaalGlobalTranslator extends UppaalTranslator {
 				"    curSeg = segRoutes[id][0];\n" + 
 				"\n" + 
 				"    //Control boxes\n" + 
-				"    for(i : int[0,NROUTELENGTH]) {\n" + 
+				"    for(i : cBRoute_i) {\n" + 
 				"        if(boxRoutes[id][i] &gt; -1){\n" + 
 				"            requiresLock[i] = points[boxRoutes[id][i]] &gt; -1;\n" + 
 				"        }\n" + 
@@ -417,6 +415,235 @@ public class UppaalGlobalTranslator extends UppaalTranslator {
 				"	</template>\n";
 	}
 
+	protected String computeQueries() {
+		return "<queries>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>MISCELLANEOUS\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A&lt;&gt; forall(i:t_id) not(Train(i).Initial)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Well-formedness of Trains.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A&lt;&gt; forall(i:cB_id) not(CB(i).Initial)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Well-formedness of CBs.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] !deadlock\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>No deadlock.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>LIVENESS AND SAFETY\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>E&lt;&gt; forall(i:t_id) Train(i).Arrived\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Liveness:\r\n" + 
+				"There exists a sequence of actions for which all Trains arrive at their destinations.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:t_id) Initializer.Initialized &amp;&amp; i != j imply\r\n" + 
+				"	(Train(i).curSeg != Train(j).curSeg) &amp;&amp;\r\n" + 
+				"	(Train(i).DoubleSegment imply Train(i).headSeg != Train(j).curSeg) &amp;&amp;\r\n" + 
+				"	(Train(i).DoubleSegment &amp;&amp; Train(j).DoubleSegment imply Train(i).headSeg!= Train(j).headSeg)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>No collision.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply\r\n" + 
+				"	(Train(i).headSeg == cBs[boxRoutes[i][Train(i).index+1]][0] &amp;&amp; Train(i).curSeg == CB(boxRoutes[i][Train(i).index+1]).connected) ||\r\n" + 
+				"	(Train(i).curSeg == cBs[boxRoutes[i][Train(i).index+1]][0] &amp;&amp; Train(i).headSeg == CB(boxRoutes[i][Train(i).index+1]).connected)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>No derailment:\r\n" + 
+				"If a train is in a critical section, then the segments that it is moving on are connected.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment &amp;&amp; points[boxRoutes[i][Train(i).index+1]] != -1 imply\r\n" + 
+				"	!Point(points[boxRoutes[i][Train(i).index+1]]).SwitchingPM &amp;&amp; !Point(points[boxRoutes[i][Train(i).index+1]]).SwitchingMP\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>No derailment:\r\n" + 
+				"If a train is in a critical section, the point in that section is not in themiddle of switching.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>CONCISTENCY\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).locks == (sum(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; points[boxRoutes[i][j]] &gt; -1))\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Lock consistency:\r\n" + 
+				"The number of saved locks in the state space of a Train is the same number of locks that it believes that it has.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:p_id) Initializer.Initialized &amp;&amp; !Point(i).SwitchingPM &amp;&amp; !Point(i).SwitchingMP imply (pointInPlus[i] imply Point(i).Plus) &amp;&amp; (!pointInPlus[i] imply Point(i).Minus)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Network array consistency:\r\n" + 
+				"The position of a point in the network data is consistent with the actual position of the point.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching imply \r\n" + 
+				"	((CB(i).connected == cBs[i][1]) imply Point(points[i]).Plus &amp;&amp; (CB(i).connected == cBs[i][2]) imply Point(points[i]).Minus)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Point consistency:\r\n" + 
+				"A CB's information about its associated Point's position is consistent with the Point's actual position.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; Train(i).requiresLock[j] imply \r\n" + 
+				"	CB(boxRoutes[i][j]).lockedBy == i)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Lock consistency:\r\n" + 
+				"The locks saved in the state space of a Train are also saved in the state spaces of the involved CBs.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:seg_id) (j &gt;= Train(i).index &amp;&amp; j &lt; Train(i).resSegIndex imply exists(l:int[0,2]) cBs[boxRoutes[i][j+1]][l] == segRoutes[i][j] &amp;&amp; CB(boxRoutes[i][j+1]).res[l] == i) &amp;&amp;\r\n" + 
+				"		(j &gt; Train(i).index &amp;&amp; j &lt; Train(i).resCBIndex imply exists(l:int[0,2]) cBs[boxRoutes[i][j]][l] == segRoutes[i][j] &amp;&amp; CB(boxRoutes[i][j]).res[l] == i)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>Reservation consistency:\r\n" + 
+				"The reservations saved in the state space of a Train are also saved in the state spaces of the involved CBs.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>PASS\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply \r\n" + 
+				"	Train(i).index+1 &lt; Train(i).resSegIndex\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A train only enters a segment that it has the full reservation of.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply boxRoutes[i][Train(i).index+1] != boxRoutes[i][Train(i).routeLength]\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A train never passes the last control box on its route.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment &amp;&amp; points[boxRoutes[i][Train(i).index+1]] != -1 imply\r\n" + 
+				"	CB(boxRoutes[i][Train(i).index+1]).lockedBy == i\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A train only passes a switch box if it has been locked for the train.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>LOCKS\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) CB(i).Switched imply CB(i).lockedBy == -1\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A lock is only successful if the point involved in the request was unlocked prior to the request.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) (CB(i).Switched || CB(i).Switching) imply !(exists(j:t_id) (Train(j).DoubleSegment &amp;&amp; boxRoutes[j][Train(j).index+1] == i))\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A control box only switches and locks its point if no train is in its critical section.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:cB_id) (Train(i).Locking &amp;&amp; CB(j).Switched &amp;&amp; CB(j).tid == i) imply \r\n" + 
+				"	(exists(k:int[1,2]) \r\n" + 
+				"	(cBs[j][0] == segRoutes[i][Train(i).lockIndex-1] &amp;&amp; cBs[j][k] == segRoutes[i][Train(i).lockIndex]) ||\r\n" + 
+				"	(cBs[j][0] == segRoutes[i][Train(i).lockIndex] &amp;&amp; cBs[j][k] == segRoutes[i][Train(i).lockIndex-1]))\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A switch is only successful if the requested connection is of segments that are adjacent in the train’s route and the stem segment and plus or minus segment of the switch box.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) CB(i).lockedBy != -1 imply \r\n" + 
+				"	CB(i).res[0] == CB(i).lockedBy &amp;&amp; \r\n" + 
+				"	exists(j:int[0,2]) cBs[i][j] == CB(i).connected &amp;&amp; CB(i).res[j] == CB(i).lockedBy\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A lock is only successful if the requesting train has the reservation for the stem segment at the switch box and one other segment.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) boxRoutes[CB(i).lockedBy][j] == i)\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).locks &lt;= lockLimit\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A train never has more locks than the lock limit.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>RESERVATIONS\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:cB_id) \r\n" + 
+				"	(Train(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply \r\n" + 
+				"	CB(j).res[CB(j).result] == -1\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A reservation is only successful if the requested segment is not already reserved.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:cB_id) \r\n" + 
+				"	(Train(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply \r\n" + 
+				"	(exists(k:int[0,2]) cBs[j][k] == segRoutes[i][Train(i).resSegIndex])\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A reservation is only successful if the requested segment is associated with the control box that receives the request.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) \r\n" + 
+				"	CB(i).res[j] != -1 imply \r\n" + 
+				"	exists(k:cB_id) boxRoutes[CB(i).res[j]][k] == i\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A reservation is only successful if the control box that a train contacts is a part of the train’s route.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2])\r\n" + 
+				"	CB(i).res[j] != -1 imply \r\n" + 
+				"	exists(k:seg_id) segRoutes[CB(i).res[j]][k] == cBs[i][j]\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A reservation is only successful if the requested segment is a part of the requesting train’s route.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"		<query>\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).resSegIndex - 1 - Train(i).index &lt;= resLimit\r\n" + 
+				"			</formula>\r\n" + 
+				"			<comment>A train never has more reservations than the reservation limit.\r\n" + 
+				"			</comment>\r\n" + 
+				"		</query>\r\n" + 
+				"	</queries>\r\n";
+		
+	}
 	@Override
 	protected String getFileNameDetails() {
 		return "UPPAAL_Global";

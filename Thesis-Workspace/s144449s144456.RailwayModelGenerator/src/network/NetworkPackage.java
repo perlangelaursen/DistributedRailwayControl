@@ -214,31 +214,13 @@ public interface NetworkPackage extends EPackage {
 	int CONTROL_BOX__OUTGOING = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_BOX__X = COMPONENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_BOX__Y = COMPONENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Control Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROL_BOX_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 4;
+	int CONTROL_BOX_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Control Box</em>' class.
@@ -342,24 +324,6 @@ public interface NetworkPackage extends EPackage {
 	int SWITCH_BOX__OUTGOING = CONTROL_BOX__OUTGOING;
 
 	/**
-	 * The feature id for the '<em><b>X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH_BOX__X = CONTROL_BOX__X;
-
-	/**
-	 * The feature id for the '<em><b>Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH_BOX__Y = CONTROL_BOX__Y;
-
-	/**
 	 * The feature id for the '<em><b>Connected</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,79 +378,6 @@ public interface NetworkPackage extends EPackage {
 	int SWITCH_BOX_OPERATION_COUNT = CONTROL_BOX_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link network.impl.RegularBoxImpl <em>Regular Box</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see network.impl.RegularBoxImpl
-	 * @see network.impl.NetworkPackageImpl#getRegularBox()
-	 * @generated
-	 */
-	int REGULAR_BOX = 5;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX__ID = CONTROL_BOX__ID;
-
-	/**
-	 * The feature id for the '<em><b>Ingoing</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX__INGOING = CONTROL_BOX__INGOING;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX__OUTGOING = CONTROL_BOX__OUTGOING;
-
-	/**
-	 * The feature id for the '<em><b>X</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX__X = CONTROL_BOX__X;
-
-	/**
-	 * The feature id for the '<em><b>Y</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX__Y = CONTROL_BOX__Y;
-
-	/**
-	 * The number of structural features of the '<em>Regular Box</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX_FEATURE_COUNT = CONTROL_BOX_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Regular Box</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGULAR_BOX_OPERATION_COUNT = CONTROL_BOX_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link network.impl.TrainImpl <em>Train</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -494,7 +385,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getTrain()
 	 * @generated
 	 */
-	int TRAIN = 6;
+	int TRAIN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -540,7 +431,7 @@ public interface NetworkPackage extends EPackage {
 	 * @see network.impl.NetworkPackageImpl#getPointSetting()
 	 * @generated
 	 */
-	int POINT_SETTING = 7;
+	int POINT_SETTING = 6;
 
 
 	/**
@@ -673,28 +564,6 @@ public interface NetworkPackage extends EPackage {
 	EReference getControlBox_Outgoing();
 
 	/**
-	 * Returns the meta object for the attribute '{@link network.ControlBox#getX <em>X</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>X</em>'.
-	 * @see network.ControlBox#getX()
-	 * @see #getControlBox()
-	 * @generated
-	 */
-	EAttribute getControlBox_X();
-
-	/**
-	 * Returns the meta object for the attribute '{@link network.ControlBox#getY <em>Y</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Y</em>'.
-	 * @see network.ControlBox#getY()
-	 * @see #getControlBox()
-	 * @generated
-	 */
-	EAttribute getControlBox_Y();
-
-	/**
 	 * Returns the meta object for class '{@link network.Segment <em>Segment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -779,16 +648,6 @@ public interface NetworkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSwitchBox_Minus();
-
-	/**
-	 * Returns the meta object for class '{@link network.RegularBox <em>Regular Box</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Regular Box</em>'.
-	 * @see network.RegularBox
-	 * @generated
-	 */
-	EClass getRegularBox();
 
 	/**
 	 * Returns the meta object for class '{@link network.Train <em>Train</em>}'.
@@ -947,22 +806,6 @@ public interface NetworkPackage extends EPackage {
 		EReference CONTROL_BOX__OUTGOING = eINSTANCE.getControlBox_Outgoing();
 
 		/**
-		 * The meta object literal for the '<em><b>X</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROL_BOX__X = eINSTANCE.getControlBox_X();
-
-		/**
-		 * The meta object literal for the '<em><b>Y</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROL_BOX__Y = eINSTANCE.getControlBox_Y();
-
-		/**
 		 * The meta object literal for the '{@link network.impl.SegmentImpl <em>Segment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1029,16 +872,6 @@ public interface NetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SWITCH_BOX__MINUS = eINSTANCE.getSwitchBox_Minus();
-
-		/**
-		 * The meta object literal for the '{@link network.impl.RegularBoxImpl <em>Regular Box</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see network.impl.RegularBoxImpl
-		 * @see network.impl.NetworkPackageImpl#getRegularBox()
-		 * @generated
-		 */
-		EClass REGULAR_BOX = eINSTANCE.getRegularBox();
 
 		/**
 		 * The meta object literal for the '{@link network.impl.TrainImpl <em>Train</em>}' class.

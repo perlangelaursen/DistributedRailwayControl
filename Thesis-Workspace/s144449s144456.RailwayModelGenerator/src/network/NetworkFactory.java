@@ -31,6 +31,15 @@ public interface NetworkFactory extends EFactory {
 	Network createNetwork();
 
 	/**
+	 * Returns a new object of class '<em>Control Box</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Control Box</em>'.
+	 * @generated
+	 */
+	ControlBox createControlBox();
+
+	/**
 	 * Returns a new object of class '<em>Segment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,15 +56,6 @@ public interface NetworkFactory extends EFactory {
 	 * @generated
 	 */
 	SwitchBox createSwitchBox();
-
-	/**
-	 * Returns a new object of class '<em>Regular Box</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Regular Box</em>'.
-	 * @generated
-	 */
-	RegularBox createRegularBox();
 
 	/**
 	 * Returns a new object of class '<em>Train</em>'.

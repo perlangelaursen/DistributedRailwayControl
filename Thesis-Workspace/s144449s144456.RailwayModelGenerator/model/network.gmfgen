@@ -75,17 +75,17 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="2002"
-        editPartClassName="RegularBoxEditPart"
-        itemSemanticEditPolicyClassName="RegularBoxItemSemanticEditPolicy"
-        canonicalEditPolicyClassName="RegularBoxCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="RegularBoxGraphicalNodeEditPolicy"
-        createCommandClassName="RegularBoxCreateCommand">
+        visualID="2005"
+        editPartClassName="ControlBoxEditPart"
+        itemSemanticEditPolicyClassName="ControlBoxItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="ControlBoxCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ControlBoxGraphicalNodeEditPolicy"
+        createCommandClassName="ControlBoxCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="RegularBoxEditHelper"/>
+          editHelperClassName="ControlBoxEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="RegularBoxFigure"
@@ -102,7 +102,7 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="network.genmodel#//network/RegularBox"/>
+            href="network.genmodel#//network/ControlBox"/>
         <containmentMetaFeature
             href="network.genmodel#//network/Network/controlBoxes"/>
         <childMetaFeature
@@ -110,9 +110,9 @@
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5002"
-          editPartClassName="RegularBoxIdEditPart"
-          itemSemanticEditPolicyClassName="RegularBoxIdItemSemanticEditPolicy">
+          visualID="5005"
+          editPartClassName="ControlBoxIdEditPart"
+          itemSemanticEditPolicyClassName="ControlBoxIdItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

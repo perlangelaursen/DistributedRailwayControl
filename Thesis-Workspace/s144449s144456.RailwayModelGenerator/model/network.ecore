@@ -20,13 +20,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ControlBox" abstract="true" eSuperTypes="#//Component">
+  <eClassifiers xsi:type="ecore:EClass" name="ControlBox" eSuperTypes="#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ingoing" upperBound="3"
         eType="#//Segment" eOpposite="#//Segment/end"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="3"
         eType="#//Segment" eOpposite="#//Segment/start"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="start" lowerBound="1" eType="#//ControlBox"
@@ -45,7 +43,6 @@
     <eLiterals name="PLUS"/>
     <eLiterals name="MINUS" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RegularBox" eSuperTypes="#//ControlBox"/>
   <eClassifiers xsi:type="ecore:EClass" name="Train" eSuperTypes="#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" upperBound="-1"
         eType="#//Segment"/>

@@ -101,52 +101,40 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 				}
 				
 				//Switch box connections
-				for(ControlBox cb2 : n.getControlBoxes()) {
-					if(cb2 instanceof SwitchBox && cb != cb2) {
-						SwitchBox sb2 = (SwitchBox) cb2;
-						String id2 = getIDString(sb2);
-						LinkedList<ControlBox> cList2;
-
-						if(conflicts.containsKey(sb2)) {
-							cList2 = conflicts.get(sb2);
-						} else {
-							cList2 = new LinkedList<>();
-						}
-						
-						if(!cList2.contains(sb) && sharedSegments(sb, sb2) > 1 && !(sb.getPlus() == sb2.getPlus() && sb.getMinus() == sb2.getMinus() && sb.getStem() != sb2.getStem())) {
-							cList2.add(sb);
-							conflicts.put(sb2, cList2);
-
-							LinkedList<ControlBox> cList;
-							if(conflicts.containsKey(sb)) {
-								cList = conflicts.get(sb);
+				if(segmentsSet(sb)) {
+					for(ControlBox cb2 : n.getControlBoxes()) {
+						if(cb2 instanceof SwitchBox && cb != cb2 && segmentsSet((SwitchBox) cb2)) {
+							SwitchBox sb2 = (SwitchBox) cb2;
+							String id2 = getIDString(sb2);
+							LinkedList<ControlBox> cList2;
+	
+							if(conflicts.containsKey(sb2)) {
+								cList2 = conflicts.get(sb2);
 							} else {
-								cList = new LinkedList<>();
+								cList2 = new LinkedList<>();
 							}
-							cList.add(sb2);
-							conflicts.put(sb, cList);
-							msg += "Error in switch boxes "+id+" and "+id2+": Connections between the switch boxes are invalid.\n";							
+							
+							if(!cList2.contains(sb) && sharedSegments(sb, sb2) > 1 && !(sb.getPlus() == sb2.getPlus() && sb.getMinus() == sb2.getMinus() && sb.getStem() != sb2.getStem())) {
+								cList2.add(sb);
+								conflicts.put(sb2, cList2);
+	
+								LinkedList<ControlBox> cList;
+								if(conflicts.containsKey(sb)) {
+									cList = conflicts.get(sb);
+								} else {
+									cList = new LinkedList<>();
+								}
+								cList.add(sb2);
+								conflicts.put(sb, cList);
+								msg += "Error in switch boxes "+id+" and "+id2+": Connections between the switch boxes are invalid.\n";							
+							}
 						}
 					}
-				}
-
-				//Direction
-				ControlBox cb1 = otherCB(sb, sb.getStem());
-				ControlBox cb2 = otherCB(sb, sb.getPlus());
-				if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
-						(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
-					msg += "Error in switch box "+id+": Plus segment and minus segment must be placed on different sides of the switch box.\n";
-				}
-			} else if(cb.getSegments().size() == 2) {
-				ControlBox cb1 = otherCB(cb, cb.getSegments().get(0));
-				ControlBox cb2 = otherCB(cb, cb.getSegments().get(1));
-				if((cb1.getX() > cb.getX() && cb2.getX() > cb.getX()) || 
-						(cb1.getX() < cb.getX() && cb2.getX() < cb.getX())) {
-					msg += "Error in control box "+id+": Associated segments must be placed on different sides of the control box.\n";
 				}
 			} else if(cb.getSegments().size() < 1 || cb.getSegments().size() > 2) {
 				msg += "Error in regular control box "+id+": Regular control box must be associated with exactly one or two segments.\n";
 			}
+			
 		}
 		
 		//TRAINS
@@ -162,7 +150,6 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 						msg += "Error in train "+id+"'s route: Movement from segment "+s1.getId()+" to segment "+s2.getId()+" is not possible.\n";
 					} else if (t.getBoxRoute().get(i+1) instanceof SwitchBox) {
 						SwitchBox sb = (SwitchBox) t.getBoxRoute().get(i+1);
-						System.out.println(sb.getId()+" is SB");
 						if((sb.getPlus() == s1 && sb.getMinus() == s2) || (sb.getPlus() == s2 && sb.getMinus() == s1)) {
 							msg += "Error in train "+id+"'s route: Movement from segment "+s1.getId()+" to segment "+s2.getId()+" is not possible.\n";
 						}
@@ -176,6 +163,10 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		return msg.equals("");
 	}
 
+
+	private boolean segmentsSet(SwitchBox sb) {
+		return sb.getStem() != null && sb.getPlus() != null && sb.getMinus() != null;
+	}
 
 	private ControlBox otherCB(ControlBox cb, Segment s) {
 		return (s.getStart() == cb) ? s.getEnd() : s.getStart();
