@@ -3,7 +3,7 @@ package s144449s144456.RailwayModelGenerator.commands;
 public class UppaalCancelTranslator extends UppaalTranslator {	
 	
 	@Override
-	protected String computeTrainModel() {
+	protected String getTrainModel() {
 		return "<template>\n" + 
 				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
 				"		<parameter>t_id id</parameter>\n" + 
@@ -235,7 +235,7 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 	}
 
 	@Override
-	protected String computeCBModel() {
+	protected String getCBModel() {
 		return "<template>\n" + 
 				"		<name>CB</name>\n" + 
 				"		<parameter>cB_id id</parameter>\n" + 
@@ -474,7 +474,7 @@ public class UppaalCancelTranslator extends UppaalTranslator {
 	}
 
 	@Override
-	protected String generateChannels() {
+	protected String getChannels() {
 		return "//Channels\n" + 
 				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
 				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 

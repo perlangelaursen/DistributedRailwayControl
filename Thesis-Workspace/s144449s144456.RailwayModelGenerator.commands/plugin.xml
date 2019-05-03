@@ -104,7 +104,7 @@
     <command
         id="s144449s144456.RailwayModelGenerator.generateGeneralUppaal"
         description="Generate Uppaal Code (Standard version)"
-        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalGeneralTranslator"
+        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalTranslator"
         name="Generate Uppaal Code (Standard version)">
     </command>
   </extension>

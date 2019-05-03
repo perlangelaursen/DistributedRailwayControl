@@ -21,7 +21,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import network.*;
 
-public abstract class Translator extends AbstractHandler implements IHandler{
+public abstract class Translator extends AbstractHandler{
 	protected Map<ControlBox, Integer> cbIDs;
 	protected Map<Segment, Integer> segIDs;
 	protected Map<Train, Integer> trainIDs;
@@ -33,11 +33,12 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null & selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-			
-			if (structuredSelection.size() == 1) {
-				Network n = getNetwork(structuredSelection.getFirstElement());
+
+			Object o = structuredSelection.getFirstElement();
+			Network n = getNetwork(o);
+			if(n != null) {
 				n.reload();
-				if (n != null && isWellFormed(n)) {				
+				if (isWellFormed(n)) {				
 					//Generate code
 					initialize(n);
 					String msg = generateCode(n);
@@ -46,6 +47,15 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 					MessageDialog.openInformation(null, "Generate File", msg);
 				}
 			}
+		}
+		return null;
+	}
+
+	private Network getNetwork(Object o) {
+		if (o instanceof Network) {
+			return (Network) o;
+		} else if(o instanceof IAdaptable) {
+			return ((IAdaptable) o).getAdapter(Network.class);			
 		}
 		return null;
 	}
@@ -163,13 +173,8 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 		return msg.equals("");
 	}
 
-
 	private boolean segmentsSet(SwitchBox sb) {
 		return sb.getStem() != null && sb.getPlus() != null && sb.getMinus() != null;
-	}
-
-	private ControlBox otherCB(ControlBox cb, Segment s) {
-		return (s.getStart() == cb) ? s.getEnd() : s.getStart();
 	}
 
 	private int sharedSegments(SwitchBox sb, SwitchBox sb2) {
@@ -191,15 +196,6 @@ public abstract class Translator extends AbstractHandler implements IHandler{
 	}
 
 	protected abstract String generateCode(Network n);
-	
-	private Network getNetwork(Object o) {
-		if (o instanceof Network) {
-			return (Network) o;
-		} else if (o instanceof IAdaptable) {
-			return ((IAdaptable) o).getAdapter(Network.class);
-		}
-		return null;
-	}
 	
 	private void initialize(Network n) {
 		int i = 0;
