@@ -114,7 +114,7 @@ bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){
 
     for(i:segRoute_i){
         for(j:segRoute_i){
-            if(j != i &amp;&amp; route[i] == route[j]){
+            if(j != i &amp;&amp; route[i] == route[j] && route[i] != -1){
                 return false;
             }
         }
