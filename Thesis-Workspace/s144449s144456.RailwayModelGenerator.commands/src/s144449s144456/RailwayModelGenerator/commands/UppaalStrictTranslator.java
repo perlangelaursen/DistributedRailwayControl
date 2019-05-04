@@ -1,8 +1,9 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
 public class UppaalStrictTranslator extends UppaalTranslator {
+	
 	@Override
-	protected String computeTrainModel() {
+	protected String getTrainModel() {
 		return "<template>\n" + 
 				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
 				"		<parameter>t_id id</parameter>\n" + 

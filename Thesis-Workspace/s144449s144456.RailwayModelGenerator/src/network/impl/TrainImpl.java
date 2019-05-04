@@ -168,22 +168,21 @@ public class TrainImpl extends ComponentImpl implements Train {
 	@Override
 	public LinkedList<ControlBox> getBoxRoute() {
 		if(boxRoute == null) {
-			LinkedList<ControlBox> l = new LinkedList<>();
+			boxRoute = new LinkedList<>();
 			ControlBox[] cbs;
 			if(getRoute().size() > 1) {
 				for(int j = 0; j < getRoute().size()-1; j++) {
 					cbs = getSegmentBoxes(getRoute().get(j), getRoute().get(j+1));
-					l.add(cbs[0]);
+					boxRoute.add(cbs[0]);
 					if(j == getRoute().size()-2) {
-						l.add(cbs[1]);
-						l.add(cbs[2]);
+						boxRoute.add(cbs[1]);
+						boxRoute.add(cbs[2]);
 					}
 				}
 			} else {
-				l.add(getRoute().get(0).getStart());
-				l.add(getRoute().get(0).getEnd());
+				boxRoute.add(getRoute().get(0).getStart());
+				boxRoute.add(getRoute().get(0).getEnd());
 			}
-			boxRoute = l;
 		}
 		return boxRoute;
 	}

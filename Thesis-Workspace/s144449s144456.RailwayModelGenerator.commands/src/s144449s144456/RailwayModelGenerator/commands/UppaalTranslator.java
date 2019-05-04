@@ -7,10 +7,237 @@ import org.eclipse.emf.common.util.EList;
 
 import network.*;
 
-public abstract class UppaalTranslator extends Translator {
-	protected abstract String computeTrainModel();
+public class UppaalTranslator extends Translator {
 	
-	protected String computeCBModel() {
+	@Override
+	protected String generateCode(Network n) {
+		if(n != null) {
+			String result =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
+					"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n" + 
+					"<nta>" +
+					generateDeclarations(n) + 
+					getTrainModel() +
+					getInitializerModel() + 
+					getCBModel() +
+					getPointModel() +
+					"<system>system Initializer, Train, CB, Point;</system>\n" + 
+					getQueries() + 
+					"</nta>\n";
+
+			//Generate file
+			PrintWriter writer;
+			try {
+				writer = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
+				writer.println(result);
+				writer.close();
+				return "Model file successfully generated.";
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		return "An error occurred";
+	}
+
+	protected String getTrainModel() {
+		return "<template>\n" + 
+				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
+				"		<parameter>t_id id</parameter>\n" + 
+				"		<declaration>segV_id segments[NROUTELENGTH];\n" + 
+				"cBV_id boxes[NROUTELENGTH+1];\n" + 
+				"\n" + 
+				"int[0,NROUTELENGTH] routeLength;\n" + 
+				"segV_id curSeg;\n" + 
+				"\n" + 
+				"bool requiresLock[NROUTELENGTH+1];\n" + 
+				"\n" + 
+				"cBRoute_i lockIndex = 1;\n" + 
+				"segRoute_i index = 0;\n" + 
+				"\n" + 
+				"int[0,1] resBit = 0;\n" + 
+				"cBRoute_i resCBIndex = 1;\n" + 
+				"cBRoute_i resSegIndex = 0;\n" + 
+				"\n" + 
+				"segV_id headSeg = -1;\n" + 
+				"cB_id locks = 0;\n" + 
+				"\n" + 
+				"void updateLockIndex(){\n" + 
+				"    while(lockIndex &lt; NROUTELENGTH &amp;&amp; !requiresLock[lockIndex]){\n" + 
+				"        lockIndex++;\n" + 
+				"    }\n" + 
+				"}\n" + 
+				"\n" + 
+				"void initialize() {\n" + 
+				"    //Segments\n" + 
+				"    for(i : segRoute_i) {\n" + 
+				"        segments[i] = segRoutes[id][i];\n" + 
+				"        if(segments[i]&gt;-1) {\n" + 
+				"            routeLength++;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    curSeg = segments[0];\n" + 
+				"\n" + 
+				"    //Control boxes\n" + 
+				"    for(i : cBRoute_i) {\n" + 
+				"        boxes[i] = boxRoutes[id][i];\n" + 
+				"        if(boxes[i] &gt; -1){\n" + 
+				"            requiresLock[i] = points[boxes[i]] &gt; -1;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Locks and reservations\n" + 
+				"    resSegIndex = 1;\n" + 
+				"    updateLockIndex();\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool possibleToLock() {\n" + 
+				"    return lockIndex &lt; routeLength &amp;&amp; locks &lt; lockLimit &amp;&amp; ((resBit == 0 &amp;&amp; resSegIndex &gt; lockIndex) || (resBit == 1 &amp;&amp; resSegIndex &gt;= lockIndex));\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool hasArrived() {\n" + 
+				"    return index == routeLength-1;\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool possibleToReserve() {\n" + 
+				"    return resSegIndex &lt; routeLength &amp;&amp; resSegIndex - 1 - index &lt; resLimit;\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool possibleToPass() {\n" + 
+				"    return resSegIndex &gt; index + 1 &amp;&amp; lockIndex &gt; index + 1 &amp;&amp; index + 1 &lt; routeLength;\n" + 
+				"}\n" + 
+				"\n" + 
+				"void updateResInfo(){\n" + 
+				"    resBit = resBit^1;\n" + 
+				"    resSegIndex = (resBit==0) ? resSegIndex + 1 : resSegIndex;\n" + 
+				"    resCBIndex = (resBit==1) ? resCBIndex + 1 : resCBIndex;\n" + 
+				"}\n" + 
+				"\n" + 
+				"void updateLocationInfo(){\n" + 
+				"    curSeg = headSeg;\n" + 
+				"    headSeg = -1;\n" + 
+				"    if(requiresLock[index + 1]){\n" + 
+				"        locks--;\n" + 
+				"    }\n" + 
+				"    index++;\n" + 
+				"}\n" + 
+				"\n" + 
+				"void updateHeadInfo(){\n" + 
+				"    headSeg = nextSegment(boxes[index+1], curSeg);\n" + 
+				"}\n" + 
+				"\n" + 
+				"void updateLockInfo(){\n" + 
+				"    locks++;\n" + 
+				"    lockIndex++;\n" + 
+				"    updateLockIndex();\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool isWellFormed(){\n" + 
+				"	return segRouteIsWellFormed(segRoutes[id]) &amp;&amp;\n" + 
+				"           boxRouteIsWellFormed(boxRoutes[id]) &amp;&amp; \n" + 
+				"           routesAreConsistent(id) &amp;&amp; \n" + 
+				"           reservationIsWellFormed(initialRes[id]) &amp;&amp; \n" + 
+				"           initialResIsConsistent(id);\n" + 
+				"}</declaration>\n" + 
+				"		<location id=\"id0\" x=\"-340\" y=\"-1156\">\n" + 
+				"			<name x=\"-323\" y=\"-1173\">DoubleSegment</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id1\" x=\"-1020\" y=\"-1156\">\n" + 
+				"			<name x=\"-1030\" y=\"-1190\">Initial</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id2\" x=\"-680\" y=\"-1156\">\n" + 
+				"			<name x=\"-748\" y=\"-1181\">Arrived</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id3\" x=\"-340\" y=\"-748\">\n" + 
+				"			<name x=\"-323\" y=\"-765\">Reserving</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id4\" x=\"-680\" y=\"-952\">\n" + 
+				"			<name x=\"-807\" y=\"-969\">SingleSegment</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id5\" x=\"-1020\" y=\"-748\">\n" + 
+				"			<name x=\"-1044\" y=\"-732\">Locking</name>\n" + 
+				"		</location>\n" + 
+				"		<init ref=\"id1\"/>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id1\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
+				"			<label kind=\"guard\" x=\"-1028\" y=\"-1096\">isWellFormed()</label>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-1028\" y=\"-1079\">start?</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-1028\" y=\"-1062\">initialize()</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id5\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-833\" y=\"-739\">notOK[id]?</label>\n" + 
+				"			<nail x=\"-748\" y=\"-748\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id5\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-841\" y=\"-858\">OK[id]?</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-841\" y=\"-841\">updateLockInfo()</label>\n" + 
+				"			<nail x=\"-850\" y=\"-850\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id3\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-323\" y=\"-875\">OK[id]?</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-323\" y=\"-858\">updateResInfo()</label>\n" + 
+				"			<nail x=\"-340\" y=\"-884\"/>\n" + 
+				"			<nail x=\"-510\" y=\"-918\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id2\"/>\n" + 
+				"			<target ref=\"id2\"/>\n" + 
+				"			<nail x=\"-714\" y=\"-1224\"/>\n" + 
+				"			<nail x=\"-646\" y=\"-1224\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id4\"/>\n" + 
+				"			<target ref=\"id0\"/>\n" + 
+				"			<label kind=\"guard\" x=\"-544\" y=\"-1207\">possibleToPass()</label>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-544\" y=\"-1190\">pass[boxes[index+1]]!</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-544\" y=\"-1173\">updateHeadInfo()</label>\n" + 
+				"			<nail x=\"-578\" y=\"-1156\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id4\"/>\n" + 
+				"			<target ref=\"id2\"/>\n" + 
+				"			<label kind=\"guard\" x=\"-765\" y=\"-1113\">hasArrived()</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id3\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-501\" y=\"-867\">notOK[id]?</label>\n" + 
+				"			<nail x=\"-552\" y=\"-875\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id0\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-450\" y=\"-994\">passed[boxes[index+1]]!</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-450\" y=\"-977\">updateLocationInfo()</label>\n" + 
+				"			<nail x=\"-340\" y=\"-1020\"/>\n" + 
+				"			<nail x=\"-595\" y=\"-969\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id4\"/>\n" + 
+				"			<target ref=\"id5\"/>\n" + 
+				"			<label kind=\"guard\" x=\"-1241\" y=\"-841\">possibleToLock()</label>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-1241\" y=\"-824\">reqLock[boxes[lockIndex]][id]\n" + 
+				"[segments[lockIndex-1]]\n" + 
+				"[segments[lockIndex]]!</label>\n" + 
+				"			<nail x=\"-1020\" y=\"-884\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id4\"/>\n" + 
+				"			<target ref=\"id3\"/>\n" + 
+				"			<label kind=\"guard\" x=\"-612\" y=\"-740\">possibleToReserve()</label>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-612\" y=\"-722\">reqSeg[boxes[resCBIndex]][id][segments[resSegIndex]]!</label>\n" + 
+				"			<nail x=\"-612\" y=\"-748\"/>\n" + 
+				"			<nail x=\"-527\" y=\"-748\"/>\n" + 
+				"		</transition>\n" + 
+				"	</template>\n";
+	};
+	
+	protected String getCBModel() {
 		return "<template>\n" + 
 				"		<name>CB</name>\n" + 
 				"		<parameter>cB_id id</parameter>\n" + 
@@ -228,7 +455,7 @@ public abstract class UppaalTranslator extends Translator {
 				"	</template>\n";
 	}
 	
-	protected String computePointModel() {
+	private String getPointModel() {
 		return "<template>\n" + 
 				"		<name>Point</name>\n" + 
 				"		<parameter>p_id id</parameter>\n" + 
@@ -291,7 +518,7 @@ public abstract class UppaalTranslator extends Translator {
 				"	</template>\n";
 	}
 	
-	private String computeInitializerModel() {
+	private String getInitializerModel() {
 		return "<template>\n" + 
 				"		<name>Initializer</name>\n" + 
 				"		<location id=\"id6\" x=\"0\" y=\"136\">\n" + 
@@ -309,9 +536,9 @@ public abstract class UppaalTranslator extends Translator {
 				"	</template>\n";
 	}
 	
-	protected String computeDeclarations(Network n) {
+	private String generateDeclarations(Network n) {
 		int NPOINT = (pointIDs.size() > 0) ? pointIDs.size() : 1;
-		int routeLength = computeLongestRouteLength(n.getTrains());
+		int routeLength = computeLongestRouteLength(n);
 		String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
 							 "const int NCB = "+cbIDs.size()+";\n"+
 							 "const int NPOINT = "+NPOINT+";\n"+
@@ -337,45 +564,41 @@ public abstract class UppaalTranslator extends Translator {
 		String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
 							  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
 		
-		//Route segments
-		
-		String routesString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
-		for(int i = 0; i < n.getTrains().size()-1; i++) {
-			routesString += trainRoute(n.getTrains().get(i), routeLength)+", ";
+		//Route segments	
+		String segRouteString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
+		for(Train t : n.getTrains()) {
+			segRouteString += trainRoute(t, routeLength)+", ";
 		}
-		routesString += trainRoute(n.getTrains().get(n.getTrains().size()-1), routeLength)+"};\n";
-
+		segRouteString = segRouteString.substring(0, segRouteString.length() - 2)+"};\n";
+		
 		//Route control boxes
-		String cbsString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
-		for(int i = 0; i < n.getTrains().size(); i++) {
-			cbsString += trainBoxes(n.getTrains().get(i), routeLength + 1) + ", ";
+		String cbRouteString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
+		for(Train t : n.getTrains()) {
+			cbRouteString += trainBoxes(t, routeLength + 1) + ", ";
 		}
-		cbsString = cbsString.substring(0, cbsString.length() - 2)+"};\n";
-//		cbsString += trainBoxes(n.getTrains().get(n.getTrains().size()-1), routeLength + 1)+"};\n";
-					
+		cbRouteString = cbRouteString.substring(0, cbRouteString.length() - 2)+"};\n";				
 		
-		String cbDetailsString = "const segV_id cBs[NCB][3] = {";
-		for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
-			cbDetailsString += cbsDetails(n.getControlBoxes().get(i))+", ";
+		//Control box definitions
+		String cbsString = "const segV_id cBs[NCB][3] = {";
+		for(ControlBox cb : n.getControlBoxes()) {
+			cbsString += cbsDetails(cb)+", ";
 		}
-		cbDetailsString += cbsDetails(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+		cbsString = cbsString.substring(0, cbsString.length() - 2)+"};\n";	
 		
 		//Initial reservations
-		String initRes = "const reservation initialRes[NTRAIN] = {";
-		for(int i = 0; i < n.getTrains().size()-1; i++) {
-			int[] res = getRes(n.getTrains().get(i));
-			initRes += "{"+res[0]+", "+res[1]+"},";
+		String initResString = "const reservation initialRes[NTRAIN] = {";
+		for(Train t : n.getTrains()) {
+			int[] res = getRes(t);
+			initResString += "{"+res[0]+", "+res[1]+"}, ";
 		}
-		int[] res = getRes(n.getTrains().get(n.getTrains().size()-1));
-		initRes += "{"+res[0]+", "+res[1]+"}};\n";
+		initResString = initResString.substring(0, initResString.length() - 2)+"};\n";
 		
 		//Points
 		String pointsString = "const pV_id points[NCB] = {";
-		for(int i = 0; i < n.getControlBoxes().size()-1; i++) {
-			ControlBox cb = n.getControlBoxes().get(i);
-			pointsString += pointID(cb)+", ";
+		for(ControlBox cb : n.getControlBoxes()) {
+			pointsString += Integer.toString(pointIDs.getOrDefault(cb, -1))+", ";
 		} 
-		pointsString += pointID(n.getControlBoxes().get(n.getControlBoxes().size()-1))+"};\n";
+		pointsString = pointsString.substring(0, pointsString.length() - 2)+"};\n";
 		
 		String pointSettingsString = "bool pointInPlus[NPOINT] = {";
 		pointSettingsString += (pointIDs.size() > 0) ? "" : "true";
@@ -390,12 +613,15 @@ public abstract class UppaalTranslator extends Translator {
 		}
 		pointSettingsString += "};\n\n";
 		
-		return "<declaration>\n" + sizesString + 
-				typesString + limitsString + routesString + 
-				cbsString + cbDetailsString + initRes + 
+		return "<declaration>\n" + "//"+n.getName()+"\n" +  sizesString + 
+				typesString + limitsString + segRouteString + 
+				cbRouteString + cbsString + initResString + 
 				pointsString + pointSettingsString + 
-				generateChannels() + 
-				"int nextSegment(cB_id cb, seg_id s){\n" + 
+				getChannels() + getWellFormednessFunctions();
+	}
+	
+	private String getWellFormednessFunctions() {
+		return "int nextSegment(cB_id cb, seg_id s){\n" + 
 				"    int s1 = cBs[cb][0];\n" + 
 				"    int s2 = cBs[cb][1];\n" + 
 				"    if(points[cb] &gt; -1 &amp;&amp; !pointInPlus[points[cb]]){\n" + 
@@ -480,7 +706,7 @@ public abstract class UppaalTranslator extends Translator {
 				"\r\n" + 
 				"    for(i:segRoute_i){\r\n" + 
 				"        for(j:segRoute_i){\r\n" + 
-				"            if(j != i &amp;&amp; route[i] == route[j]){\r\n" + 
+				"            if(j != i &amp;&amp; route[i] == route[j] &amp;&amp; route[i] != -1){\r\n" + 
 				"                return false;\r\n" + 
 				"            }\r\n" + 
 				"        }\r\n" + 
@@ -568,7 +794,7 @@ public abstract class UppaalTranslator extends Translator {
 				"</declaration>\n";
 	}
 	
-	protected String generateChannels() {
+	protected String getChannels() {
 		return "//Channels\n" + 
 				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
 				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
@@ -581,7 +807,7 @@ public abstract class UppaalTranslator extends Translator {
 				"urgent broadcast chan start;\n\n";
 	}
 
-	protected String computeQueries() {
+	protected String getQueries() {
 		return "<queries>\n" + 
 				"		<query>\n" + 
 				"			<formula>\n" + 
@@ -832,44 +1058,21 @@ public abstract class UppaalTranslator extends Translator {
 				"	</queries>\n";
 	}
 	
-	@Override
-	protected String generateCode(Network n) {
 
+	protected String getFileNameDetails() {
+		return "UPPAAL";
+	};
 
-		if(n != null) {
-			String result =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
-					"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n" + 
-					"<nta>\n" + computeDeclarations(n) + computeTrainModel() +  
-					computeInitializerModel() + computeCBModel() + computePointModel() +
-					"<system>system Initializer, Train, CB, Point;</system>\n" + 
-					computeQueries() + 
-					"</nta>\n";
-
-			//Generate file
-			PrintWriter writer;
-			try {
-				writer = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
-				writer.println(result);
-				writer.close();
-				return "Model file successfully generated.";
-			} catch (FileNotFoundException | UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		return "An error occurred";
-	}
-
-	protected abstract String getFileNameDetails();
-
-	private int computeLongestRouteLength(EList<Train> trains) {
+	private int computeLongestRouteLength(Network n) {
 		int routeLength = 0;
-		for(Train train : trains) {
-			if (train.getRoute().size() > routeLength) {
-				routeLength = train.getRoute().size();
+		for(Train t : n.getTrains()) {
+			if (t.getRoute().size() > routeLength) {
+				routeLength = t.getRoute().size();
 			}
 		}
 		return routeLength;
 	}
+	
 
 	private int[] getRes(Train t) {
 		Segment s1 = t.getRoute().get(0);
@@ -877,21 +1080,21 @@ public abstract class UppaalTranslator extends Translator {
 		int[] res = {cbIDs.get(box), segIDs.get(s1)};
 		return res;
 	}
+	
 
-	private String pointID(ControlBox cb) {
-		return Integer.toString(pointIDs.getOrDefault(cb, -1));
-	}
+
 
 	
 	private String cbsDetails(ControlBox cb) {
 		String cbsDetails = "{";
-		cbsDetails += segIDs.get(controlBoxSegments.get(cb)[0]);
+		Segment[] cbSegments = controlBoxSegments.get(cb);
+		cbsDetails += segIDs.get(cbSegments[0]);
 		for(int i = 1; i < controlBoxSegments.get(cb).length; i++) {
-			cbsDetails += ", " + segIDs.getOrDefault(controlBoxSegments.get(cb)[i], -1) ;
+			cbsDetails += ", " + segIDs.getOrDefault(cbSegments[i], -1) ;
 		}
 		return cbsDetails+"}";
 	}
-	private String trainBoxes(Train t, int routeLength) { //3
+	private String trainBoxes(Train t, int routeLength) {
 		String routeString = "{";
 		for(int i = 0; i < routeLength; i++) {
 			if (i < t.getBoxRoute().size()) {
@@ -905,19 +1108,15 @@ public abstract class UppaalTranslator extends Translator {
 	}
 	
 	private String trainRoute(Train t, int routeLength) {
-		String routesString = "{";
-		for(int j = 0; j < routeLength-1; j++) {
+		String routeString = "{";
+		for(int j = 0; j < routeLength; j++) {
 			if (j < t.getRoute().size()) {
-				routesString += segIDs.get(t.getRoute().get(j))+",";
+				routeString += segIDs.get(t.getRoute().get(j))+",";
 			} else {
-				routesString += "-1,";
+				routeString += "-1,";
 			}
 		}
-		if(t.getRoute().size() < routeLength) {
-			routesString += "-1}";
-		} else {
-			routesString += segIDs.get(t.getRoute().get(t.getRoute().size()-1))+"}";
-		}
-		return routesString;
+		routeString = routeString.substring(0, routeString.length() - 1)+"}";
+		return routeString;
 	}
 }
