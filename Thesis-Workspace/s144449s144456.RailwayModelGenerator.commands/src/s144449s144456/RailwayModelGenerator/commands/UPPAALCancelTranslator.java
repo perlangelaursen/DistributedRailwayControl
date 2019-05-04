@@ -1,6 +1,6 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
-public class UppaalCancelTranslator extends UppaalTranslator {	
+public class UPPAALCancelTranslator extends UPPAALTranslator {	
 	
 	@Override
 	protected String getTrainModel() {

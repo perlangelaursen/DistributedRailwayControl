@@ -17,7 +17,7 @@
     <menuContribution
         locationURI="popup:s144449s144456.RailwayModelGenerator?after=additions">
       <command
-          commandId="s144449s144456.RailwayModelGenerator.generateCancelUppaal">
+          commandId="s144449s144456.RailwayModelGenerator.generateCancelUPPAAL">
         <visibleWhen>
           <with
               variable="selection">
@@ -31,7 +31,7 @@
         </visibleWhen>
       </command>
       <command
-          commandId="s144449s144456.RailwayModelGenerator.generateGeneralUppaal">
+          commandId="s144449s144456.RailwayModelGenerator.generateGeneralUPPAAL">
         <visibleWhen>
           <with
               variable="selection">
@@ -45,7 +45,7 @@
         </visibleWhen>
       </command>
       <command
-          commandId="s144449s144456.RailwayModelGenerator.generateGlobalUppaal">
+          commandId="s144449s144456.RailwayModelGenerator.generateGlobalUPPAAL">
         <visibleWhen>
           <with
               variable="selection">
@@ -59,7 +59,7 @@
         </visibleWhen>
       </command>
       <command
-          commandId="s144449s144456.RailwayModelGenerator.generateStrictUppaal">
+          commandId="s144449s144456.RailwayModelGenerator.generateStrictUPPAAL">
         <visibleWhen>
           <with
               variable="selection">
@@ -92,40 +92,40 @@
   <extension
       point="org.eclipse.ui.commands">
     <command
-        id="s144449s144456.RailwayModelGenerator.generateCancelUppaal"
-        description="Generate Uppaal Code with Cancel operation"
-        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalCancelTranslator"
-        name="Generate Uppaal Code (Extension with cancel operation)">
+        id="s144449s144456.RailwayModelGenerator.generateCancelUPPAAL"
+        description="Generate UPPAAL code for model with with 'cancel' operation"
+        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UPPAALCancelTranslator"
+        name="Generate UPPAAL Code (Extension with 'cancel' operation)">
     </command>
   </extension>
 
   <extension
       point="org.eclipse.ui.commands">
     <command
-        id="s144449s144456.RailwayModelGenerator.generateGeneralUppaal"
-        description="Generate Uppaal Code (Standard version)"
-        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalTranslator"
-        name="Generate Uppaal Code (Standard version)">
+        id="s144449s144456.RailwayModelGenerator.generateGeneralUPPAAL"
+        description="Generate UPPAAL code for first model"
+        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UPPAALTranslator"
+        name="Generate UPPAAL Code (First model)">
     </command>
   </extension>
 
   <extension
       point="org.eclipse.ui.commands">
     <command
-        id="s144449s144456.RailwayModelGenerator.generateGlobalUppaal"
-        description="Generate Uppaal Code (Global memory access)"
-        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalGlobalTranslator"
-        name="Generate Uppaal Code (Global memory access)">
+        id="s144449s144456.RailwayModelGenerator.generateGlobalUPPAAL"
+        description="Generate UPPAAL code for model where trains retrieve configuration data from global declarations"
+        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UPPAALGlobalTranslator"
+        name="Generate UPPAAL Code (Global configuration data)">
     </command>
   </extension>
 
   <extension
       point="org.eclipse.ui.commands">
     <command
-        id="s144449s144456.RailwayModelGenerator.generateStrictUppaal"
-        description="Generate Uppaal Code (Strict evaluation sequence)"
-        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UppaalStrictTranslator"
-        name="Generate Uppaal Code (Strict evaluation sequence)">
+        id="s144449s144456.RailwayModelGenerator.generateStrictUPPAAL"
+        description="Generate UPPAAL code for model with a restricted operation sequence for trains"
+        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UPPAALStrictTranslator"
+        name="Generate UPPAAL Code (Restricted operation sequence)">
     </command>
   </extension>
 
@@ -133,7 +133,7 @@
       point="org.eclipse.ui.commands">
     <command
         id="s144449s144456.RailwayModelGenerator.generateUMC"
-        description="Generate UMC Code"
+        description="Generate UMC code for first model"
         defaultHandler="s144449s144456.RailwayModelGenerator.commands.UMCTranslator"
         name="Generate UMC Code">
     </command>

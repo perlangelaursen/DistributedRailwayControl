@@ -7,7 +7,7 @@ import org.eclipse.emf.common.util.EList;
 
 import network.*;
 
-public class UppaalTranslator extends Translator {
+public class UPPAALTranslator extends Translator {
 	
 	@Override
 	protected String generateCode(Network n) {
@@ -1057,7 +1057,6 @@ public class UppaalTranslator extends Translator {
 				"		</query>\n" + 
 				"	</queries>\n";
 	}
-	
 
 	protected String getFileNameDetails() {
 		return "UPPAAL";
@@ -1072,7 +1071,6 @@ public class UppaalTranslator extends Translator {
 		}
 		return routeLength;
 	}
-	
 
 	private int[] getRes(Train t) {
 		Segment s1 = t.getRoute().get(0);
@@ -1080,10 +1078,6 @@ public class UppaalTranslator extends Translator {
 		int[] res = {cbIDs.get(box), segIDs.get(s1)};
 		return res;
 	}
-	
-
-
-
 	
 	private String cbsDetails(ControlBox cb) {
 		String cbsDetails = "{";
@@ -1094,6 +1088,9 @@ public class UppaalTranslator extends Translator {
 		}
 		return cbsDetails+"}";
 	}
+	
+	
+	
 	private String trainBoxes(Train t, int routeLength) {
 		String routeString = "{";
 		for(int i = 0; i < routeLength; i++) {

@@ -1,6 +1,6 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
-public class UppaalGlobalTranslator extends UppaalTranslator {
+public class UPPAALGlobalTranslator extends UPPAALTranslator {
 	
 	@Override
 	protected String getTrainModel() {
@@ -644,6 +644,7 @@ public class UppaalGlobalTranslator extends UppaalTranslator {
 				"	</queries>\r\n";
 		
 	}
+	
 	@Override
 	protected String getFileNameDetails() {
 		return "UPPAAL_Global";
