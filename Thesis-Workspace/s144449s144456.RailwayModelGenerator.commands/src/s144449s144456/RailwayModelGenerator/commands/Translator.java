@@ -1,5 +1,8 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 import java.util.LinkedList;
@@ -30,6 +33,7 @@ public abstract class Translator extends AbstractHandler{
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		String msg = "The model could not be generated.";
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null & selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
@@ -41,15 +45,27 @@ public abstract class Translator extends AbstractHandler{
 				if (isWellFormed(n)) {				
 					//Generate code
 					initialize(n);
-					String msg = generateCode(n);
+					String s = generateCode(n);
 					
-					//Display dialog
-					MessageDialog.openInformation(null, "Generate File", msg);
+					if(s != null) {
+						PrintWriter printWriter;
+						try {
+							printWriter = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
+							printWriter.println(s);
+							printWriter.close();
+							msg = "Model file successfully generated.";
+						} catch (FileNotFoundException | UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					}
 				}
 			}
 		}
+		MessageDialog.openInformation(null, "Generate File", msg);
 		return null;
 	}
+
+	protected abstract String getFileNameDetails();
 
 	private Network getNetwork(Object o) {
 		if (o instanceof Network) {

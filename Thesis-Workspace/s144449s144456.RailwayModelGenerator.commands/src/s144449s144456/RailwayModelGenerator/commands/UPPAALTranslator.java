@@ -24,18 +24,9 @@ public class UPPAALTranslator extends Translator {
 					getQueries() + 
 					"</nta>\n";
 
-			//Generate file
-			PrintWriter writer;
-			try {
-				writer = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
-				writer.println(result);
-				writer.close();
-				return "Model file successfully generated.";
-			} catch (FileNotFoundException | UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+			return result;
 		}
-		return "An error occurred";
+		return null;
 	}
 
 	protected String getTrainModel() {
@@ -455,7 +446,7 @@ public class UPPAALTranslator extends Translator {
 				"	</template>\n";
 	}
 	
-	private String getPointModel() {
+	protected String getPointModel() {
 		return "<template>\n" + 
 				"		<name>Point</name>\n" + 
 				"		<parameter>p_id id</parameter>\n" + 
@@ -1088,9 +1079,7 @@ public class UPPAALTranslator extends Translator {
 		}
 		return cbsDetails+"}";
 	}
-	
-	
-	
+		
 	private String trainBoxes(Train t, int routeLength) {
 		String routeString = "{";
 		for(int i = 0; i < routeLength; i++) {
