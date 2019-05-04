@@ -1643,208 +1643,246 @@
 ** Limit One
 *** No derailment (Move between connected segments)
 **** Elapsed time
-|---------------+-------------+-------------+------------+-------------+-----------|
-| Configuration | First model |  Restricted |     Global |      Cancel | UMC       |
-|---------------+-------------+-------------+------------+-------------+-----------|
-| Station One   | 0.011333333 | 0.013666667 |      0.017 | 0.026666667 | vmean([]) |
-| Station Two   |       0.075 | 0.083666667 | 0.13566667 |       0.251 | vmean([]) |
-| Station Four  |        1.72 |       1.415 |      2.482 |   5.5273333 | vmean([]) |
-| Station Six   |       27.37 |      22.865 |  45.915667 |     108.261 | vmean([]) |
-| Station Eight |   165.79533 |   134.60933 |  276.71933 |   630.82333 | vmean([]) |
-|---------------+-------------+-------------+------------+-------------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One No Derailment (Move between connected segments) Time
+|----------+-------------+-------------+------------+-------------+-----------|
+| Stations | First model |  Restricted |     Global |      Cancel | UMC       |
+|----------+-------------+-------------+------------+-------------+-----------|
+|        1 | 0.011333333 | 0.013666667 |      0.017 | 0.026666667 | vmean([]) |
+|        2 |       0.075 | 0.083666667 | 0.13566667 |       0.251 | vmean([]) |
+|        4 |        1.72 |       1.415 |      2.482 |   5.5273333 | vmean([]) |
+|        6 |       27.37 |      22.865 |  45.915667 |     108.261 | vmean([]) |
+|        8 |   165.79533 |   134.60933 |  276.71933 |   630.82333 | vmean([]) |
+|----------+-------------+-------------+------------+-------------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveTime,@6$5)::@2$3=remote(RestrictedLimitOneMoveTime, @6$5)::@2$4=remote(GlobalLimitOneMoveTime, @6$5)::@2$5=remote(CancelLimitOneMoveTime, @2$5)::@2$6=remote(UMCLimitOneMoveTime, @2$5)::@3$2=remote(RCSLimitOneMoveTime,@7$5)::@3$3=remote(RestrictedLimitOneMoveTime, @7$5)::@3$4=remote(GlobalLimitOneMoveTime, @7$5)::@3$5=remote(CancelLimitOneMoveTime, @3$5)::@3$6=remote(UMCLimitOneMoveTime, @3$5)::@4$2=remote(RCSLimitOneMoveTime, @8$5)::@4$3=remote(RestrictedLimitOneMoveTime, @8$5)::@4$4=remote(GlobalLimitOneMoveTime, @8$5)::@4$5=remote(CancelLimitOneMoveTime, @4$5)::@4$6=remote(UMCLimitOneMoveTime, @4$5)::@5$2=remote(RCSLimitOneMoveTime, @9$5)::@5$3=remote(RestrictedLimitOneMoveTime, @9$5)::@5$4=remote(GlobalLimitOneMoveTime, @9$5)::@5$5=remote(CancelLimitOneMoveTime, @5$5)::@5$6=remote(UMCLimitOneMoveTime, @5$5)::@6$2=remote(RCSLimitOneMoveTime, @10$5)::@6$3=remote(RestrictedLimitOneMoveTime, @10$5)::@6$4=remote(GlobalLimitOneMoveTime, @10$5)::@6$5=remote(CancelLimitOneMoveTime, @6$5)::@6$6=remote(UMCLimitOneMoveTime, @6$5)
 
-
-|-----------------+-------------+------------+-----------+----------+-----------|
-| Configuration   | First model | Restricted |    Global |   Cancel | UMC       |
-|-----------------+-------------+------------+-----------+----------+-----------|
-| Nærumbanen (2T) |      24.152 |     19.547 |    30.622 |   44.806 | vmean([]) |
-| Nærumbanen (3T) |   654.66267 |    320.442 | 609.31133 | 1137.541 | vmean([]) |
-|-----------------+-------------+------------+-----------+----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One No Derailment (Move between connected segments) Time
+|--------+-------------+------------+-----------+----------+-----------|
+| Trains | First model | Restricted |    Global |   Cancel | UMC       |
+|--------+-------------+------------+-----------+----------+-----------|
+|      2 |      24.152 |     19.547 |    30.622 |   44.806 | vmean([]) |
+|      3 |   654.66267 |    320.442 | 609.31133 | 1137.541 | vmean([]) |
+|--------+-------------+------------+-----------+----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveTime, @15$5)::@2$3=remote(RestrictedLimitOneMoveTime, @15$5)::@2$4=remote(GlobalLimitOneMoveTime, @12$5)::@2$5=remote(CancelLimitOneMoveTime, @7$5)::@2$6=remote(UMCLimitOneMoveTime, @7$5)::@3$2=remote(RCSLimitOneMoveTime, @16$5)::@3$3=remote(RestrictedLimitOneMoveTime, @16$5)::@3$4=remote(GlobalLimitOneMoveTime, @13$5)::@3$5=remote(CancelLimitOneMoveTime, @8$5)::@3$6=remote(UMCLimitOneMoveTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |       6.488 |      8.552 | 8.3653333 | 8.7373333 | vmean([]) |
-| Station Two   |   9.2786667 |  14.294667 |     12.47 | 13.606667 | vmean([]) |
-| Station Four  |   29.646667 |  38.089333 | 37.878667 | 48.485333 | vmean([]) |
-| Station Six   |   70.101333 |  105.63733 | 104.06933 |   151.608 | vmean([]) |
-| Station Eight |   205.39067 |    222.268 |   232.768 |   372.632 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One No Derailment (Move between connected segments) Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |       6.488 |      8.552 | 8.3653333 | 8.7373333 | vmean([]) |
+|        2 |   9.2786667 |  14.294667 |     12.47 | 13.606667 | vmean([]) |
+|        4 |   29.646667 |  38.089333 | 37.878667 | 48.485333 | vmean([]) |
+|        6 |   70.101333 |  105.63733 | 104.06933 |   151.608 | vmean([]) |
+|        8 |   205.39067 |    222.268 |   232.768 |   372.632 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveMemory,@6$5)::@2$3=remote(RestrictedLimitOneMoveMemory, @6$5)::@2$4=remote(GlobalLimitOneMoveMemory, @6$5)::@2$5=remote(CancelLimitOneMoveMemory, @2$5)::@2$6=remote(UMCLimitOneMoveMemory, @2$5)::@3$2=remote(RCSLimitOneMoveMemory,@7$5)::@3$3=remote(RestrictedLimitOneMoveMemory, @7$5)::@3$4=remote(GlobalLimitOneMoveMemory, @7$5)::@3$5=remote(CancelLimitOneMoveMemory, @3$5)::@3$6=remote(UMCLimitOneMoveMemory, @3$5)::@4$2=remote(RCSLimitOneMoveMemory, @8$5)::@4$3=remote(RestrictedLimitOneMoveMemory, @8$5)::@4$4=remote(GlobalLimitOneMoveMemory, @8$5)::@4$5=remote(CancelLimitOneMoveMemory, @4$5)::@4$6=remote(UMCLimitOneMoveMemory, @4$5)::@5$2=remote(RCSLimitOneMoveMemory, @9$5)::@5$3=remote(RestrictedLimitOneMoveMemory, @9$5)::@5$4=remote(GlobalLimitOneMoveMemory, @9$5)::@5$5=remote(CancelLimitOneMoveMemory, @5$5)::@5$6=remote(UMCLimitOneMoveMemory, @5$5)::@6$2=remote(RCSLimitOneMoveMemory, @10$5)::@6$3=remote(RestrictedLimitOneMoveMemory, @10$5)::@6$4=remote(GlobalLimitOneMoveMemory, @10$5)::@6$5=remote(CancelLimitOneMoveMemory, @6$5)::@6$6=remote(UMCLimitOneMoveMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+---------+-----------|
-| Configuration   | First model | Restricted |    Global |  Cancel | UMC       |
-|-----------------+-------------+------------+-----------+---------+-----------|
-| Nærumbanen (2T) |   78.693333 |  118.23467 | 114.38267 |  128.24 | vmean([]) |
-| Nærumbanen (3T) |     384.864 |    289.796 | 310.33067 | 552.472 | vmean([]) |
-|-----------------+-------------+------------+-----------+---------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One No Derailment (Move between connected segments) Memory
+|--------+-------------+------------+-----------+---------+-----------|
+| Trains | First model | Restricted |    Global |  Cancel | UMC       |
+|--------+-------------+------------+-----------+---------+-----------|
+|      2 |   78.693333 |  118.23467 | 114.38267 |  128.24 | vmean([]) |
+|      3 |     384.864 |    289.796 | 310.33067 | 552.472 | vmean([]) |
+|--------+-------------+------------+-----------+---------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveMemory, @15$5)::@2$3=remote(RestrictedLimitOneMoveMemory, @15$5)::@2$4=remote(GlobalLimitOneMoveMemory, @12$5)::@2$5=remote(CancelLimitOneMoveMemory, @7$5)::@2$6=remote(UMCLimitOneMoveMemory, @7$5)::@3$2=remote(RCSLimitOneMoveMemory, @16$5)::@3$3=remote(RestrictedLimitOneMoveMemory, @16$5)::@3$4=remote(GlobalLimitOneMoveMemory, @13$5)::@3$5=remote(CancelLimitOneMoveMemory, @8$5)::@3$6=remote(UMCLimitOneMoveMemory, @8$5)
 
 
 *** No derailment (Critical section)
 **** Elapsed time
-|---------------+-------------+-------------+-------------+-------------+-----------|
-| Configuration | First model |  Restricted |      Global |      Cancel | UMC       |
-|---------------+-------------+-------------+-------------+-------------+-----------|
-| Station One   | 0.011666667 | 0.017333333 | 0.022666667 | 0.034666667 | vmean([]) |
-| Station Two   | 0.073333333 |       0.074 |       0.141 |  0.27033333 | vmean([]) |
-| Station Four  |   1.7076667 |       1.316 |        2.36 |       5.197 | vmean([]) |
-| Station Six   |      29.484 |   22.226333 |   44.986333 |   108.01067 | vmean([]) |
-| Station Eight |     165.246 |   135.38033 |   288.69767 |   634.25033 | vmean([]) |
-|---------------+-------------+-------------+-------------+-------------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One No Derailment (No trains in critical section) Time
+|----------+-------------+-------------+-------------+-------------+-----------|
+| Stations | First model |  Restricted |      Global |      Cancel | UMC       |
+|----------+-------------+-------------+-------------+-------------+-----------|
+|        1 | 0.011666667 | 0.017333333 | 0.022666667 | 0.034666667 | vmean([]) |
+|        2 | 0.073333333 |       0.074 |       0.141 |  0.27033333 | vmean([]) |
+|        4 |   1.7076667 |       1.316 |        2.36 |       5.197 | vmean([]) |
+|        6 |      29.484 |   22.226333 |   44.986333 |   108.01067 | vmean([]) |
+|        8 |     165.246 |   135.38033 |   288.69767 |   634.25033 | vmean([]) |
+|----------+-------------+-------------+-------------+-------------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalTime,@6$5)::@2$3=remote(RestrictedLimitOneCriticalTime, @6$5)::@2$4=remote(GlobalLimitOneCriticalTime, @6$5)::@2$5=remote(CancelLimitOneCriticalTime, @2$5)::@2$6=remote(UMCLimitOneCriticalTime, @2$5)::@3$2=remote(RCSLimitOneCriticalTime,@7$5)::@3$3=remote(RestrictedLimitOneCriticalTime, @7$5)::@3$4=remote(GlobalLimitOneCriticalTime, @7$5)::@3$5=remote(CancelLimitOneCriticalTime, @3$5)::@3$6=remote(UMCLimitOneCriticalTime, @3$5)::@4$2=remote(RCSLimitOneCriticalTime, @8$5)::@4$3=remote(RestrictedLimitOneCriticalTime, @8$5)::@4$4=remote(GlobalLimitOneCriticalTime, @8$5)::@4$5=remote(CancelLimitOneCriticalTime, @4$5)::@4$6=remote(UMCLimitOneCriticalTime, @4$5)::@5$2=remote(RCSLimitOneCriticalTime, @9$5)::@5$3=remote(RestrictedLimitOneCriticalTime, @9$5)::@5$4=remote(GlobalLimitOneCriticalTime, @9$5)::@5$5=remote(CancelLimitOneCriticalTime, @5$5)::@5$6=remote(UMCLimitOneCriticalTime, @5$5)::@6$2=remote(RCSLimitOneCriticalTime, @10$5)::@6$3=remote(RestrictedLimitOneCriticalTime, @10$5)::@6$4=remote(GlobalLimitOneCriticalTime, @10$5)::@6$5=remote(CancelLimitOneCriticalTime, @6$5)::@6$6=remote(UMCLimitOneCriticalTime, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |   24.068667 |  20.085667 | 29.555333 | 43.606667 | vmean([]) |
-| Nærumbanen (3T) |   660.63733 |  332.30267 |   627.546 | 1116.0117 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One No Derailment (No trains in critical section) Time
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |   24.068667 |  20.085667 | 29.555333 | 43.606667 | vmean([]) |
+|      3 |   660.63733 |  332.30267 |   627.546 | 1116.0117 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalTime, @15$5)::@2$3=remote(RestrictedLimitOneCriticalTime, @15$5)::@2$4=remote(GlobalLimitOneCriticalTime, @12$5)::@2$5=remote(CancelLimitOneCriticalTime, @7$5)::@2$6=remote(UMCLimitOneCriticalTime, @7$5)::@3$2=remote(RCSLimitOneCriticalTime, @16$5)::@3$3=remote(RestrictedLimitOneCriticalTime, @16$5)::@3$4=remote(GlobalLimitOneCriticalTime, @13$5)::@3$5=remote(CancelLimitOneCriticalTime, @8$5)::@3$6=remote(UMCLimitOneCriticalTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |   6.4746667 |  8.5186667 |     8.348 | 8.7013333 | vmean([]) |
-| Station Two   |   9.2693333 |  12.442667 | 12.550667 | 13.581333 | vmean([]) |
-| Station Four  |   25.826667 |      36.66 | 37.674667 | 48.445333 | vmean([]) |
-| Station Six   |   70.086667 |  105.90667 |   104.064 | 151.57867 | vmean([]) |
-| Station Eight |   158.47467 |  220.23467 | 232.74667 |   372.268 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One No Derailment (No trains in critical section) Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |   6.4746667 |  8.5186667 |     8.348 | 8.7013333 | vmean([]) |
+|        2 |   9.2693333 |  12.442667 | 12.550667 | 13.581333 | vmean([]) |
+|        4 |   25.826667 |      36.66 | 37.674667 | 48.445333 | vmean([]) |
+|        6 |   70.086667 |  105.90667 |   104.064 | 151.57867 | vmean([]) |
+|        8 |   158.47467 |  220.23467 | 232.74667 |   372.268 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory,@6$5)::@2$3=remote(RestrictedLimitOneCriticalMemory, @6$5)::@2$4=remote(GlobalLimitOneCriticalMemory, @6$5)::@2$5=remote(CancelLimitOneCriticalMemory, @2$5)::@2$6=remote(UMCLimitOneCriticalMemory, @2$5)::@3$2=remote(RCSLimitOneCriticalMemory,@7$5)::@3$3=remote(RestrictedLimitOneCriticalMemory, @7$5)::@3$4=remote(GlobalLimitOneCriticalMemory, @7$5)::@3$5=remote(CancelLimitOneCriticalMemory, @3$5)::@3$6=remote(UMCLimitOneCriticalMemory, @3$5)::@4$2=remote(RCSLimitOneCriticalMemory, @8$5)::@4$3=remote(RestrictedLimitOneCriticalMemory, @8$5)::@4$4=remote(GlobalLimitOneCriticalMemory, @8$5)::@4$5=remote(CancelLimitOneCriticalMemory, @4$5)::@4$6=remote(UMCLimitOneCriticalMemory, @4$5)::@5$2=remote(RCSLimitOneCriticalMemory, @9$5)::@5$3=remote(RestrictedLimitOneCriticalMemory, @9$5)::@5$4=remote(GlobalLimitOneCriticalMemory, @9$5)::@5$5=remote(CancelLimitOneCriticalMemory, @5$5)::@5$6=remote(UMCLimitOneCriticalMemory, @5$5)::@6$2=remote(RCSLimitOneCriticalMemory, @10$5)::@6$3=remote(RestrictedLimitOneCriticalMemory, @10$5)::@6$4=remote(GlobalLimitOneCriticalMemory, @10$5)::@6$5=remote(CancelLimitOneCriticalMemory, @6$5)::@6$6=remote(UMCLimitOneCriticalMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+---------+-----------|
-| Configuration   | First model | Restricted |    Global |  Cancel | UMC       |
-|-----------------+-------------+------------+-----------+---------+-----------|
-| Nærumbanen (2T) |   78.678667 |    116.736 |   112.684 | 126.564 | vmean([]) |
-| Nærumbanen (3T) |   383.09467 |    287.436 | 310.41333 |  550.28 | vmean([]) |
-|-----------------+-------------+------------+-----------+---------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One No Derailment (No trains in critical section) Memory
+|--------+-------------+------------+-----------+---------+-----------|
+| Trains | First model | Restricted |    Global |  Cancel | UMC       |
+|--------+-------------+------------+-----------+---------+-----------|
+|      2 |   78.678667 |    116.736 |   112.684 | 126.564 | vmean([]) |
+|      3 |   383.09467 |    287.436 | 310.41333 |  550.28 | vmean([]) |
+|--------+-------------+------------+-----------+---------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory, @15$5)::@2$3=remote(RestrictedLimitOneCriticalMemory, @15$5)::@2$4=remote(GlobalLimitOneCriticalMemory, @12$5)::@2$5=remote(CancelLimitOneCriticalMemory, @7$5)::@2$6=remote(UMCLimitOneCriticalMemory, @7$5)::@3$2=remote(RCSLimitOneCriticalMemory, @16$5)::@3$3=remote(RestrictedLimitOneCriticalMemory, @16$5)::@3$4=remote(GlobalLimitOneCriticalMemory, @13$5)::@3$5=remote(CancelLimitOneCriticalMemory, @8$5)::@3$6=remote(UMCLimitOneCriticalMemory, @8$5)
 
 
 *** No collision
 **** Elapsed time
-|---------------+--------------+-------------+-------------+-------------+-----------|
-| Configuration |  First model |  Restricted |      Global |      Cancel | UMC       |
-|---------------+--------------+-------------+-------------+-------------+-----------|
-| Station One   | 8.3333333e-3 | 0.014333333 | 0.021666667 | 0.031666667 | vmean([]) |
-| Station Two   |  0.085333333 | 0.096666667 |  0.12733333 |  0.25333333 | vmean([]) |
-| Station Four  |    1.7836667 |       1.289 |   2.6766667 |       5.281 | vmean([]) |
-| Station Six   |    29.719667 |   23.231667 |   44.976333 |   107.55467 | vmean([]) |
-| Station Eight |    165.38233 |   125.71833 |     286.938 |   637.43367 | vmean([]) |
-|---------------+--------------+-------------+-------------+-------------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One No collision Time
+|----------+--------------+-------------+-------------+-------------+-----------|
+| Stations |  First model |  Restricted |      Global |      Cancel | UMC       |
+|----------+--------------+-------------+-------------+-------------+-----------|
+|        1 | 8.3333333e-3 | 0.014333333 | 0.021666667 | 0.031666667 | vmean([]) |
+|        2 |  0.085333333 | 0.096666667 |  0.12733333 |  0.25333333 | vmean([]) |
+|        4 |    1.7836667 |       1.289 |   2.6766667 |       5.281 | vmean([]) |
+|        6 |    29.719667 |   23.231667 |   44.976333 |   107.55467 | vmean([]) |
+|        8 |    165.38233 |   125.71833 |     286.938 |   637.43367 | vmean([]) |
+|----------+--------------+-------------+-------------+-------------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionTime,@6$5)::@2$3=remote(RestrictedLimitOneCollisionTime, @6$5)::@2$4=remote(GlobalLimitOneCollisionTime, @6$5)::@2$5=remote(CancelLimitOneCollisionTime, @2$5)::@2$6=remote(UMCLimitOneCollisionTime, @2$5)::@3$2=remote(RCSLimitOneCollisionTime,@7$5)::@3$3=remote(RestrictedLimitOneCollisionTime, @7$5)::@3$4=remote(GlobalLimitOneCollisionTime, @7$5)::@3$5=remote(CancelLimitOneCollisionTime, @3$5)::@3$6=remote(UMCLimitOneCollisionTime, @3$5)::@4$2=remote(RCSLimitOneCollisionTime, @8$5)::@4$3=remote(RestrictedLimitOneCollisionTime, @8$5)::@4$4=remote(GlobalLimitOneCollisionTime, @8$5)::@4$5=remote(CancelLimitOneCollisionTime, @4$5)::@4$6=remote(UMCLimitOneCollisionTime, @4$5)::@5$2=remote(RCSLimitOneCollisionTime, @9$5)::@5$3=remote(RestrictedLimitOneCollisionTime, @9$5)::@5$4=remote(GlobalLimitOneCollisionTime, @9$5)::@5$5=remote(CancelLimitOneCollisionTime, @5$5)::@5$6=remote(UMCLimitOneCollisionTime, @5$5)::@6$2=remote(RCSLimitOneCollisionTime, @10$5)::@6$3=remote(RestrictedLimitOneCollisionTime, @10$5)::@6$4=remote(GlobalLimitOneCollisionTime, @10$5)::@6$5=remote(CancelLimitOneCollisionTime, @6$5)::@6$6=remote(UMCLimitOneCollisionTime, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |      24.255 |  18.658333 | 28.123333 |    43.134 | vmean([]) |
-| Nærumbanen (3T) |   662.67467 |    322.102 | 592.84267 | 1126.9723 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One (No collision) Time
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |      24.255 |  18.658333 | 28.123333 |    43.134 | vmean([]) |
+|      3 |   662.67467 |    322.102 | 592.84267 | 1126.9723 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionTime, @15$5)::@2$3=remote(RestrictedLimitOneCollisionTime, @15$5)::@2$4=remote(GlobalLimitOneCollisionTime, @12$5)::@2$5=remote(CancelLimitOneCollisionTime, @7$5)::@2$6=remote(UMCLimitOneCollisionTime, @7$5)::@3$2=remote(RCSLimitOneCollisionTime, @16$5)::@3$3=remote(RestrictedLimitOneCollisionTime, @16$5)::@3$4=remote(GlobalLimitOneCollisionTime, @13$5)::@3$5=remote(CancelLimitOneCollisionTime, @8$5)::@3$6=remote(UMCLimitOneCollisionTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |   6.5146667 |      8.524 |     8.352 | 8.7013333 | vmean([]) |
-| Station Two   |         9.3 |  12.421333 | 12.545333 | 13.570667 | vmean([]) |
-| Station Four  |      25.856 |  38.101333 | 37.845333 | 48.441333 | vmean([]) |
-| Station Six   |      70.112 |    101.904 | 104.04667 |    151.56 | vmean([]) |
-| Station Eight |   158.49733 |     224.52 |    232.72 | 372.24933 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One No Collision Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |   6.5146667 |      8.524 |     8.352 | 8.7013333 | vmean([]) |
+|        2 |         9.3 |  12.421333 | 12.545333 | 13.570667 | vmean([]) |
+|        4 |      25.856 |  38.101333 | 37.845333 | 48.441333 | vmean([]) |
+|        6 |      70.112 |    101.904 | 104.04667 |    151.56 | vmean([]) |
+|        8 |   158.49733 |     224.52 |    232.72 | 372.24933 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory,@6$5)::@2$3=remote(RestrictedLimitOneCollisionMemory, @6$5)::@2$4=remote(GlobalLimitOneCollisionMemory, @6$5)::@2$5=remote(CancelLimitOneCollisionMemory, @2$5)::@2$6=remote(UMCLimitOneCollisionMemory, @2$5)::@3$2=remote(RCSLimitOneCollisionMemory,@7$5)::@3$3=remote(RestrictedLimitOneCollisionMemory, @7$5)::@3$4=remote(GlobalLimitOneCollisionMemory, @7$5)::@3$5=remote(CancelLimitOneCollisionMemory, @3$5)::@3$6=remote(UMCLimitOneCollisionMemory, @3$5)::@4$2=remote(RCSLimitOneCollisionMemory, @8$5)::@4$3=remote(RestrictedLimitOneCollisionMemory, @8$5)::@4$4=remote(GlobalLimitOneCollisionMemory, @8$5)::@4$5=remote(CancelLimitOneCollisionMemory, @4$5)::@4$6=remote(UMCLimitOneCollisionMemory, @4$5)::@5$2=remote(RCSLimitOneCollisionMemory, @9$5)::@5$3=remote(RestrictedLimitOneCollisionMemory, @9$5)::@5$4=remote(GlobalLimitOneCollisionMemory, @9$5)::@5$5=remote(CancelLimitOneCollisionMemory, @5$5)::@5$6=remote(UMCLimitOneCollisionMemory, @5$5)::@6$2=remote(RCSLimitOneCollisionMemory, @10$5)::@6$3=remote(RestrictedLimitOneCollisionMemory, @10$5)::@6$4=remote(GlobalLimitOneCollisionMemory, @10$5)::@6$5=remote(CancelLimitOneCollisionMemory, @6$5)::@6$6=remote(UMCLimitOneCollisionMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+---------+-----------|
-| Configuration   | First model | Restricted |    Global |  Cancel | UMC       |
-|-----------------+-------------+------------+-----------+---------+-----------|
-| Nærumbanen (2T) |   78.717333 |  119.15733 |   112.648 | 126.548 | vmean([]) |
-| Nærumbanen (3T) |   383.10533 |  288.14533 | 310.32133 |  550.28 | vmean([]) |
-|-----------------+-------------+------------+-----------+---------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One No Collision Memory
+|--------+-------------+------------+-----------+---------+-----------|
+| Trains | First model | Restricted |    Global |  Cancel | UMC       |
+|--------+-------------+------------+-----------+---------+-----------|
+|      2 |   78.717333 |  119.15733 |   112.648 | 126.548 | vmean([]) |
+|      3 |   383.10533 |  288.14533 | 310.32133 |  550.28 | vmean([]) |
+|--------+-------------+------------+-----------+---------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory, @15$5)::@2$3=remote(RestrictedLimitOneCollisionMemory, @15$5)::@2$4=remote(GlobalLimitOneCollisionMemory, @12$5)::@2$5=remote(CancelLimitOneCollisionMemory, @7$5)::@2$6=remote(UMCLimitOneCollisionMemory, @7$5)::@3$2=remote(RCSLimitOneCollisionMemory, @16$5)::@3$3=remote(RestrictedLimitOneCollisionMemory, @16$5)::@3$4=remote(GlobalLimitOneCollisionMemory, @13$5)::@3$5=remote(CancelLimitOneCollisionMemory, @8$5)::@3$6=remote(UMCLimitOneCollisionMemory, @8$5)
 
 
 *** Will arrive
 **** Elapsed time
-|---------------+-------------+-------------+------------+-----------+-----------|
-| Configuration | First model |  Restricted |     Global |    Cancel | UMC       |
-|---------------+-------------+-------------+------------+-----------+-----------|
-| Station One   |        0.01 | 0.019333333 |      0.025 |     0.033 | vmean([]) |
-| Station Two   | 0.076666667 | 0.072333333 | 0.13133333 |     0.229 | vmean([]) |
-| Station Four  |   1.7113333 |   1.3063333 |       2.59 |     4.823 | vmean([]) |
-| Station Six   |   27.375333 |      22.197 |  46.804333 |   106.595 | vmean([]) |
-| Station Eight |   163.19167 |     134.605 |    285.323 | 654.14167 | vmean([]) |
-|---------------+-------------+-------------+------------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One Will Arrive Time
+|----------+-------------+-------------+------------+-----------+-----------|
+| Stations | First model |  Restricted |     Global |    Cancel | UMC       |
+|----------+-------------+-------------+------------+-----------+-----------|
+|        1 |        0.01 | 0.019333333 |      0.025 |     0.033 | vmean([]) |
+|        2 | 0.076666667 | 0.072333333 | 0.13133333 |     0.229 | vmean([]) |
+|        4 |   1.7113333 |   1.3063333 |       2.59 |     4.823 | vmean([]) |
+|        6 |   27.375333 |      22.197 |  46.804333 |   106.595 | vmean([]) |
+|        8 |   163.19167 |     134.605 |    285.323 | 654.14167 | vmean([]) |
+|----------+-------------+-------------+------------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneArriveTime,@6$5)::@2$3=remote(RestrictedLimitOneArriveTime, @6$5)::@2$4=remote(GlobalLimitOneArriveTime, @6$5)::@2$5=remote(CancelLimitOneArriveTime, @2$5)::@2$6=remote(UMCLimitOneArriveTime, @2$5)::@3$2=remote(RCSLimitOneArriveTime,@7$5)::@3$3=remote(RestrictedLimitOneArriveTime, @7$5)::@3$4=remote(GlobalLimitOneArriveTime, @7$5)::@3$5=remote(CancelLimitOneArriveTime, @3$5)::@3$6=remote(UMCLimitOneArriveTime, @3$5)::@4$2=remote(RCSLimitOneArriveTime, @8$5)::@4$3=remote(RestrictedLimitOneArriveTime, @8$5)::@4$4=remote(GlobalLimitOneArriveTime, @8$5)::@4$5=remote(CancelLimitOneArriveTime, @4$5)::@4$6=remote(UMCLimitOneArriveTime, @4$5)::@5$2=remote(RCSLimitOneArriveTime, @9$5)::@5$3=remote(RestrictedLimitOneArriveTime, @9$5)::@5$4=remote(GlobalLimitOneArriveTime, @9$5)::@5$5=remote(CancelLimitOneArriveTime, @5$5)::@5$6=remote(UMCLimitOneArriveTime, @5$5)::@6$2=remote(RCSLimitOneArriveTime, @10$5)::@6$3=remote(RestrictedLimitOneArriveTime, @10$5)::@6$4=remote(GlobalLimitOneArriveTime, @10$5)::@6$5=remote(CancelLimitOneArriveTime, @6$5)::@6$6=remote(UMCLimitOneArriveTime, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |   23.918333 |     20.417 |    28.715 | 42.842333 | vmean([]) |
-| Nærumbanen (3T) |     664.667 |  333.81433 | 640.21167 |  1113.862 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One Will Arrive Time
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |   23.918333 |     20.417 |    28.715 | 42.842333 | vmean([]) |
+|      3 |     664.667 |  333.81433 | 640.21167 |  1113.862 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneArriveTime, @15$5)::@2$3=remote(RestrictedLimitOneArriveTime, @15$5)::@2$4=remote(GlobalLimitOneArriveTime, @12$5)::@2$5=remote(CancelLimitOneArriveTime, @7$5)::@2$6=remote(UMCLimitOneArriveTime, @7$5)::@3$2=remote(RCSLimitOneArriveTime, @16$5)::@3$3=remote(RestrictedLimitOneArriveTime, @16$5)::@3$4=remote(GlobalLimitOneArriveTime, @13$5)::@3$5=remote(CancelLimitOneArriveTime, @8$5)::@3$6=remote(UMCLimitOneArriveTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |   6.4386667 |  8.4466667 |     8.268 |     8.616 | vmean([]) |
-| Station Two   |       9.228 |     12.344 | 12.458667 | 13.474667 | vmean([]) |
-| Station Four  |   25.781333 |     37.208 | 37.749333 |    48.224 | vmean([]) |
-| Station Six   |   69.981333 |    100.468 | 103.72133 |   150.872 | vmean([]) |
-| Station Eight |      158.18 |  221.27733 | 232.37333 |    370.34 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit One Will Arrive Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |   6.4386667 |  8.4466667 |     8.268 |     8.616 | vmean([]) |
+|        2 |       9.228 |     12.344 | 12.458667 | 13.474667 | vmean([]) |
+|        4 |   25.781333 |     37.208 | 37.749333 |    48.224 | vmean([]) |
+|        6 |   69.981333 |    100.468 | 103.72133 |   150.872 | vmean([]) |
+|        8 |      158.18 |  221.27733 | 232.37333 |    370.34 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneArriveMemory,@6$5)::@2$3=remote(RestrictedLimitOneArriveMemory, @6$5)::@2$4=remote(GlobalLimitOneArriveMemory, @6$5)::@2$5=remote(CancelLimitOneArriveMemory, @2$5)::@2$6=remote(UMCLimitOneArriveMemory, @2$5)::@3$2=remote(RCSLimitOneArriveMemory,@7$5)::@3$3=remote(RestrictedLimitOneArriveMemory, @7$5)::@3$4=remote(GlobalLimitOneArriveMemory, @7$5)::@3$5=remote(CancelLimitOneArriveMemory, @3$5)::@3$6=remote(UMCLimitOneArriveMemory, @3$5)::@4$2=remote(RCSLimitOneArriveMemory, @8$5)::@4$3=remote(RestrictedLimitOneArriveMemory, @8$5)::@4$4=remote(GlobalLimitOneArriveMemory, @8$5)::@4$5=remote(CancelLimitOneArriveMemory, @4$5)::@4$6=remote(UMCLimitOneArriveMemory, @4$5)::@5$2=remote(RCSLimitOneArriveMemory, @9$5)::@5$3=remote(RestrictedLimitOneArriveMemory, @9$5)::@5$4=remote(GlobalLimitOneArriveMemory, @9$5)::@5$5=remote(CancelLimitOneArriveMemory, @5$5)::@5$6=remote(UMCLimitOneArriveMemory, @5$5)::@6$2=remote(RCSLimitOneArriveMemory, @10$5)::@6$3=remote(RestrictedLimitOneArriveMemory, @10$5)::@6$4=remote(GlobalLimitOneArriveMemory, @10$5)::@6$5=remote(CancelLimitOneArriveMemory, @6$5)::@6$6=remote(UMCLimitOneArriveMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |        78.6 |    115.344 | 112.50667 |   126.416 | vmean([]) |
-| Nærumbanen (3T) |   382.92533 |    286.056 | 310.17067 | 550.17733 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One Will Arrive Memory
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |        78.6 |    115.344 | 112.50667 |   126.416 | vmean([]) |
+|      3 |   382.92533 |    286.056 | 310.17067 | 550.17733 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitOneArriveMemory, @15$5)::@2$3=remote(RestrictedLimitOneArriveMemory, @15$5)::@2$4=remote(GlobalLimitOneArriveMemory, @12$5)::@2$5=remote(CancelLimitOneArriveMemory, @7$5)::@2$6=remote(UMCLimitOneArriveMemory, @7$5)::@3$2=remote(RCSLimitOneArriveMemory, @16$5)::@3$3=remote(RestrictedLimitOneArriveMemory, @16$5)::@3$4=remote(GlobalLimitOneArriveMemory, @13$5)::@3$5=remote(CancelLimitOneArriveMemory, @8$5)::@3$6=remote(UMCLimitOneArriveMemory, @8$5)
 
 
 ** Limit Two
 *** No derailment (Move between connected segments)
 **** Elapsed time
-|---------------+-------------+------------+-------------+----------+-----------|
-| Configuration | First model | Restricted |      Global |   Cancel | UMC       |
-|---------------+-------------+------------+-------------+----------+-----------|
-| Station One   |       0.016 |      0.015 | 0.035666667 |    0.035 | vmean([]) |
-| Station Two   |  0.18566667 | 0.12533333 |  0.36466667 |     0.87 | vmean([]) |
-| Station Four  |        8.13 |      2.373 |   11.708333 |   34.119 | vmean([]) |
-| Station Six   |     176.259 |  47.547333 |   254.67733 |  895.692 | vmean([]) |
-| Station Eight |   1127.1353 |  296.93933 |   1594.7723 | 6552.647 | vmean([]) |
-|---------------+-------------+------------+-------------+----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two No derailment (Move between connected segments) Time
+|----------+-------------+------------+-------------+----------+-----------|
+| Stations | First model | Restricted |      Global |   Cancel | UMC       |
+|----------+-------------+------------+-------------+----------+-----------|
+|        1 |       0.016 |      0.015 | 0.035666667 |    0.035 | vmean([]) |
+|        2 |  0.18566667 | 0.12533333 |  0.36466667 |     0.87 | vmean([]) |
+|        4 |        8.13 |      2.373 |   11.708333 |   34.119 | vmean([]) |
+|        6 |     176.259 |  47.547333 |   254.67733 |  895.692 | vmean([]) |
+|        8 |   1127.1353 |  296.93933 |   1594.7723 | 6552.647 | vmean([]) |
+|----------+-------------+------------+-------------+----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveTime,@6$5)::@2$3=remote(RestrictedLimitTwoMoveTime, @6$5)::@2$4=remote(GlobalLimitTwoMoveTime, @6$5)::@2$5=remote(CancelLimitTwoMoveTime, @2$5)::@2$6=remote(UMCLimitTwoMoveTime, @2$5)::@3$2=remote(RCSLimitTwoMoveTime,@7$5)::@3$3=remote(RestrictedLimitTwoMoveTime, @7$5)::@3$4=remote(GlobalLimitTwoMoveTime, @7$5)::@3$5=remote(CancelLimitTwoMoveTime, @3$5)::@3$6=remote(UMCLimitTwoMoveTime, @3$5)::@4$2=remote(RCSLimitTwoMoveTime, @8$5)::@4$3=remote(RestrictedLimitTwoMoveTime, @8$5)::@4$4=remote(GlobalLimitTwoMoveTime, @8$5)::@4$5=remote(CancelLimitTwoMoveTime, @4$5)::@4$6=remote(UMCLimitTwoMoveTime, @4$5)::@5$2=remote(RCSLimitTwoMoveTime, @9$5)::@5$3=remote(RestrictedLimitTwoMoveTime, @9$5)::@5$4=remote(GlobalLimitTwoMoveTime, @9$5)::@5$5=remote(CancelLimitTwoMoveTime, @5$5)::@5$6=remote(UMCLimitTwoMoveTime, @5$5)::@6$2=remote(RCSLimitTwoMoveTime, @10$5)::@6$3=remote(RestrictedLimitTwoMoveTime, @10$5)::@6$4=remote(GlobalLimitTwoMoveTime, @10$5)::@6$5=remote(CancelLimitTwoMoveTime, @6$5)::@6$6=remote(UMCLimitTwoMoveTime, @6$5)
 
-
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |   114.48133 |     20.385 | 132.67567 |   242.572 | vmean([]) |
-| Nærumbanen (3T) |   4451.9977 |  407.33467 | 4585.1813 | 10075.215 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No derailment (Move between connected segments) Time
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |   114.48133 |     20.385 | 132.67567 |   242.572 | vmean([]) |
+|      3 |   4451.9977 |  407.33467 | 4585.1813 | 10075.215 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveTime, @15$5)::@2$3=remote(RestrictedLimitTwoMoveTime, @15$5)::@2$4=remote(GlobalLimitTwoMoveTime, @12$5)::@2$5=remote(CancelLimitTwoMoveTime, @7$5)::@2$6=remote(UMCLimitTwoMoveTime, @7$5)::@3$2=remote(RCSLimitTwoMoveTime, @16$5)::@3$3=remote(RestrictedLimitTwoMoveTime, @16$5)::@3$4=remote(GlobalLimitTwoMoveTime, @13$5)::@3$5=remote(CancelLimitTwoMoveTime, @8$5)::@3$6=remote(UMCLimitTwoMoveTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |       6.496 |      8.556 | 10.066667 | 12.054667 | vmean([]) |
-| Station Two   |   9.9306667 |  12.654667 | 16.369333 | 18.554667 | vmean([]) |
-| Station Four  |   41.502667 |  39.422667 | 59.801333 | 139.58267 | vmean([]) |
-| Station Six   |     152.876 |  120.05867 | 212.28933 | 680.38267 | vmean([]) |
-| Station Eight |   422.32267 |  276.12267 | 541.72133 | 2104.1053 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two No derailment (Move between connected segments) Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |       6.496 |      8.556 | 10.066667 | 12.054667 | vmean([]) |
+|        2 |   9.9306667 |  12.654667 | 16.369333 | 18.554667 | vmean([]) |
+|        4 |   41.502667 |  39.422667 | 59.801333 | 139.58267 | vmean([]) |
+|        6 |     152.876 |  120.05867 | 212.28933 | 680.38267 | vmean([]) |
+|        8 |   422.32267 |  276.12267 | 541.72133 | 2104.1053 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory,@6$5)::@2$3=remote(RestrictedLimitTwoMoveMemory, @6$5)::@2$4=remote(GlobalLimitTwoMoveMemory, @6$5)::@2$5=remote(CancelLimitTwoMoveMemory, @2$5)::@2$6=remote(UMCLimitTwoMoveMemory, @2$5)::@3$2=remote(RCSLimitTwoMoveMemory,@7$5)::@3$3=remote(RestrictedLimitTwoMoveMemory, @7$5)::@3$4=remote(GlobalLimitTwoMoveMemory, @7$5)::@3$5=remote(CancelLimitTwoMoveMemory, @3$5)::@3$6=remote(UMCLimitTwoMoveMemory, @3$5)::@4$2=remote(RCSLimitTwoMoveMemory, @8$5)::@4$3=remote(RestrictedLimitTwoMoveMemory, @8$5)::@4$4=remote(GlobalLimitTwoMoveMemory, @8$5)::@4$5=remote(CancelLimitTwoMoveMemory, @4$5)::@4$6=remote(UMCLimitTwoMoveMemory, @4$5)::@5$2=remote(RCSLimitTwoMoveMemory, @9$5)::@5$3=remote(RestrictedLimitTwoMoveMemory, @9$5)::@5$4=remote(GlobalLimitTwoMoveMemory, @9$5)::@5$5=remote(CancelLimitTwoMoveMemory, @5$5)::@5$6=remote(UMCLimitTwoMoveMemory, @5$5)::@6$2=remote(RCSLimitTwoMoveMemory, @10$5)::@6$3=remote(RestrictedLimitTwoMoveMemory, @10$5)::@6$4=remote(GlobalLimitTwoMoveMemory, @10$5)::@6$5=remote(CancelLimitTwoMoveMemory, @6$5)::@6$6=remote(UMCLimitTwoMoveMemory, @6$5)
 
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No derailment (Move between connected segments) Memory
 |-----------------+-------------+------------+----------+-----------+-----------|
 | Configuration   | First model | Restricted |   Global |    Cancel | UMC       |
 |-----------------+-------------+------------+----------+-----------+-----------|
@@ -1856,127 +1894,151 @@
 
 *** No derailment (Critical section)
 **** Elapsed time
-|---------------+-------------+-------------+-------------+------------+-----------|
-| Configuration | First model |  Restricted |      Global |     Cancel | UMC       |
-|---------------+-------------+-------------+-------------+------------+-----------|
-| Station One   |       0.013 | 0.022666667 | 0.022333333 |      0.036 | vmean([]) |
-| Station Two   |       0.198 |       0.133 |  0.36766667 | 0.87733333 | vmean([]) |
-| Station Four  |   8.0706667 |       2.147 |      10.941 |  32.311333 | vmean([]) |
-| Station Six   |     172.667 |      47.579 |     245.934 |    920.202 | vmean([]) |
-| Station Eight |   1138.0233 |   292.37333 |    1694.755 |  6608.8023 | vmean([]) |
-|---------------+-------------+-------------+-------------+------------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two No derailment (No trains in critical section) Time
+|----------+-------------+-------------+-------------+------------+-----------|
+| Stations | First model |  Restricted |      Global |     Cancel | UMC       |
+|----------+-------------+-------------+-------------+------------+-----------|
+|        1 |       0.013 | 0.022666667 | 0.022333333 |      0.036 | vmean([]) |
+|        2 |       0.198 |       0.133 |  0.36766667 | 0.87733333 | vmean([]) |
+|        4 |   8.0706667 |       2.147 |      10.941 |  32.311333 | vmean([]) |
+|        6 |     172.667 |      47.579 |     245.934 |    920.202 | vmean([]) |
+|        8 |   1138.0233 |   292.37333 |    1694.755 |  6608.8023 | vmean([]) |
+|----------+-------------+-------------+-------------+------------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalTime,@6$5)::@2$3=remote(RestrictedLimitTwoCriticalTime, @6$5)::@2$4=remote(GlobalLimitTwoCriticalTime, @6$5)::@2$5=remote(CancelLimitTwoCriticalTime, @2$5)::@2$6=remote(UMCLimitTwoCriticalTime, @2$5)::@3$2=remote(RCSLimitTwoCriticalTime,@7$5)::@3$3=remote(RestrictedLimitTwoCriticalTime, @7$5)::@3$4=remote(GlobalLimitTwoCriticalTime, @7$5)::@3$5=remote(CancelLimitTwoCriticalTime, @3$5)::@3$6=remote(UMCLimitTwoCriticalTime, @3$5)::@4$2=remote(RCSLimitTwoCriticalTime, @8$5)::@4$3=remote(RestrictedLimitTwoCriticalTime, @8$5)::@4$4=remote(GlobalLimitTwoCriticalTime, @8$5)::@4$5=remote(CancelLimitTwoCriticalTime, @4$5)::@4$6=remote(UMCLimitTwoCriticalTime, @4$5)::@5$2=remote(RCSLimitTwoCriticalTime, @9$5)::@5$3=remote(RestrictedLimitTwoCriticalTime, @9$5)::@5$4=remote(GlobalLimitTwoCriticalTime, @9$5)::@5$5=remote(CancelLimitTwoCriticalTime, @5$5)::@5$6=remote(UMCLimitTwoCriticalTime, @5$5)::@6$2=remote(RCSLimitTwoCriticalTime, @10$5)::@6$3=remote(RestrictedLimitTwoCriticalTime, @10$5)::@6$4=remote(GlobalLimitTwoCriticalTime, @10$5)::@6$5=remote(CancelLimitTwoCriticalTime, @6$5)::@6$6=remote(UMCLimitTwoCriticalTime, @6$5)
 
-|-----------------+-------------+------------+----------+-----------+-----------|
-| Configuration   | First model | Restricted |   Global |    Cancel | UMC       |
-|-----------------+-------------+------------+----------+-----------+-----------|
-| Nærumbanen (2T) |   112.89633 |  19.871333 |  133.281 |   251.827 | vmean([]) |
-| Nærumbanen (3T) |   4587.7087 |  415.81233 | 4319.844 | 10015.096 | vmean([]) |
-|-----------------+-------------+------------+----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No derailment (No trains in critical section) Time
+|--------+-------------+------------+----------+-----------+-----------|
+| Trains | First model | Restricted |   Global |    Cancel | UMC       |
+|--------+-------------+------------+----------+-----------+-----------|
+|      2 |   112.89633 |  19.871333 |  133.281 |   251.827 | vmean([]) |
+|      3 |   4587.7087 |  415.81233 | 4319.844 | 10015.096 | vmean([]) |
+|--------+-------------+------------+----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalTime, @15$5)::@2$3=remote(RestrictedLimitTwoCriticalTime, @15$5)::@2$4=remote(GlobalLimitTwoCriticalTime, @12$5)::@2$5=remote(CancelLimitTwoCriticalTime, @7$5)::@2$6=remote(UMCLimitTwoCriticalTime, @7$5)::@3$2=remote(RCSLimitTwoCriticalTime, @16$5)::@3$3=remote(RestrictedLimitTwoCriticalTime, @16$5)::@3$4=remote(GlobalLimitTwoCriticalTime, @13$5)::@3$5=remote(CancelLimitTwoCriticalTime, @8$5)::@3$6=remote(UMCLimitTwoCriticalTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |   6.4786667 |      8.516 |     8.416 |     8.732 | vmean([]) |
-| Station Two   |   9.9093333 |  12.590667 | 15.442667 | 16.661333 | vmean([]) |
-| Station Four  |      41.484 |     40.388 | 58.229333 | 139.53867 | vmean([]) |
-| Station Six   |   152.85067 |    121.686 | 209.16267 |   680.276 | vmean([]) |
-| Station Eight |   422.30267 |  275.48933 |   543.076 |  2104.356 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two No derailment (No trains in critical section) Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |   6.4786667 |      8.516 |     8.416 |     8.732 | vmean([]) |
+|        2 |   9.9093333 |  12.590667 | 15.442667 | 16.661333 | vmean([]) |
+|        4 |      41.484 |     40.388 | 58.229333 | 139.53867 | vmean([]) |
+|        6 |   152.85067 |    121.686 | 209.16267 |   680.276 | vmean([]) |
+|        8 |   422.30267 |  275.48933 |   543.076 |  2104.356 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory,@6$5)::@2$3=remote(RestrictedLimitTwoCriticalMemory, @6$5)::@2$4=remote(GlobalLimitTwoCriticalMemory, @6$5)::@2$5=remote(CancelLimitTwoCriticalMemory, @2$5)::@2$6=remote(UMCLimitTwoCriticalMemory, @2$5)::@3$2=remote(RCSLimitTwoCriticalMemory,@7$5)::@3$3=remote(RestrictedLimitTwoCriticalMemory, @7$5)::@3$4=remote(GlobalLimitTwoCriticalMemory, @7$5)::@3$5=remote(CancelLimitTwoCriticalMemory, @3$5)::@3$6=remote(UMCLimitTwoCriticalMemory, @3$5)::@4$2=remote(RCSLimitTwoCriticalMemory, @8$5)::@4$3=remote(RestrictedLimitTwoCriticalMemory, @8$5)::@4$4=remote(GlobalLimitTwoCriticalMemory, @8$5)::@4$5=remote(CancelLimitTwoCriticalMemory, @4$5)::@4$6=remote(UMCLimitTwoCriticalMemory, @4$5)::@5$2=remote(RCSLimitTwoCriticalMemory, @9$5)::@5$3=remote(RestrictedLimitTwoCriticalMemory, @9$5)::@5$4=remote(GlobalLimitTwoCriticalMemory, @9$5)::@5$5=remote(CancelLimitTwoCriticalMemory, @5$5)::@5$6=remote(UMCLimitTwoCriticalMemory, @5$5)::@6$2=remote(RCSLimitTwoCriticalMemory, @10$5)::@6$3=remote(RestrictedLimitTwoCriticalMemory, @10$5)::@6$4=remote(GlobalLimitTwoCriticalMemory, @10$5)::@6$5=remote(CancelLimitTwoCriticalMemory, @6$5)::@6$6=remote(UMCLimitTwoCriticalMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |   122.17467 |  116.47333 | 152.13867 | 238.95867 | vmean([]) |
-| Nærumbanen (3T) |   1833.1267 |  311.93467 | 1303.3787 | 3638.6987 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No derailment (No trains in critical section) Memory
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |   122.17467 |  116.47333 | 152.13867 | 238.95867 | vmean([]) |
+|      3 |   1833.1267 |  311.93467 | 1303.3787 | 3638.6987 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory, @15$5)::@2$3=remote(RestrictedLimitTwoCriticalMemory, @15$5)::@2$4=remote(GlobalLimitTwoCriticalMemory, @12$5)::@2$5=remote(CancelLimitTwoCriticalMemory, @7$5)::@2$6=remote(UMCLimitTwoCriticalMemory, @7$5)::@3$2=remote(RCSLimitTwoCriticalMemory, @16$5)::@3$3=remote(RestrictedLimitTwoCriticalMemory, @16$5)::@3$4=remote(GlobalLimitTwoCriticalMemory, @13$5)::@3$5=remote(CancelLimitTwoCriticalMemory, @8$5)::@3$6=remote(UMCLimitTwoCriticalMemory, @8$5)
 
 
 *** No collision
 **** Elapsed time
-|---------------+--------------+-------------+-------------+-------------+-----------|
-| Configuration |  First model |  Restricted |      Global |      Cancel | UMC       |
-|---------------+--------------+-------------+-------------+-------------+-----------|
-| Station One   |  0.013333333 |       0.021 |       0.018 | 0.046333333 | vmean([]) |
-| Station Two   |  0.085333333 | 0.096666667 |  0.12733333 |  0.25333333 | vmean([]) |
-| Station Four  |    1.7836667 |       1.289 |   2.6766667 |       5.281 | vmean([]) |
-| Station Six   |    29.719667 |   23.231667 |   44.976333 |   107.55467 | vmean([]) |
-| Station Eight |    165.38233 |   125.71833 |     286.938 |   637.43367 | vmean([]) |
-|---------------+--------------+-------------+-------------+-------------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two No Collision Time
+|----------+-------------+-------------+------------+-------------+-----------|
+| Stations | First model |  Restricted |     Global |      Cancel | UMC       |
+|----------+-------------+-------------+------------+-------------+-----------|
+|        1 | 0.013333333 |       0.021 |      0.018 | 0.046333333 | vmean([]) |
+|        2 | 0.085333333 | 0.096666667 | 0.12733333 |  0.25333333 | vmean([]) |
+|        4 |   1.7836667 |       1.289 |  2.6766667 |       5.281 | vmean([]) |
+|        6 |   29.719667 |   23.231667 |  44.976333 |   107.55467 | vmean([]) |
+|        8 |   165.38233 |   125.71833 |    286.938 |   637.43367 | vmean([]) |
+|----------+-------------+-------------+------------+-------------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionTime,@6$5)::@2$3=remote(RestrictedLimitTwoCollisionTime, @6$5)::@2$4=remote(GlobalLimitTwoCollisionTime, @6$5)::@2$5=remote(CancelLimitTwoCollisionTime, @2$5)::@2$6=remote(UMCLimitTwoCollisionTime, @2$5)::@3$2=remote(RCSLimitTwoCollisionTime,@7$5)::@3$3=remote(RestrictedLimitTwoCollisionTime, @7$5)::@3$4=remote(GlobalLimitTwoCollisionTime, @7$5)::@3$5=remote(CancelLimitTwoCollisionTime, @3$5)::@3$6=remote(UMCLimitTwoCollisionTime, @3$5)::@4$2=remote(RCSLimitTwoCollisionTime, @8$5)::@4$3=remote(RestrictedLimitTwoCollisionTime, @8$5)::@4$4=remote(GlobalLimitTwoCollisionTime, @8$5)::@4$5=remote(CancelLimitTwoCollisionTime, @4$5)::@4$6=remote(UMCLimitTwoCollisionTime, @4$5)::@5$2=remote(RCSLimitTwoCollisionTime, @9$5)::@5$3=remote(RestrictedLimitTwoCollisionTime, @9$5)::@5$4=remote(GlobalLimitTwoCollisionTime, @9$5)::@5$5=remote(CancelLimitTwoCollisionTime, @5$5)::@5$6=remote(UMCLimitTwoCollisionTime, @5$5)::@6$2=remote(RCSLimitTwoCollisionTime, @10$5)::@6$3=remote(RestrictedLimitTwoCollisionTime, @10$5)::@6$4=remote(GlobalLimitTwoCollisionTime, @10$5)::@6$5=remote(CancelLimitTwoCollisionTime, @6$5)::@6$6=remote(UMCLimitTwoCollisionTime, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |     111.705 |  19.910333 | 133.70833 | 251.85567 | vmean([]) |
-| Nærumbanen (3T) |   662.67467 |    322.102 | 592.84267 | 1126.9723 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No Collision Time
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |     111.705 |  19.910333 | 133.70833 | 251.85567 | vmean([]) |
+|      3 |   662.67467 |    322.102 | 592.84267 | 1126.9723 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionTime, @15$5)::@2$3=remote(RestrictedLimitTwoCollisionTime, @15$5)::@2$4=remote(GlobalLimitTwoCollisionTime, @12$5)::@2$5=remote(CancelLimitTwoCollisionTime, @7$5)::@2$6=remote(UMCLimitTwoCollisionTime, @7$5)::@3$2=remote(RCSLimitTwoCollisionTime, @16$5)::@3$3=remote(RestrictedLimitTwoCollisionTime, @16$5)::@3$4=remote(GlobalLimitTwoCollisionTime, @13$5)::@3$5=remote(CancelLimitTwoCollisionTime, @8$5)::@3$6=remote(UMCLimitTwoCollisionTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |   6.5146667 |      8.508 |     8.412 | 8.7266667 | vmean([]) |
-| Station Two   |       9.944 |  12.578667 |     14.96 | 16.641333 | vmean([]) |
-| Station Four  |      41.508 |     39.384 | 58.201333 | 139.52667 | vmean([]) |
-| Station Six   |   152.87467 |  122.78667 | 210.05733 | 680.33333 | vmean([]) |
-| Station Eight |   422.32667 |    276.996 | 544.73333 | 2104.3453 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two No Collision Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |   6.5146667 |      8.508 |     8.412 | 8.7266667 | vmean([]) |
+|        2 |       9.944 |  12.578667 |     14.96 | 16.641333 | vmean([]) |
+|        4 |      41.508 |     39.384 | 58.201333 | 139.52667 | vmean([]) |
+|        6 |   152.87467 |  122.78667 | 210.05733 | 680.33333 | vmean([]) |
+|        8 |   422.32667 |    276.996 | 544.73333 | 2104.3453 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5)::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5)::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5)::@2$5=remote(CancelLimitTwoCollisionMemory, @2$5)::@2$6=remote(UMCLimitTwoCollisionMemory, @2$5)::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5)::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5)::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5)::@3$5=remote(CancelLimitTwoCollisionMemory, @3$5)::@3$6=remote(UMCLimitTwoCollisionMemory, @3$5)::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5)::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5)::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5)::@4$5=remote(CancelLimitTwoCollisionMemory, @4$5)::@4$6=remote(UMCLimitTwoCollisionMemory, @4$5)::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5)::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5)::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5)::@5$5=remote(CancelLimitTwoCollisionMemory, @5$5)::@5$6=remote(UMCLimitTwoCollisionMemory, @5$5)::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5)::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5)::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5)::@6$5=remote(CancelLimitTwoCollisionMemory, @6$5)::@6$6=remote(UMCLimitTwoCollisionMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |     122.196 |  113.55333 | 152.06533 | 238.94533 | vmean([]) |
-| Nærumbanen (3T) |   1833.1293 |  313.88133 | 1303.3773 | 3638.7027 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No Collision Memory
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |     122.196 |  113.55333 | 152.06533 | 238.94533 | vmean([]) |
+|      3 |   1833.1293 |  313.88133 | 1303.3773 | 3638.7027 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory, @15$5)::@2$3=remote(RestrictedLimitTwoCollisionMemory, @15$5)::@2$4=remote(GlobalLimitTwoCollisionMemory, @12$5)::@2$5=remote(CancelLimitTwoCollisionMemory, @7$5)::@2$6=remote(UMCLimitTwoCollisionMemory, @7$5)::@3$2=remote(RCSLimitTwoCollisionMemory, @16$5)::@3$3=remote(RestrictedLimitTwoCollisionMemory, @16$5)::@3$4=remote(GlobalLimitTwoCollisionMemory, @13$5)::@3$5=remote(CancelLimitTwoCollisionMemory, @8$5)::@3$6=remote(UMCLimitTwoCollisionMemory, @8$5)
 
 
 *** Will arrive
 **** Elapsed time
-|---------------+-------------+-------------+-------------+-------------+-----------|
-| Configuration | First model |  Restricted |      Global |      Cancel | UMC       |
-|---------------+-------------+-------------+-------------+-------------+-----------|
-| Station One   |       0.015 | 0.019333333 | 0.025666667 | 0.026666667 | vmean([]) |
-| Station Two   |  0.19666667 |  0.11966667 |  0.33966667 |       0.815 | vmean([]) |
-| Station Four  |   8.1093333 |       2.272 |       11.78 |   34.642333 | vmean([]) |
-| Station Six   |     177.619 |   46.954333 |   260.88367 |   933.92167 | vmean([]) |
-| Station Eight |   1133.7253 |     295.897 |   1657.4813 |   6625.0333 | vmean([]) |
-|---------------+-------------+-------------+-------------+-------------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two Will Arrive Time
+|----------+-------------+-------------+-------------+-------------+-----------|
+| Stations | First model |  Restricted |      Global |      Cancel | UMC       |
+|----------+-------------+-------------+-------------+-------------+-----------|
+|        1 |       0.015 | 0.019333333 | 0.025666667 | 0.026666667 | vmean([]) |
+|        2 |  0.19666667 |  0.11966667 |  0.33966667 |       0.815 | vmean([]) |
+|        4 |   8.1093333 |       2.272 |       11.78 |   34.642333 | vmean([]) |
+|        6 |     177.619 |   46.954333 |   260.88367 |   933.92167 | vmean([]) |
+|        8 |   1133.7253 |     295.897 |   1657.4813 |   6625.0333 | vmean([]) |
+|----------+-------------+-------------+-------------+-------------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveTime,@6$5)::@2$3=remote(RestrictedLimitTwoArriveTime, @6$5)::@2$4=remote(GlobalLimitTwoArriveTime, @6$5)::@2$5=remote(CancelLimitTwoArriveTime, @2$5)::@2$6=remote(UMCLimitTwoArriveTime, @2$5)::@3$2=remote(RCSLimitTwoArriveTime,@7$5)::@3$3=remote(RestrictedLimitTwoArriveTime, @7$5)::@3$4=remote(GlobalLimitTwoArriveTime, @7$5)::@3$5=remote(CancelLimitTwoArriveTime, @3$5)::@3$6=remote(UMCLimitTwoArriveTime, @3$5)::@4$2=remote(RCSLimitTwoArriveTime, @8$5)::@4$3=remote(RestrictedLimitTwoArriveTime, @8$5)::@4$4=remote(GlobalLimitTwoArriveTime, @8$5)::@4$5=remote(CancelLimitTwoArriveTime, @4$5)::@4$6=remote(UMCLimitTwoArriveTime, @4$5)::@5$2=remote(RCSLimitTwoArriveTime, @9$5)::@5$3=remote(RestrictedLimitTwoArriveTime, @9$5)::@5$4=remote(GlobalLimitTwoArriveTime, @9$5)::@5$5=remote(CancelLimitTwoArriveTime, @5$5)::@5$6=remote(UMCLimitTwoArriveTime, @5$5)::@6$2=remote(RCSLimitTwoArriveTime, @10$5)::@6$3=remote(RestrictedLimitTwoArriveTime, @10$5)::@6$4=remote(GlobalLimitTwoArriveTime, @10$5)::@6$5=remote(CancelLimitTwoArriveTime, @6$5)::@6$6=remote(UMCLimitTwoArriveTime, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |   113.33067 |  20.071667 | 131.59433 | 243.13033 | vmean([]) |
-| Nærumbanen (3T) |   4742.6797 |  414.10833 | 4594.8233 | 9986.8373 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two Will Arrive Time
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |   113.33067 |  20.071667 | 131.59433 | 243.13033 | vmean([]) |
+|      3 |   4742.6797 |  414.10833 | 4594.8233 | 9986.8373 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveTime, @15$5)::@2$3=remote(RestrictedLimitTwoArriveTime, @15$5)::@2$4=remote(GlobalLimitTwoArriveTime, @12$5)::@2$5=remote(CancelLimitTwoArriveTime, @7$5)::@2$6=remote(UMCLimitTwoArriveTime, @7$5)::@3$2=remote(RCSLimitTwoArriveTime, @16$5)::@3$3=remote(RestrictedLimitTwoArriveTime, @16$5)::@3$4=remote(GlobalLimitTwoArriveTime, @13$5)::@3$5=remote(CancelLimitTwoArriveTime, @8$5)::@3$6=remote(UMCLimitTwoArriveTime, @8$5)
 
 **** Memory Usage Peak
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Configuration | First model | Restricted |    Global |    Cancel | UMC       |
-|---------------+-------------+------------+-----------+-----------+-----------|
-| Station One   |   6.4386667 |      8.428 |     8.332 | 8.6333333 | vmean([]) |
-| Station Two   |   9.8733333 |  12.498667 |    15.364 |      16.5 | vmean([]) |
-| Station Four  |   41.429333 |     39.184 | 58.926667 | 138.15733 | vmean([]) |
-| Station Six   |   152.73867 |  119.47733 |   205.772 | 675.40267 | vmean([]) |
-| Station Eight |   421.92267 |  273.29067 |   543.112 | 2087.7187 | vmean([]) |
-|---------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Stations Limit Two Will Arrive Memory
+|----------+-------------+------------+-----------+-----------+-----------|
+| Stations | First model | Restricted |    Global |    Cancel | UMC       |
+|----------+-------------+------------+-----------+-----------+-----------|
+|        1 |   6.4386667 |      8.428 |     8.332 | 8.6333333 | vmean([]) |
+|        2 |   9.8733333 |  12.498667 |    15.364 |      16.5 | vmean([]) |
+|        4 |   41.429333 |     39.184 | 58.926667 | 138.15733 | vmean([]) |
+|        6 |   152.73867 |  119.47733 |   205.772 | 675.40267 | vmean([]) |
+|        8 |   421.92267 |  273.29067 |   543.112 | 2087.7187 | vmean([]) |
+|----------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory,@6$5)::@2$3=remote(RestrictedLimitTwoArriveMemory, @6$5)::@2$4=remote(GlobalLimitTwoArriveMemory, @6$5)::@2$5=remote(CancelLimitTwoArriveMemory, @2$5)::@2$6=remote(UMCLimitTwoArriveMemory, @2$5)::@3$2=remote(RCSLimitTwoArriveMemory,@7$5)::@3$3=remote(RestrictedLimitTwoArriveMemory, @7$5)::@3$4=remote(GlobalLimitTwoArriveMemory, @7$5)::@3$5=remote(CancelLimitTwoArriveMemory, @3$5)::@3$6=remote(UMCLimitTwoArriveMemory, @3$5)::@4$2=remote(RCSLimitTwoArriveMemory, @8$5)::@4$3=remote(RestrictedLimitTwoArriveMemory, @8$5)::@4$4=remote(GlobalLimitTwoArriveMemory, @8$5)::@4$5=remote(CancelLimitTwoArriveMemory, @4$5)::@4$6=remote(UMCLimitTwoArriveMemory, @4$5)::@5$2=remote(RCSLimitTwoArriveMemory, @9$5)::@5$3=remote(RestrictedLimitTwoArriveMemory, @9$5)::@5$4=remote(GlobalLimitTwoArriveMemory, @9$5)::@5$5=remote(CancelLimitTwoArriveMemory, @5$5)::@5$6=remote(UMCLimitTwoArriveMemory, @5$5)::@6$2=remote(RCSLimitTwoArriveMemory, @10$5)::@6$3=remote(RestrictedLimitTwoArriveMemory, @10$5)::@6$4=remote(GlobalLimitTwoArriveMemory, @10$5)::@6$5=remote(CancelLimitTwoArriveMemory, @6$5)::@6$6=remote(UMCLimitTwoArriveMemory, @6$5)
 
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Configuration   | First model | Restricted |    Global |    Cancel | UMC       |
-|-----------------+-------------+------------+-----------+-----------+-----------|
-| Nærumbanen (2T) |   122.07867 |    115.008 | 151.93067 | 238.86933 | vmean([]) |
-| Nærumbanen (3T) |     1833.04 |  312.58267 |    1303.3 | 3638.5627 | vmean([]) |
-|-----------------+-------------+------------+-----------+-----------+-----------|
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two Will Arrive Memory
+|--------+-------------+------------+-----------+-----------+-----------|
+| Trains | First model | Restricted |    Global |    Cancel | UMC       |
+|--------+-------------+------------+-----------+-----------+-----------|
+|      2 |   122.07867 |    115.008 | 151.93067 | 238.86933 | vmean([]) |
+|      3 |     1833.04 |  312.58267 |    1303.3 | 3638.5627 | vmean([]) |
+|--------+-------------+------------+-----------+-----------+-----------|
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory, @15$5)::@2$3=remote(RestrictedLimitTwoArriveMemory, @15$5)::@2$4=remote(GlobalLimitTwoArriveMemory, @12$5)::@2$5=remote(CancelLimitTwoArriveMemory, @7$5)::@2$6=remote(UMCLimitTwoArriveMemory, @7$5)::@3$2=remote(RCSLimitTwoArriveMemory, @16$5)::@3$3=remote(RestrictedLimitTwoArriveMemory, @16$5)::@3$4=remote(GlobalLimitTwoArriveMemory, @13$5)::@3$5=remote(CancelLimitTwoArriveMemory, @8$5)::@3$6=remote(UMCLimitTwoArriveMemory, @8$5)
 
 
