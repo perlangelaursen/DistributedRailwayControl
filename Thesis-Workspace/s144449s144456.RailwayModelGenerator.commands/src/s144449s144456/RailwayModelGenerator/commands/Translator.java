@@ -177,9 +177,9 @@ public abstract class Translator extends AbstractHandler{
 		return sb.getStem() != null && sb.getPlus() != null && sb.getMinus() != null;
 	}
 
-	private int sharedSegments(SwitchBox sb, SwitchBox sb2) {
+	private int sharedSegments(SwitchBox sb1, SwitchBox sb2) {
 		int count = 0;
-		for(Segment s : sb.getSegments()) {
+		for(Segment s : sb1.getSegments()) {
 			if(sb2.getSegments().contains(s)) {
 				count++;
 			}
