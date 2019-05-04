@@ -42,8 +42,7 @@ public abstract class Translator extends AbstractHandler{
 			Network n = getNetwork(o);
 			if(n != null) {
 				n.reload();
-				if (isWellFormed(n)) {				
-					//Generate code
+				if (isWellFormed(n)) {		
 					initialize(n);
 					String s = generateCode(n);
 					
