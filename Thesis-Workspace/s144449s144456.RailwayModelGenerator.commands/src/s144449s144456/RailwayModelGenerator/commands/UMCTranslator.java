@@ -14,13 +14,13 @@ public class UMCTranslator extends Translator {
 			String classesString = generateTrainClass(n.getReserveLimit(), n.getLockLimit())+getCBClass()+getPointClass();
 			
 			//Objects
-			String trainsString = generateTrainObjectsString(n);
-			String cbsString = generateCBObjectsString(n);
-			String pointsString = generatePointObjectsString(n); 
+			String trainsString = generateTrainObjects(n);
+			String cbsString = generateCBObjects(n);
+			String pointsString = generatePointObjects(n); 
 			String objectString = "\r\n"+"Objects" + "\r\n" + trainsString + "\r\n" + cbsString + "\r\n" + pointsString;
 			
 			//Create abstractions
-			String abstractionsString = generateAbstractionsString(n);
+			String abstractionsString = generateAbstractions(n);
 			
 			return classesString + "\r\n" + objectString + "\r\n" + abstractionsString;
 			
@@ -28,7 +28,7 @@ public class UMCTranslator extends Translator {
 		return "An error occurred";
 	}
 
-	private String generateAbstractionsString(Network n) {
+	private String generateAbstractions(Network n) {
 		String abs = "Abstractions{\r\n  State: ";
 		for(Train t : n.getTrains()) {
 			abs += "inState(t"+trainIDs.get(t)+".Arrived) and ";
@@ -350,7 +350,7 @@ public class UMCTranslator extends Translator {
 		}
 	}
 
-	private String generatePointObjectsString(Network n) {
+	private String generatePointObjects(Network n) {
 		String ps = "";
 		for(ControlBox cb : n.getControlBoxes()) {
 			if(cb instanceof SwitchBox) {
@@ -364,7 +364,7 @@ public class UMCTranslator extends Translator {
 		return ps;
 	}
 
-	private String generateCBObjectsString(Network n) {
+	private String generateCBObjects(Network n) {
 		String cbs = "";
 		for(ControlBox cb : n.getControlBoxes()) {
 			cbs += "cb"+cbIDs.get(cb)+":CB(segments => [";
@@ -406,7 +406,7 @@ public class UMCTranslator extends Translator {
 		return cbs;
 	}
 
-	private String generateTrainObjectsString(Network n) {
+	private String generateTrainObjects(Network n) {
 		String ts = "";
 		for(Train t : n.getTrains()) {
 			//Segments

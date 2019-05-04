@@ -1,14 +1,8 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import org.eclipse.emf.common.util.EList;
-
 import network.*;
 
 public class UPPAALTranslator extends Translator {
-	
 	@Override
 	protected String generateCode(Network n) {
 		if(n != null) {
@@ -529,7 +523,7 @@ public class UPPAALTranslator extends Translator {
 	
 	private String generateDeclarations(Network n) {
 		int NPOINT = (pointIDs.size() > 0) ? pointIDs.size() : 1;
-		int routeLength = computeLongestRouteLength(n);
+		int routeLength = longestRouteLength(n);
 		String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
 							 "const int NCB = "+cbIDs.size()+";\n"+
 							 "const int NPOINT = "+NPOINT+";\n"+
@@ -558,7 +552,7 @@ public class UPPAALTranslator extends Translator {
 		//Route segments	
 		String segRouteString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
 		for(Train t : n.getTrains()) {
-			segRouteString += trainRoute(t, routeLength)+", ";
+			segRouteString += trainSegments(t, routeLength)+", ";
 		}
 		segRouteString = segRouteString.substring(0, segRouteString.length() - 2)+"};\n";
 		
@@ -579,8 +573,9 @@ public class UPPAALTranslator extends Translator {
 		//Initial reservations
 		String initResString = "const reservation initialRes[NTRAIN] = {";
 		for(Train t : n.getTrains()) {
-			int[] res = getRes(t);
-			initResString += "{"+res[0]+", "+res[1]+"}, ";
+			Segment s = t.getRoute().get(0);
+			ControlBox cb = t.getBoxRoute().get(1);
+			initResString += "{"+cbIDs.get(cb)+", "+segIDs.get(s)+"}, ";
 		}
 		initResString = initResString.substring(0, initResString.length() - 2)+"};\n";
 		
@@ -1053,7 +1048,7 @@ public class UPPAALTranslator extends Translator {
 		return "UPPAAL";
 	};
 
-	private int computeLongestRouteLength(Network n) {
+	private int longestRouteLength(Network n) {
 		int routeLength = 0;
 		for(Train t : n.getTrains()) {
 			if (t.getRoute().size() > routeLength) {
@@ -1063,13 +1058,6 @@ public class UPPAALTranslator extends Translator {
 		return routeLength;
 	}
 
-	private int[] getRes(Train t) {
-		Segment s1 = t.getRoute().get(0);
-		ControlBox box = t.getBoxRoute().get(1);
-		int[] res = {cbIDs.get(box), segIDs.get(s1)};
-		return res;
-	}
-	
 	private String cbsDetails(ControlBox cb) {
 		String cbsDetails = "{";
 		Segment[] cbSegments = controlBoxSegments.get(cb);
@@ -1093,7 +1081,7 @@ public class UPPAALTranslator extends Translator {
 		return routeString;
 	}
 	
-	private String trainRoute(Train t, int routeLength) {
+	private String trainSegments(Train t, int routeLength) {
 		String routeString = "{";
 		for(int j = 0; j < routeLength; j++) {
 			if (j < t.getRoute().size()) {

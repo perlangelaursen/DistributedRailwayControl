@@ -65,7 +65,6 @@ public abstract class Translator extends AbstractHandler{
 		return null;
 	}
 
-	protected abstract String getFileNameDetails();
 
 	private Network getNetwork(Object o) {
 		if (o instanceof Network) {
@@ -212,6 +211,8 @@ public abstract class Translator extends AbstractHandler{
 	}
 
 	protected abstract String generateCode(Network n);
+
+	protected abstract String getFileNameDetails();
 	
 	private void initialize(Network n) {
 		int i = 0;
