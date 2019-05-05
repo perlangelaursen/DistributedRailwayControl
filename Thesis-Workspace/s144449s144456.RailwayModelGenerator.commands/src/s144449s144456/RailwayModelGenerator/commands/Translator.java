@@ -241,10 +241,6 @@ public abstract class Translator extends AbstractHandler{
 				segments[0] = cb.getSegments().get(0);
 				if (cb.getSegments().size() > 1) {
 					segments[1] = cb.getSegments().get(1);
-					
-					if (cb.getSegments().size() > 2) {
-						segments[2] = cb.getSegments().get(2);
-					}
 				}
 			}
 			controlBoxSegments.put(cb, segments);
