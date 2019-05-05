@@ -529,22 +529,7 @@ public class UPPAALTranslator extends Translator {
 							 "const int NPOINT = "+NPOINT+";\n"+
 					  		 "const int NSEG = "+segIDs.size()+";\n"+ 
 							 "const int NROUTELENGTH = "+ routeLength +";\n\n";
-		
-		String typesString = "typedef int[0, NTRAIN-1] t_id;\n" + 
-							"typedef int[0, NCB-1]  cB_id;\n" + 
-							"typedef int[0, NPOINT-1] p_id;\n" + 
-							"typedef int[0, NSEG-1] seg_id;\n" + 
-							"typedef int[-1, NTRAIN-1] tV_id;\n" + 
-							"typedef int[-1, NCB-1] cBV_id;\n" + 
-							"typedef int[-1, NPOINT-1] pV_id;\n" + 
-							"typedef int[-1, NSEG-1] segV_id;\n"+
-							"typedef int[0, NROUTELENGTH] cBRoute_i;\n" + 
-							"typedef int[0, NROUTELENGTH-1] segRoute_i;\r\n" +
-							"typedef struct {\r\n" + 
-							"    cB_id cb;\r\n" + 
-							"    seg_id seg;\r\n" + 
-							"} reservation;\n\n";
-		
+				
 		//Limits
 		String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
 							  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
@@ -600,12 +585,29 @@ public class UPPAALTranslator extends Translator {
 		pointSettingsString += "};\n\n";
 		
 		return "<declaration>\n" + "//"+n.getName()+"\n" +  sizesString + 
-				typesString + limitsString + segRouteString + 
+				getTypeDefinitions() + limitsString + segRouteString + 
 				cbRouteString + cbsString + initResString + 
 				pointsString + pointSettingsString + 
 				getChannels() + getWellFormednessFunctions();
 	}
 	
+	private String getTypeDefinitions() {
+		return "typedef int[0, NTRAIN-1] t_id;\n" + 
+				"typedef int[0, NCB-1]  cB_id;\n" + 
+				"typedef int[0, NPOINT-1] p_id;\n" + 
+				"typedef int[0, NSEG-1] seg_id;\n" + 
+				"typedef int[-1, NTRAIN-1] tV_id;\n" + 
+				"typedef int[-1, NCB-1] cBV_id;\n" + 
+				"typedef int[-1, NPOINT-1] pV_id;\n" + 
+				"typedef int[-1, NSEG-1] segV_id;\n"+
+				"typedef int[0, NROUTELENGTH] cBRoute_i;\n" + 
+				"typedef int[0, NROUTELENGTH-1] segRoute_i;\r\n" +
+				"typedef struct {\r\n" + 
+				"    cB_id cb;\r\n" + 
+				"    seg_id seg;\r\n" + 
+				"} reservation;\n\n";
+	}
+
 	private String getWellFormednessFunctions() {
 		return "int nextSegment(cB_id cb, seg_id s){\n" + 
 				"    int s1 = cBs[cb][0];\n" + 
