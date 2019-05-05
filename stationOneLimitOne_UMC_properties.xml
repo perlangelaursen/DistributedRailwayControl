@@ -1,0 +1,54 @@
+
+//NO COLLISION
+AG((~ccCol(t0,t1) & ~hcCol(t0,t1) & ~hhCol(t0,t1)) & (~ccCol(t1,t0) & ~hcCol(t1,t0) & ~hhCol(t1,t0)))
+
+//NO DERAILMENT
+//If a train is in a critical section, the point in that section is not in the middle of switching
+AG(([passing(t0, cb1)] ~inSwitching(p0)) & ([passing(t0, cb2)] ~inSwitching(p1)) & ([passing(t1, cb2)] ~inSwitching(p1)) & ([passing(t1, cb1)] ~inSwitching(p0)))
+//If a train is in a critical section, then the segments that it is moving on are connected
+AG(([passing(t0, cb1)] (doublePos(t0,0,2) & connects(cb1,0,2))) & ([passing(t0, cb2)] (doublePos(t0,2,3) & connects(cb2,2,3))) & ([passing(t1, cb2)] (doublePos(t1,3,1) & connects(cb2,3,1))))
+
+//OPERATION REQUIREMENTS: RESERVE
+//A reservation is only requested if the requested segment is a part of the requesting train's route
+~EF{reqSegS(t0,1) | reqSegS(t1,0) | reqSegS(t1,2)}
+//A reservation is only requested if the control box that a train contacts is a part of the train's route
+~EF{reqSegAt(t0,cb0) | reqSegAt(t1,cb0) | reqSegAt(t1,cb3)}
+//A reservation is only successful if the requested segment is associated with the control box that receives the request and if it is not already reserved
+AG((resOK(cb0,0) -> segFree(cb0,0)) & (resOK(cb1,0) -> segFree(cb1,0)) & (resOK(cb1,1) -> segFree(cb1,1)) & (resOK(cb1,2) -> segFree(cb1,2)) & (resOK(cb2,1) -> segFree(cb2,1)) & (resOK(cb2,2) -> segFree(cb2,2)) & (resOK(cb2,3) -> segFree(cb2,3)) & (resOK(cb3,3) -> segFree(cb3,3)))
+
+//OPERATION REQUIREMENTS: LOCK
+//A train never has more locks than the lock limit
+~EF(lockLimitExceeded(t0) | lockLimitExceeded(t1))
+//A lock is only requested if the involved switch box is in the route of the requesting train
+~EF{reqLock(t0,cb0) | reqLock(t1,cb0) | reqLock(t1,cb3)}
+//A lock is only requested if the requesting train has the reservation for the two segments at the switch box
+AG(([reqLocking(t0,cb1,0,2)] -> (reserved(t0,0,cb1) & reserved(t0,2,cb1))) & ([reqLocking(t0,cb2,2,3)] -> (reserved(t0,2,cb2) & reserved(t0,3,cb2))) & ([reqLocking(t1,cb2,3,1)] -> (reserved(t1,3,cb2) & reserved(t1,1,cb2))))
+//A lock is only successful if the point involved in the request was unlocked prior to the request
+AG((inSwitched(cb0) -> lockedBy(cb0,null)) & (inSwitched(cb1) -> lockedBy(cb1,null)) & (inSwitched(cb2) -> lockedBy(cb2,null)) & (inSwitched(cb3) -> lockedBy(cb3,null)))
+//A switch is only requested if the requested connection is of segments that are adjacent in the train's route
+~EF{reqLockingS(t0,0,0) | reqLockingS(t0,0,1) | reqLockingS(t0,0,3) | reqLockingS(t0,1,0) | reqLockingS(t0,1,1) | reqLockingS(t0,1,2) | reqLockingS(t0,1,3) | reqLockingS(t0,2,0) | reqLockingS(t0,2,1) | reqLockingS(t0,2,2) | reqLockingS(t1,0,0) | reqLockingS(t1,0,1) | reqLockingS(t1,0,2) | reqLockingS(t1,0,3) | reqLockingS(t1,2,0) | reqLockingS(t1,2,1) | reqLockingS(t1,2,2) | reqLockingS(t1,2,3) | reqLockingS(t1,3,0) | reqLockingS(t1,3,2) | reqLockingS(t1,3,3)}
+//A switch is only successful if the requested conenction is of the stem segment and plus or minus segment of the switch box
+AG(([reqLocking(t0,cb1,0,2)] canConnect(cb1,0,2)) & ([reqLocking(t0,cb2,2,3)] canConnect(cb2,2,3)) & ([reqLocking(t1,cb2,3,1)] canConnect(cb2,3,1)))
+//A control box only switches and locks its point if no train is in its critical section
+AG(([switching(cb0)] (~inCrit(cb0,t0) & ~inCrit(cb0,t1))) & ([switching(cb1)] (~inCrit(cb1,t0) & ~inCrit(cb1,t1))) & ([switching(cb2)] (~inCrit(cb2,t0) & ~inCrit(cb2,t1))) & ([switching(cb3)] (~inCrit(cb3,t0) & ~inCrit(cb3,t1))))
+
+//OPERATION REQUIREMENTS: PASS
+//A train only passes a switch box if it has been locked for the train
+AG(((doublePos(t0,0,2) & isSwitchBox(cb1)) -> locked(t0,cb1)) & ((doublePos(t0,2,3) & isSwitchBox(cb2)) -> locked(t0,cb2)) & ((doublePos(t1,3,1) & isSwitchBox(cb2)) -> locked(t1,cb2)))
+//A train never passes the last control box on its route
+~EF{passing(t0,cb3) & passing(t1,cb1)}
+//A train only enters a segment that it has the full reservation of
+AG((doublePos(t0,0,2) -> (reserved(t0,2,cb1) & reserved(t0,2,cb2))) & (doublePos(t0,2,3) -> (reserved(t0,3,cb2) & reserved(t0,3,cb3))) & (doublePos(t1,3,1) -> (reserved(t1,1,cb2) & reserved(t1,1,cb1))))
+
+//CONSISTENCY
+//Reservation consistency: The reservations saved in the state space of a Train are also saved in the state spaces of the involved CBs
+AG((reserved(t0,0,cb1) -> reservedBy(cb1,0,t0)) & (reserved(t0,0,cb2) -> reservedBy(cb2,0,t0)) & (reserved(t0,2,cb2) -> reservedBy(cb2,2,t0)) & (reserved(t0,2,cb3) -> reservedBy(cb3,2,t0)) & (reserved(t1,3,cb2) -> reservedBy(cb2,3,t1)) & (reserved(t1,3,cb1) -> reservedBy(cb1,3,t1)))
+//Lock consistency: The locks saved in the state space of a Train are also saved in the state spaces of the involved CBs
+AG((locked(t0,cb0) -> lockedBy(cb0,t0)) & (locked(t0,cb1) -> lockedBy(cb1,t0)) & (locked(t0,cb2) -> lockedBy(cb2,t0)) & (locked(t0,cb3) -> lockedBy(cb3,t0)) & (locked(t1,cb3) -> lockedBy(cb3,t1)) & (locked(t1,cb2) -> lockedBy(cb2,t1)) & (locked(t1,cb1) -> lockedBy(cb1,t1)))
+//Point consistency: A CB's connected information is consistent with its Point's position
+AG(((connects(cb1,0,2) & ~inSwitching(cb1)) -> inPlus(p0)) & ((connects(cb1,0,1) & ~inSwitching(cb1)) -> ~inPlus(p0)) & ((connects(cb2,3,2) & ~inSwitching(cb2)) -> inPlus(p1)) & ((connects(cb2,3,1) & ~inSwitching(cb2)) -> ~inPlus(p1)))
+//Position consistency: The train position saved in a TCC is consistent with the train's actual position
+AG((doublePos(t0,0,2) -> connects(cb1,0,2)) & (doublePos(t0,2,3) -> connects(cb2,2,3)) & (doublePos(t1,3,1) -> connects(cb2,3,1)))
+//LIVENESS
+EF All_Trains_Arrive
+
