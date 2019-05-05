@@ -11,39 +11,23 @@ public class UMCTranslator extends Translator {
 	@Override
 	protected String generateCode(Network n) {
 		if(n != null) {
-			String classes = createTrainClass(n.getReserveLimit(), n.getLockLimit())+createCBClass()+createPointClass();
-			
-			String objectString = "\n"+"Objects";
-			
-			//Create trains
-			String trainsString = getTrainObjectsString(n);
-			
-			//Create control boxes
-			String cbsString = getCBObjectsString(n);
-			
-			//Create points
-			String pointsString = getPointObjectsString(n); 
+			String classesString = generateTrainClass(n.getReserveLimit(), n.getLockLimit())+getCBClass()+getPointClass();
+      
+			//Objects
+			String trainsString = generateTrainObjects(n);
+			String cbsString = generateCBObjects(n);
+			String pointsString = generatePointObjects(n); 
+			String objectString = "\n"+"Objects" + "\n" + trainsString + "\n" + cbsString + "\n" + pointsString;
 			
 			//Create abstractions
-			String abstractionsString = getAbstractionsString(n);
+			String abstractionsString = generateAbstractions(n);
 			
-			//Generate file
-			PrintWriter writer;
-			try {
-				writer = new PrintWriter(n.getName()+"_UMC.txt", "UTF-8");
-				writer.println(classes);
-				writer.println(objectString + "\n" + trainsString + "\n" + cbsString + "\n" + pointsString + "\n" + abstractionsString);
-//				System.out.println(trainsString + cbsString + pointsString + abstractionsString);
-				writer.close();
-				return "Model file successfully generated.";
-			} catch (FileNotFoundException | UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+			return classesString + "\n" + objectString + "\n" + abstractionsString;
 		}
 		return "An error occurred";
 	}
 
-	private String getAbstractionsString(Network n) {
+	private String generateAbstractions(Network n) {
 		String abs = "Abstractions{\n  State: ";
 		for(Train t : n.getTrains()) {
 			abs += "inState(t"+trainIDs.get(t)+".Arrived) and ";
@@ -118,7 +102,6 @@ public class UMCTranslator extends Translator {
 					//A TCC only requests locks for connections that it has reserved
 					//Note: Train only requests switching/locking for segments in route
 					//Note: Train only requests switching/locking of CBs in route
-//					prop14 += "(locked("+tid+","+cbid+") -> (reserved("+tid+","+stem+","+cbid+") & (reserved("+tid+","+plus+","+cbid+") | reserved("+tid+","+minus+","+cbid+")))) & ";
 					prop14 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] -> (reserved("+tid+","+s1+","+cbid+") & reserved("+tid+","+s2+","+cbid+"))) & ";
 
 					String cbid2 = "cb"+cbIDs.get(t.getBoxRoute().get(i+1));
@@ -255,14 +238,13 @@ public class UMCTranslator extends Translator {
 						"    and "+cbid+".segments["+i+"] = $s\n" + 
 						"    and "+cbid+".res["+i+"] = $t -> reservedBy("+cbid+",$s,$t)\n";
 			}
+
 			abs += "  State: inState("+cbid+".Switched) -> inSwitched("+cbid+")\n";
-//			abs += "  State: "+cbid+".lockedBy = null -> unlocked("+cbid+")\n";
 			
 			//A lock is only ever given if it is available
 			prop11 += "(inSwitched("+cbid+") -> lockedBy("+cbid+",null)) & ";
 			
 			//A control box only switches and locks its point if no train is in its critical section
-//			prop12 += "((inSwitched("+cbid+") | inSwitching("+cbid+")) -> (";
 			prop12 += "([switching("+cbid+")] (";
 			for(Train t : n.getTrains()) {
 				String tid = "t"+trainIDs.get(t);
@@ -348,14 +330,27 @@ public class UMCTranslator extends Translator {
 
 		props += "//LIVENESS\n";
 		props += prop1;
+		printProperties(n.getName(), props);
 		
-
-		System.out.println(props);
 		abs += "}";
 		return abs;
 	}
 	
-	private String getPointObjectsString(Network n) {
+	private void printProperties(String name, String s) {
+		if(s != null) {
+			System.out.println(s);
+			PrintWriter printWriter;
+			try {
+				printWriter = new PrintWriter(name+"_"+getFileNameDetails()+"_properties"+".xml", "UTF-8");
+				printWriter.println(s);
+				printWriter.close();
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private String generatePointObjects(Network n) {
 		String ps = "";
 		for(ControlBox cb : n.getControlBoxes()) {
 			if(cb instanceof SwitchBox) {
@@ -369,7 +364,7 @@ public class UMCTranslator extends Translator {
 		return ps;
 	}
 
-	private String getCBObjectsString(Network n) {
+	private String generateCBObjects(Network n) {
 		String cbs = "";
 		for(ControlBox cb : n.getControlBoxes()) {
 			cbs += "cb"+cbIDs.get(cb)+":CB(segments => [";
@@ -411,7 +406,7 @@ public class UMCTranslator extends Translator {
 		return cbs;
 	}
 
-	private String getTrainObjectsString(Network n) {
+	private String generateTrainObjects(Network n) {
 		String ts = "";
 		for(Train t : n.getTrains()) {
 			//Segments
@@ -455,7 +450,7 @@ public class UMCTranslator extends Translator {
 		return ts;
 	}
 
-	private String createPointClass() {
+	private String getPointClass() {
 		return "class Point is\n" + 
 				"Signals\n" + 
 				"    switchPoint\n" + 
@@ -470,7 +465,7 @@ public class UMCTranslator extends Translator {
 				"end Point;\n";
 	}
 
-	private String createCBClass() {
+	private String getCBClass() {
 		return "Class CB is\n" + 
 				"Signals\n" + 
 				"    reqSeg(it:Train, s:int),\n" + 
@@ -600,7 +595,7 @@ public class UMCTranslator extends Translator {
 				"end CB;\n";
 	}
 
-	private String createTrainClass(int resLimit, int lockLimit) {
+	private String generateTrainClass(int resLimit, int lockLimit) {
 		return "Class Train is\n" + 
 				"Signals\n" + 
 				"    OK, notOK\n" + 
@@ -696,4 +691,10 @@ public class UMCTranslator extends Translator {
 				"end Train;\n";
 	}
 
+	@Override
+	protected String getFileNameDetails() {
+		return "UMC";
+	}
+
 }
+
