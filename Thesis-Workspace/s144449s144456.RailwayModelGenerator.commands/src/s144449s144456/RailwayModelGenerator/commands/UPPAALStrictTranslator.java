@@ -3,7 +3,7 @@ package s144449s144456.RailwayModelGenerator.commands;
 public class UPPAALStrictTranslator extends UPPAALTranslator {
 	
 	@Override
-	protected String getTrainModel() {
+	protected String getTrainTemplate() {
 		return "<template>\n" + 
 				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
 				"		<parameter>t_id id</parameter>\n" + 

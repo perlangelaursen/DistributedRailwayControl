@@ -10,10 +10,10 @@ public class UPPAALTranslator extends Translator {
 					"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n" + 
 					"<nta>" +
 					generateDeclarations(n) + 
-					getTrainModel() +
-					getInitializerModel() + 
-					getCBModel() +
-					getPointModel() +
+					getTrainTemplate() +
+					getInitializerTemplate() + 
+					getCBTemplate() +
+					getPointTemplate() +
 					"<system>system Initializer, Train, CB, Point;</system>\n" + 
 					getQueries() + 
 					"</nta>\n";
@@ -23,7 +23,7 @@ public class UPPAALTranslator extends Translator {
 		return null;
 	}
 
-	protected String getTrainModel() {
+	protected String getTrainTemplate() {
 		return "<template>\n" + 
 				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
 				"		<parameter>t_id id</parameter>\n" + 
@@ -222,7 +222,7 @@ public class UPPAALTranslator extends Translator {
 				"	</template>\n";
 	};
 	
-	protected String getCBModel() {
+	protected String getCBTemplate() {
 		return "<template>\n" + 
 				"		<name>CB</name>\n" + 
 				"		<parameter>cB_id id</parameter>\n" + 
@@ -440,7 +440,7 @@ public class UPPAALTranslator extends Translator {
 				"	</template>\n";
 	}
 	
-	protected String getPointModel() {
+	protected String getPointTemplate() {
 		return "<template>\n" + 
 				"		<name>Point</name>\n" + 
 				"		<parameter>p_id id</parameter>\n" + 
@@ -503,7 +503,7 @@ public class UPPAALTranslator extends Translator {
 				"	</template>\n";
 	}
 	
-	private String getInitializerModel() {
+	private String getInitializerTemplate() {
 		return "<template>\n" + 
 				"		<name>Initializer</name>\n" + 
 				"		<location id=\"id6\" x=\"0\" y=\"136\">\n" + 
