@@ -64,7 +64,6 @@ public abstract class Translator extends AbstractHandler{
 		return null;
 	}
 
-
 	private Network getNetwork(Object o) {
 		if (o instanceof Network) {
 			return (Network) o;
