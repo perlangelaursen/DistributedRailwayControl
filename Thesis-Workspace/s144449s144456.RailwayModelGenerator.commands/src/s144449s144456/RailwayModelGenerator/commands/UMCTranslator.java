@@ -352,14 +352,11 @@ public class UMCTranslator extends Translator {
 
 	private String generatePointObjects(Network n) {
 		String ps = "";
-		for(ControlBox cb : n.getControlBoxes()) {
-			if(cb instanceof SwitchBox) {
-				SwitchBox sb = (SwitchBox) cb;
-				ps += "p"+pointIDs.get(sb)+":Point(inPlus => ";
-				ps += (sb.getConnected() == PointSetting.PLUS) ? "true" : "false";
-				
-				ps += ", cb => cb"+cbIDs.get(sb)+");\n";
-			}
+		for(SwitchBox sb : pointIDs.keySet()) {
+			ps += "p"+pointIDs.get(sb)+":Point(inPlus => ";
+			ps += (sb.getConnected() == PointSetting.PLUS) ? "true" : "false";
+			
+			ps += ", cb => cb"+cbIDs.get(sb)+");\n";
 		}
 		return ps;
 	}
@@ -390,8 +387,7 @@ public class UMCTranslator extends Translator {
 			cbs += ", connected => ";
 			//point
 			if(!(cb instanceof SwitchBox)) {
-				String sid = ""+segIDs.get(controlBoxSegments.get(cb)[1]);
-				cbs += sid;
+				cbs += ""+segIDs.get(controlBoxSegments.get(cb)[1]);
 			} else {
 				SwitchBox sb = (SwitchBox) cb;
 				if(sb.getConnected() == PointSetting.PLUS) {
@@ -418,34 +414,20 @@ public class UMCTranslator extends Translator {
 			ts += "curSeg => "+segIDs.get(t.getRoute().get(0))+", ";
 			
 			//Control boxes
-			String boxIDs = "boxIDs => [";
 			String requiresLock = "requiresLock => [";
+			String lockIndex = "";
 			ts += "boxes => [";
-			for(int j = 0; j < t.getBoxRoute().size(); j++) {
-				ControlBox cb = t.getBoxRoute().get(j);
+			for(int i = 0; i < t.getBoxRoute().size(); i++) {
+				ControlBox cb = t.getBoxRoute().get(i);
 				int cbID = cbIDs.get(cb);
 				ts += "cb"+cbID+",";
-				boxIDs += cbID+",";
 				requiresLock += (cb instanceof SwitchBox)? "true," : "false,";
-			}
-
-			requiresLock = requiresLock.substring(0, requiresLock.length() - 1)+"]";
-			boxIDs = boxIDs.substring(0,boxIDs.length()-1)+"]";
-			ts = ts.substring(0, ts.length() - 1)+"], "+boxIDs+", "+requiresLock;
-			
-			if(t.getRoute().size() > 1) {
-				ts += ", "+"lockIndex => ";
-				int lockIndex = 0;
-				for(int j = 1; j < t.getBoxRoute().size(); j++) {
-					if(t.getBoxRoute().get(j) instanceof SwitchBox) {
-						lockIndex = j;
-						break;
-					}
+				if(lockIndex.equals("") && cb instanceof SwitchBox) {
+					lockIndex = ", lockIndex => "+i;
 				}
-				ts += lockIndex;
 			}
-			
-			ts += ");\n";
+			requiresLock = requiresLock.substring(0, requiresLock.length() - 1)+"]";
+			ts = ts.substring(0, ts.length() - 1)+"], "+requiresLock+lockIndex+");\n";
 		}
 		return ts;
 	}
@@ -602,7 +584,6 @@ public class UMCTranslator extends Translator {
 				"Vars\n" + 
 				"    segments;\n" + 
 				"    boxes;\n" + 
-				"    boxIDs;\n" + 
 				"    \n" + 
 				"    curSeg:int;\n" + 
 				"\n" + 
@@ -618,7 +599,6 @@ public class UMCTranslator extends Translator {
 				"    headSeg:int = -1;\n" + 
 				"    locks:int = 0;\n" + 
 				"\n" + 
-				"    //TEMP\n" + 
 				"    resLimit = "+resLimit+";\n" + 
 				"    lockLimit = "+lockLimit+";\n" + 
 				"Transitions\n" + 
