@@ -59,6 +59,7 @@ public class UMCTranslator extends Translator {
 		abs += "  Action: $t:$cb.pass -> passing($t,$cb)\n";
 		abs += "  Action: $t:$cb.reqLock($t,$s1,$s2) -> reqLocking($t,$cb,$s1,$s2)\n";
 		abs += "  Action: $t:*.reqLock($t,$s1,$s2) -> reqLockingS($t,$s1,$s2)\n";
+		abs += "  Action: $t:$cb.reqLock($t,*,*) -> reqLockingAt($t,$cb)\n";
 		abs += "  Action: $t:$cb.reqSeg($t,*) -> reqSegAt($t,$cb)\n";
 		abs += "  Action: $t:*.reqSeg($t,$s) -> reqSegS($t,$s)\n";
 		abs += "  Action: $cb:*.switchPoint -> switching($cb)\n";
@@ -168,7 +169,7 @@ public class UMCTranslator extends Translator {
 				String cbid = "cb"+cbIDs.get(cb);
 				if(!t.getBoxRoute().contains(cb) || cb == t.getBoxRoute().getFirst()) {
 					//A TCC only requests locks at switch boxes on its route
-					prop15 += "reqLock("+tid+","+cbid+") | ";
+					prop15 += "reqLockingAt("+tid+","+cbid+") | ";
 					//A TCC only reserves at control boxes on its route
 					prop18 += "reqSegAt("+tid+","+cbid+") | ";
 				}
