@@ -1792,7 +1792,6 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
-j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
@@ -1800,15 +1799,15 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot data u 1:2 w points title 'First model', \
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted', \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
      g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global', \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel', \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC', \
+     data u 1:6 w points title 'UMC' linecolor rgb "black", \
      j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j)
 #+end_src
 
@@ -1851,21 +1850,20 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
-j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h)
 #+end_src
 
 #+RESULTS:
