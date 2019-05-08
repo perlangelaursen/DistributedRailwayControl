@@ -22,7 +22,7 @@
 | Nærumbanen (2T)            |   24.112 |   24.158 |   24.186 |   24.152 |
 | Nærumbanen (3T)            |  648.154 |  655.805 |  660.029 |  654.663 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitOneMoveMemory
@@ -45,7 +45,7 @@
 | Nærumbanen (2T)            |  78.428 |  78.824 |  78.828 |  78.693 |
 | Nærumbanen (3T)            | 384.220 | 385.180 | 385.192 | 384.864 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -70,7 +70,7 @@
 | Nærumbanen (2T)            |   24.004 |   24.091 |   24.111 |   24.069 |
 | Nærumbanen (3T)            |  664.594 |  660.006 |  657.312 |  660.637 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitOneCriticalMemory
@@ -93,7 +93,7 @@
 | Nærumbanen (2T)            |  78.428 |  78.800 |  78.808 |  78.679 |
 | Nærumbanen (3T)            | 382.556 | 383.184 | 383.544 | 383.095 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -118,7 +118,7 @@
 | Nærumbanen (2T)            |   24.081 |   24.345 |   24.339 |   24.255 |
 | Nærumbanen (3T)            |  671.008 |  653.381 |  663.635 |  662.675 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitOneCollisionMemory
@@ -141,7 +141,7 @@
 | Nærumbanen (2T)            |  78.436 |   78.828 |  78.888 |  78.717 |
 | Nærumbanen (3T)            | 382.548 |  383.224 | 383.544 | 383.105 |
 |----------------------------+---------+----------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -167,7 +167,7 @@
 | Nærumbanen (2T)            |   23.900 |   23.947 |   23.908 |   23.918 |
 | Nærumbanen (3T)            |  662.400 |  662.405 |  669.196 |  664.667 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitOneArriveMemory
@@ -190,7 +190,7 @@
 | Nærumbanen (2T)            |  78.392 |  78.704 |  78.704 |  78.600 |
 | Nærumbanen (3T)            | 382.464 | 383.120 | 383.192 | 382.925 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 ** Limit Two
@@ -210,13 +210,13 @@
 | Station Six                |  176.213 |  175.867 |  176.697 |  176.259 |
 | Station Eight              | 1127.661 | 1124.994 | 1128.751 | 1127.135 |
 | Station Ten                | 4311.035 | 4309.434 | 4313.687 | 4311.385 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |    0.028 |    0.034 |    0.023 |    0.028 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  114.581 |  114.372 |  114.491 |  114.481 |
 | Nærumbanen (3T)            | 4375.625 | 4437.235 | 4543.133 | 4451.998 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitTwoMoveMemory
@@ -233,13 +233,13 @@
 | Station Six                |  152.812 |  152.908 |  152.908 |  152.876 |
 | Station Eight              |  422.192 |  422.384 |  422.392 |  422.323 |
 | Station Ten                |  954.604 |  954.948 |  954.960 |  954.837 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |    7.540 |    7.544 |    7.592 |    7.559 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  122.060 |  122.396 |  122.420 |  122.292 |
 | Nærumbanen (3T)            | 1834.760 | 1834.804 | 1834.812 | 1834.792 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -258,13 +258,13 @@
 | Station Six                |  172.488 |  172.487 |  173.026 |  172.667 |
 | Station Eight              | 1138.254 | 1136.482 | 1139.334 | 1138.023 |
 | Station Ten                | 4346.405 |  4327.87 | 4331.854 | 4335.376 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |     0.02 |    0.028 |    0.028 |    0.025 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  113.146 |  112.966 |  112.577 |  112.896 |
 | Nærumbanen (3T)            | 4616.238 | 4564.949 | 4581.939 | 4587.709 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitTwoCriticalMemory
@@ -287,7 +287,7 @@
 | Nærumbanen (2T)            |  122.032 |  122.124 |  122.368 |  122.175 |
 | Nærumbanen (3T)            | 1833.100 | 1833.140 | 1833.140 | 1833.127 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -307,13 +307,13 @@
 | Station Six                |  176.156 |  175.635 |  175.459 |  175.750 |
 | Station Eight              | 1144.312 | 1146.043 | 1144.102 | 1144.819 |
 | Station Ten                | 4327.887 | 4350.655 | 4352.747 | 4343.763 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |    0.024 |    0.029 |    0.022 |    0.025 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  111.647 |  111.867 |  111.601 |  111.705 |
 | Nærumbanen (3T)            | 4707.002 | 4711.929 | 4683.026 | 4700.652 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 **** Memory Usage Peak
@@ -331,13 +331,13 @@
 | Station Six                |  152.804 |  152.904 |  152.916 |  152.875 |
 | Station Eight              |  422.196 |  422.388 |  422.396 |  422.327 |
 | Station Ten                |  955.772 |  954.604 |  954.952 |  955.109 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |    7.536 |    7.588 |    7.600 |    7.575 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  122.040 |  122.144 |  122.404 |  122.196 |
 | Nærumbanen (3T)            | 1833.096 | 1833.144 | 1833.148 | 1833.129 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -357,13 +357,13 @@
 | Station Six                |  178.496 |  176.697 |  177.664 |  177.619 |
 | Station Eight              | 1134.646 | 1132.922 | 1133.608 | 1133.725 |
 | Station Ten                | 4318.385 | 4306.554 | 4316.069 | 4313.669 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |    0.021 |    0.025 |    0.031 |    0.026 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  113.356 |  113.335 |  113.301 |  113.331 |
 | Nærumbanen (3T)            | 4768.012 | 4734.325 | 4725.702 | 4742.680 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RCSLimitTwoArriveMemory
@@ -380,13 +380,13 @@
 | Station Six                |  152.688 |  152.764 |  152.764 |  152.739 |
 | Station Eight              |  421.808 |  421.980 |  421.980 |  421.923 |
 | Station Ten                |  953.328 |  953.672 |  953.672 |  953.557 |
-| Station Twelfth            |      DNA |      DNA |      DNA |    0.000 |
+| Station Twelfth            |          |          |          |          |
 | Two trains same direction  |    7.504 |    7.504 |    7.504 |    7.504 |
-| Four trains same direction |      DNF |      DNF |      DNF |    0.000 |
+| Four trains same direction |          |          |          |          |
 | Nærumbanen (2T)            |  122.016 |  122.104 |  122.116 |  122.079 |
 | Nærumbanen (3T)            | 1833.016 | 1833.052 | 1833.052 | 1833.040 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 * RCS Restricted
@@ -413,7 +413,7 @@
 | Nærumbanen (2T)            |   20.145 |   19.258 |   19.238 |   19.547 |
 | Nærumbanen (3T)            |  317.762 |  318.903 |  324.661 |  320.442 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitOneMoveMemory
@@ -436,7 +436,7 @@
 | Nærumbanen (2T)            | 117.620 | 118.440 | 118.644 | 118.235 |
 | Nærumbanen (3T)            | 289.164 | 290.112 | 290.112 | 289.796 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -461,7 +461,7 @@
 | Nærumbanen (2T)            |   19.946 |   20.036 |   20.275 |   20.086 |
 | Nærumbanen (3T)            |  332.490 |  333.240 |  331.178 |  332.303 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitOneCriticalMemory
@@ -484,7 +484,7 @@
 | Nærumbanen (2T)            | 116.124 | 116.940 | 117.144 | 116.736 |
 | Nærumbanen (3T)            | 286.900 | 287.556 | 287.852 | 287.436 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -510,7 +510,7 @@
 | Nærumbanen (2T)            |   19.309 |   18.324 |   18.342 |   18.658 |
 | Nærumbanen (3T)            |  323.919 |  321.851 |  320.536 |  322.102 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitOneCollisionMemory
@@ -533,7 +533,7 @@
 | Nærumbanen (2T)            | 118.312 | 119.176 | 119.984 | 119.157 |
 | Nærumbanen (3T)            | 287.632 | 288.220 | 288.584 | 288.145 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
@@ -558,7 +558,7 @@
 | Nærumbanen (2T)            |   20.903 |   20.225 |   20.123 |   20.417 |
 | Nærumbanen (3T)            |  334.085 |  331.171 |  336.187 |  333.814 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitOneArriveMemory
@@ -581,7 +581,7 @@
 | Nærumbanen (2T)            | 114.784 | 115.532 | 115.716 | 115.344 |
 | Nærumbanen (3T)            | 285.640 | 286.228 | 286.300 | 286.056 |
 |----------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -608,7 +608,7 @@
 | Nærumbanen (2T)            |   20.171 |   20.407 |   20.577 |   20.385 |
 | Nærumbanen (3T)            |  407.498 |  410.378 |  404.128 |  407.335 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitTwoMoveMemory
@@ -631,7 +631,7 @@
 | Nærumbanen (2T)            |  118.712 |  119.532 |  119.740 |  119.328 |
 | Nærumbanen (3T)            |  316.156 |  316.488 |  316.500 |  316.381 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -656,7 +656,7 @@
 | Nærumbanen (2T)            |   19.936 |   19.731 |   19.947 |   19.871 |
 | Nærumbanen (3T)            |  416.936 |  415.357 |  415.144 |  415.812 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitTwoCriticalMemory
@@ -679,7 +679,7 @@
 | Nærumbanen (2T)            |  115.860 |  116.676 |  116.884 |  116.473 |
 | Nærumbanen (3T)            |  311.716 |  312.044 |  312.044 |  311.935 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -704,7 +704,7 @@
 | Nærumbanen (2T)            |   20.008 |   19.764 |   19.959 |   19.910 |
 | Nærumbanen (3T)            |  395.981 |  393.703 |  393.868 |  394.517 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitTwoCollisionMemory
@@ -727,7 +727,7 @@
 | Nærumbanen (2T)            |  112.928 |  113.756 |  113.976 |  113.553 |
 | Nærumbanen (3T)            |  313.656 |  313.988 |  314.000 |  313.881 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
@@ -752,7 +752,7 @@
 | Nærumbanen (2T)            |   20.173 |   19.960 |   20.082 |   20.072 |
 | Nærumbanen (3T)            |  432.761 |  400.223 |  409.341 |  414.108 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: RestrictedLimitTwoArriveMemory
@@ -775,7 +775,7 @@
 | Nærumbanen (2T)            |  114.440 |  115.208 |  115.376 |  115.008 |
 | Nærumbanen (3T)            |  312.232 |  312.752 |  312.764 |  312.583 |
 |----------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 * RCS Global
@@ -799,7 +799,7 @@
 | Nærumbanen (2T)         |   30.402 |   31.323 |   30.141 |   30.622 |
 | Nærumbanen (3T)         |  609.778 |  609.493 |  608.663 |  609.311 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitOneMoveMemory
@@ -819,7 +819,7 @@
 | Nærumbanen (2T)         | 113.668 | 114.688 | 114.792 | 114.383 |
 | Nærumbanen (3T)         | 309.836 | 310.420 | 310.736 | 310.331 |
 |-------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -842,7 +842,7 @@
 | Nærumbanen (2T)         |   29.375 |   29.997 |   29.294 |   29.555 |
 | Nærumbanen (3T)         |  634.538 |  625.064 |  623.036 |  627.546 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitOneCriticalMemory
@@ -862,7 +862,7 @@
 | Nærumbanen (2T)         | 111.964 | 112.992 | 113.096 | 112.684 |
 | Nærumbanen (3T)         | 309.812 | 310.700 | 310.728 | 310.413 |
 |-------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -884,7 +884,7 @@
 | Nærumbanen (2T)         |   27.643 |   28.318 |   28.409 |   28.123 |
 | Nærumbanen (3T)         |  589.217 |  596.547 |  592.764 |  592.843 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitOneCollisionMemory
@@ -904,7 +904,7 @@
 | Nærumbanen (2T)         | 111.960 | 112.988 | 112.996 | 112.648 |
 | Nærumbanen (3T)         | 309.820 | 310.408 | 310.736 | 310.321 |
 |-------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
@@ -926,7 +926,7 @@
 | Nærumbanen (2T)         |   28.386 |   28.808 |   28.951 |   28.715 |
 | Nærumbanen (3T)         |  642.802 |  642.096 |  635.737 |  640.212 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitOneArriveMemory
@@ -946,7 +946,7 @@
 | Nærumbanen (2T)         | 111.888 | 112.812 | 112.820 | 112.507 |
 | Nærumbanen (3T)         | 309.736 | 310.312 | 310.464 | 310.171 |
 |-------------------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 ** Limit Two
@@ -969,7 +969,7 @@
 | Nærumbanen (2T)         |  132.497 |  131.916 |  133.614 |  132.676 |
 | Nærumbanen (3T)         | 4627.806 | 4562.283 | 4565.455 | 4585.181 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitTwoMoveMemory
@@ -989,7 +989,7 @@
 | Nærumbanen (2T)         |  152.988 |  154.016 |  154.132 |  153.712 |
 | Nærumbanen (3T)         | 1303.376 | 1303.416 | 1303.432 | 1303.408 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -1011,7 +1011,7 @@
 | Nærumbanen (2T)         |  132.551 |  134.115 |  133.177 |  133.281 |
 | Nærumbanen (3T)         | 4328.896 | 4311.326 | 4319.310 | 4319.844 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitTwoCriticalMemory
@@ -1031,7 +1031,7 @@
 | Nærumbanen (2T)         |  151.420 |  152.436 |  152.560 |  152.139 |
 | Nærumbanen (3T)         | 1303.352 | 1303.392 | 1303.392 | 1303.379 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -1053,7 +1053,7 @@
 | Nærumbanen (2T)         |  133.816 |  133.661 |  133.648 |  133.708 |
 | Nærumbanen (3T)         | 4380.034 | 4368.982 | 4373.205 | 4374.074 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitTwoCollisionMemory
@@ -1073,7 +1073,7 @@
 | Nærumbanen (2T)         |  151.368 |  152.404 |  152.424 |  152.065 |
 | Nærumbanen (3T)         | 1303.336 | 1303.388 | 1303.408 | 1303.377 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
@@ -1095,7 +1095,7 @@
 | Nærumbanen (2T)         |  131.425 |  130.869 |  132.489 |  131.594 |
 | Nærumbanen (3T)         | 4587.688 | 4593.748 | 4603.034 | 4594.823 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: GlobalLimitTwoArriveMemory
@@ -1115,7 +1115,7 @@
 | Nærumbanen (2T)         |  151.304 |  152.240 |  152.248 |  151.931 |
 | Nærumbanen (3T)         | 1303.276 | 1303.312 | 1303.312 | 1303.300 |
 |-------------------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 * RCS Cancel
@@ -1134,7 +1134,7 @@
 | Nærumbanen (2T) |   44.972 |   44.176 |   45.270 |   44.806 |
 | Nærumbanen (3T) | 1137.892 | 1136.126 | 1138.605 | 1137.541 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitOneMoveMemory
@@ -1149,7 +1149,7 @@
 | Nærumbanen (2T) | 127.520 | 128.484 | 128.716 | 128.240 |
 | Nærumbanen (3T) | 552.016 | 552.700 | 552.700 | 552.472 |
 |-----------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -1166,7 +1166,7 @@
 | Nærumbanen (2T) |   44.166 |   42.726 |   43.928 |   43.607 |
 | Nærumbanen (3T) | 1107.463 | 1105.787 | 1134.785 | 1116.012 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitOneCriticalMemory
@@ -1181,7 +1181,7 @@
 | Nærumbanen (2T) | 125.848 | 126.812 | 127.032 | 126.564 |
 | Nærumbanen (3T) | 550.272 | 550.296 | 550.272 | 550.280 |
 |-----------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -1198,7 +1198,7 @@
 | Nærumbanen (2T) |   42.576 |   43.328 |   43.498 |   43.134 |
 | Nærumbanen (3T) | 1121.852 | 1129.423 | 1129.642 | 1126.972 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitOneCollisionMemory
@@ -1213,7 +1213,7 @@
 | Nærumbanen (2T) | 125.832 | 126.796 | 127.016 | 126.548 |
 | Nærumbanen (3T) | 550.268 | 550.300 | 550.272 | 550.280 |
 |-----------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
@@ -1230,7 +1230,7 @@
 | Nærumbanen (2T) |   42.939 |   42.902 |   42.686 |   42.842 |
 | Nærumbanen (3T) | 1123.635 | 1124.439 | 1093.512 | 1113.862 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitOneArriveMemory
@@ -1245,7 +1245,7 @@
 | Nærumbanen (2T) | 125.760 | 126.624 | 126.864 | 126.416 |
 | Nærumbanen (3T) | 550.176 | 550.176 | 550.180 | 550.177 |
 |-----------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 ** Limit Two
@@ -1263,7 +1263,7 @@
 | Nærumbanen (2T) |   242.522 |   242.283 |   242.911 |   242.572 |
 | Nærumbanen (3T) | 10033.654 | 10092.504 | 10099.487 | 10075.215 |
 |-----------------+-----------+-----------+-----------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitTwoMoveMemory
@@ -1278,7 +1278,7 @@
 | Nærumbanen (2T) |  240.248 |  240.920 |  240.948 |  240.705 |
 | Nærumbanen (3T) | 3640.400 | 3640.416 | 3640.424 | 3640.413 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -1296,7 +1296,7 @@
 | Nærumbanen (2T) |   249.023 |   253.583 |  252.875 |   251.827 |
 | Nærumbanen (3T) | 10004.897 | 10072.137 | 9968.254 | 10015.096 |
 |-----------------+-----------+-----------+----------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitTwoCriticalMemory
@@ -1311,7 +1311,7 @@
 | Nærumbanen (2T) |  238.396 |  239.228 |  239.252 |  238.959 |
 | Nærumbanen (3T) | 3638.684 | 3638.700 | 3638.712 | 3638.699 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -1329,7 +1329,7 @@
 | Nærumbanen (2T) |  254.086 |  251.442 |  250.039 |  251.856 |
 | Nærumbanen (3T) | 9754.725 | 9692.086 | 9644.453 | 9697.088 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitTwoCollisionMemory
@@ -1344,7 +1344,7 @@
 | Nærumbanen (2T) |  238.384 |  239.212 |  239.240 |  238.945 |
 | Nærumbanen (3T) | 3638.672 | 3638.708 | 3638.728 | 3638.703 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -1362,7 +1362,7 @@
 | Nærumbanen (2T) |   245.720 |  241.710 |  241.961 |  243.130 |
 | Nærumbanen (3T) | 10032.713 | 9964.283 | 9963.516 | 9986.837 |
 |-----------------+-----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: CancelLimitTwoArriveMemory
@@ -1377,7 +1377,7 @@
 | Nærumbanen (2T) |  238.316 |  239.136 |  239.156 |  238.869 |
 | Nærumbanen (3T) | 3638.500 | 3638.592 | 3638.596 | 3638.563 |
 |-----------------+----------+----------+----------+----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 * UMC
@@ -1387,122 +1387,122 @@
 |-----------------+-------+--------+-------+---------|
 | Configuration   | First | Second | Third | Average |
 |-----------------+-------+--------+-------+---------|
-| Station One     | 0.156 | 0.162  | 0.154 |   0.157 |
-| Station Two     | 8.600 | 8.340  | 8.345 |   8.428 |
-| Station Four    | DNF   | DNF    | DNF   |   0.000 |
-| Station Six     | DNA   | DNA    | DNA   |   0.000 |
-| Station Eight   | DNA   | DNA    | DNA   |   0.000 |
-| Nærumbanen (2T) | DNA   | DNA    | DNA   |   0.000 |
-| Nærumbanen (3T) | DNA   | DNA    | DNA   |   0.000 |
+| Station One     | 0.156 |  0.162 | 0.154 |   0.156 |
+| Station Two     | 8.600 |  8.340 | 8.345 |   8.600 |
+| Station Four    |       |        |       |         |
+| Station Six     |       |        |       |         |
+| Station Eight   |       |        |       |         |
+| Nærumbanen (2T) |       |        |       |         |
+| Nærumbanen (3T) |       |        |       |         |
 |-----------------+-------+--------+-------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 *** No derailment (Critical section)
 #+TBLNAME: UMCLimitOneCriticalTime
 |-----------------+-------+--------+-------+---------|
 | Configuration   | First | Second | Third | Average |
 |-----------------+-------+--------+-------+---------|
-| Station One     | 0.164 | 0.161  | 0.161 |   0.162 |
-| Station Two     | 8.681 | 8.711  | 8.693 |   8.695 |
-| Station Four    | DNF   | DNF    | DNF   |   0.000 |
-| Station Six     | DNA   | DNA    | DNA   |   0.000 |
-| Station Eight   | DNA   | DNA    | DNA   |   0.000 |
-| Nærumbanen (2T) | DNA   | DNA    | DNA   |   0.000 |
-| Nærumbanen (3T) | DNA   | DNA    | DNA   |   0.000 |
+| Station One     | 0.164 |  0.161 | 0.161 |   0.162 |
+| Station Two     | 8.681 |  8.711 | 8.693 |   8.695 |
+| Station Four    |       |        |       |         |
+| Station Six     |       |        |       |         |
+| Station Eight   |       |        |       |         |
+| Nærumbanen (2T) |       |        |       |         |
+| Nærumbanen (3T) |       |        |       |         |
 |-----------------+-------+--------+-------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 *** No collision
 #+TBLNAME: UMCLimitOneCollisionTime
 |-----------------+--------+--------+--------+---------|
-| Configuration   | First  | Second | Third  | Average |
+| Configuration   |  First | Second |  Third | Average |
 |-----------------+--------+--------+--------+---------|
-| Station One     | 1.097  | 1.096  | 1.097  |   1.097 |
+| Station One     |  1.097 |  1.096 |  1.097 |   1.097 |
 | Station Two     | 68.506 | 68.710 | 68.655 |  68.624 |
-| Station Four    | DNF    | DNF    | DNF    |   0.000 |
-| Station Six     | DNA    | DNA    | DNA    |   0.000 |
-| Station Eight   | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (2T) | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (3T) | DNA    | DNA    | DNA    |   0.000 |
+| Station Four    |        |        |        |         |
+| Station Six     |        |        |        |         |
+| Station Eight   |        |        |        |         |
+| Nærumbanen (2T) |        |        |        |         |
+| Nærumbanen (3T) |        |        |        |         |
 |-----------------+--------+--------+--------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 *** Will arrive
 #+TBLNAME: UMCLimitOneArriveTime
 |-----------------+--------+--------+--------+---------|
-| Configuration   | First  | Second | Third  | Average |
+| Configuration   |  First | Second |  Third | Average |
 |-----------------+--------+--------+--------+---------|
-| Station One     | 0.203  | 0.198  | 0.198  |   0.200 |
+| Station One     |  0.203 |  0.198 |  0.198 |   0.200 |
 | Station Two     | 11.340 | 11.345 | 11.345 |  11.343 |
-| Station Four    | DNF    | DNF    | DNF    |   0.000 |
-| Station Six     | DNA    | DNA    | DNA    |   0.000 |
-| Station Eight   | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (2T) | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (3T) | DNA    | DNA    | DNA    |   0.000 |
+| Station Four    |        |        |        |         |
+| Station Six     |        |        |        |         |
+| Station Eight   |        |        |        |         |
+| Nærumbanen (2T) |        |        |        |         |
+| Nærumbanen (3T) |        |        |        |         |
 |-----------------+--------+--------+--------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 ** Limit Two
 *** No derailment (Move between connected segments)
 #+TBLNAME: UMCLimitTwoMoveTime
 |-----------------+--------+--------+--------+---------|
-| Configuration   | First  | Second | Third  | Average |
+| Configuration   |  First | Second |  Third | Average |
 |-----------------+--------+--------+--------+---------|
-| Station One     | 0.182  | 0.177  | 0.179  |   0.179 |
+| Station One     |  0.182 |  0.177 |  0.179 |   0.179 |
 | Station Two     | 14.434 | 14.234 | 14.188 |  14.285 |
-| Station Four    | DNF    | DNF    | DNF    |   0.000 |
-| Station Six     | DNA    | DNA    | DNA    |   0.000 |
-| Station Eight   | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (2T) | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (3T) | DNA    | DNA    | DNA    |   0.000 |
+| Station Four    |        |        |        |         |
+| Station Six     |        |        |        |         |
+| Station Eight   |        |        |        |         |
+| Nærumbanen (2T) |        |        |        |         |
+| Nærumbanen (3T) |        |        |        |         |
 |-----------------+--------+--------+--------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 *** No derailment (Critical section)
 #+TBLNAME: UMCLimitTwoCriticalTime
 |-----------------+--------+--------+--------+---------|
-| Configuration   | First  | Second | Third  | Average |
+| Configuration   |  First | Second |  Third | Average |
 |-----------------+--------+--------+--------+---------|
-| Station One     | 0.179  | 0.174  | 0.174  |   0.176 |
+| Station One     |  0.179 |  0.174 |  0.174 |   0.176 |
 | Station Two     | 14.448 | 14.411 | 14.420 |  14.426 |
-| Station Four    | DNF    | DNF    | DNF    |   0.000 |
-| Station Six     | DNA    | DNA    | DNA    |   0.000 |
-| Station Eight   | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (2T) | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (3T) | DNA    | DNA    | DNA    |   0.000 |
+| Station Four    |        |        |        |         |
+| Station Six     |        |        |        |         |
+| Station Eight   |        |        |        |         |
+| Nærumbanen (2T) |        |        |        |         |
+| Nærumbanen (3T) |        |        |        |         |
 |-----------------+--------+--------+--------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 *** No collision
 #+TBLNAME: UMCLimitTwoCollisionTime
 |-----------------+---------+---------+---------+---------|
-| Configuration   | First   | Second  | Third   | Average |
+| Configuration   |   First |  Second |   Third | Average |
 |-----------------+---------+---------+---------+---------|
-| Station One     | 1.329   | 1.329   | 1.345   |   1.334 |
+| Station One     |   1.329 |   1.329 |   1.345 |   1.334 |
 | Station Two     | 116.885 | 118.049 | 118.737 | 117.890 |
-| Station Four    | DNF     | DNF     | DNF     |   0.000 |
-| Station Six     | DNA     | DNA     | DNA     |   0.000 |
-| Station Eight   | DNA     | DNA     | DNA     |   0.000 |
-| Nærumbanen (2T) | DNA     | DNA     | DNA     |   0.000 |
-| Nærumbanen (3T) | DNA     | DNA     | DNA     |   0.000 |
+| Station Four    |         |         |         |         |
+| Station Six     |         |         |         |         |
+| Station Eight   |         |         |         |         |
+| Nærumbanen (2T) |         |         |         |         |
+| Nærumbanen (3T) |         |         |         |         |
 |-----------------+---------+---------+---------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 *** Will arrive
 #+TBLNAME: UMCLimitTwoArriveTime
 |-----------------+--------+--------+--------+---------|
-| Configuration   | First  | Second | Third  | Average |
+| Configuration   |  First | Second |  Third | Average |
 |-----------------+--------+--------+--------+---------|
-| Station One     | 0.223  | 0.222  | 0.222  |   0.222 |
-| Station Two     | 17.888 | 17.904 | 17.897 |  17.896 |
-| Station Four    | DNF    | DNF    | DNF    |   0.000 |
-| Station Six     | DNA    | DNA    | DNA    |   0.000 |
-| Station Eight   | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (2T) | DNA    | DNA    | DNA    |   0.000 |
-| Nærumbanen (3T) | DNA    | DNA    | DNA    |   0.000 |
+| Station One     |  0.223 |  0.222 |  0.222 | #ERROR  |
+| Station Two     | 17.888 | 17.904 | 17.897 |         |
+| Station Four    |        |        |        |         |
+| Station Six     |        |        |        |         |
+| Station Eight   |        |        |        |         |
+| Nærumbanen (2T) |        |        |        |         |
+| Nærumbanen (3T) |        |        |        |         |
 |-----------------+--------+--------+--------+---------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=#if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 * UPPAALxUMC
@@ -1521,7 +1521,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneMoveMemory
@@ -1536,7 +1536,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -1553,7 +1553,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneCriticalMemory
@@ -1568,7 +1568,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -1585,7 +1585,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneCollisionMemory
@@ -1600,7 +1600,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
@@ -1617,7 +1617,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneArriveMemory
@@ -1632,7 +1632,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 ** Limit Two
@@ -1650,7 +1650,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoMoveMemory
@@ -1665,7 +1665,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
@@ -1682,7 +1682,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoCriticalMemory
@@ -1697,7 +1697,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
@@ -1714,7 +1714,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoCollisionMemory
@@ -1729,7 +1729,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 
@@ -1747,7 +1747,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoArriveMemory
@@ -1762,8 +1762,7 @@
 | Nærumbanen (2T) |       |        |       | vmean([]) |
 | Nærumbanen (3T) |       |        |       | vmean([]) |
 |-----------------+-------+--------+-------+-----------|
-#+TBLFM: $5=vmean($2..$4);%.3f
-
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 * Summary
@@ -1776,11 +1775,11 @@
 |----------+-------------+------------+---------+---------+-------+------------|
 | Stations | First model | Restricted |  Global |  Cancel |   UMC | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+-------+------------|
-|        1 |       0.011 |      0.014 |   0.017 |   0.027 | 0.157 | vmean([])  |
-|        2 |       0.075 |      0.084 |   0.136 |   0.251 | 8.428 | vmean([])  |
-|        4 |        1.72 |      1.415 |   2.482 |   5.527 |    0. | vmean([])  |
-|        6 |       27.37 |     22.865 |  45.916 | 108.261 |    0. | vmean([])  |
-|        8 |     165.795 |    134.609 | 276.719 | 630.823 |    0. | vmean([])  |
+|        1 |       0.011 |      0.014 |   0.017 |   0.027 | 0.156 | vmean([])  |
+|        2 |       0.075 |      0.084 |   0.136 |   0.251 |   8.6 | vmean([])  |
+|        4 |        1.72 |      1.415 |   2.482 |   5.527 |     0 | vmean([])  |
+|        6 |       27.37 |     22.865 |  45.916 | 108.261 |     0 | vmean([])  |
+|        8 |     165.795 |    134.609 | 276.719 | 630.823 |     0 | vmean([])  |
 |----------+-------------+------------+---------+---------+-------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveTime,@6$5)::@2$3=remote(RestrictedLimitOneMoveTime, @6$5)::@2$4=remote(GlobalLimitOneMoveTime, @6$5)::@2$5=remote(CancelLimitOneMoveTime, @2$5)::@2$6=remote(UMCLimitOneMoveTime, @2$5)::@2$7=remote(UppaalLimitOneMoveTime, @2$5)::@3$2=remote(RCSLimitOneMoveTime,@7$5)::@3$3=remote(RestrictedLimitOneMoveTime, @7$5)::@3$4=remote(GlobalLimitOneMoveTime, @7$5)::@3$5=remote(CancelLimitOneMoveTime, @3$5)::@3$6=remote(UMCLimitOneMoveTime, @3$5)::@3$7=remote(UppaalLimitOneMoveTime, @3$5)::@4$2=remote(RCSLimitOneMoveTime, @8$5)::@4$3=remote(RestrictedLimitOneMoveTime, @8$5)::@4$4=remote(GlobalLimitOneMoveTime, @8$5)::@4$5=remote(CancelLimitOneMoveTime, @4$5)::@4$6=remote(UMCLimitOneMoveTime, @4$5)::@4$7=remote(UppaalLimitOneMoveTime, @4$5)::@5$2=remote(RCSLimitOneMoveTime, @9$5)::@5$3=remote(RestrictedLimitOneMoveTime, @9$5)::@5$4=remote(GlobalLimitOneMoveTime, @9$5)::@5$5=remote(CancelLimitOneMoveTime, @5$5)::@5$6=remote(UMCLimitOneMoveTime, @5$5)::@5$7=remote(UppaalLimitOneMoveTime, @5$5)::@6$2=remote(RCSLimitOneMoveTime, @10$5)::@6$3=remote(RestrictedLimitOneMoveTime, @10$5)::@6$4=remote(GlobalLimitOneMoveTime, @10$5)::@6$5=remote(CancelLimitOneMoveTime, @6$5)::@6$6=remote(UMCLimitOneMoveTime, @6$5)::@6$7=remote(UppaalLimitOneMoveTime, @6$5)
 
