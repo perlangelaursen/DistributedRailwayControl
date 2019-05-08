@@ -55,7 +55,9 @@ public class UMCTranslator extends Translator {
 		String prop19 = "~EF{";
 		String prop20 = "~EF{";
 		String prop21 = "AG(";
-
+		String prop22 = "~EF(";
+		String prop23 = "~EF{";
+		
 		abs += "  Action: $t:$cb.pass -> passing($t,$cb)\n";
 		abs += "  Action: $t:$cb.reqLock($t,$s1,$s2) -> reqLocking($t,$cb,$s1,$s2)\n";
 		abs += "  Action: $t:*.reqLock($t,$s1,$s2) -> reqLockingS($t,$s1,$s2)\n";
@@ -91,29 +93,29 @@ public class UMCTranslator extends Translator {
 					int s2 = segIDs.get(t.getRoute().get(i));
 					
 					//If a train is passing a CB, the segments it moves on are connected
-					//Note: Train only moves on reserved segments + Train only reserves segments on its route
-					prop3 += "([passing("+tid+", "+cbid+")] (doublePos("+tid+","+s1+","+s2+") & connects("+cbid+","+s1+","+s2+"))) & ";
+					//Note: Train only enters segments in its route (prop22)
+					prop3 += "(doublePos("+tid+","+s1+","+s2+") -> connects("+cbid+","+s1+","+s2+")) & ";
 					
 					//A CB only returns acknowledgement for a switch/lock request if the requested segments are its stem and one of its other segments
 					//Note: Weaker - canConnect regardless of whether OK is returned or not (possible in UMC)
-					//Note: Train only requests switching/locking of CBs in route
+					//Note: Train only requests switching/locking for adjacent segments in its route at CBs in route (prop20+prop15)
 					prop13 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] canConnect("+cbid+","+s1+","+s2+")) & ";				
 					
 					
 					//A TCC only requests locks for connections that it has reserved
-					//Note: Train only requests switching/locking for segments in route
-					//Note: Train only requests switching/locking of CBs in route
+					//Note: Note: Train only requests switching/locking for adjacent segments in its route at CBs in route (prop20+prop15)
 					prop14 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] -> (reserved("+tid+","+s1+","+cbid+") & reserved("+tid+","+s2+","+cbid+"))) & ";
 
 					String cbid2 = "cb"+cbIDs.get(t.getBoxRoute().get(i+1));
 					//Reservation consistency: All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
-					//Note: Train only reserves segments in route at CBs in route
+					//Note: Train only reserves segments in route at CBs in route (abstraction definition)
 					prop7 += "(reserved("+tid+","+s1+","+cbid+") -> reservedBy("+cbid+","+s1+","+tid+")) & (reserved("+tid+","+s1+","+cbid2+") -> reservedBy("+cbid2+","+s1+","+tid+")) & ";
 				}
 				
 				if(cb instanceof SwitchBox) {
 					String pid = "p"+pointIDs.get(cb);
-					//If a train is passing a CB, the associated point is not in the middle of switching 
+					//If a train is passing a CB, the associated point is not in the middle of switching
+					//Note: A train only passes a control box in its route (prop23)
 					prop4 += "([passing("+tid+", "+cbid+")] ~inSwitching("+pid+")) & ";
 					
 					int stem = segIDs.get(((SwitchBox) cb).getStem());
@@ -131,7 +133,7 @@ public class UMCTranslator extends Translator {
 						"    and "+tid+".boxes["+i+"] = $cb -> locked("+tid+",$cb)\n"; 
 				
 				//Lock consistency: A TCC's obtained locks are reflected in the relevant CBs
-				//Note: Trains only lock CBs in route
+				//Note: Trains only lock CBs in route (abstraction definition)
 				prop6 += "(locked("+tid+","+cbid+") -> lockedBy("+cbid+","+tid+")) & ";
 				
 				abs += "  State: "+tid+".index <= "+i+"\n" + 
@@ -150,10 +152,11 @@ public class UMCTranslator extends Translator {
 					String cbid3 = "cb"+cbIDs.get(t.getBoxRoute().get(i+2));
 					
 					//A train only enters a segment that is has the full reservation of
-					//Note: Train only moves on reserved segments + Train only reserves segments on its route
+					//Note: Train only moves on reserved segments + Train only reserves segments in its route
 					prop8 += "(doublePos("+tid+","+s1+","+s2+") -> (reserved("+tid+","+s2+","+cbid2+") & reserved("+tid+","+s2+","+cbid3+"))) & ";
 					
-					prop21 += "(doublePos("+tid+","+s1+","+s2+") -> connects("+cbid2+","+s1+","+s2+")) & ";
+					//Position consistency
+					prop21 += "(doublePos("+tid+","+s1+","+s2+") -> connects("+cbid+","+s1+","+s2+")) & ";
 					
 					//A train only passes a switch box if it has been locked for the train
 					prop10 += "((doublePos("+tid+","+s1+","+s2+") & isSwitchBox("+cbid2+")) -> locked("+tid+","+cbid2+")) & ";
@@ -161,22 +164,25 @@ public class UMCTranslator extends Translator {
 
 				//A train never passes the last control box in its route
 				if(i == t.getRoute().size()) {
-					prop9 += "passing("+tid+","+cbid+") & ";	
+					prop9 += "passing("+tid+","+cbid+") | ";	
 				}
 			}
 			
 			for(ControlBox cb : n.getControlBoxes()) {
 				String cbid = "cb"+cbIDs.get(cb);
 				if(!t.getBoxRoute().contains(cb) || cb == t.getBoxRoute().getFirst()) {
-					//A TCC only requests locks at switch boxes on its route
+					//A TCC only requests locks at switch boxes in its route
 					prop15 += "reqLockingAt("+tid+","+cbid+") | ";
-					//A TCC only reserves at control boxes on its route
+					//A TCC only reserves at control boxes in its route
 					prop18 += "reqSegAt("+tid+","+cbid+") | ";
+					//Note: Train only passes CBs in its route (for prop3)
+					prop23 += "passing("+tid+","+cbid+") | ";
 				}
 				if(cb instanceof SwitchBox) {
 					String pid = "p"+pointIDs.get(cb);
 					abs += "  State: inState("+pid+".Switching) -> inSwitching("+pid+")\n";
 				}
+				
 			}
 			
 			//A TCC never has more locks than allowed
@@ -185,13 +191,14 @@ public class UMCTranslator extends Translator {
 			for(Segment s : n.getSegments()) {
 				String sid = ""+segIDs.get(s);
 				if(!t.getRoute().contains(s)) {
-					//A TCC only reserves segments on its route
+					//A TCC only reserves segments in its route
 					prop19 += "reqSegS("+tid+","+sid+") | ";
 					
 					for(Segment s2 : n.getSegments()) {
 						String sid2 = ""+segIDs.get(s2);
 						//A TCC only requests switch/lock for connections of segments that are adjacent in its route
-						prop20 += "reqLockingS("+tid+","+sid+","+sid2+") | ";
+						prop20 += "reqLockingS("+tid+","+sid+","+sid2+") | ";						
+						prop22 += "doublePos("+tid+","+sid+","+sid2+") | ";
 					}
 				} else {
 					int i = t.getRoute().indexOf(s);
@@ -199,6 +206,7 @@ public class UMCTranslator extends Translator {
 						if(i < t.getRoute().size()-1 && t.getRoute().get(i+1) != s2) {
 							String sid2 = ""+segIDs.get(s2);
 							prop20 += "reqLockingS("+tid+","+sid+","+sid2+") | ";
+							prop22 += "doublePos("+tid+","+sid+","+sid2+") | ";
 						}
 					}
 				}
@@ -292,6 +300,8 @@ public class UMCTranslator extends Translator {
 		prop19 = prop19.substring(0, prop19.length() - 3)+"}\n";
 		prop20 = prop20.substring(0, prop20.length() - 3)+"}\n";
 		prop21 = prop21.substring(0, prop21.length() - 3)+")\n";
+		prop22 = prop22.substring(0, prop22.length() - 3)+")\n";
+		prop23 = prop23.substring(0, prop23.length() - 3)+"}\n";
 		
 		String props = "";
 		props += "\n//NO COLLISION\n";
@@ -318,7 +328,7 @@ public class UMCTranslator extends Translator {
 
 		props += "\n//OPERATION REQUIREMENTS: PASS\n";
 		props += "//A train only passes a switch box if it has been locked for the train\n"+prop10;
-		props += "//A train never passes the last control box on its route\n"+prop9;
+		props += "//A train never passes the last control box in its route\n"+prop9;
 		props += "//A train only enters a segment that it has the full reservation of\n"+prop8;
 
 		props += "\n//CONSISTENCY\n";
@@ -329,8 +339,12 @@ public class UMCTranslator extends Translator {
 		props += "//Point consistency: A CB's connected information is consistent with its Point's position\n"+prop5;
 		props += "//Position consistency: The train position saved in a TCC is consistent with the train's actual position\n"+prop21;
 
-		props += "//LIVENESS\n";
+		props += "\n//LIVENESS\n";
 		props += prop1;
+		
+		props += "\n//AUXILIARY\n";
+		props += "//A train never moves from one segment to another segment if it is not planned in its route\n"+prop22;
+		props += "//A train never passes a control box that is not in its route\n"+prop23;
 		printProperties(n.getName(), props);
 		
 		abs += "}";
