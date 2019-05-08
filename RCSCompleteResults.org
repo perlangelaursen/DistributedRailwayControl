@@ -1801,15 +1801,15 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
 plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
      data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
      data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
      data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit', \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
      data u 1:6 w points title 'UMC', \
-     j(x) title 'UMC fit'
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j)
 #+end_src
 
 #+RESULTS:
