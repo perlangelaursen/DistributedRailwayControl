@@ -4,7 +4,6 @@ Signals
 Vars
     segments;
     boxes;
-    boxIDs;
     
     curSeg:int;
 
@@ -105,14 +104,10 @@ Vars
     
     res:Train[3];
     result:int := -1;
-    t:Train := null;
-    lockedBy:Train;
-    
-    ERROR:int := 0;
-    NOSWITCH:int := 1;
-    DOSWITCH:int := 2;
+    lockedBy:Train := null;
+
 Transitions
-    Idle -> SegmentChecked {
+    Idle -> Idle {
         reqSeg(it,s) /
         
         //checkSegment
@@ -121,69 +116,40 @@ Transitions
                 result = i;
             }
         };
-        t = it;
-    }
-        
-    SegmentChecked -> Idle {
-        - [result > -1] /
-                
-        //updateResInfo
-        res[result] = t;
-        //resetVariables
-        result = -1;
-        
-        t.OK;
-        t = null;
-    }
-    
-    SegmentChecked -> Idle {
-        - [result == -1] /
-        
-        t.notOK;
-        
-        //resetVariables
-        t = null;
-        result = -1;
+        if (result > -1) then {
+            res[result] = it;
+            result = -1;
+            it.OK;
+        } else {
+            it.notOK;
+        }
     }
     
     Idle -> LockChecked {
         reqLock(it,s1,s2) /
         
         //checkLock
-        result = ERROR;
         if(lockedBy == null) then {
             if ((segments[0] == s1 && (segments[1] == s2 || segments[2] == s2)) ||
                 (segments[0] == s2 && (segments[1] == s1 || segments[2] == s1))) then {
+                lockedBy = it;
                 if((s1 == segments[0] && s2 == connected) || (s2 == segments[0] && s1 == connected)) then {
-                    result = NOSWITCH;
+                    result = 0;
                 } else {
-                    result = DOSWITCH;
+                    point.switchPoint;
+                    result = 1;
                 }
+            } else {
+                it.notOK;
             }
-        };
-        t = it;
+        } else {
+            it.notOK;
+        }
     }
     
-    LockChecked -> Switching {
-        - [result == DOSWITCH] /
-        
-        point.switchPoint;
-    }
-    
-    LockChecked -> Idle {
-        - [result == ERROR] /
-        
-        t.notOK;
-        //resetVariables
-        t = null;
-        result = -1
-    }
-    
-    LockChecked -> Switched {- [result == NOSWITCH]}
-    
-    Switching -> Switched {
-        OKp /
-        //updateConnected
+    LockChecked -> Switched {
+        OKp [result == 1] /
+        result = -1;
         if(connected == segments[1]) {
             connected = segments[2];
         } else {
@@ -191,17 +157,16 @@ Transitions
         }
     }
     
+    LockChecked -> Idle { [lockedBy == null] }
+    
+    LockChecked -> Switched {
+        - [result == 0] /
+        result = -1;
+    }
+    
     Switched -> Idle{
         /
-        //updateLockInfo
-        lockedBy = t;
-        //resetVariables
-        result = -1;
-        
-        t.OK;
-        
-        //resetVariables
-        t = null;
+        lockedBy.OK;
     }
     
     Idle -> Passing {pass}
@@ -233,8 +198,8 @@ end Point;
 
 
 Objects
-t0:Train(segments=>[0,2,3], curSeg => 0, boxes => [cb0,cb1,cb2,cb3], boxIDs => [0,1,2,3], requiresLock => [false,true,true,false], lockIndex => 1);
-t1:Train(segments=>[3,1], curSeg => 3, boxes => [cb3,cb2,cb1], boxIDs => [3,2,1], requiresLock => [false,true,true], lockIndex => 1);
+t0:Train(segments=>[0,2,3], curSeg => 0, boxes => [cb0,cb1,cb2,cb3], requiresLock => [false,true,true,false], lockIndex => 1);
+t1:Train(segments=>[3,1], curSeg => 3, boxes => [cb3,cb2,cb1], requiresLock => [false,true,true], lockIndex => 1);
 
 cb0:CB(segments => [0,-1,-1], res => [null,null,null], connected => null);
 cb1:CB(segments => [0,2,1], res => [t0,null,null], connected => 2, point => p0);

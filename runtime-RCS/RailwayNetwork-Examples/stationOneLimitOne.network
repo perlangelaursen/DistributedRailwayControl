@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<nw:Network xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nw="http://s144449s144456.RailwayModelGenerator/network" lockLimit="2" reserveLimit="2" name="stationOneLimitTwo">
+<nw:Network xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nw="http://s144449s144456.RailwayModelGenerator/network" name="stationOneLimitOne">
   <controlBoxes id="cb0" outgoing="s0"/>
   <controlBoxes xsi:type="nw:SwitchBox" id="cb1" ingoing="s0" outgoing="s2 s1" stem="s0" plus="s1" minus="s2"/>
   <controlBoxes xsi:type="nw:SwitchBox" id="cb2" ingoing="s2 s1" outgoing="s3" stem="s3" plus="s1" minus="s2"/>
