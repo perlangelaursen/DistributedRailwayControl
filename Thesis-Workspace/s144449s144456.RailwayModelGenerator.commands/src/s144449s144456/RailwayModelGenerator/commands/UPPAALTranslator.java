@@ -601,10 +601,10 @@ public class UPPAALTranslator extends Translator {
 				"typedef int[-1, NPOINT-1] pV_id;\n" + 
 				"typedef int[-1, NSEG-1] segV_id;\n"+
 				"typedef int[0, NROUTELENGTH] cBRoute_i;\n" + 
-				"typedef int[0, NROUTELENGTH-1] segRoute_i;\r\n" +
-				"typedef struct {\r\n" + 
-				"    cB_id cb;\r\n" + 
-				"    seg_id seg;\r\n" + 
+				"typedef int[0, NROUTELENGTH-1] segRoute_i;\n" +
+				"typedef struct {\n" + 
+				"    cB_id cb;\n" + 
+				"    seg_id seg;\n" + 
 				"} reservation;\n\n";
 	}
 
@@ -623,162 +623,162 @@ public class UPPAALTranslator extends Translator {
 				"    }    \n" + 
 				"}\n" + 
 				"\n" + 
-				"////////////////////////////////////\r\n" + 
-				"//Well-formedness Functions\r\n" + 
-				"bool initialResIsConsistent(t_id id){\r\n" + 
-				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"bool reservationIsWellFormed(reservation res){\r\n" + 
-				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"\r\n" + 
-				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\r\n" + 
-				"    return  (i != j) &amp;&amp;\r\n" + 
-				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \r\n" + 
-				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"bool routesAreConsistent(t_id id){\r\n" + 
-				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\r\n" + 
-				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\r\n" + 
-				"\r\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\r\n" + 
-				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\r\n" + 
-				"            return false;\r\n" + 
-				"        }\r\n" + 
-				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\r\n" + 
-				"            return false;\r\n" + 
-				"        }\r\n" + 
-				"    }\r\n" + 
-				"    return true; \r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"bool sharesSegment(cB_id i, cB_id j){\r\n" + 
-				"    return (i != j) &amp;&amp;\r\n" + 
-				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\r\n" + 
-				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\r\n" + 
-				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\r\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\r\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\r\n" + 
-				"            return false;\r\n" + 
-				"        }\r\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\r\n" + 
-				"            return false;\r\n" + 
-				"        }\r\n" + 
-				"\r\n" + 
-				"    }\r\n" + 
-				"    return true; \r\n" + 
-				"}\r\n" + 
-				"bool canConnect(seg_id s1, seg_id s2){\r\n" + 
-				"    for(i:cB_id){\r\n" + 
-				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\r\n" + 
-				"            return true;\r\n" + 
-				"        }\r\n" + 
-				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\r\n" + 
-				"            return true;\r\n" + 
-				"        }\r\n" + 
-				"    }\r\n" + 
-				"    return false;   \r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\r\n" + 
-				"    int i = 0;\r\n" + 
-				"    if(route[0] == -1){\r\n" + 
-				"        return false;\r\n" + 
-				"    }\r\n" + 
-				"\r\n" + 
-				"    for(i:segRoute_i){\r\n" + 
-				"        for(j:segRoute_i){\r\n" + 
-				"            if(j != i &amp;&amp; route[i] == route[j] &amp;&amp; route[i] != -1){\r\n" + 
-				"                return false;\r\n" + 
-				"            }\r\n" + 
-				"        }\r\n" + 
-				"    }\r\n" + 
-				"\r\n" + 
-				"    while(i &lt;= NROUTELENGTH - 2){\r\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\r\n" + 
-				"            return false;\r\n" + 
-				"        }\r\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\r\n" + 
-				"            return false;\r\n" + 
-				"        }\r\n" + 
-				"        i++;\r\n" + 
-				"    }\r\n" + 
-				"    return true; \r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"int pointIsWellFormed(cBV_id id){\r\n" + 
-				"    if(points[id] != -1){\r\n" + 
-				"        for(i : cB_id){\r\n" + 
-				"            if(i != id &amp;&amp; points[i] == points[id]){\r\n" + 
-				"                return false;\r\n" + 
-				"            }\r\n" + 
-				"        }\r\n" + 
-				"    }\r\n" + 
-				"    return (points[id] == -1) == (cBs[id][2] == -1);\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"int otherBoxes(cB_id id, segV_id s){\r\n" + 
-				"    segV_id cB[3] = cBs[id];\r\n" + 
-				"    int found = 0;\r\n" + 
-				"    for(i:cB_id){\r\n" + 
-				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\r\n" + 
-				"            found++;\r\n" + 
-				"        }\r\n" + 
-				"    }\r\n" + 
-				"    return found;\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"int sharedSegments(cB_id i, cB_id j){\r\n" + 
-				"    int count = 0;\r\n" + 
-				"    if (cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])){\r\n" + 
-				"        count++;\r\n" + 
-				"    }\r\n" + 
-				"    if (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])){\r\n" + 
-				"        count++;\r\n" + 
-				"    }\r\n" + 
-				"    if (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])){\r\n" + 
-				"         count++;\r\n" + 
-				"    }\r\n" + 
-				"    return count;\r\n" + 
-				"}\r\n" + 
-				"\r\n" + 
-				"bool cBIsWellFormed(cB_id id){\r\n" + 
-				"    segV_id cB[3] = cBs[id];\r\n" + 
-				"\r\n" + 
-				"    //Invalid definitions\r\n" + 
-				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\r\n" + 
-				"        return false;\r\n" + 
-				"    }\r\n" + 
-				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\r\n" + 
-				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\r\n" + 
-				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\r\n" + 
-				"        return false;\r\n" + 
-				"    }\r\n" + 
-				"\r\n" + 
-				"    //Case: []--x--\r\n" + 
-				"    if(cB[1] == -1){\r\n" + 
-				"        return otherBoxes(id, cB[0]) == 1;\r\n" + 
-				"    }\r\n" + 
-				"\r\n" + 
-				"    //Case: --x--[]--y--\r\n" + 
-				"    if(cB[2] == -1){\r\n" + 
-				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\r\n" + 
-				"    }\r\n" + 
-				"\r\n" + 
-				"    //Case: Switch box\r\n" + 
-				"    for(i:cB_id){\r\n" + 
-				"        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][0] != cB[0] &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] == cB[2])){                \r\n" + 
-				"            return false;\r\n" + 
-				"        } \r\n" + 
-				"    }\r\n" + 
-				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\r\n" + 
-				"}\r\n" +
+				"////////////////////////////////////\n" + 
+				"//Well-formedness Functions\n" + 
+				"bool initialResIsConsistent(t_id id){\n" + 
+				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool reservationIsWellFormed(reservation res){\n" + 
+				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\n" + 
+				"}\n" + 
+				"\n" + 
+				"\n" + 
+				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\n" + 
+				"    return  (i != j) &amp;&amp;\n" + 
+				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \n" + 
+				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool routesAreConsistent(t_id id){\n" + 
+				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\n" + 
+				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\n" + 
+				"\n" + 
+				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
+				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return true; \n" + 
+				"}\n" + 
+				"\n" + 
+				"bool sharesSegment(cB_id i, cB_id j){\n" + 
+				"    return (i != j) &amp;&amp;\n" + 
+				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\n" + 
+				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\n" + 
+				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\n" + 
+				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
+				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"\n" + 
+				"    }\n" + 
+				"    return true; \n" + 
+				"}\n" + 
+				"bool canConnect(seg_id s1, seg_id s2){\n" + 
+				"    for(i:cB_id){\n" + 
+				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\n" + 
+				"            return true;\n" + 
+				"        }\n" + 
+				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\n" + 
+				"            return true;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return false;   \n" + 
+				"}\n" + 
+				"\n" + 
+				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\n" + 
+				"    int i = 0;\n" + 
+				"    if(route[0] == -1){\n" + 
+				"        return false;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    for(i:segRoute_i){\n" + 
+				"        for(j:segRoute_i){\n" + 
+				"            if(j != i &amp;&amp; route[i] == route[j] &amp;&amp; route[i] != -1){\n" + 
+				"                return false;\n" + 
+				"            }\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    while(i &lt;= NROUTELENGTH - 2){\n" + 
+				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\n" + 
+				"            return false;\n" + 
+				"        }\n" + 
+				"        i++;\n" + 
+				"    }\n" + 
+				"    return true; \n" + 
+				"}\n" + 
+				"\n" + 
+				"int pointIsWellFormed(cBV_id id){\n" + 
+				"    if(points[id] != -1){\n" + 
+				"        for(i : cB_id){\n" + 
+				"            if(i != id &amp;&amp; points[i] == points[id]){\n" + 
+				"                return false;\n" + 
+				"            }\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return (points[id] == -1) == (cBs[id][2] == -1);\n" + 
+				"}\n" + 
+				"\n" + 
+				"int otherBoxes(cB_id id, segV_id s){\n" + 
+				"    segV_id cB[3] = cBs[id];\n" + 
+				"    int found = 0;\n" + 
+				"    for(i:cB_id){\n" + 
+				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\n" + 
+				"            found++;\n" + 
+				"        }\n" + 
+				"    }\n" + 
+				"    return found;\n" + 
+				"}\n" + 
+				"\n" + 
+				"int sharedSegments(cB_id i, cB_id j){\n" + 
+				"    int count = 0;\n" + 
+				"    if (cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])){\n" + 
+				"        count++;\n" + 
+				"    }\n" + 
+				"    if (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])){\n" + 
+				"        count++;\n" + 
+				"    }\n" + 
+				"    if (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])){\n" + 
+				"         count++;\n" + 
+				"    }\n" + 
+				"    return count;\n" + 
+				"}\n" + 
+				"\n" + 
+				"bool cBIsWellFormed(cB_id id){\n" + 
+				"    segV_id cB[3] = cBs[id];\n" + 
+				"\n" + 
+				"    //Invalid definitions\n" + 
+				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\n" + 
+				"        return false;\n" + 
+				"    }\n" + 
+				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\n" + 
+				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\n" + 
+				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\n" + 
+				"        return false;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Case: []--x--\n" + 
+				"    if(cB[1] == -1){\n" + 
+				"        return otherBoxes(id, cB[0]) == 1;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Case: --x--[]--y--\n" + 
+				"    if(cB[2] == -1){\n" + 
+				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\n" + 
+				"    }\n" + 
+				"\n" + 
+				"    //Case: Switch box\n" + 
+				"    for(i:cB_id){\n" + 
+				"        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][0] != cB[0] &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] == cB[2])){                \n" + 
+				"            return false;\n" + 
+				"        } \n" + 
+				"    }\n" + 
+				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\n" + 
+				"}\n" +
 				"</declaration>\n";
 	}
 	
@@ -796,7 +796,7 @@ public class UPPAALTranslator extends Translator {
 	}
 
 	protected String getQueries() {
-		return "<queries>\n" + 
+		return "	<queries>\n" + 
 				"		<query>\n" + 
 				"			<formula>\n" + 
 				"			</formula>\n" + 
@@ -804,21 +804,21 @@ public class UPPAALTranslator extends Translator {
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>E&lt;&gt; forall(i:t_id) not(Train(i).Initial)\n" + 
+				"			<formula>A&lt;&gt; forall(i:t_id) not(Train(i).Initial)\n" + 
 				"			</formula>\n" + 
-				"			<comment>Well-formedness of Train\n" + 
+				"			<comment>Well-formedness of Trains.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>E&lt;&gt; forall(i:cB_id) not(CB(i).Initial)\n" + 
+				"			<formula>A&lt;&gt; forall(i:cB_id) not(CB(i).Initial)\n" + 
 				"			</formula>\n" + 
-				"			<comment>Well-formedness of CB\n" + 
+				"			<comment>Well-formedness of CBs.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] !deadlock\n" + 
 				"			</formula>\n" + 
-				"			<comment>\n" + 
+				"			<comment>No deadlock.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -830,7 +830,8 @@ public class UPPAALTranslator extends Translator {
 				"		<query>\n" + 
 				"			<formula>E&lt;&gt; forall(i:t_id) Train(i).Arrived\n" + 
 				"			</formula>\n" + 
-				"			<comment>Liveness\n" + 
+				"			<comment>Liveness:\n" + 
+				"There exists a sequence of actions for which all Trains arrive at their destinations.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -839,16 +840,16 @@ public class UPPAALTranslator extends Translator {
 				"	(Train(i).DoubleSegment imply Train(i).headSeg != Train(j).curSeg) &amp;&amp;\n" + 
 				"	(Train(i).DoubleSegment &amp;&amp; Train(j).DoubleSegment imply Train(i).headSeg!= Train(j).headSeg)\n" + 
 				"			</formula>\n" + 
-				"			<comment>No collision\n" + 
+				"			<comment>No collision.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>A[] forall(i:t_id) forall(j:int[0,1]) Train(i).DoubleSegment imply\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply\n" + 
 				"	(Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).connected) ||\n" + 
 				"	(Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] &amp;&amp; Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected)\n" + 
 				"			</formula>\n" + 
 				"			<comment>No derailment:\n" + 
-				"A train passing a point always moves between the connected segments\n" + 
+				"If a train is in a critical section, then the segments that it is moving on are connected.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -856,7 +857,7 @@ public class UPPAALTranslator extends Translator {
 				"	!Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingPM &amp;&amp; !Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingMP\n" + 
 				"			</formula>\n" + 
 				"			<comment>No derailment:\n" + 
-				"A train is never in a critical section while the point there is switching\n" + 
+				"If a train is in a critical section, the point in that section is not in themiddle of switching.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -868,30 +869,23 @@ public class UPPAALTranslator extends Translator {
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:t_id) Train(i).locks == (sum(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; points[Train(i).boxes[j]] &gt; -1))\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC's locks variable is always the true number of locks\n" + 
+				"			<comment>Lock consistency:\n" + 
+				"The number of saved locks in the state space of a Train is the same number of locks that it believes that it has.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>A[] forall(i:p_id) (Point(i).Plus imply pointInPlus[i]) &amp;&amp; (Point(i).Minus imply !pointInPlus[i])\n" + 
+				"			<formula>A[] forall(i:p_id) Initializer.Initialized &amp;&amp; !Point(i).SwitchingPM &amp;&amp; !Point(i).SwitchingMP imply (pointInPlus[i] imply Point(i).Plus) &amp;&amp; (!pointInPlus[i] imply Point(i).Minus)\n" + 
 				"			</formula>\n" + 
 				"			<comment>Network array consistency:\n" + 
-				"The pointInPlus array reflects the true state of all Points\n" + 
+				"The position of a point in the network data is consistent with the actual position of the point.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>A[] forall(i:cB_id) points[i] &gt; -1 imply\n" + 
-				"	(Point(points[i]).Plus imply CB(i).connected == cBs[i][1]) &amp;&amp; (Point(points[i]).Minus imply CB(i).connected == cBs[i][2])\n" + 
+				"			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching imply \n" + 
+				"	((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).Plus &amp;&amp; (CB(i).connected == CB(i).segments[2]) imply Point(points[i]).Minus)\n" + 
 				"			</formula>\n" + 
 				"			<comment>Point consistency:\n" + 
-				"A CB's connected information is consistent with its Point's position\n" + 
-				"			</comment>\n" + 
-				"		</query>\n" + 
-				"		<query>\n" + 
-				"			<formula>A[] forall(i:cB_id) CB(i).lockedBy &gt; -1 imply\n" + 
-				"	(exists(k:cB_id) Train(CB(i).lockedBy).boxes[k] == i &amp;&amp; k &gt; Train(CB(i).lockedBy).index &amp;&amp; k &lt; Train(CB(i).lockedBy).lockIndex)\n" + 
-				"			</formula>\n" + 
-				"			<comment>Lock consistency:\n" + 
-				"A CB's lock information is also reflected in the state space of the relevant TCC\n" + 
+				"A CB's information about its associated Point's position is consistent with the Point's actual position.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -899,7 +893,7 @@ public class UPPAALTranslator extends Translator {
 				"	CB(Train(i).boxes[j]).lockedBy == i)\n" + 
 				"			</formula>\n" + 
 				"			<comment>Lock consistency:\n" + 
-				"A TCC's obtained locks are reflected in the relevant CBs\n" + 
+				"The locks saved in the state space of a Train are also saved in the state spaces of the involved CBs.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -907,17 +901,7 @@ public class UPPAALTranslator extends Translator {
 				"		(j &gt; Train(i).index &amp;&amp; j &lt; Train(i).resCBIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j]).segments[l] == Train(i).segments[j] &amp;&amp; CB(Train(i).boxes[j]).res[l] == i)\n" + 
 				"			</formula>\n" + 
 				"			<comment>Reservation consistency:\n" + 
-				"All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs\n" + 
-				"			</comment>\n" + 
-				"		</query>\n" + 
-				"		<query>\n" + 
-				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) CB(i).res[j] &gt; -1 imply\n" + 
-				"	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j] &amp;&amp; k &gt;= Train(CB(i).res[j]).index &amp;&amp;\n" + 
-				"		(Train(CB(i).res[j]).resCBIndex == Train(CB(i).res[j]).resSegIndex imply (k &lt; Train(CB(i).res[j]).resSegIndex)) &amp;&amp;\n" + 
-				"		(Train(CB(i).res[j]).resCBIndex != Train(CB(i).res[j]).resSegIndex imply (k &lt; Train(CB(i).res[j]).resCBIndex))\n" + 
-				"			</formula>\n" + 
-				"			<comment>Reservation consistency: \n" + 
-				"All reservations at a CB are also saved in the state space of the relevant TCCs\n" + 
+				"The reservations saved in the state space of a Train are also saved in the state spaces of the involved CBs.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -930,20 +914,20 @@ public class UPPAALTranslator extends Translator {
 				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply \n" + 
 				"	Train(i).index+1 &lt; Train(i).resSegIndex\n" + 
 				"			</formula>\n" + 
-				"			<comment>A train only enters a segment that is has the full reservation of\n" + 
+				"			<comment>A train only enters a segment that it has the full reservation of.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment imply Train(i).boxes[Train(i).index+1] != Train(i).boxes[Train(i).routeLength]\n" + 
 				"			</formula>\n" + 
-				"			<comment>A train never passes the last control box in its route\n" + 
+				"			<comment>A train never passes the last control box on its route.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment &amp;&amp; points[Train(i).boxes[Train(i).index+1]] != -1 imply\n" + 
 				"	CB(Train(i).boxes[Train(i).index+1]).lockedBy == i\n" + 
 				"			</formula>\n" + 
-				"			<comment>A train only passes a switch box if it has been locked for the train\n" + 
+				"			<comment>A train only passes a switch box if it has been locked for the train.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -955,16 +939,13 @@ public class UPPAALTranslator extends Translator {
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:cB_id) CB(i).Switched imply CB(i).lockedBy == -1\n" + 
 				"			</formula>\n" + 
-				"			<comment>A CB only returns acknowledgement for a lock request if its point was unlocked prior to the request\n" + 
-				"A TCC only requests locks for switch boxes that it has not already obtained the lock at\n" + 
-				"\n" + 
-				"A lock is only ever given if it was available\n" + 
+				"			<comment>A lock is only successful if the point involved in the request was unlocked prior to the request.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:cB_id) (CB(i).Switched || CB(i).Switching) imply !(exists(j:t_id) (Train(j).DoubleSegment &amp;&amp; Train(j).boxes[Train(j).index+1] == i))\n" + 
 				"			</formula>\n" + 
-				"			<comment>A control box only switches if no train is in its critical section\n" + 
+				"			<comment>A control box only switches and locks its point if no train is in its critical section.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -973,7 +954,7 @@ public class UPPAALTranslator extends Translator {
 				"	(CB(j).segments[0] == Train(i).segments[Train(i).lockIndex-1] &amp;&amp; CB(j).segments[k] == Train(i).segments[Train(i).lockIndex]) ||\n" + 
 				"	(CB(j).segments[0] == Train(i).segments[Train(i).lockIndex] &amp;&amp; CB(j).segments[k] == Train(i).segments[Train(i).lockIndex-1]))\n" + 
 				"			</formula>\n" + 
-				"			<comment>A CB only returns acknowledgement for a switch/lock request if the requested segments are its stem and one of its other segments\n" + 
+				"			<comment>A switch is only successful if the requested connection is of segments that are adjacent in the train’s route and the stem segment and plus or minus segment of the switch box.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -981,19 +962,19 @@ public class UPPAALTranslator extends Translator {
 				"	CB(i).res[0] == CB(i).lockedBy &amp;&amp; \n" + 
 				"	exists(j:int[0,2]) CB(i).segments[j] == CB(i).connected &amp;&amp; CB(i).res[j] == CB(i).lockedBy\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC only has locks for CB's that it has the stem reservation at and one other segment reservation\n" + 
+				"			<comment>A lock is only successful if the requesting train has the reservation for the stem segment at the switch box and one other segment.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC only requests locks at switch boxes on its route\n" + 
+				"			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:t_id) Train(i).locks &lt;= lockLimit\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC never has more locks than allowed\n" + 
+				"			<comment>A train never has more locks than the lock limit.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -1007,10 +988,7 @@ public class UPPAALTranslator extends Translator {
 				"	(Train(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply \n" + 
 				"	CB(j).res[CB(j).result] == -1\n" + 
 				"			</formula>\n" + 
-				"			<comment>A CB only returns acknowledgement for reservation requests of available segments\n" + 
-				"A TCC only reserves segments that it does not already have a reservation for\n" + 
-				"\n" + 
-				"A reservation is only ever given if it was available\n" + 
+				"			<comment>A reservation is only successful if the requested segment is not already reserved.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -1018,7 +996,7 @@ public class UPPAALTranslator extends Translator {
 				"	(Train(i).Reserving &amp;&amp; CB(j).SegmentChecked &amp;&amp; CB(j).tid == i &amp;&amp; CB(j).result &gt; -1) imply \n" + 
 				"	(exists(k:int[0,2]) CB(j).segments[k] == Train(i).segments[Train(i).resSegIndex])\n" + 
 				"			</formula>\n" + 
-				"			<comment>A control box only returns acknowledgement for reservations involving segments that it is associated with\n" + 
+				"			<comment>A reservation is only successful if the requested segment is associated with the control box that receives the request.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -1026,7 +1004,7 @@ public class UPPAALTranslator extends Translator {
 				"	CB(i).res[j] != -1 imply \n" + 
 				"	exists(k:cB_id) Train(CB(i).res[j]).boxes[k] == i\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC only reserves at control boxes on its route\n" + 
+				"			<comment>A reservation is only successful if the control box that a train contacts is a part of the train’s route.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -1034,13 +1012,13 @@ public class UPPAALTranslator extends Translator {
 				"	CB(i).res[j] != -1 imply \n" + 
 				"	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC only reserves segments on its route\n" + 
+				"			<comment>A reservation is only successful if the requested segment is a part of the requesting train’s route.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:t_id) Train(i).resSegIndex - 1 - Train(i).index &lt;= resLimit\n" + 
 				"			</formula>\n" + 
-				"			<comment>A TCC never has more reservations than allowed\n" + 
+				"			<comment>A train never has more reservations than the reservation limit.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"	</queries>\n";

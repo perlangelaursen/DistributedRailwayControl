@@ -1,0 +1,10 @@
+The Formula: AG (((not ccCol(t0,t1)) and ((not hcCol(t0,t1)) and not hhCol(t0,t1))) and ((not ccCol(t1,t0)) and ((not hcCol(t1,t0)) and not hhCol(t1,t0))))
+is TRUE
+(evaluation time= 0.066 sec.)
+(total states generated= 16, computations fragments generated= 288, total evaluation time= 0.066 sec.)
+
+
+The Formula: EF All_Trains_Arrive
+is FALSE
+(evaluation time= 0.054 sec.)
+(total states generated= 16, computations fragments generated= 32, total evaluation time= 0.054 sec.)
