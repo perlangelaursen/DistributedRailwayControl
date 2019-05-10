@@ -1865,14 +1865,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
      data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
      data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h)
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 #+RESULTS:
@@ -1986,14 +1991,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2103,14 +2113,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2218,14 +2233,20 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2335,14 +2356,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2450,14 +2476,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 
@@ -2565,14 +2596,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2680,14 +2716,19 @@ fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 
-plot data u 1:2 w points title 'First model', \
-     f(x) title 'First model fit', \
-     data u 1:3 w points title 'Restricted', \
-     g(x) title 'Restricted fit', \
-     data u 1:4 w points title 'Global', \
-     h(x) title 'Global fit', \
-     data u 1:5 w points title 'Cancel', \
-     i(x) title 'Cancel fit'
+stats data u 1:log(2) name "F"
+stats data u 1:log(3) name "G"
+stats data u 1:log(4) name "H"
+stats data u 1:log(5) name "I"
+
+plot data u 1:2 w points title 'First model' linecolor rgb "black", \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x), r = %8.4f", c, d, G_correlation), \
+     data u 1:4 w points title 'Global' linecolor rgb "black", \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
 #+end_src
 
 
