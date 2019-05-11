@@ -650,5 +650,4 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 	}
 	
 	
-
 }

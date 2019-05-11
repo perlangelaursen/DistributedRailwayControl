@@ -1,28 +1,12 @@
 package s144449s144456.RailwayModelGenerator.commands;
 
-import network.*;
+public class UPPAALxUMCTranslator extends UPPAALTranslator{
 
-public class UPPAALTranslator extends Translator {
-	@Override
-	protected String generateCode(Network n) {
-		if(n != null) {
-			String result =  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
-					"<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n" + 
-					"<nta>" +
-					generateDeclarations(n) + 
-					getTrainTemplate() +
-					getInitializerTemplate() + 
-					getCBTemplate() +
-					getPointTemplate() +
-					"<system>system Initializer, Train, CB, Point;</system>\n" + 
-					getQueries() + 
-					"</nta>\n";
-
-			return result;
-		}
-		return null;
+	protected String getGlobalFunctions() {
+		return  "";
 	}
-
+	
+	@Override
 	protected String getTrainTemplate() {
 		return "<template>\n" + 
 				"		<name x=\"5\" y=\"5\">Train</name>\n" + 
@@ -106,7 +90,7 @@ public class UPPAALTranslator extends Translator {
 				"}\n" + 
 				"\n" + 
 				"void updateHeadInfo(){\n" + 
-				"    headSeg = nextSegment(boxes[index+1], curSeg);\n" + 
+				"    headSeg = segments[index+1];\n" + 
 				"}\n" + 
 				"\n" + 
 				"void updateLockInfo(){\n" + 
@@ -122,89 +106,108 @@ public class UPPAALTranslator extends Translator {
 				"           reservationIsWellFormed(initialRes[id]) &amp;&amp; \n" + 
 				"           initialResIsConsistent(id);\n" + 
 				"}</declaration>\n" + 
-				"		<location id=\"id0\" x=\"-340\" y=\"-1156\">\n" + 
+				"		<location id=\"id0\" x=\"-858\" y=\"-850\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id1\" x=\"-535\" y=\"-875\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id2\" x=\"-748\" y=\"-748\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id3\" x=\"-493\" y=\"-918\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id4\" x=\"-340\" y=\"-1156\">\n" + 
 				"			<name x=\"-323\" y=\"-1173\">DoubleSegment</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id1\" x=\"-1020\" y=\"-1156\">\n" + 
+				"		<location id=\"id5\" x=\"-1020\" y=\"-1156\">\n" + 
 				"			<name x=\"-1030\" y=\"-1190\">Initial</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id2\" x=\"-680\" y=\"-1156\">\n" + 
+				"		<location id=\"id6\" x=\"-680\" y=\"-1156\">\n" + 
 				"			<name x=\"-748\" y=\"-1181\">Arrived</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id3\" x=\"-340\" y=\"-748\">\n" + 
+				"		<location id=\"id7\" x=\"-340\" y=\"-748\">\n" + 
 				"			<name x=\"-323\" y=\"-765\">Reserving</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id4\" x=\"-680\" y=\"-952\">\n" + 
+				"		<location id=\"id8\" x=\"-680\" y=\"-952\">\n" + 
 				"			<name x=\"-807\" y=\"-969\">SingleSegment</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id5\" x=\"-1020\" y=\"-748\">\n" + 
+				"		<location id=\"id9\" x=\"-1020\" y=\"-748\">\n" + 
 				"			<name x=\"-1044\" y=\"-732\">Locking</name>\n" + 
 				"		</location>\n" + 
-				"		<init ref=\"id1\"/>\n" + 
+				"		<init ref=\"id5\"/>\n" + 
 				"		<transition>\n" + 
 				"			<source ref=\"id1\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-1028\" y=\"-1096\">isWellFormed()</label>\n" + 
+				"			<target ref=\"id8\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id0\"/>\n" + 
+				"			<target ref=\"id8\"/>\n" + 
+				"			<label kind=\"assignment\" x=\"-840\" y=\"-901\">updateLockInfo()</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id2\"/>\n" + 
+				"			<target ref=\"id8\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id3\"/>\n" + 
+				"			<target ref=\"id8\"/>\n" + 
+				"			<label kind=\"assignment\" x=\"-595\" y=\"-960\">updateResInfo()</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id5\"/>\n" + 
+				"			<target ref=\"id8\"/>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-1028\" y=\"-1079\">start?</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-1028\" y=\"-1062\">initialize()</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id5\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-833\" y=\"-739\">notOK[id]?</label>\n" + 
-				"			<nail x=\"-748\" y=\"-748\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id5\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-841\" y=\"-858\">OK[id]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-841\" y=\"-841\">updateLockInfo()</label>\n" + 
-				"			<nail x=\"-850\" y=\"-850\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id3\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-323\" y=\"-875\">OK[id]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-323\" y=\"-858\">updateResInfo()</label>\n" + 
-				"			<nail x=\"-340\" y=\"-884\"/>\n" + 
-				"			<nail x=\"-510\" y=\"-918\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id2\"/>\n" + 
+				"			<source ref=\"id9\"/>\n" + 
 				"			<target ref=\"id2\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-918\" y=\"-739\">notOK[id]?</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id9\"/>\n" + 
+				"			<target ref=\"id0\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-943\" y=\"-807\">OK[id]?</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id7\"/>\n" + 
+				"			<target ref=\"id3\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-323\" y=\"-875\">OK[id]?</label>\n" + 
+				"			<nail x=\"-340\" y=\"-884\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id6\"/>\n" + 
+				"			<target ref=\"id6\"/>\n" + 
 				"			<nail x=\"-714\" y=\"-1224\"/>\n" + 
 				"			<nail x=\"-646\" y=\"-1224\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id0\"/>\n" + 
+				"			<source ref=\"id8\"/>\n" + 
+				"			<target ref=\"id4\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-544\" y=\"-1207\">possibleToPass()</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-544\" y=\"-1190\">pass[boxes[index+1]]!</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-544\" y=\"-1173\">updateHeadInfo()</label>\n" + 
 				"			<nail x=\"-578\" y=\"-1156\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id2\"/>\n" + 
+				"			<source ref=\"id8\"/>\n" + 
+				"			<target ref=\"id6\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-765\" y=\"-1113\">hasArrived()</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id3\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-501\" y=\"-867\">notOK[id]?</label>\n" + 
-				"			<nail x=\"-552\" y=\"-875\"/>\n" + 
+				"			<source ref=\"id7\"/>\n" + 
+				"			<target ref=\"id1\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-493\" y=\"-841\">notOK[id]?</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id0\"/>\n" + 
-				"			<target ref=\"id4\"/>\n" + 
+				"			<source ref=\"id4\"/>\n" + 
+				"			<target ref=\"id8\"/>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-450\" y=\"-994\">passed[boxes[index+1]]!</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-450\" y=\"-977\">updateLocationInfo()</label>\n" + 
 				"			<nail x=\"-340\" y=\"-1020\"/>\n" + 
 				"			<nail x=\"-595\" y=\"-969\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id5\"/>\n" + 
+				"			<source ref=\"id8\"/>\n" + 
+				"			<target ref=\"id9\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-1241\" y=\"-841\">possibleToLock()</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-1241\" y=\"-824\">reqLock[boxes[lockIndex]][id]\n" + 
 				"[segments[lockIndex-1]]\n" + 
@@ -212,15 +215,15 @@ public class UPPAALTranslator extends Translator {
 				"			<nail x=\"-1020\" y=\"-884\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id4\"/>\n" + 
-				"			<target ref=\"id3\"/>\n" + 
+				"			<source ref=\"id8\"/>\n" + 
+				"			<target ref=\"id7\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-612\" y=\"-740\">possibleToReserve()</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-612\" y=\"-722\">reqSeg[boxes[resCBIndex]][id][segments[resSegIndex]]!</label>\n" + 
 				"			<nail x=\"-612\" y=\"-748\"/>\n" + 
 				"			<nail x=\"-527\" y=\"-748\"/>\n" + 
 				"		</transition>\n" + 
 				"	</template>\n";
-	};
+	}
 	
 	protected String getCBTemplate() {
 		return "<template>\n" + 
@@ -319,81 +322,108 @@ public class UPPAALTranslator extends Translator {
 				"bool isWellFormed(){\n" + 
 				"    return cBIsWellFormed(id) &amp;&amp; pointIsWellFormed(id);\n" + 
 				"}</declaration>\n" + 
-				"		<location id=\"id8\" x=\"-1045\" y=\"51\">\n" + 
+				"		<location id=\"id12\" x=\"-263\" y=\"-34\">\n" + 
+				"			<name x=\"-273\" y=\"-68\">SwitchAux</name>\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id13\" x=\"-722\" y=\"-68\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id14\" x=\"-1020\" y=\"-102\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id15\" x=\"-1020\" y=\"-42\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id16\" x=\"-1020\" y=\"-204\">\n" + 
+				"		</location>\n" + 
+				"		<location id=\"id17\" x=\"-1045\" y=\"51\">\n" + 
 				"			<name x=\"-1096\" y=\"42\">Initial</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id9\" x=\"-1139\" y=\"-68\">\n" + 
+				"		<location id=\"id18\" x=\"-1139\" y=\"-68\">\n" + 
 				"			<name x=\"-1164\" y=\"-102\">Passing</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id10\" x=\"-356\" y=\"-34\">\n" + 
+				"		<location id=\"id19\" x=\"-356\" y=\"-34\">\n" + 
 				"			<name x=\"-366\" y=\"-68\">Switching</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id11\" x=\"-884\" y=\"-306\">\n" + 
+				"		<location id=\"id20\" x=\"-884\" y=\"-306\">\n" + 
 				"			<name x=\"-940\" y=\"-338\">SegmentChecked</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id12\" x=\"-170\" y=\"-34\">\n" + 
+				"		<location id=\"id21\" x=\"-170\" y=\"-34\">\n" + 
 				"			<name x=\"-154\" y=\"-42\">Switched</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id13\" x=\"-646\" y=\"-34\">\n" + 
+				"		<location id=\"id22\" x=\"-646\" y=\"-34\">\n" + 
 				"			<name x=\"-680\" y=\"-17\">LockChecked</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id14\" x=\"-884\" y=\"-68\">\n" + 
+				"		<location id=\"id23\" x=\"-884\" y=\"-68\">\n" + 
 				"			<name x=\"-858\" y=\"-93\">Idle</name>\n" + 
 				"		</location>\n" + 
-				"		<init ref=\"id8\"/>\n" + 
+				"		<init ref=\"id17\"/>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id8\"/>\n" + 
-				"			<target ref=\"id14\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-1011\" y=\"25\">isWellFormed()</label>\n" + 
+				"			<source ref=\"id12\"/>\n" + 
+				"			<target ref=\"id21\"/>\n" + 
+				"			<label kind=\"assignment\" x=\"-263\" y=\"-25\">updateConnected()</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id13\"/>\n" + 
+				"			<target ref=\"id22\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id14\"/>\n" + 
+				"			<target ref=\"id23\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id15\"/>\n" + 
+				"			<target ref=\"id18\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-1139\" y=\"-51\">passed[id]?</label>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id16\"/>\n" + 
+				"			<target ref=\"id20\"/>\n" + 
+				"		</transition>\n" + 
+				"		<transition>\n" + 
+				"			<source ref=\"id17\"/>\n" + 
+				"			<target ref=\"id23\"/>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-1011\" y=\"42\">start?</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-1011\" y=\"59\">initialize()</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id9\"/>\n" + 
+				"			<source ref=\"id18\"/>\n" + 
 				"			<target ref=\"id14\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-1079\" y=\"-136\">passed[id]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-1079\" y=\"-119\">clear()</label>\n" + 
-				"			<nail x=\"-1020\" y=\"-102\"/>\n" + 
+				"			<label kind=\"assignment\" x=\"-1105\" y=\"-119\">clear()</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id10\"/>\n" + 
+				"			<source ref=\"id19\"/>\n" + 
 				"			<target ref=\"id12\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-331\" y=\"-34\">OKp[point]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-331\" y=\"-17\">updateConnected()</label>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-357\" y=\"-25\">OKp[point]?</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id13\"/>\n" + 
-				"			<target ref=\"id12\"/>\n" + 
+				"			<source ref=\"id22\"/>\n" + 
+				"			<target ref=\"id21\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-458\" y=\"-153\">result == NOSWITCH</label>\n" + 
 				"			<nail x=\"-544\" y=\"-136\"/>\n" + 
 				"			<nail x=\"-322\" y=\"-136\"/>\n" + 
 				"			<nail x=\"-272\" y=\"-136\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id14\"/>\n" + 
-				"			<target ref=\"id9\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-1105\" y=\"-34\">pass[id]?</label>\n" + 
-				"			<nail x=\"-952\" y=\"-51\"/>\n" + 
-				"			<nail x=\"-1020\" y=\"-34\"/>\n" + 
+				"			<source ref=\"id23\"/>\n" + 
+				"			<target ref=\"id15\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-994\" y=\"-42\">pass[id]?</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id13\"/>\n" + 
-				"			<target ref=\"id10\"/>\n" + 
+				"			<source ref=\"id22\"/>\n" + 
+				"			<target ref=\"id19\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-569\" y=\"-68\">result == DOSWITCH</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-569\" y=\"-51\">switchPoint[point]!</label>\n" + 
 				"			<nail x=\"-373\" y=\"-34\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id13\"/>\n" + 
-				"			<target ref=\"id14\"/>\n" + 
+				"			<source ref=\"id22\"/>\n" + 
+				"			<target ref=\"id23\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-782\" y=\"-34\">result == ERROR</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-782\" y=\"-17\">notOK[tid]!</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-782\" y=\"0\">resetVariables()</label>\n" + 
 				"			<nail x=\"-816\" y=\"-34\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id11\"/>\n" + 
-				"			<target ref=\"id14\"/>\n" + 
+				"			<source ref=\"id20\"/>\n" + 
+				"			<target ref=\"id23\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-807\" y=\"-289\">result == -1</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-807\" y=\"-272\">notOK[tid]!</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-807\" y=\"-255\">resetVariables()</label>\n" + 
@@ -401,37 +431,35 @@ public class UPPAALTranslator extends Translator {
 				"			<nail x=\"-816\" y=\"-136\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id11\"/>\n" + 
-				"			<target ref=\"id14\"/>\n" + 
+				"			<source ref=\"id20\"/>\n" + 
+				"			<target ref=\"id23\"/>\n" + 
 				"			<label kind=\"guard\" x=\"-943\" y=\"-238\">result &gt; -1</label>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-943\" y=\"-221\">OK[tid]!</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-943\" y=\"-204\">updateResInfo()</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id14\"/>\n" + 
+				"			<source ref=\"id23\"/>\n" + 
 				"			<target ref=\"id13\"/>\n" + 
-				"			<label kind=\"select\" x=\"-790\" y=\"-187\">i : t_id,\n" + 
+				"			<label kind=\"select\" x=\"-807\" y=\"-187\">i : t_id,\n" + 
 				"j : seg_id,\n" + 
 				"k : seg_id</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-790\" y=\"-136\">reqLock[id][i][j][k]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-790\" y=\"-119\">result = checkLock(j,k),\n" + 
+				"			<label kind=\"synchronisation\" x=\"-807\" y=\"-136\">reqLock[id][i][j][k]?</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-807\" y=\"-119\">result = checkLock(j,k),\n" + 
 				"tid = i</label>\n" + 
-				"			<nail x=\"-714\" y=\"-68\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id14\"/>\n" + 
-				"			<target ref=\"id11\"/>\n" + 
-				"			<label kind=\"select\" x=\"-1173\" y=\"-263\">i : t_id,\n" + 
+				"			<source ref=\"id23\"/>\n" + 
+				"			<target ref=\"id16\"/>\n" + 
+				"			<label kind=\"select\" x=\"-1215\" y=\"-255\">i : t_id,\n" + 
 				"j : seg_id</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-1173\" y=\"-229\">reqSeg[id][i][j]?</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-1173\" y=\"-212\">result = checkSegment(j),\n" + 
+				"			<label kind=\"synchronisation\" x=\"-1215\" y=\"-221\">reqSeg[id][i][j]?</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-1215\" y=\"-204\">result = checkSegment(j),\n" + 
 				"tid = i</label>\n" + 
 				"			<nail x=\"-952\" y=\"-136\"/>\n" + 
-				"			<nail x=\"-952\" y=\"-272\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id12\"/>\n" + 
-				"			<target ref=\"id14\"/>\n" + 
+				"			<source ref=\"id21\"/>\n" + 
+				"			<target ref=\"id23\"/>\n" + 
 				"			<label kind=\"synchronisation\" x=\"-722\" y=\"34\">OK[tid]!</label>\n" + 
 				"			<label kind=\"assignment\" x=\"-722\" y=\"51\">updateLockInfo()</label>\n" + 
 				"			<nail x=\"-170\" y=\"34\"/>\n" + 
@@ -444,362 +472,46 @@ public class UPPAALTranslator extends Translator {
 		return "<template>\n" + 
 				"		<name>Point</name>\n" + 
 				"		<parameter>p_id id</parameter>\n" + 
-				"		<location id=\"id15\" x=\"136\" y=\"-85\">\n" + 
-				"			<name x=\"102\" y=\"-119\">SwitchingPM</name>\n" + 
+				"		<declaration>int inPlus;</declaration>\n" + 
+				"		<location id=\"id24\" x=\"42\" y=\"-42\">\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id16\" x=\"136\" y=\"153\">\n" + 
-				"			<name x=\"127\" y=\"170\">Initial</name>\n" + 
+				"		<location id=\"id25\" x=\"144\" y=\"0\">\n" + 
+				"			<name x=\"110\" y=\"17\">Switching</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id17\" x=\"136\" y=\"68\">\n" + 
-				"			<name x=\"102\" y=\"34\">SwitchingMP</name>\n" + 
+				"		<location id=\"id26\" x=\"-272\" y=\"0\">\n" + 
+				"			<name x=\"-281\" y=\"17\">Initial</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id18\" x=\"340\" y=\"0\">\n" + 
-				"			<name x=\"330\" y=\"-30\">Minus</name>\n" + 
+				"		<location id=\"id27\" x=\"-68\" y=\"0\">\n" + 
+				"			<name x=\"-85\" y=\"17\">Idle</name>\n" + 
 				"		</location>\n" + 
-				"		<location id=\"id19\" x=\"-68\" y=\"0\">\n" + 
-				"			<name x=\"-78\" y=\"-30\">Plus</name>\n" + 
-				"		</location>\n" + 
-				"		<init ref=\"id16\"/>\n" + 
+				"		<init ref=\"id26\"/>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id16\"/>\n" + 
-				"			<target ref=\"id18\"/>\n" + 
-				"			<label kind=\"guard\" x=\"238\" y=\"119\">!pointInPlus[id]</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"289\" y=\"136\">start?</label>\n" + 
-				"			<nail x=\"340\" y=\"153\"/>\n" + 
+				"			<source ref=\"id24\"/>\n" + 
+				"			<target ref=\"id25\"/>\n" + 
+				"			<label kind=\"assignment\" x=\"93\" y=\"-42\">inPlus = !inPlus</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id16\"/>\n" + 
-				"			<target ref=\"id19\"/>\n" + 
-				"			<label kind=\"guard\" x=\"-51\" y=\"119\">pointInPlus[id]</label>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-50\" y=\"136\">start?</label>\n" + 
-				"			<nail x=\"-68\" y=\"153\"/>\n" + 
+				"			<source ref=\"id25\"/>\n" + 
+				"			<target ref=\"id27\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"8\" y=\"42\">OKp[id]!</label>\n" + 
+				"			<nail x=\"34\" y=\"42\"/>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id19\"/>\n" + 
-				"			<target ref=\"id15\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-42\" y=\"-68\">switchPoint[id]?</label>\n" + 
-				"			<nail x=\"34\" y=\"-42\"/>\n" + 
+				"			<source ref=\"id26\"/>\n" + 
+				"			<target ref=\"id27\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-246\" y=\"-42\">start?</label>\n" + 
+				"			<label kind=\"assignment\" x=\"-246\" y=\"-25\">inPlus = pointInPlus[id]</label>\n" + 
 				"		</transition>\n" + 
 				"		<transition>\n" + 
-				"			<source ref=\"id18\"/>\n" + 
-				"			<target ref=\"id17\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"212\" y=\"42\">switchPoint[id]?</label>\n" + 
-				"			<nail x=\"238\" y=\"34\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id15\"/>\n" + 
-				"			<target ref=\"id18\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"246\" y=\"-76\">OKp[id]!</label>\n" + 
-				"			<label kind=\"assignment\" x=\"246\" y=\"-59\">pointInPlus[id] = false</label>\n" + 
-				"			<nail x=\"238\" y=\"-42\"/>\n" + 
-				"		</transition>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id17\"/>\n" + 
-				"			<target ref=\"id19\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"-42\" y=\"42\">OKp[id]!</label>\n" + 
-				"			<label kind=\"assignment\" x=\"-42\" y=\"59\">pointInPlus[id] = true</label>\n" + 
-				"			<nail x=\"34\" y=\"34\"/>\n" + 
+				"			<source ref=\"id27\"/>\n" + 
+				"			<target ref=\"id24\"/>\n" + 
+				"			<label kind=\"synchronisation\" x=\"-85\" y=\"-51\">switchPoint[id]?</label>\n" + 
 				"		</transition>\n" + 
 				"	</template>\n";
 	}
 	
-	private String getInitializerTemplate() {
-		return "<template>\n" + 
-				"		<name>Initializer</name>\n" + 
-				"		<location id=\"id6\" x=\"0\" y=\"136\">\n" + 
-				"			<name x=\"8\" y=\"110\">Initialized</name>\n" + 
-				"		</location>\n" + 
-				"		<location id=\"id7\" x=\"0\" y=\"0\">\n" + 
-				"			<name x=\"-10\" y=\"-34\">Uninitialized</name>\n" + 
-				"		</location>\n" + 
-				"		<init ref=\"id7\"/>\n" + 
-				"		<transition>\n" + 
-				"			<source ref=\"id7\"/>\n" + 
-				"			<target ref=\"id6\"/>\n" + 
-				"			<label kind=\"synchronisation\" x=\"8\" y=\"51\">start!</label>\n" + 
-				"		</transition>\n" + 
-				"	</template>\n";
-	}
-	
-	private String generateDeclarations(Network n) {
-		int NPOINT = (pointIDs.size() > 0) ? pointIDs.size() : 1;
-		int routeLength = longestRouteLength(n);
-		String sizesString = "const int NTRAIN = "+trainIDs.size()+";\n"+
-							 "const int NCB = "+cbIDs.size()+";\n"+
-							 "const int NPOINT = "+NPOINT+";\n"+
-					  		 "const int NSEG = "+segIDs.size()+";\n"+ 
-							 "const int NROUTELENGTH = "+ routeLength +";\n\n";
-				
-		//Limits
-		String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
-							  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
-		
-		//Route segments	
-		String segRouteString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";
-		for(Train t : n.getTrains()) {
-			segRouteString += trainSegments(t, routeLength)+", ";
-		}
-		segRouteString = segRouteString.substring(0, segRouteString.length() - 2)+"};\n";
-		
-		//Route control boxes
-		String cbRouteString= "const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {";
-		for(Train t : n.getTrains()) {
-			cbRouteString += trainBoxes(t, routeLength + 1) + ", ";
-		}
-		cbRouteString = cbRouteString.substring(0, cbRouteString.length() - 2)+"};\n";				
-		
-		//Control box definitions
-		String cbsString = "const segV_id cBs[NCB][3] = {";
-		for(ControlBox cb : n.getControlBoxes()) {
-			cbsString += cbsDetails(cb)+", ";
-		}
-		cbsString = cbsString.substring(0, cbsString.length() - 2)+"};\n";	
-		
-		//Initial reservations
-		String initResString = "const reservation initialRes[NTRAIN] = {";
-		for(Train t : n.getTrains()) {
-			Segment s = t.getRoute().get(0);
-			ControlBox cb = t.getBoxRoute().get(1);
-			initResString += "{"+cbIDs.get(cb)+", "+segIDs.get(s)+"}, ";
-		}
-		initResString = initResString.substring(0, initResString.length() - 2)+"};\n";
-		
-		//Points
-		String pointsString = "const pV_id points[NCB] = {";
-		for(ControlBox cb : n.getControlBoxes()) {
-			pointsString += Integer.toString(pointIDs.getOrDefault(cb, -1))+", ";
-		} 
-		pointsString = pointsString.substring(0, pointsString.length() - 2)+"};\n";
-		
-		String pointSettingsString = "bool pointInPlus[NPOINT] = {";
-		pointSettingsString += (pointIDs.size() > 0) ? "" : "true";
-		for(ControlBox cb : n.getControlBoxes()) {
-			if(cb instanceof SwitchBox) {
-				SwitchBox sb = (SwitchBox) cb;
-				pointSettingsString += (sb.getConnected() == PointSetting.PLUS)+", ";	
-			}
-		}
-		if(pointIDs.size() > 0) {
-			pointSettingsString = pointSettingsString.substring(0, pointSettingsString.length() - 2);
-		}
-		pointSettingsString += "};\n\n";
-		
-		return "<declaration>\n" + "//"+n.getName()+"\n" +  sizesString + 
-				getTypeDefinitions() + limitsString + segRouteString + 
-				cbRouteString + cbsString + initResString + 
-				pointsString + pointSettingsString + 
-				getChannels() + getGlobalFunctions() + getWellFormednessFunctions();
-	}
-	
-	private String getTypeDefinitions() {
-		return "typedef int[0, NTRAIN-1] t_id;\n" + 
-				"typedef int[0, NCB-1]  cB_id;\n" + 
-				"typedef int[0, NPOINT-1] p_id;\n" + 
-				"typedef int[0, NSEG-1] seg_id;\n" + 
-				"typedef int[-1, NTRAIN-1] tV_id;\n" + 
-				"typedef int[-1, NCB-1] cBV_id;\n" + 
-				"typedef int[-1, NPOINT-1] pV_id;\n" + 
-				"typedef int[-1, NSEG-1] segV_id;\n"+
-				"typedef int[0, NROUTELENGTH] cBRoute_i;\n" + 
-				"typedef int[0, NROUTELENGTH-1] segRoute_i;\n" +
-				"typedef struct {\n" + 
-				"    cB_id cb;\n" + 
-				"    seg_id seg;\n" + 
-				"} reservation;\n\n";
-	}
-
-	protected String getGlobalFunctions() {
-		return  "int nextSegment(cB_id cb, seg_id s){\n" + 
-				"    int s1 = cBs[cb][0];\n" + 
-				"    int s2 = cBs[cb][1];\n" + 
-				"    if(points[cb] &gt; -1 &amp;&amp; !pointInPlus[points[cb]]){\n" + 
-				"        s2 = cBs[cb][2];\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    if(s == s1){\n" + 
-				"        return s2;\n" + 
-				"    } else {\n" + 
-				"        return s1;\n" + 
-				"    }    \n" + 
-				"}\n" + 
-				"\n";
-	}
-
-	private String getWellFormednessFunctions() {
-		return "////////////////////////////////////\n" + 
-				"//Well-formedness Functions\n" + 
-				"bool initialResIsConsistent(t_id id){\n" + 
-				"    return initialRes[id].cb == boxRoutes[id][1] &amp;&amp; initialRes[id].seg == segRoutes[id][0];\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool reservationIsWellFormed(reservation res){\n" + 
-				"    return cBs[res.cb][0] == res.seg || cBs[res.cb][1] == res.seg || cBs[res.cb][2] == res.seg;\n" + 
-				"}\n" + 
-				"\n" + 
-				"\n" + 
-				"bool sharesSegmentS(cB_id i, cB_id j, seg_id s){\n" + 
-				"    return  (i != j) &amp;&amp;\n" + 
-				"            (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s) &amp;&amp; \n" + 
-				"            (cBs[j][0] == s || cBs[j][1] == s || cBs[j][2] == s);\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool routesAreConsistent(t_id id){\n" + 
-				"    cBV_id bRoute[NROUTELENGTH+1] = boxRoutes[id];\n" + 
-				"    segV_id sRoute[NROUTELENGTH] = segRoutes[id];\n" + 
-				"\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
-				"        if((bRoute[i+1] != -1) == (sRoute[i] == -1)){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(bRoute[i+1] != -1 &amp;&amp; !sharesSegmentS(bRoute[i], bRoute[i+1], sRoute[i])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"\n" + 
-				"bool sharesSegment(cB_id i, cB_id j){\n" + 
-				"    return (i != j) &amp;&amp;\n" + 
-				"            ((cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])) ||\n" + 
-				"            (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])) ||\n" + 
-				"            (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])));\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool boxRouteIsWellFormed(cBV_id route[NROUTELENGTH+1]){\n" + 
-				"    for(i:int[0,NROUTELENGTH-1]){\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !sharesSegment(route[i], route[i+1])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"bool canConnect(seg_id s1, seg_id s2){\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(cBs[i][0] == s1 &amp;&amp; (cBs[i][1] == s2 || cBs[i][2] == s2)){\n" + 
-				"            return true;\n" + 
-				"        }\n" + 
-				"        if (cBs[i][0] == s2 &amp;&amp; (cBs[i][1] == s1 || cBs[i][2] == s1)){\n" + 
-				"            return true;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return false;   \n" + 
-				"}\n" + 
-				"\n" + 
-				"bool segRouteIsWellFormed(segV_id route[NROUTELENGTH]){\n" + 
-				"    int i = 0;\n" + 
-				"    if(route[0] == -1){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    for(i:segRoute_i){\n" + 
-				"        for(j:segRoute_i){\n" + 
-				"            if(j != i &amp;&amp; route[i] == route[j] &amp;&amp; route[i] != -1){\n" + 
-				"                return false;\n" + 
-				"            }\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    while(i &lt;= NROUTELENGTH - 2){\n" + 
-				"        if(route[i] == -1 &amp;&amp; route[i+1] != -1){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        if(route[i+1] != -1 &amp;&amp; !canConnect(route[i], route[i+1])){\n" + 
-				"            return false;\n" + 
-				"        }\n" + 
-				"        i++;\n" + 
-				"    }\n" + 
-				"    return true; \n" + 
-				"}\n" + 
-				"\n" + 
-				"int pointIsWellFormed(cBV_id id){\n" + 
-				"    if(points[id] != -1){\n" + 
-				"        for(i : cB_id){\n" + 
-				"            if(i != id &amp;&amp; points[i] == points[id]){\n" + 
-				"                return false;\n" + 
-				"            }\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return (points[id] == -1) == (cBs[id][2] == -1);\n" + 
-				"}\n" + 
-				"\n" + 
-				"int otherBoxes(cB_id id, segV_id s){\n" + 
-				"    segV_id cB[3] = cBs[id];\n" + 
-				"    int found = 0;\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if(id != i &amp;&amp; (cBs[i][0] == s || cBs[i][1] == s || cBs[i][2] == s)){\n" + 
-				"            found++;\n" + 
-				"        }\n" + 
-				"    }\n" + 
-				"    return found;\n" + 
-				"}\n" + 
-				"\n" + 
-				"int sharedSegments(cB_id i, cB_id j){\n" + 
-				"    int count = 0;\n" + 
-				"    if (cBs[i][0] != -1 &amp;&amp; (cBs[i][0] == cBs[j][0] || cBs[i][0] == cBs[j][1] || cBs[i][0] == cBs[j][2])){\n" + 
-				"        count++;\n" + 
-				"    }\n" + 
-				"    if (cBs[i][1] != -1 &amp;&amp; (cBs[i][1] == cBs[j][0] || cBs[i][1] == cBs[j][1] || cBs[i][1] == cBs[j][2])){\n" + 
-				"        count++;\n" + 
-				"    }\n" + 
-				"    if (cBs[i][2] != -1 &amp;&amp; (cBs[i][2] == cBs[j][0] || cBs[i][2] == cBs[j][1] || cBs[i][2] == cBs[j][2])){\n" + 
-				"         count++;\n" + 
-				"    }\n" + 
-				"    return count;\n" + 
-				"}\n" + 
-				"\n" + 
-				"bool cBIsWellFormed(cB_id id){\n" + 
-				"    segV_id cB[3] = cBs[id];\n" + 
-				"\n" + 
-				"    //Invalid definitions\n" + 
-				"    if(cB[0] == -1 || (cB[1] == -1 &amp;&amp; cB[2] != -1) || (cB[0] == -1 &amp;&amp; cB[1] == -1)){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"    if((cB[0] != -1 &amp;&amp; (cB[0] == cB[1] || cB[0] == cB[2])) ||\n" + 
-				"        (cB[1] != -1 &amp;&amp; (cB[1] == cB[0] || cB[1] == cB[2])) ||\n" + 
-				"        (cB[2] != -1 &amp;&amp; (cB[2] == cB[0] || cB[2] == cB[1]))){\n" + 
-				"        return false;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: []--x--\n" + 
-				"    if(cB[1] == -1){\n" + 
-				"        return otherBoxes(id, cB[0]) == 1;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: --x--[]--y--\n" + 
-				"    if(cB[2] == -1){\n" + 
-				"        return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1;\n" + 
-				"    }\n" + 
-				"\n" + 
-				"    //Case: Switch box\n" + 
-				"    for(i:cB_id){\n" + 
-				"        if (i != id &amp;&amp; sharedSegments(i,id) &gt; 1 &amp;&amp; !(cBs[i][0] != cB[0] &amp;&amp; cBs[i][1] == cB[1] &amp;&amp; cBs[i][2] == cB[2])){                \n" + 
-				"            return false;\n" + 
-				"        } \n" + 
-				"    }\n" + 
-				"    return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;\n" + 
-				"}\n" +
-				"</declaration>\n";
-	}
-	
-	protected String getChannels() {
-		return "//Channels\n" + 
-				"chan reqSeg[NCB][NTRAIN][NSEG];\n" + 
-				"chan reqLock[NCB][NTRAIN][NSEG][NSEG];\n" + 
-				"chan OK[NTRAIN];\n" + 
-				"chan notOK[NTRAIN];\n" + 
-				"chan pass[NCB];\n" + 
-				"chan passed[NCB];\n" + 
-				"chan switchPoint[NPOINT];\n" + 
-				"chan OKp[NPOINT];\n" + 
-				"urgent broadcast chan start;\n\n";
-	}
-
 	protected String getQueries() {
-		return "	<queries>\n" + 
+		return "<queries>\n" + 
 				"		<query>\n" + 
 				"			<formula>\n" + 
 				"			</formula>\n" + 
@@ -857,10 +569,10 @@ public class UPPAALTranslator extends Translator {
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:t_id) Train(i).DoubleSegment &amp;&amp; points[Train(i).boxes[Train(i).index+1]] != -1 imply\n" + 
-				"	!Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingPM &amp;&amp; !Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingMP\n" + 
+				"	!Point(points[Train(i).boxes[Train(i).index+1]]).Switching\n" + 
 				"			</formula>\n" + 
 				"			<comment>No derailment:\n" + 
-				"If a train is in a critical section, the point in that section is not in themiddle of switching.\n" + 
+				"If a train is in a critical section, the point in that section is not in the middle of switching.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
@@ -877,15 +589,8 @@ public class UPPAALTranslator extends Translator {
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>A[] forall(i:p_id) Initializer.Initialized &amp;&amp; !Point(i).SwitchingPM &amp;&amp; !Point(i).SwitchingMP imply (pointInPlus[i] imply Point(i).Plus) &amp;&amp; (!pointInPlus[i] imply Point(i).Minus)\n" + 
-				"			</formula>\n" + 
-				"			<comment>Network array consistency:\n" + 
-				"The position of a point in the network data is consistent with the actual position of the point.\n" + 
-				"			</comment>\n" + 
-				"		</query>\n" + 
-				"		<query>\n" + 
-				"			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching imply \n" + 
-				"	((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).Plus &amp;&amp; (CB(i).connected == CB(i).segments[2]) imply Point(points[i]).Minus)\n" + 
+				"			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching &amp;&amp; !CB(i).SwitchAux imply \n" + 
+				"	((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).inPlus &amp;&amp; (CB(i).connected == CB(i).segments[2]) imply !Point(points[i]).inPlus)\n" + 
 				"			</formula>\n" + 
 				"			<comment>Point consistency:\n" + 
 				"A CB's information about its associated Point's position is consistent with the Point's actual position.\n" + 
@@ -1026,54 +731,9 @@ public class UPPAALTranslator extends Translator {
 				"		</query>\n" + 
 				"	</queries>\n";
 	}
-
-	protected String getFileNameDetails() {
-		return "UPPAAL";
-	};
-
-	private int longestRouteLength(Network n) {
-		int routeLength = 0;
-		for(Train t : n.getTrains()) {
-			if (t.getRoute().size() > routeLength) {
-				routeLength = t.getRoute().size();
-			}
-		}
-		return routeLength;
-	}
-
-	private String cbsDetails(ControlBox cb) {
-		String cbsDetails = "{";
-		Segment[] cbSegments = controlBoxSegments.get(cb);
-		cbsDetails += segIDs.get(cbSegments[0]);
-		for(int i = 1; i < controlBoxSegments.get(cb).length; i++) {
-			cbsDetails += ", " + segIDs.getOrDefault(cbSegments[i], -1) ;
-		}
-		return cbsDetails+"}";
-	}
-		
-	private String trainBoxes(Train t, int routeLength) {
-		String routeString = "{";
-		for(int i = 0; i < routeLength; i++) {
-			if (i < t.getBoxRoute().size()) {
-				routeString += cbIDs.get(t.getBoxRoute().get(i))+",";
-			} else {
-				routeString += "-1,";
-			}
-		}
-		routeString = routeString.substring(0, routeString.length() - 1)+"}";
-		return routeString;
-	}
 	
-	private String trainSegments(Train t, int routeLength) {
-		String routeString = "{";
-		for(int j = 0; j < routeLength; j++) {
-			if (j < t.getRoute().size()) {
-				routeString += segIDs.get(t.getRoute().get(j))+",";
-			} else {
-				routeString += "-1,";
-			}
-		}
-		routeString = routeString.substring(0, routeString.length() - 1)+"}";
-		return routeString;
+	@Override
+	protected String getFileNameDetails() {
+		return "UPPAAL_UMC-Revised";
 	}
 }

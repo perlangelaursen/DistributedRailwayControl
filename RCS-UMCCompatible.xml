@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
 <nta>
-	<declaration>const int NTRAIN = 2;
+	<declaration>// Station 1 with regular control box
+//Configuration Data - Part 1
 const int NCB = 5;
-const int NPOINT = 2;
 const int NSEG = 5;
-const int NROUTELENGTH =4;
+const int NTRAIN = 2;
+const int NPOINT = 2;
+const int NROUTELENGTH = 4;
 
+//TYPES
 typedef int[0, NTRAIN-1] t_id;
 typedef int[0, NCB-1]  cB_id;
 typedef int[0, NPOINT-1] p_id;
 typedef int[0, NSEG-1] seg_id;
-typedef int[-1, NTRAIN-1] tV_id;
-typedef int[-1, NCB-1] cBV_id;
-typedef int[-1, NPOINT-1] pV_id;
 typedef int[-1, NSEG-1] segV_id;
+typedef int[-1, NPOINT-1] pV_id;
+typedef int[-1, NCB-1] cBV_id;
+typedef int[-1, NTRAIN-1] tV_id;
 typedef int[0, NROUTELENGTH] cBRoute_i;
 typedef int[0, NROUTELENGTH-1] segRoute_i;
 
@@ -23,13 +26,16 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
-const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,1,4,3}, {3,2,1,0}};
-const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0, 1, 3, 4, 2}, {2, 4, 3, 1, 0}};
-const segV_id cBs[NCB][3] = {{0, -1, -1}, {0, 1, -1}, {3, -1, -1}, {1, 4, 2}, {3, 4, 2}};
-const reservation initialRes[NTRAIN] = {{1, 0},{4, 3}};
-const pV_id points[NCB] = {-1, -1, -1, 0, 1};
+//Configuration Data - Part 2
+const int[0,NROUTELENGTH] resLimit = 2;
+const int[0,NROUTELENGTH-1] lockLimit = 2;
+
+
+const segV_id segRoutes[NTRAIN][NROUTELENGTH]= {{0,1,2,4}, {4,3,1,0}};
+const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2,3,4}, {4,3,2,1,0}};
+const segV_id cBs[NCB][3]= {{0,-1,-1}, {0,1,-1}, {1,2,3}, {4,2,3}, {4,-1,-1}};
+const pV_id points[NCB] = {-1, -1, 0, 1, -1};
+const reservation initialRes[NTRAIN] = {{1, 0}, {3,4}};
 const bool pointInPlus[NPOINT] = {true, true};
 
 //Channels
@@ -40,7 +46,7 @@ chan notOK[NTRAIN];
 chan pass[NCB];
 chan passed[NCB];
 chan switchPoint[NPOINT];
-chan OKp[NPOINT];
+chan OKp[NCB];
 urgent broadcast chan start;
 
 ////////////////////////////////////
@@ -198,7 +204,8 @@ bool cBIsWellFormed(cB_id id){
         } 
     }
     return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;
-}</declaration>
+}
+</declaration>
 	<template>
 		<name x="5" y="5">Train</name>
 		<parameter>t_id id</parameter>
@@ -672,40 +679,40 @@ tid = i</label>
 	<template>
 		<name>Point</name>
 		<parameter>p_id id</parameter>
-		<declaration>bool inPlus;</declaration>
+		<declaration>int inPlus;</declaration>
 		<location id="id24" x="42" y="-42">
 		</location>
 		<location id="id25" x="144" y="0">
-			<name x="110" y="-34">Switching</name>
+			<name x="110" y="17">Switching</name>
 		</location>
-		<location id="id26" x="-170" y="0">
-			<name x="-179" y="17">Initial</name>
+		<location id="id26" x="-272" y="0">
+			<name x="-281" y="17">Initial</name>
 		</location>
 		<location id="id27" x="-68" y="0">
-			<name x="-78" y="-30">Idle</name>
+			<name x="-85" y="17">Idle</name>
 		</location>
 		<init ref="id26"/>
 		<transition>
 			<source ref="id24"/>
 			<target ref="id25"/>
-			<label kind="assignment" x="60" y="-21">inPlus = !inPlus</label>
+			<label kind="assignment" x="93" y="-42">inPlus = !inPlus</label>
 		</transition>
 		<transition>
 			<source ref="id25"/>
 			<target ref="id27"/>
-			<label kind="synchronisation" x="8" y="51">OKp[id]!</label>
+			<label kind="synchronisation" x="8" y="42">OKp[id]!</label>
 			<nail x="34" y="42"/>
 		</transition>
 		<transition>
 			<source ref="id26"/>
 			<target ref="id27"/>
-			<label kind="synchronisation" x="-127" y="17">start?</label>
-			<label kind="assignment" x="-153" y="34">inPlus = pointInPlus[id]</label>
+			<label kind="synchronisation" x="-246" y="-42">start?</label>
+			<label kind="assignment" x="-246" y="-25">inPlus = pointInPlus[id]</label>
 		</transition>
 		<transition>
 			<source ref="id27"/>
 			<target ref="id24"/>
-			<label kind="synchronisation" x="-85" y="-93">switchPoint[id]?</label>
+			<label kind="synchronisation" x="-85" y="-51">switchPoint[id]?</label>
 		</transition>
 	</template>
 	<system>system Initializer, Train, CB, Point;</system>
@@ -717,13 +724,13 @@ tid = i</label>
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; forall(i:t_id) not(Train(i).Initial)
+			<formula>A&lt;&gt; forall(i:t_id) not(Train(i).Initial)
 			</formula>
 			<comment>Well-formedness of Trains.
 			</comment>
 		</query>
 		<query>
-			<formula>E&lt;&gt; forall(i:cB_id) not(CB(i).Initial)
+			<formula>A&lt;&gt; forall(i:cB_id) not(CB(i).Initial)
 			</formula>
 			<comment>Well-formedness of CBs.
 			</comment>
@@ -770,7 +777,7 @@ If a train is in a critical section, then the segments that it is moving on are 
 	!Point(points[Train(i).boxes[Train(i).index+1]]).Switching
 			</formula>
 			<comment>No derailment:
-If a train is in a critical section, the point in that section is not in themiddle of switching.
+If a train is in a critical section, the point in that section is not in the middle of switching.
 			</comment>
 		</query>
 		<query>
@@ -787,8 +794,8 @@ The number of saved locks in the state space of a Train is the same number of lo
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) points[i] &gt; -1 &amp;&amp; !CB(i).SwitchAux &amp;&amp; Point(points[i]).Idle imply
-	(Point(points[i]).inPlus imply CB(i).connected == cBs[i][1]) &amp;&amp; (!Point(points[i]).inPlus imply CB(i).connected == cBs[i][2])
+			<formula>A[] forall(i:cB_id) Initializer.Initialized &amp;&amp; points[i] &gt; -1 &amp;&amp; !CB(i).Switching &amp;&amp; !CB(i).SwitchAux imply 
+	((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).inPlus &amp;&amp; (CB(i).connected == CB(i).segments[2]) imply !Point(points[i]).inPlus)
 			</formula>
 			<comment>Point consistency:
 A CB's information about its associated Point's position is consistent with the Point's actual position.
