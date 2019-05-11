@@ -55,7 +55,7 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 				"}\n" + 
 				"\n" + 
 				"bool hasArrived() {\n" + 
-				"    return curSeg == segRoutes[id][routeLength-1];\n" + 
+				"	 return index == routeLength-1;\n" + 
 				"}\n" + 
 				"\n" + 
 				"bool possibleToReserve() {\n" + 
@@ -202,8 +202,7 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 		return "<template>\n" + 
 				"		<name>CB</name>\n" + 
 				"		<parameter>cB_id id</parameter>\n" + 
-				"		<declaration>//segV_id segments[3];\n" + 
-				"segV_id connected =-1;\n" + 
+				"		<declaration>segV_id connected =-1;\n" + 
 				"pV_id point = -1;\n" + 
 				"\n" + 
 				"tV_id res[3] = {-1, -1, -1};\n" + 

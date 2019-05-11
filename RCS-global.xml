@@ -223,10 +223,7 @@ bool cBIsWellFormed(cB_id id){
 	<template>
 		<name x="5" y="5">Train</name>
 		<parameter>t_id id</parameter>
-		<declaration>//segV_id segments[NROUTELENGTH];
-//cBV_id boxes[NROUTELENGTH+1];
-
-int[0,NROUTELENGTH] routeLength;
+		<declaration>int[0,NROUTELENGTH] routeLength;
 segV_id curSeg;
 
 bool requiresLock[NROUTELENGTH+1];
@@ -273,7 +270,7 @@ bool possibleToLock() {
 }
 
 bool hasArrived() {
-    return curSeg == segRoutes[id][routeLength-1];
+    return index == routeLength-1;
 }
 
 bool possibleToReserve() {
@@ -431,8 +428,7 @@ bool isWellFormed(){
 	<template>
 		<name>CB</name>
 		<parameter>cB_id id</parameter>
-		<declaration>//segV_id segments[3];
-segV_id connected =-1;
+		<declaration>segV_id connected =-1;
 pV_id point = -1;
 
 tV_id res[3] = {-1, -1, -1};
