@@ -104,7 +104,7 @@ public class UMCTranslator extends Translator {
 					
 					//A TCC only requests locks for connections that it has reserved
 					//Note: Note: Train only requests switching/locking for adjacent segments in its route at CBs in route (prop20+prop15)
-					prop14 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] -> (reserved("+tid+","+s1+","+cbid+") & reserved("+tid+","+s2+","+cbid+"))) & ";
+					prop14 += "([reqLocking("+tid+","+cbid+","+s1+","+s2+")] (reserved("+tid+","+s1+","+cbid+") & reserved("+tid+","+s2+","+cbid+"))) & ";
 
 					String cbid2 = "cb"+cbIDs.get(t.getBoxRoute().get(i+1));
 					//Reservation consistency: All segment reservations obtained by a TCC are also saved in the state space of the relevant CBs
@@ -275,10 +275,10 @@ public class UMCTranslator extends Translator {
 				prop17 += "(resOK("+cbid+","+sid+") -> segFree("+cbid+","+sid+")) & ";
 			}
 		}
-		prop2 = prop2.substring(0, prop2.length() - 3)+")\n";
+		prop2 = trainIDs.size() < 2 ? "--Fewer than two trains in network\n" : prop2.substring(0, prop2.length() - 3)+")\n";
 		prop3 = prop3.substring(0, prop3.length() - 3)+")\n";
-		prop4 = prop4.substring(0, prop4.length() - 3)+")\n";
-		prop5 = prop5.substring(0, prop5.length() - 3)+")\n";		
+		prop4 = pointIDs.isEmpty() ? "-- No points in network\n" : prop4.substring(0, prop4.length() - 3)+")\n";
+		prop5 = pointIDs.isEmpty() ? "-- No points in network\n" : prop5.substring(0, prop5.length() - 3)+")\n";
 		prop6 = prop6.substring(0, prop6.length() - 3)+")\n";
 		prop7 = prop7.substring(0, prop7.length() - 3)+")\n";
 		prop8 = prop8.substring(0, prop8.length() - 3)+")\n";

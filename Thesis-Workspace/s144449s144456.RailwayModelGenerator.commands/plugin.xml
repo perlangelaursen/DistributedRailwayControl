@@ -73,6 +73,20 @@
         </visibleWhen>
       </command>
       <command
+          commandId="s144449s144456.RailwayModelGenerator.generateUPPAALUMC">
+        <visibleWhen>
+          <with
+              variable="selection">
+            <count value="1"/>
+            <iterate>
+              <adapt
+                  type="network.Network">
+              </adapt>
+            </iterate>
+          </with>
+        </visibleWhen>
+      </command>
+      <command
           commandId="s144449s144456.RailwayModelGenerator.generateUMC">
         <visibleWhen>
           <with
@@ -132,10 +146,21 @@
   <extension
       point="org.eclipse.ui.commands">
     <command
+        id="s144449s144456.RailwayModelGenerator.generateUPPAALUMC"
+        description="Generate UPPAAL code for model revised to match UMC model"
+        defaultHandler="s144449s144456.RailwayModelGenerator.commands.UPPAALxUMCTranslator"
+        name="Generate UPPAAL Code (Revised based on UMC model)">
+    </command>
+  </extension>
+  
+  <extension
+      point="org.eclipse.ui.commands">
+    <command
         id="s144449s144456.RailwayModelGenerator.generateUMC"
         description="Generate UMC code for first model"
         defaultHandler="s144449s144456.RailwayModelGenerator.commands.UMCTranslator"
         name="Generate UMC Code">
     </command>
   </extension>
+
 </plugin>

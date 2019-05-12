@@ -1,0 +1,21 @@
+Established direct connection to local server.
+(Academic) UPPAAL version 4.1.19 (rev. 5649), September 2014 -- server.
+Disconnected.
+Established direct connection to local server.
+(Academic) UPPAAL version 4.1.19 (rev. 5649), September 2014 -- server.
+A[] forall(i:t_id) forall(j:t_id) Initializer.Initialized && i != j imply (Train(i).curSeg != Train(j).curSeg) && (Train(i).DoubleSegment imply Train(i).headSeg != Train(j).curSeg) && (Train(i).DoubleSegment && Train(j).DoubleSegment imply Train(i).headSeg!= Train(j).headSeg)
+Verification/kernel/elapsed time used: 0s / 0s / 0.003s.
+Resident/virtual memory usage peaks: 9,884KB / 31,800KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment imply (Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] && Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).connected) || (Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] && Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected)
+Verification/kernel/elapsed time used: 0s / 0s / 0.003s.
+Resident/virtual memory usage peaks: 9,916KB / 31,844KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment && points[Train(i).boxes[Train(i).index+1]] != -1 imply !Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingPM && !Point(points[Train(i).boxes[Train(i).index+1]]).SwitchingMP
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,920KB / 31,848KB.
+Property is satisfied.
+E<> forall(i:t_id) Train(i).Arrived
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,920KB / 31,848KB.
+Property is not satisfied.
