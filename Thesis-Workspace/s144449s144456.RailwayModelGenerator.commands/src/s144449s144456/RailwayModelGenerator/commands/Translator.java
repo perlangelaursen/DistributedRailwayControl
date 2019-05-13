@@ -12,6 +12,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -33,7 +34,6 @@ public abstract class Translator extends AbstractHandler{
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		String msg = "The model could not be generated.";
 		ISelection selection = HandlerUtil.getActiveWorkbenchWindow(event).getActivePage().getSelection();
 		if (selection != null & selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
@@ -49,18 +49,22 @@ public abstract class Translator extends AbstractHandler{
 					if(s != null) {
 						PrintWriter printWriter;
 						try {
-							printWriter = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
+							String path = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
+							printWriter = new PrintWriter(path+"/"+n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
 							printWriter.println(s);
 							printWriter.close();
-							msg = "Model file successfully generated.";
+							String msg = "Model file successfully generated.";
+							MessageDialog.openInformation(null, "Generate File", msg);
 						} catch (FileNotFoundException | UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 					}
 				}
+			} else {
+				String msg = "The model could not be generated.";
+				MessageDialog.openInformation(null, "Generate File", msg);
 			}
 		}
-		MessageDialog.openInformation(null, "Generate File", msg);
 		return null;
 	}
 

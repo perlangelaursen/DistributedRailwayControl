@@ -23,9 +23,9 @@
             xsi:type="gmfgraph:BorderLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="58"
-            green="58"
-            blue="58"/>
+            red="117"
+            green="130"
+            blue="147"/>
         <preferredSize
             dx="20"
             dy="20"/>
@@ -58,7 +58,10 @@
         <layout
             xsi:type="gmfgraph:BorderLayout"/>
         <backgroundColor
-            xsi:type="gmfgraph:RGBColor"/>
+            xsi:type="gmfgraph:RGBColor"
+            red="34"
+            green="34"
+            blue="34"/>
         <preferredSize
             dx="20"
             dy="15"/>
