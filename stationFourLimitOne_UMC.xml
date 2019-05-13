@@ -4,7 +4,6 @@ Signals
 Vars
     segments;
     boxes;
-    boxIDs;
     
     curSeg:int;
 
@@ -20,7 +19,6 @@ Vars
     headSeg:int = -1;
     locks:int = 0;
 
-    //TEMP
     resLimit = 1;
     lockLimit = 1;
 Transitions
@@ -233,8 +231,8 @@ end Point;
 
 
 Objects
-t0:Train(segments=>[0,2,3,5,6,8,9,11,12], curSeg => 0, boxes => [cb0,cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8,cb9], boxIDs => [0,1,2,3,4,5,6,7,8,9], requiresLock => [false,true,true,true,true,true,true,true,true,false], lockIndex => 1);
-t1:Train(segments=>[12,10,9,7,6,4,3,1], curSeg => 12, boxes => [cb9,cb8,cb7,cb6,cb5,cb4,cb3,cb2,cb1], boxIDs => [9,8,7,6,5,4,3,2,1], requiresLock => [false,true,true,true,true,true,true,true,true], lockIndex => 1);
+t0:Train(segments=>[0,2,3,5,6,8,9,11,12], curSeg => 0, boxes => [cb0,cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8,cb9], requiresLock => [false,true,true,true,true,true,true,true,true,false], lockIndex => 1);
+t1:Train(segments=>[12,10,9,7,6,4,3,1], curSeg => 12, boxes => [cb9,cb8,cb7,cb6,cb5,cb4,cb3,cb2,cb1], requiresLock => [false,true,true,true,true,true,true,true,true], lockIndex => 1);
 
 cb0:CB(segments => [0,-1,-1], res => [null,null,null], connected => null);
 cb1:CB(segments => [0,2,1], res => [t0,null,null], connected => 2, point => p0);
@@ -247,709 +245,64 @@ cb7:CB(segments => [9,11,10], res => [null,null,null], connected => 11, point =>
 cb8:CB(segments => [12,11,10], res => [t1,null,null], connected => 11, point => p7);
 cb9:CB(segments => [12,-1,-1], res => [null,null,null], connected => null);
 
+p4:Point(inPlus => true, cb => cb5);
 p0:Point(inPlus => true, cb => cb1);
 p1:Point(inPlus => true, cb => cb2);
-p2:Point(inPlus => true, cb => cb3);
-p3:Point(inPlus => true, cb => cb4);
-p4:Point(inPlus => true, cb => cb5);
-p5:Point(inPlus => true, cb => cb6);
 p6:Point(inPlus => true, cb => cb7);
+p5:Point(inPlus => true, cb => cb6);
+p3:Point(inPlus => true, cb => cb4);
+p2:Point(inPlus => true, cb => cb3);
 p7:Point(inPlus => true, cb => cb8);
 
 Abstractions{
   State: inState(t0.Arrived) and inState(t1.Arrived) -> All_Trains_Arrive
   Action: $t:$cb.pass -> passing($t,$cb)
-  Action: $t:$cb.reqLock($t,$s1,$s2) -> reqLocking($t,$cb,$s1,$s2)
-  Action: $t:*.reqLock($t,$s1,$s2) -> reqLockingS($t,$s1,$s2)
-  Action: $t:$cb.reqSeg($t,*) -> reqSegAt($t,$cb)
-  Action: $t:*.reqSeg($t,$s) -> reqSegS($t,$s)
-  Action: $cb:*.switchPoint -> switching($cb)
   State: inState(t0.DoubleSegment)
     and t0.curSeg = $s1
     and t0.headSeg = $s2 -> doublePos(t0,$s1,$s2)
-  State: t0.locks > t0.lockLimit -> lockLimitExceeded(t0)
   State: t0.curSeg = t1.curSeg -> ccCol(t0,t1)
   State: inState(t0.DoubleSegment) 
     and t0.headSeg = t1.curSeg -> hcCol(t0,t1)
   State: inState(t0.DoubleSegment) 
     and inState(t1.DoubleSegment) 
     and t0.headSeg = t1.headSeg -> hhCol(t0,t1)
-  State: t0.index < 0
-    and t0.lockIndex > 0
-    and t0.requiresLock[0] = true
-    and t0.boxes[0] = $cb -> locked(t0,$cb)
-  State: t0.index <= 0
-    and t0.resSegIndex > 0
-    and t0.segments[0] = $s
-    and t0.boxes[1] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 0
-    and t0.resCBIndex > 0
-    and t0.segments[0] = $s
-    and t0.boxes[0] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 0 and t0.headSeg = 2 -> inCrit(cb1,t0)
-  State: t0.curSeg = 2 and t0.headSeg = 0 -> inCrit(cb1,t0)
-  State: t0.curSeg = 0 and t0.headSeg = 1 -> inCrit(cb1,t0)
-  State: t0.curSeg = 1 and t0.headSeg = 0 -> inCrit(cb1,t0)
-  State: t0.index < 1
-    and t0.lockIndex > 1
-    and t0.requiresLock[1] = true
-    and t0.boxes[1] = $cb -> locked(t0,$cb)
-  State: t0.index <= 1
-    and t0.resSegIndex > 1
-    and t0.segments[1] = $s
-    and t0.boxes[2] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 1
-    and t0.resCBIndex > 1
-    and t0.segments[1] = $s
-    and t0.boxes[1] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 3 and t0.headSeg = 2 -> inCrit(cb2,t0)
-  State: t0.curSeg = 2 and t0.headSeg = 3 -> inCrit(cb2,t0)
-  State: t0.curSeg = 3 and t0.headSeg = 1 -> inCrit(cb2,t0)
-  State: t0.curSeg = 1 and t0.headSeg = 3 -> inCrit(cb2,t0)
-  State: t0.index < 2
-    and t0.lockIndex > 2
-    and t0.requiresLock[2] = true
-    and t0.boxes[2] = $cb -> locked(t0,$cb)
-  State: t0.index <= 2
-    and t0.resSegIndex > 2
-    and t0.segments[2] = $s
-    and t0.boxes[3] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 2
-    and t0.resCBIndex > 2
-    and t0.segments[2] = $s
-    and t0.boxes[2] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 3 and t0.headSeg = 5 -> inCrit(cb3,t0)
-  State: t0.curSeg = 5 and t0.headSeg = 3 -> inCrit(cb3,t0)
-  State: t0.curSeg = 3 and t0.headSeg = 4 -> inCrit(cb3,t0)
-  State: t0.curSeg = 4 and t0.headSeg = 3 -> inCrit(cb3,t0)
-  State: t0.index < 3
-    and t0.lockIndex > 3
-    and t0.requiresLock[3] = true
-    and t0.boxes[3] = $cb -> locked(t0,$cb)
-  State: t0.index <= 3
-    and t0.resSegIndex > 3
-    and t0.segments[3] = $s
-    and t0.boxes[4] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 3
-    and t0.resCBIndex > 3
-    and t0.segments[3] = $s
-    and t0.boxes[3] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 6 and t0.headSeg = 5 -> inCrit(cb4,t0)
-  State: t0.curSeg = 5 and t0.headSeg = 6 -> inCrit(cb4,t0)
-  State: t0.curSeg = 6 and t0.headSeg = 4 -> inCrit(cb4,t0)
-  State: t0.curSeg = 4 and t0.headSeg = 6 -> inCrit(cb4,t0)
-  State: t0.index < 4
-    and t0.lockIndex > 4
-    and t0.requiresLock[4] = true
-    and t0.boxes[4] = $cb -> locked(t0,$cb)
-  State: t0.index <= 4
-    and t0.resSegIndex > 4
-    and t0.segments[4] = $s
-    and t0.boxes[5] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 4
-    and t0.resCBIndex > 4
-    and t0.segments[4] = $s
-    and t0.boxes[4] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 6 and t0.headSeg = 8 -> inCrit(cb5,t0)
-  State: t0.curSeg = 8 and t0.headSeg = 6 -> inCrit(cb5,t0)
-  State: t0.curSeg = 6 and t0.headSeg = 7 -> inCrit(cb5,t0)
-  State: t0.curSeg = 7 and t0.headSeg = 6 -> inCrit(cb5,t0)
-  State: t0.index < 5
-    and t0.lockIndex > 5
-    and t0.requiresLock[5] = true
-    and t0.boxes[5] = $cb -> locked(t0,$cb)
-  State: t0.index <= 5
-    and t0.resSegIndex > 5
-    and t0.segments[5] = $s
-    and t0.boxes[6] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 5
-    and t0.resCBIndex > 5
-    and t0.segments[5] = $s
-    and t0.boxes[5] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 9 and t0.headSeg = 8 -> inCrit(cb6,t0)
-  State: t0.curSeg = 8 and t0.headSeg = 9 -> inCrit(cb6,t0)
-  State: t0.curSeg = 9 and t0.headSeg = 7 -> inCrit(cb6,t0)
-  State: t0.curSeg = 7 and t0.headSeg = 9 -> inCrit(cb6,t0)
-  State: t0.index < 6
-    and t0.lockIndex > 6
-    and t0.requiresLock[6] = true
-    and t0.boxes[6] = $cb -> locked(t0,$cb)
-  State: t0.index <= 6
-    and t0.resSegIndex > 6
-    and t0.segments[6] = $s
-    and t0.boxes[7] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 6
-    and t0.resCBIndex > 6
-    and t0.segments[6] = $s
-    and t0.boxes[6] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 9 and t0.headSeg = 11 -> inCrit(cb7,t0)
-  State: t0.curSeg = 11 and t0.headSeg = 9 -> inCrit(cb7,t0)
-  State: t0.curSeg = 9 and t0.headSeg = 10 -> inCrit(cb7,t0)
-  State: t0.curSeg = 10 and t0.headSeg = 9 -> inCrit(cb7,t0)
-  State: t0.index < 7
-    and t0.lockIndex > 7
-    and t0.requiresLock[7] = true
-    and t0.boxes[7] = $cb -> locked(t0,$cb)
-  State: t0.index <= 7
-    and t0.resSegIndex > 7
-    and t0.segments[7] = $s
-    and t0.boxes[8] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 7
-    and t0.resCBIndex > 7
-    and t0.segments[7] = $s
-    and t0.boxes[7] = $cb -> reserved(t0,$s,$cb)
-  State: t0.curSeg = 12 and t0.headSeg = 11 -> inCrit(cb8,t0)
-  State: t0.curSeg = 11 and t0.headSeg = 12 -> inCrit(cb8,t0)
-  State: t0.curSeg = 12 and t0.headSeg = 10 -> inCrit(cb8,t0)
-  State: t0.curSeg = 10 and t0.headSeg = 12 -> inCrit(cb8,t0)
-  State: t0.index < 8
-    and t0.lockIndex > 8
-    and t0.requiresLock[8] = true
-    and t0.boxes[8] = $cb -> locked(t0,$cb)
-  State: t0.index <= 8
-    and t0.resSegIndex > 8
-    and t0.segments[8] = $s
-    and t0.boxes[9] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 8
-    and t0.resCBIndex > 8
-    and t0.segments[8] = $s
-    and t0.boxes[8] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 9
-    and t0.lockIndex > 9
-    and t0.requiresLock[9] = true
-    and t0.boxes[9] = $cb -> locked(t0,$cb)
-  State: t0.index <= 9
-    and t0.resSegIndex > 9
-    and t0.segments[9] = $s
-    and t0.boxes[10] = $cb -> reserved(t0,$s,$cb)
-  State: t0.index < 9
-    and t0.resCBIndex > 9
-    and t0.segments[9] = $s
-    and t0.boxes[9] = $cb -> reserved(t0,$s,$cb)
-  State: inState(p0.Switching) -> inSwitching(p0)
-  State: inState(p1.Switching) -> inSwitching(p1)
-  State: inState(p2.Switching) -> inSwitching(p2)
-  State: inState(p3.Switching) -> inSwitching(p3)
-  State: inState(p4.Switching) -> inSwitching(p4)
-  State: inState(p5.Switching) -> inSwitching(p5)
-  State: inState(p6.Switching) -> inSwitching(p6)
-  State: inState(p7.Switching) -> inSwitching(p7)
   State: inState(t1.DoubleSegment)
     and t1.curSeg = $s1
     and t1.headSeg = $s2 -> doublePos(t1,$s1,$s2)
-  State: t1.locks > t1.lockLimit -> lockLimitExceeded(t1)
   State: t1.curSeg = t0.curSeg -> ccCol(t1,t0)
   State: inState(t1.DoubleSegment) 
     and t1.headSeg = t0.curSeg -> hcCol(t1,t0)
   State: inState(t1.DoubleSegment) 
     and inState(t0.DoubleSegment) 
     and t1.headSeg = t0.headSeg -> hhCol(t1,t0)
-  State: t1.index < 0
-    and t1.lockIndex > 0
-    and t1.requiresLock[0] = true
-    and t1.boxes[0] = $cb -> locked(t1,$cb)
-  State: t1.index <= 0
-    and t1.resSegIndex > 0
-    and t1.segments[0] = $s
-    and t1.boxes[1] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 0
-    and t1.resCBIndex > 0
-    and t1.segments[0] = $s
-    and t1.boxes[0] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 12 and t1.headSeg = 11 -> inCrit(cb8,t1)
-  State: t1.curSeg = 11 and t1.headSeg = 12 -> inCrit(cb8,t1)
-  State: t1.curSeg = 12 and t1.headSeg = 10 -> inCrit(cb8,t1)
-  State: t1.curSeg = 10 and t1.headSeg = 12 -> inCrit(cb8,t1)
-  State: t1.index < 1
-    and t1.lockIndex > 1
-    and t1.requiresLock[1] = true
-    and t1.boxes[1] = $cb -> locked(t1,$cb)
-  State: t1.index <= 1
-    and t1.resSegIndex > 1
-    and t1.segments[1] = $s
-    and t1.boxes[2] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 1
-    and t1.resCBIndex > 1
-    and t1.segments[1] = $s
-    and t1.boxes[1] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 9 and t1.headSeg = 11 -> inCrit(cb7,t1)
-  State: t1.curSeg = 11 and t1.headSeg = 9 -> inCrit(cb7,t1)
-  State: t1.curSeg = 9 and t1.headSeg = 10 -> inCrit(cb7,t1)
-  State: t1.curSeg = 10 and t1.headSeg = 9 -> inCrit(cb7,t1)
-  State: t1.index < 2
-    and t1.lockIndex > 2
-    and t1.requiresLock[2] = true
-    and t1.boxes[2] = $cb -> locked(t1,$cb)
-  State: t1.index <= 2
-    and t1.resSegIndex > 2
-    and t1.segments[2] = $s
-    and t1.boxes[3] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 2
-    and t1.resCBIndex > 2
-    and t1.segments[2] = $s
-    and t1.boxes[2] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 9 and t1.headSeg = 8 -> inCrit(cb6,t1)
-  State: t1.curSeg = 8 and t1.headSeg = 9 -> inCrit(cb6,t1)
-  State: t1.curSeg = 9 and t1.headSeg = 7 -> inCrit(cb6,t1)
-  State: t1.curSeg = 7 and t1.headSeg = 9 -> inCrit(cb6,t1)
-  State: t1.index < 3
-    and t1.lockIndex > 3
-    and t1.requiresLock[3] = true
-    and t1.boxes[3] = $cb -> locked(t1,$cb)
-  State: t1.index <= 3
-    and t1.resSegIndex > 3
-    and t1.segments[3] = $s
-    and t1.boxes[4] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 3
-    and t1.resCBIndex > 3
-    and t1.segments[3] = $s
-    and t1.boxes[3] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 6 and t1.headSeg = 8 -> inCrit(cb5,t1)
-  State: t1.curSeg = 8 and t1.headSeg = 6 -> inCrit(cb5,t1)
-  State: t1.curSeg = 6 and t1.headSeg = 7 -> inCrit(cb5,t1)
-  State: t1.curSeg = 7 and t1.headSeg = 6 -> inCrit(cb5,t1)
-  State: t1.index < 4
-    and t1.lockIndex > 4
-    and t1.requiresLock[4] = true
-    and t1.boxes[4] = $cb -> locked(t1,$cb)
-  State: t1.index <= 4
-    and t1.resSegIndex > 4
-    and t1.segments[4] = $s
-    and t1.boxes[5] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 4
-    and t1.resCBIndex > 4
-    and t1.segments[4] = $s
-    and t1.boxes[4] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 6 and t1.headSeg = 5 -> inCrit(cb4,t1)
-  State: t1.curSeg = 5 and t1.headSeg = 6 -> inCrit(cb4,t1)
-  State: t1.curSeg = 6 and t1.headSeg = 4 -> inCrit(cb4,t1)
-  State: t1.curSeg = 4 and t1.headSeg = 6 -> inCrit(cb4,t1)
-  State: t1.index < 5
-    and t1.lockIndex > 5
-    and t1.requiresLock[5] = true
-    and t1.boxes[5] = $cb -> locked(t1,$cb)
-  State: t1.index <= 5
-    and t1.resSegIndex > 5
-    and t1.segments[5] = $s
-    and t1.boxes[6] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 5
-    and t1.resCBIndex > 5
-    and t1.segments[5] = $s
-    and t1.boxes[5] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 3 and t1.headSeg = 5 -> inCrit(cb3,t1)
-  State: t1.curSeg = 5 and t1.headSeg = 3 -> inCrit(cb3,t1)
-  State: t1.curSeg = 3 and t1.headSeg = 4 -> inCrit(cb3,t1)
-  State: t1.curSeg = 4 and t1.headSeg = 3 -> inCrit(cb3,t1)
-  State: t1.index < 6
-    and t1.lockIndex > 6
-    and t1.requiresLock[6] = true
-    and t1.boxes[6] = $cb -> locked(t1,$cb)
-  State: t1.index <= 6
-    and t1.resSegIndex > 6
-    and t1.segments[6] = $s
-    and t1.boxes[7] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 6
-    and t1.resCBIndex > 6
-    and t1.segments[6] = $s
-    and t1.boxes[6] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 3 and t1.headSeg = 2 -> inCrit(cb2,t1)
-  State: t1.curSeg = 2 and t1.headSeg = 3 -> inCrit(cb2,t1)
-  State: t1.curSeg = 3 and t1.headSeg = 1 -> inCrit(cb2,t1)
-  State: t1.curSeg = 1 and t1.headSeg = 3 -> inCrit(cb2,t1)
-  State: t1.index < 7
-    and t1.lockIndex > 7
-    and t1.requiresLock[7] = true
-    and t1.boxes[7] = $cb -> locked(t1,$cb)
-  State: t1.index <= 7
-    and t1.resSegIndex > 7
-    and t1.segments[7] = $s
-    and t1.boxes[8] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 7
-    and t1.resCBIndex > 7
-    and t1.segments[7] = $s
-    and t1.boxes[7] = $cb -> reserved(t1,$s,$cb)
-  State: t1.curSeg = 0 and t1.headSeg = 2 -> inCrit(cb1,t1)
-  State: t1.curSeg = 2 and t1.headSeg = 0 -> inCrit(cb1,t1)
-  State: t1.curSeg = 0 and t1.headSeg = 1 -> inCrit(cb1,t1)
-  State: t1.curSeg = 1 and t1.headSeg = 0 -> inCrit(cb1,t1)
-  State: t1.index < 8
-    and t1.lockIndex > 8
-    and t1.requiresLock[8] = true
-    and t1.boxes[8] = $cb -> locked(t1,$cb)
-  State: t1.index <= 8
-    and t1.resSegIndex > 8
-    and t1.segments[8] = $s
-    and t1.boxes[9] = $cb -> reserved(t1,$s,$cb)
-  State: t1.index < 8
-    and t1.resCBIndex > 8
-    and t1.segments[8] = $s
-    and t1.boxes[8] = $cb -> reserved(t1,$s,$cb)
-  State: inState(p0.Switching) -> inSwitching(p0)
-  State: inState(p1.Switching) -> inSwitching(p1)
-  State: inState(p2.Switching) -> inSwitching(p2)
-  State: inState(p3.Switching) -> inSwitching(p3)
-  State: inState(p4.Switching) -> inSwitching(p4)
-  State: inState(p5.Switching) -> inSwitching(p5)
-  State: inState(p6.Switching) -> inSwitching(p6)
-  State: inState(p7.Switching) -> inSwitching(p7)
   State: cb0.segments[0] = $s1 and cb0.connected = $s2 -> connects(cb0,$s1,$s2)
   State: cb0.segments[0] = $s1 and cb0.connected = $s2 -> connects(cb0,$s2,$s1)
-  State: cb0.point /= null -> isSwitchBox(cb0)
-  State: cb0.lockedBy = $t -> lockedBy(cb0,$t)
   State: inState(cb0.Switching) -> inSwitching(cb0)
-  State: cb0.segments[0] = $s1
-    and cb0.segments[1] = $s2 -> canConnect(cb0,$s1,$s2)
-  State: cb0.segments[0] = $s1
-    and cb0.segments[1] = $s2 -> canConnect(cb0,$s2,$s1)
-  State: cb0.res[0] /= null
-    and cb0.segments[0] = $s
-    and cb0.res[0] = $t -> reservedBy(cb0,$s,$t)
-  State: cb0.res[1] /= null
-    and cb0.segments[1] = $s
-    and cb0.res[1] = $t -> reservedBy(cb0,$s,$t)
-  State: cb0.res[2] /= null
-    and cb0.segments[2] = $s
-    and cb0.res[2] = $t -> reservedBy(cb0,$s,$t)
-  State: inState(cb0.Switched) -> inSwitched(cb0)
-  State: inState(cb0.SegmentChecked)
-    and cb0.result >= 0 
-    and cb0.result = $i
-    and cb0.segments[$i] = $s -> resOK(cb0,$s)
-  State: cb0.segments[0] /= null
-    and cb0.segments[0] = $s
-    and cb0.res[0] = null -> segFree(cb0,$s)
-  State: cb0.segments[1] /= null
-    and cb0.segments[1] = $s
-    and cb0.res[1] = null -> segFree(cb0,$s)
-  State: cb0.segments[2] /= null
-    and cb0.segments[2] = $s
-    and cb0.res[2] = null -> segFree(cb0,$s)
   State: cb1.segments[0] = $s1 and cb1.connected = $s2 -> connects(cb1,$s1,$s2)
   State: cb1.segments[0] = $s1 and cb1.connected = $s2 -> connects(cb1,$s2,$s1)
-  State: cb1.point /= null -> isSwitchBox(cb1)
-  State: p0.inPlus = true -> inPlus(p0)
-  State: cb1.lockedBy = $t -> lockedBy(cb1,$t)
   State: inState(cb1.Switching) -> inSwitching(cb1)
-  State: cb1.segments[0] = $s1
-    and cb1.segments[1] = $s2 -> canConnect(cb1,$s1,$s2)
-  State: cb1.segments[0] = $s1
-    and cb1.segments[1] = $s2 -> canConnect(cb1,$s2,$s1)
-  State: cb1.segments[0] = $s1
-    and cb1.segments[2] = $s2 -> canConnect(cb1,$s1,$s2)
-  State: cb1.segments[0] = $s1
-    and cb1.segments[2] = $s2 -> canConnect(cb1,$s2,$s1)
-  State: cb1.res[0] /= null
-    and cb1.segments[0] = $s
-    and cb1.res[0] = $t -> reservedBy(cb1,$s,$t)
-  State: cb1.res[1] /= null
-    and cb1.segments[1] = $s
-    and cb1.res[1] = $t -> reservedBy(cb1,$s,$t)
-  State: cb1.res[2] /= null
-    and cb1.segments[2] = $s
-    and cb1.res[2] = $t -> reservedBy(cb1,$s,$t)
-  State: inState(cb1.Switched) -> inSwitched(cb1)
-  State: inState(cb1.SegmentChecked)
-    and cb1.result >= 0 
-    and cb1.result = $i
-    and cb1.segments[$i] = $s -> resOK(cb1,$s)
-  State: cb1.segments[0] /= null
-    and cb1.segments[0] = $s
-    and cb1.res[0] = null -> segFree(cb1,$s)
-  State: cb1.segments[1] /= null
-    and cb1.segments[1] = $s
-    and cb1.res[1] = null -> segFree(cb1,$s)
-  State: cb1.segments[2] /= null
-    and cb1.segments[2] = $s
-    and cb1.res[2] = null -> segFree(cb1,$s)
   State: cb2.segments[0] = $s1 and cb2.connected = $s2 -> connects(cb2,$s1,$s2)
   State: cb2.segments[0] = $s1 and cb2.connected = $s2 -> connects(cb2,$s2,$s1)
-  State: cb2.point /= null -> isSwitchBox(cb2)
-  State: p1.inPlus = true -> inPlus(p1)
-  State: cb2.lockedBy = $t -> lockedBy(cb2,$t)
   State: inState(cb2.Switching) -> inSwitching(cb2)
-  State: cb2.segments[0] = $s1
-    and cb2.segments[1] = $s2 -> canConnect(cb2,$s1,$s2)
-  State: cb2.segments[0] = $s1
-    and cb2.segments[1] = $s2 -> canConnect(cb2,$s2,$s1)
-  State: cb2.segments[0] = $s1
-    and cb2.segments[2] = $s2 -> canConnect(cb2,$s1,$s2)
-  State: cb2.segments[0] = $s1
-    and cb2.segments[2] = $s2 -> canConnect(cb2,$s2,$s1)
-  State: cb2.res[0] /= null
-    and cb2.segments[0] = $s
-    and cb2.res[0] = $t -> reservedBy(cb2,$s,$t)
-  State: cb2.res[1] /= null
-    and cb2.segments[1] = $s
-    and cb2.res[1] = $t -> reservedBy(cb2,$s,$t)
-  State: cb2.res[2] /= null
-    and cb2.segments[2] = $s
-    and cb2.res[2] = $t -> reservedBy(cb2,$s,$t)
-  State: inState(cb2.Switched) -> inSwitched(cb2)
-  State: inState(cb2.SegmentChecked)
-    and cb2.result >= 0 
-    and cb2.result = $i
-    and cb2.segments[$i] = $s -> resOK(cb2,$s)
-  State: cb2.segments[0] /= null
-    and cb2.segments[0] = $s
-    and cb2.res[0] = null -> segFree(cb2,$s)
-  State: cb2.segments[1] /= null
-    and cb2.segments[1] = $s
-    and cb2.res[1] = null -> segFree(cb2,$s)
-  State: cb2.segments[2] /= null
-    and cb2.segments[2] = $s
-    and cb2.res[2] = null -> segFree(cb2,$s)
   State: cb3.segments[0] = $s1 and cb3.connected = $s2 -> connects(cb3,$s1,$s2)
   State: cb3.segments[0] = $s1 and cb3.connected = $s2 -> connects(cb3,$s2,$s1)
-  State: cb3.point /= null -> isSwitchBox(cb3)
-  State: p2.inPlus = true -> inPlus(p2)
-  State: cb3.lockedBy = $t -> lockedBy(cb3,$t)
   State: inState(cb3.Switching) -> inSwitching(cb3)
-  State: cb3.segments[0] = $s1
-    and cb3.segments[1] = $s2 -> canConnect(cb3,$s1,$s2)
-  State: cb3.segments[0] = $s1
-    and cb3.segments[1] = $s2 -> canConnect(cb3,$s2,$s1)
-  State: cb3.segments[0] = $s1
-    and cb3.segments[2] = $s2 -> canConnect(cb3,$s1,$s2)
-  State: cb3.segments[0] = $s1
-    and cb3.segments[2] = $s2 -> canConnect(cb3,$s2,$s1)
-  State: cb3.res[0] /= null
-    and cb3.segments[0] = $s
-    and cb3.res[0] = $t -> reservedBy(cb3,$s,$t)
-  State: cb3.res[1] /= null
-    and cb3.segments[1] = $s
-    and cb3.res[1] = $t -> reservedBy(cb3,$s,$t)
-  State: cb3.res[2] /= null
-    and cb3.segments[2] = $s
-    and cb3.res[2] = $t -> reservedBy(cb3,$s,$t)
-  State: inState(cb3.Switched) -> inSwitched(cb3)
-  State: inState(cb3.SegmentChecked)
-    and cb3.result >= 0 
-    and cb3.result = $i
-    and cb3.segments[$i] = $s -> resOK(cb3,$s)
-  State: cb3.segments[0] /= null
-    and cb3.segments[0] = $s
-    and cb3.res[0] = null -> segFree(cb3,$s)
-  State: cb3.segments[1] /= null
-    and cb3.segments[1] = $s
-    and cb3.res[1] = null -> segFree(cb3,$s)
-  State: cb3.segments[2] /= null
-    and cb3.segments[2] = $s
-    and cb3.res[2] = null -> segFree(cb3,$s)
   State: cb4.segments[0] = $s1 and cb4.connected = $s2 -> connects(cb4,$s1,$s2)
   State: cb4.segments[0] = $s1 and cb4.connected = $s2 -> connects(cb4,$s2,$s1)
-  State: cb4.point /= null -> isSwitchBox(cb4)
-  State: p3.inPlus = true -> inPlus(p3)
-  State: cb4.lockedBy = $t -> lockedBy(cb4,$t)
   State: inState(cb4.Switching) -> inSwitching(cb4)
-  State: cb4.segments[0] = $s1
-    and cb4.segments[1] = $s2 -> canConnect(cb4,$s1,$s2)
-  State: cb4.segments[0] = $s1
-    and cb4.segments[1] = $s2 -> canConnect(cb4,$s2,$s1)
-  State: cb4.segments[0] = $s1
-    and cb4.segments[2] = $s2 -> canConnect(cb4,$s1,$s2)
-  State: cb4.segments[0] = $s1
-    and cb4.segments[2] = $s2 -> canConnect(cb4,$s2,$s1)
-  State: cb4.res[0] /= null
-    and cb4.segments[0] = $s
-    and cb4.res[0] = $t -> reservedBy(cb4,$s,$t)
-  State: cb4.res[1] /= null
-    and cb4.segments[1] = $s
-    and cb4.res[1] = $t -> reservedBy(cb4,$s,$t)
-  State: cb4.res[2] /= null
-    and cb4.segments[2] = $s
-    and cb4.res[2] = $t -> reservedBy(cb4,$s,$t)
-  State: inState(cb4.Switched) -> inSwitched(cb4)
-  State: inState(cb4.SegmentChecked)
-    and cb4.result >= 0 
-    and cb4.result = $i
-    and cb4.segments[$i] = $s -> resOK(cb4,$s)
-  State: cb4.segments[0] /= null
-    and cb4.segments[0] = $s
-    and cb4.res[0] = null -> segFree(cb4,$s)
-  State: cb4.segments[1] /= null
-    and cb4.segments[1] = $s
-    and cb4.res[1] = null -> segFree(cb4,$s)
-  State: cb4.segments[2] /= null
-    and cb4.segments[2] = $s
-    and cb4.res[2] = null -> segFree(cb4,$s)
   State: cb5.segments[0] = $s1 and cb5.connected = $s2 -> connects(cb5,$s1,$s2)
   State: cb5.segments[0] = $s1 and cb5.connected = $s2 -> connects(cb5,$s2,$s1)
-  State: cb5.point /= null -> isSwitchBox(cb5)
-  State: p4.inPlus = true -> inPlus(p4)
-  State: cb5.lockedBy = $t -> lockedBy(cb5,$t)
   State: inState(cb5.Switching) -> inSwitching(cb5)
-  State: cb5.segments[0] = $s1
-    and cb5.segments[1] = $s2 -> canConnect(cb5,$s1,$s2)
-  State: cb5.segments[0] = $s1
-    and cb5.segments[1] = $s2 -> canConnect(cb5,$s2,$s1)
-  State: cb5.segments[0] = $s1
-    and cb5.segments[2] = $s2 -> canConnect(cb5,$s1,$s2)
-  State: cb5.segments[0] = $s1
-    and cb5.segments[2] = $s2 -> canConnect(cb5,$s2,$s1)
-  State: cb5.res[0] /= null
-    and cb5.segments[0] = $s
-    and cb5.res[0] = $t -> reservedBy(cb5,$s,$t)
-  State: cb5.res[1] /= null
-    and cb5.segments[1] = $s
-    and cb5.res[1] = $t -> reservedBy(cb5,$s,$t)
-  State: cb5.res[2] /= null
-    and cb5.segments[2] = $s
-    and cb5.res[2] = $t -> reservedBy(cb5,$s,$t)
-  State: inState(cb5.Switched) -> inSwitched(cb5)
-  State: inState(cb5.SegmentChecked)
-    and cb5.result >= 0 
-    and cb5.result = $i
-    and cb5.segments[$i] = $s -> resOK(cb5,$s)
-  State: cb5.segments[0] /= null
-    and cb5.segments[0] = $s
-    and cb5.res[0] = null -> segFree(cb5,$s)
-  State: cb5.segments[1] /= null
-    and cb5.segments[1] = $s
-    and cb5.res[1] = null -> segFree(cb5,$s)
-  State: cb5.segments[2] /= null
-    and cb5.segments[2] = $s
-    and cb5.res[2] = null -> segFree(cb5,$s)
   State: cb6.segments[0] = $s1 and cb6.connected = $s2 -> connects(cb6,$s1,$s2)
   State: cb6.segments[0] = $s1 and cb6.connected = $s2 -> connects(cb6,$s2,$s1)
-  State: cb6.point /= null -> isSwitchBox(cb6)
-  State: p5.inPlus = true -> inPlus(p5)
-  State: cb6.lockedBy = $t -> lockedBy(cb6,$t)
   State: inState(cb6.Switching) -> inSwitching(cb6)
-  State: cb6.segments[0] = $s1
-    and cb6.segments[1] = $s2 -> canConnect(cb6,$s1,$s2)
-  State: cb6.segments[0] = $s1
-    and cb6.segments[1] = $s2 -> canConnect(cb6,$s2,$s1)
-  State: cb6.segments[0] = $s1
-    and cb6.segments[2] = $s2 -> canConnect(cb6,$s1,$s2)
-  State: cb6.segments[0] = $s1
-    and cb6.segments[2] = $s2 -> canConnect(cb6,$s2,$s1)
-  State: cb6.res[0] /= null
-    and cb6.segments[0] = $s
-    and cb6.res[0] = $t -> reservedBy(cb6,$s,$t)
-  State: cb6.res[1] /= null
-    and cb6.segments[1] = $s
-    and cb6.res[1] = $t -> reservedBy(cb6,$s,$t)
-  State: cb6.res[2] /= null
-    and cb6.segments[2] = $s
-    and cb6.res[2] = $t -> reservedBy(cb6,$s,$t)
-  State: inState(cb6.Switched) -> inSwitched(cb6)
-  State: inState(cb6.SegmentChecked)
-    and cb6.result >= 0 
-    and cb6.result = $i
-    and cb6.segments[$i] = $s -> resOK(cb6,$s)
-  State: cb6.segments[0] /= null
-    and cb6.segments[0] = $s
-    and cb6.res[0] = null -> segFree(cb6,$s)
-  State: cb6.segments[1] /= null
-    and cb6.segments[1] = $s
-    and cb6.res[1] = null -> segFree(cb6,$s)
-  State: cb6.segments[2] /= null
-    and cb6.segments[2] = $s
-    and cb6.res[2] = null -> segFree(cb6,$s)
   State: cb7.segments[0] = $s1 and cb7.connected = $s2 -> connects(cb7,$s1,$s2)
   State: cb7.segments[0] = $s1 and cb7.connected = $s2 -> connects(cb7,$s2,$s1)
-  State: cb7.point /= null -> isSwitchBox(cb7)
-  State: p6.inPlus = true -> inPlus(p6)
-  State: cb7.lockedBy = $t -> lockedBy(cb7,$t)
   State: inState(cb7.Switching) -> inSwitching(cb7)
-  State: cb7.segments[0] = $s1
-    and cb7.segments[1] = $s2 -> canConnect(cb7,$s1,$s2)
-  State: cb7.segments[0] = $s1
-    and cb7.segments[1] = $s2 -> canConnect(cb7,$s2,$s1)
-  State: cb7.segments[0] = $s1
-    and cb7.segments[2] = $s2 -> canConnect(cb7,$s1,$s2)
-  State: cb7.segments[0] = $s1
-    and cb7.segments[2] = $s2 -> canConnect(cb7,$s2,$s1)
-  State: cb7.res[0] /= null
-    and cb7.segments[0] = $s
-    and cb7.res[0] = $t -> reservedBy(cb7,$s,$t)
-  State: cb7.res[1] /= null
-    and cb7.segments[1] = $s
-    and cb7.res[1] = $t -> reservedBy(cb7,$s,$t)
-  State: cb7.res[2] /= null
-    and cb7.segments[2] = $s
-    and cb7.res[2] = $t -> reservedBy(cb7,$s,$t)
-  State: inState(cb7.Switched) -> inSwitched(cb7)
-  State: inState(cb7.SegmentChecked)
-    and cb7.result >= 0 
-    and cb7.result = $i
-    and cb7.segments[$i] = $s -> resOK(cb7,$s)
-  State: cb7.segments[0] /= null
-    and cb7.segments[0] = $s
-    and cb7.res[0] = null -> segFree(cb7,$s)
-  State: cb7.segments[1] /= null
-    and cb7.segments[1] = $s
-    and cb7.res[1] = null -> segFree(cb7,$s)
-  State: cb7.segments[2] /= null
-    and cb7.segments[2] = $s
-    and cb7.res[2] = null -> segFree(cb7,$s)
   State: cb8.segments[0] = $s1 and cb8.connected = $s2 -> connects(cb8,$s1,$s2)
   State: cb8.segments[0] = $s1 and cb8.connected = $s2 -> connects(cb8,$s2,$s1)
-  State: cb8.point /= null -> isSwitchBox(cb8)
-  State: p7.inPlus = true -> inPlus(p7)
-  State: cb8.lockedBy = $t -> lockedBy(cb8,$t)
   State: inState(cb8.Switching) -> inSwitching(cb8)
-  State: cb8.segments[0] = $s1
-    and cb8.segments[1] = $s2 -> canConnect(cb8,$s1,$s2)
-  State: cb8.segments[0] = $s1
-    and cb8.segments[1] = $s2 -> canConnect(cb8,$s2,$s1)
-  State: cb8.segments[0] = $s1
-    and cb8.segments[2] = $s2 -> canConnect(cb8,$s1,$s2)
-  State: cb8.segments[0] = $s1
-    and cb8.segments[2] = $s2 -> canConnect(cb8,$s2,$s1)
-  State: cb8.res[0] /= null
-    and cb8.segments[0] = $s
-    and cb8.res[0] = $t -> reservedBy(cb8,$s,$t)
-  State: cb8.res[1] /= null
-    and cb8.segments[1] = $s
-    and cb8.res[1] = $t -> reservedBy(cb8,$s,$t)
-  State: cb8.res[2] /= null
-    and cb8.segments[2] = $s
-    and cb8.res[2] = $t -> reservedBy(cb8,$s,$t)
-  State: inState(cb8.Switched) -> inSwitched(cb8)
-  State: inState(cb8.SegmentChecked)
-    and cb8.result >= 0 
-    and cb8.result = $i
-    and cb8.segments[$i] = $s -> resOK(cb8,$s)
-  State: cb8.segments[0] /= null
-    and cb8.segments[0] = $s
-    and cb8.res[0] = null -> segFree(cb8,$s)
-  State: cb8.segments[1] /= null
-    and cb8.segments[1] = $s
-    and cb8.res[1] = null -> segFree(cb8,$s)
-  State: cb8.segments[2] /= null
-    and cb8.segments[2] = $s
-    and cb8.res[2] = null -> segFree(cb8,$s)
   State: cb9.segments[0] = $s1 and cb9.connected = $s2 -> connects(cb9,$s1,$s2)
   State: cb9.segments[0] = $s1 and cb9.connected = $s2 -> connects(cb9,$s2,$s1)
-  State: cb9.point /= null -> isSwitchBox(cb9)
-  State: cb9.lockedBy = $t -> lockedBy(cb9,$t)
   State: inState(cb9.Switching) -> inSwitching(cb9)
-  State: cb9.segments[0] = $s1
-    and cb9.segments[1] = $s2 -> canConnect(cb9,$s1,$s2)
-  State: cb9.segments[0] = $s1
-    and cb9.segments[1] = $s2 -> canConnect(cb9,$s2,$s1)
-  State: cb9.res[0] /= null
-    and cb9.segments[0] = $s
-    and cb9.res[0] = $t -> reservedBy(cb9,$s,$t)
-  State: cb9.res[1] /= null
-    and cb9.segments[1] = $s
-    and cb9.res[1] = $t -> reservedBy(cb9,$s,$t)
-  State: cb9.res[2] /= null
-    and cb9.segments[2] = $s
-    and cb9.res[2] = $t -> reservedBy(cb9,$s,$t)
-  State: inState(cb9.Switched) -> inSwitched(cb9)
-  State: inState(cb9.SegmentChecked)
-    and cb9.result >= 0 
-    and cb9.result = $i
-    and cb9.segments[$i] = $s -> resOK(cb9,$s)
-  State: cb9.segments[0] /= null
-    and cb9.segments[0] = $s
-    and cb9.res[0] = null -> segFree(cb9,$s)
-  State: cb9.segments[1] /= null
-    and cb9.segments[1] = $s
-    and cb9.res[1] = null -> segFree(cb9,$s)
-  State: cb9.segments[2] /= null
-    and cb9.segments[2] = $s
-    and cb9.res[2] = null -> segFree(cb9,$s)
 }
