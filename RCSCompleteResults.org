@@ -1838,18 +1838,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -1860,7 +1863,9 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
      data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
-     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+RESULTS:
@@ -1902,16 +1907,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -1921,6 +1929,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+RESULTS:
@@ -1966,19 +1976,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
-
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -1988,8 +2000,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2028,16 +2042,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2047,6 +2064,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2088,19 +2107,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
-
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2110,8 +2131,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2150,16 +2173,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2169,6 +2195,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2209,19 +2237,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
-
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2231,8 +2261,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2270,17 +2302,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
-
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2290,6 +2324,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2331,19 +2367,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
-
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2353,8 +2391,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2398,11 +2438,13 @@ fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2412,6 +2454,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2452,19 +2496,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
-
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2474,8 +2520,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2513,16 +2561,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2532,6 +2583,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 
@@ -2572,19 +2625,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
-
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2594,8 +2649,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2633,16 +2690,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2652,6 +2712,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 #+PLOT: ind:1
@@ -2692,18 +2754,21 @@ g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
 stats data u 1:log(6) name "J"
+stats data u 1:log(7) name "K"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2713,8 +2778,10 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation), \
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 
@@ -2753,16 +2820,19 @@ f(x) = a * exp(b*x)
 g(x) = c * exp(d*x)
 h(x) = e * exp(f*x)
 i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
 
 fit f(x) data u 1:2 via a, b
 fit g(x) data u 1:3 via c, d
 fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
 
 stats data u 1:log(2) name "F"
 stats data u 1:log(3) name "G"
 stats data u 1:log(4) name "H"
 stats data u 1:log(5) name "I"
+stats data u 1:log(6) name "J"
 
 plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x), r = %8.4f", a, b, F_correlation), \
@@ -2772,6 +2842,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x, r = %8.4f", g, h, I_correlation)
+     data u 1:($1 <= 4  ? $7 : 1/0) title 'UPPAALxUMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 4) ? k($1) : 1/0) w l  title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x), r = %8.4f", k, l, K_correlation)
 #+end_src
 
 
