@@ -1,3 +1,47 @@
+* Overview
+** Limit One
+|----------------------------+-------------+------------+--------+--------+------+------------|
+| Network\Model              | First model | Restricted | Global | Cancel | UMC  | UPPAALxUMC |
+|----------------------------+-------------+------------+--------+--------+------+------------|
+| Example with one train     | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Example with two trains    | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Shared Segment             | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Large Network              | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Station One                | DONE        | DONE       | DONE   | DONE   | DONE | DONE       |
+| Station Two                | DONE        | DONE       | DONE   | DONE   | DONE | DONE       |
+| Station Four               | DONE        | DONE       | DONE   | DONE   | DNF  | DONE       |
+| Station Six                | DONE        | DONE       | DONE   | DONE   | DNA  | DNF        |
+| Station Eight              | DONE        | DONE       | DONE   | DONE   | DNA  | DNA        |
+| Station Ten                | DONE        | DONE       | DONE   | SKIP   | DNA  | DNA        |
+| Station Twelfth            | DONE        | DONE       | SKIP   | SKIP   | DNA  | DNA        |
+| Two trains same direction  | DONE        | DONE       | SKIP   | SKIP   | SKIP | SKIP       |
+| Four trains same direction | DONE        | DONE       | SKIP   | SKIP   | SKIP | SKIP       |
+| Nærumbanen (2T)            | DONE        | DONE       | DONE   | DONE   | DNA  | DNA        |
+| Nærumbanen (3T)            | DONE        | DONE       | DONE   | DONE   | DNA  | DNA        |
+|----------------------------+-------------+------------+--------+--------+------+------------|
+
+** Limit Two
+|----------------------------+-------------+------------+--------+--------+------+------------|
+| Network\Model              | First model | Restricted | Global | Cancel | UMC  | UPPAALxUMC |
+|----------------------------+-------------+------------+--------+--------+------+------------|
+| Example with one train     | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Example with two trains    | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Shared Segment             | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Large Network              | DONE        | DONE       | DONE   | SKIP   | SKIP | SKIP       |
+| Station One                | DONE        | DONE       | DONE   | DONE   | DONE | DONE       |
+| Station Two                | DONE        | DONE       | DONE   | DONE   | DONE | DONE       |
+| Station Four               | DONE        | DONE       | DONE   | DONE   | DNF  | DONE       |
+| Station Six                | DONE        | DONE       | DONE   | DONE   | DNA  | DNF        |
+| Station Eight              | DONE        | DONE       | DONE   | DONE   | DNA  | DNA        |
+| Station Ten                | DONE        | DONE       | DONE   | SKIP   | DNA  | DNA        |
+| Station Twelfth            | DNA         | DONE       | SKIP   | SKIP   | DNA  | DNA        |
+| Two trains same direction  | DONE        | DONE       | SKIP   | SKIP   | SKIP | SKIP       |
+| Four trains same direction | DNF         | DONE       | SKIP   | SKIP   | SKIP | SKIP       |
+| Nærumbanen (2T)            | DONE        | DONE       | DONE   | DONE   | DNA  | DNA        |
+| Nærumbanen (3T)            | DONE        | DONE       | DONE   | DONE   | DNA  | DNA        |
+|----------------------------+-------------+------------+--------+--------+------+------------|
+
+
 * RCS 
 ** Limit One
 *** No derailment (Move between connected segments)
@@ -1815,8 +1859,8 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
      h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x), r = %8.4f", e, f, H_correlation), \
      data u 1:5 w points title 'Cancel' linecolor rgb "black", \
      i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x), r = %8.4f", g, h, I_correlation), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
+     data u 1:($1 <= 2  ? $6 : 1/0) title 'UMC' linecolor rgb "black", \
+     '+' u 1:(($1 <= 2) ? j($1) : 1/0) w l title sprintf("UMC fit: j(x) = %f * exp(%f * x), r = %8.4f", i, j, J_correlation)
 #+end_src
 
 #+RESULTS:
