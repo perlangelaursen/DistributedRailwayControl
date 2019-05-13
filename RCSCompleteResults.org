@@ -1510,128 +1510,128 @@
 *** No derailment (Move between segments)
 **** Elapsed time
 #+TBLNAME: UppaalLimitOneMoveTime
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.073 |    0.084 |    0.070 |    0.076 |
+| Station Two     |    1.723 |    1.706 |    1.800 |    1.743 |
+| Station Four    | 2086.282 | 2058.861 | 2082.121 | 2075.755 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneMoveMemory
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.548 |    8.572 |    8.600 |    8.573 |
+| Station Two     |   22.600 |   22.656 |   22.664 |   22.640 |
+| Station Four    | 2347.152 | 2347.156 | 2347.156 | 2347.155 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
 **** Elapsed time
 #+TBLNAME: UppaalLimitOneCriticalTime
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.075 |    0.088 |    0.077 |    0.080 |
+| Station Two     |    1.751 |    1.776 |    1.757 |    1.761 |
+| Station Four    | 2073.825 | 2117.443 | 2137.279 | 2109.516 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneCriticalMemory
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.508 |    8.512 |    8.520 |    8.513 |
+| Station Two     |   20.620 |   20.664 |   20.762 |   20.682 |
+| Station Four    | 2347.124 | 2347.116 | 2347.108 | 2347.116 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
 **** Elapsed time
 #+TBLNAME: UppaalLimitOneCollisionTime
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.062 |    0.056 |    0.079 |    0.066 |
+| Station Two     |    1.713 |    1.782 |    1.785 |    1.760 |
+| Station Four    | 2101.282 | 2120.291 | 2110.154 | 2110.576 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneCollisionMemory
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.516 |    8.532 |    8.552 |    8.533 |
+| Station Two     |   20.620 |   20.672 |   20.680 |   20.657 |
+| Station Four    | 2347.104 | 2347.108 | 2347.108 | 2347.107 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** Will arrive
 **** Elapsed time
 #+TBLNAME: UppaalLimitOneArriveTime
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.075 |    0.062 |    0.078 |    0.072 |
+| Station Two     |    1.818 |    1.721 |    1.824 |    1.788 |
+| Station Four    | 2132.376 | 2037.542 | 2048.334 | 2072.751 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitOneArriveMemory
-|-----------------+-------+--------+-------+-----------|
-| Configuration   | First | Second | Third | Average   |
-|-----------------+-------+--------+-------+-----------|
-| Station One     |       |        |       | vmean([]) |
-| Station Two     |       |        |       | vmean([]) |
-| Station Four    |       |        |       | vmean([]) |
-| Station Six     |       |        |       | vmean([]) |
-| Station Eight   |       |        |       | vmean([]) |
-| Nærumbanen (2T) |       |        |       | vmean([]) |
-| Nærumbanen (3T) |       |        |       | vmean([]) |
-|-----------------+-------+--------+-------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.456 |    8.456 |    8.456 |    8.456 |
+| Station Two     |   20.444 |   20.484 |   20.488 |   20.472 |
+| Station Four    | 2230.892 | 2230.908 | 2230.912 | 2230.904 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
@@ -1639,96 +1639,96 @@
 *** No derailment (Move between segments)
 **** Elapsed time
 #+TBLNAME: UppaalLimitTwoMoveTime
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    0.074 |    0.084 |    0.070 | vmean([]) |
-| Station Two     |    2.505 |    2.606 |    2.612 | vmean([]) |
-| Station Four    | 4164.950 | 4235.207 | 4300.883 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.074 |    0.084 |    0.070 |    0.076 |
+| Station Two     |    2.505 |    2.606 |    2.612 |    2.574 |
+| Station Four    | 4164.950 | 4235.207 | 4300.883 | 4233.680 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoMoveMemory
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    8.584 |    8.604 |    8.632 | vmean([]) |
-| Station Two     |   26.980 |   27.028 |   27.040 | vmean([]) |
-| Station Four    | 4533.628 | 4533.628 | 4533.628 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.584 |    8.604 |    8.632 |    8.607 |
+| Station Two     |   26.980 |   27.028 |   27.040 |   27.016 |
+| Station Four    | 4533.628 | 4533.628 | 4533.628 | 4533.628 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No derailment (Critical section)
 **** Elapsed time
 #+TBLNAME: UppaalLimitTwoCriticalTime
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    0.083 |    0.080 |    0.080 | vmean([]) |
-| Station Two     |    2.657 |    2.624 |    2.599 | vmean([]) |
-| Station Four    | 4107.677 | 4339.988 | 4246.319 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.083 |    0.080 |    0.080 |    0.081 |
+| Station Two     |    2.657 |    2.624 |    2.599 |    2.627 |
+| Station Four    | 4107.677 | 4339.988 | 4246.319 | 4231.328 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoCriticalMemory
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    8.528 |    8.544 |    8.548 | vmean([]) |
-| Station Two     |   29.932 |   26.980 |   26.980 | vmean([]) |
-| Station Four    | 4533.584 | 4533.576 | 4533.584 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.528 |    8.544 |    8.548 |    8.540 |
+| Station Two     |   29.932 |   26.980 |   26.980 |   27.964 |
+| Station Four    | 4533.584 | 4533.576 | 4533.584 | 4533.581 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
 *** No collision
 **** Elapsed time
 #+TBLNAME: UppaalLimitTwoCollisionTime
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    0.082 |    0.069 |    0.095 | vmean([]) |
-| Station Two     |    2.607 |    2.726 |    2.557 | vmean([]) |
-| Station Four    | 4102.210 | 4170.611 | 4313.341 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.082 |    0.069 |    0.095 |    0.082 |
+| Station Two     |    2.607 |    2.726 |    2.557 |    2.630 |
+| Station Four    | 4102.210 | 4170.611 | 4313.341 | 4195.387 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoCollisionMemory
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    8.536 |    8.560 |    8.588 | vmean([]) |
-| Station Two     |   26.932 |   26.984 |   26.992 | vmean([]) |
-| Station Four    | 4533.576 | 4533.580 | 4533.572 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.536 |    8.560 |    8.588 |    8.561 |
+| Station Two     |   26.932 |   26.984 |   26.992 |   26.969 |
+| Station Four    | 4533.576 | 4533.580 | 4533.572 | 4533.576 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
@@ -1736,32 +1736,32 @@
 *** Will arrive
 **** Elapsed time
 #+TBLNAME: UppaalLimitTwoArriveTime
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    0.074 |    0.095 |    0.090 | vmean([]) |
-| Station Two     |    2.696 |    2.539 |    2.519 | vmean([]) |
-| Station Four    | 4103.429 | 4163.708 | 4172.222 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    0.074 |    0.095 |    0.090 |    0.086 |
+| Station Two     |    2.696 |    2.539 |    2.519 |    2.585 |
+| Station Four    | 4103.429 | 4163.708 | 4172.222 | 4146.453 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 **** Memory Usage Peak
 #+TBLNAME: UppaalLimitTwoArriveMemory
-|-----------------+----------+----------+----------+-----------|
-| Configuration   |    First |   Second |    Third | Average   |
-|-----------------+----------+----------+----------+-----------|
-| Station One     |    8.472 |    8.472 |    8.472 | vmean([]) |
-| Station Two     |   26.764 |   26.796 |   26.800 | vmean([]) |
-| Station Four    | 4471.212 | 4471.196 | 4471.212 | vmean([]) |
-| Station Six     |          |          |          | vmean([]) |
-| Station Eight   |          |          |          | vmean([]) |
-| Nærumbanen (2T) |          |          |          | vmean([]) |
-| Nærumbanen (3T) |          |          |          | vmean([]) |
-|-----------------+----------+----------+----------+-----------|
+|-----------------+----------+----------+----------+----------|
+| Configuration   |    First |   Second |    Third |  Average |
+|-----------------+----------+----------+----------+----------|
+| Station One     |    8.472 |    8.472 |    8.472 |    8.472 |
+| Station Two     |   26.764 |   26.796 |   26.800 |   26.787 |
+| Station Four    | 4471.212 | 4471.196 | 4471.212 | 4471.207 |
+| Station Six     |          |          |          |          |
+| Station Eight   |          |          |          |          |
+| Nærumbanen (2T) |          |          |          |          |
+| Nærumbanen (3T) |          |          |          |          |
+|-----------------+----------+----------+----------+----------|
 #+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
 
 
@@ -1772,15 +1772,15 @@
 #+PLOT: ind:1
 #+tblname: summaryStationsMoveLimitOneTime
 #+CAPTION: Stations Limit One No Derailment (Move between connected segments) Time
-|----------+-------------+------------+---------+---------+-------+------------|
-| Stations | First model | Restricted |  Global |  Cancel |   UMC | UPPAALxUMC |
-|----------+-------------+------------+---------+---------+-------+------------|
-|        1 |       0.011 |      0.014 |   0.017 |   0.027 | 0.156 | vmean([])  |
-|        2 |       0.075 |      0.084 |   0.136 |   0.251 |   8.6 | vmean([])  |
-|        4 |        1.72 |      1.415 |   2.482 |   5.527 |     0 | vmean([])  |
-|        6 |       27.37 |     22.865 |  45.916 | 108.261 |     0 | vmean([])  |
-|        8 |     165.795 |    134.609 | 276.719 | 630.823 |     0 | vmean([])  |
-|----------+-------------+------------+---------+---------+-------+------------|
+|----------+-------------+------------+---------+---------+--------+------------|
+| Stations | First model | Restricted |  Global |  Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+--------+------------|
+|        1 |       0.011 |      0.014 |   0.017 |   0.027 |  0.269 |      0.076 |
+|        2 |       0.075 |      0.084 |   0.136 |   0.251 | 14.469 |      1.743 |
+|        4 |        1.72 |      1.415 |   2.482 |   5.527 |      0 |   2075.755 |
+|        6 |       27.37 |     22.865 |  45.916 | 108.261 |      0 |          0 |
+|        8 |     165.795 |    134.609 | 276.719 | 630.823 |      0 |          0 |
+|----------+-------------+------------+---------+---------+--------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveTime,@6$5)::@2$3=remote(RestrictedLimitOneMoveTime, @6$5)::@2$4=remote(GlobalLimitOneMoveTime, @6$5)::@2$5=remote(CancelLimitOneMoveTime, @2$5)::@2$6=remote(UMCLimitOneMoveTime, @2$5)::@2$7=remote(UppaalLimitOneMoveTime, @2$5)::@3$2=remote(RCSLimitOneMoveTime,@7$5)::@3$3=remote(RestrictedLimitOneMoveTime, @7$5)::@3$4=remote(GlobalLimitOneMoveTime, @7$5)::@3$5=remote(CancelLimitOneMoveTime, @3$5)::@3$6=remote(UMCLimitOneMoveTime, @3$5)::@3$7=remote(UppaalLimitOneMoveTime, @3$5)::@4$2=remote(RCSLimitOneMoveTime, @8$5)::@4$3=remote(RestrictedLimitOneMoveTime, @8$5)::@4$4=remote(GlobalLimitOneMoveTime, @8$5)::@4$5=remote(CancelLimitOneMoveTime, @4$5)::@4$6=remote(UMCLimitOneMoveTime, @4$5)::@4$7=remote(UppaalLimitOneMoveTime, @4$5)::@5$2=remote(RCSLimitOneMoveTime, @9$5)::@5$3=remote(RestrictedLimitOneMoveTime, @9$5)::@5$4=remote(GlobalLimitOneMoveTime, @9$5)::@5$5=remote(CancelLimitOneMoveTime, @5$5)::@5$6=remote(UMCLimitOneMoveTime, @5$5)::@5$7=remote(UppaalLimitOneMoveTime, @5$5)::@6$2=remote(RCSLimitOneMoveTime, @10$5)::@6$3=remote(RestrictedLimitOneMoveTime, @10$5)::@6$4=remote(GlobalLimitOneMoveTime, @10$5)::@6$5=remote(CancelLimitOneMoveTime, @6$5)::@6$6=remote(UMCLimitOneMoveTime, @6$5)::@6$7=remote(UppaalLimitOneMoveTime, @6$5)
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitOneTime :file stationsMoveLimitOneTime.png
@@ -1833,7 +1833,6 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |--------+-------------+------------+---------+----------+-----+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveTime, @15$5)::@2$3=remote(RestrictedLimitOneMoveTime, @15$5)::@2$4=remote(GlobalLimitOneMoveTime, @12$5)::@2$5=remote(CancelLimitOneMoveTime, @7$5)::@2$6=remote(UMCLimitOneMoveTime, @7$5)::@2$7=remote(UppaalLimitOneMoveTime, @7$5)::@3$2=remote(RCSLimitOneMoveTime, @16$5)::@3$3=remote(RestrictedLimitOneMoveTime, @16$5)::@3$4=remote(GlobalLimitOneMoveTime, @13$5)::@3$5=remote(CancelLimitOneMoveTime, @8$5)::@3$6=remote(UMCLimitOneMoveTime, @8$5)::@3$7=remote(UppaalLimitOneMoveTime, @8$5)
 
-
 **** Memory Usage Peak
 #+PLOT: ind:1
 #+tblname: summaryStationsMoveLimitOneMemory
@@ -1841,11 +1840,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+---------+---------+------------|
 | Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+------------|
-|        1 |       6.488 |      8.552 |   8.365 |   8.737 | vmean([])  |
-|        2 |       9.279 |     14.295 |   12.47 |  13.607 | vmean([])  |
-|        4 |      29.647 |     38.089 |  37.879 |  48.485 | vmean([])  |
-|        6 |      70.101 |    105.637 | 104.069 | 151.608 | vmean([])  |
-|        8 |     205.391 |    222.268 | 232.768 | 372.632 | vmean([])  |
+|        1 |       6.488 |      8.552 |   8.365 |   8.737 |      8.573 |
+|        2 |       9.279 |     14.295 |   12.47 |  13.607 |      22.64 |
+|        4 |      29.647 |     38.089 |  37.879 |  48.485 |   2347.155 |
+|        6 |      70.101 |    105.637 | 104.069 | 151.608 |          0 |
+|        8 |     205.391 |    222.268 | 232.768 | 372.632 |          0 |
 |----------+-------------+------------+---------+---------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneMoveMemory,@6$5)::@2$3=remote(RestrictedLimitOneMoveMemory, @6$5)::@2$4=remote(GlobalLimitOneMoveMemory, @6$5)::@2$5=remote(CancelLimitOneMoveMemory, @2$5)::@2$6=remote(UppaalLimitOneMoveMemory, @2$5)::@3$2=remote(RCSLimitOneMoveMemory,@7$5)::@3$3=remote(RestrictedLimitOneMoveMemory, @7$5)::@3$4=remote(GlobalLimitOneMoveMemory, @7$5)::@3$5=remote(CancelLimitOneMoveMemory, @3$5)::@3$6=remote(UppaalLimitOneMoveMemory, @3$5)::@4$2=remote(RCSLimitOneMoveMemory, @8$5)::@4$3=remote(RestrictedLimitOneMoveMemory, @8$5)::@4$4=remote(GlobalLimitOneMoveMemory, @8$5)::@4$5=remote(CancelLimitOneMoveMemory, @4$5)::@4$6=remote(UppaalLimitOneMoveMemory, @4$5)::@5$2=remote(RCSLimitOneMoveMemory, @9$5)::@5$3=remote(RestrictedLimitOneMoveMemory, @9$5)::@5$4=remote(GlobalLimitOneMoveMemory, @9$5)::@5$5=remote(CancelLimitOneMoveMemory, @5$5)::@5$6=remote(UppaalLimitOneMoveMemory, @5$5)::@6$2=remote(RCSLimitOneMoveMemory, @10$5)::@6$3=remote(RestrictedLimitOneMoveMemory, @10$5)::@6$4=remote(GlobalLimitOneMoveMemory, @10$5)::@6$5=remote(CancelLimitOneMoveMemory, @6$5)::@6$6=remote(UppaalLimitOneMoveMemory, @6$5)
 
@@ -1904,11 +1903,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+---------+---------+-------+------------|
 | Stations | First model | Restricted |  Global |  Cancel |   UMC | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+-------+------------|
-|        1 |       0.012 |      0.017 |   0.023 |   0.035 | 0.162 | vmean([])  |
-|        2 |       0.073 |      0.074 |   0.141 |    0.27 | 8.695 | vmean([])  |
-|        4 |       1.708 |      1.316 |    2.36 |   5.197 |       | vmean([])  |
-|        6 |      29.484 |     22.226 |  44.986 | 108.011 |       | vmean([])  |
-|        8 |     165.246 |     135.38 | 288.698 |  634.25 |       | vmean([])  |
+|        1 |       0.012 |      0.017 |   0.023 |   0.035 | 0.231 |       0.08 |
+|        2 |       0.073 |      0.074 |   0.141 |    0.27 | 7.981 |      1.761 |
+|        4 |       1.708 |      1.316 |    2.36 |   5.197 |       |   2109.516 |
+|        6 |      29.484 |     22.226 |  44.986 | 108.011 |       |          0 |
+|        8 |     165.246 |     135.38 | 288.698 |  634.25 |       |          0 |
 |----------+-------------+------------+---------+---------+-------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalTime,@6$5)::@2$3=remote(RestrictedLimitOneCriticalTime, @6$5)::@2$4=remote(GlobalLimitOneCriticalTime, @6$5)::@2$5=remote(CancelLimitOneCriticalTime, @2$5)::@2$6=remote(UMCLimitOneCriticalTime, @2$5)::@2$7=remote(UppaalLimitOneCriticalTime, @2$5)::@3$2=remote(RCSLimitOneCriticalTime,@7$5)::@3$3=remote(RestrictedLimitOneCriticalTime, @7$5)::@3$4=remote(GlobalLimitOneCriticalTime, @7$5)::@3$5=remote(CancelLimitOneCriticalTime, @3$5)::@3$6=remote(UMCLimitOneCriticalTime, @3$5)::@3$7=remote(UppaalLimitOneCriticalTime, @3$5)::@4$2=remote(RCSLimitOneCriticalTime, @8$5)::@4$3=remote(RestrictedLimitOneCriticalTime, @8$5)::@4$4=remote(GlobalLimitOneCriticalTime, @8$5)::@4$5=remote(CancelLimitOneCriticalTime, @4$5)::@4$7=remote(UppaalLimitOneCriticalTime, @4$5)::@5$2=remote(RCSLimitOneCriticalTime, @9$5)::@5$3=remote(RestrictedLimitOneCriticalTime, @9$5)::@5$4=remote(GlobalLimitOneCriticalTime, @9$5)::@5$5=remote(CancelLimitOneCriticalTime, @5$5)::@5$7=remote(UppaalLimitOneCriticalTime, @5$5)::@6$2=remote(RCSLimitOneCriticalTime, @10$5)::@6$3=remote(RestrictedLimitOneCriticalTime, @10$5)::@6$4=remote(GlobalLimitOneCriticalTime, @10$5)::@6$5=remote(CancelLimitOneCriticalTime, @6$5)::@6$7=remote(UppaalLimitOneCriticalTime, @6$5)
 
@@ -1967,11 +1966,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+---------+---------+------------|
 | Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+------------|
-|        1 |       6.475 |      8.519 |   8.348 |   8.701 | vmean([])  |
-|        2 |       9.269 |     12.443 |  12.551 |  13.581 | vmean([])  |
-|        4 |      25.827 |      36.66 |  37.675 |  48.445 | vmean([])  |
-|        6 |      70.087 |    105.907 | 104.064 | 151.579 | vmean([])  |
-|        8 |     158.475 |    220.235 | 232.747 | 372.268 | vmean([])  |
+|        1 |       6.475 |      8.519 |   8.348 |   8.701 |      8.513 |
+|        2 |       9.269 |     12.443 |  12.551 |  13.581 |     20.682 |
+|        4 |      25.827 |      36.66 |  37.675 |  48.445 |   2347.116 |
+|        6 |      70.087 |    105.907 | 104.064 | 151.579 |          0 |
+|        8 |     158.475 |    220.235 | 232.747 | 372.268 |          0 |
 |----------+-------------+------------+---------+---------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory,@6$5)::@2$3=remote(RestrictedLimitOneCriticalMemory, @6$5)::@2$4=remote(GlobalLimitOneCriticalMemory, @6$5)::@2$5=remote(CancelLimitOneCriticalMemory, @2$5)::@2$6=remote(UppaalLimitOneCriticalMemory, @2$5)::@3$2=remote(RCSLimitOneCriticalMemory,@7$5)::@3$3=remote(RestrictedLimitOneCriticalMemory, @7$5)::@3$4=remote(GlobalLimitOneCriticalMemory, @7$5)::@3$5=remote(CancelLimitOneCriticalMemory, @3$5)::@3$6=remote(UppaalLimitOneCriticalMemory, @3$5)::@4$2=remote(RCSLimitOneCriticalMemory, @8$5)::@4$3=remote(RestrictedLimitOneCriticalMemory, @8$5)::@4$4=remote(GlobalLimitOneCriticalMemory, @8$5)::@4$5=remote(CancelLimitOneCriticalMemory, @4$5)::@4$6=remote(UppaalLimitOneCriticalMemory, @4$5)::@5$2=remote(RCSLimitOneCriticalMemory, @9$5)::@5$3=remote(RestrictedLimitOneCriticalMemory, @9$5)::@5$4=remote(GlobalLimitOneCriticalMemory, @9$5)::@5$5=remote(CancelLimitOneCriticalMemory, @5$5)::@5$6=remote(UppaalLimitOneCriticalMemory, @5$5)::@6$2=remote(RCSLimitOneCriticalMemory, @10$5)::@6$3=remote(RestrictedLimitOneCriticalMemory, @10$5)::@6$4=remote(GlobalLimitOneCriticalMemory, @10$5)::@6$5=remote(CancelLimitOneCriticalMemory, @6$5)::@6$6=remote(UppaalLimitOneCriticalMemory, @6$5)
 
@@ -2026,11 +2025,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+---------+---------+--------+------------|
 | Stations | First model | Restricted |  Global |  Cancel |    UMC | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+--------+------------|
-|        1 |        8e-3 |      0.014 |   0.022 |   0.032 |  1.097 | vmean([])  |
-|        2 |       0.085 |      0.097 |   0.127 |   0.253 | 68.624 | vmean([])  |
-|        4 |       1.784 |      1.289 |   2.677 |   5.281 |     0. | vmean([])  |
-|        6 |       29.72 |     23.232 |  44.976 | 107.555 |     0. | vmean([])  |
-|        8 |     165.382 |    125.718 | 286.938 | 637.434 |     0. | vmean([])  |
+|        1 |        8e-3 |      0.014 |   0.022 |   0.032 |  0.375 |      0.066 |
+|        2 |       0.085 |      0.097 |   0.127 |   0.253 | 12.369 |       1.76 |
+|        4 |       1.784 |      1.289 |   2.677 |   5.281 |      0 |   2110.576 |
+|        6 |       29.72 |     23.232 |  44.976 | 107.555 |      0 |          0 |
+|        8 |     165.382 |    125.718 | 286.938 | 637.434 |      0 |          0 |
 |----------+-------------+------------+---------+---------+--------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionTime,@6$5)::@2$3=remote(RestrictedLimitOneCollisionTime, @6$5)::@2$4=remote(GlobalLimitOneCollisionTime, @6$5)::@2$5=remote(CancelLimitOneCollisionTime, @2$5)::@2$6=remote(UMCLimitOneCollisionTime, @2$5)::@2$7=remote(UppaalLimitOneCollisionTime, @2$5)::@3$2=remote(RCSLimitOneCollisionTime,@7$5)::@3$3=remote(RestrictedLimitOneCollisionTime, @7$5)::@3$4=remote(GlobalLimitOneCollisionTime, @7$5)::@3$5=remote(CancelLimitOneCollisionTime, @3$5)::@3$6=remote(UMCLimitOneCollisionTime, @3$5)::@3$7=remote(UppaalLimitOneCollisionTime, @3$5)::@4$2=remote(RCSLimitOneCollisionTime, @8$5)::@4$3=remote(RestrictedLimitOneCollisionTime, @8$5)::@4$4=remote(GlobalLimitOneCollisionTime, @8$5)::@4$5=remote(CancelLimitOneCollisionTime, @4$5)::@4$6=remote(UMCLimitOneCollisionTime, @4$5)::@4$7=remote(UppaalLimitOneCollisionTime, @4$5)::@5$2=remote(RCSLimitOneCollisionTime, @9$5)::@5$3=remote(RestrictedLimitOneCollisionTime, @9$5)::@5$4=remote(GlobalLimitOneCollisionTime, @9$5)::@5$5=remote(CancelLimitOneCollisionTime, @5$5)::@5$6=remote(UMCLimitOneCollisionTime, @5$5)::@5$7=remote(UppaalLimitOneCollisionTime, @5$5)::@6$2=remote(RCSLimitOneCollisionTime, @10$5)::@6$3=remote(RestrictedLimitOneCollisionTime, @10$5)::@6$4=remote(GlobalLimitOneCollisionTime, @10$5)::@6$5=remote(CancelLimitOneCollisionTime, @6$5)::@6$6=remote(UMCLimitOneCollisionTime, @6$5)::@6$7=remote(UppaalLimitOneCollisionTime, @6$5)
 
@@ -2089,11 +2088,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+---------+---------+------------|
 | Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+------------|
-|        1 |       6.515 |      8.524 |   8.352 |   8.701 | vmean([])  |
-|        2 |         9.3 |     12.421 |  12.545 |  13.571 | vmean([])  |
-|        4 |      25.856 |     38.101 |  37.845 |  48.441 | vmean([])  |
-|        6 |      70.112 |    101.904 | 104.047 |  151.56 | vmean([])  |
-|        8 |     158.497 |     224.52 |  232.72 | 372.249 | vmean([])  |
+|        1 |       6.515 |      8.524 |   8.352 |   8.701 |      8.533 |
+|        2 |         9.3 |     12.421 |  12.545 |  13.571 |     20.657 |
+|        4 |      25.856 |     38.101 |  37.845 |  48.441 |   2347.107 |
+|        6 |      70.112 |    101.904 | 104.047 |  151.56 |          0 |
+|        8 |     158.497 |     224.52 |  232.72 | 372.249 |          0 |
 |----------+-------------+------------+---------+---------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory,@6$5)::@2$3=remote(RestrictedLimitOneCollisionMemory, @6$5)::@2$4=remote(GlobalLimitOneCollisionMemory, @6$5)::@2$5=remote(CancelLimitOneCollisionMemory, @2$5)::@2$6=remote(UppaalLimitOneCollisionMemory, @2$5)::@3$2=remote(RCSLimitOneCollisionMemory,@7$5)::@3$3=remote(RestrictedLimitOneCollisionMemory, @7$5)::@3$4=remote(GlobalLimitOneCollisionMemory, @7$5)::@3$5=remote(CancelLimitOneCollisionMemory, @3$5)::@3$6=remote(UppaalLimitOneCollisionMemory, @3$5)::@4$2=remote(RCSLimitOneCollisionMemory, @8$5)::@4$3=remote(RestrictedLimitOneCollisionMemory, @8$5)::@4$4=remote(GlobalLimitOneCollisionMemory, @8$5)::@4$5=remote(CancelLimitOneCollisionMemory, @4$5)::@4$6=remote(UppaalLimitOneCollisionMemory, @4$5)::@5$2=remote(RCSLimitOneCollisionMemory, @9$5)::@5$3=remote(RestrictedLimitOneCollisionMemory, @9$5)::@5$4=remote(GlobalLimitOneCollisionMemory, @9$5)::@5$5=remote(CancelLimitOneCollisionMemory, @5$5)::@5$6=remote(UppaalLimitOneCollisionMemory, @5$5)::@6$2=remote(RCSLimitOneCollisionMemory, @10$5)::@6$3=remote(RestrictedLimitOneCollisionMemory, @10$5)::@6$4=remote(GlobalLimitOneCollisionMemory, @10$5)::@6$5=remote(CancelLimitOneCollisionMemory, @6$5)::@6$6=remote(UppaalLimitOneCollisionMemory, @6$5)
 
@@ -2144,15 +2143,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryArriveLimitOneTime
 #+CAPTION: Stations Limit One Will Arrive Time
-|----------+-------------+------------+---------+---------+--------+------------|
-| Stations | First model | Restricted |  Global |  Cancel |    UMC | UPPAALxUMC |
-|----------+-------------+------------+---------+---------+--------+------------|
-|        1 |        0.01 |      0.019 |   0.025 |   0.033 |    0.2 | vmean([])  |
-|        2 |       0.077 |      0.072 |   0.131 |   0.229 | 11.343 | vmean([])  |
-|        4 |       1.711 |      1.306 |    2.59 |   4.823 |     0. | vmean([])  |
-|        6 |      27.375 |     22.197 |  46.804 | 106.595 |     0. | vmean([])  |
-|        8 |     163.192 |    134.605 | 285.323 | 654.142 |     0. | vmean([])  |
-|----------+-------------+------------+---------+---------+--------+------------|
+|----------+-------------+------------+---------+---------+-------+------------|
+| Stations | First model | Restricted |  Global |  Cancel |   UMC | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+-------+------------|
+|        1 |        0.01 |      0.019 |   0.025 |   0.033 | 0.154 |      0.072 |
+|        2 |       0.077 |      0.072 |   0.131 |   0.229 | 2.426 |      1.788 |
+|        4 |       1.711 |      1.306 |    2.59 |   4.823 |     0 |   2072.751 |
+|        6 |      27.375 |     22.197 |  46.804 | 106.595 |     0 |          0 |
+|        8 |     163.192 |    134.605 | 285.323 | 654.142 |     0 |          0 |
+|----------+-------------+------------+---------+---------+-------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneArriveTime,@6$5)::@2$3=remote(RestrictedLimitOneArriveTime, @6$5)::@2$4=remote(GlobalLimitOneArriveTime, @6$5)::@2$5=remote(CancelLimitOneArriveTime, @2$5)::@2$6=remote(UMCLimitOneArriveTime, @2$5)::@2$7=remote(UppaalLimitOneArriveTime, @2$5)::@3$2=remote(RCSLimitOneArriveTime,@7$5)::@3$3=remote(RestrictedLimitOneArriveTime, @7$5)::@3$4=remote(GlobalLimitOneArriveTime, @7$5)::@3$5=remote(CancelLimitOneArriveTime, @3$5)::@3$6=remote(UMCLimitOneArriveTime, @3$5)::@3$7=remote(UppaalLimitOneArriveTime, @3$5)::@4$2=remote(RCSLimitOneArriveTime, @8$5)::@4$3=remote(RestrictedLimitOneArriveTime, @8$5)::@4$4=remote(GlobalLimitOneArriveTime, @8$5)::@4$5=remote(CancelLimitOneArriveTime, @4$5)::@4$6=remote(UMCLimitOneArriveTime, @4$5)::@4$7=remote(UppaalLimitOneArriveTime, @4$5)::@5$2=remote(RCSLimitOneArriveTime, @9$5)::@5$3=remote(RestrictedLimitOneArriveTime, @9$5)::@5$4=remote(GlobalLimitOneArriveTime, @9$5)::@5$5=remote(CancelLimitOneArriveTime, @5$5)::@5$6=remote(UMCLimitOneArriveTime, @5$5)::@5$7=remote(UppaalLimitOneArriveTime, @5$5)::@6$2=remote(RCSLimitOneArriveTime, @10$5)::@6$3=remote(RestrictedLimitOneArriveTime, @10$5)::@6$4=remote(GlobalLimitOneArriveTime, @10$5)::@6$5=remote(CancelLimitOneArriveTime, @6$5)::@6$6=remote(UMCLimitOneArriveTime, @6$5)::@6$7=remote(UppaalLimitOneArriveTime, @6$5)
 
 #+begin_src gnuplot :var data=summaryArriveLimitOneTime :file stationsArriveLimitOneTime.png
@@ -2209,11 +2208,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+---------+---------+------------|
 | Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
 |----------+-------------+------------+---------+---------+------------|
-|        1 |       6.439 |      8.447 |   8.268 |   8.616 | vmean([])  |
-|        2 |       9.228 |     12.344 |  12.459 |  13.475 | vmean([])  |
-|        4 |      25.781 |     37.208 |  37.749 |  48.224 | vmean([])  |
-|        6 |      69.981 |    100.468 | 103.721 | 150.872 | vmean([])  |
-|        8 |      158.18 |    221.277 | 232.373 |  370.34 | vmean([])  |
+|        1 |       6.439 |      8.447 |   8.268 |   8.616 |      8.456 |
+|        2 |       9.228 |     12.344 |  12.459 |  13.475 |     20.472 |
+|        4 |      25.781 |     37.208 |  37.749 |  48.224 |   2230.904 |
+|        6 |      69.981 |    100.468 | 103.721 | 150.872 |          0 |
+|        8 |      158.18 |    221.277 | 232.373 |  370.34 |          0 |
 |----------+-------------+------------+---------+---------+------------|
 #+TBLFM: @2$2=remote(RCSLimitOneArriveMemory,@6$5)::@2$3=remote(RestrictedLimitOneArriveMemory, @6$5)::@2$4=remote(GlobalLimitOneArriveMemory, @6$5)::@2$5=remote(CancelLimitOneArriveMemory, @2$5)::@2$6=remote(UppaalLimitOneArriveMemory, @2$5)::@3$2=remote(RCSLimitOneArriveMemory,@7$5)::@3$3=remote(RestrictedLimitOneArriveMemory, @7$5)::@3$4=remote(GlobalLimitOneArriveMemory, @7$5)::@3$5=remote(CancelLimitOneArriveMemory, @3$5)::@3$6=remote(UppaalLimitOneArriveMemory, @3$5)::@4$2=remote(RCSLimitOneArriveMemory, @8$5)::@4$3=remote(RestrictedLimitOneArriveMemory, @8$5)::@4$4=remote(GlobalLimitOneArriveMemory, @8$5)::@4$5=remote(CancelLimitOneArriveMemory, @4$5)::@4$6=remote(UppaalLimitOneArriveMemory, @4$5)::@5$2=remote(RCSLimitOneArriveMemory, @9$5)::@5$3=remote(RestrictedLimitOneArriveMemory, @9$5)::@5$4=remote(GlobalLimitOneArriveMemory, @9$5)::@5$5=remote(CancelLimitOneArriveMemory, @5$5)::@5$6=remote(UppaalLimitOneArriveMemory, @5$5)::@6$2=remote(RCSLimitOneArriveMemory, @10$5)::@6$3=remote(RestrictedLimitOneArriveMemory, @10$5)::@6$4=remote(GlobalLimitOneArriveMemory, @10$5)::@6$5=remote(CancelLimitOneArriveMemory, @6$5)::@6$6=remote(UppaalLimitOneArriveMemory, @6$5)
 
@@ -2269,11 +2268,11 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 |----------+-------------+------------+----------+----------+--------+------------|
 | Stations | First model | Restricted |   Global |   Cancel |    UMC | UPPAALxUMC |
 |----------+-------------+------------+----------+----------+--------+------------|
-|        1 |       0.016 |      0.015 |    0.036 |    0.035 |  0.179 | vmean([])  |
-|        2 |       0.186 |      0.125 |    0.365 |     0.87 | 14.285 | vmean([])  |
-|        4 |        8.13 |      2.373 |   11.708 |   34.119 |     0. | vmean([])  |
-|        6 |     176.259 |     47.547 |  254.677 |  895.692 |     0. | vmean([])  |
-|        8 |    1127.135 |    296.939 | 1594.772 | 6552.647 |     0. | vmean([])  |
+|        1 |       0.016 |      0.015 |    0.036 |    0.035 |  0.307 |      0.076 |
+|        2 |       0.186 |      0.125 |    0.365 |     0.87 | 23.661 |      2.574 |
+|        4 |        8.13 |      2.373 |   11.708 |   34.119 |      0 |    4233.68 |
+|        6 |     176.259 |     47.547 |  254.677 |  895.692 |      0 |          0 |
+|        8 |    1127.135 |    296.939 | 1594.772 | 6552.647 |      0 |          0 |
 |----------+-------------+------------+----------+----------+--------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveTime,@6$5)::@2$3=remote(RestrictedLimitTwoMoveTime, @6$5)::@2$4=remote(GlobalLimitTwoMoveTime, @6$5)::@2$5=remote(CancelLimitTwoMoveTime, @2$5)::@2$6=remote(UMCLimitTwoMoveTime, @2$5)::@2$7=remote(UppaalLimitTwoMoveTime, @2$5)::@3$2=remote(RCSLimitTwoMoveTime,@7$5)::@3$3=remote(RestrictedLimitTwoMoveTime, @7$5)::@3$4=remote(GlobalLimitTwoMoveTime, @7$5)::@3$5=remote(CancelLimitTwoMoveTime, @3$5)::@3$6=remote(UMCLimitTwoMoveTime, @3$5)::@3$7=remote(UppaalLimitTwoMoveTime, @3$5)::@4$2=remote(RCSLimitTwoMoveTime, @8$5)::@4$3=remote(RestrictedLimitTwoMoveTime, @8$5)::@4$4=remote(GlobalLimitTwoMoveTime, @8$5)::@4$5=remote(CancelLimitTwoMoveTime, @4$5)::@4$6=remote(UMCLimitTwoMoveTime, @4$5)::@4$7=remote(UppaalLimitTwoMoveTime, @4$5)::@5$2=remote(RCSLimitTwoMoveTime, @9$5)::@5$3=remote(RestrictedLimitTwoMoveTime, @9$5)::@5$4=remote(GlobalLimitTwoMoveTime, @9$5)::@5$5=remote(CancelLimitTwoMoveTime, @5$5)::@5$6=remote(UMCLimitTwoMoveTime, @5$5)::@5$7=remote(UppaalLimitTwoMoveTime, @5$5)::@6$2=remote(RCSLimitTwoMoveTime, @10$5)::@6$3=remote(RestrictedLimitTwoMoveTime, @10$5)::@6$4=remote(GlobalLimitTwoMoveTime, @10$5)::@6$5=remote(CancelLimitTwoMoveTime, @6$5)::@6$6=remote(UMCLimitTwoMoveTime, @6$5)::@6$7=remote(UppaalLimitTwoMoveTime, @6$5)
 
@@ -2328,15 +2327,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryStationsMoveLimitTwoMemory
 #+CAPTION: Stations Limit Two No derailment (Move between connected segments) Memory
-|----------+-------------+------------+-----------+-----------+------------|
-| Stations | First model | Restricted |    Global |    Cancel | UPPAALxUMC |
-|----------+-------------+------------+-----------+-----------+------------|
-|        1 |       6.496 |      8.556 | 10.066667 | 12.054667 | vmean([])  |
-|        2 |   9.9306667 |  12.654667 | 16.369333 | 18.554667 | vmean([])  |
-|        4 |   41.502667 |  39.422667 | 59.801333 | 139.58267 | vmean([])  |
-|        6 |     152.876 |  120.05867 | 212.28933 | 680.38267 | vmean([])  |
-|        8 |   422.32267 |  276.12267 | 541.72133 | 2104.1053 | vmean([])  |
-|----------+-------------+------------+-----------+-----------+------------|
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.496 |      8.556 |  10.067 |   12.055 |      8.607 |
+|        2 |       9.931 |     12.655 |  16.369 |   18.555 |     27.016 |
+|        4 |      41.503 |     39.423 |  59.801 |  139.583 |   4533.628 |
+|        6 |     152.876 |    120.059 | 212.289 |  680.383 |          0 |
+|        8 |     422.323 |    276.123 | 541.721 | 2104.105 |          0 |
+|----------+-------------+------------+---------+----------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory,@6$5)::@2$3=remote(RestrictedLimitTwoMoveMemory, @6$5)::@2$4=remote(GlobalLimitTwoMoveMemory, @6$5)::@2$5=remote(CancelLimitTwoMoveMemory, @2$5)::@2$6=remote(UppaalLimitTwoMoveMemory, @2$5)::@3$2=remote(RCSLimitTwoMoveMemory,@7$5)::@3$3=remote(RestrictedLimitTwoMoveMemory, @7$5)::@3$4=remote(GlobalLimitTwoMoveMemory, @7$5)::@3$5=remote(CancelLimitTwoMoveMemory, @3$5)::@3$6=remote(UppaalLimitTwoMoveMemory, @3$5)::@4$2=remote(RCSLimitTwoMoveMemory, @8$5)::@4$3=remote(RestrictedLimitTwoMoveMemory, @8$5)::@4$4=remote(GlobalLimitTwoMoveMemory, @8$5)::@4$5=remote(CancelLimitTwoMoveMemory, @4$5)::@4$6=remote(UppaalLimitTwoMoveMemory, @4$5)::@5$2=remote(RCSLimitTwoMoveMemory, @9$5)::@5$3=remote(RestrictedLimitTwoMoveMemory, @9$5)::@5$4=remote(GlobalLimitTwoMoveMemory, @9$5)::@5$5=remote(CancelLimitTwoMoveMemory, @5$5)::@5$6=remote(UppaalLimitTwoMoveMemory, @5$5)::@6$2=remote(RCSLimitTwoMoveMemory, @10$5)::@6$3=remote(RestrictedLimitTwoMoveMemory, @10$5)::@6$4=remote(GlobalLimitTwoMoveMemory, @10$5)::@6$5=remote(CancelLimitTwoMoveMemory, @6$5)::@6$6=remote(UppaalLimitTwoMoveMemory, @6$5)
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitTwoMemory :file stationsMoveLimitTwoMemory.png
@@ -2387,15 +2386,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryStationsCriticalLimitTwoTime
 #+CAPTION: Stations Limit Two No derailment (No trains in critical section) Time
-|----------+-------------+-------------+-------------+------------+------------+------------|
-| Stations | First model |  Restricted |      Global |     Cancel | UMC        | UPPAALxUMC |
-|----------+-------------+-------------+-------------+------------+------------+------------|
-|        1 |       0.013 | 0.022666667 | 0.022333333 |      0.036 | 0.17566667 | vmean([])  |
-|        2 |       0.198 |       0.133 |  0.36766667 | 0.87733333 | 14.426333  | vmean([])  |
-|        4 |   8.0706667 |       2.147 |      10.941 |  32.311333 | DNF        | vmean([])  |
-|        6 |     172.667 |      47.579 |     245.934 |    920.202 | DNA        | vmean([])  |
-|        8 |   1138.0233 |   292.37333 |    1694.755 |  6608.8023 | DNA        | vmean([])  |
-|----------+-------------+-------------+-------------+------------+------------+------------|
+|----------+-------------+------------+----------+----------+--------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+--------+------------|
+|        1 |       0.013 |      0.023 |    0.022 |    0.036 |  0.255 |      0.081 |
+|        2 |       0.198 |      0.133 |    0.368 |    0.877 | 12.791 |      2.627 |
+|        4 |       8.071 |      2.147 |   10.941 |   32.311 |      0 |   4231.328 |
+|        6 |     172.667 |     47.579 |  245.934 |  920.202 |      0 |          0 |
+|        8 |    1138.023 |    292.373 | 1694.755 | 6608.802 |      0 |          0 |
+|----------+-------------+------------+----------+----------+--------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalTime,@6$5)::@2$3=remote(RestrictedLimitTwoCriticalTime, @6$5)::@2$4=remote(GlobalLimitTwoCriticalTime, @6$5)::@2$5=remote(CancelLimitTwoCriticalTime, @2$5)::@2$6=remote(UMCLimitTwoCriticalTime, @2$5)::@2$7=remote(UppaalLimitTwoCriticalTime, @2$5)::@3$2=remote(RCSLimitTwoCriticalTime,@7$5)::@3$3=remote(RestrictedLimitTwoCriticalTime, @7$5)::@3$4=remote(GlobalLimitTwoCriticalTime, @7$5)::@3$5=remote(CancelLimitTwoCriticalTime, @3$5)::@3$6=remote(UMCLimitTwoCriticalTime, @3$5)::@3$7=remote(UppaalLimitTwoCriticalTime, @3$5)::@4$2=remote(RCSLimitTwoCriticalTime, @8$5)::@4$3=remote(RestrictedLimitTwoCriticalTime, @8$5)::@4$4=remote(GlobalLimitTwoCriticalTime, @8$5)::@4$5=remote(CancelLimitTwoCriticalTime, @4$5)::@4$6=remote(UMCLimitTwoCriticalTime, @4$5)::@4$7=remote(UppaalLimitTwoCriticalTime, @4$5)::@5$2=remote(RCSLimitTwoCriticalTime, @9$5)::@5$3=remote(RestrictedLimitTwoCriticalTime, @9$5)::@5$4=remote(GlobalLimitTwoCriticalTime, @9$5)::@5$5=remote(CancelLimitTwoCriticalTime, @5$5)::@5$6=remote(UMCLimitTwoCriticalTime, @5$5)::@5$7=remote(UppaalLimitTwoCriticalTime, @5$5)::@6$2=remote(RCSLimitTwoCriticalTime, @10$5)::@6$3=remote(RestrictedLimitTwoCriticalTime, @10$5)::@6$4=remote(GlobalLimitTwoCriticalTime, @10$5)::@6$5=remote(CancelLimitTwoCriticalTime, @6$5)::@6$6=remote(UMCLimitTwoCriticalTime, @6$5)::@6$7=remote(UppaalLimitTwoCriticalTime, @6$5)
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoTime :file stationsCriticalTimeLimitTwo.png
@@ -2449,15 +2448,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryStationsCriticalLimitTwoMemory
 #+CAPTION: Stations Limit Two No derailment (No trains in critical section) Memory
-|----------+-------------+------------+-----------+-----------+------------|
-| Stations | First model | Restricted |    Global |    Cancel | UPPAALxUMC |
-|----------+-------------+------------+-----------+-----------+------------|
-|        1 |   6.4786667 |      8.516 |     8.416 |     8.732 | vmean([])  |
-|        2 |   9.9093333 |  12.590667 | 15.442667 | 16.661333 | vmean([])  |
-|        4 |      41.484 |     40.388 | 58.229333 | 139.53867 | vmean([])  |
-|        6 |   152.85067 |    121.686 | 209.16267 |   680.276 | vmean([])  |
-|        8 |   422.30267 |  275.48933 |   543.076 |  2104.356 | vmean([])  |
-|----------+-------------+------------+-----------+-----------+------------|
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.479 |      8.516 |   8.416 |    8.732 |       8.54 |
+|        2 |       9.909 |     12.591 |  15.443 |   16.661 |     27.964 |
+|        4 |      41.484 |     40.388 |  58.229 |  139.539 |   4533.581 |
+|        6 |     152.851 |    121.686 | 209.163 |  680.276 |          0 |
+|        8 |     422.303 |    275.489 | 543.076 | 2104.356 |          0 |
+|----------+-------------+------------+---------+----------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory,@6$5)::@2$3=remote(RestrictedLimitTwoCriticalMemory, @6$5)::@2$4=remote(GlobalLimitTwoCriticalMemory, @6$5)::@2$5=remote(CancelLimitTwoCriticalMemory, @2$5)::@2$6=remote(UppaalLimitTwoCriticalMemory, @2$5)::@3$2=remote(RCSLimitTwoCriticalMemory,@7$5)::@3$3=remote(RestrictedLimitTwoCriticalMemory, @7$5)::@3$4=remote(GlobalLimitTwoCriticalMemory, @7$5)::@3$5=remote(CancelLimitTwoCriticalMemory, @3$5)::@3$6=remote(UppaalLimitTwoCriticalMemory, @3$5)::@4$2=remote(RCSLimitTwoCriticalMemory, @8$5)::@4$3=remote(RestrictedLimitTwoCriticalMemory, @8$5)::@4$4=remote(GlobalLimitTwoCriticalMemory, @8$5)::@4$5=remote(CancelLimitTwoCriticalMemory, @4$5)::@4$6=remote(UppaalLimitTwoCriticalMemory, @4$5)::@5$2=remote(RCSLimitTwoCriticalMemory, @9$5)::@5$3=remote(RestrictedLimitTwoCriticalMemory, @9$5)::@5$4=remote(GlobalLimitTwoCriticalMemory, @9$5)::@5$5=remote(CancelLimitTwoCriticalMemory, @5$5)::@5$6=remote(UppaalLimitTwoCriticalMemory, @5$5)::@6$2=remote(RCSLimitTwoCriticalMemory, @10$5)::@6$3=remote(RestrictedLimitTwoCriticalMemory, @10$5)::@6$4=remote(GlobalLimitTwoCriticalMemory, @10$5)::@6$5=remote(CancelLimitTwoCriticalMemory, @6$5)::@6$6=remote(UppaalLimitTwoCriticalMemory, @6$5)
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoMemory :file stationsCriticalLimitTwoMemory.png
@@ -2507,15 +2506,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 **** Elapsed time
 #+PLOT: ind:1
 #+CAPTION: Stations Limit Two No Collision Time
-|----------+-------------+------------+-----------+-------------+-----------+------------|
-| Stations | First model | Restricted |    Global |      Cancel | UMC       | UPPAALxUMC |
-|----------+-------------+------------+-----------+-------------+-----------+------------|
-|        1 | 0.013333333 |      0.021 |     0.018 | 0.046333333 | 1.3343333 | vmean([])  |
-|        2 |       0.195 | 0.12666667 |     0.351 |       0.894 | 117.89033 | vmean([])  |
-|        4 |   8.1486667 |  2.2746667 |     11.55 |   33.869333 | DNF       | vmean([])  |
-|        6 |      175.75 |     47.536 | 249.72933 |   951.25567 | DNA       | vmean([])  |
-|        8 |    1144.819 |    276.935 |  1597.767 |   6587.2517 | DNA       | vmean([])  |
-|----------+-------------+------------+-----------+-------------+-----------+------------|
+|----------+-------------+------------+----------+----------+--------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+--------+------------|
+|        1 |       0.013 |      0.021 |    0.018 |    0.046 |  0.429 |      0.082 |
+|        2 |       0.195 |      0.127 |    0.351 |    0.894 | 20.186 |       2.63 |
+|        4 |       8.149 |      2.275 |    11.55 |   33.869 |      0 |   4195.387 |
+|        6 |      175.75 |     47.536 |  249.729 |  951.256 |      0 |          0 |
+|        8 |    1144.819 |    276.935 | 1597.767 | 6587.252 |      0 |          0 |
+|----------+-------------+------------+----------+----------+--------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionTime,@6$5)::@2$3=remote(RestrictedLimitTwoCollisionTime, @6$5)::@2$4=remote(GlobalLimitTwoCollisionTime, @6$5)::@2$5=remote(CancelLimitTwoCollisionTime, @2$5)::@2$6=remote(UMCLimitTwoCollisionTime, @2$5)::@2$7=remote(UppaalLimitTwoCollisionTime, @2$5)::@3$2=remote(RCSLimitTwoCollisionTime,@7$5)::@3$3=remote(RestrictedLimitTwoCollisionTime, @7$5)::@3$4=remote(GlobalLimitTwoCollisionTime, @7$5)::@3$5=remote(CancelLimitTwoCollisionTime, @3$5)::@3$6=remote(UMCLimitTwoCollisionTime, @3$5)::@3$7=remote(UppaalLimitTwoCollisionTime, @3$5)::@4$2=remote(RCSLimitTwoCollisionTime, @8$5)::@4$3=remote(RestrictedLimitTwoCollisionTime, @8$5)::@4$4=remote(GlobalLimitTwoCollisionTime, @8$5)::@4$5=remote(CancelLimitTwoCollisionTime, @4$5)::@4$6=remote(UMCLimitTwoCollisionTime, @4$5)::@4$7=remote(UppaalLimitTwoCollisionTime, @4$5)::@5$2=remote(RCSLimitTwoCollisionTime, @9$5)::@5$3=remote(RestrictedLimitTwoCollisionTime, @9$5)::@5$4=remote(GlobalLimitTwoCollisionTime, @9$5)::@5$5=remote(CancelLimitTwoCollisionTime, @5$5)::@5$6=remote(UMCLimitTwoCollisionTime, @5$5)::@5$7=remote(UppaalLimitTwoCollisionTime, @5$5)::@6$2=remote(RCSLimitTwoCollisionTime, @10$5)::@6$3=remote(RestrictedLimitTwoCollisionTime, @10$5)::@6$4=remote(GlobalLimitTwoCollisionTime, @10$5)::@6$5=remote(CancelLimitTwoCollisionTime, @6$5)::@6$6=remote(UMCLimitTwoCollisionTime, @6$5)::@6$7=remote(UppaalLimitTwoCollisionTime, @6$5)
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoTime :file stationsCollisionLimitTwoTime.png
@@ -2569,16 +2568,16 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryStationsCollisionLimitTwoMemory
 #+CAPTION: Stations Limit Two No Collision Memory
-|----------+-------------+------------+-----------+-----------|
-| Stations | First model | Restricted |    Global |    Cancel |
-|----------+-------------+------------+-----------+-----------|
-|        1 |   6.5146667 |      8.508 |     8.412 | 8.7266667 |
-|        2 |       9.944 |  12.578667 |     14.96 | 16.641333 |
-|        4 |      41.508 |     39.384 | 58.201333 | 139.52667 |
-|        6 |   152.87467 |  122.78667 | 210.05733 | 680.33333 |
-|        8 |   422.32667 |    276.996 | 544.73333 | 2104.3453 |
-|----------+-------------+------------+-----------+-----------|
-#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5)::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5)::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5)::@2$5=remote(CancelLimitTwoCollisionMemory, @2$5)::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5)::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5)::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5)::@3$5=remote(CancelLimitTwoCollisionMemory, @3$5)::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5)::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5)::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5)::@4$5=remote(CancelLimitTwoCollisionMemory, @4$5)::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5)::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5)::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5)::@5$5=remote(CancelLimitTwoCollisionMemory, @5$5)::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5)::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5)::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5)::@6$5=remote(CancelLimitTwoCollisionMemory, @6$5)
+|----------+-------------+------------+-----------+-----------+------------|
+| Stations | First model | Restricted |    Global |    Cancel | UPPAALxUMC |
+|----------+-------------+------------+-----------+-----------+------------|
+|        1 |   6.5146667 |      8.508 |     8.412 |     8.727 |      8.561 |
+|        2 |       9.944 |  12.578667 |     14.96 | 16.641333 |     26.969 |
+|        4 |      41.508 |     39.384 | 58.201333 | 139.52667 |   4533.576 |
+|        6 |   152.87467 |  122.78667 | 210.05733 | 680.33333 |          0 |
+|        8 |   422.32667 |    276.996 | 544.73333 | 2104.3453 |          0 |
+|----------+-------------+------------+-----------+-----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5)::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5)::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5)::@2$5=remote(CancelLimitTwoCollisionMemory, @2$5)::@2$6=remote(UppaalLimitTwoCollisionMemory, @2$5)::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5)::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5)::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5)::@3$5=remote(CancelLimitTwoCollisionMemory, @3$5)::@3$6=remote(UppaalLimitTwoCollisionMemory, @3$5)::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5)::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5)::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5)::@4$5=remote(CancelLimitTwoCollisionMemory, @4$5)::@4$6=remote(UppaalLimitTwoCollisionMemory, @4$5)::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5)::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5)::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5)::@5$5=remote(CancelLimitTwoCollisionMemory, @5$5)::@5$6=remote(UppaalLimitTwoCollisionMemory, @5$5)::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5)::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5)::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5)::@6$5=remote(CancelLimitTwoCollisionMemory, @6$5)::@6$6=remote(UppaalLimitTwoCollisionMemory, @6$5)
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoMemory :file stationsCollisionLimitTwoMemory.png
 set term png size 1600,1600
@@ -2613,13 +2612,13 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 
 #+PLOT: ind:1
 #+CAPTION: Nærumbanen Limit Two No Collision Memory
-|--------+-------------+------------+-----------+-----------|
-| Trains | First model | Restricted |    Global |    Cancel |
-|--------+-------------+------------+-----------+-----------|
-|      2 |     122.196 |  113.55333 | 152.06533 | 238.94533 |
-|      3 |   1833.1293 |  313.88133 | 1303.3773 | 3638.7027 |
-|--------+-------------+------------+-----------+-----------|
-#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory, @15$5)::@2$3=remote(RestrictedLimitTwoCollisionMemory, @15$5)::@2$4=remote(GlobalLimitTwoCollisionMemory, @12$5)::@2$5=remote(CancelLimitTwoCollisionMemory, @7$5)::@3$2=remote(RCSLimitTwoCollisionMemory, @16$5)::@3$3=remote(RestrictedLimitTwoCollisionMemory, @16$5)::@3$4=remote(GlobalLimitTwoCollisionMemory, @13$5)::@3$5=remote(CancelLimitTwoCollisionMemory, @8$5)
+|--------+-------------+------------+-----------+-----------+------------|
+| Trains | First model | Restricted |    Global |    Cancel | UPPAALxUMC |
+|--------+-------------+------------+-----------+-----------+------------|
+|      2 |     122.196 |  113.55333 | 152.06533 | 238.94533 | 0          |
+|      3 |   1833.1293 |  313.88133 | 1303.3773 | 3638.7027 | 0          |
+|--------+-------------+------------+-----------+-----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory, @15$5)::@2$3=remote(RestrictedLimitTwoCollisionMemory, @15$5)::@2$4=remote(GlobalLimitTwoCollisionMemory, @12$5)::@2$5=remote(CancelLimitTwoCollisionMemory, @7$5)::@2$6=remote(UppaalLimitTwoCollisionMemory, @7$5)::@3$2=remote(RCSLimitTwoCollisionMemory, @16$5)::@3$3=remote(RestrictedLimitTwoCollisionMemory, @16$5)::@3$4=remote(GlobalLimitTwoCollisionMemory, @13$5)::@3$5=remote(CancelLimitTwoCollisionMemory, @8$5)::@3$6=remote(UppaalLimitTwoCollisionMemory, @8$5)
 
 
 *** Will arrive
@@ -2627,15 +2626,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryArriveLimitTwoTime
 #+CAPTION: Stations Limit Two Will Arrive Time
-|----------+-------------+-------------+-------------+-------------+------------+------------|
-| Stations | First model |  Restricted |      Global |      Cancel | UMC        | UPPAALxUMC |
-|----------+-------------+-------------+-------------+-------------+------------+------------|
-|        1 |       0.015 | 0.019333333 | 0.025666667 | 0.026666667 | 0.22233333 | vmean([])  |
-|        2 |  0.19666667 |  0.11966667 |  0.33966667 |       0.815 | 17.896333  | vmean([])  |
-|        4 |   8.1093333 |       2.272 |       11.78 |   34.642333 | DNF        | vmean([])  |
-|        6 |     177.619 |   46.954333 |   260.88367 |   933.92167 | DNA        | vmean([])  |
-|        8 |   1133.7253 |     295.897 |   1657.4813 |   6625.0333 | DNA        | vmean([])  |
-|----------+-------------+-------------+-------------+-------------+------------+------------|
+|----------+-------------+------------+----------+----------+-------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |   UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+-------+------------|
+|        1 |       0.015 |      0.019 |    0.026 |    0.027 |  0.17 |      0.086 |
+|        2 |       0.197 |       0.12 |     0.34 |    0.815 | 3.546 |      2.585 |
+|        4 |       8.109 |      2.272 |    11.78 |   34.642 |     0 |   4146.453 |
+|        6 |     177.619 |     46.954 |  260.884 |  933.922 |     0 |          0 |
+|        8 |    1133.725 |    295.897 | 1657.481 | 6625.033 |     0 |          0 |
+|----------+-------------+------------+----------+----------+-------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveTime,@6$5)::@2$3=remote(RestrictedLimitTwoArriveTime, @6$5)::@2$4=remote(GlobalLimitTwoArriveTime, @6$5)::@2$5=remote(CancelLimitTwoArriveTime, @2$5)::@2$6=remote(UMCLimitTwoArriveTime, @2$5)::@2$7=remote(UppaalLimitTwoArriveTime, @2$5)::@3$2=remote(RCSLimitTwoArriveTime,@7$5)::@3$3=remote(RestrictedLimitTwoArriveTime, @7$5)::@3$4=remote(GlobalLimitTwoArriveTime, @7$5)::@3$5=remote(CancelLimitTwoArriveTime, @3$5)::@3$6=remote(UMCLimitTwoArriveTime, @3$5)::@3$7=remote(UppaalLimitTwoArriveTime, @3$5)::@4$2=remote(RCSLimitTwoArriveTime, @8$5)::@4$3=remote(RestrictedLimitTwoArriveTime, @8$5)::@4$4=remote(GlobalLimitTwoArriveTime, @8$5)::@4$5=remote(CancelLimitTwoArriveTime, @4$5)::@4$6=remote(UMCLimitTwoArriveTime, @4$5)::@4$7=remote(UppaalLimitTwoArriveTime, @4$5)::@5$2=remote(RCSLimitTwoArriveTime, @9$5)::@5$3=remote(RestrictedLimitTwoArriveTime, @9$5)::@5$4=remote(GlobalLimitTwoArriveTime, @9$5)::@5$5=remote(CancelLimitTwoArriveTime, @5$5)::@5$6=remote(UMCLimitTwoArriveTime, @5$5)::@5$7=remote(UppaalLimitTwoArriveTime, @5$5)::@6$2=remote(RCSLimitTwoArriveTime, @10$5)::@6$3=remote(RestrictedLimitTwoArriveTime, @10$5)::@6$4=remote(GlobalLimitTwoArriveTime, @10$5)::@6$5=remote(CancelLimitTwoArriveTime, @6$5)::@6$6=remote(UMCLimitTwoArriveTime, @6$5)::@6$7=remote(UppaalLimitTwoArriveTime, @6$5)
 
 #+begin_src gnuplot :var data=summaryArriveLimitTwoTime :file stationsArriveLimitTwoTime.png
@@ -2689,15 +2688,15 @@ plot data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+PLOT: ind:1
 #+tblname: summaryArriveLimitTwoMemory
 #+CAPTION: Stations Limit Two Will Arrive Memory
-|----------+-------------+------------+-----------+-----------+------------|
-| Stations | First model | Restricted |    Global |    Cancel | UPPAALxUMC |
-|----------+-------------+------------+-----------+-----------+------------|
-|        1 |   6.4386667 |      8.428 |     8.332 | 8.6333333 | vmean([])  |
-|        2 |   9.8733333 |  12.498667 |    15.364 |      16.5 | vmean([])  |
-|        4 |   41.429333 |     39.184 | 58.926667 | 138.15733 | vmean([])  |
-|        6 |   152.73867 |  119.47733 |   205.772 | 675.40267 | vmean([])  |
-|        8 |   421.92267 |  273.29067 |   543.112 | 2087.7187 | vmean([])  |
-|----------+-------------+------------+-----------+-----------+------------|
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.439 |      8.428 |   8.332 |    8.633 |      8.472 |
+|        2 |       9.873 |     12.499 |  15.364 |     16.5 |     26.787 |
+|        4 |      41.429 |     39.184 |  58.927 |  138.157 |   4471.207 |
+|        6 |     152.739 |    119.477 | 205.772 |  675.403 |          0 |
+|        8 |     421.923 |    273.291 | 543.112 | 2087.719 |          0 |
+|----------+-------------+------------+---------+----------+------------|
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory,@6$5)::@2$3=remote(RestrictedLimitTwoArriveMemory, @6$5)::@2$4=remote(GlobalLimitTwoArriveMemory, @6$5)::@2$5=remote(CancelLimitTwoArriveMemory, @2$5)::@2$6=remote(UppaalLimitTwoArriveMemory, @2$5)::@3$2=remote(RCSLimitTwoArriveMemory,@7$5)::@3$3=remote(RestrictedLimitTwoArriveMemory, @7$5)::@3$4=remote(GlobalLimitTwoArriveMemory, @7$5)::@3$5=remote(CancelLimitTwoArriveMemory, @3$5)::@3$6=remote(UppaalLimitTwoArriveMemory, @3$5)::@4$2=remote(RCSLimitTwoArriveMemory, @8$5)::@4$3=remote(RestrictedLimitTwoArriveMemory, @8$5)::@4$4=remote(GlobalLimitTwoArriveMemory, @8$5)::@4$5=remote(CancelLimitTwoArriveMemory, @4$5)::@4$6=remote(UppaalLimitTwoArriveMemory, @4$5)::@5$2=remote(RCSLimitTwoArriveMemory, @9$5)::@5$3=remote(RestrictedLimitTwoArriveMemory, @9$5)::@5$4=remote(GlobalLimitTwoArriveMemory, @9$5)::@5$5=remote(CancelLimitTwoArriveMemory, @5$5)::@5$6=remote(UppaalLimitTwoArriveMemory, @5$5)::@6$2=remote(RCSLimitTwoArriveMemory, @10$5)::@6$3=remote(RestrictedLimitTwoArriveMemory, @10$5)::@6$4=remote(GlobalLimitTwoArriveMemory, @10$5)::@6$5=remote(CancelLimitTwoArriveMemory, @6$5)::@6$6=remote(UppaalLimitTwoArriveMemory, @6$5)
 
 #+begin_src gnuplot :var data=summaryArriveLimitTwoMemory :file stationsArriveLimitTwoMemory.png
