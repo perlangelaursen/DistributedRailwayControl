@@ -1,0 +1,105 @@
+Established direct connection to local server.
+(Academic) UPPAAL version 4.1.19 (rev. 5649), September 2014 -- server.
+Disconnected.
+Established direct connection to local server.
+(Academic) UPPAAL version 4.1.19 (rev. 5649), September 2014 -- server.
+A<> forall(i:t_id) not(Train(i).Initial)
+Verification/kernel/elapsed time used: 0s / 0s / 0.003s.
+Resident/virtual memory usage peaks: 9,396KB / 30,952KB.
+Property is satisfied.
+A<> forall(i:cB_id) not(CB(i).Initial)
+Verification/kernel/elapsed time used: 0.016s / 0s / 0.004s.
+Resident/virtual memory usage peaks: 9,416KB / 30,972KB.
+Property is satisfied.
+A[] !deadlock
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,428KB / 30,972KB.
+Property is satisfied.
+E<> forall(i:t_id) Train(i).Arrived
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,436KB / 30,956KB.
+Property is not satisfied.
+A[] forall(i:t_id) forall(j:t_id) Initializer.Initialized && i != j imply (Train(i).curSeg != Train(j).curSeg) && (Train(i).DoubleSegment imply Train(i).headSeg != Train(j).curSeg) && (Train(i).DoubleSegment && Train(j).DoubleSegment imply Train(i).headSeg!= Train(j).headSeg)
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,472KB / 31,072KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment imply (Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] && Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).connected) || (Train(i).curSeg == CB(Train(i).boxes[Train(i).index+1]).segments[0] && Train(i).headSeg == CB(Train(i).boxes[Train(i).index+1]).connected)
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,484KB / 31,092KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment && points[Train(i).boxes[Train(i).index+1]] != -1 imply !Point(points[Train(i).boxes[Train(i).index+1]]).Switching
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,484KB / 31,092KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).locks == (sum(j:cB_id) (j > Train(i).index && j < Train(i).lockIndex && points[Train(i).boxes[j]] > -1))
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,492KB / 31,100KB.
+Property is satisfied.
+A[] forall(i:cB_id) Initializer.Initialized && points[i] > -1 && !CB(i).Switching && !CB(i).SwitchAux imply ((CB(i).connected == CB(i).segments[1]) imply Point(points[i]).inPlus && (CB(i).connected == CB(i).segments[2]) imply !Point(points[i]).inPlus)
+Verification/kernel/elapsed time used: 0.015s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,496KB / 31,104KB.
+Property is satisfied.
+A[] forall(i:t_id) forall(j:cB_id) (j > Train(i).index && j < Train(i).lockIndex && Train(i).requiresLock[j] imply CB(Train(i).boxes[j]).lockedBy == i)
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,504KB / 31,112KB.
+Property is satisfied.
+A[] forall(i:t_id) forall(j:seg_id) (j >= Train(i).index && j < Train(i).resSegIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j+1]).segments[l] == Train(i).segments[j] && CB(Train(i).boxes[j+1]).res[l] == i) && (j > Train(i).index && j < Train(i).resCBIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j]).segments[l] == Train(i).segments[j] && CB(Train(i).boxes[j]).res[l] == i)
+Verification/kernel/elapsed time used: 0s / 0s / 0.005s.
+Resident/virtual memory usage peaks: 9,532KB / 31,140KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment imply Train(i).index+1 < Train(i).resSegIndex
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,532KB / 31,140KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment imply Train(i).boxes[Train(i).index+1] != Train(i).boxes[Train(i).routeLength]
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,532KB / 31,140KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).DoubleSegment && points[Train(i).boxes[Train(i).index+1]] != -1 imply CB(Train(i).boxes[Train(i).index+1]).lockedBy == i
+Verification/kernel/elapsed time used: 0.016s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,536KB / 31,144KB.
+Property is satisfied.
+A[] forall(i:cB_id) CB(i).Switched imply CB(i).lockedBy == -1
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,540KB / 31,148KB.
+Property is satisfied.
+A[] forall(i:cB_id) (CB(i).Switched || CB(i).Switching) imply !(exists(j:t_id) (Train(j).DoubleSegment && Train(j).boxes[Train(j).index+1] == i))
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,540KB / 31,148KB.
+Property is satisfied.
+A[] forall(i:t_id) forall(j:cB_id) (Train(i).Locking && CB(j).Switched && CB(j).tid == i) imply (exists(k:int[1,2]) (CB(j).segments[0] == Train(i).segments[Train(i).lockIndex-1] && CB(j).segments[k] == Train(i).segments[Train(i).lockIndex]) || (CB(j).segments[0] == Train(i).segments[Train(i).lockIndex] && CB(j).segments[k] == Train(i).segments[Train(i).lockIndex-1]))
+Verification/kernel/elapsed time used: 0s / 0s / 0.005s.
+Resident/virtual memory usage peaks: 9,788KB / 31,916KB.
+Property is satisfied.
+A[] forall(i:cB_id) CB(i).lockedBy != -1 imply CB(i).res[0] == CB(i).lockedBy && exists(j:int[0,2]) CB(i).segments[j] == CB(i).connected && CB(i).res[j] == CB(i).lockedBy
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,792KB / 31,920KB.
+Property is satisfied.
+A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,800KB / 31,928KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).locks <= lockLimit
+Verification/kernel/elapsed time used: 0.015s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,800KB / 31,928KB.
+Property is satisfied.
+A[] forall(i:t_id) forall(j:cB_id) (Train(i).Reserving && CB(j).SegmentChecked && CB(j).tid == i && CB(j).result > -1) imply CB(j).res[CB(j).result] == -1
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,804KB / 31,932KB.
+Property is satisfied.
+A[] forall(i:t_id) forall(j:cB_id) (Train(i).Reserving && CB(j).SegmentChecked && CB(j).tid == i && CB(j).result > -1) imply (exists(k:int[0,2]) CB(j).segments[k] == Train(i).segments[Train(i).resSegIndex])
+Verification/kernel/elapsed time used: 0s / 0s / 0.002s.
+Resident/virtual memory usage peaks: 9,816KB / 31,944KB.
+Property is satisfied.
+A[] forall(i:cB_id) forall(j:int[0,2]) CB(i).res[j] != -1 imply exists(k:cB_id) Train(CB(i).res[j]).boxes[k] == i
+Verification/kernel/elapsed time used: 0s / 0s / 0.003s.
+Resident/virtual memory usage peaks: 9,828KB / 31,956KB.
+Property is satisfied.
+A[] forall(i:cB_id) forall(j:int[0,2]) CB(i).res[j] != -1 imply exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]
+Verification/kernel/elapsed time used: 0s / 0s / 0.003s.
+Resident/virtual memory usage peaks: 9,840KB / 31,968KB.
+Property is satisfied.
+A[] forall(i:t_id) Train(i).resSegIndex - 1 - Train(i).index <= resLimit
+Verification/kernel/elapsed time used: 0s / 0s / 0.001s.
+Resident/virtual memory usage peaks: 9,840KB / 31,968KB.
+Property is satisfied.
