@@ -734,6 +734,6 @@ public class UPPAALxUMCTranslator extends UPPAALTranslator{
 	
 	@Override
 	protected String getFileNameDetails() {
-		return "UPPAAL_UMC-Revised";
+		return "UPPAAL_Revised";
 	}
 }

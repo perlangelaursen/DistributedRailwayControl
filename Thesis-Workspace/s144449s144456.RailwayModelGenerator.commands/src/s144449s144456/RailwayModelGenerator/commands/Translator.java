@@ -12,6 +12,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -48,7 +49,8 @@ public abstract class Translator extends AbstractHandler{
 					if(s != null) {
 						PrintWriter printWriter;
 						try {
-							printWriter = new PrintWriter(n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
+							String path = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
+							printWriter = new PrintWriter(path+"/"+n.getName()+"_"+getFileNameDetails()+".xml", "UTF-8");
 							printWriter.println(s);
 							printWriter.close();
 							String msg = "Model file successfully generated.";
