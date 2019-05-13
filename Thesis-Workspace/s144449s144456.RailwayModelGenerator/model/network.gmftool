@@ -12,35 +12,44 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Segment"
-          description="Create new Segment">
+          description="Add new segment">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="resources/Segment.gif"
+            bundle="s144449s144456.RailwayModelGenerator"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SwitchBox"
-          description="Create new SwitchBox">
+          title="Switch Box"
+          description="Add new switch box">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="resources/SwitchBox.gif"
+            bundle="s144449s144456.RailwayModelGenerator"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="RegularBox"
-          description="Create new RegularBox">
+          title="Regular Box"
+          description="Add new regular control box">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="resources/RegularBox.gif"
+            bundle="s144449s144456.RailwayModelGenerator"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Train">
+          title="Train"
+          description="Add new train">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="resources/train.gif"
+            bundle="s144449s144456.RailwayModelGenerator"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
