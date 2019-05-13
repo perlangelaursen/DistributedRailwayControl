@@ -149,7 +149,7 @@
         id="s144449s144456.RailwayModelGenerator.generateUPPAALUMC"
         description="Generate UPPAAL code for model revised to match UMC model"
         defaultHandler="s144449s144456.RailwayModelGenerator.commands.UPPAALxUMCTranslator"
-        name="Generate UPPAAL Code (Revised based on UMC model)">
+        name="Generate UPPAAL Code (UPPAALxUMC)">
     </command>
   </extension>
   
