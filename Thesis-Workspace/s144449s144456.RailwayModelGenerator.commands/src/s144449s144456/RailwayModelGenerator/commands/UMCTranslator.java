@@ -508,10 +508,10 @@ public class UMCTranslator extends Translator {
 			ts += "curSeg => "+segIDs.get(t.getRoute().get(0))+", ";
 			
 			//Control boxes
-			String requiresLock = "requiresLock => [";
+			String requiresLock = "requiresLock => [false,";
 			String lockIndex = "";
 			ts += "boxes => [";
-			for(int i = 0; i < t.getBoxRoute().size(); i++) {
+			for(int i = 1; i < t.getBoxRoute().size(); i++) {
 				ControlBox cb = t.getBoxRoute().get(i);
 				int cbID = cbIDs.get(cb);
 				ts += "cb"+cbID+",";
