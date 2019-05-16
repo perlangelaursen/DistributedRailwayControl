@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:nw="http://s144449s144456.RailwayModelGenerator/network" xmi:id="_cp5SwHfnEemp-IwBpyIf0Q" type="Network" name="largeNetwork.network_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_fwSb8HfnEemp-IwBpyIf0Q" type="2005">
+    <children xmi:type="notation:DecorationNode" xmi:id="_fwTDAHfnEemp-IwBpyIf0Q" type="5005">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fwTDAXfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_fwSb8XfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fwSb8nfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_fwSb83fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:ControlBox" href="largeNetwork.network#cb0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fwSb9HfnEemp-IwBpyIf0Q" x="124" y="252"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_hBMqMHfnEemp-IwBpyIf0Q" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_hBMqNXfnEemp-IwBpyIf0Q" type="5001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_hBMqNnfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_hBMqMXfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_hBMqMnfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_hBMqM3fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:SwitchBox" href="largeNetwork.network#cb1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hBMqNHfnEemp-IwBpyIf0Q" x="313" y="256"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_iMbuQHfnEemp-IwBpyIf0Q" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_iMbuRXfnEemp-IwBpyIf0Q" type="5001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_iMbuRnfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_iMbuQXfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_iMbuQnfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_iMbuQ3fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:SwitchBox" href="largeNetwork.network#cb2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iMbuRHfnEemp-IwBpyIf0Q" x="529" y="266"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_jQOtkHfnEemp-IwBpyIf0Q" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_jQPUoHfnEemp-IwBpyIf0Q" type="5001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_jQPUoXfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_jQOtkXfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_jQOtknfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_jQOtk3fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:SwitchBox" href="largeNetwork.network#cb3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jQOtlHfnEemp-IwBpyIf0Q" x="758" y="270"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_kFb3QHfnEemp-IwBpyIf0Q" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_kFb3RXfnEemp-IwBpyIf0Q" type="5001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_kFceUHfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_kFb3QXfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_kFb3QnfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_kFb3Q3fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:SwitchBox" href="largeNetwork.network#cb4"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kFb3RHfnEemp-IwBpyIf0Q" x="985" y="277"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_k7qUoHfnEemp-IwBpyIf0Q" type="2005">
+    <children xmi:type="notation:DecorationNode" xmi:id="_k7q7sHfnEemp-IwBpyIf0Q" type="5005">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_k7q7sXfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_k7qUoXfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_k7qUonfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_k7qUo3fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:ControlBox" href="largeNetwork.network#cb5"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k7qUpHfnEemp-IwBpyIf0Q" x="1181" y="274"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_7pGV4HfnEemp-IwBpyIf0Q" type="2004">
+    <children xmi:type="notation:DecorationNode" xmi:id="_7pGV5XfnEemp-IwBpyIf0Q" type="5004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_7pGV5nfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_7pGV4XfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_7pGV4nfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_7pGV43fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:Train" href="largeNetwork.network#t0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7pGV5HfnEemp-IwBpyIf0Q" x="421" y="252"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_-rizMHfnEemp-IwBpyIf0Q" type="2004">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-rizNXfnEemp-IwBpyIf0Q" type="5004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rizNnfnEemp-IwBpyIf0Q" y="5"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-rizMXfnEemp-IwBpyIf0Q"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_-rizMnfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_-rizM3fnEemp-IwBpyIf0Q"/>
+    <element xmi:type="nw:Train" href="largeNetwork.network#t1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-rizNHfnEemp-IwBpyIf0Q" x="864" y="160"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_cp5SwXfnEemp-IwBpyIf0Q"/>
+  <element xmi:type="nw:Network" href="largeNetwork.network#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_mX0woHfnEemp-IwBpyIf0Q" type="4004" source="_fwSb8HfnEemp-IwBpyIf0Q" target="_hBMqMHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_mX0wo3fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_mX0wpHfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_mX0woXfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mX0wonfnEemp-IwBpyIf0Q" points="[10, 8, -179, 4]$[189, 14, 0, 10]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_n0818HfnEemp-IwBpyIf0Q" type="4004" source="_hBMqMHfnEemp-IwBpyIf0Q" target="_iMbuQHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_n08183fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_n0819HfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_n0818XfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_n0818nfnEemp-IwBpyIf0Q" points="[1, -4, -214, -20]$[28, -68, -187, -84]$[148, -76, -67, -92]$[207, 6, -8, -10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_n0-EEHfnEemp-IwBpyIf0Q" id="(0.55,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_pqc_AHfnEemp-IwBpyIf0Q" type="4004" source="_hBMqMHfnEemp-IwBpyIf0Q" target="_iMbuQHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_pqc_A3fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_pqc_BHfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_pqc_AXfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_pqc_AnfnEemp-IwBpyIf0Q" points="[17, 1, -199, -18]$[213, 21, -3, 2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_pqdmEHfnEemp-IwBpyIf0Q" id="(0.15,0.3)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_pqdmEXfnEemp-IwBpyIf0Q" id="(0.15,0.75)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_q9f7QHfnEemp-IwBpyIf0Q" type="4004" source="_iMbuQHfnEemp-IwBpyIf0Q" target="_jQOtkHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_q9f7Q3fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_q9f7RHfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_q9f7QXfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_q9f7QnfnEemp-IwBpyIf0Q" points="[6, 0, -219, -10]$[222, 20, -3, 10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q9hJYHfnEemp-IwBpyIf0Q" id="(0.7,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_r9bHMHfnEemp-IwBpyIf0Q" type="4004" source="_jQOtkHfnEemp-IwBpyIf0Q" target="_kFb3QHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_r9bHM3fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_r9buQHfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_r9bHMXfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s5"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_r9bHMnfnEemp-IwBpyIf0Q" points="[7, -10, -219, -11]$[56, -80, -170, -81]$[156, -80, -70, -81]$[222, -3, -4, -4]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_r9cVUHfnEemp-IwBpyIf0Q" id="(0.45,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_u4lQwHfnEemp-IwBpyIf0Q" type="4004" source="_jQOtkHfnEemp-IwBpyIf0Q" target="_kFb3QHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_u4lQw3fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_u4lQxHfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_u4lQwXfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s4"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_u4lQwnfnEemp-IwBpyIf0Q" points="[2, 7, -217, -2]$[220, -1, 1, -10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_u4me4HfnEemp-IwBpyIf0Q" id="(0.9,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_woK_EHfnEemp-IwBpyIf0Q" type="4004" source="_kFb3QHfnEemp-IwBpyIf0Q" target="_k7qUoHfnEemp-IwBpyIf0Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_woK_E3fnEemp-IwBpyIf0Q" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_woK_FHfnEemp-IwBpyIf0Q" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_woK_EXfnEemp-IwBpyIf0Q" fontName="Noto Sans"/>
+    <element xmi:type="nw:Segment" href="largeNetwork.network#s6"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_woK_EnfnEemp-IwBpyIf0Q" points="[15, 0, -179, 0]$[191, -2, -3, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_woMNMHfnEemp-IwBpyIf0Q" id="(0.25,0.2)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_woMNMXfnEemp-IwBpyIf0Q" id="(0.15,0.35)"/>
+  </edges>
+</notation:Diagram>
