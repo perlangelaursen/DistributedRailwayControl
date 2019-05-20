@@ -8,12 +8,12 @@
 | Configuration              |    First |   Second |    Third |  Average |
 |----------------------------+----------+----------+----------+----------|
 | Example with one train     |    0.003 |    0.002 |    0.002 |    0.002 |
-| Example with two trains    |     0.02 |    0.018 |    0.013 |    0.017 |
+| Example with two trains    |    0.020 |    0.018 |    0.013 |    0.017 |
 | Shared Segment             |    0.017 |    0.015 |    0.013 |    0.015 |
 | Large Network              |    0.011 |    0.014 |    0.017 |    0.014 |
 | Station One                |    0.013 |    0.009 |    0.012 |    0.011 |
 | Station Two                |    0.074 |    0.076 |    0.075 |    0.075 |
-| Station Four               |     1.69 |    1.715 |    1.755 |    1.720 |
+| Station Four               |    1.690 |    1.715 |    1.755 |    1.720 |
 | Station Six                |   27.474 |   27.433 |   27.203 |   27.370 |
 | Station Eight              |  165.631 |  165.800 |  165.955 |  165.795 |
 | Station Ten                |  601.131 |  602.165 |  600.341 |  601.212 |
@@ -1515,10 +1515,10 @@
 |-------------------------+--------+--------+--------+---------|
 | Configuration           |  First | Second |  Third | Average |
 |-------------------------+--------+--------+--------+---------|
-| Example with one train  |  0.074 |  0.072 |  0.072 |         |
-| Example with two trains |  0.597 |  0.589 |  0.598 |         |
-| Shared segment          |  0.278 |  0.278 |  0.279 |         |
-| Large network           |        |        |        |         |
+| Example with one train  |  0.074 |  0.072 |  0.072 |   0.073 |
+| Example with two trains |  0.597 |  0.589 |  0.598 |   0.595 |
+| Shared segment          |  0.278 |  0.278 |  0.279 |   0.278 |
+| Large network           |  0.281 |  0.282 |  0.280 |   0.281 |
 | Station One             |  0.269 |  0.270 |  0.269 |   0.269 |
 | Station Two             | 14.436 | 14.517 | 14.455 |  14.469 |
 | Station Four            |        |        |        |         |
@@ -1535,10 +1535,10 @@
 |-------------------------+-------+--------+-------+---------|
 | Configuration           | First | Second | Third | Average |
 |-------------------------+-------+--------+-------+---------|
-| Example with one train  | 0.067 |  0.068 | 0.068 |         |
-| Example with two trains | 0.409 |  0.408 | 0.412 |         |
-| Shared segment          | 0.199 |  0.199 | 0.200 |         |
-| Large network           |       |        |       |         |
+| Example with one train  | 0.067 |  0.068 | 0.068 |   0.068 |
+| Example with two trains | 0.409 |  0.408 | 0.412 |   0.410 |
+| Shared segment          | 0.199 |  0.199 | 0.200 |   0.199 |
+| Large network           | 0.252 |  0.252 | 0.252 |   0.252 |
 | Station One             | 0.233 |  0.234 | 0.226 |   0.231 |
 | Station Two             | 7.966 |  8.003 | 7.973 |   7.981 |
 | Station Four            |       |        |       |         |
@@ -1555,10 +1555,10 @@
 |-------------------------+--------+--------+--------+---------|
 | Configuration           |  First | Second |  Third | Average |
 |-------------------------+--------+--------+--------+---------|
-| Example with one train  |  0.063 |  0.063 |  0.064 |         |
-| Example with two trains |  0.752 |  0.748 |  0.758 |         |
-| Shared segment          |  0.342 |  0.341 |  0.341 |         |
-| Large network           |        |        |        |         |
+| Example with one train  |  0.063 |  0.063 |  0.064 |   0.063 |
+| Example with two trains |  0.752 |  0.748 |  0.758 |   0.753 |
+| Shared segment          |  0.342 |  0.341 |  0.341 |   0.341 |
+| Large network           |  0.346 |  0.343 |  0.345 |   0.345 |
 | Station One             |  0.368 |  0.379 |  0.378 |   0.375 |
 | Station Two             | 12.400 | 12.355 | 12.352 |  12.369 |
 | Station Four            |        |        |        |         |
@@ -1575,10 +1575,10 @@
 |-------------------------+-------+--------+-------+---------|
 | Configuration           | First | Second | Third | Average |
 |-------------------------+-------+--------+-------+---------|
-| Example with one train  | 0.063 |  0.063 | 0.063 |         |
-| Example with two trains | 0.282 |  0.282 | 0.281 |         |
-| Shared segment          | 0.134 |  0.139 | 0.134 |         |
-| Large network           |       |        |       |         |
+| Example with one train  | 0.063 |  0.063 | 0.063 |   0.063 |
+| Example with two trains | 0.282 |  0.282 | 0.281 |   0.282 |
+| Shared segment          | 0.134 |  0.139 | 0.134 |   0.136 |
+| Large network           | 0.136 |  0.136 | 0.136 |   0.136 |
 | Station One             | 0.156 |  0.152 | 0.155 |   0.154 |
 | Station Two             | 2.422 |  2.427 | 2.428 |   2.426 |
 | Station Four            |       |        |       |         |
@@ -1597,10 +1597,10 @@
 |-------------------------+--------+--------+--------+---------|
 | Configuration           |  First | Second |  Third | Average |
 |-------------------------+--------+--------+--------+---------|
-| Example with one train  |  0.079 |  0.081 |  0.079 |         |
-| Example with two trains |  0.688 |  0.690 |  0.691 |         |
-| Shared segment          |  0.335 |  0.334 |  0.350 |         |
-| Large network           |        |        |        |         |
+| Example with one train  |  0.079 |  0.081 |  0.079 |   0.080 |
+| Example with two trains |  0.688 |  0.690 |  0.691 |   0.690 |
+| Shared segment          |  0.335 |  0.334 |  0.350 |   0.340 |
+| Large network           |  0.338 |  0.337 |  0.337 |   0.337 |
 | Station One             |  0.305 |  0.303 |  0.314 |   0.307 |
 | Station Two             | 23.583 | 23.752 | 23.649 |  23.661 |
 | Station Four            |        |        |        |         |
@@ -1617,10 +1617,10 @@
 |-------------------------+--------+--------+--------+---------|
 | Configuration           |  First | Second |  Third | Average |
 |-------------------------+--------+--------+--------+---------|
-| Example with one train  |  0.074 |  0.073 |  0.074 |         |
-| Example with two trains |  0.460 |  0.459 |  0.458 |         |
-| Shared segment          |  0.230 |  0.231 |  0.231 |         |
-| Large network           |        |        |        |         |
+| Example with one train  |  0.074 |  0.073 |  0.074 |   0.074 |
+| Example with two trains |  0.460 |  0.459 |  0.458 |   0.459 |
+| Shared segment          |  0.230 |  0.231 |  0.231 |   0.231 |
+| Large network           |  0.299 |  0.313 |  0.300 |   0.304 |
 | Station One             |  0.260 |  0.252 |  0.254 |   0.255 |
 | Station Two             | 12.805 | 12.790 | 12.778 |  12.791 |
 | Station Four            |        |        |        |         |
@@ -1637,10 +1637,10 @@
 |-------------------------+--------+--------+--------+---------|
 | Configuration           |  First | Second |  Third | Average |
 |-------------------------+--------+--------+--------+---------|
-| Example with one train  |  0.066 |  0.066 |  0.066 |         |
-| Example with two trains |  0.886 |  0.886 |  0.894 |         |
-| Shared segment          |  0.417 |  0.415 |  0.416 |         |
-| Large network           |        |        |        |         |
+| Example with one train  |  0.066 |  0.066 |  0.066 |   0.066 |
+| Example with two trains |  0.886 |  0.886 |  0.894 |   0.889 |
+| Shared segment          |  0.417 |  0.415 |  0.416 |   0.416 |
+| Large network           |  0.420 |  0.419 |  0.420 |   0.420 |
 | Station One             |  0.429 |  0.430 |  0.429 |   0.429 |
 | Station Two             | 20.210 | 20.193 | 20.154 |  20.186 |
 | Station Four            |        |        |        |         |
@@ -1657,10 +1657,10 @@
 |-------------------------+-------+--------+-------+---------|
 | Configuration           | First | Second | Third | Average |
 |-------------------------+-------+--------+-------+---------|
-| Example with one train  | 0.062 |  0.062 | 0.062 |         |
-| Example with two trains | 0.275 |  0.264 | 0.262 |         |
-| Shared segment          | 0.161 |  0.155 | 0.156 |         |
-| Large network           |       |        |       |         |
+| Example with one train  | 0.062 |  0.062 | 0.062 |   0.062 |
+| Example with two trains | 0.275 |  0.264 | 0.262 |   0.267 |
+| Shared segment          | 0.161 |  0.155 | 0.156 |   0.157 |
+| Large network           | 0.419 |  0.418 | 0.422 |   0.420 |
 | Station One             | 0.170 |  0.169 | 0.170 |   0.170 |
 | Station Two             | 3.548 |  3.556 | 3.535 |   3.546 |
 | Station Four            |       |        |       |         |
