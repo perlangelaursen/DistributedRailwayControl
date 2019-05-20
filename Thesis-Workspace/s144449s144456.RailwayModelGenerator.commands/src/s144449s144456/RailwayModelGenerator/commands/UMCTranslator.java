@@ -11,7 +11,7 @@ public class UMCTranslator extends Translator {
 	@Override
 	protected String generateCode(Network n) {
 		if(n != null) {
-			String classesString = generateTrainClass(n.getReserveLimit(), n.getLockLimit())+getCBClass()+getPointClass();
+			String classesString = generateTrainClass(n.getReservationLimit(), n.getLockLimit())+getCBClass()+getPointClass();
       
 			//Objects
 			String trainsString = generateTrainObjects(n);

@@ -193,7 +193,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getNetwork_ReserveLimit() {
+	public EAttribute getNetwork_ReservationLimit() {
 		return (EAttribute)networkEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -401,7 +401,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		createEReference(networkEClass, NETWORK__SEGMENTS);
 		createEReference(networkEClass, NETWORK__TRAINS);
 		createEAttribute(networkEClass, NETWORK__LOCK_LIMIT);
-		createEAttribute(networkEClass, NETWORK__RESERVE_LIMIT);
+		createEAttribute(networkEClass, NETWORK__RESERVATION_LIMIT);
 		createEAttribute(networkEClass, NETWORK__NAME);
 
 		componentEClass = createEClass(COMPONENT);
@@ -467,7 +467,7 @@ public class NetworkPackageImpl extends EPackageImpl implements NetworkPackage {
 		initEReference(getNetwork_Segments(), this.getSegment(), null, "segments", null, 1, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNetwork_Trains(), this.getTrain(), null, "trains", null, 1, -1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_LockLimit(), ecorePackage.getEInt(), "lockLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getNetwork_ReserveLimit(), ecorePackage.getEInt(), "reserveLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNetwork_ReservationLimit(), ecorePackage.getEInt(), "reservationLimit", "1", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNetwork_Name(), ecorePackage.getEString(), "name", "untitled", 1, 1, Network.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentEClass, Component.class, "Component", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

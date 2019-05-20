@@ -532,7 +532,7 @@ public class UPPAALTranslator extends Translator {
 				
 		//Limits
 		String limitsString = "const int[1,NCB] lockLimit = "+n.getLockLimit()+";\n"+
-							  "const int[1,NSEG] resLimit = "+n.getReserveLimit()+";\n";
+							  "const int[1,NSEG] resLimit = "+n.getReservationLimit()+";\n";
 		
 		//Route segments	
 		String segRouteString = "const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {";

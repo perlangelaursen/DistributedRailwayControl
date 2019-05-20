@@ -104,13 +104,13 @@ public interface NetworkPackage extends EPackage {
 	int NETWORK__LOCK_LIMIT = 3;
 
 	/**
-	 * The feature id for the '<em><b>Reserve Limit</b></em>' attribute.
+	 * The feature id for the '<em><b>Reservation Limit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NETWORK__RESERVE_LIMIT = 4;
+	int NETWORK__RESERVATION_LIMIT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -489,15 +489,15 @@ public interface NetworkPackage extends EPackage {
 	EAttribute getNetwork_LockLimit();
 
 	/**
-	 * Returns the meta object for the attribute '{@link network.Network#getReserveLimit <em>Reserve Limit</em>}'.
+	 * Returns the meta object for the attribute '{@link network.Network#getReservationLimit <em>Reservation Limit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Reserve Limit</em>'.
-	 * @see network.Network#getReserveLimit()
+	 * @return the meta object for the attribute '<em>Reservation Limit</em>'.
+	 * @see network.Network#getReservationLimit()
 	 * @see #getNetwork()
 	 * @generated
 	 */
-	EAttribute getNetwork_ReserveLimit();
+	EAttribute getNetwork_ReservationLimit();
 
 	/**
 	 * Returns the meta object for the attribute '{@link network.Network#getName <em>Name</em>}'.
@@ -746,12 +746,12 @@ public interface NetworkPackage extends EPackage {
 		EAttribute NETWORK__LOCK_LIMIT = eINSTANCE.getNetwork_LockLimit();
 
 		/**
-		 * The meta object literal for the '<em><b>Reserve Limit</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Reservation Limit</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NETWORK__RESERVE_LIMIT = eINSTANCE.getNetwork_ReserveLimit();
+		EAttribute NETWORK__RESERVATION_LIMIT = eINSTANCE.getNetwork_ReservationLimit();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

@@ -235,7 +235,6 @@
             xsi:type="gmfgen:ToolEntry"
             title="Segment"
             description="Add new segment"
-            largeIconPath="/s144449s144456.RailwayModelGenerator/resources/Segment.gif"
             smallIconPath="/s144449s144456.RailwayModelGenerator/resources/Segment.gif"
             genLinks="//@diagram/@links.0"/>
         <entries
