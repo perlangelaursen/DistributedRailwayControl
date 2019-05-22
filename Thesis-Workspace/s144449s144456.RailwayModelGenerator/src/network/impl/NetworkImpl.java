@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link network.impl.NetworkImpl#getSegments <em>Segments</em>}</li>
  *   <li>{@link network.impl.NetworkImpl#getTrains <em>Trains</em>}</li>
  *   <li>{@link network.impl.NetworkImpl#getLockLimit <em>Lock Limit</em>}</li>
- *   <li>{@link network.impl.NetworkImpl#getReserveLimit <em>Reserve Limit</em>}</li>
+ *   <li>{@link network.impl.NetworkImpl#getReservationLimit <em>Reservation Limit</em>}</li>
  *   <li>{@link network.impl.NetworkImpl#getName <em>Name</em>}</li>
  * </ul>
  *
@@ -94,24 +94,24 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	protected int lockLimit = LOCK_LIMIT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getReserveLimit() <em>Reserve Limit</em>}' attribute.
+	 * The default value of the '{@link #getReservationLimit() <em>Reservation Limit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReserveLimit()
+	 * @see #getReservationLimit()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int RESERVE_LIMIT_EDEFAULT = 1;
+	protected static final int RESERVATION_LIMIT_EDEFAULT = 1;
 
 	/**
-	 * The cached value of the '{@link #getReserveLimit() <em>Reserve Limit</em>}' attribute.
+	 * The cached value of the '{@link #getReservationLimit() <em>Reservation Limit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReserveLimit()
+	 * @see #getReservationLimit()
 	 * @generated
 	 * @ordered
 	 */
-	protected int reserveLimit = RESERVE_LIMIT_EDEFAULT;
+	protected int reservationLimit = RESERVATION_LIMIT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -220,8 +220,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	 * @generated
 	 */
 	@Override
-	public int getReserveLimit() {
-		return reserveLimit;
+	public int getReservationLimit() {
+		return reservationLimit;
 	}
 
 	/**
@@ -230,11 +230,11 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 	 * @generated
 	 */
 	@Override
-	public void setReserveLimit(int newReserveLimit) {
-		int oldReserveLimit = reserveLimit;
-		reserveLimit = newReserveLimit;
+	public void setReservationLimit(int newReservationLimit) {
+		int oldReservationLimit = reservationLimit;
+		reservationLimit = newReservationLimit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.NETWORK__RESERVE_LIMIT, oldReserveLimit, reserveLimit));
+			eNotify(new ENotificationImpl(this, Notification.SET, NetworkPackage.NETWORK__RESERVATION_LIMIT, oldReservationLimit, reservationLimit));
 	}
 
 	/**
@@ -294,8 +294,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return getTrains();
 			case NetworkPackage.NETWORK__LOCK_LIMIT:
 				return getLockLimit();
-			case NetworkPackage.NETWORK__RESERVE_LIMIT:
-				return getReserveLimit();
+			case NetworkPackage.NETWORK__RESERVATION_LIMIT:
+				return getReservationLimit();
 			case NetworkPackage.NETWORK__NAME:
 				return getName();
 		}
@@ -326,8 +326,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 			case NetworkPackage.NETWORK__LOCK_LIMIT:
 				setLockLimit((Integer)newValue);
 				return;
-			case NetworkPackage.NETWORK__RESERVE_LIMIT:
-				setReserveLimit((Integer)newValue);
+			case NetworkPackage.NETWORK__RESERVATION_LIMIT:
+				setReservationLimit((Integer)newValue);
 				return;
 			case NetworkPackage.NETWORK__NAME:
 				setName((String)newValue);
@@ -356,8 +356,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 			case NetworkPackage.NETWORK__LOCK_LIMIT:
 				setLockLimit(LOCK_LIMIT_EDEFAULT);
 				return;
-			case NetworkPackage.NETWORK__RESERVE_LIMIT:
-				setReserveLimit(RESERVE_LIMIT_EDEFAULT);
+			case NetworkPackage.NETWORK__RESERVATION_LIMIT:
+				setReservationLimit(RESERVATION_LIMIT_EDEFAULT);
 				return;
 			case NetworkPackage.NETWORK__NAME:
 				setName(NAME_EDEFAULT);
@@ -382,8 +382,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 				return trains != null && !trains.isEmpty();
 			case NetworkPackage.NETWORK__LOCK_LIMIT:
 				return lockLimit != LOCK_LIMIT_EDEFAULT;
-			case NetworkPackage.NETWORK__RESERVE_LIMIT:
-				return reserveLimit != RESERVE_LIMIT_EDEFAULT;
+			case NetworkPackage.NETWORK__RESERVATION_LIMIT:
+				return reservationLimit != RESERVATION_LIMIT_EDEFAULT;
 			case NetworkPackage.NETWORK__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
@@ -402,8 +402,8 @@ public class NetworkImpl extends MinimalEObjectImpl.Container implements Network
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (lockLimit: ");
 		result.append(lockLimit);
-		result.append(", reserveLimit: ");
-		result.append(reserveLimit);
+		result.append(", reservationLimit: ");
+		result.append(reservationLimit);
 		result.append(", name: ");
 		result.append(name);
 		result.append(')');

@@ -374,9 +374,9 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_O3o2cCoMEemUJoiXXeuyCw" name="reserveLimit : EInt = 1" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="network.ecore#//Network/reserveLimit"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="network.ecore#//Network/reserveLimit"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_O3o2cCoMEemUJoiXXeuyCw" name="reservationLimit : EInt = 1" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="network.ecore#//Network/reservationLimit"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="network.ecore#//Network/reservationLimit"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_RPxygSoMEemUJoiXXeuyCw" labelAlignment="LEFT" description="_JsO2kChhEemEYOmaX8gHtQ">
           <labelFormat>bold</labelFormat>
         </ownedStyle>

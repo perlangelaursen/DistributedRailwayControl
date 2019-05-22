@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link network.Network#getSegments <em>Segments</em>}</li>
  *   <li>{@link network.Network#getTrains <em>Trains</em>}</li>
  *   <li>{@link network.Network#getLockLimit <em>Lock Limit</em>}</li>
- *   <li>{@link network.Network#getReserveLimit <em>Reserve Limit</em>}</li>
+ *   <li>{@link network.Network#getReservationLimit <em>Reservation Limit</em>}</li>
  *   <li>{@link network.Network#getName <em>Name</em>}</li>
  * </ul>
  *
@@ -104,31 +104,27 @@ public interface Network extends EObject {
 	void setLockLimit(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Reserve Limit</b></em>' attribute.
+	 * Returns the value of the '<em><b>Reservation Limit</b></em>' attribute.
 	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reserve Limit</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reserve Limit</em>' attribute.
-	 * @see #setReserveLimit(int)
-	 * @see network.NetworkPackage#getNetwork_ReserveLimit()
+	 * @return the value of the '<em>Reservation Limit</em>' attribute.
+	 * @see #setReservationLimit(int)
+	 * @see network.NetworkPackage#getNetwork_ReservationLimit()
 	 * @model default="1" required="true"
 	 * @generated
 	 */
-	int getReserveLimit();
+	int getReservationLimit();
 
 	/**
-	 * Sets the value of the '{@link network.Network#getReserveLimit <em>Reserve Limit</em>}' attribute.
+	 * Sets the value of the '{@link network.Network#getReservationLimit <em>Reservation Limit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reserve Limit</em>' attribute.
-	 * @see #getReserveLimit()
+	 * @param value the new value of the '<em>Reservation Limit</em>' attribute.
+	 * @see #getReservationLimit()
 	 * @generated
 	 */
-	void setReserveLimit(int value);
+	void setReservationLimit(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

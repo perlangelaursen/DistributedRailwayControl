@@ -11,7 +11,7 @@
         upperBound="-1" eType="#//Train" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lockLimit" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reserveLimit" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reservationLimit" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="untitled"/>
