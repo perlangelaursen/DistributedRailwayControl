@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
-<nta><declaration>
+<nta>
+	<declaration>
 //NoDerailment10
 const int NTRAIN = 1;
 const int NCB = 4;
@@ -23,8 +24,8 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
+const int[0, NROUTELENGTH] lockLimit = 1;
+const int[0, NROUTELENGTH-1] resLimit = 1;
 const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{2,0}};
 const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{2,3,1}};
 const segV_id cBs[NCB][3] = {{1, -1, -1}, {0, -1, -1}, {2, -1, -1}, {0, 1, 2}};
@@ -214,7 +215,7 @@ bool cBIsWellFormed(cB_id id){
     return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;
 }
 </declaration>
-<template>
+	<template>
 		<name x="5" y="5">Train</name>
 		<parameter>t_id id</parameter>
 		<declaration>segV_id segments[NROUTELENGTH];
@@ -460,22 +461,22 @@ bool isWellFormed(){
 			<label kind="guard" x="-1275" y="-1181">hasArrived()</label>
 		</transition>
 	</template>
-<template>
+	<template>
 		<name>Initializer</name>
-		<location id="id6" x="0" y="136">
+		<location id="id7" x="0" y="136">
 			<name x="8" y="110">Initialized</name>
 		</location>
-		<location id="id7" x="0" y="0">
+		<location id="id8" x="0" y="0">
 			<name x="-10" y="-34">Uninitialized</name>
 		</location>
-		<init ref="id7"/>
+		<init ref="id8"/>
 		<transition>
-			<source ref="id7"/>
-			<target ref="id6"/>
+			<source ref="id8"/>
+			<target ref="id7"/>
 			<label kind="synchronisation" x="8" y="51">start!</label>
 		</transition>
 	</template>
-<template>
+	<template>
 		<name>CB</name>
 		<parameter>cB_id id</parameter>
 		<declaration>segV_id segments[3];
@@ -571,81 +572,81 @@ void updateResInfo(){
 bool isWellFormed(){
     return cBIsWellFormed(id) &amp;&amp; pointIsWellFormed(id);
 }</declaration>
-		<location id="id8" x="-1045" y="51">
+		<location id="id9" x="-1045" y="51">
 			<name x="-1096" y="42">Initial</name>
 		</location>
-		<location id="id9" x="-1139" y="-68">
+		<location id="id10" x="-1139" y="-68">
 			<name x="-1164" y="-102">Passing</name>
 		</location>
-		<location id="id10" x="-356" y="-34">
+		<location id="id11" x="-356" y="-34">
 			<name x="-366" y="-68">Switching</name>
 		</location>
-		<location id="id11" x="-884" y="-306">
+		<location id="id12" x="-884" y="-306">
 			<name x="-940" y="-338">SegmentChecked</name>
 		</location>
-		<location id="id12" x="-170" y="-34">
+		<location id="id13" x="-170" y="-34">
 			<name x="-154" y="-42">Switched</name>
 		</location>
-		<location id="id13" x="-646" y="-34">
+		<location id="id14" x="-646" y="-34">
 			<name x="-680" y="-17">LockChecked</name>
 		</location>
-		<location id="id14" x="-884" y="-68">
+		<location id="id15" x="-884" y="-68">
 			<name x="-858" y="-93">Idle</name>
 		</location>
-		<init ref="id8"/>
+		<init ref="id9"/>
 		<transition>
-			<source ref="id8"/>
-			<target ref="id14"/>
+			<source ref="id9"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-1011" y="25">isWellFormed()</label>
 			<label kind="synchronisation" x="-1011" y="42">start?</label>
 			<label kind="assignment" x="-1011" y="59">initialize()</label>
 		</transition>
 		<transition>
-			<source ref="id9"/>
-			<target ref="id14"/>
+			<source ref="id10"/>
+			<target ref="id15"/>
 			<label kind="synchronisation" x="-1079" y="-136">passed[id]?</label>
 			<label kind="assignment" x="-1079" y="-119">clear()</label>
 			<nail x="-1020" y="-102"/>
 		</transition>
 		<transition>
-			<source ref="id10"/>
-			<target ref="id12"/>
+			<source ref="id11"/>
+			<target ref="id13"/>
 			<label kind="synchronisation" x="-331" y="-34">OKp[point]?</label>
 			<label kind="assignment" x="-331" y="-17">updateConnected()</label>
 		</transition>
 		<transition>
-			<source ref="id13"/>
-			<target ref="id12"/>
+			<source ref="id14"/>
+			<target ref="id13"/>
 			<label kind="guard" x="-458" y="-153">result == NOSWITCH</label>
 			<nail x="-544" y="-136"/>
 			<nail x="-322" y="-136"/>
 			<nail x="-272" y="-136"/>
 		</transition>
 		<transition>
-			<source ref="id14"/>
-			<target ref="id9"/>
+			<source ref="id15"/>
+			<target ref="id10"/>
 			<label kind="synchronisation" x="-1105" y="-34">pass[id]?</label>
 			<nail x="-952" y="-51"/>
 			<nail x="-1020" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id13"/>
-			<target ref="id10"/>
+			<source ref="id14"/>
+			<target ref="id11"/>
 			<label kind="guard" x="-569" y="-68">result == DOSWITCH</label>
 			<label kind="synchronisation" x="-569" y="-51">switchPoint[point]!</label>
 			<nail x="-373" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id13"/>
-			<target ref="id14"/>
+			<source ref="id14"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-782" y="-34">result == ERROR</label>
 			<label kind="synchronisation" x="-782" y="-17">notOK[tid]!</label>
 			<label kind="assignment" x="-782" y="0">resetVariables()</label>
 			<nail x="-816" y="-34"/>
 		</transition>
 		<transition>
-			<source ref="id11"/>
-			<target ref="id14"/>
+			<source ref="id12"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-807" y="-289">result == -1</label>
 			<label kind="synchronisation" x="-807" y="-272">notOK[tid]!</label>
 			<label kind="assignment" x="-807" y="-255">resetVariables()</label>
@@ -653,15 +654,15 @@ bool isWellFormed(){
 			<nail x="-816" y="-136"/>
 		</transition>
 		<transition>
-			<source ref="id11"/>
-			<target ref="id14"/>
+			<source ref="id12"/>
+			<target ref="id15"/>
 			<label kind="guard" x="-943" y="-238">result &gt; -1</label>
 			<label kind="synchronisation" x="-943" y="-221">OK[tid]!</label>
 			<label kind="assignment" x="-943" y="-204">updateResInfo()</label>
 		</transition>
 		<transition>
-			<source ref="id14"/>
-			<target ref="id13"/>
+			<source ref="id15"/>
+			<target ref="id14"/>
 			<label kind="select" x="-790" y="-187">i : t_id,
 j : seg_id,
 k : seg_id</label>
@@ -671,8 +672,8 @@ tid = i</label>
 			<nail x="-714" y="-68"/>
 		</transition>
 		<transition>
-			<source ref="id14"/>
-			<target ref="id11"/>
+			<source ref="id15"/>
+			<target ref="id12"/>
 			<label kind="select" x="-1173" y="-263">i : t_id,
 j : seg_id</label>
 			<label kind="synchronisation" x="-1173" y="-229">reqSeg[id][i][j]?</label>
@@ -682,75 +683,75 @@ tid = i</label>
 			<nail x="-952" y="-272"/>
 		</transition>
 		<transition>
-			<source ref="id12"/>
-			<target ref="id14"/>
+			<source ref="id13"/>
+			<target ref="id15"/>
 			<label kind="synchronisation" x="-722" y="34">OK[tid]!</label>
 			<label kind="assignment" x="-722" y="51">updateLockInfo()</label>
 			<nail x="-170" y="34"/>
 			<nail x="-884" y="34"/>
 		</transition>
 	</template>
-<template>
+	<template>
 		<name>Point</name>
 		<parameter>p_id id</parameter>
-		<location id="id15" x="136" y="-85">
+		<location id="id16" x="136" y="-85">
 			<name x="102" y="-119">SwitchingPM</name>
 		</location>
-		<location id="id16" x="136" y="153">
+		<location id="id17" x="136" y="153">
 			<name x="127" y="170">Initial</name>
 		</location>
-		<location id="id17" x="136" y="68">
+		<location id="id18" x="136" y="68">
 			<name x="102" y="34">SwitchingMP</name>
 		</location>
-		<location id="id18" x="340" y="0">
+		<location id="id19" x="340" y="0">
 			<name x="330" y="-30">Minus</name>
 		</location>
-		<location id="id19" x="-68" y="0">
+		<location id="id20" x="-68" y="0">
 			<name x="-78" y="-30">Plus</name>
 		</location>
-		<init ref="id16"/>
+		<init ref="id17"/>
 		<transition>
-			<source ref="id16"/>
-			<target ref="id18"/>
+			<source ref="id17"/>
+			<target ref="id19"/>
 			<label kind="guard" x="238" y="119">!pointInPlus[id]</label>
 			<label kind="synchronisation" x="289" y="136">start?</label>
 			<nail x="340" y="153"/>
 		</transition>
 		<transition>
-			<source ref="id16"/>
-			<target ref="id19"/>
+			<source ref="id17"/>
+			<target ref="id20"/>
 			<label kind="guard" x="-51" y="119">pointInPlus[id]</label>
 			<label kind="synchronisation" x="-50" y="136">start?</label>
 			<nail x="-68" y="153"/>
 		</transition>
 		<transition>
-			<source ref="id19"/>
-			<target ref="id15"/>
+			<source ref="id20"/>
+			<target ref="id16"/>
 			<label kind="synchronisation" x="-42" y="-68">switchPoint[id]?</label>
 			<nail x="34" y="-42"/>
 		</transition>
 		<transition>
-			<source ref="id18"/>
-			<target ref="id17"/>
+			<source ref="id19"/>
+			<target ref="id18"/>
 			<label kind="synchronisation" x="212" y="42">switchPoint[id]?</label>
 			<nail x="238" y="34"/>
 		</transition>
 		<transition>
-			<source ref="id15"/>
-			<target ref="id18"/>
+			<source ref="id16"/>
+			<target ref="id19"/>
 			<label kind="synchronisation" x="246" y="-76">OKp[id]!</label>
 			<label kind="assignment" x="246" y="-59">pointInPlus[id] = false</label>
 			<nail x="238" y="-42"/>
 		</transition>
 		<transition>
-			<source ref="id17"/>
-			<target ref="id19"/>
+			<source ref="id18"/>
+			<target ref="id20"/>
 			<label kind="synchronisation" x="-42" y="42">OKp[id]!</label>
 			<label kind="assignment" x="-42" y="59">pointInPlus[id] = true</label>
 			<nail x="34" y="34"/>
 		</transition>
 	</template>
-<system>system Initializer, Train, CB, Point;</system>
+	<system>system Initializer, Train, CB, Point;</system>
 	<queries>
 		<query>
 			<formula>
@@ -978,4 +979,3 @@ The reservations saved in the state space of a Train are also saved in the state
 		</query>
 	</queries>
 </nta>
-
