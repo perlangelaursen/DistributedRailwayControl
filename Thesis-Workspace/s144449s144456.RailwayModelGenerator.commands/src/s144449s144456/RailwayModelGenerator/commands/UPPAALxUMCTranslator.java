@@ -674,7 +674,7 @@ public class UPPAALxUMCTranslator extends UPPAALTranslator{
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)\n" + 
+				"			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cBRoute_i) Train(CB(i).lockedBy).boxes[j] == i)\n" + 
 				"			</formula>\n" + 
 				"			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.\n" + 
 				"			</comment>\n" + 
@@ -710,17 +710,17 @@ public class UPPAALxUMCTranslator extends UPPAALTranslator{
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) \n" + 
 				"	CB(i).res[j] != -1 imply \n" + 
-				"	exists(k:cB_id) Train(CB(i).res[j]).boxes[k] == i\n" + 
+				"	exists(k:cBRoute_i) Train(CB(i).res[j]).boxes[k] == i\n" + 
 				"			</formula>\n" + 
-				"			<comment>A reservation is only successful if the control box that a train contacts is a part of the train’s route.\n" + 
+				"			<comment>A reservation is only successful if the control box that a train contacts is a part of the train's route.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
 				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2])\n" + 
 				"	CB(i).res[j] != -1 imply \n" + 
-				"	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]\n" + 
+				"	exists(k:segRoute_i) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]\n" + 
 				"			</formula>\n" + 
-				"			<comment>A reservation is only successful if the requested segment is a part of the requesting train’s route.\n" + 
+				"			<comment>A reservation is only successful if the requested segment is a part of the requesting train's route.\n" + 
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 

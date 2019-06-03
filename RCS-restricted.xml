@@ -926,7 +926,7 @@ The reservations saved in the state space of a Train are also saved in the state
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)
+			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cBRoute_i) Train(CB(i).lockedBy).boxes[j] == i)
 			</formula>
 			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.
 			</comment>
@@ -962,7 +962,7 @@ The reservations saved in the state space of a Train are also saved in the state
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) 
 	CB(i).res[j] != -1 imply 
-	exists(k:cB_id) Train(CB(i).res[j]).boxes[k] == i
+	exists(k:cBRoute_i) Train(CB(i).res[j]).boxes[k] == i
 			</formula>
 			<comment>A reservation is only successful if the control box that a train contacts is a part of the train’s route.
 			</comment>
@@ -970,7 +970,7 @@ The reservations saved in the state space of a Train are also saved in the state
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2])
 	CB(i).res[j] != -1 imply 
-	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]
+	exists(k:segRoute_i) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]
 			</formula>
 			<comment>A reservation is only successful if the requested segment is a part of the requesting train’s route.
 			</comment>

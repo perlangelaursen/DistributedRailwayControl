@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
-<nta><declaration>
+<nta>
+	<declaration>
 //NoDerailment7
 const int NTRAIN = 1;
 const int NCB = 4;
@@ -23,8 +24,8 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
+const int[0, NROUTELENGTH] lockLimit = 1;
+const int[0, NROUTELENGTH-1] resLimit = 1;
 const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,2}};
 const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{1,3,2}};
 const segV_id cBs[NCB][3] = {{1, -1, -1}, {0, -1, -1}, {2, -1, -1}, {0, 1, 2}};
@@ -215,7 +216,7 @@ bool cBIsWellFormed(cB_id id){
     return otherBoxes(id, cB[0]) == 1 &amp;&amp; otherBoxes(id, cB[1]) == 1 &amp;&amp; otherBoxes(id, cB[2]) == 1;
 }
 </declaration>
-<template>
+	<template>
 		<name x="5" y="5">Train</name>
 		<parameter>t_id id</parameter>
 		<declaration>segV_id segments[NROUTELENGTH];
@@ -443,7 +444,7 @@ bool isWellFormed(){
 			<nail x="-527" y="-748"/>
 		</transition>
 	</template>
-<template>
+	<template>
 		<name>Initializer</name>
 		<location id="id6" x="0" y="136">
 			<name x="8" y="110">Initialized</name>
@@ -458,7 +459,7 @@ bool isWellFormed(){
 			<label kind="synchronisation" x="8" y="51">start!</label>
 		</transition>
 	</template>
-<template>
+	<template>
 		<name>CB</name>
 		<parameter>cB_id id</parameter>
 		<declaration>segV_id segments[3];
@@ -693,7 +694,7 @@ tid = i</label>
 			<nail x="-782" y="34"/>
 		</transition>
 	</template>
-<template>
+	<template>
 		<name>Point</name>
 		<parameter>p_id id</parameter>
 		<location id="id15" x="136" y="-85">
@@ -753,7 +754,7 @@ tid = i</label>
 			<nail x="34" y="34"/>
 		</transition>
 	</template>
-<system>system Initializer, Train, CB, Point;</system>
+	<system>system Initializer, Train, CB, Point;</system>
 	<queries>
 		<query>
 			<formula>
@@ -960,17 +961,17 @@ The reservations saved in the state space of a Train are also saved in the state
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) 
 	CB(i).res[j] != -1 imply 
-	exists(k:cB_id) Train(CB(i).res[j]).boxes[k] == i
+	exists(k:cBRoute_i) Train(CB(i).res[j]).boxes[k] == i
 			</formula>
-			<comment>A reservation is only successful if the control box that a train contacts is a part of the trainâ€™s route.
+			<comment>A reservation is only successful if the control box that a train contacts is a part of the train's route.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2])
 	CB(i).res[j] != -1 imply 
-	exists(k:seg_id) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]
+	exists(k:segRoute_i) Train(CB(i).res[j]).segments[k] == CB(i).segments[j]
 			</formula>
-			<comment>A reservation is only successful if the requested segment is a part of the requesting trainâ€™s route.
+			<comment>A reservation is only successful if the requested segment is a part of the requesting train's route.
 			</comment>
 		</query>
 		<query>
@@ -981,4 +982,3 @@ The reservations saved in the state space of a Train are also saved in the state
 		</query>
 	</queries>
 </nta>
-

@@ -24,8 +24,8 @@ typedef struct {
     seg_id seg;
 } reservation;
 
-const int[1,NCB] lockLimit = 1;
-const int[1,NSEG] resLimit = 1;
+const int[0, NROUTELENGTH] lockLimit = 1;
+const int[0, NROUTELENGTH-1] resLimit = 1;
 const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,1}, {1,-1}};
 const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1] = {{0,1,2}, {1,2,-1}};
 const segV_id cBs[NCB][3] = {{0, -1, -1}, {0, 1, -1}, {1, -1, -1}};
@@ -901,17 +901,17 @@ The reservations saved in the state space of a Train are also saved in the state
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) 
 	CB(i).res[j] != -1 imply 
-	exists(k:cB_id) boxRoutes[CB(i).res[j]][k] == i
+	exists(k:cBRoute_i) boxRoutes[CB(i).res[j]][k] == i
 			</formula>
-			<comment>A reservation is only successful if the control box that a train contacts is a part of the trainâ€™s route.
+			<comment>A reservation is only successful if the control box that a train contacts is a part of the train's route.
 			</comment>
 		</query>
 		<query>
 			<formula>A[] forall(i:cB_id) forall(j:int[0,2])
 	CB(i).res[j] != -1 imply 
-	exists(k:seg_id) segRoutes[CB(i).res[j]][k] == cBs[i][j]
+	exists(k:segRoute_i) segRoutes[CB(i).res[j]][k] == cBs[i][j]
 			</formula>
-			<comment>A reservation is only successful if the requested segment is a part of the requesting trainâ€™s route.
+			<comment>A reservation is only successful if the requested segment is a part of the requesting train's route.
 			</comment>
 		</query>
 		<query>
