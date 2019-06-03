@@ -621,17 +621,17 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 				"		<query>\r\n" + 
 				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2]) \r\n" + 
 				"	CB(i).res[j] != -1 imply \r\n" + 
-				"	exists(k:cB_id) boxRoutes[CB(i).res[j]][k] == i\r\n" + 
+				"	exists(k:cBRoute_i) boxRoutes[CB(i).res[j]][k] == i\r\n" + 
 				"			</formula>\r\n" + 
-				"			<comment>A reservation is only successful if the control box that a train contacts is a part of the train’s route.\r\n" + 
+				"			<comment>A reservation is only successful if the control box that a train contacts is a part of the train's route.\r\n" + 
 				"			</comment>\r\n" + 
 				"		</query>\r\n" + 
 				"		<query>\r\n" + 
 				"			<formula>A[] forall(i:cB_id) forall(j:int[0,2])\r\n" + 
 				"	CB(i).res[j] != -1 imply \r\n" + 
-				"	exists(k:seg_id) segRoutes[CB(i).res[j]][k] == cBs[i][j]\r\n" + 
+				"	exists(k:segRoute_i) segRoutes[CB(i).res[j]][k] == cBs[i][j]\r\n" + 
 				"			</formula>\r\n" + 
-				"			<comment>A reservation is only successful if the requested segment is a part of the requesting train’s route.\r\n" + 
+				"			<comment>A reservation is only successful if the requested segment is a part of the requesting train's route.\r\n" + 
 				"			</comment>\r\n" + 
 				"		</query>\r\n" + 
 				"		<query>\r\n" + 
