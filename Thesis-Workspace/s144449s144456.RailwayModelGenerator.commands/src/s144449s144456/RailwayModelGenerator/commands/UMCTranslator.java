@@ -22,7 +22,7 @@ public class UMCTranslator extends Translator {
 			String objectString = "\n"+"Objects" + "\n" + trainsString + "\n" + cbsString + "\n" + pointsString;
 			
 			//Create abstractions
-			String abstractionsString = generateAbstractionsTEST(n);
+			String abstractionsString = generateAbstractions(n);
 			
 			return classesString + "\n" + objectString + "\n" + abstractionsString;
 		}
@@ -346,86 +346,6 @@ public class UMCTranslator extends Translator {
 		props += "\n//AUXILIARY\n";
 		props += "//A train never moves from one segment to another segment if it is not planned in its route\n"+prop22;
 		props += "//A train never passes a control box that is not in its route\n"+prop23;
-		printProperties(n.getName(), props);
-		
-		abs += "}";
-		return abs;
-	}
-
-	private String generateAbstractionsTEST(Network n) {
-		String abs = "Abstractions{\n  State: ";
-		for(Train t : n.getTrains()) {
-			abs += "inState(t"+trainIDs.get(t)+".Arrived) and ";
-		}
-		abs = abs.substring(0, abs.length() - 5)+" -> All_Trains_Arrive\n";
-
-		String prop1 = "EF All_Trains_Arrive\n";
-		String prop2 = "AG(";
-		String prop3 = "AG(";
-		String prop4 = "AG(";
-		
-		abs += "  Action: $t:$cb.pass -> passing($t,$cb)\n";
-		
-		for(Train t : n.getTrains()) {
-			String tid = "t"+trainIDs.get(t);
-			abs += "  State: inState("+tid+".DoubleSegment)\n" + 
-					"    and "+tid+".curSeg = $s1\n" + 
-					"    and "+tid+".headSeg = $s2 -> doublePos("+tid+",$s1,$s2)\n";
-			
-			for(Train t2: n.getTrains()) {
-				if(t != t2) {
-					String tid2 = "t"+trainIDs.get(t2);
-					abs += "  State: "+tid+".curSeg = "+tid2+".curSeg -> ccCol("+tid+","+tid2+")\n";
-					abs += "  State: inState("+tid+".DoubleSegment) \n" + 
-							"    and "+tid+".headSeg = "+tid2+".curSeg -> hcCol("+tid+","+tid2+")\n";
-					abs += "  State: inState("+tid+".DoubleSegment) \n" + 
-							"    and inState("+tid2+".DoubleSegment) \n" + 
-							"    and "+tid+".headSeg = "+tid2+".headSeg -> hhCol("+tid+","+tid2+")\n";
-					prop2 += "(~ccCol("+tid+","+tid2+") & ~hcCol("+tid+","+tid2+") & ~hhCol("+tid+","+tid2+")) & ";
-				}
-			}
-			for(int i = 0; i < t.getBoxRoute().size(); i++) {
-				ControlBox cb = t.getBoxRoute().get(i);
-				String cbid = "cb"+cbIDs.get(cb);
-				if(i > 0 && i < t.getRoute().size()) {
-					int s1 = segIDs.get(t.getRoute().get(i-1));
-					int s2 = segIDs.get(t.getRoute().get(i));
-					
-					//If a train is passing a CB, the segments it moves on are connected
-					//Note: Train only enters segments in its route (prop22)
-					prop3 += "(doublePos("+tid+","+s1+","+s2+") -> connects("+cbid+","+s1+","+s2+")) & ";
-				}
-				
-				if(cb instanceof SwitchBox) {
-					String pid = "p"+pointIDs.get(cb);
-					//If a train is passing a CB, the associated point is not in the middle of switching
-					//Note: A train only passes a control box in its route (prop23)
-					prop4 += "([passing("+tid+", "+cbid+")] ~inSwitching("+pid+")) & ";
-				}
-			}
-		}
-
-		for(ControlBox cb : n.getControlBoxes()) {
-			String cbid = "cb"+cbIDs.get(cb);
-			abs += "  State: "+cbid+".segments[0] = $s1 and "+cbid+".connected = $s2 -> connects("+cbid+",$s1,$s2)\n";
-			abs += "  State: "+cbid+".segments[0] = $s1 and "+cbid+".connected = $s2 -> connects("+cbid+",$s2,$s1)\n";
-			abs += "  State: inState("+cbid+".Switching) -> inSwitching("+cbid+")\n";
-		}
-		prop2 = prop2.substring(0, prop2.length() - 3)+")\n";
-		prop3 = prop3.substring(0, prop3.length() - 3)+")\n";
-		prop4 = prop4.substring(0, prop4.length() - 3)+")\n";
-		
-		String props = "";
-		props += "\n//NO COLLISION\n";
-		props += prop2;
-		
-		props += "\n//NO DERAILMENT\n";
-		props += "//If a train is in a critical section, the point in that section is not in the middle of switching\n"+prop4;
-		props += "//If a train is in a critical section, then the segments that it is moving on are connected\n"+prop3;
-
-		props += "\n//LIVENESS\n";
-		props += prop1;
-		
 		printProperties(n.getName(), props);
 		
 		abs += "}";
