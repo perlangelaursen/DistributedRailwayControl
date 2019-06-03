@@ -969,7 +969,7 @@ public class UPPAALTranslator extends Translator {
 				"			</comment>\n" + 
 				"		</query>\n" + 
 				"		<query>\n" + 
-				"			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)\n" + 
+				"			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cBRoute_i) Train(CB(i).lockedBy).boxes[j] == i)\n" + 
 				"			</formula>\n" + 
 				"			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.\n" + 
 				"			</comment>\n" + 

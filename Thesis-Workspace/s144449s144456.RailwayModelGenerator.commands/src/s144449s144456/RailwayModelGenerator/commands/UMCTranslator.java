@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+
 import network.*;
 
 public class UMCTranslator extends Translator {
@@ -435,7 +437,8 @@ public class UMCTranslator extends Translator {
 			System.out.println(s);
 			PrintWriter printWriter;
 			try {
-				printWriter = new PrintWriter(name+"_"+getFileNameDetails()+"_properties"+".xml", "UTF-8");
+				String path = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
+				printWriter = new PrintWriter(path+"/"+name+"_"+getFileNameDetails()+"_properties.xml", "UTF-8");
 				printWriter.println(s);
 				printWriter.close();
 			} catch (FileNotFoundException | UnsupportedEncodingException e) {

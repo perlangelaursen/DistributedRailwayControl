@@ -19,7 +19,7 @@ Vars
     headSeg:int = -1;
     locks:int = 0;
 
-    resLimit = 2;
+    resLimit = 1;
     lockLimit = 2;
 Transitions
     SingleSegment -> Arrived {[index == segments.length-1]}
@@ -231,16 +231,16 @@ end Point;
 
 
 Objects
-t0:Train(segments=>[0,2,3], curSeg => 0, boxes => [cb0,cb1,cb2,cb3], requiresLock => [false,true,true,false], lockIndex => 1);
-t1:Train(segments=>[3,1,0], curSeg => 3, boxes => [cb3,cb2,cb1,cb0], requiresLock => [false,true,true,false], lockIndex => 1);
+t0:Train(segments=>[0,2,3], curSeg => 0, boxes => [cb1,cb2,cb3], requiresLock => [false,true,true,false], lockIndex => 1);
+t1:Train(segments=>[3,1,0], curSeg => 3, boxes => [cb2,cb1,cb0], requiresLock => [false,true,true,false], lockIndex => 1);
 
 cb0:CB(segments => [0,-1,-1], res => [null,null,null], connected => null);
 cb1:CB(segments => [0,2,1], res => [t0,null,null], connected => 2, point => p0);
 cb2:CB(segments => [3,2,1], res => [t1,null,null], connected => 2, point => p1);
 cb3:CB(segments => [3,-1,-1], res => [null,null,null], connected => null);
 
-p0:Point(inPlus => true, cb => cb1);
 p1:Point(inPlus => true, cb => cb2);
+p0:Point(inPlus => true, cb => cb1);
 
 Abstractions{
   State: inState(t0.Arrived) and inState(t1.Arrived) -> All_Trains_Arrive

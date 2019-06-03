@@ -926,7 +926,7 @@ The reservations saved in the state space of a Train are also saved in the state
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cB_id) Train(CB(i).lockedBy).boxes[j] == i)
+			<formula>A[] forall(i:cB_id) (CB(i).lockedBy != -1) imply (exists(j:cBRoute_i) Train(CB(i).lockedBy).boxes[j] == i)
 			</formula>
 			<comment>A lock is only successful if the involved switch box is in the route of the requesting train.
 			</comment>
