@@ -15,14 +15,16 @@ typedef int[-1, NSEG-1] segV_id;
 typedef int[-1, NPOINT-1] pV_id;
 typedef int[-1, NCB-1] cBV_id;
 typedef int[-1, NTRAIN-1] tV_id;
+typedef int[0, NROUTELENGTH] cBRoute_i;
+typedef int[0, NROUTELENGTH-1] segRoute_i;
 typedef struct {
     cB_id cb;
     seg_id seg;
 } reservation;
 
 //Configuration Data - Part 2
-const int[0,NROUTELENGTH] resLimit = 2;
-const int[0,NROUTELENGTH-1] lockLimit = 2;
+const int[1,NCB] lockLimit = 2;
+const int[1,NSEG] resLimit = 2;
 
 const segV_id segRoutes[NTRAIN][NROUTELENGTH] = {{0,1,2,4}, {4,3,1,0}};
 const cBV_id boxRoutes[NTRAIN][NROUTELENGTH+1]= {{0,1,2,3,4}, {4,3,2,1,0}};
