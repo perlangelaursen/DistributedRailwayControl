@@ -58,7 +58,6 @@ public class UMCTranslator extends Translator {
 		String prop20 = "~EF{";
 		String prop21 = "AG(";
 		String prop22 = "~EF(";
-		String prop23 = "~EF{";
 		
 		abs += "  Action: $t:$cb.pass -> passing($t,$cb)\n";
 		abs += "  Action: $t:$cb.reqLock($t,$s1,$s2) -> reqLocking($t,$cb,$s1,$s2)\n";
@@ -114,12 +113,7 @@ public class UMCTranslator extends Translator {
 					prop7 += "(reserved("+tid+","+s1+","+cbid+") -> reservedBy("+cbid+","+s1+","+tid+")) & (reserved("+tid+","+s1+","+cbid2+") -> reservedBy("+cbid2+","+s1+","+tid+")) & ";
 				}
 				
-				if(cb instanceof SwitchBox) {
-					String pid = "p"+pointIDs.get(cb);
-					//If a train is passing a CB, the associated point is not in the middle of switching
-					//Note: A train only passes a control box in its route (prop23)
-					prop4 += "([passing("+tid+", "+cbid+")] ~inSwitching("+pid+")) & ";
-					
+				if(cb instanceof SwitchBox) {					
 					int stem = segIDs.get(((SwitchBox) cb).getStem());
 					int plus = segIDs.get(((SwitchBox) cb).getPlus());
 					int minus = segIDs.get(((SwitchBox) cb).getMinus());
@@ -177,13 +171,12 @@ public class UMCTranslator extends Translator {
 					prop15 += "reqLockingAt("+tid+","+cbid+") | ";
 					//A TCC only reserves at control boxes in its route
 					prop18 += "reqSegAt("+tid+","+cbid+") | ";
-					//Note: Train only passes CBs in its route (for prop3)
-					prop23 += "passing("+tid+","+cbid+") | ";
 				}
-//				if(cb instanceof SwitchBox) {
-//					String pid = "p"+pointIDs.get(cb);
-//					abs += "  State: inState("+pid+".Switching) -> inSwitching("+pid+")\n";
-//				}
+				if(cb instanceof SwitchBox) {
+					String pid = "p"+pointIDs.get(cb);
+					//If a train is passing a CB, the associated point is not in the middle of switching
+					prop4 += "([passing("+tid+", "+cbid+")] ~inSwitching("+pid+")) & ";		
+				}
 			}
 			
 			//A TCC never has more locks than allowed
@@ -302,7 +295,6 @@ public class UMCTranslator extends Translator {
 		prop20 = prop20.substring(0, prop20.length() - 3)+"}\n";
 		prop21 = prop21.substring(0, prop21.length() - 3)+")\n";
 		prop22 = prop22.substring(0, prop22.length() - 3)+")\n";
-		prop23 = prop23.substring(0, prop23.length() - 3)+"}\n";
 		
 		String props = "";
 		props += "\n//NO COLLISION\n";
@@ -345,7 +337,6 @@ public class UMCTranslator extends Translator {
 		
 		props += "\n//AUXILIARY\n";
 		props += "//A train never moves from one segment to another segment if it is not planned in its route\n"+prop22;
-		props += "//A train never passes a control box that is not in its route\n"+prop23;
 		printProperties(n.getName(), props);
 		
 		abs += "}";

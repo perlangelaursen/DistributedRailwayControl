@@ -800,7 +800,7 @@ A CB's information about its associated Point's position is consistent with the 
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) forall(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; Train(i).requiresLock[j] imply 
+			<formula>A[] forall(i:t_id) forall(j:cBRoute_i) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; Train(i).requiresLock[j] imply 
 	CB(Train(i).boxes[j]).lockedBy == i)
 			</formula>
 			<comment>Lock consistency:
@@ -808,7 +808,7 @@ The locks saved in the state space of a Train are also saved in the state spaces
 			</comment>
 		</query>
 		<query>
-			<formula>A[] forall(i:t_id) forall(j:seg_id) (j &gt;= Train(i).index &amp;&amp; j &lt; Train(i).resSegIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j+1]).segments[l] == Train(i).segments[j] &amp;&amp; CB(Train(i).boxes[j+1]).res[l] == i) &amp;&amp;
+			<formula>A[] forall(i:t_id) forall(j:segRoute_i) (j &gt;= Train(i).index &amp;&amp; j &lt; Train(i).resSegIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j+1]).segments[l] == Train(i).segments[j] &amp;&amp; CB(Train(i).boxes[j+1]).res[l] == i) &amp;&amp;
 		(j &gt; Train(i).index &amp;&amp; j &lt; Train(i).resCBIndex imply exists(l:int[0,2]) CB(Train(i).boxes[j]).segments[l] == Train(i).segments[j] &amp;&amp; CB(Train(i).boxes[j]).res[l] == i)
 			</formula>
 			<comment>Reservation consistency:
