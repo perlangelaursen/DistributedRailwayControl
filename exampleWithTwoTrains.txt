@@ -14,6 +14,8 @@ typedef int[-1, NSEG-1] segV_id;
 typedef int[-1, NPOINT-1] pV_id;
 typedef int[-1, NCB-1] cBV_id;
 typedef int[-1, NTRAIN-1] tV_id;
+typedef int[0, NROUTELENGTH] cBRoute_i;
+typedef int[0, NROUTELENGTH-1] segRoute_i;
 typedef struct {
     cB_id cb;
     seg_id seg;
