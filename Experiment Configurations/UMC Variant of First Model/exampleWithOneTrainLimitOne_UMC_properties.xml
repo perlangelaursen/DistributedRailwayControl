@@ -1,0 +1,13 @@
+
+//NO COLLISION
+)
+
+//NO DERAILMENT
+//If a train is in a critical section, the point in that section is not in the middle of switching
+AG(([passing(t0, cb1)] ~inSwitching(p0)) & ([passing(t0, cb2)] ~inSwitching(p1)))
+//If a train is in a critical section, then the segments that it is moving on are connected
+AG((doublePos(t0,0,1) -> connects(cb1,0,1)) & (doublePos(t0,1,3) -> connects(cb2,1,3)))
+
+//LIVENESS
+EF All_Trains_Arrive
+
