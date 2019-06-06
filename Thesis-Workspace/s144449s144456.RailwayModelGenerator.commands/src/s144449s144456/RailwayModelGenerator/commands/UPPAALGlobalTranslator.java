@@ -482,11 +482,11 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 				"		<query>\r\n" + 
 				"			<formula>\r\n" + 
 				"			</formula>\r\n" + 
-				"			<comment>CONCISTENCY\r\n" + 
+				"			<comment>CONSISTENCY\r\n" + 
 				"			</comment>\r\n" + 
 				"		</query>\r\n" + 
 				"		<query>\r\n" + 
-				"			<formula>A[] forall(i:t_id) Train(i).locks == (sum(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; points[boxRoutes[i][j]] &gt; -1))\r\n" + 
+				"			<formula>A[] forall(i:t_id) Train(i).locks == (sum(j:cBRoute_i) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; points[boxRoutes[i][j]] &gt; -1))\r\n" + 
 				"			</formula>\r\n" + 
 				"			<comment>Lock consistency:\r\n" + 
 				"The number of saved locks in the state space of a Train is the same number of locks that it believes that it has.\r\n" + 
@@ -508,7 +508,7 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 				"			</comment>\r\n" + 
 				"		</query>\r\n" + 
 				"		<query>\r\n" + 
-				"			<formula>A[] forall(i:t_id) forall(j:cB_id) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; Train(i).requiresLock[j] imply \r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:cBRoute_i) (j &gt; Train(i).index &amp;&amp; j &lt; Train(i).lockIndex &amp;&amp; Train(i).requiresLock[j] imply \r\n" + 
 				"	CB(boxRoutes[i][j]).lockedBy == i)\r\n" + 
 				"			</formula>\r\n" + 
 				"			<comment>Lock consistency:\r\n" + 
@@ -516,7 +516,7 @@ public class UPPAALGlobalTranslator extends UPPAALTranslator {
 				"			</comment>\r\n" + 
 				"		</query>\r\n" + 
 				"		<query>\r\n" + 
-				"			<formula>A[] forall(i:t_id) forall(j:seg_id) (j &gt;= Train(i).index &amp;&amp; j &lt; Train(i).resSegIndex imply exists(l:int[0,2]) cBs[boxRoutes[i][j+1]][l] == segRoutes[i][j] &amp;&amp; CB(boxRoutes[i][j+1]).res[l] == i) &amp;&amp;\r\n" + 
+				"			<formula>A[] forall(i:t_id) forall(j:segRoute_i) (j &gt;= Train(i).index &amp;&amp; j &lt; Train(i).resSegIndex imply exists(l:int[0,2]) cBs[boxRoutes[i][j+1]][l] == segRoutes[i][j] &amp;&amp; CB(boxRoutes[i][j+1]).res[l] == i) &amp;&amp;\r\n" + 
 				"		(j &gt; Train(i).index &amp;&amp; j &lt; Train(i).resCBIndex imply exists(l:int[0,2]) cBs[boxRoutes[i][j]][l] == segRoutes[i][j] &amp;&amp; CB(boxRoutes[i][j]).res[l] == i)\r\n" + 
 				"			</formula>\r\n" + 
 				"			<comment>Reservation consistency:\r\n" + 
