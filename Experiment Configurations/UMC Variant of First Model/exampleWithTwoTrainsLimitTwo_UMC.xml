@@ -19,7 +19,7 @@ Vars
     headSeg:int = -1;
     locks:int = 0;
 
-    resLimit = 1;
+    resLimit = 2;
     lockLimit = 2;
 Transitions
     SingleSegment -> Arrived {[index == segments.length-1]}
