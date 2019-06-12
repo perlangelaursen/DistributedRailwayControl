@@ -2031,7 +2031,7 @@
 #+TBLFM: @2$2=remote(RCSLimitOneMoveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneMoveTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneMoveTime, @6$5);E f-3::@2$5=remote(CancelLimitOneMoveTime, @6$5);E f-3::@2$6=remote(UMCLimitOneMoveTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneMoveTime, @6$5);E f-3::@3$2=remote(RCSLimitOneMoveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneMoveTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneMoveTime, @7$5);E f-3::@3$5=remote(CancelLimitOneMoveTime, @7$5);E f-3::@3$6=remote(UMCLimitOneMoveTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneMoveTime, @7$5);E f-3::@4$2=remote(RCSLimitOneMoveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneMoveTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneMoveTime, @8$5);E f-3::@4$5=remote(CancelLimitOneMoveTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneMoveTime, @8$5);E f-3::@5$2=remote(RCSLimitOneMoveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneMoveTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneMoveTime, @9$5);E f-3::@5$5=remote(CancelLimitOneMoveTime, @9$5);E f-3::@6$2=remote(RCSLimitOneMoveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneMoveTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneMoveTime, @10$5);E f-3::@6$5=remote(CancelLimitOneMoveTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitOneTime :file stationsMoveLimitOneTime.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica,16"
 set title "No derailment limit 1 time (Move between connected segments)"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2050,18 +2050,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2094,7 +2094,7 @@ plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneMoveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneMoveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneMoveMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneMoveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneMoveMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneMoveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneMoveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneMoveMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneMoveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneMoveMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneMoveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneMoveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneMoveMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneMoveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneMoveMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneMoveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneMoveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneMoveMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneMoveMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneMoveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneMoveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneMoveMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneMoveMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitOneMemory :file stationsMoveLimitOneMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica,16"
 set title "No derailment limit 1 memory (Move between connected segments)"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2111,16 +2111,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2156,7 +2156,7 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCriticalTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneCriticalTime, @6$5);E f-3::@2$5=remote(CancelLimitOneCriticalTime, @6$5);E f-3::@2$6=remote(UMCLimitOneCriticalTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneCriticalTime, @6$5);E f-3::@3$2=remote(RCSLimitOneCriticalTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCriticalTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneCriticalTime, @7$5);E f-3::@3$5=remote(CancelLimitOneCriticalTime, @7$5);E f-3::@3$6=remote(UMCLimitOneCriticalTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneCriticalTime, @7$5);E f-3::@4$2=remote(RCSLimitOneCriticalTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCriticalTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneCriticalTime, @8$5);E f-3::@4$5=remote(CancelLimitOneCriticalTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneCriticalTime, @8$5);E f-3::@5$2=remote(RCSLimitOneCriticalTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCriticalTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneCriticalTime, @9$5);E f-3::@5$5=remote(CancelLimitOneCriticalTime, @9$5);E f-3::@6$2=remote(RCSLimitOneCriticalTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCriticalTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneCriticalTime, @10$5);E f-3::@6$5=remote(CancelLimitOneCriticalTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitOneTime :file stationsCriticalTimeLimitOne.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica,16"
 set title "No derailment limit 1 time (No trains in critical section)"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2175,18 +2175,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2219,7 +2219,7 @@ plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCriticalMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneCriticalMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneCriticalMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneCriticalMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneCriticalMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCriticalMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneCriticalMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneCriticalMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneCriticalMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneCriticalMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCriticalMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneCriticalMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneCriticalMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneCriticalMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneCriticalMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCriticalMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneCriticalMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneCriticalMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneCriticalMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCriticalMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneCriticalMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneCriticalMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitOneMemory :file stationsCriticalLimitOneMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No derailment limit 1 memory (No trains in critical section)"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2236,16 +2236,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2280,7 +2280,7 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCollisionTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneCollisionTime, @6$5);E f-3::@2$5=remote(CancelLimitOneCollisionTime, @6$5);E f-3::@2$6=remote(UMCLimitOneCollisionTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneCollisionTime, @6$5);E f-3::@3$2=remote(RCSLimitOneCollisionTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCollisionTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneCollisionTime, @7$5);E f-3::@3$5=remote(CancelLimitOneCollisionTime, @7$5);E f-3::@3$6=remote(UMCLimitOneCollisionTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneCollisionTime, @7$5);E f-3::@4$2=remote(RCSLimitOneCollisionTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCollisionTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneCollisionTime, @8$5);E f-3::@4$5=remote(CancelLimitOneCollisionTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneCollisionTime, @8$5);E f-3::@5$2=remote(RCSLimitOneCollisionTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCollisionTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneCollisionTime, @9$5);E f-3::@5$5=remote(CancelLimitOneCollisionTime, @9$5);E f-3::@6$2=remote(RCSLimitOneCollisionTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCollisionTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneCollisionTime, @10$5);E f-3::@6$5=remote(CancelLimitOneCollisionTime, @6$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitOneTime :file stationsCollisionLimitOneTime.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No collision limit 1 time"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2299,18 +2299,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2343,7 +2343,7 @@ plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCollisionMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneCollisionMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneCollisionMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneCollisionMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneCollisionMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCollisionMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneCollisionMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneCollisionMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneCollisionMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneCollisionMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCollisionMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneCollisionMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneCollisionMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneCollisionMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneCollisionMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCollisionMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneCollisionMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneCollisionMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneCollisionMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCollisionMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneCollisionMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneCollisionMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitOneMemory :file stationsCollisionLimitOneMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No collision limit 1 memory"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2360,16 +2360,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2403,7 +2403,7 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneArriveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneArriveTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneArriveTime, @6$5);E f-3::@2$5=remote(CancelLimitOneArriveTime, @6$5);E f-3::@2$6=remote(UMCLimitOneArriveTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneArriveTime, @6$5);E f-3::@3$2=remote(RCSLimitOneArriveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneArriveTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneArriveTime, @7$5);E f-3::@3$5=remote(CancelLimitOneArriveTime, @7$5);E f-3::@3$6=remote(UMCLimitOneArriveTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneArriveTime, @7$5);E f-3::@4$2=remote(RCSLimitOneArriveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneArriveTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneArriveTime, @8$5);E f-3::@4$5=remote(CancelLimitOneArriveTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneArriveTime, @8$5);E f-3::@5$2=remote(RCSLimitOneArriveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneArriveTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneArriveTime, @9$5);E f-3::@5$5=remote(CancelLimitOneArriveTime, @9$5);E f-3::@6$2=remote(RCSLimitOneArriveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneArriveTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneArriveTime, @10$5);E f-3::@6$5=remote(CancelLimitOneArriveTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryArriveLimitOneTime :file stationsArriveLimitOneTime.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "Will arrive limit 1"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2415,18 +2415,18 @@ i(x) = g * exp(h*x)
 j(x) = i * exp(j*x)
 k(x) = k * exp(l*x)
 
-plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2458,7 +2458,7 @@ plot [][:900] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitOneArriveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneArriveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneArriveMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneArriveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneArriveMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneArriveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneArriveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneArriveMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneArriveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneArriveMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneArriveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneArriveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneArriveMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneArriveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneArriveMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneArriveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneArriveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneArriveMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneArriveMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneArriveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneArriveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneArriveMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneArriveMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryArriveLimitOneMemory :file stationsArriveLimitOneMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "Will arrive limit 1 memory"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2475,16 +2475,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2519,7 +2519,7 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoMoveTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoMoveTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoMoveTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoMoveTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoMoveTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoMoveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoMoveTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoMoveTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoMoveTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoMoveTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoMoveTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoMoveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoMoveTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoMoveTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoMoveTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoMoveTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoMoveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoMoveTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoMoveTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoMoveTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoMoveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoMoveTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoMoveTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoMoveTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitTwoTime :file stationsMoveLimitTwoTime.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No derailment limit 2 time (Move between connected segments)"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2538,18 +2538,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2581,7 +2581,7 @@ plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoMoveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoMoveMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoMoveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoMoveMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoMoveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoMoveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoMoveMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoMoveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoMoveMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoMoveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoMoveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoMoveMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoMoveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoMoveMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoMoveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoMoveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoMoveMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoMoveMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoMoveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoMoveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoMoveMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoMoveMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitTwoMemory :file stationsMoveLimitTwoMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No derailment limit 2 memory (Move between connected segments)"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2598,16 +2598,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2641,7 +2641,7 @@ plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", 
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCriticalTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCriticalTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoCriticalTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoCriticalTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoCriticalTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoCriticalTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCriticalTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCriticalTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoCriticalTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoCriticalTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoCriticalTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoCriticalTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCriticalTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCriticalTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoCriticalTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoCriticalTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoCriticalTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCriticalTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCriticalTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoCriticalTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoCriticalTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCriticalTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCriticalTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoCriticalTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoTime :file stationsCriticalTimeLimitTwo.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No derailment limit 2 time (No trains in critical section)"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2660,18 +2660,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2703,7 +2703,7 @@ plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCriticalMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCriticalMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoCriticalMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoCriticalMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoCriticalMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCriticalMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCriticalMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoCriticalMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoCriticalMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoCriticalMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCriticalMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCriticalMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoCriticalMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoCriticalMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoCriticalMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCriticalMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCriticalMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoCriticalMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoCriticalMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCriticalMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCriticalMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoCriticalMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoMemory :file stationsCriticalLimitTwoMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No derailment limit 2 memory (No trains in critical section)"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2720,16 +2720,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2764,7 +2764,7 @@ plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", 
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCollisionTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCollisionTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoCollisionTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoCollisionTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoCollisionTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoCollisionTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCollisionTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCollisionTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoCollisionTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoCollisionTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoCollisionTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoCollisionTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCollisionTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCollisionTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoCollisionTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoCollisionTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoCollisionTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCollisionTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCollisionTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoCollisionTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoCollisionTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCollisionTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCollisionTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoCollisionTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoTime :file stationsCollisionLimitTwoTime.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No collision limit 2 time"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2783,18 +2783,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2826,7 +2826,7 @@ plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoCollisionMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoCollisionMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoCollisionMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoCollisionMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoCollisionMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoCollisionMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoCollisionMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoCollisionMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoMemory :file stationsCollisionLimitTwoMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "No collision limit 2 memory"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2843,16 +2843,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2886,7 +2886,7 @@ plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", 
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoArriveTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoArriveTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoArriveTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoArriveTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoArriveTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoArriveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoArriveTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoArriveTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoArriveTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoArriveTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoArriveTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoArriveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoArriveTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoArriveTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoArriveTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoArriveTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoArriveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoArriveTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoArriveTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoArriveTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoArriveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoArriveTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoArriveTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoArriveTime, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryArriveLimitTwoTime :file stationsArriveLimitTwoTime.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "Will arrive limit 2"
 set xlabel "Number of stations"
 set ylabel "Time"
@@ -2905,18 +2905,18 @@ fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 fit k(x) data u 1:7 via k, l
 
-plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h), \
-     data u 1:6 w points title 'UMC' linecolor rgb "black", \
-     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j), \
-     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l)
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
 #+end_src
 
 #+RESULTS:
@@ -2949,7 +2949,7 @@ plot [][:8000] data u 1:2 w points title 'First model' linecolor rgb "black", \
 #+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoArriveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoArriveMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoArriveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoArriveMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoArriveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoArriveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoArriveMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoArriveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoArriveMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoArriveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoArriveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoArriveMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoArriveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoArriveMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoArriveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoArriveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoArriveMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoArriveMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoArriveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoArriveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoArriveMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoArriveMemory, @10$5);E f-3
 
 #+begin_src gnuplot :var data=summaryArriveLimitTwoMemory :file stationsArriveLimitTwoMemory.png
-set term png size 1600,1600
+set term png size 1600,1600 font "Helvetica, 16"
 set title "Will arrive limit 2 memory"
 set xlabel "Number of stations"
 set ylabel "Memory"
@@ -2966,16 +2966,16 @@ fit h(x) data u 1:4 via e, f
 fit i(x) data u 1:5 via g, h
 fit j(x) data u 1:6 via i, j
 
-plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black", \
-     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b), \
-     data u 1:3 w points title 'Restricted' linecolor rgb "black", \
-     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d), \
-     data u 1:4 w points title 'Global' linecolor rgb "black", \
-     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f), \
-     data u 1:5 w points title 'Cancel' linecolor rgb "black", \
-     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h), \
-     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black", \
-     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j)
+plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
 #+end_src
 
 #+RESULTS:
