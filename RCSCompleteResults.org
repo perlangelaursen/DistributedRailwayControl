@@ -2082,16 +2082,16 @@ plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2
 #+PLOT: ind:1
 #+tblname: summaryStationsMoveLimitOneMemory
 #+CAPTION: Stations Limit One No Derailment (Move between connected segments) Memory
-|----------+-------------+------------+--------+--------+------------|
-| Stations | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+--------+------------|
-|        1 |        6488 |       8552 |   8365 |   8737 |       8573 |
-|        2 |        9279 |      14295 |  12470 |  13607 |      22640 |
-|        4 |       29647 |      38089 |  37879 |  48485 |    2347155 |
-|        6 |       70101 |     105637 | 104069 | 151608 |            |
-|        8 |      205391 |     222268 | 232768 | 372632 |            |
-|----------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneMoveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneMoveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneMoveMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneMoveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneMoveMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneMoveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneMoveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneMoveMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneMoveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneMoveMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneMoveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneMoveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneMoveMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneMoveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneMoveMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneMoveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneMoveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneMoveMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneMoveMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneMoveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneMoveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneMoveMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneMoveMemory, @10$5);E f-3
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.488 |      8.552 |   8.365 |   8.737 |      8.573 |
+|        2 |       9.279 |     14.295 |   1.247 |   1.361 |      2.264 |
+|        4 |      29.647 |     38.089 |  37.879 |  48.485 |   2347.155 |
+|        6 |      70.101 |    105.637 | 104.069 | 151.608 |            |
+|        8 |     205.391 |    222.268 | 232.768 | 372.632 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneMoveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneMoveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneMoveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneMoveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneMoveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneMoveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneMoveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneMoveMemory, @7$5)/10000;E f-3::@3$5=remote(CancelLimitOneMoveMemory, @7$5)/10000;E f-3::@3$6=remote(UppaalLimitOneMoveMemory, @7$5)/10000;E f-3::@4$2=remote(RCSLimitOneMoveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneMoveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneMoveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneMoveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneMoveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneMoveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneMoveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneMoveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneMoveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneMoveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneMoveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneMoveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneMoveMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitOneMemory :file stationsMoveLimitOneMemory.png
 set term png size 1600,1600 font "Helvetica,16"
@@ -2125,18 +2125,6 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps
 
 #+RESULTS:
 [[file:stationsMoveLimitOneMemory.png]]
-
-
-#+PLOT: ind:1
-#+tblname: summaryTrainsMoveLimitOneMemory
-#+CAPTION: Nærumbanen Limit One No Derailment (Move between connected segments) Memory
-|--------+-------------+------------+--------+--------+------------|
-| Trains | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|--------+-------------+------------+--------+--------+------------|
-|      2 |       78693 |     118235 | 114383 | 128240 |            |
-|      3 |      384864 |     289796 | 310331 | 552472 |            |
-|--------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneMoveMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitOneMoveMemory, @15$5);E f-3::@2$4=remote(GlobalLimitOneMoveMemory, @12$5);E f-3::@2$5=remote(CancelLimitOneMoveMemory, @11$5);E f-3::@3$2=remote(RCSLimitOneMoveMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitOneMoveMemory, @16$5);E f-3::@3$4=remote(GlobalLimitOneMoveMemory, @13$5);E f-3::@3$5=remote(CancelLimitOneMoveMemory, @12$5);E f-3
 
 
 *** No derailment (Critical section)
@@ -2207,16 +2195,16 @@ plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2
 #+PLOT: ind:1
 #+tblname: summaryStationsCriticalLimitOneMemory
 #+CAPTION: Stations Limit One No Derailment (No trains in critical section) Memory
-|----------+-------------+------------+--------+--------+------------|
-| Stations | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+--------+------------|
-|        1 |        6475 |       8519 |   8348 |   8701 |       8513 |
-|        2 |        9269 |      12443 |  12551 |  13581 |      20682 |
-|        4 |       25827 |      36660 |  37675 |  48445 |    2347116 |
-|        6 |       70087 |     105907 | 104064 | 151579 |            |
-|        8 |      158475 |     220235 | 232747 | 372268 |            |
-|----------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCriticalMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneCriticalMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneCriticalMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneCriticalMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneCriticalMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCriticalMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneCriticalMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneCriticalMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneCriticalMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneCriticalMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCriticalMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneCriticalMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneCriticalMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneCriticalMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneCriticalMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCriticalMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneCriticalMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneCriticalMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneCriticalMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCriticalMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneCriticalMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneCriticalMemory, @10$5);E f-3
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.475 |      8.519 |   8.348 |   8.701 |      8.513 |
+|        2 |       9.269 |     12.443 |  12.551 |  13.581 |     20.682 |
+|        4 |      25.827 |     36.660 |  37.675 |  48.445 |   2347.116 |
+|        6 |      70.087 |    105.907 | 104.064 | 151.579 |            |
+|        8 |     158.475 |    220.235 | 232.747 | 372.268 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneCriticalMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneCriticalMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneCriticalMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneCriticalMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneCriticalMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneCriticalMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneCriticalMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitOneCriticalMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitOneCriticalMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneCriticalMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneCriticalMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneCriticalMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneCriticalMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneCriticalMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneCriticalMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneCriticalMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneCriticalMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneCriticalMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitOneMemory :file stationsCriticalLimitOneMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2250,17 +2238,6 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps
 
 #+RESULTS:
 [[file:stationsCriticalLimitOneMemory.png]]
-
-#+PLOT: ind:1
-#+tblname: summaryTrainsCriticalLimitOneMemory
-#+CAPTION: Nærumbanen Limit One No Derailment (No trains in critical section) Memory
-|--------+-------------+------------+--------+--------+------------|
-| Trains | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|--------+-------------+------------+--------+--------+------------|
-|      2 |       78679 |     116736 | 112684 | 126564 |            |
-|      3 |      383095 |     287436 | 310413 | 550280 |            |
-|--------+-------------+------------+--------+--------+------------|
-#+TBLFM: $6=remote(UppaalLimitOneCriticalMemory, @7$5);E f-3::@2$2=remote(RCSLimitOneCriticalMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitOneCriticalMemory, @15$5);E f-3::@2$4=remote(GlobalLimitOneCriticalMemory, @12$5);E f-3::@2$5=remote(CancelLimitOneCriticalMemory, @11$5);E f-3::@3$2=remote(RCSLimitOneCriticalMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitOneCriticalMemory, @16$5);E f-3::@3$4=remote(GlobalLimitOneCriticalMemory, @13$5);E f-3::@3$5=remote(CancelLimitOneCriticalMemory, @12$5);E f-3
 
 
 *** No collision
@@ -2331,16 +2308,16 @@ plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2
 #+PLOT: ind:1
 #+tblname: summaryStationsCollisionLimitOneMemory
 #+CAPTION: Stations Limit One No Collision Memory
-|----------+-------------+------------+--------+--------+------------|
-| Stations | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+--------+------------|
-|        1 |        6515 |       8524 |   8352 |   8701 |       8533 |
-|        2 |        9300 |      12421 |  12545 |  13571 |      20657 |
-|        4 |       25856 |      38101 |  37845 |  48441 |    2347107 |
-|        6 |       70112 |     101904 | 104047 | 151560 |            |
-|        8 |      158497 |     224520 | 232720 | 372249 |            |
-|----------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCollisionMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneCollisionMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneCollisionMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneCollisionMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneCollisionMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCollisionMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneCollisionMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneCollisionMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneCollisionMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneCollisionMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCollisionMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneCollisionMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneCollisionMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneCollisionMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneCollisionMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCollisionMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneCollisionMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneCollisionMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneCollisionMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCollisionMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneCollisionMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneCollisionMemory, @10$5);E f-3
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.515 |      8.524 |   8.352 |   8.701 |      8.533 |
+|        2 |       9.300 |     12.421 |  12.545 |  13.571 |     20.657 |
+|        4 |      25.856 |     38.101 |  37.845 |  48.441 |   2347.107 |
+|        6 |      70.112 |    101.904 | 104.047 | 151.560 |            |
+|        8 |     158.497 |    224.520 | 232.720 | 372.249 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneCollisionMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneCollisionMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneCollisionMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneCollisionMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneCollisionMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneCollisionMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneCollisionMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitOneCollisionMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitOneCollisionMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneCollisionMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneCollisionMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneCollisionMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneCollisionMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneCollisionMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneCollisionMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneCollisionMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneCollisionMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneCollisionMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitOneMemory :file stationsCollisionLimitOneMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2374,16 +2351,6 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps
 
 #+RESULTS:
 [[file:stationsCollisionLimitOneMemory.png]]
-
-#+PLOT: ind:1
-#+CAPTION: Nærumbanen Limit One No Collision Memory
-|--------+-------------+------------+--------+--------+------------|
-| Trains | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|--------+-------------+------------+--------+--------+------------|
-|      2 |       78717 |     119157 | 112648 | 126548 |            |
-|      3 |      383105 |     288145 | 310321 | 550280 |            |
-|--------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitOneCollisionMemory, @15$5);E f-3::@2$4=remote(GlobalLimitOneCollisionMemory, @12$5);E f-3::@2$5=remote(CancelLimitOneCollisionMemory, @11$5);E f-3::@3$2=remote(RCSLimitOneCollisionMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitOneCollisionMemory, @16$5);E f-3::@3$4=remote(GlobalLimitOneCollisionMemory, @13$5);E f-3::@3$5=remote(CancelLimitOneCollisionMemory, @12$5);E f-3
 
 
 *** Will arrive
@@ -2446,16 +2413,16 @@ plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2
 #+PLOT: ind:1
 #+tblname: summaryArriveLimitOneMemory
 #+CAPTION: Stations Limit One Will Arrive Memory
-|----------+-------------+------------+--------+--------+------------|
-| Stations | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+--------+------------|
-|        1 |        6439 |       8447 |   8268 |   8616 |       8456 |
-|        2 |        9228 |      12344 |  12459 |  13475 |      20472 |
-|        4 |       25781 |      37208 |  37749 |  48224 |    2230904 |
-|        6 |       69981 |     100468 | 103721 | 150872 |            |
-|        8 |      158180 |     221277 | 232373 | 370340 |            |
-|----------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneArriveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitOneArriveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitOneArriveMemory, @6$5);E f-3::@2$5=remote(CancelLimitOneArriveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitOneArriveMemory, @6$5);E f-3::@3$2=remote(RCSLimitOneArriveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitOneArriveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitOneArriveMemory, @7$5);E f-3::@3$5=remote(CancelLimitOneArriveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitOneArriveMemory, @7$5);E f-3::@4$2=remote(RCSLimitOneArriveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitOneArriveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitOneArriveMemory, @8$5);E f-3::@4$5=remote(CancelLimitOneArriveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitOneArriveMemory, @8$5);E f-3::@5$2=remote(RCSLimitOneArriveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitOneArriveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitOneArriveMemory, @9$5);E f-3::@5$5=remote(CancelLimitOneArriveMemory, @9$5);E f-3::@6$2=remote(RCSLimitOneArriveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitOneArriveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitOneArriveMemory, @10$5);E f-3::@6$5=remote(CancelLimitOneArriveMemory, @10$5);E f-3
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.439 |      8.447 |   8.268 |   8.616 |      8.456 |
+|        2 |       9.228 |     12.344 |  12.459 |  13.475 |     20.472 |
+|        4 |      25.781 |     37.208 |  37.749 |  48.224 |   2230.904 |
+|        6 |      69.981 |    100.468 | 103.721 | 150.872 |            |
+|        8 |     158.180 |    221.277 | 232.373 | 370.340 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneArriveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneArriveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneArriveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneArriveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneArriveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneArriveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneArriveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneArriveMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitOneArriveMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitOneArriveMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitOneArriveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneArriveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneArriveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneArriveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneArriveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneArriveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneArriveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneArriveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneArriveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneArriveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneArriveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneArriveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneArriveMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryArriveLimitOneMemory :file stationsArriveLimitOneMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2489,16 +2456,6 @@ plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps
 
 #+RESULTS:
 [[file:stationsArriveLimitOneMemory.png]]
-
-#+PLOT: ind:1
-#+CAPTION: Nærumbanen Limit One Will Arrive Memory
-|--------+-------------+------------+--------+--------+------------|
-| Trains | First model | Restricted | Global | Cancel | UPPAALxUMC |
-|--------+-------------+------------+--------+--------+------------|
-|      2 |       78600 |     115344 | 112507 | 126416 |            |
-|      3 |      382925 |     286056 | 310171 | 550177 |            |
-|--------+-------------+------------+--------+--------+------------|
-#+TBLFM: @2$2=remote(RCSLimitOneArriveMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitOneArriveMemory, @15$5);E f-3::@2$4=remote(GlobalLimitOneArriveMemory, @12$5);E f-3::@2$5=remote(CancelLimitOneArriveMemory, @11$5);E f-3::@3$2=remote(RCSLimitOneArriveMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitOneArriveMemory, @16$5);E f-3::@3$4=remote(GlobalLimitOneArriveMemory, @13$5);E f-3::@3$5=remote(CancelLimitOneArriveMemory, @12$5);E f-3
 
 
 ** Limit Two
@@ -2569,16 +2526,16 @@ plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 
 #+PLOT: ind:1
 #+tblname: summaryStationsMoveLimitTwoMemory
 #+CAPTION: Stations Limit Two No derailment (Move between connected segments) Memory
-|----------+-------------+------------+--------+---------+------------|
-| Stations | First model | Restricted | Global |  Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+---------+------------|
-|        1 |        6496 |       8556 |  10067 |   12055 |       8607 |
-|        2 |        9931 |      12655 |  16369 |   18555 |      27016 |
-|        4 |       41503 |      39423 |  59801 |  139583 |    4533628 |
-|        6 |      152876 |     120059 | 212289 |  680383 |            |
-|        8 |      422323 |     276123 | 541721 | 2104105 |            |
-|----------+-------------+------------+--------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoMoveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoMoveMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoMoveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoMoveMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoMoveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoMoveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoMoveMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoMoveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoMoveMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoMoveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoMoveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoMoveMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoMoveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoMoveMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoMoveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoMoveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoMoveMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoMoveMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoMoveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoMoveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoMoveMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoMoveMemory, @10$5);E f-3
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.496 |      8.556 |  10.067 |   12.055 |      8.607 |
+|        2 |       9.931 |     12.655 |  16.369 |   18.555 |     27.016 |
+|        4 |      41.503 |     39.423 |  59.801 |  139.583 |   4533.628 |
+|        6 |     152.876 |    120.059 | 212.289 |  680.383 |            |
+|        8 |     422.323 |    276.123 | 541.721 | 2104.105 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoMoveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoMoveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoMoveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoMoveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoMoveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoMoveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoMoveMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoMoveMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoMoveMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoMoveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoMoveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoMoveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoMoveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoMoveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoMoveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoMoveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoMoveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoMoveMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryStationsMoveLimitTwoMemory :file stationsMoveLimitTwoMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2612,16 +2569,6 @@ plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" p
 
 #+RESULTS:
 [[file:stationsMoveLimitTwoMemory.png]]
-
-#+PLOT: ind:1
-#+CAPTION: Nærumbanen Limit Two No derailment (Move between connected segments) Memory
-|-----------------+-------------+------------+---------+---------+------------|
-| Configuration   | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
-|-----------------+-------------+------------+---------+---------+------------|
-| Nærumbanen (2T) |      122292 |     119328 |  153712 |  240705 |            |
-| Nærumbanen (3T) |     1834792 |     316381 | 1303408 | 3640413 |            |
-|-----------------+-------------+------------+---------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoMoveMemory, @15$5);E f-3::@2$4=remote(GlobalLimitTwoMoveMemory, @12$5);E f-3::@2$5=remote(CancelLimitTwoMoveMemory, @11$5);E f-3::@3$2=remote(RCSLimitTwoMoveMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoMoveMemory, @16$5);E f-3::@3$4=remote(GlobalLimitTwoMoveMemory, @13$5);E f-3::@3$5=remote(CancelLimitTwoMoveMemory, @12$5);E f-3
 
 
 *** No derailment (Critical section)
@@ -2691,16 +2638,16 @@ plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 
 #+PLOT: ind:1
 #+tblname: summaryStationsCriticalLimitTwoMemory
 #+CAPTION: Stations Limit Two No derailment (No trains in critical section) Memory
-|----------+-------------+------------+--------+---------+------------|
-| Stations | First model | Restricted | Global |  Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+---------+------------|
-|        1 |        6479 |       8516 |   8416 |    8732 |       8540 |
-|        2 |        9909 |      12591 |  15443 |   16661 |      27964 |
-|        4 |       41484 |      40388 |  58229 |  139539 |    4533581 |
-|        6 |      152851 |     121686 | 209163 |  680276 |            |
-|        8 |      422303 |     275489 | 543076 | 2104356 |            |
-|----------+-------------+------------+--------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCriticalMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCriticalMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoCriticalMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoCriticalMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoCriticalMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCriticalMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCriticalMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoCriticalMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoCriticalMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoCriticalMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCriticalMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCriticalMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoCriticalMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoCriticalMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoCriticalMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCriticalMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCriticalMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoCriticalMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoCriticalMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCriticalMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCriticalMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoCriticalMemory, @10$5);E f-3
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.479 |      8.516 |   8.416 |    8.732 |      8.540 |
+|        2 |       9.909 |     12.591 |  15.443 |   16.661 |     27.964 |
+|        4 |      41.484 |     40.388 |  58.229 |  139.539 |   4533.581 |
+|        6 |     152.851 |    121.686 | 209.163 |  680.276 |            |
+|        8 |     422.303 |    275.489 | 543.076 | 2104.356 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoCriticalMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoCriticalMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoCriticalMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoCriticalMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoCriticalMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoCriticalMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoCriticalMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoCriticalMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoCriticalMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoCriticalMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoCriticalMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoCriticalMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoCriticalMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoCriticalMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoCriticalMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoCriticalMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoCriticalMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoCriticalMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoMemory :file stationsCriticalLimitTwoMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2734,17 +2681,6 @@ plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" p
 
 #+RESULTS:
 [[file:stationsCriticalLimitTwoMemory.png]]
-
-
-#+PLOT: ind:1
-#+CAPTION: Nærumbanen Limit Two No derailment (No trains in critical section) Memory
-|--------+-------------+------------+---------+---------+------------|
-| Trains | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
-|--------+-------------+------------+---------+---------+------------|
-|      2 |      122175 |     116473 |  152139 |  238959 |            |
-|      3 |     1833127 |     311935 | 1303379 | 3638699 |            |
-|--------+-------------+------------+---------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoCriticalMemory, @15$5);E f-3::@2$4=remote(GlobalLimitTwoCriticalMemory, @12$5);E f-3::@2$5=remote(CancelLimitTwoCriticalMemory, @11$5);E f-3::@3$2=remote(RCSLimitTwoCriticalMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoCriticalMemory, @16$5);E f-3::@3$4=remote(GlobalLimitTwoCriticalMemory, @13$5);E f-3::@3$5=remote(CancelLimitTwoCriticalMemory, @12$5);E f-3
 
 
 *** No collision
@@ -2814,16 +2750,16 @@ plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 
 #+PLOT: ind:1
 #+tblname: summaryStationsCollisionLimitTwoMemory
 #+CAPTION: Stations Limit Two No Collision Memory
-|----------+-------------+------------+--------+---------+------------|
-| Stations | First model | Restricted | Global |  Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+---------+------------|
-|        1 |        6515 |       8508 |   8412 |    8727 |       8561 |
-|        2 |        9944 |      12579 |  14960 |   16641 |      26969 |
-|        4 |       41508 |      39384 |  58201 |  139527 |    4533576 |
-|        6 |      152875 |     122787 | 210057 |  680333 |            |
-|        8 |      422327 |     276996 | 544733 | 2104345 |            |
-|----------+-------------+------------+--------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoCollisionMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoCollisionMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoCollisionMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoCollisionMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoCollisionMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoCollisionMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoCollisionMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoCollisionMemory, @10$5);E f-3
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.515 |      8.508 |   8.412 |    8.727 |      8.561 |
+|        2 |       9.944 |     12.579 |  14.960 |   16.641 |     26.969 |
+|        4 |      41.508 |     39.384 |  58.201 |  139.527 |   4533.576 |
+|        6 |     152.875 |    122.787 | 210.057 |  680.333 |            |
+|        8 |     422.327 |    276.996 | 544.733 | 2104.345 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoCollisionMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoCollisionMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoCollisionMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoCollisionMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoCollisionMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoCollisionMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoCollisionMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoMemory :file stationsCollisionLimitTwoMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2857,16 +2793,6 @@ plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" p
 
 #+RESULTS:
 [[file:stationsCollisionLimitTwoMemory.png]]
-
-#+PLOT: ind:1
-#+CAPTION: Nærumbanen Limit Two No Collision Memory
-|--------+-------------+------------+---------+---------+------------|
-| Trains | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
-|--------+-------------+------------+---------+---------+------------|
-|      2 |      122196 |     113553 |  152065 |  238945 |            |
-|      3 |     1833129 |     313881 | 1303377 | 3638703 |            |
-|--------+-------------+------------+---------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoCollisionMemory, @15$5);E f-3::@2$4=remote(GlobalLimitTwoCollisionMemory, @12$5);E f-3::@2$5=remote(CancelLimitTwoCollisionMemory, @11$5);E f-3::@3$2=remote(RCSLimitTwoCollisionMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoCollisionMemory, @16$5);E f-3::@3$4=remote(GlobalLimitTwoCollisionMemory, @13$5);E f-3::@3$5=remote(CancelLimitTwoCollisionMemory, @12$5);E f-3
 
 
 *** Will arrive
@@ -2937,16 +2863,16 @@ plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 
 #+PLOT: ind:1
 #+tblname: summaryArriveLimitTwoMemory
 #+CAPTION: Stations Limit Two Will Arrive Memory
-|----------+-------------+------------+--------+---------+------------|
-| Stations | First model | Restricted | Global |  Cancel | UPPAALxUMC |
-|----------+-------------+------------+--------+---------+------------|
-|        1 |        6439 |       8428 |   8332 |    8633 |       8472 |
-|        2 |        9873 |      12499 |  15364 |   16500 |      26787 |
-|        4 |       41429 |      39184 |  58927 |  138157 |    4471207 |
-|        6 |      152739 |     119477 | 205772 |  675403 |            |
-|        8 |      421923 |     273291 | 543112 | 2087719 |            |
-|----------+-------------+------------+--------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoArriveMemory, @6$5);E f-3::@2$4=remote(GlobalLimitTwoArriveMemory, @6$5);E f-3::@2$5=remote(CancelLimitTwoArriveMemory, @6$5);E f-3::@2$6=remote(UppaalLimitTwoArriveMemory, @6$5);E f-3::@3$2=remote(RCSLimitTwoArriveMemory,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoArriveMemory, @7$5);E f-3::@3$4=remote(GlobalLimitTwoArriveMemory, @7$5);E f-3::@3$5=remote(CancelLimitTwoArriveMemory, @7$5);E f-3::@3$6=remote(UppaalLimitTwoArriveMemory, @7$5);E f-3::@4$2=remote(RCSLimitTwoArriveMemory, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoArriveMemory, @8$5);E f-3::@4$4=remote(GlobalLimitTwoArriveMemory, @8$5);E f-3::@4$5=remote(CancelLimitTwoArriveMemory, @8$5);E f-3::@4$6=remote(UppaalLimitTwoArriveMemory, @8$5);E f-3::@5$2=remote(RCSLimitTwoArriveMemory, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoArriveMemory, @9$5);E f-3::@5$4=remote(GlobalLimitTwoArriveMemory, @9$5);E f-3::@5$5=remote(CancelLimitTwoArriveMemory, @9$5);E f-3::@6$2=remote(RCSLimitTwoArriveMemory, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoArriveMemory, @10$5);E f-3::@6$4=remote(GlobalLimitTwoArriveMemory, @10$5);E f-3::@6$5=remote(CancelLimitTwoArriveMemory, @10$5);E f-3
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.439 |      8.428 |   8.332 |    8.633 |      8.472 |
+|        2 |       9.873 |     12.499 |  15.364 |   16.500 |     26.787 |
+|        4 |      41.429 |     39.184 |  58.927 |  138.157 |   4471.207 |
+|        6 |     152.739 |    119.477 | 205.772 |  675.403 |            |
+|        8 |     421.923 |    273.291 | 543.112 | 2087.719 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoArriveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoArriveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoArriveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoArriveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoArriveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoArriveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoArriveMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoArriveMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoArriveMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoArriveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoArriveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoArriveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoArriveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoArriveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoArriveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoArriveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoArriveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoArriveMemory, @10$5)/1000;E f-3
 
 #+begin_src gnuplot :var data=summaryArriveLimitTwoMemory :file stationsArriveLimitTwoMemory.png
 set term png size 1600,1600 font "Helvetica, 16"
@@ -2980,17 +2906,6 @@ plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black" p
 
 #+RESULTS:
 [[file:stationsArriveLimitTwoMemory.png]]
-
-
-#+PLOT: ind:1
-#+CAPTION: Nærumbanen Limit Two Will Arrive Memory
-|--------+-------------+------------+---------+---------+------------|
-| Trains | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
-|--------+-------------+------------+---------+---------+------------|
-|      2 |      122079 |     115008 |  151931 |  238869 |            |
-|      3 |     1833040 |     312583 | 1303300 | 3638563 |            |
-|--------+-------------+------------+---------+---------+------------|
-#+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoArriveMemory, @15$5);E f-3::@2$4=remote(GlobalLimitTwoArriveMemory, @12$5);E f-3::@2$5=remote(CancelLimitTwoArriveMemory, @11$5);E f-3::@3$2=remote(RCSLimitTwoArriveMemory, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoArriveMemory, @16$5);E f-3::@3$4=remote(GlobalLimitTwoArriveMemory, @13$5);E f-3::@3$5=remote(CancelLimitTwoArriveMemory, @12$5);E f-3
 
 
 
