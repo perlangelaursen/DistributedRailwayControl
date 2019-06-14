@@ -1,0 +1,5 @@
+Check1 - All Properties:
+	• Contains the results of verifying all properties from chapter 7 for the first model with 'check 1' configuration.
+
+Check1 - Check17:
+	• Contains the models checked as described in chapter 8 and the corresponding results.
