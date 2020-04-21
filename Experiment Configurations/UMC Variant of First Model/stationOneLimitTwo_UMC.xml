@@ -1,0 +1,278 @@
+Class Train is
+Signals
+    OK, notOK
+Vars
+    segments;
+    boxes;
+    
+    curSeg:int;
+
+    requiresLock;
+
+    lockIndex:int = 1;
+    index:int = 0;
+
+    resBit:int = 0;
+    resCBIndex:int = 1;
+    resSegIndex:int = 1;
+
+    headSeg:int = -1;
+    locks:int = 0;
+
+    resLimit = 2;
+    lockLimit = 2;
+Transitions
+    SingleSegment -> Arrived {[index == segments.length-1]}
+    Arrived -> Arrived
+    
+    SingleSegment -> DoubleSegment {
+        [resSegIndex > index + 1 && lockIndex > index + 1 && index + 1 < segments.length] / 
+         
+        //updateHeadInfo
+        boxes[index+1].pass;
+        headSeg = segments[index+1];    
+    }
+    
+    DoubleSegment -> SingleSegment {/ 
+        //updateLocationInfo
+        curSeg = headSeg;
+        headSeg = -1;
+        if(requiresLock[index +1]){
+            locks--;
+        };
+        index++;
+        
+        boxes[index].passed; 
+    }
+    
+    SingleSegment -> Reserving {
+        - [resSegIndex < segments.length && resSegIndex - 1 - index < resLimit] / 
+        
+        boxes[resCBIndex].reqSeg(this, segments[resSegIndex])
+    }
+    
+    Reserving -> SingleSegment {
+        OK / 
+        
+        //updateResInfo
+        if (resBit == 0) {
+            resBit = 1;
+            resCBIndex++;
+        } else {
+            resBit = 0;
+            resSegIndex++;
+        }
+    }
+        
+    Reserving -> SingleSegment {notOK}
+    
+    SingleSegment -> Locking {
+        [lockIndex < segments.length && locks < lockLimit && ((resBit == 0 && resSegIndex > lockIndex) || (resBit == 1 && resSegIndex >= lockIndex))] / 
+        
+        boxes[lockIndex].reqLock(this, segments[lockIndex-1],segments[lockIndex])
+    }
+        
+    Locking -> SingleSegment {
+        OK / 
+        
+        //updateLockInfo
+        locks++;
+        lockIndex++;
+        //updateLockIndex
+        for i in lockIndex..segments.length {
+            if(!requiresLock[i]){
+                lockIndex++;
+            } else {
+                i = segments.length;
+            }
+        }
+    }
+    Locking -> SingleSegment {notOK}
+end Train;
+Class CB is
+Signals
+    reqSeg(it:Train, s:int),
+    reqLock(it:Train, s1:int, s2:int),
+    pass,
+    passed,
+    OKp
+Vars
+    segments;
+    connected;
+    point:Point;
+    
+    res:Train[3];
+    result:int := -1;
+    t:Train := null;
+    lockedBy:Train;
+    
+    ERROR:int := 0;
+    NOSWITCH:int := 1;
+    DOSWITCH:int := 2;
+Transitions
+    Idle -> SegmentChecked {
+        reqSeg(it,s) /
+        
+        //checkSegment
+        for i in 0..2 {
+            if (segments[i] == s && res[i] == null) then {
+                result = i;
+            }
+        };
+        t = it;
+    }
+        
+    SegmentChecked -> Idle {
+        - [result > -1] /
+                
+        //updateResInfo
+        res[result] = t;
+        //resetVariables
+        result = -1;
+        
+        t.OK;
+        t = null;
+    }
+    
+    SegmentChecked -> Idle {
+        - [result == -1] /
+        
+        t.notOK;
+        
+        //resetVariables
+        t = null;
+        result = -1;
+    }
+    
+    Idle -> LockChecked {
+        reqLock(it,s1,s2) /
+        
+        //checkLock
+        result = ERROR;
+        if(lockedBy == null) then {
+            if ((segments[0] == s1 && (segments[1] == s2 || segments[2] == s2)) ||
+                (segments[0] == s2 && (segments[1] == s1 || segments[2] == s1))) then {
+                if((s1 == segments[0] && s2 == connected) || (s2 == segments[0] && s1 == connected)) then {
+                    result = NOSWITCH;
+                } else {
+                    result = DOSWITCH;
+                }
+            }
+        };
+        t = it;
+    }
+    
+    LockChecked -> Switching {
+        - [result == DOSWITCH] /
+        
+        point.switchPoint;
+    }
+    
+    LockChecked -> Idle {
+        - [result == ERROR] /
+        
+        t.notOK;
+        //resetVariables
+        t = null;
+        result = -1
+    }
+    
+    LockChecked -> Switched {- [result == NOSWITCH]}
+    
+    Switching -> Switched {
+        OKp /
+        //updateConnected
+        if(connected == segments[1]) {
+            connected = segments[2];
+        } else {
+            connected = segments[1];
+        }
+    }
+    
+    Switched -> Idle{
+        /
+        //updateLockInfo
+        lockedBy = t;
+        //resetVariables
+        result = -1;
+        
+        t.OK;
+        
+        //resetVariables
+        t = null;
+    }
+    
+    Idle -> Passing {pass}
+    Passing -> Idle {
+        passed /
+        
+        //clear
+        lockedBy = null;
+        res[0] = null;
+        if(connected == segments[1]){
+            res[1] = null;
+        } else {
+            res[2] = null;
+        }
+    }
+end CB;
+class Point is
+Signals
+    switchPoint
+Vars
+    cb:CB;
+    inPlus:bool
+Transitions
+    Still -> Switching {switchPoint}
+    Switching -> Still { - /
+        inPlus = !inPlus;
+        cb.OKp;}        
+end Point;
+
+
+Objects
+t0:Train(segments=>[0,2,3], curSeg => 0, boxes => [cb0,cb1,cb2,cb3], requiresLock => [false,true,true,false], lockIndex => 1);
+t1:Train(segments=>[3,1], curSeg => 3, boxes => [cb3,cb2,cb1], requiresLock => [false,true,true], lockIndex => 1);
+
+cb0:CB(segments => [0,-1,-1], res => [null,null,null], connected => null);
+cb1:CB(segments => [0,2,1], res => [t0,null,null], connected => 2, point => p0);
+cb2:CB(segments => [3,2,1], res => [t1,null,null], connected => 2, point => p1);
+cb3:CB(segments => [3,-1,-1], res => [null,null,null], connected => null);
+
+p1:Point(inPlus => true, cb => cb2);
+p0:Point(inPlus => true, cb => cb1);
+
+Abstractions{
+  State: inState(t0.Arrived) and inState(t1.Arrived) -> All_Trains_Arrive
+  Action: $t:$cb.pass -> passing($t,$cb)
+  State: inState(t0.DoubleSegment)
+    and t0.curSeg = $s1
+    and t0.headSeg = $s2 -> doublePos(t0,$s1,$s2)
+  State: t0.curSeg = t1.curSeg -> ccCol(t0,t1)
+  State: inState(t0.DoubleSegment) 
+    and t0.headSeg = t1.curSeg -> hcCol(t0,t1)
+  State: inState(t0.DoubleSegment) 
+    and inState(t1.DoubleSegment) 
+    and t0.headSeg = t1.headSeg -> hhCol(t0,t1)
+  State: inState(t1.DoubleSegment)
+    and t1.curSeg = $s1
+    and t1.headSeg = $s2 -> doublePos(t1,$s1,$s2)
+  State: t1.curSeg = t0.curSeg -> ccCol(t1,t0)
+  State: inState(t1.DoubleSegment) 
+    and t1.headSeg = t0.curSeg -> hcCol(t1,t0)
+  State: inState(t1.DoubleSegment) 
+    and inState(t0.DoubleSegment) 
+    and t1.headSeg = t0.headSeg -> hhCol(t1,t0)
+  State: cb0.segments[0] = $s1 and cb0.connected = $s2 -> connects(cb0,$s1,$s2)
+  State: cb0.segments[0] = $s1 and cb0.connected = $s2 -> connects(cb0,$s2,$s1)
+  State: inState(cb0.Switching) -> inSwitching(cb0)
+  State: cb1.segments[0] = $s1 and cb1.connected = $s2 -> connects(cb1,$s1,$s2)
+  State: cb1.segments[0] = $s1 and cb1.connected = $s2 -> connects(cb1,$s2,$s1)
+  State: inState(cb1.Switching) -> inSwitching(cb1)
+  State: cb2.segments[0] = $s1 and cb2.connected = $s2 -> connects(cb2,$s1,$s2)
+  State: cb2.segments[0] = $s1 and cb2.connected = $s2 -> connects(cb2,$s2,$s1)
+  State: inState(cb2.Switching) -> inSwitching(cb2)
+  State: cb3.segments[0] = $s1 and cb3.connected = $s2 -> connects(cb3,$s1,$s2)
+  State: cb3.segments[0] = $s1 and cb3.connected = $s2 -> connects(cb3,$s2,$s1)
+  State: inState(cb3.Switching) -> inSwitching(cb3)
+}

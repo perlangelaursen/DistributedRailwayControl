@@ -1,0 +1,125 @@
+The Formula: AG (((not ccCol(t0,t1)) and ((not hcCol(t0,t1)) and not hhCol(t0,t1))) and ((not ccCol(t1,t0)) and ((not hcCol(t1,t0)) and not hhCol(t1,t0))))
+is TRUE
+(evaluation time= 0.088 sec.)
+(total states generated= 32, computations fragments generated= 576, total evaluation time= 0.088 sec.)
+
+
+The Formula: AG (doublePos(t0,0,1) implies connects(cb1,0,1))
+is TRUE
+(evaluation time= 0.059 sec.)
+(total states generated= 32, computations fragments generated= 96, total evaluation time= 0.059 sec.)
+
+
+The Formula: not EF {reqSegS(t1,0)} true
+is TRUE
+(evaluation time= 0.045 sec.)
+(total states generated= 32, computations fragments generated= 65, total evaluation time= 0.045 sec.)
+
+
+The Formula: not EF {reqSegAt(t0,cb0) or (reqSegAt(t1,cb0) or reqSegAt(t1,cb1))} true
+is TRUE
+(evaluation time= 0.054 sec.)
+(total states generated= 32, computations fragments generated= 65, total evaluation time= 0.054 sec.)
+
+
+The Formula: AG ((resOK(cb0,0) implies segFree(cb0,0)) and ((resOK(cb1,0) implies segFree(cb1,0)) and ((resOK(cb1,1) implies segFree(cb1,1)) and (resOK(cb2,1) implies segFree(cb2,1)))))
+is TRUE
+(evaluation time= 0.066 sec.)
+(total states generated= 32, computations fragments generated= 386, total evaluation time= 0.066 sec.)
+
+
+The Formula: not EF (lockLimitExceeded(t0) or lockLimitExceeded(t1))
+is TRUE
+(evaluation time= 0.056 sec.)
+(total states generated= 32, computations fragments generated= 129, total evaluation time= 0.056 sec.)
+
+
+The Formula: not EF {reqLockingAt(t0,cb0) or (reqLockingAt(t1,cb0) or reqLockingAt(t1,cb1))} true
+is TRUE
+(evaluation time= 0.054 sec.)
+(total states generated= 32, computations fragments generated= 65, total evaluation time= 0.054 sec.)
+
+
+The Formula: AG [reqLocking(t0,cb1,0,1)] (reserved(t0,0,cb1) and reserved(t0,1,cb1))
+is TRUE
+(evaluation time= 0.049 sec.)
+(total states generated= 32, computations fragments generated= 70, total evaluation time= 0.049 sec.)
+
+
+The Formula: AG ((inSwitched(cb0) implies lockedBy(cb0,null)) and ((inSwitched(cb1) implies lockedBy(cb1,null)) and (inSwitched(cb2) implies lockedBy(cb2,null))))
+is TRUE
+(evaluation time= 0.060 sec.)
+(total states generated= 32, computations fragments generated= 290, total evaluation time= 0.060 sec.)
+
+
+The Formula: not EF {reqLockingS(t0,0,0) or (reqLockingS(t1,0,0) or reqLockingS(t1,0,1))} true
+is TRUE
+(evaluation time= 0.047 sec.)
+(total states generated= 32, computations fragments generated= 65, total evaluation time= 0.047 sec.)
+
+
+The Formula: AG [reqLocking(t0,cb1,0,1)] canConnect(cb1,0,1)
+is TRUE
+(evaluation time= 0.048 sec.)
+(total states generated= 32, computations fragments generated= 66, total evaluation time= 0.048 sec.)
+
+
+The Formula: AG (([switching(cb0)] ((not inCrit(cb0,t0)) and not inCrit(cb0,t1))) and (([switching(cb1)] ((not inCrit(cb1,t0)) and not inCrit(cb1,t1))) and [switching(cb2)] ((not inCrit(cb2,t0)) and not inCrit(cb2,t1))))
+is TRUE
+(evaluation time= 0.048 sec.)
+(total states generated= 32, computations fragments generated= 192, total evaluation time= 0.048 sec.)
+
+
+The Formula: AG ((doublePos(t0,0,1) and isSwitchBox(cb1)) implies locked(t0,cb1))
+is TRUE
+(evaluation time= 0.051 sec.)
+(total states generated= 32, computations fragments generated= 128, total evaluation time= 0.051 sec.)
+
+
+The Formula: not EF {passing(t0,cb2) or passing(t1,cb2)} true
+is TRUE
+(evaluation time= 0.046 sec.)
+(total states generated= 32, computations fragments generated= 65, total evaluation time= 0.046 sec.)
+
+
+The Formula: AG (doublePos(t0,0,1) implies (reserved(t0,1,cb1) and reserved(t0,1,cb2)))
+is TRUE
+(evaluation time= 0.050 sec.)
+(total states generated= 32, computations fragments generated= 96, total evaluation time= 0.050 sec.)
+
+
+The Formula: AG ((reserved(t0,0,cb1) implies reservedBy(cb1,0,t0)) and (reserved(t0,0,cb2) implies reservedBy(cb2,0,t0)))
+is TRUE
+(evaluation time= 0.064 sec.)
+(total states generated= 32, computations fragments generated= 224, total evaluation time= 0.064 sec.)
+
+
+The Formula: AG ((locked(t0,cb0) implies lockedBy(cb0,t0)) and ((locked(t0,cb1) implies lockedBy(cb1,t0)) and ((locked(t0,cb2) implies lockedBy(cb2,t0)) and ((locked(t1,cb1) implies lockedBy(cb1,t1)) and (locked(t1,cb2) implies lockedBy(cb2,t1))))))
+is TRUE
+(evaluation time= 0.069 sec.)
+(total states generated= 32, computations fragments generated= 480, total evaluation time= 0.069 sec.)
+
+
+The Formula: AG (doublePos(t0,0,1) implies connects(cb0,0,1))
+is TRUE
+(evaluation time= 0.051 sec.)
+(total states generated= 32, computations fragments generated= 96, total evaluation time= 0.051 sec.)
+
+
+The Formula: EF All_Trains_Arrive
+is FALSE
+(evaluation time= 0.055 sec.)
+
+(total states generated= 32, computations fragments generated= 64, total evaluation time= 0.055 sec.)
+
+
+The Formula: not EF (doublePos(t0,0,0) or (doublePos(t1,0,0) or doublePos(t1,0,1)))
+is TRUE
+(evaluation time= 0.060 sec.)
+(total states generated= 32, computations fragments generated= 193, total evaluation time= 0.060 sec.)
+
+
+The Formula: not EF {passing(t0,cb0) or (passing(t1,cb0) or passing(t1,cb1))} true
+is TRUE
+(evaluation time= 0.048 sec.)
+(total states generated= 32, computations fragments generated= 65, total evaluation time= 0.048 sec.)

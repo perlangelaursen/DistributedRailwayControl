@@ -1,0 +1,28 @@
+The Formula: AG [passing(t0,cb3)] not inSwitching(p0)
+is TRUE
+(evaluation time= 0.058 sec.)
+(total states generated= 36, computations fragments generated= 74, total evaluation time= 0.058 sec.)
+
+
+The Formula: AG (doublePos(t0,0,2) implies connects(cb3,0,2))
+is TRUE
+(evaluation time= 0.057 sec.)
+(total states generated= 36, computations fragments generated= 110, total evaluation time= 0.057 sec.)
+
+
+The Formula: not EF (doublePos(t0,0,0) or (doublePos(t0,0,1) or (doublePos(t0,1,0) or (doublePos(t0,1,1) or doublePos(t0,1,2)))))
+is TRUE
+(evaluation time= 0.084 sec.)
+(total states generated= 36, computations fragments generated= 361, total evaluation time= 0.084 sec.)
+
+
+The Formula: not EF {passing(t0,cb0) or passing(t0,cb1)} true
+is TRUE
+(evaluation time= 0.050 sec.)
+(total states generated= 36, computations fragments generated= 73, total evaluation time= 0.050 sec.)
+
+
+The Formula: EF All_Trains_Arrive
+is TRUE
+(evaluation time= 0.048 sec.)
+(total states generated= 36, computations fragments generated= 40, total evaluation time= 0.048 sec.)

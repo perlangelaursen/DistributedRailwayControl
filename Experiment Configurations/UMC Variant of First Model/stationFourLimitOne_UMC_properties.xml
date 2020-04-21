@@ -1,0 +1,13 @@
+
+//NO COLLISION
+AG((~ccCol(t0,t1) & ~hcCol(t0,t1) & ~hhCol(t0,t1)) & (~ccCol(t1,t0) & ~hcCol(t1,t0) & ~hhCol(t1,t0)))
+
+//NO DERAILMENT
+//If a train is in a critical section, the point in that section is not in the middle of switching
+//AG(([passing(t0, cb1)] ~inSwitching(p0)) & ([passing(t0, cb2)] ~inSwitching(p1)) & ([passing(t0, cb3)] ~inSwitching(p2)) & ([passing(t0, cb4)] ~inSwitching(p3)) & ([passing(t0, cb5)] ~inSwitching(p4)) & ([passing(t0, cb6)] ~inSwitching(p5)) & ([passing(t0, cb7)] ~inSwitching(p6)) & ([passing(t0, cb8)] ~inSwitching(p7)) & ([passing(t1, cb8)] ~inSwitching(p7)) & ([passing(t1, cb7)] ~inSwitching(p6)) & ([passing(t1, cb6)] ~inSwitching(p5)) & ([passing(t1, cb5)] ~inSwitching(p4)) & ([passing(t1, cb4)] ~inSwitching(p3)) & ([passing(t1, cb3)] ~inSwitching(p2)) & ([passing(t1, cb2)] ~inSwitching(p1)) & ([passing(t1, cb1)] ~inSwitching(p0)))
+//If a train is in a critical section, then the segments that it is moving on are connected
+//AG((doublePos(t0,0,2) -> connects(cb1,0,2)) & (doublePos(t0,2,3) -> connects(cb2,2,3)) & (doublePos(t0,3,5) -> connects(cb3,3,5)) & (doublePos(t0,5,6) -> connects(cb4,5,6)) & (doublePos(t0,6,8) -> connects(cb5,6,8)) & (doublePos(t0,8,9) -> connects(cb6,8,9)) & (doublePos(t0,9,11) -> connects(cb7,9,11)) & (doublePos(t0,11,12) -> connects(cb8,11,12)) & (doublePos(t1,12,10) -> connects(cb8,12,10)) & (doublePos(t1,10,9) -> connects(cb7,10,9)) & (doublePos(t1,9,7) -> connects(cb6,9,7)) & (doublePos(t1,7,6) -> connects(cb5,7,6)) & (doublePos(t1,6,4) -> connects(cb4,6,4)) & (doublePos(t1,4,3) -> connects(cb3,4,3)) & (doublePos(t1,3,1) -> connects(cb2,3,1)))
+
+//LIVENESS
+//EF All_Trains_Arrive
+

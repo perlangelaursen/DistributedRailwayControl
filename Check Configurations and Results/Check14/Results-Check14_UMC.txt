@@ -1,0 +1,34 @@
+The Formula: AG (((not ccCol(t0,t1)) and ((not hcCol(t0,t1)) and not hhCol(t0,t1))) and ((not ccCol(t1,t0)) and ((not hcCol(t1,t0)) and not hhCol(t1,t0))))
+is TRUE
+(evaluation time= 0.359 sec.)
+(total states generated= 193, computations fragments generated= 3474, total evaluation time= 0.359 sec.)
+
+
+The Formula: AG (([passing(t0,cb3)] not inSwitching(p0)) and [passing(t1,cb3)] not inSwitching(p0))
+is TRUE
+(evaluation time= 0.080 sec.)
+(total states generated= 193, computations fragments generated= 784, total evaluation time= 0.080 sec.)
+
+
+The Formula: AG ((doublePos(t0,0,1) implies connects(cb3,0,1)) and (doublePos(t1,2,0) implies connects(cb3,2,0)))
+is TRUE
+(evaluation time= 0.134 sec.)
+(total states generated= 193, computations fragments generated= 1171, total evaluation time= 0.134 sec.)
+
+
+The Formula: not EF (doublePos(t0,0,0) or (doublePos(t0,0,2) or (doublePos(t0,2,0) or (doublePos(t0,2,1) or (doublePos(t0,2,2) or (doublePos(t1,1,0) or (doublePos(t1,1,1) or (doublePos(t1,1,2) or (doublePos(t1,2,1) or doublePos(t1,2,2))))))))))
+is TRUE
+(evaluation time= 0.437 sec.)
+(total states generated= 193, computations fragments generated= 3861, total evaluation time= 0.437 sec.)
+
+
+The Formula: not EF {passing(t0,cb1) or (passing(t0,cb2) or (passing(t1,cb0) or passing(t1,cb2)))} true
+is TRUE
+(evaluation time= 0.074 sec.)
+(total states generated= 193, computations fragments generated= 387, total evaluation time= 0.074 sec.)
+
+
+The Formula: EF All_Trains_Arrive
+is TRUE
+(evaluation time= 0.059 sec.)
+(total states generated= 193, computations fragments generated= 92, total evaluation time= 0.059 sec.)

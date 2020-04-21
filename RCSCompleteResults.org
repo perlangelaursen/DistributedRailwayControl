@@ -1,0 +1,2911 @@
+* RCS 
+** Limit One
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+caption: First model: No derailment 1 limit 1 Elapsed time in seconds
+#+TBLNAME: RCSLimitOneMoveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.003 |    0.002 |    0.002 |    0.002 |
+| Example with two trains    |    0.020 |    0.018 |    0.013 |    0.017 |
+| Shared Segment             |    0.017 |    0.015 |    0.013 |    0.015 |
+| Large Network              |    0.011 |    0.014 |    0.017 |    0.014 |
+| Station One                |    0.013 |    0.009 |    0.012 |    0.011 |
+| Station Two                |    0.074 |    0.076 |    0.075 |    0.075 |
+| Station Four               |    1.690 |    1.715 |    1.755 |    1.720 |
+| Station Six                |   27.474 |   27.433 |   27.203 |   27.370 |
+| Station Eight              |  165.631 |  165.800 |  165.955 |  165.795 |
+| Station Ten                |  601.131 |  602.165 |  600.341 |  601.212 |
+| Station Twelfth            | 1749.956 | 1751.553 | 1724.338 | 1741.949 |
+| Two trains same direction  |    0.014 |    0.019 |    0.016 |    0.016 |
+| Four trains same direction | 1146.256 | 1130.966 | 1133.690 | 1136.971 |
+| Nærumbanen (2T)            |   24.112 |   24.158 |   24.186 |   24.152 |
+| Nærumbanen (3T)            |  648.154 |  655.805 |  660.029 |  654.663 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: No derailment 1 limit 1 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitOneMoveMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   5988 |   5996 |   6004 |    5996 |
+| Example with two trains    |   6512 |   6528 |   6538 |    6526 |
+| Shared Segment             |   7464 |   7472 |   7516 |    7484 |
+| Large Network              |   8928 |   8960 |   8972 |    8953 |
+| Station One                |   6472 |   6492 |   6500 |    6488 |
+| Station Two                |   9252 |   9288 |   9296 |    9279 |
+| Station Four               |  29580 |  29672 |  29688 |   29647 |
+| Station Six                |  69912 |  70192 |  70200 |   70101 |
+| Station Eight              | 205372 | 205396 | 205404 |  205391 |
+| Station Ten                | 313016 | 313220 | 313748 |  313328 |
+| Station Twelfth            | 560580 | 724492 | 723488 |  669520 |
+| Two trains same direction  |   7488 |   7496 |   7540 |    7508 |
+| Four trains same direction | 726732 | 749296 | 749460 |  741829 |
+| Nærumbanen (2T)            |  78428 |  78824 |  78828 |   78693 |
+| Nærumbanen (3T)            | 384220 | 385180 | 385192 |  384864 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: First model: No derailment 2 limit 1 Elapsed time in seconds
+#+TBLNAME: RCSLimitOneCriticalTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.001 |    0.003 |    0.004 |    0.003 |
+| Example with two trains    |    0.015 |    0.021 |    0.021 |    0.019 |
+| Shared Segment             |    0.009 |    0.014 |     0.02 |    0.014 |
+| Large Network              |    0.017 |    0.017 |    0.015 |    0.016 |
+| Station One                |    0.012 |    0.011 |    0.012 |    0.012 |
+| Station Two                |    0.068 |    0.077 |    0.075 |    0.073 |
+| Station Four               |    1.679 |    1.723 |    1.721 |    1.708 |
+| Station Six                |   29.505 |   29.477 |   29.470 |   29.484 |
+| Station Eight              |  166.133 |  164.812 |  164.793 |  165.246 |
+| Station Ten                |  599.734 |  601.485 |  600.747 |  600.655 |
+| Station Twelfth            | 1744.904 | 1745.973 | 1739.476 | 1743.451 |
+| Two trains same direction  |    0.022 |    0.015 |    0.019 |    0.019 |
+| Four trains same direction | 1121.890 | 1139.341 | 1130.754 | 1130.662 |
+| Nærumbanen (2T)            |   24.004 |   24.091 |   24.111 |   24.069 |
+| Nærumbanen (3T)            |  664.594 |  660.006 |  657.312 |  660.637 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: No derailment 2 limit 1 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitOneCriticalMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   5984 |   5996 |   5996 |    5992 |
+| Example with two trains    |   6500 |   6512 |   6516 |    6509 |
+| Shared Segment             |   7460 |   7464 |   7468 |    7464 |
+| Large Network              |   8920 |   8944 |   8948 |    8937 |
+| Station One                |   6464 |   6480 |   6480 |    6475 |
+| Station Two                |   9252 |   9276 |   9280 |    9269 |
+| Station Four               |  25772 |  25848 |  25860 |   25827 |
+| Station Six                |  69912 |  70168 |  70180 |   70087 |
+| Station Eight              | 158408 | 158508 | 158508 |  158475 |
+| Station Ten                | 312992 | 313008 | 313132 |  313044 |
+| Station Twelfth            | 559520 | 559532 | 559600 |  559551 |
+| Two trains same direction  |   7484 |   7488 |   7492 |    7488 |
+| Four trains same direction | 726708 | 726852 | 726864 |  726808 |
+| Nærumbanen (2T)            |  78428 |  78800 |  78808 |   78679 |
+| Nærumbanen (3T)            | 382556 | 383184 | 383544 |  383095 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: First Model: No collision limit 1 Elapsed time in seconds
+#+TBLNAME: RCSLimitOneCollisionTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.002 |    0.003 |    0.004 |    0.003 |
+| Example with two trains    |    0.022 |    0.024 |    0.015 |    0.020 |
+| Shared Segment             |    0.014 |    0.014 |    0.014 |    0.014 |
+| Large Network              |    0.011 |    0.015 |    0.021 |    0.016 |
+| Station One                |    0.007 |     0.01 |    0.008 |    0.008 |
+| Station Two                |    0.082 |    0.093 |    0.081 |    0.085 |
+| Station Four               |    1.702 |    1.911 |    1.738 |    1.784 |
+| Station Six                |   29.678 |   29.678 |   29.803 |   29.720 |
+| Station Eight              |  164.477 |  165.993 |  165.677 |  165.382 |
+| Station Ten                |  599.563 |  599.868 |  597.934 |  599.122 |
+| Station Twelfth            | 1741.865 | 1741.334 | 1747.987 | 1743.729 |
+| Two trains same direction  |    0.016 |    0.019 |    0.019 |    0.018 |
+| Four trains same direction | 1142.559 | 1141.663 | 1139.661 | 1141.294 |
+| Nærumbanen (2T)            |   24.081 |   24.345 |   24.339 |   24.255 |
+| Nærumbanen (3T)            |  671.008 |  653.381 |  663.635 |  662.675 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: No collision limit 1 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitOneCollisionMemory
+|----------------------------+--------+---------+--------+---------|
+| Configuration              |  First |  Second |  Third | Average |
+|----------------------------+--------+---------+--------+---------|
+| Example with one train     |   6000 |    6016 |   6020 |    6012 |
+| Example with two trains    |   6528 |    6552 |   6572 |    6551 |
+| Shared Segment             |   7468 |    7520 |   7532 |    7507 |
+| Large Network              |   8932 |    8972 |   8988 |    8964 |
+| Station One                |   6484 |    6524 |   6536 |    6515 |
+| Station Two                |   9268 |    9308 |   9324 |    9300 |
+| Station Four               |  25792 |   25880 |  25896 |   25856 |
+| Station Six                |  69916 |   70200 |  70220 |   70112 |
+| Station Eight              | 158424 |  158440 | 158628 |  158497 |
+| Station Ten                | 312972 |  312984 | 313116 |  313024 |
+| Station Twelfth            | 723464 | 1051300 | 887412 |  887392 |
+| Two trains same direction  |   7496 |    7548 |   7560 |    7535 |
+| Four trains same direction | 726716 |  726880 | 726904 |  726833 |
+| Nærumbanen (2T)            |  78436 |   78828 |  78888 |   78717 |
+| Nærumbanen (3T)            | 382548 |  383224 | 383544 |  383105 |
+|----------------------------+--------+---------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: First model: Will arrive limit 1 Elapsed time in seconds
+#+TBLNAME: RCSLimitOneArriveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.002 |    0.003 |    0.003 |    0.003 |
+| Example with two trains    |    0.023 |    0.018 |    0.013 |    0.018 |
+| Shared Segment             |    0.010 |    0.010 |    0.010 |    0.010 |
+| Large Network              |    0.013 |    0.020 |    0.020 |    0.018 |
+| Station One                |    0.012 |    0.008 |    0.010 |    0.010 |
+| Station Two                |    0.082 |    0.067 |    0.081 |    0.077 |
+| Station Four               |    1.679 |    1.740 |    1.715 |    1.711 |
+| Station Six                |   27.342 |   27.453 |   27.331 |   27.375 |
+| Station Eight              |  163.763 |  163.562 |  162.250 |  163.192 |
+| Station Ten                |  590.130 |  587.481 |  588.739 |  588.783 |
+| Station Twelfth            | 1731.068 | 1730.117 | 1726.287 | 1729.157 |
+| Two trains same direction  |    0.018 |    0.017 |    0.018 |    0.018 |
+| Four trains same direction | 1082.917 | 1090.144 | 1096.833 | 1089.965 |
+| Nærumbanen (2T)            |   23.900 |   23.947 |   23.908 |   23.918 |
+| Nærumbanen (3T)            |  662.400 |  662.405 |  669.196 |  664.667 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: Will arrive limit 1 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitOneArriveMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   5956 |   5960 |   5960 |    5959 |
+| Example with two trains    |   6468 |   6472 |   6472 |    6471 |
+| Shared Segment             |   7436 |   7436 |   7436 |    7436 |
+| Large Network              |   8888 |   8904 |   8908 |    8900 |
+| Station One                |   6436 |   6440 |   6440 |    6439 |
+| Station Two                |   9216 |   9232 |   9236 |    9228 |
+| Station Four               |  25736 |  25804 |  25804 |   25781 |
+| Station Six                |  69812 |  70064 |  70068 |   69981 |
+| Station Eight              | 158152 | 158152 | 158236 |  158180 |
+| Station Ten                | 312360 | 312528 | 312528 |  312472 |
+| Station Twelfth            | 557696 | 557984 | 557984 |  557888 |
+| Two trains same direction  |   7460 |   7460 |   7460 |    7460 |
+| Four trains same direction | 726668 | 726800 | 726808 |  726759 |
+| Nærumbanen (2T)            |  78392 |  78704 |  78704 |   78600 |
+| Nærumbanen (3T)            | 382464 | 383120 | 383192 |  382925 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+** Limit Two
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+caption: First model: No derailment 1 limit 2 Elapsed time in seconds
+#+TBLNAME: RCSLimitTwoMoveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains    |    0.025 |    0.027 |    0.028 |    0.027 |
+| Shared Segment             |    0.018 |     0.02 |    0.015 |    0.018 |
+| Large Network              |    0.017 |    0.028 |    0.023 |    0.023 |
+| Station One                |    0.017 |    0.016 |    0.015 |    0.016 |
+| Station Two                |     0.18 |    0.187 |     0.19 |    0.186 |
+| Station Four               |    8.239 |    8.075 |    8.076 |    8.130 |
+| Station Six                |  176.213 |  175.867 |  176.697 |  176.259 |
+| Station Eight              | 1127.661 | 1124.994 | 1128.751 | 1127.135 |
+| Station Ten                | 4311.035 | 4309.434 | 4313.687 | 4311.385 |
+| Station Twelfth            |          |          |          |          |
+| Two trains same direction  |    0.028 |    0.034 |    0.023 |    0.028 |
+| Four trains same direction |          |          |          |          |
+| Nærumbanen (2T)            |  114.581 |  114.372 |  114.491 |  114.481 |
+| Nærumbanen (3T)            | 4375.625 | 4437.235 | 4543.133 | 4451.998 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: No derailment 1 limit 2 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitTwoMoveMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    5992 |    5996 |    5996 |    5995 |
+| Example with two trains    |    6536 |    6536 |    6536 |    6536 |
+| Shared Segment             |    7484 |    7488 |    7536 |    7503 |
+| Large Network              |    8948 |    8980 |    8984 |    8971 |
+| Station One                |    6480 |    6500 |    6508 |    6496 |
+| Station Two                |    9908 |    9940 |    9944 |    9931 |
+| Station Four               |   41412 |   41540 |   41556 |   41503 |
+| Station Six                |  152812 |  152908 |  152908 |  152876 |
+| Station Eight              |  422192 |  422384 |  422392 |  422323 |
+| Station Ten                |  954604 |  954948 |  954960 |  954837 |
+| Station Twelfth            |         |         |         |         |
+| Two trains same direction  |    7540 |    7544 |    7592 |    7559 |
+| Four trains same direction |         |         |         |         |
+| Nærumbanen (2T)            |  122060 |  122396 |  122420 |  122292 |
+| Nærumbanen (3T)            | 1834760 | 1834804 | 1834812 | 1834792 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: First model: No derailment 2 limit 2 Elapsed time in seconds
+#+TBLNAME: RCSLimitTwoCriticalTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains    |    0.015 |    0.025 |    0.018 |    0.019 |
+| Shared Segment             |    0.023 |    0.021 |    0.019 |    0.021 |
+| Large Network              |    0.026 |    0.023 |    0.023 |    0.024 |
+| Station One                |     0.01 |    0.012 |    0.017 |    0.013 |
+| Station Two                |     0.18 |    0.203 |    0.211 |    0.198 |
+| Station Four               |    8.055 |    8.083 |    8.074 |    8.071 |
+| Station Six                |  172.488 |  172.487 |  173.026 |  172.667 |
+| Station Eight              | 1138.254 | 1136.482 | 1139.334 | 1138.023 |
+| Station Ten                | 4346.405 |  4327.87 | 4331.854 | 4335.376 |
+| Station Twelfth            |          |          |          |          |
+| Two trains same direction  |     0.02 |    0.028 |    0.028 |    0.025 |
+| Four trains same direction |          |          |          |          |
+| Nærumbanen (2T)            |  113.146 |  112.966 |  112.577 |  112.896 |
+| Nærumbanen (3T)            | 4616.238 | 4564.949 | 4581.939 | 4587.709 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: No derailment 2 limit 2 Memory Usage Peak
+#+TBLNAME: RCSLimitTwoCriticalMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    5988 |    5988 |    5988 |    5988 |
+| Example with two trains    |    6528 |    6528 |    6532 |    6529 |
+| Shared Segment             |    7476 |    7480 |    7484 |    7480 |
+| Large Network              |    8952 |    8984 |    8996 |    8977 |
+| Station One                |    6468 |    6484 |    6484 |    6479 |
+| Station Two                |    9892 |    9916 |    9920 |    9909 |
+| Station Four               |   41404 |   41520 |   41528 |   41484 |
+| Station Six                |  152800 |  152876 |  152876 |  152851 |
+| Station Eight              |  422180 |  422364 |  422364 |  422303 |
+| Station Ten                | 1050988 | 1243744 | 1244084 | 1179605 |
+| Station Twelfth            |         |         |         |         |
+| Two trains same direction  |    7524 |    7528 |    7532 |    7528 |
+| Four trains same direction |         |         |         |         |
+| Nærumbanen (2T)            |  122032 |  122124 |  122368 |  122175 |
+| Nærumbanen (3T)            | 1833100 | 1833140 | 1833140 | 1833127 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** No collision
+**** Elapsed time
+#+caption: First model: No collision limit 2 Elapsed time in seconds
+#+TBLNAME: RCSLimitTwoCollisionTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains    |    0.018 |    0.018 |    0.024 |    0.020 |
+| Shared Segment             |    0.015 |     0.02 |    0.023 |    0.019 |
+| Large Network              |    0.023 |    0.032 |    0.027 |    0.027 |
+| Station One                |    0.011 |    0.017 |    0.012 |    0.013 |
+| Station Two                |    0.183 |    0.215 |    0.187 |    0.195 |
+| Station Four               |     8.09 |    8.115 |    8.241 |    8.149 |
+| Station Six                |  176.156 |  175.635 |  175.459 |  175.750 |
+| Station Eight              | 1144.312 | 1146.043 | 1144.102 | 1144.819 |
+| Station Ten                | 4327.887 | 4350.655 | 4352.747 | 4343.763 |
+| Station Twelfth            |          |          |          |          |
+| Two trains same direction  |    0.024 |    0.029 |    0.022 |    0.025 |
+| Four trains same direction |          |          |          |          |
+| Nærumbanen (2T)            |  111.647 |  111.867 |  111.601 |  111.705 |
+| Nærumbanen (3T)            | 4707.002 | 4711.929 | 4683.026 | 4700.652 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: No collision limit 2 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitTwoCollisionMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    5996 |    5992 |    5996 |    5995 |
+| Example with two trains    |    6548 |    6552 |    6576 |    6559 |
+| Shared Segment             |    7480 |    7532 |    7554 |    7522 |
+| Large Network              |    8960 |    9000 |    9016 |    8992 |
+| Station One                |    6492 |    6520 |    6532 |    6515 |
+| Station Two                |    9912 |    9952 |    9968 |    9944 |
+| Station Four               |   41416 |   41548 |   41560 |   41508 |
+| Station Six                |  152804 |  152904 |  152916 |  152875 |
+| Station Eight              |  422196 |  422388 |  422396 |  422327 |
+| Station Ten                |  955772 |  954604 |  954952 |  955109 |
+| Station Twelfth            |         |         |         |         |
+| Two trains same direction  |    7536 |    7588 |    7600 |    7575 |
+| Four trains same direction |         |         |         |         |
+| Nærumbanen (2T)            |  122040 |  122144 |  122404 |  122196 |
+| Nærumbanen (3T)            | 1833096 | 1833144 | 1833148 | 1833129 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: First model: Will arrive limit 2 Elapsed time in seconds
+#+TBLNAME: RCSLimitTwoArriveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.003 |    0.004 |    0.003 |    0.003 |
+| Example with two trains    |    0.026 |    0.025 |    0.026 |    0.026 |
+| Shared Segment             |    0.021 |    0.022 |    0.017 |    0.020 |
+| Large Network              |     0.02 |    0.027 |    0.021 |    0.023 |
+| Station One                |    0.017 |    0.012 |    0.016 |    0.015 |
+| Station Two                |    0.191 |    0.196 |    0.203 |    0.197 |
+| Station Four               |    8.081 |    8.118 |    8.129 |    8.109 |
+| Station Six                |  178.496 |  176.697 |  177.664 |  177.619 |
+| Station Eight              | 1134.646 | 1132.922 | 1133.608 | 1133.725 |
+| Station Ten                | 4318.385 | 4306.554 | 4316.069 | 4313.669 |
+| Station Twelfth            |          |          |          |          |
+| Two trains same direction  |    0.021 |    0.025 |    0.031 |    0.026 |
+| Four trains same direction |          |          |          |          |
+| Nærumbanen (2T)            |  113.356 |  113.335 |  113.301 |  113.331 |
+| Nærumbanen (3T)            | 4768.012 | 4734.325 | 4725.702 | 4742.680 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: First model: Will arrive limit 2 Memory Usage Peak in KB
+#+TBLNAME: RCSLimitTwoArriveMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    5960 |    5960 |    5956 |    5959 |
+| Example with two trains    |    6500 |    6504 |    6504 |    6503 |
+| Shared Segment             |    7452 |    7452 |    7452 |    7452 |
+| Large Network              |    8912 |    8928 |    8932 |    8924 |
+| Station One                |    6436 |    6440 |    6440 |    6439 |
+| Station Two                |    9860 |    9880 |    9880 |    9873 |
+| Station Four               |   41372 |   41456 |   41460 |   41429 |
+| Station Six                |  152688 |  152764 |  152764 |  152739 |
+| Station Eight              |  421808 |  421980 |  421980 |  421923 |
+| Station Ten                |  953328 |  953672 |  953672 |  953557 |
+| Station Twelfth            |         |         |         |         |
+| Two trains same direction  |    7504 |    7504 |    7504 |    7504 |
+| Four trains same direction |         |         |         |         |
+| Nærumbanen (2T)            |  122016 |  122104 |  122116 |  122079 |
+| Nærumbanen (3T)            | 1833016 | 1833052 | 1833052 | 1833040 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+* RCS Restricted
+** Limit One
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+caption: Restricted variant: No derailment 1 limit 1 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitOneMoveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.004 |    0.003 |    0.004 |    0.004 |
+| Example with two trains    |    0.014 |    0.016 |    0.013 |    0.014 |
+| Shared Segment             |    0.015 |    0.018 |    0.018 |    0.017 |
+| Large Network              |    0.011 |    0.026 |    0.025 |    0.021 |
+| Station One                |    0.010 |    0.010 |    0.021 |    0.014 |
+| Station Two                |    0.075 |    0.097 |    0.079 |    0.084 |
+| Station Four               |    1.494 |    1.396 |    1.355 |    1.415 |
+| Station Six                |   22.872 |   23.017 |   22.706 |   22.865 |
+| Station Eight              |  135.759 |  133.936 |  134.133 |  134.609 |
+| Station Ten                |  475.160 |  477.251 |  474.018 |  475.476 |
+| Station Twelfth            | 1357.894 | 1340.195 | 1289.723 | 1329.271 |
+| Two trains same direction  |    0.022 |    0.024 |    0.026 |    0.024 |
+| Four trains same direction |  835.163 |  830.236 |  833.745 |  833.048 |
+| Nærumbanen (2T)            |   20.145 |   19.258 |   19.238 |   19.547 |
+| Nærumbanen (3T)            |  317.762 |  318.903 |  324.661 |  320.442 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: No derailment 1 limit 1 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitOneMoveMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   7640 |   7652 |   7656 |    7649 |
+| Example with two trains    |   8576 |   8584 |   8588 |    8583 |
+| Shared Segment             |   9816 |   9848 |   9852 |    9839 |
+| Large Network              |  12024 |  12072 |  12084 |   12060 |
+| Station One                |   8544 |   8552 |   8560 |    8552 |
+| Station Two                |  14256 |  14308 |  14320 |   14295 |
+| Station Four               |  37932 |  38164 |  38172 |   38089 |
+| Station Six                | 105136 | 105888 | 105888 |  105637 |
+| Station Eight              | 221068 | 222868 | 222868 |  222268 |
+| Station Ten                | 424840 | 428096 | 428268 |  427068 |
+| Station Twelfth            | 725592 | 732964 | 732964 |  730507 |
+| Two trains same direction  |  11664 |  11700 |  11704 |   11689 |
+| Four trains same direction | 686480 | 686620 | 686636 |  686579 |
+| Nærumbanen (2T)            | 117620 | 118440 | 118644 |  118235 |
+| Nærumbanen (3T)            | 289164 | 290112 | 290112 |  289796 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Restricted variant: No derailment 2 limit 1 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitOneCriticalTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.003 |    0.004 |    0.004 |    0.004 |
+| Example with two trains    |    0.027 |    0.030 |    0.029 |    0.029 |
+| Shared Segment             |    0.014 |    0.017 |    0.018 |    0.016 |
+| Large Network              |    0.012 |    0.022 |    0.019 |    0.018 |
+| Station One                |    0.019 |    0.022 |    0.011 |    0.017 |
+| Station Two                |    0.067 |    0.077 |    0.078 |    0.074 |
+| Station Four               |    1.264 |    1.385 |    1.299 |    1.316 |
+| Station Six                |   21.984 |   22.251 |   22.444 |   22.226 |
+| Station Eight              |  135.149 |  134.701 |  136.291 |  135.380 |
+| Station Ten                |  471.003 |  472.720 |  472.425 |  472.049 |
+| Station Twelfth            | 1356.472 | 1356.409 | 1308.059 | 1340.313 |
+| Two trains same direction  |    0.024 |    0.022 |    0.026 |    0.024 |
+| Four trains same direction |  819.379 |  779.918 |  786.767 |  795.355 |
+| Nærumbanen (2T)            |   19.946 |   20.036 |   20.275 |   20.086 |
+| Nærumbanen (3T)            |  332.490 |  333.240 |  331.178 |  332.303 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: No derailment 2 limit 1 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitOneCriticalMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   7608 |   7616 |   7628 |    7617 |
+| Example with two trains    |   8560 |   8568 |   8572 |    8567 |
+| Shared Segment             |   9792 |   9820 |   9832 |    9815 |
+| Large Network              |  12004 |  12052 |  12064 |   12040 |
+| Station One                |   8512 |   8520 |   8524 |    8519 |
+| Station Two                |  12408 |  12456 |  12464 |   12443 |
+| Station Four               |  36500 |  36728 |  36752 |   36660 |
+| Station Six                | 105660 | 106012 | 106048 |  105907 |
+| Station Eight              | 219100 | 220624 | 220980 |  220235 |
+| Station Ten                | 420864 | 424288 | 424460 |  423204 |
+| Station Twelfth            | 724864 | 727128 | 732708 |  728233 |
+| Two trains same direction  |   9936 |   9964 |   9972 |    9957 |
+| Four trains same direction | 687808 | 687812 | 687784 |  687801 |
+| Nærumbanen (2T)            | 116124 | 116940 | 117144 |  116736 |
+| Nærumbanen (3T)            | 286900 | 287556 | 287852 |  287436 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** No collision
+**** Elapsed time
+#+caption: Restricted variant: No collision limit 1 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitOneCollisionTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.003 |    0.004 |    0.003 |    0.003 |
+| Example with two trains    |    0.026 |    0.017 |    0.030 |    0.024 |
+| Shared Segment             |    0.014 |    0.016 |    0.017 |    0.016 |
+| Large Network              |    0.012 |    0.019 |    0.019 |    0.017 |
+| Station One                |    0.012 |    0.012 |    0.019 |    0.014 |
+| Station Two                |    0.065 |    0.111 |    0.114 |    0.097 |
+| Station Four               |    1.286 |    1.315 |    1.266 |    1.289 |
+| Station Six                |   23.164 |   23.206 |   23.325 |   23.232 |
+| Station Eight              |  127.860 |  124.623 |  124.672 |  125.718 |
+| Station Ten                |  474.403 |  459.789 |  444.659 |  459.617 |
+| Station Twelfth            | 1337.102 | 1326.536 | 1320.822 | 1328.153 |
+| Two trains same direction  |    0.024 |    0.020 |    0.025 |    0.023 |
+| Four trains same direction |  828.480 |  839.239 |  839.249 |  835.656 |
+| Nærumbanen (2T)            |   19.309 |   18.324 |   18.342 |   18.658 |
+| Nærumbanen (3T)            |  323.919 |  321.851 |  320.536 |  322.102 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: No collision limit 1 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitOneCollisionMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   7592 |   7608 |   7612 |    7604 |
+| Example with two trains    |   8544 |   8552 |   8560 |    8552 |
+| Shared Segment             |   9772 |   9808 |   9820 |    9800 |
+| Large Network              |  11980 |  12044 |  12506 |   12177 |
+| Station One                |   8516 |   8524 |   8532 |    8524 |
+| Station Two                |  12384 |  12436 |  12444 |   12421 |
+| Station Four               |  37948 |  38172 |  38184 |   38101 |
+| Station Six                | 101400 | 102152 | 102160 |  101904 |
+| Station Eight              | 223784 | 224888 | 224888 |  224520 |
+| Station Ten                | 421316 | 426156 | 426156 |  424543 |
+| Station Twelfth            | 725644 | 727908 | 732620 |  728724 |
+| Two trains same direction  |   9916 |   9948 |   9960 |    9941 |
+| Four trains same direction | 688684 | 688700 | 688708 |  688697 |
+| Nærumbanen (2T)            | 118312 | 119176 | 119984 |  119157 |
+| Nærumbanen (3T)            | 287632 | 288220 | 288584 |  288145 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Restricted variant: Will arrive limit 1 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitOneArriveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.002 |    0.003 |    0.003 |    0.003 |
+| Example with two trains    |    0.027 |    0.028 |    0.028 |    0.028 |
+| Shared Segment             |    0.012 |    0.014 |    0.014 |    0.013 |
+| Large Network              |    0.011 |    0.012 |    0.020 |    0.014 |
+| Station One                |    0.019 |    0.018 |    0.021 |    0.019 |
+| Station Two                |    0.077 |    0.064 |    0.076 |    0.072 |
+| Station Four               |    1.253 |    1.375 |    1.291 |    1.306 |
+| Station Six                |   21.982 |   22.389 |   22.220 |   22.197 |
+| Station Eight              |  134.299 |  134.362 |  135.154 |  134.605 |
+| Station Ten                |  470.486 |  452.370 |  444.189 |  455.682 |
+| Station Twelfth            | 1279.219 | 1260.140 | 1274.903 | 1271.421 |
+| Two trains same direction  |    0.021 |    0.018 |    0.014 |    0.018 |
+| Four trains same direction |  805.680 |  789.951 |  792.274 |  795.968 |
+| Nærumbanen (2T)            |   20.903 |   20.225 |   20.123 |   20.417 |
+| Nærumbanen (3T)            |  334.085 |  331.171 |  336.187 |  333.814 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: Will arrive limit 1 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitOneArriveMemory
+|----------------------------+--------+--------+--------+---------|
+| Configuration              |  First | Second |  Third | Average |
+|----------------------------+--------+--------+--------+---------|
+| Example with one train     |   7520 |   7524 |   7524 |    7523 |
+| Example with two trains    |   8480 |   8480 |   8500 |    8487 |
+| Shared Segment             |   9700 |   9720 |   9724 |    9715 |
+| Large Network              |  11920 |  11920 |  11928 |   11923 |
+| Station One                |   8440 |   8440 |   8460 |    8447 |
+| Station Two                |  12312 |  12356 |  12364 |   12344 |
+| Station Four               |  37080 |  37260 |  37284 |   37208 |
+| Station Six                | 100220 | 100576 | 100608 |  100468 |
+| Station Eight              | 220080 | 221836 | 221916 |  221277 |
+| Station Ten                | 422496 | 427152 | 427152 |  425600 |
+| Station Twelfth            | 728620 | 731976 | 731903 |  730833 |
+| Two trains same direction  |   9844 |   9864 |   9872 |    9860 |
+| Four trains same direction | 687712 | 687712 | 687716 |  687713 |
+| Nærumbanen (2T)            | 114784 | 115532 | 115716 |  115344 |
+| Nærumbanen (3T)            | 285640 | 286228 | 286300 |  286056 |
+|----------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+** Limit Two
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+caption: Restricted variant: No derailment 1 limit 2 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitTwoMoveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains    |    0.033 |    0.032 |    0.037 |    0.034 |
+| Shared Segment             |    0.015 |    0.015 |    0.015 |    0.015 |
+| Large Network              |    0.015 |    0.017 |    0.014 |    0.015 |
+| Station One                |    0.010 |    0.012 |    0.023 |    0.015 |
+| Station Two                |    0.119 |    0.118 |    0.139 |    0.125 |
+| Station Four               |    2.570 |    2.138 |    2.411 |    2.373 |
+| Station Six                |   48.013 |   47.405 |   47.224 |   47.547 |
+| Station Eight              |  298.282 |  296.721 |  295.815 |  296.939 |
+| Station Ten                | 1097.763 | 1042.993 | 1045.759 | 1062.172 |
+| Station Twelfth            | 3231.455 | 3163.849 | 3091.770 | 3162.358 |
+| Two trains same direction  |    0.022 |    0.024 |    0.021 |    0.022 |
+| Four trains same direction | 1537.286 | 1565.133 | 1525.910 | 1542.776 |
+| Nærumbanen (2T)            |   20.171 |   20.407 |   20.577 |   20.385 |
+| Nærumbanen (3T)            |  407.498 |  410.378 |  404.128 |  407.335 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: No derailment 1 limit 2 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitTwoMoveMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    7612 |    7632 |    7640 |    7628 |
+| Example with two trains    |    8558 |    8604 |    8620 |    8594 |
+| Shared Segment             |    9792 |    9836 |    9796 |    9808 |
+| Large Network              |   12008 |   12072 |   12000 |   12027 |
+| Station One                |    8540 |    8556 |    8572 |    8556 |
+| Station Two                |   12608 |   12672 |   12684 |   12655 |
+| Station Four               |   39248 |   39488 |   39532 |   39423 |
+| Station Six                |  119492 |  120340 |  120344 |  120059 |
+| Station Eight              |  274880 |  276720 |  276768 |  276123 |
+| Station Ten                |  560252 |  565828 |  565840 |  563973 |
+| Station Twelfth            | 1017416 | 1264912 | 1015104 | 1099144 |
+| Two trains same direction  |   11504 |   11544 |   12076 |   11708 |
+| Four trains same direction |  902860 |  902864 |  904716 |  903480 |
+| Nærumbanen (2T)            |  118712 |  119532 |  119740 |  119328 |
+| Nærumbanen (3T)            |  316156 |  316488 |  316500 |  316381 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Restricted variant: No derailment 2 limit 2 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitTwoCriticalTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.002 |    0.002 |    0.003 |    0.002 |
+| Example with two trains    |    0.031 |    0.037 |    0.049 |    0.039 |
+| Shared Segment             |    0.015 |    0.014 |    0.016 |    0.015 |
+| Large Network              |    0.012 |    0.020 |    0.020 |    0.017 |
+| Station One                |    0.022 |    0.020 |    0.026 |    0.023 |
+| Station Two                |    0.116 |    0.145 |    0.138 |    0.133 |
+| Station Four               |    2.125 |    2.202 |    2.114 |    2.147 |
+| Station Six                |   47.666 |   47.449 |   47.622 |   47.579 |
+| Station Eight              |  292.541 |  291.094 |  293.485 |  292.373 |
+| Station Ten                | 1073.923 | 1076.563 | 1074.403 | 1074.963 |
+| Station Twelfth            | 3323.860 | 3224.331 | 3152.559 | 3233.583 |
+| Two trains same direction  |    0.012 |    0.023 |    0.026 |    0.020 |
+| Four trains same direction | 1566.301 | 1570.500 | 1523.703 | 1553.501 |
+| Nærumbanen (2T)            |   19.936 |   19.731 |   19.947 |   19.871 |
+| Nærumbanen (3T)            |  416.936 |  415.357 |  415.144 |  415.812 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted Variant: No derailment 2 limit 2 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitTwoCriticalMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    7580 |    7592 |    7592 |    7588 |
+| Example with two trains    |    8540 |    8564 |    8572 |    8559 |
+| Shared Segment             |    9744 |    9776 |    9784 |    9768 |
+| Large Network              |   11968 |   12020 |   12032 |   12007 |
+| Station One                |    8496 |    8524 |    8528 |    8516 |
+| Station Two                |   12552 |   12600 |   12620 |   12591 |
+| Station Four               |   40260 |   40448 |   40456 |   40388 |
+| Station Six                |  121108 |  121994 |  121956 |  121686 |
+| Station Eight              |  274252 |  276084 |  276132 |  275489 |
+| Station Ten                |  560432 |  563852 |  563852 |  562712 |
+| Station Twelfth            | 1011640 | 1019088 | 1019096 | 1016608 |
+| Two trains same direction  |    9764 |    9796 |    9804 |    9788 |
+| Four trains same direction |  905036 |  905036 |  905472 |  905181 |
+| Nærumbanen (2T)            |  115860 |  116676 |  116884 |  116473 |
+| Nærumbanen (3T)            |  311716 |  312044 |  312044 |  311935 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: Restricted variant: No collision limit 2 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitTwoCollisionTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |   Second |    First |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains    |    0.034 |    0.036 |    0.033 |    0.034 |
+| Shared Segment             |    0.015 |    0.014 |    0.015 |    0.015 |
+| Large Network              |    0.029 |    0.011 |    0.021 |    0.020 |
+| Station One                |    0.019 |    0.022 |    0.022 |    0.021 |
+| Station Two                |    0.142 |    0.102 |    0.136 |    0.127 |
+| Station Four               |    2.399 |    2.094 |    2.331 |    2.275 |
+| Station Six                |   47.752 |   47.224 |   47.632 |   47.536 |
+| Station Eight              |  271.339 |  290.211 |  269.255 |  276.935 |
+| Station Ten                | 1072.370 | 1069.352 | 1051.182 | 1064.301 |
+| Station Twelfth            | 3154.039 | 3032.947 | 3265.269 | 3150.752 |
+| Two trains same direction  |    0.011 |    0.015 |    0.014 |    0.013 |
+| Four trains same direction | 1513.903 | 1519.292 | 1466.833 | 1500.009 |
+| Nærumbanen (2T)            |   20.008 |   19.764 |   19.959 |   19.910 |
+| Nærumbanen (3T)            |  395.981 |  393.703 |  393.868 |  394.517 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: No collision limit 2 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitTwoCollisionMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    7560 |    7576 |    7576 |    7571 |
+| Example with two trains    |    8548 |    8560 |    8568 |    8559 |
+| Shared Segment             |    9744 |    9776 |    9784 |    9768 |
+| Large Network              |   11944 |   11996 |   12016 |   11985 |
+| Station One                |    8500 |    8508 |    8516 |    8508 |
+| Station Two                |   12540 |   12588 |   12608 |   12579 |
+| Station Four               |   39228 |   39448 |   39476 |   39384 |
+| Station Six                |  122276 |  123040 |  123044 |  122787 |
+| Station Eight              |  276256 |  277364 |  277368 |  276996 |
+| Station Ten                |  560320 |  560176 |  561456 |  560651 |
+| Station Twelfth            | 1266208 | 1796796 | 1019336 | 1360780 |
+| Two trains same direction  |    9744 |    9780 |    9792 |    9772 |
+| Four trains same direction |  903736 |  903792 |  904192 |  903907 |
+| Nærumbanen (2T)            |  112928 |  113756 |  113976 |  113553 |
+| Nærumbanen (3T)            |  313656 |  313988 |  314000 |  313881 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Restricted variant: Will arrive limit 2 Elapsed time in seconds
+#+TBLNAME: RestrictedLimitTwoArriveTime
+|----------------------------+----------+----------+----------+----------|
+| Configuration              |    First |   Second |    Third |  Average |
+|----------------------------+----------+----------+----------+----------|
+| Example with one train     |    0.003 |    0.004 |    0.002 |    0.003 |
+| Example with two trains    |    0.031 |    0.035 |    0.034 |    0.033 |
+| Shared Segment             |    0.010 |    0.016 |    0.016 |    0.014 |
+| Large Network              |    0.014 |    0.019 |    0.021 |    0.018 |
+| Station One                |    0.018 |    0.019 |    0.021 |    0.019 |
+| Station Two                |    0.109 |    0.114 |    0.136 |    0.120 |
+| Station Four               |    2.189 |    2.502 |    2.125 |    2.272 |
+| Station Six                |   46.999 |   46.819 |   47.045 |   46.954 |
+| Station Eight              |  296.215 |  296.269 |  295.207 |  295.897 |
+| Station Ten                | 1060.366 | 1043.868 | 1053.478 | 1052.571 |
+| Station Twelfth            | 3291.267 | 3136.088 | 3102.526 | 3176.627 |
+| Two trains same direction  |    0.013 |    0.012 |    0.019 |    0.015 |
+| Four trains same direction | 1498.865 | 1498.277 | 1493.474 | 1496.872 |
+| Nærumbanen (2T)            |   20.173 |   19.960 |   20.082 |   20.072 |
+| Nærumbanen (3T)            |  432.761 |  400.223 |  409.341 |  414.108 |
+|----------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Restricted variant: Will arrive limit 2 Memory Usage Peak in KB
+#+TBLNAME: RestrictedLimitTwoArriveMemory
+|----------------------------+---------+---------+---------+---------|
+| Configuration              |   First |  Second |   Third | Average |
+|----------------------------+---------+---------+---------+---------|
+| Example with one train     |    7500 |    7500 |    7500 |    7500 |
+| Example with two trains    |    8472 |    8472 |    8476 |    8473 |
+| Shared Segment             |    9668 |    9688 |    9692 |    9683 |
+| Large Network              |   11900 |   11924 |   11924 |   11916 |
+| Station One                |    8428 |    8428 |    8428 |    8428 |
+| Station Two                |   12468 |   12508 |   12520 |   12499 |
+| Station Four               |   39064 |   39228 |   39260 |   39184 |
+| Station Six                |  119216 |  119604 |  119612 |  119477 |
+| Station Eight              |  272788 |  273536 |  273548 |  273291 |
+| Station Ten                |  715344 |  716436 |  559096 |  663625 |
+| Station Twelfth            | 1013140 | 1020800 | 1020828 | 1018256 |
+| Two trains same direction  |    9684 |    9704 |    9708 |    9699 |
+| Four trains same direction |  907728 |  907852 |  908220 |  907933 |
+| Nærumbanen (2T)            |  114440 |  115208 |  115376 |  115008 |
+| Nærumbanen (3T)            |  312232 |  312752 |  312764 |  312583 |
+|----------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+* RCS Global
+** Limit One
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+caption: Global variant: No derailment 1 limit 1 Elapsed time in seconds
+#+TBLNAME: GlobalLimitOneMoveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.005 |    0.004 |    0.003 |    0.004 |
+| Example with two trains |    0.036 |    0.046 |    0.040 |    0.041 |
+| Shared Segment          |    0.014 |    0.014 |    0.016 |    0.015 |
+| Large Network           |    0.019 |    0.018 |    0.017 |    0.018 |
+| Station One             |    0.015 |    0.018 |    0.018 |    0.017 |
+| Station Two             |    0.125 |    0.133 |    0.149 |    0.136 |
+| Station Four            |    2.321 |    2.735 |    2.390 |    2.482 |
+| Station Six             |   46.617 |   45.514 |   45.616 |   45.916 |
+| Station Eight           |  276.247 |  276.290 |  277.621 |  276.719 |
+| Station Ten             | 1019.511 | 1017.561 | 1002.800 | 1013.291 |
+| Nærumbanen (2T)         |   30.402 |   31.323 |   30.141 |   30.622 |
+| Nærumbanen (3T)         |  609.778 |  609.493 |  608.663 |  609.311 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: No derailment 1 limit 1 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitOneMoveMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7656 |   7676 |   7676 |    7669 |
+| Example with two trains |   8404 |   8412 |   8420 |    8412 |
+| Shared Segment          |   9924 |   9956 |   9960 |    9947 |
+| Large Network           |  11924 |  11972 |  11980 |   11959 |
+| Station One             |   8360 |   8364 |   8372 |    8365 |
+| Station Two             |  12254 |  12572 |  12584 |   12470 |
+| Station Four            |  37716 |  37956 |  37964 |   37879 |
+| Station Six             | 103552 | 104284 | 104372 |  104069 |
+| Station Eight           | 231528 | 233348 | 233428 |  232768 |
+| Station Ten             | 451236 | 454584 | 451232 |  452351 |
+| Nærumbanen (2T)         | 113668 | 114688 | 114792 |  114383 |
+| Nærumbanen (3T)         | 309836 | 310420 | 310736 |  310331 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Global variant: No derailment 2 limit 1 Elapsed time in seconds
+#+TBLNAME: GlobalLimitOneCriticalTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.004 |    0.004 |    0.005 |    0.004 |
+| Example with two trains |    0.026 |    0.027 |    0.051 |    0.035 |
+| Shared Segment          |    0.021 |    0.020 |    0.022 |    0.021 |
+| Large Network           |    0.016 |    0.017 |    0.027 |    0.020 |
+| Station One             |    0.022 |    0.021 |    0.025 |    0.023 |
+| Station Two             |    0.125 |    0.134 |    0.164 |    0.141 |
+| Station Four            |    2.394 |    2.338 |    2.348 |    2.360 |
+| Station Six             |   45.077 |   44.229 |   45.653 |   44.986 |
+| Station Eight           |  289.866 |  288.213 |  288.014 |  288.698 |
+| Station Ten             | 1027.780 | 1021.841 | 1022.455 | 1024.025 |
+| Nærumbanen (2T)         |   29.375 |   29.997 |   29.294 |   29.555 |
+| Nærumbanen (3T)         |  634.538 |  625.064 |  623.036 |  627.546 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: No derailment 2 limit 1 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitOneCriticalMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7648 |   7668 |   7668 |    7661 |
+| Example with two trains |   8384 |   8408 |   8416 |    8403 |
+| Shared Segment          |   9904 |   9932 |   9936 |    9924 |
+| Large Network           |  11924 |  11968 |  11980 |   11957 |
+| Station One             |   8328 |   8356 |   8360 |    8348 |
+| Station Two             |  12516 |  12564 |  12572 |   12551 |
+| Station Four            |  37712 |  37952 |  37360 |   37675 |
+| Station Six             | 103552 | 104280 | 104360 |  104064 |
+| Station Eight           | 231512 | 233328 | 233400 |  232747 |
+| Station Ten             | 451224 | 454576 | 454584 |  453461 |
+| Nærumbanen (2T)         | 111964 | 112992 | 113096 |  112684 |
+| Nærumbanen (3T)         | 309812 | 310700 | 310728 |  310413 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: Global variant: No collision limit 1 Elapsed time in seconds
+#+TBLNAME: GlobalLimitOneCollisionTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains |    0.036 |    0.034 |    0.042 |    0.037 |
+| Shared Segment          |    0.020 |    0.019 |    0.020 |    0.020 |
+| Large Network           |    0.019 |    0.027 |    0.025 |    0.024 |
+| Station One             |    0.025 |    0.015 |    0.025 |    0.022 |
+| Station Two             |    0.125 |    0.129 |    0.128 |    0.127 |
+| Station Four            |    2.685 |    2.651 |    2.694 |    2.677 |
+| Station Six             |   44.791 |   45.379 |   44.759 |   44.976 |
+| Station Eight           |  286.995 |  287.993 |  285.826 |  286.938 |
+| Station Ten             | 1022.700 | 1029.362 | 1027.356 | 1026.473 |
+| Nærumbanen (2T)         |   27.643 |   28.318 |   28.409 |   28.123 |
+| Nærumbanen (3T)         |  589.217 |  596.547 |  592.764 |  592.843 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: No collision limit 1 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitOneCollisionMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7632 |   7652 |   7656 |    7647 |
+| Example with two trains |   8392 |   8400 |   8408 |    8400 |
+| Shared Segment          |   9900 |   9936 |  10192 |   10009 |
+| Large Network           |  11920 |  11972 |  11980 |   11957 |
+| Station One             |   8344 |   8352 |   8360 |    8352 |
+| Station Two             |  12504 |  12560 |  12572 |   12545 |
+| Station Four            |  37696 |  37892 |  37948 |   37845 |
+| Station Six             | 103528 | 104260 | 104352 |  104047 |
+| Station Eight           | 231500 | 233320 | 233340 |  232720 |
+| Station Ten             | 451224 | 454576 | 454680 |  453493 |
+| Nærumbanen (2T)         | 111960 | 112988 | 112996 |  112648 |
+| Nærumbanen (3T)         | 309820 | 310408 | 310736 |  310321 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Global variant: Will arrive limit 1 Elapsed time in seconds
+#+TBLNAME: GlobalLimitOneArriveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.003 |    0.004 |    0.003 |    0.003 |
+| Example with two trains |    0.037 |    0.048 |    0.045 |    0.043 |
+| Shared Segment          |    0.021 |    0.021 |    0.021 |    0.021 |
+| Large Network           |    0.015 |    0.016 |    0.020 |    0.017 |
+| Station One             |    0.025 |    0.025 |    0.025 |    0.025 |
+| Station Two             |    0.124 |    0.137 |    0.133 |    0.131 |
+| Station Four            |    2.578 |    2.538 |    2.654 |    2.590 |
+| Station Six             |   46.681 |   46.718 |   47.014 |   46.804 |
+| Station Eight           |  285.616 |  285.069 |  285.284 |  285.323 |
+| Station Ten             | 1012.653 | 1003.455 | 1008.457 | 1008.188 |
+| Nærumbanen (2T)         |   28.386 |   28.808 |   28.951 |   28.715 |
+| Nærumbanen (3T)         |  642.802 |  642.096 |  635.737 |  640.212 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: Will arrive limit 1 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitOneArriveMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7572 |   7580 |   7580 |    7577 |
+| Example with two trains |   8316 |   8316 |   8316 |    8316 |
+| Shared Segment          |   9828 |   9848 |   9852 |    9843 |
+| Large Network           |  11856 |  11856 |  11856 |   11856 |
+| Station One             |   8268 |   8268 |   8268 |    8268 |
+| Station Two             |  12428 |  12468 |  12480 |   12459 |
+| Station Four            |  37624 |  37808 |  37816 |   37749 |
+| Station Six             | 103380 | 103724 | 104060 |  103721 |
+| Station Eight           | 231172 | 232936 | 233012 |  232373 |
+| Station Ten             | 452100 | 455184 | 455188 |  454157 |
+| Nærumbanen (2T)         | 111888 | 112812 | 112820 |  112507 |
+| Nærumbanen (3T)         | 309736 | 310312 | 310464 |  310171 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+** Limit Two
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+caption: Global variant: No derailment 1 limit 2 Elapsed time in seconds
+#+TBLNAME: GlobalLimitTwoMoveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.009 |    0.008 |    0.009 |    0.009 |
+| Example with two trains |    0.056 |    0.069 |    0.068 |    0.064 |
+| Shared Segment          |    0.033 |    0.040 |    0.041 |    0.038 |
+| Large Network           |    0.022 |    0.031 |    0.047 |    0.033 |
+| Station One             |    0.032 |    0.037 |    0.038 |    0.036 |
+| Station Two             |    0.316 |    0.404 |    0.374 |    0.365 |
+| Station Four            |   12.138 |   11.746 |   11.241 |   11.708 |
+| Station Six             |  254.857 |  253.484 |  255.691 |  254.677 |
+| Station Eight           | 1658.055 | 1580.792 | 1545.470 | 1594.772 |
+| Station Ten             | 6293.598 | 6145.904 | 6052.362 | 6163.955 |
+| Nærumbanen (2T)         |  132.497 |  131.916 |  133.614 |  132.676 |
+| Nærumbanen (3T)         | 4627.806 | 4562.283 | 4565.455 | 4585.181 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: No derailment 1 limit 2 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitTwoMoveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    9296 |    9320 |    9324 |    9313 |
+| Example with two trains |   10116 |   10132 |   10144 |   10131 |
+| Shared Segment          |   11644 |   11936 |   12212 |   11931 |
+| Large Network           |   13876 |   13924 |   13940 |   13913 |
+| Station One             |   10052 |   10068 |   10080 |   10067 |
+| Station Two             |   16324 |   16388 |   16396 |   16369 |
+| Station Four            |   59620 |   59884 |   59900 |   59801 |
+| Station Six             |  211792 |  212548 |  212528 |  212289 |
+| Station Eight           |  540852 |  542156 |  542156 |  541721 |
+| Station Ten             | 1177352 | 1177396 | 1179200 | 1177983 |
+| Nærumbanen (2T)         |  152988 |  154016 |  154132 |  153712 |
+| Nærumbanen (3T)         | 1303376 | 1303416 | 1303432 | 1303408 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Global variant: No derailment 2 limit 2 Elapsed time in seconds
+#+TBLNAME: GlobalLimitTwoCriticalTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.003 |    0.006 |    0.007 |    0.005 |
+| Example with two trains |    0.061 |    0.052 |    0.067 |    0.060 |
+| Shared Segment          |    0.031 |    0.031 |    0.052 |    0.038 |
+| Large Network           |    0.029 |    0.032 |    0.034 |    0.032 |
+| Station One             |    0.030 |    0.016 |    0.021 |    0.022 |
+| Station Two             |    0.351 |    0.402 |    0.350 |    0.368 |
+| Station Four            |   11.451 |   11.260 |   10.112 |   10.941 |
+| Station Six             |  257.545 |  239.275 |  240.982 |  245.934 |
+| Station Eight           | 1757.166 | 1660.574 | 1666.525 | 1694.755 |
+| Station Ten             | 6251.048 | 6112.542 | 6116.494 | 6160.028 |
+| Nærumbanen (2T)         |  132.551 |  134.115 |  133.177 |  133.281 |
+| Nærumbanen (3T)         | 4328.896 | 4311.326 | 4319.310 | 4319.844 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: No derailment 2 limit 2 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitTwoCriticalMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7656 |    7668 |    7672 |    7665 |
+| Example with two trains |   10448 |   10472 |   10480 |   10467 |
+| Shared Segment          |    9948 |    9976 |    9980 |    9968 |
+| Large Network           |   11948 |   11996 |   12008 |   11984 |
+| Station One             |    8396 |    8424 |    8428 |    8416 |
+| Station Two             |   15408 |   15456 |   15464 |   15443 |
+| Station Four            |   58064 |   58308 |   58316 |   58229 |
+| Station Six             |  208876 |  209304 |  209308 |  209163 |
+| Station Eight           |  542196 |  543516 |  543516 |  543076 |
+| Station Ten             | 1178508 | 1178568 | 1178036 | 1178371 |
+| Nærumbanen (2T)         |  151420 |  152436 |  152560 |  152139 |
+| Nærumbanen (3T)         | 1303352 | 1303392 | 1303392 | 1303379 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: Global variant: No collision limit 2 Elapsed time in seconds
+#+TBLNAME: GlobalLimitTwoCollisionTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.006 |    0.006 |    0.007 |    0.006 |
+| Example with two trains |    0.034 |    0.035 |    0.063 |    0.044 |
+| Shared Segment          |    0.018 |    0.037 |    0.033 |    0.029 |
+| Large Network           |    0.024 |    0.029 |    0.040 |    0.031 |
+| Station One             |    0.018 |    0.017 |    0.019 |    0.018 |
+| Station Two             |    0.306 |    0.398 |    0.349 |    0.351 |
+| Station Four            |   12.486 |   10.081 |   12.083 |   11.550 |
+| Station Six             |  252.827 |  246.848 |  249.513 |  249.729 |
+| Station Eight           | 1625.016 | 1620.067 | 1548.218 | 1597.767 |
+| Station Ten             | 6219.558 | 5960.382 | 6024.153 | 6068.031 |
+| Nærumbanen (2T)         |  133.816 |  133.661 |  133.648 |  133.708 |
+| Nærumbanen (3T)         | 4380.034 | 4368.982 | 4373.205 | 4374.074 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: No collision limit 2 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitTwoCollisionMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7648 |    7660 |    7660 |    7656 |
+| Example with two trains |    8420 |    8428 |    8436 |    8428 |
+| Shared Segment          |    9924 |    9956 |   10216 |   10032 |
+| Large Network           |   11948 |   12000 |   12008 |   11985 |
+| Station One             |    8404 |    8412 |    8420 |    8412 |
+| Station Two             |   14920 |   14976 |   14984 |   14960 |
+| Station Four            |   58036 |   58280 |   58288 |   58201 |
+| Station Six             |  209552 |  210308 |  210312 |  210057 |
+| Station Eight           |  543948 |  544996 |  545256 |  544733 |
+| Station Ten             | 1176496 | 1177572 | 1178464 | 1177511 |
+| Nærumbanen (2T)         |  151368 |  152404 |  152424 |  152065 |
+| Nærumbanen (3T)         | 1303336 | 1303388 | 1303408 | 1303377 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Global variant: Will arrive limit 2 Elapsed time in seconds
+#+TBLNAME: GlobalLimitTwoArriveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.007 |    0.005 |    0.005 |    0.006 |
+| Example with two trains |    0.063 |    0.054 |    0.063 |    0.060 |
+| Shared Segment          |    0.018 |    0.017 |    0.020 |    0.018 |
+| Large Network           |    0.023 |    0.042 |    0.038 |    0.034 |
+| Station One             |    0.018 |    0.029 |    0.030 |    0.026 |
+| Station Two             |    0.300 |    0.318 |    0.401 |    0.340 |
+| Station Four            |   12.274 |   10.647 |   12.419 |   11.780 |
+| Station Six             |  259.847 |  261.048 |  261.756 |  260.884 |
+| Station Eight           | 1670.962 | 1697.476 | 1604.006 | 1657.481 |
+| Station Ten             | 6131.157 | 5857.906 | 5887.561 | 5958.875 |
+| Nærumbanen (2T)         |  131.425 |  130.869 |  132.489 |  131.594 |
+| Nærumbanen (3T)         | 4587.688 | 4593.748 | 4603.034 | 4594.823 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Global variant: Will arrive limit 2 Memory Usage Peak in KB
+#+TBLNAME: GlobalLimitTwoArriveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7584 |    7592 |    7592 |    7589 |
+| Example with two trains |    8348 |    8348 |    8348 |    8348 |
+| Shared Segment          |    9860 |    9880 |    9884 |    9875 |
+| Large Network           |   11860 |   11900 |   11904 |   11888 |
+| Station One             |    8332 |    8332 |    8332 |    8332 |
+| Station Two             |   15332 |   15376 |   15384 |   15364 |
+| Station Four            |   58804 |   58980 |   58996 |   58927 |
+| Station Six             |  205536 |  205880 |  205900 |  205772 |
+| Station Eight           |  542224 |  543556 |  543556 |  543112 |
+| Station Ten             | 1172864 | 1172864 | 1172880 | 1172869 |
+| Nærumbanen (2T)         |  151304 |  152240 |  152248 |  151931 |
+| Nærumbanen (3T)         | 1303276 | 1303312 | 1303312 | 1303300 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+* RCS Cancel
+** Limit One
+*** No derailment (Move between segments)
+**** Elapsed time
+#+caption: Extended variant: No derailment 1 Elapsed time in seconds
+#+TBLNAME: CancelLimitOneMoveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.003 |    0.005 |    0.005 |    0.004 |
+| Example with two trains |    0.007 |    0.005 |    0.007 |    0.006 |
+| Shared segment          |    0.025 |    0.032 |    0.030 |    0.029 |
+| Large network           |    0.027 |    0.029 |    0.041 |    0.032 |
+| Station One             |    0.024 |    0.025 |    0.031 |    0.027 |
+| Station Two             |    0.228 |    0.239 |    0.286 |    0.251 |
+| Station Four            |    5.665 |    5.602 |    5.315 |    5.527 |
+| Station Six             |  107.828 |  110.020 |  106.935 |  108.261 |
+| Station Eight           |  633.381 |  628.627 |  630.462 |  630.823 |
+| Nærumbanen (2T)         |   44.972 |   44.176 |   45.270 |   44.806 |
+| Nærumbanen (3T)         | 1137.892 | 1136.126 | 1138.605 | 1137.541 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: No derailment 1 limit 1 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitOneMoveMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7828 |   7848 |   7848 |    7841 |
+| Example with two trains |   7820 |   7844 |   7844 |    7836 |
+| Shared segment          |  10220 |  10224 |  10492 |   10312 |
+| Large network           |  12300 |  12352 |  12356 |   12336 |
+| Station One             |   8716 |   8744 |   8752 |    8737 |
+| Station Two             |  13564 |  13624 |  13632 |   13607 |
+| Station Four            |  48324 |  48548 |  48584 |   48485 |
+| Station Six             | 151016 | 151900 | 151908 |  151608 |
+| Station Eight           | 370992 | 372952 | 373952 |  372632 |
+| Nærumbanen (2T)         | 127520 | 128484 | 128716 |  128240 |
+| Nærumbanen (3T)         | 552016 | 552700 | 552700 |  552472 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Extended variant: No derailment 2 limit 1 Elapsed time in seconds
+#+TBLNAME: CancelLimitOneCriticalTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.003 |    0.004 |    0.004 |    0.004 |
+| Example with two trains |    0.005 |    0.005 |    0.005 |    0.005 |
+| Shared segment          |    0.024 |    0.023 |    0.031 |    0.026 |
+| Large network           |    0.029 |    0.034 |    0.037 |    0.033 |
+| Station One             |    0.030 |    0.037 |    0.037 |    0.035 |
+| Station Two             |    0.278 |    0.277 |    0.256 |    0.270 |
+| Station Four            |    4.868 |    5.811 |    4.912 |    5.197 |
+| Station Six             |  108.516 |  107.877 |  107.639 |  108.011 |
+| Station Eight           |  631.406 |  636.037 |  635.308 |  634.250 |
+| Nærumbanen (2T)         |   44.166 |   42.726 |   43.928 |   43.607 |
+| Nærumbanen (3T)         | 1107.463 | 1105.787 | 1134.785 | 1116.012 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: No derailment 2 limit 1 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitOneCriticalMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7796 |   7808 |   7816 |    7807 |
+| Example with two trains |   7808 |   7824 |   7828 |    7820 |
+| Shared segment          |   9976 |  10256 |  10260 |   10164 |
+| Large network           |  12260 |  12312 |  12324 |   12299 |
+| Station One             |   8692 |   8696 |   8716 |    8701 |
+| Station Two             |  13544 |  13596 |  13604 |   13581 |
+| Station Four            |  48284 |  48508 |  48544 |   48445 |
+| Station Six             | 150992 | 151872 | 151872 |  151579 |
+| Station Eight           | 370960 | 372916 | 372928 |  372268 |
+| Nærumbanen (2T)         | 125848 | 126812 | 127032 |  126564 |
+| Nærumbanen (3T)         | 550272 | 550296 | 550272 |  550280 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: Extended variant: No collision limit 1 Elapsed time in seconds
+#+TBLNAME: CancelLimitOneCollisionTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.004 |    0.004 |    0.004 |    0.004 |
+| Example with two trains |    0.004 |    0.007 |    0.008 |    0.006 |
+| Shared segment          |    0.026 |    0.019 |    0.031 |    0.025 |
+| Large network           |    0.023 |    0.045 |    0.031 |    0.033 |
+| Station One             |    0.025 |    0.034 |    0.036 |    0.032 |
+| Station Two             |    0.266 |    0.244 |    0.250 |    0.253 |
+| Station Four            |    5.340 |    5.289 |    5.214 |    5.281 |
+| Station Six             |  107.415 |  108.704 |  106.545 |  107.555 |
+| Station Eight           |  633.211 |  636.107 |  642.983 |  637.434 |
+| Nærumbanen (2T)         |   42.576 |   43.328 |   43.498 |   43.134 |
+| Nærumbanen (3T)         | 1121.852 | 1129.423 | 1129.642 | 1126.972 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: No collision limit 1 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitOneCollisionMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7784 |   7800 |   7804 |    7796 |
+| Example with two trains |   7788 |   7800 |   7804 |    7797 |
+| Shared segment          |  10176 |  10180 |  10448 |   10268 |
+| Large network           |  12256 |  12304 |  12324 |   12295 |
+| Station One             |   8680 |   8708 |   8716 |    8701 |
+| Station Two             |  13528 |  13588 |  13596 |   13571 |
+| Station Four            |  48280 |  48504 |  48540 |   48441 |
+| Station Six             | 150972 | 151848 | 151860 |  151560 |
+| Station Eight           | 370944 | 372896 | 372908 |  372249 |
+| Nærumbanen (2T)         | 125832 | 126796 | 127016 |  126548 |
+| Nærumbanen (3T)         | 550268 | 550300 | 550272 |  550280 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Extended variant: Will arrive limit 1 Elapsed time in seconds
+#+TBLNAME: CancelLimitOneArriveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.002 |    0.004 |    0.004 |    0.003 |
+| Example with two trains |    0.005 |    0.006 |    0.005 |    0.005 |
+| Shared segment          |    0.029 |    0.019 |    0.028 |    0.025 |
+| Large network           |    0.030 |    0.046 |    0.032 |    0.036 |
+| Station One             |    0.023 |    0.046 |    0.030 |    0.033 |
+| Station Two             |    0.222 |    0.231 |    0.234 |    0.229 |
+| Station Four            |    4.714 |    4.932 |    4.823 |    4.823 |
+| Station Six             |  107.899 |  107.418 |  104.468 |  106.595 |
+| Station Eight           |  653.839 |  654.680 |  653.906 |  654.142 |
+| Nærumbanen (2T)         |   42.939 |   42.902 |   42.686 |   42.842 |
+| Nærumbanen (3T)         | 1123.635 | 1124.439 | 1093.512 | 1113.862 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: Will arrive limit 1 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitOneArriveMemory
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |   7724 |   7732 |   7732 |    7729 |
+| Example with two trains |   7740 |   7744 |   7748 |    7744 |
+| Shared segment          |   9904 |   9928 |   9928 |    9920 |
+| Large network           |  12184 |  12224 |  12224 |   12211 |
+| Station One             |   8612 |   8612 |   8624 |    8616 |
+| Station Two             |  13444 |  13488 |  13492 |   13475 |
+| Station Four            |  48132 |  48264 |  48276 |   48224 |
+| Station Six             | 150296 | 151156 | 151164 |  150872 |
+| Station Eight           | 369096 | 370960 | 370964 |  370340 |
+| Nærumbanen (2T)         | 125760 | 126624 | 126864 |  126416 |
+| Nærumbanen (3T)         | 550176 | 550176 | 550180 |  550177 |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+** Limit Two
+*** No derailment (Move between segments)
+**** Elapsed time
+#+caption: Extended variant: No derailment 1 limit 2 Elapsed time in seconds
+#+TBLNAME: CancelLimitTwoMoveTime
+|-------------------------+-----------+-----------+-----------+-----------|
+| Configuration           |     First |    Second |     Third |   Average |
+|-------------------------+-----------+-----------+-----------+-----------|
+| Example with one train  |     0.004 |     0.008 |     0.009 |     0.007 |
+| Example with two trains |     0.081 |     0.076 |     0.084 |     0.080 |
+| Shared segment          |     0.036 |     0.043 |     0.047 |     0.042 |
+| Large network           |     0.039 |     0.082 |     0.065 |     0.062 |
+| Station One             |     0.028 |     0.038 |     0.039 |     0.035 |
+| Station Two             |     0.777 |     0.927 |     0.906 |     0.870 |
+| Station Four            |    32.451 |    36.382 |    33.524 |    34.119 |
+| Station Six             |   910.817 |   888.077 |   888.182 |   895.692 |
+| Station Eight           |  6530.169 |  6563.059 |  6564.713 |  6552.647 |
+| Nærumbanen (2T)         |   242.522 |   242.283 |   242.911 |   242.572 |
+| Nærumbanen (3T)         | 10033.654 | 10092.504 | 10099.487 | 10075.215 |
+|-------------------------+-----------+-----------+-----------+-----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: No derailment 1 limit 2 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitTwoMoveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7836 |    7860 |    7860 |    7852 |
+| Example with two trains |    9024 |    9048 |    9056 |    9043 |
+| Shared segment          |   10308 |   10312 |   10580 |   10400 |
+| Large network           |   12384 |   12440 |   12444 |   12423 |
+| Station One             |   12036 |   12060 |   12068 |   12055 |
+| Station Two             |   18520 |   18568 |   18576 |   18555 |
+| Station Four            |  139412 |  139664 |  139672 |  139583 |
+| Station Six             |  680148 |  680496 |  680504 |  680383 |
+| Station Eight           | 2103844 | 2104664 | 2103808 | 2104105 |
+| Nærumbanen (2T)         |  240248 |  240920 |  240948 |  240705 |
+| Nærumbanen (3T)         | 3640400 | 3640416 | 3640424 | 3640413 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Extended variant: No derailment 2 limit 2 Elapsed time in seconds
+#+TBLNAME: CancelLimitTwoCriticalTime
+|-------------------------+-----------+-----------+----------+-----------|
+| Configuration           |     First |    Second |    Third |   Average |
+|-------------------------+-----------+-----------+----------+-----------|
+| Example with one train  |     0.007 |     0.007 |    0.007 |     0.007 |
+| Example with two trains |     0.065 |     0.075 |    0.077 |     0.072 |
+| Shared segment          |     0.044 |     0.066 |    0.059 |     0.056 |
+| Large network           |     0.047 |     0.062 |    0.060 |     0.056 |
+| Station One             |     0.038 |     0.035 |    0.035 |     0.036 |
+| Station Two             |     0.913 |     0.926 |    0.793 |     0.877 |
+| Station Four            |    32.448 |    32.247 |   32.239 |    32.311 |
+| Station Six             |   920.258 |   917.515 |  922.833 |   920.202 |
+| Station Eight           |  6620.755 |  6610.525 | 6595.127 |  6608.802 |
+| Nærumbanen (2T)         |   249.023 |   253.583 |  252.875 |   251.827 |
+| Nærumbanen (3T)         | 10004.897 | 10072.137 | 9968.254 | 10015.096 |
+|-------------------------+-----------+-----------+----------+-----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: No derailment 2 limit 2 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitTwoCriticalMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7812 |    7828 |    7832 |    7824 |
+| Example with two trains |    9000 |    9016 |    9024 |    9013 |
+| Shared segment          |   10076 |   10356 |   10360 |   10264 |
+| Large network           |   12352 |   12400 |   12412 |   12388 |
+| Station One             |    8716 |    8736 |    8744 |    8732 |
+| Station Two             |   16624 |   16680 |   16680 |   16661 |
+| Station Four            |  139368 |  139620 |  139628 |  139539 |
+| Station Six             |  680044 |  680392 |  680392 |  680276 |
+| Station Eight           | 2103808 | 2104628 | 2104632 | 2104356 |
+| Nærumbanen (2T)         |  238396 |  239228 |  239252 |  238959 |
+| Nærumbanen (3T)         | 3638684 | 3638700 | 3638712 | 3638699 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** No collision
+**** Elapsed time
+#+caption: Extended variant: No collision limit 2 Elapsed time in seconds
+#+TBLNAME: CancelLimitTwoCollisionTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.006 |    0.006 |    0.006 |    0.006 |
+| Example with two trains |    0.068 |    0.064 |    0.075 |    0.069 |
+| Shared segment          |    0.033 |    0.055 |    0.052 |    0.047 |
+| Large network           |    0.038 |    0.063 |    0.040 |    0.047 |
+| Station One             |    0.048 |    0.044 |    0.047 |    0.046 |
+| Station Two             |    0.915 |    0.932 |    0.835 |    0.894 |
+| Station Four            |   33.160 |   32.814 |   35.634 |   33.869 |
+| Station Six             |  946.866 |  952.055 |  954.846 |  951.256 |
+| Station Eight           | 6550.005 | 6608.182 | 6603.568 | 6587.252 |
+| Nærumbanen (2T)         |  254.086 |  251.442 |  250.039 |  251.856 |
+| Nærumbanen (3T)         | 9754.725 | 9692.086 | 9644.453 | 9697.088 |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: No collision limit 2 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitTwoCollisionMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7780 |    7792 |    7796 |    7789 |
+| Example with two trains |    8980 |    9004 |    9016 |    9000 |
+| Shared segment          |   10252 |   10256 |   10524 |   10344 |
+| Large network           |   12336 |   12384 |   12400 |   12373 |
+| Station One             |    8708 |    8732 |    8740 |    8727 |
+| Station Two             |   16604 |   16656 |   16664 |   16641 |
+| Station Four            |  139356 |  139608 |  139616 |  139527 |
+| Station Six             |  680100 |  680448 |  680452 |  680333 |
+| Station Eight           | 2103804 | 2104608 | 2104624 | 2104345 |
+| Nærumbanen (2T)         |  238384 |  239212 |  239240 |  238945 |
+| Nærumbanen (3T)         | 3638672 | 3638708 | 3638728 | 3638703 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Extended variant: Will arrive limit 2 Elapsed time in seconds
+#+TBLNAME: CancelLimitTwoArriveTime
+|-------------------------+-----------+----------+----------+----------|
+| Configuration           |     First |   Second |    Third |  Average |
+|-------------------------+-----------+----------+----------+----------|
+| Example with one train  |     0.005 |    0.009 |    0.007 |    0.007 |
+| Example with two trains |     0.081 |    0.076 |    0.074 |    0.077 |
+| Shared segment          |     0.041 |    0.042 |    0.048 |    0.044 |
+| Large network           |     0.040 |    0.054 |    0.072 |    0.055 |
+| Station One             |     0.025 |    0.025 |    0.030 |    0.027 |
+| Station Two             |     0.887 |    0.781 |    0.777 |    0.815 |
+| Station Four            |    36.392 |   31.455 |   36.080 |   34.642 |
+| Station Six             |   938.160 |  932.271 |  931.334 |  933.922 |
+| Station Eight           |  6647.814 | 6618.742 | 6608.544 | 6625.033 |
+| Nærumbanen (2T)         |   245.720 |  241.710 |  241.961 |  243.130 |
+| Nærumbanen (3T)         | 10032.713 | 9964.283 | 9963.516 | 9986.837 |
+|-------------------------+-----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Extended variant: Will arrive limit 2 Memory Usage Peak in KB
+#+TBLNAME: CancelLimitTwoArriveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7716 |    7720 |    7724 |    7720 |
+| Example with two trains |    8908 |    8916 |    8920 |    8915 |
+| Shared segment          |    9996 |   10016 |   10020 |   10011 |
+| Large network           |   12276 |   12308 |   12312 |   12299 |
+| Station One             |    8624 |    8636 |    8640 |    8633 |
+| Station Two             |   16472 |   16512 |   16516 |   16500 |
+| Station Four            |  138064 |  138196 |  138212 |  138157 |
+| Station Six             |  675176 |  675516 |  675516 |  675403 |
+| Station Eight           | 2087188 | 2087984 | 2087984 | 2087719 |
+| Nærumbanen (2T)         |  238316 |  239136 |  239156 |  238869 |
+| Nærumbanen (3T)         | 3638500 | 3638592 | 3638596 | 3638563 |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+* UMC
+** Limit One
+*** No derailment (Move between connected segments)
+#+caption: UMC Version of First Model: No derailment 1 limit 1 Elapsed time in seconds
+#+TBLNAME: UMCLimitOneMoveTime
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |  0.074 |  0.072 |  0.072 |   0.073 |
+| Example with two trains |  0.597 |  0.589 |  0.598 |   0.595 |
+| Shared segment          |  0.278 |  0.278 |  0.279 |   0.278 |
+| Large network           |  0.281 |  0.282 |  0.280 |   0.281 |
+| Station One             |  0.269 |  0.270 |  0.269 |   0.269 |
+| Station Two             | 14.436 | 14.517 | 14.455 |  14.469 |
+| Station Four            |        |        |        |         |
+| Station Six             |        |        |        |         |
+| Station Eight           |        |        |        |         |
+| Nærumbanen (2T)         |        |        |        |         |
+| Nærumbanen (3T)         |        |        |        |         |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+*** No derailment (Critical section)
+#+caption: UMC Version of First Model: No derailment 2 limit 1 Elapsed time in seconds
+#+TBLNAME: UMCLimitOneCriticalTime
+|-------------------------+-------+--------+-------+---------|
+| Configuration           | First | Second | Third | Average |
+|-------------------------+-------+--------+-------+---------|
+| Example with one train  | 0.067 |  0.068 | 0.068 |   0.068 |
+| Example with two trains | 0.409 |  0.408 | 0.412 |   0.410 |
+| Shared segment          | 0.199 |  0.199 | 0.200 |   0.199 |
+| Large network           | 0.252 |  0.252 | 0.252 |   0.252 |
+| Station One             | 0.233 |  0.234 | 0.226 |   0.231 |
+| Station Two             | 7.966 |  8.003 | 7.973 |   7.981 |
+| Station Four            |       |        |       |         |
+| Station Six             |       |        |       |         |
+| Station Eight           |       |        |       |         |
+| Nærumbanen (2T)         |       |        |       |         |
+| Nærumbanen (3T)         |       |        |       |         |
+|-------------------------+-------+--------+-------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+*** No collision
+#+caption: UMC Version of First Model: No collision Elapsed time in seconds
+#+TBLNAME: UMCLimitOneCollisionTime
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |  0.063 |  0.063 |  0.064 |   0.063 |
+| Example with two trains |  0.752 |  0.748 |  0.758 |   0.753 |
+| Shared segment          |  0.342 |  0.341 |  0.341 |   0.341 |
+| Large network           |  0.346 |  0.343 |  0.345 |   0.345 |
+| Station One             |  0.368 |  0.379 |  0.378 |   0.375 |
+| Station Two             | 12.400 | 12.355 | 12.352 |  12.369 |
+| Station Four            |        |        |        |         |
+| Station Six             |        |        |        |         |
+| Station Eight           |        |        |        |         |
+| Nærumbanen (2T)         |        |        |        |         |
+| Nærumbanen (3T)         |        |        |        |         |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+*** Will arrive
+#+caption: UMC Version of First Model: Will arrive limit 1 Elapsed time in seconds
+#+TBLNAME: UMCLimitOneArriveTime
+|-------------------------+-------+--------+-------+---------|
+| Configuration           | First | Second | Third | Average |
+|-------------------------+-------+--------+-------+---------|
+| Example with one train  | 0.063 |  0.063 | 0.063 |   0.063 |
+| Example with two trains | 0.282 |  0.282 | 0.281 |   0.282 |
+| Shared segment          | 0.134 |  0.139 | 0.134 |   0.136 |
+| Large network           | 0.136 |  0.136 | 0.136 |   0.136 |
+| Station One             | 0.156 |  0.152 | 0.155 |   0.154 |
+| Station Two             | 2.422 |  2.427 | 2.428 |   2.426 |
+| Station Four            |       |        |       |         |
+| Station Six             |       |        |       |         |
+| Station Eight           |       |        |       |         |
+| Nærumbanen (2T)         |       |        |       |         |
+| Nærumbanen (3T)         |       |        |       |         |
+|-------------------------+-------+--------+-------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+
+** Limit Two
+*** No derailment (Move between connected segments)
+#+caption: UMC Version of First Model: No derailment 1 limit 2 Elapsed time in seconds
+#+TBLNAME: UMCLimitTwoMoveTime
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |  0.079 |  0.081 |  0.079 |   0.080 |
+| Example with two trains |  0.688 |  0.690 |  0.691 |   0.690 |
+| Shared segment          |  0.335 |  0.334 |  0.350 |   0.340 |
+| Large network           |  0.338 |  0.337 |  0.337 |   0.337 |
+| Station One             |  0.305 |  0.303 |  0.314 |   0.307 |
+| Station Two             | 23.583 | 23.752 | 23.649 |  23.661 |
+| Station Four            |        |        |        |         |
+| Station Six             |        |        |        |         |
+| Station Eight           |        |        |        |         |
+| Nærumbanen (2T)         |        |        |        |         |
+| Nærumbanen (3T)         |        |        |        |         |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+*** No derailment (Critical section)
+#+caption: UMC Version of First Model: No derailment 2 limit 2 Elapsed time in seconds
+#+TBLNAME: UMCLimitTwoCriticalTime
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |  0.074 |  0.073 |  0.074 |   0.074 |
+| Example with two trains |  0.460 |  0.459 |  0.458 |   0.459 |
+| Shared segment          |  0.230 |  0.231 |  0.231 |   0.231 |
+| Large network           |  0.299 |  0.313 |  0.300 |   0.304 |
+| Station One             |  0.260 |  0.252 |  0.254 |   0.255 |
+| Station Two             | 12.805 | 12.790 | 12.778 |  12.791 |
+| Station Four            |        |        |        |         |
+| Station Six             |        |        |        |         |
+| Station Eight           |        |        |        |         |
+| Nærumbanen (2T)         |        |        |        |         |
+| Nærumbanen (3T)         |        |        |        |         |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+*** No collision
+#+caption: UMC Version of First Model: No collision limit 2 Elapsed time in seconds
+#+TBLNAME: UMCLimitTwoCollisionTime
+|-------------------------+--------+--------+--------+---------|
+| Configuration           |  First | Second |  Third | Average |
+|-------------------------+--------+--------+--------+---------|
+| Example with one train  |  0.066 |  0.066 |  0.066 |   0.066 |
+| Example with two trains |  0.886 |  0.886 |  0.894 |   0.889 |
+| Shared segment          |  0.417 |  0.415 |  0.416 |   0.416 |
+| Large network           |  0.420 |  0.419 |  0.420 |   0.420 |
+| Station One             |  0.429 |  0.430 |  0.429 |   0.429 |
+| Station Two             | 20.210 | 20.193 | 20.154 |  20.186 |
+| Station Four            |        |        |        |         |
+| Station Six             |        |        |        |         |
+| Station Eight           |        |        |        |         |
+| Nærumbanen (2T)         |        |        |        |         |
+| Nærumbanen (3T)         |        |        |        |         |
+|-------------------------+--------+--------+--------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+*** Will arrive
+#+caption: UMC Version of First Model: Will arrive limit 2 Elapsed time in seconds
+#+TBLNAME: UMCLimitTwoArriveTime
+|-------------------------+-------+--------+-------+---------|
+| Configuration           | First | Second | Third | Average |
+|-------------------------+-------+--------+-------+---------|
+| Example with one train  | 0.062 |  0.062 | 0.062 |   0.062 |
+| Example with two trains | 0.275 |  0.264 | 0.262 |   0.267 |
+| Shared segment          | 0.161 |  0.155 | 0.156 |   0.157 |
+| Large network           | 0.419 |  0.418 | 0.422 |   0.420 |
+| Station One             | 0.170 |  0.169 | 0.170 |   0.170 |
+| Station Two             | 3.548 |  3.556 | 3.535 |   3.546 |
+| Station Four            |       |        |       |         |
+| Station Six             |       |        |       |         |
+| Station Eight           |       |        |       |         |
+| Nærumbanen (2T)         |       |        |       |         |
+| Nærumbanen (3T)         |       |        |       |         |
+|-------------------------+-------+--------+-------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+
+* UPPAALxUMC
+** Limit One
+*** No derailment (Move between segments)
+**** Elapsed time
+#+caption: Hybrid variant: No derailment 1 limit 1 Elapsed time in seconds
+#+TBLNAME: UppaalLimitOneMoveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.008 |    0.011 |    0.014 |    0.011 |
+| Example with two trains |    0.010 |    0.014 |    0.017 |    0.014 |
+| Shared segment          |    0.066 |    0.079 |    0.068 |    0.071 |
+| Large network           |    0.080 |    0.087 |    0.097 |    0.088 |
+| Station One             |    0.073 |    0.084 |    0.070 |    0.076 |
+| Station Two             |    1.723 |    1.706 |    1.800 |    1.743 |
+| Station Four            | 2086.282 | 2058.861 | 2082.121 | 2075.755 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: No derailment 1 limit 1 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitOneMoveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7676 |    7692 |    7696 |    7688 |
+| Example with two trains |    7688 |    7704 |    7708 |    7700 |
+| Shared segment          |   10224 |   10260 |   10264 |   10249 |
+| Large network           |   12224 |   12268 |   12284 |   12259 |
+| Station One             |    8548 |    8572 |    8600 |    8573 |
+| Station Two             |   22600 |   22656 |   22664 |   22640 |
+| Station Four            | 2347152 | 2347156 | 2347156 | 2347155 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Hybrid variant: No derailment 2 limit 1 Elapsed time in seconds
+#+TBLNAME: UppaalLimitOneCriticalTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.010 |    0.009 |    0.007 |    0.009 |
+| Example with two trains |    0.014 |    0.018 |    0.017 |    0.016 |
+| Shared segment          |    0.055 |    0.072 |    0.064 |    0.064 |
+| Large network           |    0.066 |    0.084 |    0.087 |    0.079 |
+| Station One             |    0.075 |    0.088 |    0.077 |    0.080 |
+| Station Two             |    1.751 |    1.776 |    1.757 |    1.761 |
+| Station Four            | 2073.825 | 2117.443 | 2137.279 | 2109.516 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: No derailment 2 limit 1 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitOneCriticalMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7632 |    7644 |    7644 |    7640 |
+| Example with two trains |    7640 |    7656 |    7656 |    7651 |
+| Shared segment          |   10180 |   10208 |   10212 |   10200 |
+| Large network           |   12188 |   12228 |   12236 |   12217 |
+| Station One             |    8508 |    8512 |    8520 |    8513 |
+| Station Two             |   20620 |   20664 |   20762 |   20682 |
+| Station Four            | 2347124 | 2347116 | 2347108 | 2347116 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: Hybrid variant: No collision limit 1 Elapsed time in seconds
+#+TBLNAME: UppaalLimitOneCollisionTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.010 |    0.010 |    0.012 |    0.011 |
+| Example with two trains |    0.016 |    0.017 |    0.017 |    0.017 |
+| Shared segment          |    0.062 |    0.066 |    0.072 |    0.067 |
+| Large network           |    0.066 |    0.092 |    0.083 |    0.080 |
+| Station One             |    0.062 |    0.056 |    0.079 |    0.066 |
+| Station Two             |    1.713 |    1.782 |    1.785 |    1.760 |
+| Station Four            | 2101.282 | 2120.291 | 2110.154 | 2110.576 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: No collision limit 1 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitOneCollisionMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7636 |    7652 |    7652 |    7647 |
+| Example with two trains |    7648 |    7664 |    7664 |    7659 |
+| Shared segment          |   10184 |   10216 |   10224 |   10208 |
+| Large network           |   12180 |   12228 |   12244 |   12217 |
+| Station One             |    8516 |    8532 |    8552 |    8533 |
+| Station Two             |   20620 |   20672 |   20680 |   20657 |
+| Station Four            | 2347104 | 2347108 | 2347108 | 2347107 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Hybrid variant: Will arrive limit 1 Elapsed time in seconds
+#+TBLNAME: UppaalLimitOneArriveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.012 |    0.009 |    0.011 |    0.011 |
+| Example with two trains |    0.008 |    0.007 |    0.008 |    0.008 |
+| Shared segment          |    0.065 |    0.079 |    0.076 |    0.073 |
+| Large network           |    0.066 |    0.066 |    0.075 |    0.069 |
+| Station One             |    0.075 |    0.062 |    0.078 |    0.072 |
+| Station Two             |    1.818 |    1.721 |    1.824 |    1.788 |
+| Station Four            | 2132.376 | 2037.542 | 2048.334 | 2072.751 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: Will arrive limit 1 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitOneArriveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7572 |    7576 |    7576 |    7575 |
+| Example with two trains |    7580 |    7588 |    7588 |    7585 |
+| Shared segment          |   10112 |   10132 |   10132 |   10125 |
+| Large network           |   12108 |   12144 |   12152 |   12135 |
+| Station One             |    8456 |    8456 |    8456 |    8456 |
+| Station Two             |   20444 |   20484 |   20488 |   20472 |
+| Station Four            | 2230892 | 2230908 | 2230912 | 2230904 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+** Limit Two
+*** No derailment (Move between segments)
+**** Elapsed time
+#+caption: Hybrid variant: No derailment 1 limit 2 Elapsed time in seconds
+#+TBLNAME: UppaalLimitTwoMoveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.014 |    0.015 |    0.017 |    0.015 |
+| Example with two trains |    0.171 |    0.170 |    0.199 |    0.180 |
+| Shared segment          |    0.083 |    0.038 |    0.024 |    0.048 |
+| Large network           |    0.105 |    0.111 |    0.108 |    0.108 |
+| Station One             |    0.074 |    0.084 |    0.070 |    0.076 |
+| Station Two             |    2.505 |    2.606 |    2.612 |    2.574 |
+| Station Four            | 4164.950 | 4235.207 | 4300.883 | 4233.680 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: No derailment 1 limit 2 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitTwoMoveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7684 |    7700 |    7704 |    7696 |
+| Example with two trains |    8960 |    8980 |    9008 |    8983 |
+| Shared segment          |   10292 |   10332 |   10336 |   10320 |
+| Large network           |   12288 |   12340 |   12352 |   12327 |
+| Station One             |    8584 |    8604 |    8632 |    8607 |
+| Station Two             |   26980 |   27028 |   27040 |   27016 |
+| Station Four            | 4533628 | 4533628 | 4533628 | 4533628 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+caption: Hybrid variant: No derailment 2 limit 2 Elapsed time in seconds
+#+TBLNAME: UppaalLimitTwoCriticalTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.013 |    0.016 |    0.016 |    0.015 |
+| Example with two trains |    0.187 |    0.198 |    0.196 |    0.194 |
+| Shared segment          |    0.082 |    0.020 |    0.037 |    0.046 |
+| Large network           |    0.090 |    0.102 |    0.090 |    0.094 |
+| Station One             |    0.083 |    0.080 |    0.080 |    0.081 |
+| Station Two             |    2.657 |    2.624 |    2.599 |    2.627 |
+| Station Four            | 4107.677 | 4339.988 | 4246.319 | 4231.328 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: No derailment 2 limit 2 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitTwoCriticalMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7644 |    7660 |    7660 |    7655 |
+| Example with two trains |    8916 |    8932 |    8936 |    8928 |
+| Shared segment          |   10252 |   10284 |   10288 |   10275 |
+| Large network           |   12252 |   12288 |   12296 |   12279 |
+| Station One             |    8528 |    8544 |    8548 |    8540 |
+| Station Two             |   29932 |   26980 |   26980 |   27964 |
+| Station Four            | 4533584 | 4533576 | 4533584 | 4533581 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+*** No collision
+**** Elapsed time
+#+caption: Hybrid variant: No collision limit 2 Elapsed time in seconds
+#+TBLNAME: UppaalLimitTwoCollisionTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.014 |    0.020 |    0.015 |    0.016 |
+| Example with two trains |    0.170 |    0.194 |    0.174 |    0.179 |
+| Shared segment          |    0.085 |    0.033 |    0.032 |    0.050 |
+| Large network           |    0.090 |    0.112 |    0.101 |    0.101 |
+| Station One             |    0.082 |    0.069 |    0.095 |    0.082 |
+| Station Two             |    2.607 |    2.726 |    2.557 |    2.630 |
+| Station Four            | 4102.210 | 4170.611 | 4313.341 | 4195.387 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: No collision limit 2 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitTwoCollisionMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7636 |    7652 |    7652 |    7647 |
+| Example with two trains |    8916 |    8936 |    8964 |    8939 |
+| Shared segment          |   10248 |   10288 |   10292 |   10276 |
+| Large network           |   12248 |   12296 |   12312 |   12285 |
+| Station One             |    8536 |    8560 |    8588 |    8561 |
+| Station Two             |   26932 |   26984 |   26992 |   26969 |
+| Station Four            | 4533576 | 4533580 | 4533572 | 4533576 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+
+*** Will arrive
+**** Elapsed time
+#+caption: Hybrid variant: Will arrive limit 2 Elapsed time in seconds
+#+TBLNAME: UppaalLimitTwoArriveTime
+|-------------------------+----------+----------+----------+----------|
+| Configuration           |    First |   Second |    Third |  Average |
+|-------------------------+----------+----------+----------+----------|
+| Example with one train  |    0.014 |    0.008 |    0.014 |    0.012 |
+| Example with two trains |    0.165 |    0.166 |    0.169 |    0.167 |
+| Shared segment          |    0.082 |    0.029 |    0.028 |    0.046 |
+| Large network           |    0.093 |    0.103 |    0.093 |    0.096 |
+| Station One             |    0.074 |    0.095 |    0.090 |    0.086 |
+| Station Two             |    2.696 |    2.539 |    2.519 |    2.585 |
+| Station Four            | 4103.429 | 4163.708 | 4172.222 | 4146.453 |
+| Station Six             |          |          |          |          |
+| Station Eight           |          |          |          |          |
+| Nærumbanen (2T)         |          |          |          |          |
+| Nærumbanen (3T)         |          |          |          |          |
+|-------------------------+----------+----------+----------+----------|
+#+TBLFM: $5=if("$2" == "nan", string(""), vmean($2..$4));E f-3
+
+**** Memory Usage Peak
+#+caption: Hybrid variant: Will arrive limit 2 Memory Usage Peak in KB
+#+TBLNAME: UppaalLimitTwoArriveMemory
+|-------------------------+---------+---------+---------+---------|
+| Configuration           |   First |  Second |   Third | Average |
+|-------------------------+---------+---------+---------+---------|
+| Example with one train  |    7584 |    7592 |    7592 |    7589 |
+| Example with two trains |    8848 |    8856 |    8860 |    8855 |
+| Shared segment          |   10184 |   10204 |   10204 |   10197 |
+| Large network           |   12180 |   12216 |   12224 |   12207 |
+| Station One             |    8472 |    8472 |    8472 |    8472 |
+| Station Two             |   26764 |   26796 |   26800 |   26787 |
+| Station Four            | 4471212 | 4471196 | 4471212 | 4471207 |
+| Station Six             |         |         |         |         |
+| Station Eight           |         |         |         |         |
+| Nærumbanen (2T)         |         |         |         |         |
+| Nærumbanen (3T)         |         |         |         |         |
+|-------------------------+---------+---------+---------+---------|
+#+TBLFM: $5=if("$2" == "nan", string(""), round(vmean($2..$4)));E f-3
+
+
+* Summary
+** Limit One
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryStationsMoveLimitOneTime
+#+CAPTION: Stations Limit One No Derailment (Move between connected segments) Time
+|----------+-------------+------------+---------+---------+--------+------------|
+| Stations | First model | Restricted |  Global |  Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+--------+------------|
+|        1 |       0.011 |      0.014 |   0.017 |   0.027 |  0.269 |      0.076 |
+|        2 |       0.075 |      0.084 |   0.136 |   0.251 | 14.469 |      1.743 |
+|        4 |       1.720 |      1.415 |   2.482 |   5.527 |        |   2075.755 |
+|        6 |      27.370 |     22.865 |  45.916 | 108.261 |        |            |
+|        8 |     165.795 |    134.609 | 276.719 | 630.823 |        |            |
+|----------+-------------+------------+---------+---------+--------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneMoveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneMoveTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneMoveTime, @6$5);E f-3::@2$5=remote(CancelLimitOneMoveTime, @6$5);E f-3::@2$6=remote(UMCLimitOneMoveTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneMoveTime, @6$5);E f-3::@3$2=remote(RCSLimitOneMoveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneMoveTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneMoveTime, @7$5);E f-3::@3$5=remote(CancelLimitOneMoveTime, @7$5);E f-3::@3$6=remote(UMCLimitOneMoveTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneMoveTime, @7$5);E f-3::@4$2=remote(RCSLimitOneMoveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneMoveTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneMoveTime, @8$5);E f-3::@4$5=remote(CancelLimitOneMoveTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneMoveTime, @8$5);E f-3::@5$2=remote(RCSLimitOneMoveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneMoveTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneMoveTime, @9$5);E f-3::@5$5=remote(CancelLimitOneMoveTime, @9$5);E f-3::@6$2=remote(RCSLimitOneMoveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneMoveTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneMoveTime, @10$5);E f-3::@6$5=remote(CancelLimitOneMoveTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryStationsMoveLimitOneTime :file stationsMoveLimitOneTime.png
+set term png size 1600,1600 font "Helvetica,16"
+set title "No derailment limit 1 time (Move between connected segments)"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsMoveLimitOneTime.png]]
+
+#+PLOT: ind:1
+#+tblname: summaryTrainsMoveLimitOneTime
+#+CAPTION: Nærumbanen Limit One No Derailment (Move between connected segments) Time
+|--------+-------------+------------+---------+----------+-----+------------|
+| Trains | First model | Restricted |  Global |   Cancel | UMC | UPPAAlxUMC |
+|--------+-------------+------------+---------+----------+-----+------------|
+|      2 |      24.152 |     19.547 |  30.622 |   44.806 |     |            |
+|      3 |     654.663 |    320.442 | 609.311 | 1137.541 |     |            |
+|--------+-------------+------------+---------+----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneMoveTime, @15$5);E f-3::@2$3=remote(RestrictedLimitOneMoveTime, @15$5);E f-3::@2$4=remote(GlobalLimitOneMoveTime, @12$5);E f-3::@2$5=remote(CancelLimitOneMoveTime, @11$5);E f-3::@3$2=remote(RCSLimitOneMoveTime, @16$5);E f-3::@3$3=remote(RestrictedLimitOneMoveTime, @16$5);E f-3::@3$4=remote(GlobalLimitOneMoveTime, @13$5);E f-3::@3$5=remote(CancelLimitOneMoveTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryStationsMoveLimitOneMemory
+#+CAPTION: Stations Limit One No Derailment (Move between connected segments) Memory
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.488 |      8.552 |   8.365 |   8.737 |      8.573 |
+|        2 |       9.279 |     14.295 |   1.247 |   1.361 |      2.264 |
+|        4 |      29.647 |     38.089 |  37.879 |  48.485 |   2347.155 |
+|        6 |      70.101 |    105.637 | 104.069 | 151.608 |            |
+|        8 |     205.391 |    222.268 | 232.768 | 372.632 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneMoveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneMoveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneMoveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneMoveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneMoveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneMoveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneMoveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneMoveMemory, @7$5)/10000;E f-3::@3$5=remote(CancelLimitOneMoveMemory, @7$5)/10000;E f-3::@3$6=remote(UppaalLimitOneMoveMemory, @7$5)/10000;E f-3::@4$2=remote(RCSLimitOneMoveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneMoveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneMoveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneMoveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneMoveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneMoveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneMoveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneMoveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneMoveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneMoveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneMoveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneMoveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneMoveMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryStationsMoveLimitOneMemory :file stationsMoveLimitOneMemory.png
+set term png size 1600,1600 font "Helvetica,16"
+set title "No derailment limit 1 memory (Move between connected segments)"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsMoveLimitOneMemory.png]]
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryStationsCriticalLimitOneTime
+#+CAPTION: Stations Limit One No Derailment (No trains in critical section) Time
+|----------+-------------+------------+---------+---------+-------+------------|
+| Stations | First model | Restricted |  Global |  Cancel |   UMC | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+-------+------------|
+|        1 |       0.012 |      0.017 |   0.023 |   0.035 | 0.231 |      0.080 |
+|        2 |       0.073 |      0.074 |   0.141 |   0.270 | 7.981 |      1.761 |
+|        4 |       1.708 |      1.316 |   2.360 |   5.197 |       |   2109.516 |
+|        6 |      29.484 |     22.226 |  44.986 | 108.011 |       |            |
+|        8 |     165.246 |    135.380 | 288.698 | 634.250 |       |            |
+|----------+-------------+------------+---------+---------+-------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCriticalTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCriticalTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneCriticalTime, @6$5);E f-3::@2$5=remote(CancelLimitOneCriticalTime, @6$5);E f-3::@2$6=remote(UMCLimitOneCriticalTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneCriticalTime, @6$5);E f-3::@3$2=remote(RCSLimitOneCriticalTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCriticalTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneCriticalTime, @7$5);E f-3::@3$5=remote(CancelLimitOneCriticalTime, @7$5);E f-3::@3$6=remote(UMCLimitOneCriticalTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneCriticalTime, @7$5);E f-3::@4$2=remote(RCSLimitOneCriticalTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCriticalTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneCriticalTime, @8$5);E f-3::@4$5=remote(CancelLimitOneCriticalTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneCriticalTime, @8$5);E f-3::@5$2=remote(RCSLimitOneCriticalTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCriticalTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneCriticalTime, @9$5);E f-3::@5$5=remote(CancelLimitOneCriticalTime, @9$5);E f-3::@6$2=remote(RCSLimitOneCriticalTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCriticalTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneCriticalTime, @10$5);E f-3::@6$5=remote(CancelLimitOneCriticalTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCriticalLimitOneTime :file stationsCriticalTimeLimitOne.png
+set term png size 1600,1600 font "Helvetica,16"
+set title "No derailment limit 1 time (No trains in critical section)"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCriticalTimeLimitOne.png]]
+
+#+PLOT: ind:1
+#+tblname: summaryTrainsCriticalLimitOneTime
+#+CAPTION: Nærumbanen Limit One No Derailment (No trains in critical section) Time
+|--------+-------------+------------+---------+----------+-----+------------|
+| Trains | First model | Restricted |  Global |   Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+---------+----------+-----+------------|
+|      2 |      24.069 |     20.086 |  29.555 |   43.607 |     |            |
+|      3 |     660.637 |    332.303 | 627.546 | 1116.012 |     |            |
+|--------+-------------+------------+---------+----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCriticalTime, @15$5);E f-3::@2$3=remote(RestrictedLimitOneCriticalTime, @15$5);E f-3::@2$4=remote(GlobalLimitOneCriticalTime, @12$5);E f-3::@2$5=remote(CancelLimitOneCriticalTime, @11$5);E f-3::@3$2=remote(RCSLimitOneCriticalTime, @16$5);E f-3::@3$3=remote(RestrictedLimitOneCriticalTime, @16$5);E f-3::@3$4=remote(GlobalLimitOneCriticalTime, @13$5);E f-3::@3$5=remote(CancelLimitOneCriticalTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryStationsCriticalLimitOneMemory
+#+CAPTION: Stations Limit One No Derailment (No trains in critical section) Memory
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.475 |      8.519 |   8.348 |   8.701 |      8.513 |
+|        2 |       9.269 |     12.443 |  12.551 |  13.581 |     20.682 |
+|        4 |      25.827 |     36.660 |  37.675 |  48.445 |   2347.116 |
+|        6 |      70.087 |    105.907 | 104.064 | 151.579 |            |
+|        8 |     158.475 |    220.235 | 232.747 | 372.268 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCriticalMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneCriticalMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneCriticalMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneCriticalMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneCriticalMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneCriticalMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneCriticalMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneCriticalMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitOneCriticalMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitOneCriticalMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneCriticalMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneCriticalMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneCriticalMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneCriticalMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneCriticalMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneCriticalMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneCriticalMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneCriticalMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneCriticalMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneCriticalMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCriticalLimitOneMemory :file stationsCriticalLimitOneMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No derailment limit 1 memory (No trains in critical section)"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCriticalLimitOneMemory.png]]
+
+
+*** No collision
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryStationsCollisionLimitOneTime
+#+CAPTION: Stations Limit One No collision Time
+|----------+-------------+------------+---------+---------+--------+------------|
+| Stations | First model | Restricted |  Global |  Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+--------+------------|
+|        1 |       0.008 |      0.014 |   0.022 |   0.032 |  0.375 |      0.066 |
+|        2 |       0.085 |      0.097 |   0.127 |   0.253 | 12.369 |      1.760 |
+|        4 |       1.784 |      1.289 |   2.677 |   5.281 |        |   2110.576 |
+|        6 |      29.720 |     23.232 |  44.976 | 107.555 |        |            |
+|        8 |     165.382 |    125.718 | 286.938 | 637.434 |        |            |
+|----------+-------------+------------+---------+---------+--------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCollisionTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneCollisionTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneCollisionTime, @6$5);E f-3::@2$5=remote(CancelLimitOneCollisionTime, @6$5);E f-3::@2$6=remote(UMCLimitOneCollisionTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneCollisionTime, @6$5);E f-3::@3$2=remote(RCSLimitOneCollisionTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneCollisionTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneCollisionTime, @7$5);E f-3::@3$5=remote(CancelLimitOneCollisionTime, @7$5);E f-3::@3$6=remote(UMCLimitOneCollisionTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneCollisionTime, @7$5);E f-3::@4$2=remote(RCSLimitOneCollisionTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneCollisionTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneCollisionTime, @8$5);E f-3::@4$5=remote(CancelLimitOneCollisionTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneCollisionTime, @8$5);E f-3::@5$2=remote(RCSLimitOneCollisionTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneCollisionTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneCollisionTime, @9$5);E f-3::@5$5=remote(CancelLimitOneCollisionTime, @9$5);E f-3::@6$2=remote(RCSLimitOneCollisionTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneCollisionTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneCollisionTime, @10$5);E f-3::@6$5=remote(CancelLimitOneCollisionTime, @6$5);E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCollisionLimitOneTime :file stationsCollisionLimitOneTime.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No collision limit 1 time"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCollisionLimitOneTime.png]]
+
+#+PLOT: ind:1
+#+tblname: summaryTrainsCollisionLimitOneTime
+#+CAPTION: Nærumbanen Limit One (No collision) Time
+|--------+-------------+------------+---------+----------+-----+------------|
+| Trains | First model | Restricted |  Global |   Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+---------+----------+-----+------------|
+|      2 |      24.255 |     18.658 |  28.123 |   43.134 |     |            |
+|      3 |     662.675 |    322.102 | 592.843 | 1126.972 |     |            |
+|--------+-------------+------------+---------+----------+-----+------------|
+#+TBLFM: $7=remote(UppaalLimitOneCollisionTime, @8$5);E f-3::@2$2=remote(RCSLimitOneCollisionTime, @15$5);E f-3::@2$3=remote(RestrictedLimitOneCollisionTime, @15$5);E f-3::@2$4=remote(GlobalLimitOneCollisionTime, @12$5);E f-3::@2$5=remote(CancelLimitOneCollisionTime, @11$5);E f-3::@3$2=remote(RCSLimitOneCollisionTime, @16$5);E f-3::@3$3=remote(RestrictedLimitOneCollisionTime, @16$5);E f-3::@3$4=remote(GlobalLimitOneCollisionTime, @13$5);E f-3::@3$5=remote(CancelLimitOneCollisionTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryStationsCollisionLimitOneMemory
+#+CAPTION: Stations Limit One No Collision Memory
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.515 |      8.524 |   8.352 |   8.701 |      8.533 |
+|        2 |       9.300 |     12.421 |  12.545 |  13.571 |     20.657 |
+|        4 |      25.856 |     38.101 |  37.845 |  48.441 |   2347.107 |
+|        6 |      70.112 |    101.904 | 104.047 | 151.560 |            |
+|        8 |     158.497 |    224.520 | 232.720 | 372.249 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneCollisionMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneCollisionMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneCollisionMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneCollisionMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneCollisionMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneCollisionMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneCollisionMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneCollisionMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitOneCollisionMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitOneCollisionMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneCollisionMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneCollisionMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneCollisionMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneCollisionMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneCollisionMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneCollisionMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneCollisionMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneCollisionMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneCollisionMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneCollisionMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCollisionLimitOneMemory :file stationsCollisionLimitOneMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No collision limit 1 memory"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCollisionLimitOneMemory.png]]
+
+
+*** Will arrive
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryArriveLimitOneTime
+#+CAPTION: Stations Limit One Will Arrive Time
+|----------+-------------+------------+---------+---------+-------+------------|
+| Stations | First model | Restricted |  Global |  Cancel |   UMC | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+-------+------------|
+|        1 |       0.010 |      0.019 |   0.025 |   0.033 | 0.154 |      0.072 |
+|        2 |       0.077 |      0.072 |   0.131 |   0.229 | 2.426 |      1.788 |
+|        4 |       1.711 |      1.306 |   2.590 |   4.823 |       |   2072.751 |
+|        6 |      27.375 |     22.197 |  46.804 | 106.595 |       |            |
+|        8 |     163.192 |    134.605 | 285.323 | 654.142 |       |            |
+|----------+-------------+------------+---------+---------+-------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneArriveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitOneArriveTime, @6$5);E f-3::@2$4=remote(GlobalLimitOneArriveTime, @6$5);E f-3::@2$5=remote(CancelLimitOneArriveTime, @6$5);E f-3::@2$6=remote(UMCLimitOneArriveTime, @6$5);E f-3::@2$7=remote(UppaalLimitOneArriveTime, @6$5);E f-3::@3$2=remote(RCSLimitOneArriveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitOneArriveTime, @7$5);E f-3::@3$4=remote(GlobalLimitOneArriveTime, @7$5);E f-3::@3$5=remote(CancelLimitOneArriveTime, @7$5);E f-3::@3$6=remote(UMCLimitOneArriveTime, @7$5);E f-3::@3$7=remote(UppaalLimitOneArriveTime, @7$5);E f-3::@4$2=remote(RCSLimitOneArriveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitOneArriveTime, @8$5);E f-3::@4$4=remote(GlobalLimitOneArriveTime, @8$5);E f-3::@4$5=remote(CancelLimitOneArriveTime, @8$5);E f-3::@4$7=remote(UppaalLimitOneArriveTime, @8$5);E f-3::@5$2=remote(RCSLimitOneArriveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitOneArriveTime, @9$5);E f-3::@5$4=remote(GlobalLimitOneArriveTime, @9$5);E f-3::@5$5=remote(CancelLimitOneArriveTime, @9$5);E f-3::@6$2=remote(RCSLimitOneArriveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitOneArriveTime, @10$5);E f-3::@6$4=remote(GlobalLimitOneArriveTime, @10$5);E f-3::@6$5=remote(CancelLimitOneArriveTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryArriveLimitOneTime :file stationsArriveLimitOneTime.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "Will arrive limit 1"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+plot [][:800] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsArriveLimitOneTime.png]]
+
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit One Will Arrive Time
+|--------+-------------+------------+---------+----------+-----+------------|
+| Trains | First model | Restricted |  Global |   Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+---------+----------+-----+------------|
+|      2 |      23.918 |     20.417 |  28.715 |   42.842 |     |            |
+|      3 |     664.667 |    333.814 | 640.212 | 1113.862 |     |            |
+|--------+-------------+------------+---------+----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneArriveTime, @15$5);E f-3::@2$3=remote(RestrictedLimitOneArriveTime, @15$5);E f-3::@2$4=remote(GlobalLimitOneArriveTime, @12$5);E f-3::@2$5=remote(CancelLimitOneArriveTime, @11$5);E f-3::@3$2=remote(RCSLimitOneArriveTime, @16$5);E f-3::@3$3=remote(RestrictedLimitOneArriveTime, @16$5);E f-3::@3$4=remote(GlobalLimitOneArriveTime, @13$5);E f-3::@3$5=remote(CancelLimitOneArriveTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryArriveLimitOneMemory
+#+CAPTION: Stations Limit One Will Arrive Memory
+|----------+-------------+------------+---------+---------+------------|
+| Stations | First model | Restricted |  Global |  Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+---------+------------|
+|        1 |       6.439 |      8.447 |   8.268 |   8.616 |      8.456 |
+|        2 |       9.228 |     12.344 |  12.459 |  13.475 |     20.472 |
+|        4 |      25.781 |     37.208 |  37.749 |  48.224 |   2230.904 |
+|        6 |      69.981 |    100.468 | 103.721 | 150.872 |            |
+|        8 |     158.180 |    221.277 | 232.373 | 370.340 |            |
+|----------+-------------+------------+---------+---------+------------|
+#+TBLFM: @2$2=remote(RCSLimitOneArriveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitOneArriveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitOneArriveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitOneArriveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitOneArriveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitOneArriveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitOneArriveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitOneArriveMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitOneArriveMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitOneArriveMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitOneArriveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitOneArriveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitOneArriveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitOneArriveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitOneArriveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitOneArriveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitOneArriveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitOneArriveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitOneArriveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitOneArriveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitOneArriveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitOneArriveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitOneArriveMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryArriveLimitOneMemory :file stationsArriveLimitOneMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "Will arrive limit 1 memory"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsArriveLimitOneMemory.png]]
+
+
+** Limit Two
+*** No derailment (Move between connected segments)
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryStationsMoveLimitTwoTime
+#+CAPTION: Stations Limit Two No derailment (Move between connected segments) Time
+|----------+-------------+------------+----------+----------+--------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+--------+------------|
+|        1 |       0.016 |      0.015 |    0.036 |    0.035 |  0.307 |      0.076 |
+|        2 |       0.186 |      0.125 |    0.365 |    0.870 | 23.661 |      2.574 |
+|        4 |       8.130 |      2.373 |   11.708 |   34.119 |        |   4233.680 |
+|        6 |     176.259 |     47.547 |  254.677 |  895.692 |        |            |
+|        8 |    1127.135 |    296.939 | 1594.772 | 6552.647 |        |            |
+|----------+-------------+------------+----------+----------+--------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoMoveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoMoveTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoMoveTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoMoveTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoMoveTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoMoveTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoMoveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoMoveTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoMoveTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoMoveTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoMoveTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoMoveTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoMoveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoMoveTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoMoveTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoMoveTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoMoveTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoMoveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoMoveTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoMoveTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoMoveTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoMoveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoMoveTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoMoveTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoMoveTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryStationsMoveLimitTwoTime :file stationsMoveLimitTwoTime.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No derailment limit 2 time (Move between connected segments)"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsMoveLimitTwoTime.png]]
+
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No derailment (Move between connected segments) Time
+|--------+-------------+------------+----------+-----------+-----+------------|
+| Trains | First model | Restricted |   Global |    Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+----------+-----------+-----+------------|
+|      2 |     114.481 |     20.385 |  132.676 |   242.572 |     |            |
+|      3 |    4451.998 |    407.335 | 4585.181 | 10075.215 |     |            |
+|--------+-------------+------------+----------+-----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoMoveTime, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoMoveTime, @15$5);E f-3::@2$4=remote(GlobalLimitTwoMoveTime, @12$5);E f-3::@2$5=remote(CancelLimitTwoMoveTime, @11$5);E f-3::@3$2=remote(RCSLimitTwoMoveTime, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoMoveTime, @16$5);E f-3::@3$4=remote(GlobalLimitTwoMoveTime, @13$5);E f-3::@3$5=remote(CancelLimitTwoMoveTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryStationsMoveLimitTwoMemory
+#+CAPTION: Stations Limit Two No derailment (Move between connected segments) Memory
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.496 |      8.556 |  10.067 |   12.055 |      8.607 |
+|        2 |       9.931 |     12.655 |  16.369 |   18.555 |     27.016 |
+|        4 |      41.503 |     39.423 |  59.801 |  139.583 |   4533.628 |
+|        6 |     152.876 |    120.059 | 212.289 |  680.383 |            |
+|        8 |     422.323 |    276.123 | 541.721 | 2104.105 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoMoveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoMoveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoMoveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoMoveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoMoveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoMoveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoMoveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoMoveMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoMoveMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoMoveMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoMoveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoMoveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoMoveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoMoveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoMoveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoMoveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoMoveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoMoveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoMoveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoMoveMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryStationsMoveLimitTwoMemory :file stationsMoveLimitTwoMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No derailment limit 2 memory (Move between connected segments)"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsMoveLimitTwoMemory.png]]
+
+
+*** No derailment (Critical section)
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryStationsCriticalLimitTwoTime
+#+CAPTION: Stations Limit Two No derailment (No trains in critical section) Time
+|----------+-------------+------------+----------+----------+--------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+--------+------------|
+|        1 |       0.013 |      0.023 |    0.022 |    0.036 |  0.255 |      0.081 |
+|        2 |       0.198 |      0.133 |    0.368 |    0.877 | 12.791 |      2.627 |
+|        4 |       8.071 |      2.147 |   10.941 |   32.311 |        |   4231.328 |
+|        6 |     172.667 |     47.579 |  245.934 |  920.202 |        |            |
+|        8 |    1138.023 |    292.373 | 1694.755 | 6608.802 |        |            |
+|----------+-------------+------------+----------+----------+--------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCriticalTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCriticalTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCriticalTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoCriticalTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoCriticalTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoCriticalTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoCriticalTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCriticalTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCriticalTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoCriticalTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoCriticalTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoCriticalTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoCriticalTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCriticalTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCriticalTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoCriticalTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoCriticalTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoCriticalTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCriticalTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCriticalTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoCriticalTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoCriticalTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCriticalTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCriticalTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoCriticalTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoTime :file stationsCriticalTimeLimitTwo.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No derailment limit 2 time (No trains in critical section)"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCriticalTimeLimitTwo.png]]
+
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No derailment (No trains in critical section) Time
+|--------+-------------+------------+----------+-----------+-----+------------|
+| Trains | First model | Restricted |   Global |    Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+----------+-----------+-----+------------|
+|      2 |     112.896 |     19.871 |  133.281 |   251.827 |     |            |
+|      3 |    4587.709 |    415.812 | 4319.844 | 10015.096 |     |            |
+|--------+-------------+------------+----------+-----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCriticalTime, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoCriticalTime, @15$5);E f-3::@2$4=remote(GlobalLimitTwoCriticalTime, @12$5);E f-3::@2$5=remote(CancelLimitTwoCriticalTime, @11$5);E f-3::@3$2=remote(RCSLimitTwoCriticalTime, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoCriticalTime, @16$5);E f-3::@3$4=remote(GlobalLimitTwoCriticalTime, @13$5);E f-3::@3$5=remote(CancelLimitTwoCriticalTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryStationsCriticalLimitTwoMemory
+#+CAPTION: Stations Limit Two No derailment (No trains in critical section) Memory
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.479 |      8.516 |   8.416 |    8.732 |      8.540 |
+|        2 |       9.909 |     12.591 |  15.443 |   16.661 |     27.964 |
+|        4 |      41.484 |     40.388 |  58.229 |  139.539 |   4533.581 |
+|        6 |     152.851 |    121.686 | 209.163 |  680.276 |            |
+|        8 |     422.303 |    275.489 | 543.076 | 2104.356 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCriticalMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoCriticalMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoCriticalMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoCriticalMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoCriticalMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoCriticalMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoCriticalMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoCriticalMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoCriticalMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoCriticalMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoCriticalMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoCriticalMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoCriticalMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoCriticalMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoCriticalMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoCriticalMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoCriticalMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoCriticalMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoCriticalMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoCriticalMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCriticalLimitTwoMemory :file stationsCriticalLimitTwoMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No derailment limit 2 memory (No trains in critical section)"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCriticalLimitTwoMemory.png]]
+
+
+*** No collision
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryStationsCollisionLimitTwoTime
+#+CAPTION: Stations Limit Two No Collision Time
+|----------+-------------+------------+----------+----------+--------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |    UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+--------+------------|
+|        1 |       0.013 |      0.021 |    0.018 |    0.046 |  0.429 |      0.082 |
+|        2 |       0.195 |      0.127 |    0.351 |    0.894 | 20.186 |      2.630 |
+|        4 |       8.149 |      2.275 |   11.550 |   33.869 |        |   4195.387 |
+|        6 |     175.750 |     47.536 |  249.729 |  951.256 |        |            |
+|        8 |    1144.819 |    276.935 | 1597.767 | 6587.252 |        |            |
+|----------+-------------+------------+----------+----------+--------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCollisionTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoCollisionTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoCollisionTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoCollisionTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoCollisionTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoCollisionTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoCollisionTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoCollisionTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoCollisionTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoCollisionTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoCollisionTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoCollisionTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoCollisionTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoCollisionTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoCollisionTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoCollisionTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoCollisionTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoCollisionTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoCollisionTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoCollisionTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoCollisionTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoCollisionTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoCollisionTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoCollisionTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoCollisionTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoTime :file stationsCollisionLimitTwoTime.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No collision limit 2 time"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCollisionLimitTwoTime.png]]
+
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two No Collision Time
+|--------+-------------+------------+----------+----------+-----+------------|
+| Trains | First model | Restricted |   Global |   Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+----------+----------+-----+------------|
+|      2 |     111.705 |     19.910 |  133.708 |  251.856 |     |            |
+|      3 |    4700.652 |    394.517 | 4374.074 | 9697.088 |     |            |
+|--------+-------------+------------+----------+----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCollisionTime, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoCollisionTime, @15$5);E f-3::@2$4=remote(GlobalLimitTwoCollisionTime, @12$5);E f-3::@2$5=remote(CancelLimitTwoCollisionTime, @7$5);E f-3::@2$6=if(remote(UMCLimitTwoCollisionTime, @7$5)==0, string(""), remote(UMCLimitTwoCollisionTime, @7$5))::@2$7=if(remote(UppaalLimitTwoCollisionTime, @7$5)==0, string(""), remote(UppaalLimitTwoCollisionTime, @7$5))::@3$2=remote(RCSLimitTwoCollisionTime, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoCollisionTime, @16$5);E f-3::@3$4=remote(GlobalLimitTwoCollisionTime, @13$5);E f-3::@3$5=remote(CancelLimitTwoCollisionTime, @8$5);E f-3::@3$6=if(remote(UMCLimitTwoCollisionTime, @8$5)==0, string(""), remote(UMCLimitTwoCollisionTime, @8$5))::@3$7=if(remote(UppaalLimitTwoCollisionTime, @8$5)==0, string(""), remote(UppaalLimitTwoCollisionTime, @8$5))
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryStationsCollisionLimitTwoMemory
+#+CAPTION: Stations Limit Two No Collision Memory
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.515 |      8.508 |   8.412 |    8.727 |      8.561 |
+|        2 |       9.944 |     12.579 |  14.960 |   16.641 |     26.969 |
+|        4 |      41.508 |     39.384 |  58.201 |  139.527 |   4533.576 |
+|        6 |     152.875 |    122.787 | 210.057 |  680.333 |            |
+|        8 |     422.327 |    276.996 | 544.733 | 2104.345 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoCollisionMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoCollisionMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoCollisionMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoCollisionMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoCollisionMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoCollisionMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoCollisionMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoCollisionMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoCollisionMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoCollisionMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoCollisionMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoCollisionMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoCollisionMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoCollisionMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoCollisionMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoCollisionMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoCollisionMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoCollisionMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoCollisionMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoCollisionMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryStationsCollisionLimitTwoMemory :file stationsCollisionLimitTwoMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "No collision limit 2 memory"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:2550] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsCollisionLimitTwoMemory.png]]
+
+
+*** Will arrive
+**** Elapsed time
+#+PLOT: ind:1
+#+tblname: summaryArriveLimitTwoTime
+#+CAPTION: Stations Limit Two Will Arrive Time
+|----------+-------------+------------+----------+----------+-------+------------|
+| Stations | First model | Restricted |   Global |   Cancel |   UMC | UPPAALxUMC |
+|----------+-------------+------------+----------+----------+-------+------------|
+|        1 |       0.015 |      0.019 |    0.026 |    0.027 | 0.170 |      0.086 |
+|        2 |       0.197 |      0.120 |    0.340 |    0.815 | 3.546 |      2.585 |
+|        4 |       8.109 |      2.272 |   11.780 |   34.642 |       |   4146.453 |
+|        6 |     177.619 |     46.954 |  260.884 |  933.922 |       |            |
+|        8 |    1133.725 |    295.897 | 1657.481 | 6625.033 |       |            |
+|----------+-------------+------------+----------+----------+-------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoArriveTime,@6$5);E f-3::@2$3=remote(RestrictedLimitTwoArriveTime, @6$5);E f-3::@2$4=remote(GlobalLimitTwoArriveTime, @6$5);E f-3::@2$5=remote(CancelLimitTwoArriveTime, @6$5);E f-3::@2$6=remote(UMCLimitTwoArriveTime, @6$5);E f-3::@2$7=remote(UppaalLimitTwoArriveTime, @6$5);E f-3::@3$2=remote(RCSLimitTwoArriveTime,@7$5);E f-3::@3$3=remote(RestrictedLimitTwoArriveTime, @7$5);E f-3::@3$4=remote(GlobalLimitTwoArriveTime, @7$5);E f-3::@3$5=remote(CancelLimitTwoArriveTime, @7$5);E f-3::@3$6=remote(UMCLimitTwoArriveTime, @7$5);E f-3::@3$7=remote(UppaalLimitTwoArriveTime, @7$5);E f-3::@4$2=remote(RCSLimitTwoArriveTime, @8$5);E f-3::@4$3=remote(RestrictedLimitTwoArriveTime, @8$5);E f-3::@4$4=remote(GlobalLimitTwoArriveTime, @8$5);E f-3::@4$5=remote(CancelLimitTwoArriveTime, @8$5);E f-3::@4$7=remote(UppaalLimitTwoArriveTime, @8$5);E f-3::@5$2=remote(RCSLimitTwoArriveTime, @9$5);E f-3::@5$3=remote(RestrictedLimitTwoArriveTime, @9$5);E f-3::@5$4=remote(GlobalLimitTwoArriveTime, @9$5);E f-3::@5$5=remote(CancelLimitTwoArriveTime, @9$5);E f-3::@6$2=remote(RCSLimitTwoArriveTime, @10$5);E f-3::@6$3=remote(RestrictedLimitTwoArriveTime, @10$5);E f-3::@6$4=remote(GlobalLimitTwoArriveTime, @10$5);E f-3::@6$5=remote(CancelLimitTwoArriveTime, @10$5);E f-3
+
+#+begin_src gnuplot :var data=summaryArriveLimitTwoTime :file stationsArriveLimitTwoTime.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "Will arrive limit 2"
+set xlabel "Number of stations"
+set ylabel "Time"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+k(x) = k * exp(l*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+fit k(x) data u 1:7 via k, l
+
+plot [][:8200] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x)", g, h) lw 2, \
+     data u 1:6 w points title 'UMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UMC fit: j(x) = %f * exp(%f * x)", i, j) lw 2, \
+     data u 1:7 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     k(x) title sprintf("UPPAALxUMC: k(x) %f * exp(%f * x)", k, l) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsArriveLimitTwoTime.png]]
+
+
+#+PLOT: ind:1
+#+CAPTION: Nærumbanen Limit Two Will Arrive Time
+|--------+-------------+------------+----------+----------+-----+------------|
+| Trains | First model | Restricted |   Global |   Cancel | UMC | UPPAALxUMC |
+|--------+-------------+------------+----------+----------+-----+------------|
+|      2 |     113.331 |     20.072 |  131.594 |  243.130 |     |            |
+|      3 |    4742.680 |    414.108 | 4594.823 | 9986.837 |     |            |
+|--------+-------------+------------+----------+----------+-----+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoArriveTime, @15$5);E f-3::@2$3=remote(RestrictedLimitTwoArriveTime, @15$5);E f-3::@2$4=remote(GlobalLimitTwoArriveTime, @12$5);E f-3::@2$5=remote(CancelLimitTwoArriveTime, @11$5);E f-3::@3$2=remote(RCSLimitTwoArriveTime, @16$5);E f-3::@3$3=remote(RestrictedLimitTwoArriveTime, @16$5);E f-3::@3$4=remote(GlobalLimitTwoArriveTime, @13$5);E f-3::@3$5=remote(CancelLimitTwoArriveTime, @12$5);E f-3
+
+**** Memory Usage Peak
+#+PLOT: ind:1
+#+tblname: summaryArriveLimitTwoMemory
+#+CAPTION: Stations Limit Two Will Arrive Memory
+|----------+-------------+------------+---------+----------+------------|
+| Stations | First model | Restricted |  Global |   Cancel | UPPAALxUMC |
+|----------+-------------+------------+---------+----------+------------|
+|        1 |       6.439 |      8.428 |   8.332 |    8.633 |      8.472 |
+|        2 |       9.873 |     12.499 |  15.364 |   16.500 |     26.787 |
+|        4 |      41.429 |     39.184 |  58.927 |  138.157 |   4471.207 |
+|        6 |     152.739 |    119.477 | 205.772 |  675.403 |            |
+|        8 |     421.923 |    273.291 | 543.112 | 2087.719 |            |
+|----------+-------------+------------+---------+----------+------------|
+#+TBLFM: @2$2=remote(RCSLimitTwoArriveMemory,@6$5)/1000;E f-3::@2$3=remote(RestrictedLimitTwoArriveMemory, @6$5)/1000;E f-3::@2$4=remote(GlobalLimitTwoArriveMemory, @6$5)/1000;E f-3::@2$5=remote(CancelLimitTwoArriveMemory, @6$5)/1000;E f-3::@2$6=remote(UppaalLimitTwoArriveMemory, @6$5)/1000;E f-3::@3$2=remote(RCSLimitTwoArriveMemory,@7$5)/1000;E f-3::@3$3=remote(RestrictedLimitTwoArriveMemory, @7$5)/1000;E f-3::@3$4=remote(GlobalLimitTwoArriveMemory, @7$5)/1000;E f-3::@3$5=remote(CancelLimitTwoArriveMemory, @7$5)/1000;E f-3::@3$6=remote(UppaalLimitTwoArriveMemory, @7$5)/1000;E f-3::@4$2=remote(RCSLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$3=remote(RestrictedLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$4=remote(GlobalLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$5=remote(CancelLimitTwoArriveMemory, @8$5)/1000;E f-3::@4$6=remote(UppaalLimitTwoArriveMemory, @8$5)/1000;E f-3::@5$2=remote(RCSLimitTwoArriveMemory, @9$5)/1000;E f-3::@5$3=remote(RestrictedLimitTwoArriveMemory, @9$5)/1000;E f-3::@5$4=remote(GlobalLimitTwoArriveMemory, @9$5)/1000;E f-3::@5$5=remote(CancelLimitTwoArriveMemory, @9$5)/1000;E f-3::@6$2=remote(RCSLimitTwoArriveMemory, @10$5)/1000;E f-3::@6$3=remote(RestrictedLimitTwoArriveMemory, @10$5)/1000;E f-3::@6$4=remote(GlobalLimitTwoArriveMemory, @10$5)/1000;E f-3::@6$5=remote(CancelLimitTwoArriveMemory, @10$5)/1000;E f-3
+
+#+begin_src gnuplot :var data=summaryArriveLimitTwoMemory :file stationsArriveLimitTwoMemory.png
+set term png size 1600,1600 font "Helvetica, 16"
+set title "Will arrive limit 2 memory"
+set xlabel "Number of stations"
+set ylabel "Memory"
+
+f(x) = a * exp(b*x)
+g(x) = c * exp(d*x)
+h(x) = e * exp(f*x)
+i(x) = g * exp(h*x)
+j(x) = i * exp(j*x)
+
+fit f(x) data u 1:2 via a, b
+fit g(x) data u 1:3 via c, d
+fit h(x) data u 1:4 via e, f
+fit i(x) data u 1:5 via g, h
+fit j(x) data u 1:6 via i, j
+
+plot [] [0:2450] data u 1:2 w points title 'First model' linecolor rgb "black" ps 2, \
+     f(x) title sprintf("First model fit: f(x) = %f * exp(%f * x)", a, b) lw 2, \
+     data u 1:3 w points title 'Restricted' linecolor rgb "black" ps 2, \
+     g(x) title sprintf("Restricted fit: g(x) = %f * exp(%f * x)", c, d) lw 2, \
+     data u 1:4 w points title 'Global' linecolor rgb "black" ps 2, \
+     h(x) title sprintf("Global fit: h(x) = %f * exp(%f * x)", e, f) lw 2, \
+     data u 1:5 w points title 'Cancel' linecolor rgb "black" ps 2, \
+     i(x) title sprintf("Cancel fit: i(x) = %f * exp(%f * x", g, h) lw 2, \
+     data u 1:6 w points title 'UPPAALxUMC' linecolor rgb "black" ps 2, \
+     j(x) title sprintf("UPPAALxUMC fit: k(x) = %f * exp(%f * x)", i, j) lw 2
+#+end_src
+
+#+RESULTS:
+[[file:stationsArriveLimitTwoMemory.png]]
+
+
+
