@@ -1,9 +1,18 @@
 # Distributed Railway Control
-This repository contains five different UPPAAL models and a UMC model of an existing distributed railway control system algorithm (RELIS 2000 system of INSY GmbH). The purpose of this work is
+This repository contains five different UPPAAL models and a UMC model of an existing distributed railway control system algorithm (RELIS 2000 system of INSY GmbH). These models are a part of a 2019 Master Thesis project by Van Anh Thi Trinh and Per Lange Laursen conducted at DTU [s144449s144456-MSc-Thesis.pdf](https://github.com/perlangelaursen/DistributedRailwayControl/blob/master/s144449s144456-MSc-Thesis.pdf). The purpose of this work is
 1. to investigate the modelling the system with respect to the required operations for a
 railway control system, and 
 2. to model check the safety requirements (No derailment and No collision) and the operational correctness (see chapter 7 in [s144449s144456-MSc-Thesis.pdf](https://github.com/perlangelaursen/DistributedRailwayControl/blob/master/s144449s144456-MSc-Thesis.pdf) for the complete list). 
 
+## Formal Modelling and Verification of a Distributed Railway Interlocking System using UPPAAL
+Models explored in the paper _Formal Modelling and Verification of a Distributed Railway Interlocking System using UPPAAL_ by Per Lange Laursen, Van Anh Thi Trinh and Anne Haxthausen to be published in the proceedings of ISoLA 2020 can be found in subfolders of the [Experiment Configurations](https://github.com/perlangelaursen/DistributedRailwayControl/tree/master/Experiment%20Configurations) as follows:
+* Instances of the First Model are in [Experiment Configurations/First Model](https://github.com/perlangelaursen/DistributedRailwayControl/tree/master/Experiment%20Configurations/First%20model)
+* Instances of the Restricted Model are in [Experiment Configurations/Restricted Variant of First Model](https://github.com/perlangelaursen/DistributedRailwayControl/tree/master/Experiment%20Configurations/Restricted%20Variant%20of%20First%20Model)
+* Instances of the Model with Cancel are in [Experiment Configurations/Extended Variant of First Model](https://github.com/perlangelaursen/DistributedRailwayControl/tree/master/Experiment%20Configurations/Extended%20Variant%20of%20First%20Model)
+
+The model instances mentioned in Table 1 of the paper are given names indicating with which configuration data the models have been instantiated. For instance, _First Model_ instantiated with configuration _Station One_ and using limit 2 is in the file [_stationOneLimitTwo_UPPAAL.xml_](https://github.com/perlangelaursen/DistributedRailwayControl/blob/master/Experiment%20Configurations/First%20model/stationOneLimitTwo_UPPAAL.xml) and _First Model_ instantiated with _Nærumbanen (2T)_ and limit 2 is in the file [_naerumbanen2TLimitTwo_UPPAAL.xml_](https://github.com/perlangelaursen/DistributedRailwayControl/blob/master/Experiment%20Configurations/First%20model/naerumbanen2TLimitTwo_UPPAAL.xml).
+
+## General repository structure
 The different models are as follows:
 * RCS: Contains the basic version of the distributed railway control system with the following operations (defined using UPPAAL):
   * Reserve a railway segment
