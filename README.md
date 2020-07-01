@@ -1,6 +1,8 @@
 # Distributed Railway Control
-This repository contains five different UPPAAL models and a UMC model of an existing distributed railway control system algorithm (RELIS 2000 system of INSY GmbH). The primary purpose of this work is to investigate the modelling and model checking of the system with respect to the required operations for a
-railway control system. This includes the safety requirements (No derailment and No collision) and the operational correctness (see chapter 7 in [s144449s144456-MSc-Thesis.pdf](https://github.com/perlangelaursen/DistributedRailwayControl/blob/master/s144449s144456-MSc-Thesis.pdf) for the complete list). 
+This repository contains five different UPPAAL models and a UMC model of an existing distributed railway control system algorithm (RELIS 2000 system of INSY GmbH). The purpose of this work is to 
+1. investigate the modelling the system with respect to the required operations for a
+railway control system, and. 
+2. to model check the safety requirements (No derailment and No collision) and the operational correctness (see chapter 7 in [s144449s144456-MSc-Thesis.pdf](https://github.com/perlangelaursen/DistributedRailwayControl/blob/master/s144449s144456-MSc-Thesis.pdf) for the complete list). 
 
 The different models are as follows:
 * RCS: Contains the basic version of the distributed railway control system with the following operations (defined using UPPAAL):
